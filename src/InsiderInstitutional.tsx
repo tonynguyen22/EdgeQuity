@@ -30,6 +30,11 @@ function safeSetItem(key: string, value: string) {
   }
 }
 
+function clearCache() {
+  const prefixes = ['finnhub_', 'valuwise_', 'tech_', 'earnings_', 'insider_', 'news_', 'dividend_', 'portfolio_profile_'];
+  Object.keys(localStorage).filter(k => prefixes.some(p => k.startsWith(p))).forEach(k => localStorage.removeItem(k));
+}
+
 const fmtDate = (s: string) => {
   if (!s) return '—';
   const d = new Date(s);
@@ -138,14 +143,37 @@ export default function InsiderInstitutional() {
       }, { buy: 0, sell: 0 })
     : null;
 
+  // Net transaction score: (buyVol − sellVol) / (buyVol + sellVol) → -1 to +1
+  const netScore = netBuySell && (netBuySell.buy + netBuySell.sell) > 0
+    ? (netBuySell.buy - netBuySell.sell) / (netBuySell.buy + netBuySell.sell)
+    : null;
+
+  // Clustering: months where 2+ distinct insiders made purchases
+  const buyerClusters: { month: string; count: number }[] = (() => {
+    if (!data?.transactions) return [];
+    const byMonth: Record<string, Set<string>> = {};
+    data.transactions.forEach((t: any) => {
+      if (t.transactionCode !== 'P') return;
+      const month = (t.transactionDate || t.filingDate || '').substring(0, 7);
+      if (!month) return;
+      if (!byMonth[month]) byMonth[month] = new Set();
+      byMonth[month].add(t.name || t.reportingName || 'unknown');
+    });
+    return Object.entries(byMonth)
+      .filter(([, names]) => names.size >= 2)
+      .map(([month, names]) => ({ month, count: names.size }))
+      .sort((a, b) => b.month.localeCompare(a.month))
+      .slice(0, 3);
+  })();
+
   return (
-    <div className="space-y-6">
-      <div>
+    <div className="max-w-5xl mx-auto space-y-6">
+      <div className="max-w-xl mx-auto">
         <h2 className="text-2xl font-bold text-white mb-1">Insider &amp; Institutional</h2>
         <p className="text-slate-400 text-sm">Recent insider transactions and top institutional holders.</p>
       </div>
 
-      <form onSubmit={handleSearch} className="max-w-xl relative">
+      <form onSubmit={handleSearch} className="max-w-xl mx-auto relative">
         <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
         <input
           value={input}
@@ -160,19 +188,19 @@ export default function InsiderInstitutional() {
       </form>
 
       {loading && (
-        <div className="flex items-center gap-3 py-8">
+        <div className="flex items-center gap-3 py-8 max-w-xl mx-auto">
           <div className="w-6 h-6 border-2 border-orange-500 border-t-transparent rounded-full animate-spin" />
           <span className="text-slate-400">Loading insider data...</span>
         </div>
       )}
 
       {error && (
-        <div className="bg-red-500/10 border border-red-500/20 rounded-lg p-4 flex gap-3 max-w-xl">
+        <div className="bg-red-500/10 border border-red-500/20 rounded-lg p-4 flex gap-3 max-w-xl mx-auto">
           <AlertCircle className="w-5 h-5 text-red-400 shrink-0 mt-0.5" />
           <div>
             <p className="text-red-400 font-medium">Error</p>
             <p className="text-red-400/70 text-sm mt-0.5">{error}</p>
-            <p className="text-slate-500 text-xs mt-1.5">If this keeps happening, click <span className="text-slate-300 font-medium">Clear Cache</span> in the sidebar and try again.</p>
+            <button onClick={clearCache} className="mt-2 text-xs bg-slate-700 hover:bg-slate-600 text-slate-200 px-3 py-1.5 rounded-lg font-medium transition-colors">Clear Cache & Retry</button>
           </div>
         </div>
       )}
@@ -203,13 +231,37 @@ export default function InsiderInstitutional() {
                 <div className="text-xl font-bold text-white">{data.transactions.length}</div>
                 <div className="text-xs text-slate-500 mt-0.5">last 12 months</div>
               </div>
-              <div className={`border rounded-xl p-4 ${netBuySell.buy > netBuySell.sell ? 'bg-emerald-500/10 border-emerald-500/20' : 'bg-red-500/10 border-red-500/20'}`}>
-                <div className="text-xs text-slate-400 mb-1">Net Sentiment</div>
-                <div className={`text-xl font-bold flex items-center gap-1.5 ${netBuySell.buy > netBuySell.sell ? 'text-emerald-400' : 'text-red-400'}`}>
-                  {netBuySell.buy > netBuySell.sell ? <TrendingUp className="w-4 h-4" /> : <TrendingDown className="w-4 h-4" />}
-                  {netBuySell.buy > netBuySell.sell ? 'Buying' : 'Selling'}
-                </div>
-                <div className="text-xs text-slate-500 mt-0.5">insider activity</div>
+              {netScore !== null && (() => {
+                const pct = ((netScore + 1) / 2) * 100; // map -1..+1 → 0..100%
+                const isPositive = netScore >= 0;
+                const label = netScore >= 0.5 ? 'Strong Buy' : netScore >= 0.1 ? 'Net Buying' : netScore <= -0.5 ? 'Strong Sell' : netScore <= -0.1 ? 'Net Selling' : 'Neutral';
+                const color = netScore >= 0.1 ? 'text-emerald-400' : netScore <= -0.1 ? 'text-red-400' : 'text-slate-400';
+                return (
+                  <div className={`border rounded-xl p-4 ${isPositive ? 'bg-emerald-500/10 border-emerald-500/20' : 'bg-red-500/10 border-red-500/20'}`}>
+                    <div className="text-xs text-slate-400 mb-1">Net Transaction Score</div>
+                    <div className={`text-xl font-bold ${color}`}>{netScore >= 0 ? '+' : ''}{netScore.toFixed(2)}</div>
+                    <div className={`text-xs font-medium mt-0.5 ${color}`}>{label}</div>
+                    <div className="h-1.5 bg-slate-700 rounded-full mt-2 overflow-hidden">
+                      <div className={`h-full rounded-full ${isPositive ? 'bg-emerald-500' : 'bg-red-500'}`} style={{ width: `${pct}%` }} />
+                    </div>
+                    <div className="text-xs text-slate-600 mt-1">-1 (sell) → +1 (buy)</div>
+                  </div>
+                );
+              })()}
+            </div>
+          )}
+
+          {/* Buyer Clustering Alert */}
+          {buyerClusters.length > 0 && (
+            <div className="bg-emerald-500/5 border border-emerald-500/20 rounded-xl p-4">
+              <div className="text-xs text-emerald-400/70 uppercase tracking-wide font-medium mb-2">Coordinated Buying Signal</div>
+              <p className="text-sm text-slate-300 mb-2">Multiple insiders bought in the same month — often a stronger conviction signal:</p>
+              <div className="flex flex-wrap gap-2">
+                {buyerClusters.map(c => (
+                  <span key={c.month} className="bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs px-3 py-1 rounded-full font-medium">
+                    {c.month} — {c.count} buyers
+                  </span>
+                ))}
               </div>
             </div>
           )}
@@ -313,7 +365,7 @@ export default function InsiderInstitutional() {
       )}
 
       {!data && !loading && !error && (
-        <div className="max-w-xl bg-slate-800/30 border border-slate-700/30 rounded-xl p-5 space-y-2">
+        <div className="max-w-xl mx-auto bg-slate-800/30 border border-slate-700/30 rounded-xl p-5 space-y-2">
           <p className="text-sm font-medium text-slate-300">What you'll see here</p>
           <ul className="space-y-1.5 text-xs text-slate-500">
             <li className="flex items-start gap-2"><span className="text-orange-500 mt-0.5">•</span>Recent insider transactions — purchases, sales, and grants over the last 12 months</li>

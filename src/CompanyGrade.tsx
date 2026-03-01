@@ -18,6 +18,11 @@ function safeSetItem(key: string, value: string) {
   }
 }
 
+function clearCache() {
+  const prefixes = ['finnhub_', 'valuwise_', 'tech_', 'earnings_', 'insider_', 'news_', 'dividend_', 'portfolio_profile_'];
+  Object.keys(localStorage).filter(k => prefixes.some(p => k.startsWith(p))).forEach(k => localStorage.removeItem(k));
+}
+
 // ─── Data helpers (mirrored from App.tsx) ────────────────────────────────────
 
 const parseNum = (val: any): number => {
@@ -472,6 +477,22 @@ export default function CompanyGrade() {
   const [error, setError] = useState('');
   const [rawResult, setRawResult] = useState<ReturnType<typeof computeGrades> | null>(null);
   const [historicalSummary, setHistoricalSummary] = useState<any[]>([]);
+  const [hiddenSeries, setHiddenSeries] = useState<Record<string, boolean>>({});
+
+  const handleLegendClick = (d: any, chartKeys: string[]) => {
+    setHiddenSeries(prev => {
+      const allOthersHidden = chartKeys.every(k => k === d.dataKey || prev[k]);
+      if (allOthersHidden) {
+        const next = { ...prev };
+        chartKeys.forEach(k => { next[k] = false; });
+        return next;
+      }
+      const next = { ...prev };
+      chartKeys.forEach(k => { next[k] = k !== d.dataKey; });
+      return next;
+    });
+  };
+
   const fetchAndGrade = async (sym: string) => {
     setLoading(true);
     setError('');
@@ -692,7 +713,7 @@ export default function CompanyGrade() {
           <AlertCircle className="w-5 h-5 text-red-500 flex-shrink-0 mt-0.5" />
           <div>
             <p className="text-red-400 text-sm">{error}</p>
-            <p className="text-slate-500 text-xs mt-2">If this keeps happening, click <span className="text-slate-300 font-medium">Clear Cache</span> in the top-right corner and try again.</p>
+            <button onClick={clearCache} className="mt-2 text-xs bg-slate-700 hover:bg-slate-600 text-slate-200 px-3 py-1.5 rounded-lg font-medium transition-colors">Clear Cache & Retry</button>
           </div>
         </div>
       )}
@@ -879,10 +900,10 @@ export default function CompanyGrade() {
                         labelStyle={{ color: '#e2e8f0' }}
                         formatter={(v: number, name: string) => [`${v}%`, name]}
                       />
-                      <Legend wrapperStyle={{ fontSize: '11px' }} />
-                      <Line type="monotone" dataKey="grossMargin"     name="Gross"    stroke="#10b981" strokeWidth={2} dot={{ r: 3 }} />
-                      <Line type="monotone" dataKey="ebitdaMargin"    name="EBITDA"   stroke="#3b82f6" strokeWidth={2} dot={{ r: 3 }} />
-                      <Line type="monotone" dataKey="netProfitMargin" name="Net"      stroke="#a78bfa" strokeWidth={2} dot={{ r: 3 }} />
+                      <Legend wrapperStyle={{ fontSize: '11px', cursor: 'pointer' }} onClick={(d: any) => handleLegendClick(d, ['grossMargin', 'ebitdaMargin', 'netProfitMargin'])} />
+                      <Line type="monotone" dataKey="grossMargin"     name="Gross"    stroke="#10b981" strokeWidth={2} dot={{ r: 3 }} hide={!!hiddenSeries['grossMargin']} />
+                      <Line type="monotone" dataKey="ebitdaMargin"    name="EBITDA"   stroke="#3b82f6" strokeWidth={2} dot={{ r: 3 }} hide={!!hiddenSeries['ebitdaMargin']} />
+                      <Line type="monotone" dataKey="netProfitMargin" name="Net"      stroke="#a78bfa" strokeWidth={2} dot={{ r: 3 }} hide={!!hiddenSeries['netProfitMargin']} />
                     </LineChart>
                   </ResponsiveContainer>
                 </div>
@@ -900,11 +921,11 @@ export default function CompanyGrade() {
                         labelStyle={{ color: '#e2e8f0' }}
                         formatter={(v: number, name: string) => [`${v}x`, name]}
                       />
-                      <Legend wrapperStyle={{ fontSize: '11px' }} />
+                      <Legend wrapperStyle={{ fontSize: '11px', cursor: 'pointer' }} onClick={(d: any) => handleLegendClick(d, ['currentRatio', 'quickRatio', 'debtToEquity'])} />
                       <ReferenceLine y={1} stroke="#64748b" strokeDasharray="4 2" />
-                      <Bar dataKey="currentRatio" name="Current" fill="#10b981" opacity={0.85} radius={[3, 3, 0, 0]} />
-                      <Bar dataKey="quickRatio"   name="Quick"   fill="#3b82f6" opacity={0.85} radius={[3, 3, 0, 0]} />
-                      <Bar dataKey="debtToEquity" name="D/E"     fill="#f59e0b" opacity={0.85} radius={[3, 3, 0, 0]} />
+                      <Bar dataKey="currentRatio" name="Current" fill="#10b981" opacity={0.85} radius={[3, 3, 0, 0]} hide={!!hiddenSeries['currentRatio']} />
+                      <Bar dataKey="quickRatio"   name="Quick"   fill="#3b82f6" opacity={0.85} radius={[3, 3, 0, 0]} hide={!!hiddenSeries['quickRatio']} />
+                      <Bar dataKey="debtToEquity" name="D/E"     fill="#f59e0b" opacity={0.85} radius={[3, 3, 0, 0]} hide={!!hiddenSeries['debtToEquity']} />
                     </BarChart>
                   </ResponsiveContainer>
                 </div>
@@ -922,10 +943,10 @@ export default function CompanyGrade() {
                         labelStyle={{ color: '#e2e8f0' }}
                         formatter={(v: number, name: string) => [`${v}%`, name]}
                       />
-                      <Legend wrapperStyle={{ fontSize: '11px' }} />
+                      <Legend wrapperStyle={{ fontSize: '11px', cursor: 'pointer' }} onClick={(d: any) => handleLegendClick(d, ['roe', 'roa'])} />
                       <ReferenceLine y={0} stroke="#64748b" strokeDasharray="4 2" />
-                      <Line type="monotone" dataKey="roe" name="ROE" stroke="#10b981" strokeWidth={2} dot={{ r: 3 }} />
-                      <Line type="monotone" dataKey="roa" name="ROA" stroke="#f59e0b" strokeWidth={2} dot={{ r: 3 }} />
+                      <Line type="monotone" dataKey="roe" name="ROE" stroke="#10b981" strokeWidth={2} dot={{ r: 3 }} hide={!!hiddenSeries['roe']} />
+                      <Line type="monotone" dataKey="roa" name="ROA" stroke="#f59e0b" strokeWidth={2} dot={{ r: 3 }} hide={!!hiddenSeries['roa']} />
                     </LineChart>
                   </ResponsiveContainer>
                 </div>
@@ -937,16 +958,16 @@ export default function CompanyGrade() {
             {yoyGrades.length >= 2 && (() => {
               const trendData = yoyGrades.map(yg => ({
                 year: yg.year,
-                Overall:      yg.score,
                 Health:       gradeToScore100(yg.health),
                 Profitability:gradeToScore100(yg.prof),
                 Growth:       gradeToScore100(yg.growth),
                 'Cash Flow':  gradeToScore100(yg.cf),
+                Overall:      yg.score,
               }));
               return (
                 <div className="bg-slate-800/50 border border-slate-700/50 rounded-xl p-5">
                   <h3 className="text-sm font-semibold text-slate-300 mb-4">Grade Score Trend</h3>
-                  <ResponsiveContainer width="100%" height={200}>
+                  <ResponsiveContainer width="100%" height={320}>
                     <LineChart data={trendData} margin={{ top: 4, right: 12, bottom: 0, left: 0 }}>
                       <CartesianGrid strokeDasharray="3 3" stroke="#334155" />
                       <XAxis dataKey="year" tick={{ fill: '#94a3b8', fontSize: 11 }} />
@@ -956,12 +977,12 @@ export default function CompanyGrade() {
                         labelStyle={{ color: '#e2e8f0' }}
                         formatter={(v: number, name: string) => [`${v}/100`, name]}
                       />
-                      <Legend wrapperStyle={{ fontSize: '11px' }} />
-                      <Line type="monotone" dataKey="Overall"       stroke="#f1f5f9" strokeWidth={2.5} dot={{ r: 4 }} />
-                      <Line type="monotone" dataKey="Health"        stroke="#10b981" strokeWidth={1.5} dot={{ r: 3 }} strokeDasharray="4 2" />
-                      <Line type="monotone" dataKey="Profitability" stroke="#3b82f6" strokeWidth={1.5} dot={{ r: 3 }} strokeDasharray="4 2" />
-                      <Line type="monotone" dataKey="Growth"        stroke="#f59e0b" strokeWidth={1.5} dot={{ r: 3 }} strokeDasharray="4 2" />
-                      <Line type="monotone" dataKey="Cash Flow"     stroke="#a78bfa" strokeWidth={1.5} dot={{ r: 3 }} strokeDasharray="4 2" />
+                      <Legend wrapperStyle={{ fontSize: '11px', cursor: 'pointer' }} onClick={(d: any) => handleLegendClick(d, ['Health', 'Profitability', 'Growth', 'Cash Flow', 'Overall'])} />
+                      <Line type="monotone" dataKey="Health"        stroke="#10b981" strokeWidth={1.5} dot={{ r: 3 }} strokeDasharray="4 2" hide={!!hiddenSeries['Health']} />
+                      <Line type="monotone" dataKey="Profitability" stroke="#3b82f6" strokeWidth={1.5} dot={{ r: 3 }} strokeDasharray="4 2" hide={!!hiddenSeries['Profitability']} />
+                      <Line type="monotone" dataKey="Growth"        stroke="#f59e0b" strokeWidth={1.5} dot={{ r: 3 }} strokeDasharray="4 2" hide={!!hiddenSeries['Growth']} />
+                      <Line type="monotone" dataKey="Cash Flow"     stroke="#a78bfa" strokeWidth={1.5} dot={{ r: 3 }} strokeDasharray="4 2" hide={!!hiddenSeries['Cash Flow']} />
+                      <Line type="monotone" dataKey="Overall"       stroke="#f1f5f9" strokeWidth={2.5} dot={{ r: 4 }} hide={!!hiddenSeries['Overall']} />
                     </LineChart>
                   </ResponsiveContainer>
                 </div>

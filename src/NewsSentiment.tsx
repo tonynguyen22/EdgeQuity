@@ -3,6 +3,8 @@ import { Search, AlertCircle, TrendingUp, TrendingDown, ExternalLink } from 'luc
 
 const API_KEY = 'ctj1dchr01qgfbsvp4mgctj1dchr01qgfbsvp4n0';
 const BASE_URL = 'https://finnhub.io/api/v1';
+const GEMINI_KEY = 'AIzaSyAqwxJo7IhS9kL-rHsFanvtiV9pYqvWu2s';
+const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${GEMINI_KEY}`;
 
 const safeJson = async (res: Response): Promise<any> => {
   const text = await res.text();
@@ -30,6 +32,11 @@ function safeSetItem(key: string, value: string) {
   }
 }
 
+function clearCache() {
+  const prefixes = ['finnhub_', 'valuwise_', 'tech_', 'earnings_', 'insider_', 'news_', 'dividend_', 'portfolio_profile_'];
+  Object.keys(localStorage).filter(k => prefixes.some(p => k.startsWith(p))).forEach(k => localStorage.removeItem(k));
+}
+
 const fmtTime = (unix: number) => {
   if (!unix) return '—';
   const d = new Date(unix * 1000);
@@ -42,17 +49,78 @@ export default function NewsSentiment() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [data, setData] = useState<any>(null);
+  const [aiLoading, setAiLoading] = useState(false);
+  const [aiAnalysis, setAiAnalysis] = useState<any>(null);
+  const [aiError, setAiError] = useState('');
+
+  const runGeminiAnalysis = async (articles: any[]) => {
+    if (!articles.length) return;
+    setAiLoading(true);
+    setAiError('');
+    try {
+      const headlines = articles.slice(0, 15).map((a: any, i: number) =>
+        `${i + 1}. [${new Date((a.datetime ?? 0) * 1000).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}] ${a.headline}`
+      ).join('\n');
+
+      const prompt = `You are a financial analyst. Analyze these recent news headlines for a stock and return ONLY a JSON object (no markdown, no explanation) with this exact structure:
+{
+  "overall": "Bullish" | "Neutral" | "Bearish",
+  "summary": "2-3 sentence summary of key themes and sentiment",
+  "trend": "Improving" | "Stable" | "Weakening",
+  "trendReason": "1 sentence explaining the trend direction",
+  "headlines": [{"text": "headline text", "sentiment": "Bullish" | "Neutral" | "Bearish"}]
+}
+
+Headlines:
+${headlines}`;
+
+      const res = await fetch(GEMINI_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          contents: [{ parts: [{ text: prompt }] }],
+          generationConfig: { responseMimeType: 'application/json' },
+        }),
+      }).catch(() => null);
+
+      if (!res || !res.ok) {
+        const errBody = await res.json().catch(() => null);
+        const errMsg = errBody?.error?.message ?? errBody?.error?.status ?? `status ${res?.status ?? 'network error'}`;
+        setAiError(`Gemini: ${errMsg}`);
+        return;
+      }
+      const gemData = await res.json().catch(() => null);
+      const raw = gemData?.candidates?.[0]?.content?.parts?.[0]?.text ?? '';
+      const jsonMatch = raw.match(/\{[\s\S]*\}/);
+      const jsonStr = jsonMatch ? jsonMatch[0] : raw.replace(/```json\s*/g, '').replace(/```\s*/g, '').trim();
+      try {
+        const parsed = JSON.parse(jsonStr);
+        setAiAnalysis(parsed);
+      } catch {
+        setAiError('AI returned an unexpected response format.');
+      }
+    } catch {
+      setAiError('Failed to reach AI service.');
+    } finally {
+      setAiLoading(false);
+    }
+  };
 
   const fetchData = async (symbol: string) => {
     setLoading(true);
     setError('');
+    setAiAnalysis(null);
     try {
-      const cacheKey = `news_${symbol}_v1`;
+      const cacheKey = `news_${symbol}_v2`;
       const cached = localStorage.getItem(cacheKey);
       if (cached) {
         try {
           const { ts, d } = JSON.parse(cached);
-          if (Date.now() - ts < 1 * 60 * 60 * 1000) { setData(d); return; } // 1hr cache for news
+          if (Date.now() - ts < 1 * 60 * 60 * 1000) {
+            setData(d);
+            runGeminiAnalysis(d.articles); // re-run AI (not cached — always fresh)
+            return;
+          }
         } catch { localStorage.removeItem(cacheKey); }
       }
 
@@ -66,7 +134,7 @@ export default function NewsSentiment() {
         fetch(`${BASE_URL}/news-sentiment?symbol=${symbol}&token=${API_KEY}`),
       ]);
       const newsData = await safeJson(newsRes);
-      const sentData = await safeJson(sentRes).catch(() => ({})); // sentiment may be unavailable
+      const sentData = await safeJson(sentRes).catch(() => ({}));
 
       const articles = Array.isArray(newsData) ? newsData.slice(0, 20) : [];
 
@@ -77,6 +145,7 @@ export default function NewsSentiment() {
       const d = { articles, sentiment: sentData };
       safeSetItem(cacheKey, JSON.stringify({ ts: Date.now(), d }));
       setData(d);
+      runGeminiAnalysis(articles);
     } catch (e: any) {
       setError(e.message || 'Failed to fetch news data.');
     } finally {
@@ -110,13 +179,13 @@ export default function NewsSentiment() {
   );
 
   return (
-    <div className="space-y-6">
-      <div>
+    <div className="max-w-5xl mx-auto space-y-6">
+      <div className="max-w-xl mx-auto">
         <h2 className="text-2xl font-bold text-white mb-1">News &amp; Sentiment</h2>
         <p className="text-slate-400 text-sm">Latest news headlines and AI-powered sentiment analysis.</p>
       </div>
 
-      <form onSubmit={handleSearch} className="max-w-xl relative">
+      <form onSubmit={handleSearch} className="max-w-xl mx-auto relative">
         <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
         <input
           value={input}
@@ -131,19 +200,19 @@ export default function NewsSentiment() {
       </form>
 
       {loading && (
-        <div className="flex items-center gap-3 py-8">
+        <div className="flex items-center gap-3 py-8 max-w-xl mx-auto">
           <div className="w-6 h-6 border-2 border-sky-500 border-t-transparent rounded-full animate-spin" />
           <span className="text-slate-400">Loading news &amp; sentiment...</span>
         </div>
       )}
 
       {error && (
-        <div className="bg-red-500/10 border border-red-500/20 rounded-lg p-4 flex gap-3 max-w-xl">
+        <div className="bg-red-500/10 border border-red-500/20 rounded-lg p-4 flex gap-3 max-w-xl mx-auto">
           <AlertCircle className="w-5 h-5 text-red-400 shrink-0 mt-0.5" />
           <div>
             <p className="text-red-400 font-medium">Error</p>
             <p className="text-red-400/70 text-sm mt-0.5">{error}</p>
-            <p className="text-slate-500 text-xs mt-1.5">If this keeps happening, click <span className="text-slate-300 font-medium">Clear Cache</span> in the sidebar and try again.</p>
+            <button onClick={clearCache} className="mt-2 text-xs bg-slate-700 hover:bg-slate-600 text-slate-200 px-3 py-1.5 rounded-lg font-medium transition-colors">Clear Cache & Retry</button>
           </div>
         </div>
       )}
@@ -212,6 +281,61 @@ export default function NewsSentiment() {
             </div>
           )}
 
+          {/* Gemini AI Analysis */}
+          {(aiLoading || aiAnalysis || aiError) && (
+            <div className="bg-slate-800/50 border border-slate-700/50 rounded-xl p-5">
+              <div className="flex items-center justify-between mb-3">
+                <h3 className="text-sm font-semibold text-slate-300">AI Sentiment Analysis</h3>
+                <span className="text-xs text-slate-500 bg-slate-700/50 px-2 py-0.5 rounded">Gemini 2.5 Flash</span>
+              </div>
+              {aiLoading ? (
+                <div className="flex items-center gap-2 text-slate-400 text-sm py-2">
+                  <div className="w-4 h-4 border-2 border-sky-500 border-t-transparent rounded-full animate-spin" />
+                  Analyzing headlines with AI...
+                </div>
+              ) : aiError ? (
+                <p className="text-xs text-red-400/70">{aiError}</p>
+              ) : aiAnalysis && (() => {
+                const overall = aiAnalysis.overall ?? 'Neutral';
+                const oColor = overall === 'Bullish' ? 'text-emerald-400 bg-emerald-500/10 border-emerald-500/20'
+                  : overall === 'Bearish' ? 'text-red-400 bg-red-500/10 border-red-500/20'
+                  : 'text-amber-400 bg-amber-500/10 border-amber-500/20';
+                const trend = aiAnalysis.trend ?? 'Stable';
+                const tColor = trend === 'Improving' ? 'text-emerald-400' : trend === 'Weakening' ? 'text-red-400' : 'text-amber-400';
+                return (
+                  <div className="space-y-4">
+                    <div className="flex items-start gap-3">
+                      <span className={`border rounded-lg px-3 py-1.5 text-sm font-bold shrink-0 ${oColor}`}>{overall}</span>
+                      <p className="text-sm text-slate-300 leading-relaxed">{aiAnalysis.summary}</p>
+                    </div>
+                    {aiAnalysis.trendReason && (
+                      <div className="flex items-start gap-2 text-xs text-slate-400 bg-slate-700/30 rounded-lg p-3">
+                        <span className={`font-semibold shrink-0 ${tColor}`}>Trend: {trend}</span>
+                        <span>{aiAnalysis.trendReason}</span>
+                      </div>
+                    )}
+                    {Array.isArray(aiAnalysis.headlines) && aiAnalysis.headlines.length > 0 && (
+                      <div className="space-y-1.5">
+                        <div className="text-xs text-slate-500 font-medium uppercase tracking-wide mb-2">Per-headline classification</div>
+                        {aiAnalysis.headlines.map((h: any, i: number) => {
+                          const sc = h.sentiment === 'Bullish' ? 'text-emerald-400 bg-emerald-500/10'
+                            : h.sentiment === 'Bearish' ? 'text-red-400 bg-red-500/10'
+                            : 'text-slate-400 bg-slate-700/40';
+                          return (
+                            <div key={i} className="flex items-start gap-2">
+                              <span className={`text-xs px-2 py-0.5 rounded font-medium shrink-0 mt-0.5 ${sc}`}>{h.sentiment}</span>
+                              <span className="text-xs text-slate-400 leading-relaxed">{h.text}</span>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    )}
+                  </div>
+                );
+              })()}
+            </div>
+          )}
+
           {/* News Articles */}
           {data.articles.length > 0 && (
             <div className="space-y-3">
@@ -273,7 +397,7 @@ export default function NewsSentiment() {
       )}
 
       {!data && !loading && !error && (
-        <div className="max-w-xl bg-slate-800/30 border border-slate-700/30 rounded-xl p-5 space-y-2">
+        <div className="max-w-xl mx-auto bg-slate-800/30 border border-slate-700/30 rounded-xl p-5 space-y-2">
           <p className="text-sm font-medium text-slate-300">What you'll see here</p>
           <ul className="space-y-1.5 text-xs text-slate-500">
             <li className="flex items-start gap-2"><span className="text-sky-500 mt-0.5">•</span>Bullish/bearish sentiment score derived from news coverage</li>

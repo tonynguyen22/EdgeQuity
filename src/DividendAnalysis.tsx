@@ -32,6 +32,11 @@ function safeSetItem(key: string, value: string) {
   }
 }
 
+function clearCache() {
+  const prefixes = ['finnhub_', 'valuwise_', 'tech_', 'earnings_', 'insider_', 'news_', 'dividend_', 'portfolio_profile_'];
+  Object.keys(localStorage).filter(k => prefixes.some(p => k.startsWith(p))).forEach(k => localStorage.removeItem(k));
+}
+
 const fmtDate = (s: string) => {
   if (!s) return '—';
   const d = new Date(s);
@@ -154,10 +159,20 @@ export default function DividendAnalysis() {
   const yieldPct = data?.metrics?.dividendYieldIndicatedAnnual
     ?? (data?.currentPrice > 0 && annualDiv > 0 ? (annualDiv / data.currentPrice) * 100 : null);
 
-  // Compute payout ratio from recurring dividends ÷ EPS to exclude special dividends
-  // Finnhub's pre-calculated payoutRatioAnnual can be inflated by special dividends (e.g. CME)
+  // Payout ratio numerator:
+  //  - Companies with only recurring dividends: prefer Finnhub's dividendsPerShareAnnual
+  //    (avoids boundary counting errors in the 365-day trailing window, e.g. capturing 5
+  //    quarterly payments instead of 4)
+  //  - Companies with special/irregular dividends (e.g. CME): use recurring-only computed
+  //    annual dividend to exclude specials from the numerator
+  const hasSpecialDividends = allPayments.some((p: any) => p.type === 'irregular' || p.type === 'special');
+  const declaredAnnualDiv = data?.metrics?.dividendsPerShareAnnual ?? null;
+  const annualDivForPayout = hasSpecialDividends
+    ? annualRecurringDiv
+    : (declaredAnnualDiv && declaredAnnualDiv > 0 ? declaredAnnualDiv : annualRecurringDiv);
+
   const eps = data?.metrics?.epsBasicExclExtraItemsTTM ?? data?.metrics?.epsNormalizedAnnual ?? null;
-  const payoutRatioComputed = (eps && eps > 0 && annualRecurringDiv > 0) ? (annualRecurringDiv / eps) * 100 : null;
+  const payoutRatioComputed = (eps && eps > 0 && annualDivForPayout > 0) ? (annualDivForPayout / eps) * 100 : null;
   const payoutRatio = payoutRatioComputed ?? data?.metrics?.payoutRatioAnnual ?? data?.metrics?.payoutRatioTTM ?? null;
   const payoutRatioIsComputed = payoutRatioComputed !== null;
 
@@ -165,6 +180,32 @@ export default function DividendAnalysis() {
   const sharesOutstanding = data?.metrics?.sharesOutstanding ?? data?.metrics?.shareOutstanding ?? null;
   const totalAnnualDiv = sharesOutstanding && annualRecurringDiv ? sharesOutstanding * annualRecurringDiv * 1e6 : null;
   const fcfPayoutRatio = totalAnnualDiv && data?.fcfTTM && data.fcfTTM > 0 ? (totalAnnualDiv / data.fcfTTM) * 100 : null;
+
+  // Consecutive annual dividend growth streak (using recurring payments only)
+  const growthStreak = (() => {
+    const payments = recurringPayments.length >= 2 ? recurringPayments : allPayments;
+    if (payments.length < 2) return 0;
+    // Group into calendar years, sum each year's dividends
+    const byYear: Record<string, number> = {};
+    payments.forEach((p: any) => {
+      const yr = (p.date || p.exDate || '').substring(0, 4);
+      if (yr) byYear[yr] = (byYear[yr] ?? 0) + (p.amount ?? 0);
+    });
+    const years = Object.keys(byYear).sort().reverse(); // most recent first
+    let streak = 0;
+    for (let i = 0; i < years.length - 1; i++) {
+      if (byYear[years[i]] > byYear[years[i + 1]]) streak++;
+      else break;
+    }
+    return streak;
+  })();
+
+  const streakBadge = (() => {
+    if (growthStreak >= 25) return { label: 'Dividend Aristocrat', color: 'emerald', desc: '25+ consecutive years of growth' };
+    if (growthStreak >= 10) return { label: 'Dividend Champion', color: 'blue', desc: '10+ consecutive years of growth' };
+    if (growthStreak >= 3)  return { label: 'Dividend Grower', color: 'amber', desc: `${growthStreak} consecutive years of growth` };
+    return null;
+  })();
 
   // Safety score
   const getSafetyInfo = () => {
@@ -194,13 +235,13 @@ export default function DividendAnalysis() {
   };
 
   return (
-    <div className="space-y-6">
-      <div>
+    <div className="max-w-5xl mx-auto space-y-6">
+      <div className="max-w-xl mx-auto">
         <h2 className="text-2xl font-bold text-white mb-1">Dividend Analysis</h2>
         <p className="text-slate-400 text-sm">Dividend history, growth CAGR, yield, and FCF safety score.</p>
       </div>
 
-      <form onSubmit={handleSearch} className="max-w-xl relative">
+      <form onSubmit={handleSearch} className="max-w-xl mx-auto relative">
         <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
         <input
           value={input}
@@ -215,19 +256,19 @@ export default function DividendAnalysis() {
       </form>
 
       {loading && (
-        <div className="flex items-center gap-3 py-8">
+        <div className="flex items-center gap-3 py-8 max-w-xl mx-auto">
           <div className="w-6 h-6 border-2 border-rose-500 border-t-transparent rounded-full animate-spin" />
           <span className="text-slate-400">Loading dividend data...</span>
         </div>
       )}
 
       {error && (
-        <div className="bg-red-500/10 border border-red-500/20 rounded-lg p-4 flex gap-3 max-w-xl">
+        <div className="bg-red-500/10 border border-red-500/20 rounded-lg p-4 flex gap-3 max-w-xl mx-auto">
           <AlertCircle className="w-5 h-5 text-red-400 shrink-0 mt-0.5" />
           <div>
             <p className="text-red-400 font-medium">Error</p>
             <p className="text-red-400/70 text-sm mt-0.5">{error}</p>
-            <p className="text-slate-500 text-xs mt-1.5">If this keeps happening, click <span className="text-slate-300 font-medium">Clear Cache</span> in the sidebar and try again.</p>
+            <button onClick={clearCache} className="mt-2 text-xs bg-slate-700 hover:bg-slate-600 text-slate-200 px-3 py-1.5 rounded-lg font-medium transition-colors">Clear Cache & Retry</button>
           </div>
         </div>
       )}
@@ -286,6 +327,24 @@ export default function DividendAnalysis() {
           )}
 
           {/* Growth CAGR */}
+          {/* Growth Streak */}
+          {growthStreak > 0 && (
+            <div className={`border rounded-xl p-4 flex items-center gap-4 ${streakBadge ? `bg-${streakBadge.color}-500/10 border-${streakBadge.color}-500/20` : 'bg-slate-800/60 border-slate-700/50'}`}>
+              <div className="text-center shrink-0">
+                <div className={`text-3xl font-bold ${streakBadge ? `text-${streakBadge.color}-400` : 'text-slate-300'}`}>{growthStreak}</div>
+                <div className="text-xs text-slate-500 mt-0.5">yr streak</div>
+              </div>
+              <div>
+                <div className={`text-sm font-semibold ${streakBadge ? `text-${streakBadge.color}-400` : 'text-slate-300'}`}>
+                  {streakBadge ? streakBadge.label : 'Consecutive Growth'}
+                </div>
+                <div className="text-xs text-slate-400 mt-0.5">
+                  {streakBadge ? streakBadge.desc : `${growthStreak} consecutive years of annual dividend growth (recurring payments)`}
+                </div>
+              </div>
+            </div>
+          )}
+
           <div className="space-y-2">
             <h3 className="text-base font-semibold text-slate-200">Dividend Growth CAGR</h3>
             {(cagr3 !== null || cagr5 !== null || cagr10 !== null) ? (
@@ -373,7 +432,7 @@ export default function DividendAnalysis() {
       )}
 
       {!data && !loading && !error && (
-        <div className="max-w-xl bg-slate-800/30 border border-slate-700/30 rounded-xl p-5 space-y-2">
+        <div className="max-w-xl mx-auto bg-slate-800/30 border border-slate-700/30 rounded-xl p-5 space-y-2">
           <p className="text-sm font-medium text-slate-300">What you'll see here</p>
           <ul className="space-y-1.5 text-xs text-slate-500">
             <li className="flex items-start gap-2"><span className="text-rose-500 mt-0.5">•</span>Dividend yield, annual per-share dividend, and earnings payout ratio</li>

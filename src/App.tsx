@@ -25,17 +25,16 @@ function safeSetItem(key: string, value: string) {
     localStorage.setItem(key, value);
   } catch (e) {
     if (e instanceof DOMException && e.name === 'QuotaExceededError') {
-      Object.keys(localStorage)
-        .filter(k => k.startsWith('finnhub_') || k.startsWith('valuwise_') || k.startsWith('tech_'))
-        .forEach(k => localStorage.removeItem(k));
+      clearAllCache();
       try { localStorage.setItem(key, value); } catch { /* skip if still full */ }
     }
   }
 }
 
 function clearAllCache() {
+  const prefixes = ['finnhub_', 'valuwise_', 'tech_', 'earnings_', 'insider_', 'news_', 'dividend_', 'portfolio_profile_', 'portfolio_holdings'];
   Object.keys(localStorage)
-    .filter(k => k.startsWith('finnhub_') || k.startsWith('valuwise_') || k.startsWith('tech_'))
+    .filter(k => prefixes.some(p => k.startsWith(p)))
     .forEach(k => localStorage.removeItem(k));
 }
 
@@ -245,14 +244,13 @@ export default function App() {
       const prevRev = index < arr.length - 1 ? getRev(arr[index + 1]) : rev;
       const revGrowth = prevRev ? (rev - prevRev) / prevRev : 0;
 
+      const cogs = findConcept(ic, ['us-gaap_CostOfRevenue', 'us-gaap_CostOfGoodsAndServicesSold', 'us-gaap_CostOfGoodsSold', 'us-gaap_CostOfServices', 'ifrs-full_CostOfSales']);
+      const sga = Math.abs(findConcept(ic, ['us-gaap_SellingGeneralAndAdministrativeExpense', 'us-gaap_SellingGeneralAndAdministrativeExpenses', 'us-gaap_GeneralAndAdministrativeExpense', 'ifrs-full_SellingGeneralAndAdministrativeExpense']));
+      const rd  = Math.abs(findConcept(ic, ['us-gaap_ResearchAndDevelopmentExpense', 'us-gaap_ResearchAndDevelopmentExpenseExcludingAcquiredInProcessCost']));
       let gp = findConcept(ic, ['us-gaap_GrossProfit', 'ifrs-full_GrossProfit']);
-      if (!gp && rev > 0) {
-        const cogs = findConcept(ic, ['us-gaap_CostOfRevenue', 'us-gaap_CostOfGoodsAndServicesSold', 'us-gaap_CostOfGoodsSold', 'us-gaap_CostOfServices', 'ifrs-full_CostOfSales']);
-        if (cogs > 0) gp = rev - cogs;
-      }
+      if (!gp && rev > 0 && cogs > 0) gp = rev - cogs;
       let ebit = findConcept(ic, ['us-gaap_OperatingIncomeLoss', 'ifrs-full_ProfitLossFromOperatingActivities']);
       if (!ebit) {
-        // Fallback: derive EBIT from pretax income + net interest expense
         const ebt = findConcept(ic, [
           'us-gaap_IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest',
           'us-gaap_IncomeLossFromContinuingOperationsBeforeIncomeTaxesMinorityInterestAndIncomeLossFromEquityMethodInvestments',
@@ -262,12 +260,7 @@ export default function App() {
         const intInc = Math.abs(findConcept(ic, ['us-gaap_InvestmentIncomeInterest', 'us-gaap_InterestAndDividendIncomeOperating', 'ifrs-full_FinanceIncome']));
         if (ebt) ebit = ebt + intExp - intInc;
       }
-      // Fallback 2: Gross Profit − SG&A − R&D (uses already-computed gp)
-      if (!ebit && gp > 0) {
-        const sga = Math.abs(findConcept(ic, ['us-gaap_SellingGeneralAndAdministrativeExpense', 'us-gaap_SellingGeneralAndAdministrativeExpenses', 'us-gaap_GeneralAndAdministrativeExpense', 'ifrs-full_SellingGeneralAndAdministrativeExpense']));
-        const rd  = Math.abs(findConcept(ic, ['us-gaap_ResearchAndDevelopmentExpense', 'us-gaap_ResearchAndDevelopmentExpenseExcludingAcquiredInProcessCost']));
-        if (sga > 0) ebit = gp - sga - rd;
-      }
+      if (!ebit && gp > 0 && sga > 0) ebit = gp - sga - rd;
       const tax = findConcept(ic, ['us-gaap_IncomeTaxExpenseBenefit', 'ifrs-full_IncomeTaxExpenseContinuingOperations', 'ifrs-full_IncomeTaxExpense']);
       const netIncome = findConcept(ic, ['us-gaap_NetIncomeLoss', 'ifrs-full_ProfitLoss']);
       const da = findConcept(cf, ['us-gaap_DepreciationDepletionAndAmortization', 'us-gaap_DepreciationAmortizationAndAccretionNet', 'ifrs-full_DepreciationAndAmortisationExpense']);
@@ -316,6 +309,7 @@ export default function App() {
       return {
         year: yearStr,
         rev, revGrowth, gp, gpm: rev ? gp/rev : 0,
+        cogs, sga, rd, tax, interestExpense,
         ebit, ebitMargin: rev ? ebit/rev : 0,
         ebitda, ebitdaMargin: rev ? ebitda/rev : 0,
         netIncome, netProfitMargin: rev ? netIncome/rev : 0,
@@ -698,6 +692,7 @@ export default function App() {
 <div class="hdr"><div><div class="logo">Valu<em>Wise</em></div><div class="title">${ticker} &mdash; DCF Analysis</div><div class="subtitle">${companyNameStr} &nbsp;&bull;&nbsp; ${scenarioLabel}</div></div><div class="hdr-r"><div><strong>Date</strong>&nbsp; ${dateStr}</div><div><strong>Model</strong>&nbsp; Unlevered FCFF / Gordon Growth Terminal Value</div><div><strong>Data</strong>&nbsp; Finnhub</div></div></div>
 <div class="cards"><div class="card"><div class="card-lbl">Intrinsic Value per Share</div><div class="card-val">$${dcf.intrinsicValue.toFixed(2)}</div><div class="card-sub">${forecastYears}-yr DCF &bull; ${scenarioLabel}</div></div><div class="card"><div class="card-lbl">Current Market Price</div><div class="card-val">$${dcf.currentPrice.toFixed(2)}</div><div class="card-sub">Market cap: ${fmtM(dcf.marketCap)}</div></div><div class="card"><div class="card-lbl">Upside / Downside</div><div class="card-val ${dcf.upside >= 0 ? 'up' : 'dn'}">${dcf.upside >= 0 ? '+' : ''}${(dcf.upside * 100).toFixed(1)}%</div><div class="card-sub">${dcf.upside >= 0 ? 'Undervalued vs intrinsic estimate' : 'Overvalued vs intrinsic estimate'}</div></div></div>
 <h2>Key Assumptions</h2><div class="asm"><div><div class="asm-r"><span class="asm-k">Revenue Growth &mdash; Year 1</span><span class="asm-v">${revGrowthStart}%</span></div><div class="asm-r"><span class="asm-k">Revenue Growth &mdash; Year ${forecastYears}</span><span class="asm-v">${revGrowthEnd}%</span></div><div class="asm-r"><span class="asm-k">EBIT Margin &mdash; Year 1</span><span class="asm-v">${ebitMarginStart}%</span></div><div class="asm-r"><span class="asm-k">EBIT Margin &mdash; Year ${forecastYears}</span><span class="asm-v">${ebitMarginEnd}%</span></div></div><div><div class="asm-r"><span class="asm-k">WACC</span><span class="asm-v">${fmtP(dcf.wacc)}</span></div><div class="asm-r"><span class="asm-k">Terminal Growth Rate</span><span class="asm-v">${termGrowth}%</span></div><div class="asm-r"><span class="asm-k">Forecast Period</span><span class="asm-v">${forecastYears} years</span></div><div class="asm-r"><span class="asm-k">Beta</span><span class="asm-v">${dcf.beta.toFixed(2)}</span></div></div></div>
+${scenarioComparison ? `<h2>Scenario Comparison</h2><table><thead><tr><th style="text-align:left"></th><th class="dn">Bear Case</th><th>Base Case</th><th class="up">Bull Case</th></tr></thead><tbody><tr><td class="row-label">Implied Price</td><td class="dn">$${scenarioComparison.bear.price.toFixed(2)}</td><td>$${scenarioComparison.base.price.toFixed(2)}</td><td class="up">$${scenarioComparison.bull.price.toFixed(2)}</td></tr><tr><td class="row-label">vs Current ($${dcf.currentPrice.toFixed(2)})</td><td class="${scenarioComparison.bear.upside >= 0 ? 'up' : 'dn'}">${scenarioComparison.bear.upside >= 0 ? '+' : ''}${(scenarioComparison.bear.upside * 100).toFixed(1)}%</td><td class="${scenarioComparison.base.upside >= 0 ? 'up' : 'dn'}">${scenarioComparison.base.upside >= 0 ? '+' : ''}${(scenarioComparison.base.upside * 100).toFixed(1)}%</td><td class="${scenarioComparison.bull.upside >= 0 ? 'up' : 'dn'}">${scenarioComparison.bull.upside >= 0 ? '+' : ''}${(scenarioComparison.bull.upside * 100).toFixed(1)}%</td></tr><tr><td class="row-label">Enterprise Value</td><td>${fmtM(scenarioComparison.bear.ev)}</td><td>${fmtM(scenarioComparison.base.ev)}</td><td>${fmtM(scenarioComparison.bull.ev)}</td></tr></tbody></table>` : ''}
 <h2>Forecast Model (${formatUnit})</h2><table><thead><tr><th style="text-align:left">Metric</th>${histCols}${projCols}</tr></thead><tbody>${rowFromArrays('Revenue', dcf.historicalSummary.map((h: any) => fmtM(h.rev)), dcf.projections.map((pr: any) => fmtM(pr.rev)))}${rowFromArrays('EBIT', dcf.historicalSummary.map((h: any) => fmtM(h.ebit)), dcf.projections.map((pr: any) => fmtM(pr.ebit)))}${rowFromArrays('EBIT Margin', dcf.historicalSummary.map((h: any) => fmtP(h.ebitMargin)), dcf.projections.map((pr: any) => fmtP(pr.rev ? pr.ebit / pr.rev : 0)))}<tr><td class="row-label">NOPAT (EBIAT)</td>${dcf.historicalSummary.map(() => '<td class="hist-v">&mdash;</td>').join('')}${dcf.projections.map((pr: any) => `<td class="proj-v">${fmtM(pr.ebiat)}</td>`).join('')}</tr><tr><td class="row-label">FCFF</td>${dcf.historicalSummary.map(() => '<td class="hist-v">&mdash;</td>').join('')}${dcf.projections.map((pr: any) => `<td class="proj-v">${fmtM(pr.fcff)}</td>`).join('')}</tr><tr><td class="row-label">PV of FCFF</td>${dcf.historicalSummary.map(() => '<td class="hist-v">&mdash;</td>').join('')}${dcf.projections.map((pr: any) => `<td class="proj-v">${fmtM(pr.discountedFcff)}</td>`).join('')}</tr></tbody></table>
 <h2>Valuation Bridge</h2><table class="sum-t"><tbody><tr><td>PV of FCFFs (${forecastYears}-yr)</td><td>${fmtM(dcf.ev - pvLast)}</td></tr><tr><td>PV of Terminal Value</td><td>${fmtM(pvLast)}</td></tr><tr><td>= Enterprise Value</td><td>${fmtM(dcf.ev)}</td></tr><tr><td>+ Cash &amp; Equivalents</td><td>${fmtM(dcf.totalCash)}</td></tr><tr><td>&minus; Total Debt</td><td>(${fmtM(dcf.totalDebt)})</td></tr><tr class="sum-tot"><td>= Equity Value</td><td>${fmtM(dcf.equityValue)}</td></tr><tr><td>Intrinsic Value / Share</td><td>$${dcf.intrinsicValue.toFixed(2)}</td></tr></tbody></table>
 <h2>Sensitivity Analysis &mdash; Implied Share Price</h2><p style="font-size:10px;color:#64748b;margin-bottom:8px">Rows: Terminal growth &nbsp;&bull;&nbsp; Columns: WACC &nbsp;&bull;&nbsp; Green = upside vs market price &nbsp;&bull;&nbsp; Current WACC (${fmtP(dcf.wacc)}) highlighted</p><table class="sens"><thead><tr><th class="g-th">g / WACC</th>${waccHdrs}</tr></thead><tbody>${sensRows}</tbody></table>
@@ -1055,6 +1050,13 @@ export default function App() {
           </div>
         ) : dcf && data ? (
           <div className="space-y-6">
+            {data?.profile?.name && (
+              <div className="flex items-baseline gap-3">
+                <h2 className="text-xl font-bold text-white">{ticker}</h2>
+                <span className="text-sm text-slate-400">{data.profile.name}</span>
+                {data.profile.finnhubIndustry && <span className="text-xs text-slate-600">{data.profile.finnhubIndustry}</span>}
+              </div>
+            )}
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
               
               {/* Left Column: Controls & Assumptions */}
@@ -1464,12 +1466,12 @@ export default function App() {
                             labelStyle={{ color: '#e2e8f0' }}
                             formatter={(v: number, name: string) => [`${v}%`, name]}
                           />
-                          <Legend wrapperStyle={{ fontSize: '11px' }} />
+                          <Legend wrapperStyle={{ fontSize: '11px', cursor: 'pointer' }} onClick={(d: any) => handleLegendClick(d, ['grossMargin', 'ebitdaMargin', 'ebitMargin', 'netMargin'])} />
                           <ReferenceLine y={0} stroke="#475569" />
-                          <Line type="monotone" dataKey="grossMargin"  name="Gross"   stroke="#34d399" strokeWidth={2} dot={{ r: 3 }} />
-                          <Line type="monotone" dataKey="ebitdaMargin" name="EBITDA"  stroke="#60a5fa" strokeWidth={2} dot={{ r: 3 }} />
-                          <Line type="monotone" dataKey="ebitMargin"   name="EBIT"    stroke="#a78bfa" strokeWidth={2} dot={{ r: 3 }} />
-                          <Line type="monotone" dataKey="netMargin"    name="Net"     stroke="#f87171" strokeWidth={2} dot={{ r: 3 }} />
+                          <Line type="monotone" dataKey="grossMargin"  name="Gross"   stroke="#34d399" strokeWidth={2} dot={{ r: 3 }} hide={!!hiddenSeries['grossMargin']} />
+                          <Line type="monotone" dataKey="ebitdaMargin" name="EBITDA"  stroke="#60a5fa" strokeWidth={2} dot={{ r: 3 }} hide={!!hiddenSeries['ebitdaMargin']} />
+                          <Line type="monotone" dataKey="ebitMargin"   name="EBIT"    stroke="#a78bfa" strokeWidth={2} dot={{ r: 3 }} hide={!!hiddenSeries['ebitMargin']} />
+                          <Line type="monotone" dataKey="netMargin"    name="Net"     stroke="#f87171" strokeWidth={2} dot={{ r: 3 }} hide={!!hiddenSeries['netMargin']} />
                         </LineChart>
                       </ResponsiveContainer>
                     </div>
@@ -1663,79 +1665,79 @@ export default function App() {
                 </button>
               </div>
             </div>
-            <table className="w-full text-sm text-right">
+            <table className="w-full text-sm text-right" style={{ fontVariantNumeric: 'tabular-nums' }}>
               <thead>
                 <tr className="text-slate-400 border-b border-slate-700">
-                  <th className="text-left py-2 font-medium">Metric</th>
-                  {dcf.historicalSummary.map((p: any) => <th key={p.year} className="py-2 font-medium text-slate-500">{p.year}</th>)}
-                  {dcf.projections.map((p: any) => <th key={p.year} className="py-2 font-medium">{p.year}</th>)}
+                  <th className="text-left py-2 px-3 font-medium min-w-[120px]">Metric</th>
+                  {dcf.historicalSummary.map((p: any) => <th key={p.year} className="py-2 px-3 font-medium text-slate-500 min-w-[85px] whitespace-nowrap">{p.year}</th>)}
+                  {dcf.projections.map((p: any) => <th key={p.year} className="py-2 px-3 font-medium min-w-[85px] whitespace-nowrap">{p.year}</th>)}
                 </tr>
               </thead>
               <tbody className="font-mono text-base">
                 <tr className="border-b border-slate-700/50">
-                  <td className="text-left py-3 text-slate-300">Revenue</td>
-                  {dcf.historicalSummary.map((p: any) => <td key={p.year} className="py-3 text-slate-500">{formatModelCurrency(p.rev, formatUnit)}</td>)}
-                  {dcf.projections.map((p: any) => <td key={p.year} className="py-3">{formatModelCurrency(p.rev, formatUnit)}</td>)}
+                  <td className="text-left py-3 px-3 text-slate-300 whitespace-nowrap">Revenue</td>
+                  {dcf.historicalSummary.map((p: any) => <td key={p.year} className="py-3 px-3 text-slate-500 whitespace-nowrap">{formatModelCurrency(p.rev, formatUnit)}</td>)}
+                  {dcf.projections.map((p: any) => <td key={p.year} className="py-3 px-3 whitespace-nowrap">{formatModelCurrency(p.rev, formatUnit)}</td>)}
                 </tr>
                 <tr className="border-b border-slate-700/50">
-                  <td className="text-left py-3 text-slate-300">EBIT</td>
-                  {dcf.historicalSummary.map((p: any) => <td key={p.year} className="py-3 text-slate-500">{formatModelCurrency(p.ebit, formatUnit)}</td>)}
-                  {dcf.projections.map((p: any) => <td key={p.year} className={`py-3 ${p.ebit < 0 ? 'text-red-400' : ''}`}>{formatModelCurrency(p.ebit, formatUnit)}</td>)}
+                  <td className="text-left py-3 px-3 text-slate-300 whitespace-nowrap">EBIT</td>
+                  {dcf.historicalSummary.map((p: any) => <td key={p.year} className="py-3 px-3 text-slate-500 whitespace-nowrap">{formatModelCurrency(p.ebit, formatUnit)}</td>)}
+                  {dcf.projections.map((p: any) => <td key={p.year} className={`py-3 px-3 whitespace-nowrap ${p.ebit < 0 ? 'text-red-400' : ''}`}>{formatModelCurrency(p.ebit, formatUnit)}</td>)}
                 </tr>
                 <tr className="border-b border-slate-700/50 text-sm italic text-slate-400">
-                  <td className="text-left py-3">(1 - Tax)</td>
-                  {dcf.historicalSummary.map((p: any) => <td key={p.year} className="py-3">-</td>)}
-                  {dcf.projections.map((p: any) => <td key={p.year} className="py-3">{formatPct(1 - p.taxRate)}</td>)}
+                  <td className="text-left py-3 px-3 whitespace-nowrap">(1 - Tax)</td>
+                  {dcf.historicalSummary.map((p: any) => <td key={p.year} className="py-3 px-3">-</td>)}
+                  {dcf.projections.map((p: any) => <td key={p.year} className="py-3 px-3 whitespace-nowrap">{formatPct(1 - p.taxRate)}</td>)}
                 </tr>
                 <tr className="border-b border-slate-700/50">
-                  <td className="text-left py-3 text-slate-300">EBIAT (NOPAT)</td>
-                  {dcf.historicalSummary.map((p: any) => <td key={p.year} className="py-3 text-slate-600">-</td>)}
-                  {dcf.projections.map((p: any) => <td key={p.year} className={`py-3 ${p.ebiat < 0 ? 'text-red-400' : ''}`}>{formatModelCurrency(p.ebiat, formatUnit)}</td>)}
+                  <td className="text-left py-3 px-3 text-slate-300 whitespace-nowrap">EBIAT (NOPAT)</td>
+                  {dcf.historicalSummary.map((p: any) => <td key={p.year} className="py-3 px-3 text-slate-600">-</td>)}
+                  {dcf.projections.map((p: any) => <td key={p.year} className={`py-3 px-3 whitespace-nowrap ${p.ebiat < 0 ? 'text-red-400' : ''}`}>{formatModelCurrency(p.ebiat, formatUnit)}</td>)}
                 </tr>
                 <tr className="border-b border-slate-700/50">
-                  <td className="text-left py-3 text-slate-300">Plus: D&A</td>
-                  {dcf.historicalSummary.map((p: any) => <td key={p.year} className="py-3 text-slate-600">-</td>)}
-                  {dcf.projections.map((p: any) => <td key={p.year} className="py-3">{formatModelCurrency(p.dna, formatUnit)}</td>)}
+                  <td className="text-left py-3 px-3 text-slate-300 whitespace-nowrap">Plus: D&A</td>
+                  {dcf.historicalSummary.map((p: any) => <td key={p.year} className="py-3 px-3 text-slate-600">-</td>)}
+                  {dcf.projections.map((p: any) => <td key={p.year} className="py-3 px-3 whitespace-nowrap">{formatModelCurrency(p.dna, formatUnit)}</td>)}
                 </tr>
                 <tr className="border-b border-slate-700/50">
-                  <td className="text-left py-3 text-slate-300">Less: CapEx</td>
-                  {dcf.historicalSummary.map((p: any) => <td key={p.year} className="py-3 text-slate-600">-</td>)}
-                  {dcf.projections.map((p: any) => <td key={p.year} className="py-3 text-red-400">{formatModelCurrency(-p.capex, formatUnit)}</td>)}
+                  <td className="text-left py-3 px-3 text-slate-300 whitespace-nowrap">Less: CapEx</td>
+                  {dcf.historicalSummary.map((p: any) => <td key={p.year} className="py-3 px-3 text-slate-600">-</td>)}
+                  {dcf.projections.map((p: any) => <td key={p.year} className="py-3 px-3 text-red-400 whitespace-nowrap">{formatModelCurrency(-p.capex, formatUnit)}</td>)}
                 </tr>
                 <tr className="border-b border-slate-700/50">
-                  <td className="text-left py-3 text-slate-300">Less: Δ WC</td>
-                  {dcf.historicalSummary.map((p: any) => <td key={p.year} className="py-3 text-slate-600">-</td>)}
-                  {dcf.projections.map((p: any) => <td key={p.year} className={`py-3 ${p.deltaWc > 0 ? 'text-red-400' : 'text-emerald-400'}`}>{formatModelCurrency(-p.deltaWc, formatUnit)}</td>)}
+                  <td className="text-left py-3 px-3 text-slate-300 whitespace-nowrap">Less: Δ WC</td>
+                  {dcf.historicalSummary.map((p: any) => <td key={p.year} className="py-3 px-3 text-slate-600">-</td>)}
+                  {dcf.projections.map((p: any) => <td key={p.year} className={`py-3 px-3 whitespace-nowrap ${p.deltaWc > 0 ? 'text-red-400' : 'text-emerald-400'}`}>{formatModelCurrency(-p.deltaWc, formatUnit)}</td>)}
                 </tr>
                 <tr className="border-b border-slate-700/50">
-                  <td className="text-left py-4 text-slate-300 font-semibold">Free Cash Flow</td>
-                  {dcf.historicalSummary.map((p: any) => <td key={p.year} className="py-4 text-slate-600">-</td>)}
-                  {dcf.projections.map((p: any) => <td key={p.year} className={`py-4 font-semibold ${p.fcff < 0 ? 'text-red-400' : 'text-emerald-400'}`}>{formatModelCurrency(p.fcff, formatUnit)}</td>)}
+                  <td className="text-left py-4 px-3 text-slate-300 font-semibold whitespace-nowrap">Free Cash Flow</td>
+                  {dcf.historicalSummary.map((p: any) => <td key={p.year} className="py-4 px-3 text-slate-600">-</td>)}
+                  {dcf.projections.map((p: any) => <td key={p.year} className={`py-4 px-3 font-semibold whitespace-nowrap ${p.fcff < 0 ? 'text-red-400' : 'text-emerald-400'}`}>{formatModelCurrency(p.fcff, formatUnit)}</td>)}
                 </tr>
                 <tr className="border-b border-slate-700/50">
-                  <td className="text-left py-3 text-slate-300">Mid-Year DP</td>
-                  {dcf.historicalSummary.map((p: any) => <td key={p.year} className="py-3 text-slate-600">-</td>)}
-                  {dcf.projections.map((p: any) => <td key={p.year} className="py-3 text-slate-400">{p.discountPeriod.toFixed(2)}</td>)}
+                  <td className="text-left py-3 px-3 text-slate-300 whitespace-nowrap">Mid-Year DP</td>
+                  {dcf.historicalSummary.map((p: any) => <td key={p.year} className="py-3 px-3 text-slate-600">-</td>)}
+                  {dcf.projections.map((p: any) => <td key={p.year} className="py-3 px-3 text-slate-400 whitespace-nowrap">{p.discountPeriod.toFixed(2)}</td>)}
                 </tr>
                 <tr className="border-b border-slate-700/50">
-                  <td className="text-left py-3 text-slate-300">Discounted FCF</td>
-                  {dcf.historicalSummary.map((p: any) => <td key={p.year} className="py-3 text-slate-600">-</td>)}
-                  {dcf.projections.map((p: any) => <td key={p.year} className={`py-3 ${p.discountedFcff < 0 ? 'text-red-400' : 'text-emerald-400'}`}>{formatModelCurrency(p.discountedFcff, formatUnit)}</td>)}
+                  <td className="text-left py-3 px-3 text-slate-300 whitespace-nowrap">Discounted FCF</td>
+                  {dcf.historicalSummary.map((p: any) => <td key={p.year} className="py-3 px-3 text-slate-600">-</td>)}
+                  {dcf.projections.map((p: any) => <td key={p.year} className={`py-3 px-3 whitespace-nowrap ${p.discountedFcff < 0 ? 'text-red-400' : 'text-emerald-400'}`}>{formatModelCurrency(p.discountedFcff, formatUnit)}</td>)}
                 </tr>
                 <tr className="border-b border-slate-700/50">
-                  <td className="text-left py-3 text-slate-300">Terminal Value</td>
-                  {dcf.historicalSummary.map((p: any) => <td key={p.year} className="py-3 text-slate-600">-</td>)}
-                  {dcf.projections.map((p: any, i: number) => <td key={p.year} className="py-3">{i === dcf.projections.length - 1 ? formatModelCurrency(p.tv, formatUnit) : '-'}</td>)}
+                  <td className="text-left py-3 px-3 text-slate-300 whitespace-nowrap">Terminal Value</td>
+                  {dcf.historicalSummary.map((p: any) => <td key={p.year} className="py-3 px-3 text-slate-600">-</td>)}
+                  {dcf.projections.map((p: any, i: number) => <td key={p.year} className="py-3 px-3 whitespace-nowrap">{i === dcf.projections.length - 1 ? formatModelCurrency(p.tv, formatUnit) : '-'}</td>)}
                 </tr>
                 <tr className="border-b border-slate-700/50">
-                  <td className="text-left py-3 text-slate-300">Discounted TV</td>
-                  {dcf.historicalSummary.map((p: any) => <td key={p.year} className="py-3 text-slate-600">-</td>)}
-                  {dcf.projections.map((p: any, i: number) => <td key={p.year} className={`py-3 ${p.discountedTv < 0 ? 'text-red-400' : 'text-emerald-400'}`}>{i === dcf.projections.length - 1 ? formatModelCurrency(p.discountedTv, formatUnit) : '-'}</td>)}
+                  <td className="text-left py-3 px-3 text-slate-300 whitespace-nowrap">Discounted TV</td>
+                  {dcf.historicalSummary.map((p: any) => <td key={p.year} className="py-3 px-3 text-slate-600">-</td>)}
+                  {dcf.projections.map((p: any, i: number) => <td key={p.year} className={`py-3 px-3 whitespace-nowrap ${p.discountedTv < 0 ? 'text-red-400' : 'text-emerald-400'}`}>{i === dcf.projections.length - 1 ? formatModelCurrency(p.discountedTv, formatUnit) : '-'}</td>)}
                 </tr>
                 <tr className="border-b border-slate-700/50">
-                  <td className="text-left py-3 text-slate-300">Shares Outstanding</td>
-                  {dcf.historicalSummary.map((p: any) => <td key={p.year} className="py-3 text-slate-500">{formatModelNumber(p.shares, formatUnit)}</td>)}
-                  {dcf.projections.map((p: any) => <td key={p.year} className="py-3">{formatModelNumber(p.shares, formatUnit)}</td>)}
+                  <td className="text-left py-3 px-3 text-slate-300 whitespace-nowrap">Shares Outstanding</td>
+                  {dcf.historicalSummary.map((p: any) => <td key={p.year} className="py-3 px-3 text-slate-500 whitespace-nowrap">{formatModelNumber(p.shares, formatUnit)}</td>)}
+                  {dcf.projections.map((p: any) => <td key={p.year} className="py-3 px-3 whitespace-nowrap">{formatModelNumber(p.shares, formatUnit)}</td>)}
                 </tr>
                 
                 {/* Valuation Summary Rows */}
@@ -1784,12 +1786,18 @@ export default function App() {
                 <tbody className="font-mono text-base">
                   <tr className="border-b border-slate-700/50"><td className="text-left py-2 text-slate-300">Revenue</td>{dcf.historicalSummary.map((p: any) => <td key={p.year} className="py-2">{formatModelCurrency(p.rev, formatUnit)}</td>)}</tr>
                   <tr className="border-b border-slate-700/50 text-xs italic text-slate-400"><td className="text-left py-2">Revenue Growth</td>{dcf.historicalSummary.map((p: any) => <td key={p.year} className="py-2">{formatPct(p.revGrowth)}</td>)}</tr>
+                  <tr className="border-b border-slate-700/50 text-slate-500"><td className="text-left py-2">Cost of Revenue</td>{dcf.historicalSummary.map((p: any) => <td key={p.year} className="py-2">{p.cogs ? formatModelCurrency(p.cogs, formatUnit) : '-'}</td>)}</tr>
                   <tr className="border-b border-slate-700/50"><td className="text-left py-2 text-slate-300">Gross Profit</td>{dcf.historicalSummary.map((p: any) => <td key={p.year} className="py-2">{formatModelCurrency(p.gp, formatUnit)}</td>)}</tr>
                   <tr className="border-b border-slate-700/50 text-xs italic text-slate-400"><td className="text-left py-2">Gross Margin</td>{dcf.historicalSummary.map((p: any) => <td key={p.year} className="py-2">{formatPct(p.gpm)}</td>)}</tr>
+                  <tr className="border-b border-slate-700/50 text-slate-500"><td className="text-left py-2">SG&A</td>{dcf.historicalSummary.map((p: any) => <td key={p.year} className="py-2">{p.sga ? formatModelCurrency(p.sga, formatUnit) : '-'}</td>)}</tr>
+                  <tr className="border-b border-slate-700/50 text-slate-500"><td className="text-left py-2">R&D</td>{dcf.historicalSummary.map((p: any) => <td key={p.year} className="py-2">{p.rd ? formatModelCurrency(p.rd, formatUnit) : '-'}</td>)}</tr>
+                  <tr className="border-b border-slate-700/50 text-slate-500"><td className="text-left py-2">D&A</td>{dcf.historicalSummary.map((p: any) => <td key={p.year} className="py-2">{p.dna ? formatModelCurrency(p.dna, formatUnit) : '-'}</td>)}</tr>
                   <tr className="border-b border-slate-700/50"><td className="text-left py-2 text-slate-300">EBIT</td>{dcf.historicalSummary.map((p: any) => <td key={p.year} className="py-2">{formatModelCurrency(p.ebit, formatUnit)}</td>)}</tr>
                   <tr className="border-b border-slate-700/50 text-xs italic text-slate-400"><td className="text-left py-2">EBIT Margin</td>{dcf.historicalSummary.map((p: any) => <td key={p.year} className="py-2">{formatPct(p.ebitMargin)}</td>)}</tr>
                   <tr className="border-b border-slate-700/50"><td className="text-left py-2 text-slate-300">EBITDA</td>{dcf.historicalSummary.map((p: any) => <td key={p.year} className="py-2">{formatModelCurrency(p.ebitda, formatUnit)}</td>)}</tr>
                   <tr className="border-b border-slate-700/50 text-xs italic text-slate-400"><td className="text-left py-2">EBITDA Margin</td>{dcf.historicalSummary.map((p: any) => <td key={p.year} className="py-2">{formatPct(p.ebitdaMargin)}</td>)}</tr>
+                  <tr className="border-b border-slate-700/50 text-slate-500"><td className="text-left py-2">Interest Expense</td>{dcf.historicalSummary.map((p: any) => <td key={p.year} className="py-2">{p.interestExpense ? formatModelCurrency(p.interestExpense, formatUnit) : '-'}</td>)}</tr>
+                  <tr className="border-b border-slate-700/50 text-slate-500"><td className="text-left py-2">Income Tax</td>{dcf.historicalSummary.map((p: any) => <td key={p.year} className="py-2">{p.tax ? formatModelCurrency(p.tax, formatUnit) : '-'}</td>)}</tr>
                   <tr className="border-b border-slate-700/50"><td className="text-left py-2 text-slate-300">Net Income</td>{dcf.historicalSummary.map((p: any) => <td key={p.year} className="py-2">{formatModelCurrency(p.netIncome, formatUnit)}</td>)}</tr>
                   <tr className="border-b border-slate-700/50 text-xs italic text-slate-400"><td className="text-left py-2">Net Profit Margin</td>{dcf.historicalSummary.map((p: any) => <td key={p.year} className="py-2">{formatPct(p.netProfitMargin)}</td>)}</tr>
                   <tr className="border-b border-slate-700/50"><td className="text-left py-2 text-slate-300">Basic EPS</td>{dcf.historicalSummary.map((p: any) => <td key={p.year} className="py-2">${p.eps.toFixed(2)}</td>)}</tr>

@@ -22,6 +22,11 @@ function safeSetItem(key: string, value: string) {
   }
 }
 
+function clearCache() {
+  const prefixes = ['finnhub_', 'valuwise_', 'tech_', 'earnings_', 'insider_', 'news_', 'dividend_', 'portfolio_profile_'];
+  Object.keys(localStorage).filter(k => prefixes.some(p => k.startsWith(p))).forEach(k => localStorage.removeItem(k));
+}
+
 // ── Types ─────────────────────────────────────────────────────────────────────
 interface Candle {
   date: string; open: number; high: number; low: number; close: number; volume: number;
@@ -680,7 +685,7 @@ export default function TechAnalysis() {
           <div>
             <p className="text-red-400 font-medium">Error loading data</p>
             <p className="text-red-400/80 text-sm mt-0.5">{error}</p>
-            <p className="text-slate-500 text-xs mt-2">If this keeps happening, click <span className="text-slate-300 font-medium">Clear Cache</span> in the top-right corner and try again.</p>
+            <button onClick={clearCache} className="mt-2 text-xs bg-slate-700 hover:bg-slate-600 text-slate-200 px-3 py-1.5 rounded-lg font-medium transition-colors">Clear Cache & Retry</button>
           </div>
         </div>
       )}

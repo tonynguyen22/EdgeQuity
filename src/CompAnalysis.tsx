@@ -5,6 +5,8 @@ import * as XLSX from 'xlsx';
 
 const API_KEY = 'ctj1dchr01qgfbsvp4mgctj1dchr01qgfbsvp4n0';
 const BASE_URL = 'https://finnhub.io/api/v1';
+const GEMINI_KEY = 'AIzaSyAqwxJo7IhS9kL-rHsFanvtiV9pYqvWu2s';
+const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${GEMINI_KEY}`;
 
 function safeSetItem(key: string, value: string) {
   try {
@@ -42,6 +44,7 @@ export default function CompAnalysis() {
   // User-selected peers (max 5)
   const [selectedPeerSymbols, setSelectedPeerSymbols] = useState<string[]>([]);
   const [customPeerInput, setCustomPeerInput]         = useState('');
+  const [aiPeerLoading, setAiPeerLoading]             = useState(false);
   // Analysis results
   const [loading, setLoading]   = useState(false);
   const [error, setError]       = useState('');
@@ -49,6 +52,21 @@ export default function CompAnalysis() {
   const [selectedPeers, setSelectedPeers] = useState<Record<string, boolean>>({});
   const [sortKey, setSortKey]   = useState<string | null>(null);
   const [sortDir, setSortDir]   = useState<'asc' | 'desc'>('desc');
+  const [hiddenSeries, setHiddenSeries] = useState<Record<string, boolean>>({});
+
+  const handleLegendClick = (d: any, chartKeys: string[]) => {
+    setHiddenSeries(prev => {
+      const allOthersHidden = chartKeys.every(k => k === d.dataKey || prev[k]);
+      if (allOthersHidden) {
+        const next = { ...prev };
+        chartKeys.forEach(k => { next[k] = false; });
+        return next;
+      }
+      const next = { ...prev };
+      chartKeys.forEach(k => { next[k] = k !== d.dataKey; });
+      return next;
+    });
+  };
 
   const toggleSort = (key: string) => {
     if (sortKey === key) setSortDir(d => d === 'asc' ? 'desc' : 'asc');
@@ -193,6 +211,40 @@ export default function CompAnalysis() {
           .filter(s => s.name && s.name !== s.symbol) // skip empty profiles
       );
     } catch { /* silent */ } finally { setPeerFinderLoading(false); }
+  };
+
+  const fetchAIPeers = async (sym: string) => {
+    setAiPeerLoading(true);
+    setShowPeerFinder(true);
+    setPeerSuggestions([]);
+    try {
+      const prompt = `For the publicly-traded stock ${sym}, list exactly 5 of its closest publicly-traded US competitor stock tickers that are in the same industry and similar market cap range. Return ONLY a JSON object with this structure: {"peers": ["TICK1", "TICK2", "TICK3", "TICK4", "TICK5"]}`;
+      const res = await fetch(GEMINI_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          contents: [{ parts: [{ text: prompt }] }],
+          generationConfig: { responseMimeType: 'application/json' },
+        }),
+      }).catch(() => null);
+      if (!res || !res.ok) { setAiPeerLoading(false); return; }
+      const gemData = await res.json().catch(() => null);
+      const raw = gemData?.candidates?.[0]?.content?.parts?.[0]?.text ?? '';
+      const jsonMatch = raw.match(/\{[\s\S]*\}/);
+      const jsonStr = jsonMatch ? jsonMatch[0] : raw;
+      const parsed = JSON.parse(jsonStr);
+      const tickers: string[] = (parsed.peers ?? []).filter((t: string) => t !== sym).slice(0, 5);
+      const profiles = await Promise.all(
+        tickers.map(p =>
+          fetch(`${BASE_URL}/stock/profile2?symbol=${p}&token=${API_KEY}`)
+            .then(r => r.ok ? r.json() : null)
+            .catch(() => null)
+        )
+      );
+      setPeerSuggestions(
+        tickers.map((p, i) => ({ symbol: p, name: profiles[i]?.name ?? p, isUS: profiles[i]?.country === 'US' }))
+      );
+    } catch { /* silent */ } finally { setAiPeerLoading(false); }
   };
 
   const togglePeerSelection = (sym: string) => {
@@ -383,6 +435,19 @@ export default function CompAnalysis() {
     };
   }, [data]);
 
+  // Composite Relative Value Score (0–100): average of all percentile rankings
+  const compositeScore = useMemo(() => {
+    if (!targetPercentiles) return null;
+    const vals = [
+      targetPercentiles.revGrowth, targetPercentiles.ebitdaMargin,
+      targetPercentiles.evToRev,   targetPercentiles.evToEbitda,
+      targetPercentiles.pToSales,  targetPercentiles.pToE,
+      targetPercentiles.pToBook,   targetPercentiles.pToFCF,
+    ].filter((v): v is number => v !== null);
+    if (vals.length === 0) return null;
+    return Math.round(vals.reduce((a, b) => a + b, 0) / vals.length);
+  }, [targetPercentiles]);
+
   // Multi-line EV/EBITDA history chart data
   const multiHistData = useMemo(() => {
     if (data.length === 0) return [];
@@ -465,6 +530,16 @@ export default function CompAnalysis() {
 
           <button
             type="button"
+            disabled={!tickerInput.trim() || aiPeerLoading}
+            onClick={() => fetchAIPeers(tickerInput.trim().toUpperCase())}
+            className="flex items-center gap-2 px-4 py-2.5 bg-blue-600/20 hover:bg-blue-600/30 border border-blue-500/30 text-blue-300 rounded-lg text-sm font-medium transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+          >
+            <Users className="w-4 h-4" />
+            {aiPeerLoading ? 'AI Thinking…' : 'AI Peers'}
+          </button>
+
+          <button
+            type="button"
             disabled={loading || !tickerInput.trim()}
             onClick={fetchData}
             className="flex items-center gap-2 px-5 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg text-sm font-medium transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
@@ -485,10 +560,10 @@ export default function CompAnalysis() {
               <span className="text-xs text-slate-500">{selectedPeerSymbols.length}/5 selected</span>
             </div>
 
-            {peerFinderLoading ? (
+            {(peerFinderLoading || aiPeerLoading) ? (
               <div className="flex items-center gap-2 text-sm text-slate-400 py-2">
                 <div className="w-4 h-4 border border-slate-500 border-t-transparent rounded-full animate-spin" />
-                Fetching peer list…
+                {aiPeerLoading ? 'AI is finding competitors…' : 'Fetching peer list…'}
               </div>
             ) : peerSuggestions.length === 0 ? (
               <p className="text-xs text-slate-500 py-1">No peer suggestions found for this ticker.</p>
@@ -794,7 +869,7 @@ export default function CompAnalysis() {
                     labelStyle={{ color: '#e2e8f0' }}
                     formatter={(v: number, name: string) => [`${v?.toFixed(1)}x`, name]}
                   />
-                  <Legend wrapperStyle={{ fontSize: '11px' }} />
+                  <Legend wrapperStyle={{ fontSize: '11px', cursor: 'pointer' }} onClick={(d: any) => handleLegendClick(d, data.map(dd => dd.symbol))} />
                   {data.map((d, i) => (
                     <Line
                       key={d.symbol}
@@ -804,6 +879,7 @@ export default function CompAnalysis() {
                       strokeWidth={i === 0 ? 2.5 : 1}
                       dot={{ r: i === 0 ? 4 : 2, fill: i === 0 ? '#10b981' : '#475569' }}
                       connectNulls
+                      hide={!!hiddenSeries[d.symbol]}
                     />
                   ))}
                 </LineChart>
@@ -851,12 +927,27 @@ export default function CompAnalysis() {
             </div>
           )}
 
-          {/* Valuation Radar Chart */}
+          {/* Relative Value Score + Radar Chart */}
           {radarScores && radarScores.length > 0 && (
             <div className="bg-slate-800/50 border border-slate-700/50 rounded-xl p-6">
-              <div className="mb-4">
-                <h3 className="text-sm font-medium text-slate-300">Valuation Profile vs. Peer Median</h3>
-                <p className="text-xs text-slate-500 mt-0.5">Percentile scores (0–100) — higher = more favorable (cheaper multiple / stronger growth)</p>
+              <div className="mb-4 flex items-start justify-between gap-4">
+                <div>
+                  <h3 className="text-sm font-medium text-slate-300">Valuation Profile vs. Peer Median</h3>
+                  <p className="text-xs text-slate-500 mt-0.5">Percentile scores (0–100) — higher = more favorable (cheaper multiple / stronger growth)</p>
+                </div>
+                {compositeScore !== null && (() => {
+                  const c = compositeScore >= 60 ? { text: 'text-emerald-400', bg: 'bg-emerald-500/10 border-emerald-500/20', label: 'Attractive' }
+                    : compositeScore >= 40 ? { text: 'text-amber-400', bg: 'bg-amber-500/10 border-amber-500/20', label: 'Fair' }
+                    : { text: 'text-red-400', bg: 'bg-red-500/10 border-red-500/20', label: 'Expensive' };
+                  return (
+                    <div className={`border rounded-xl px-4 py-3 text-center shrink-0 ${c.bg}`}>
+                      <div className="text-xs text-slate-400 mb-0.5">Relative Value Score</div>
+                      <div className={`text-3xl font-bold ${c.text}`}>{compositeScore}</div>
+                      <div className={`text-xs font-medium mt-0.5 ${c.text}`}>{c.label}</div>
+                      <div className="text-xs text-slate-600 mt-0.5">vs peers (0–100)</div>
+                    </div>
+                  );
+                })()}
               </div>
               <ResponsiveContainer width="100%" height={280}>
                 <RadarChart cx="50%" cy="50%" outerRadius="65%" data={radarScores}>

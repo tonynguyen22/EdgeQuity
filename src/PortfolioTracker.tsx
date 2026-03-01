@@ -18,6 +18,7 @@ interface HoldingData extends Holding {
   price: number;
   prevClose: number;
   sector: string;
+  beta: number | null;
   value: number;
   dayChange: number;
   dayChangePct: number;
@@ -122,28 +123,37 @@ export default function PortfolioTracker() {
           const prevClose = 0; // free tier doesn't provide prev close
           let name = h.symbol; // name is premium-only on API Ninjas
 
-          // Finnhub profile2 for sector — cached 7 days
+          // Finnhub profile2 + metric for sector and beta — cached 7 days
           const profileKey = `portfolio_profile_${h.symbol}_v1`;
           let sector = '';
+          let beta: number | null = null;
           const cachedProfile = localStorage.getItem(profileKey);
           if (cachedProfile) {
             try {
               const { ts, d } = JSON.parse(cachedProfile);
-              if (Date.now() - ts < PROFILE_TTL) { sector = d.sector; if (d.name && name === h.symbol) name = d.name; }
-              else localStorage.removeItem(profileKey);
+              if (Date.now() - ts < PROFILE_TTL) {
+                sector = d.sector; beta = d.beta ?? null;
+                if (d.name && name === h.symbol) name = d.name;
+              } else localStorage.removeItem(profileKey);
             } catch { localStorage.removeItem(profileKey); }
           }
           if (!sector) {
-            const profileRes = await fetch(`${FINNHUB_URL}/stock/profile2?symbol=${h.symbol}&token=${FINNHUB_KEY}`).catch(() => null);
-            if (profileRes) {
-              const p = await safeJson(profileRes).catch(() => ({}));
-              sector = p.finnhubIndustry ?? '';
-              if (p.name && name === h.symbol) name = p.name;
-              try { localStorage.setItem(profileKey, JSON.stringify({ ts: Date.now(), d: { sector, name } })); } catch { /* skip */ }
-            }
+            const [profileRes, metricRes] = await Promise.all([
+              fetch(`${FINNHUB_URL}/stock/profile2?symbol=${h.symbol}&token=${FINNHUB_KEY}`).catch(() => null),
+              fetch(`${FINNHUB_URL}/stock/metric?symbol=${h.symbol}&metric=all&token=${FINNHUB_KEY}`).catch(() => null),
+            ]);
+            const [p, m] = await Promise.all([
+              profileRes ? safeJson(profileRes).catch(() => ({})) : Promise.resolve({}),
+              metricRes  ? safeJson(metricRes).catch(() => ({}))  : Promise.resolve({}),
+            ]);
+            sector = p.finnhubIndustry ?? '';
+            if (p.name && name === h.symbol) name = p.name;
+            const rawBeta = m?.metric?.beta;
+            beta = typeof rawBeta === 'number' && isFinite(rawBeta) ? rawBeta : null;
+            try { localStorage.setItem(profileKey, JSON.stringify({ ts: Date.now(), d: { sector, name, beta } })); } catch { /* skip */ }
           }
 
-          return { symbol: h.symbol, price, prevClose, name, sector };
+          return { symbol: h.symbol, price, prevClose, name, sector, beta };
         })
       );
       const map: Record<string, any> = {};
@@ -177,6 +187,7 @@ export default function PortfolioTracker() {
         price,
         prevClose,
         sector: pd?.sector ?? '',
+        beta: pd?.beta ?? null,
         value,
         dayChange,
         dayChangePct,
@@ -195,6 +206,20 @@ export default function PortfolioTracker() {
   const hasPrices = Object.keys(priceData).length > 0;
 
   const sectors = enriched.map(h => h.sector);
+
+  // Portfolio beta: weighted average of holding betas (weight by position value)
+  const portfolioBeta = (() => {
+    const betaHoldings = enriched.filter(h => h.beta !== null && h.value > 0);
+    if (betaHoldings.length === 0) return null;
+    const betaValue = betaHoldings.reduce((s, h) => s + h.value, 0);
+    if (betaValue === 0) return null;
+    return betaHoldings.reduce((s, h) => s + (h.beta! * h.value) / betaValue, 0);
+  })();
+
+  const betaRiskTier = portfolioBeta === null ? null
+    : portfolioBeta < 0.8 ? { label: 'Low Risk', color: 'text-emerald-400', bg: 'bg-emerald-500/10 border-emerald-500/20', desc: 'Less volatile than the market' }
+    : portfolioBeta < 1.2 ? { label: 'Moderate', color: 'text-amber-400', bg: 'bg-amber-500/10 border-amber-500/20', desc: 'Tracks the market closely' }
+    : { label: 'High Risk', color: 'text-red-400', bg: 'bg-red-500/10 border-red-500/20', desc: 'More volatile than the market' };
 
   return (
     <div className="space-y-6">
@@ -300,6 +325,14 @@ export default function PortfolioTracker() {
                 </div>
               )}
               <DiversificationGrade sectors={sectors} />
+              {betaRiskTier && (
+                <div className={`border rounded-xl p-4 ${betaRiskTier.bg}`}>
+                  <div className="text-xs text-slate-400 mb-1">Portfolio Beta</div>
+                  <div className={`text-xl font-bold ${betaRiskTier.color}`}>{portfolioBeta!.toFixed(2)}</div>
+                  <div className={`text-xs font-medium mt-0.5 ${betaRiskTier.color}`}>{betaRiskTier.label}</div>
+                  <div className="text-xs text-slate-500 mt-0.5">{betaRiskTier.desc}</div>
+                </div>
+              )}
             </div>
           )}
 

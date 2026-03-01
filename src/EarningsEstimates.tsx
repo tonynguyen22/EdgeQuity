@@ -30,6 +30,11 @@ function safeSetItem(key: string, value: string) {
   }
 }
 
+function clearCache() {
+  const prefixes = ['finnhub_', 'valuwise_', 'tech_', 'earnings_', 'insider_', 'news_', 'dividend_', 'portfolio_profile_'];
+  Object.keys(localStorage).filter(k => prefixes.some(p => k.startsWith(p))).forEach(k => localStorage.removeItem(k));
+}
+
 const fmtRev = (v: number | null) => {
   if (v == null || v === 0) return '—';
   if (Math.abs(v) >= 1e12) return `$${(v / 1e12).toFixed(2)}T`;
@@ -125,14 +130,55 @@ export default function EarningsEstimates() {
   }).length ?? 0;
   const total = data?.history.length ?? 0;
 
+  // EPS Momentum: compare YoY growth of the 2 most recent quarters vs the 2 prior
+  // history is sorted newest-first; need 4+ quarters
+  const epsMomentum = (() => {
+    const h = data?.history ?? [];
+    if (h.length < 4) return null;
+    // YoY growth for quarter i = (actual[i] - actual[i+4]) / |actual[i+4]|
+    // Recent = avg of quarters 0 and 1; Prior = avg of quarters 1 and 2
+    const yoy = (i: number) => {
+      if (i + 4 >= h.length) return null;
+      const base = h[i + 4]?.actual_eps;
+      const curr = h[i]?.actual_eps;
+      if (!base || base === 0 || curr == null) return null;
+      return ((curr - base) / Math.abs(base)) * 100;
+    };
+    const g0 = yoy(0), g1 = yoy(1), g2 = yoy(2);
+    if (g0 == null || g1 == null) return null;
+    const recentAvg = (g0 + g1) / 2;
+    const priorAvg = g2 != null ? (g1 + g2) / 2 : g1;
+    const delta = recentAvg - priorAvg;
+    const trend: 'Accelerating' | 'Stable' | 'Decelerating' =
+      delta > 3 ? 'Accelerating' : delta < -3 ? 'Decelerating' : 'Stable';
+    return { recentAvg, priorAvg, delta, trend };
+  })();
+
+  // Earnings Quality Score: beat consistency + beat magnitude
+  const qualityScore = (() => {
+    if (!data?.history?.length) return null;
+    const h = data.history;
+    const surprises = h
+      .filter((r: any) => r.estimated_eps != null)
+      .map((r: any) => ((r.actual_eps - r.estimated_eps) / Math.abs(r.estimated_eps)) * 100);
+    if (surprises.length === 0) return null;
+    const avgSurprise = surprises.reduce((a: number, b: number) => a + b, 0) / surprises.length;
+    const beatRate = (surprises.filter((s: number) => s > 0.5).length / surprises.length) * 100;
+    // Score: beat rate weighted with avg surprise magnitude (capped at 20%)
+    const score = Math.round((beatRate * 0.6) + (Math.min(Math.max(avgSurprise, -20), 20) / 20) * 40 + 40);
+    const clamped = Math.max(0, Math.min(100, score));
+    const label = clamped >= 70 ? 'High Quality' : clamped >= 45 ? 'Average' : 'Low Quality';
+    return { score: clamped, label, avgSurprise, beatRate };
+  })();
+
   return (
-    <div className="space-y-6">
-      <div>
+    <div className="max-w-5xl mx-auto space-y-6">
+      <div className="max-w-xl mx-auto">
         <h2 className="text-2xl font-bold text-white mb-1">Earnings Estimates</h2>
         <p className="text-slate-400 text-sm">Recent EPS results, surprise history, and next earnings date.</p>
       </div>
 
-      <form onSubmit={handleSearch} className="max-w-xl relative">
+      <form onSubmit={handleSearch} className="max-w-xl mx-auto relative">
         <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
         <input
           value={input}
@@ -147,19 +193,19 @@ export default function EarningsEstimates() {
       </form>
 
       {loading && (
-        <div className="flex items-center gap-3 py-8">
+        <div className="flex items-center gap-3 py-8 max-w-xl mx-auto">
           <div className="w-6 h-6 border-2 border-cyan-500 border-t-transparent rounded-full animate-spin" />
           <span className="text-slate-400">Loading earnings data...</span>
         </div>
       )}
 
       {error && (
-        <div className="bg-red-500/10 border border-red-500/20 rounded-lg p-4 flex gap-3 max-w-xl">
+        <div className="bg-red-500/10 border border-red-500/20 rounded-lg p-4 flex gap-3 max-w-xl mx-auto">
           <AlertCircle className="w-5 h-5 text-red-400 shrink-0 mt-0.5" />
           <div>
             <p className="text-red-400 font-medium">Error</p>
             <p className="text-red-400/70 text-sm mt-0.5">{error}</p>
-            <p className="text-slate-500 text-xs mt-1.5">If this keeps happening, click <span className="text-slate-300 font-medium">Clear Cache</span> in the sidebar and try again.</p>
+            <button onClick={clearCache} className="mt-2 text-xs bg-slate-700 hover:bg-slate-600 text-slate-200 px-3 py-1.5 rounded-lg font-medium transition-colors">Clear Cache & Retry</button>
           </div>
         </div>
       )}
@@ -203,6 +249,52 @@ export default function EarningsEstimates() {
                 <div className="text-2xl font-bold text-white">{total > 0 ? ((beats / total) * 100).toFixed(0) : '0'}%</div>
                 <div className="text-xs text-slate-400 mt-0.5">Beat Rate</div>
               </div>
+            </div>
+          )}
+
+          {/* EPS Momentum + Quality */}
+          {(epsMomentum || qualityScore) && (
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {epsMomentum && (() => {
+                const tColor = epsMomentum.trend === 'Accelerating' ? 'text-emerald-400'
+                  : epsMomentum.trend === 'Decelerating' ? 'text-red-400' : 'text-amber-400';
+                const tBg = epsMomentum.trend === 'Accelerating' ? 'bg-emerald-500/10 border-emerald-500/20'
+                  : epsMomentum.trend === 'Decelerating' ? 'bg-red-500/10 border-red-500/20' : 'bg-amber-500/10 border-amber-500/20';
+                return (
+                  <div className={`border rounded-xl p-4 ${tBg}`}>
+                    <div className="text-xs text-slate-400 mb-2 uppercase tracking-wide font-medium">EPS Momentum</div>
+                    <div className={`text-xl font-bold ${tColor} flex items-center gap-2`}>
+                      {epsMomentum.trend === 'Accelerating' ? <TrendingUp className="w-5 h-5" /> : epsMomentum.trend === 'Decelerating' ? <TrendingDown className="w-5 h-5" /> : <Minus className="w-5 h-5" />}
+                      {epsMomentum.trend}
+                    </div>
+                    <div className="mt-2 space-y-1 text-xs text-slate-400">
+                      <div>Recent YoY growth: <span className={`font-semibold ${epsMomentum.recentAvg >= 0 ? 'text-emerald-400' : 'text-red-400'}`}>{epsMomentum.recentAvg >= 0 ? '+' : ''}{epsMomentum.recentAvg.toFixed(1)}%</span></div>
+                      <div>Prior period: <span className="text-slate-300">{epsMomentum.priorAvg >= 0 ? '+' : ''}{epsMomentum.priorAvg.toFixed(1)}%</span></div>
+                      <div className={`${Math.abs(epsMomentum.delta) > 3 ? tColor : 'text-slate-500'}`}>
+                        {epsMomentum.delta >= 0 ? '+' : ''}{epsMomentum.delta.toFixed(1)}pp change
+                      </div>
+                    </div>
+                  </div>
+                );
+              })()}
+              {qualityScore && (() => {
+                const qColor = qualityScore.score >= 70 ? 'text-emerald-400' : qualityScore.score >= 45 ? 'text-amber-400' : 'text-red-400';
+                const qBg = qualityScore.score >= 70 ? 'bg-emerald-500/10 border-emerald-500/20' : qualityScore.score >= 45 ? 'bg-amber-500/10 border-amber-500/20' : 'bg-red-500/10 border-red-500/20';
+                return (
+                  <div className={`border rounded-xl p-4 ${qBg}`}>
+                    <div className="text-xs text-slate-400 mb-2 uppercase tracking-wide font-medium">Earnings Quality</div>
+                    <div className={`text-xl font-bold ${qColor}`}>{qualityScore.label}</div>
+                    <div className="h-1.5 bg-slate-700 rounded-full mt-2 mb-2 overflow-hidden">
+                      <div className={`h-full rounded-full ${qualityScore.score >= 70 ? 'bg-emerald-500' : qualityScore.score >= 45 ? 'bg-amber-500' : 'bg-red-500'}`}
+                        style={{ width: `${qualityScore.score}%` }} />
+                    </div>
+                    <div className="space-y-1 text-xs text-slate-400">
+                      <div>Beat rate: <span className="text-slate-200 font-medium">{qualityScore.beatRate.toFixed(0)}%</span></div>
+                      <div>Avg EPS surprise: <span className={`font-medium ${qualityScore.avgSurprise >= 0 ? 'text-emerald-400' : 'text-red-400'}`}>{qualityScore.avgSurprise >= 0 ? '+' : ''}{qualityScore.avgSurprise.toFixed(1)}%</span></div>
+                    </div>
+                  </div>
+                );
+              })()}
             </div>
           )}
 
@@ -260,7 +352,7 @@ export default function EarningsEstimates() {
       )}
 
       {!data && !loading && !error && (
-        <div className="max-w-xl bg-slate-800/30 border border-slate-700/30 rounded-xl p-5 space-y-2">
+        <div className="max-w-xl mx-auto bg-slate-800/30 border border-slate-700/30 rounded-xl p-5 space-y-2">
           <p className="text-sm font-medium text-slate-300">What you'll see here</p>
           <ul className="space-y-1.5 text-xs text-slate-500">
             <li className="flex items-start gap-2"><span className="text-cyan-500 mt-0.5">•</span>Next scheduled earnings date with estimated EPS and revenue</li>
