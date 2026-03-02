@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo, useRef } from 'react';
 import { BarChart, Bar, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, ReferenceLine, Legend, ComposedChart } from 'recharts';
-import { Search, TrendingUp, TrendingDown, Info, DollarSign, Activity, PieChart, AlertCircle, Download, LayoutDashboard, Users, Award, Printer, Target, Trash2, BarChart2, Eye, Newspaper, Briefcase, Coins, Home } from 'lucide-react';
+import { Search, TrendingUp, TrendingDown, Info, DollarSign, Activity, PieChart, AlertCircle, Download, LayoutDashboard, Users, Award, Printer, Target, Trash2, BarChart2, Eye, Newspaper, Briefcase, Coins, Home, FileSpreadsheet } from 'lucide-react';
 import * as XLSX from 'xlsx';
 import CompAnalysis from './CompAnalysis';
 import CompanyGrade from './CompanyGrade';
@@ -10,6 +10,7 @@ import InsiderInstitutional from './InsiderInstitutional';
 import NewsSentiment from './NewsSentiment';
 import PortfolioTracker from './PortfolioTracker';
 import DividendAnalysis from './DividendAnalysis';
+import EdgarFinancials from './EdgarFinancials';
 
 const API_KEY = 'ctj1dchr01qgfbsvp4mgctj1dchr01qgfbsvp4n0';
 const BASE_URL = 'https://finnhub.io/api/v1';
@@ -81,7 +82,7 @@ export default function App() {
   const [forecastYears, setForecastYears] = useState(5);
   const [formatUnit, setFormatUnit] = useState<'M' | 'B'>('B');
   const [hiddenSeries, setHiddenSeries] = useState<Record<string, boolean>>({});
-  const [activeTab, setActiveTab] = useState<'dcf' | 'comp' | 'grade' | 'tech' | 'earnings' | 'insider' | 'news' | 'portfolio' | 'dividend'>('dcf');
+  const [activeTab, setActiveTab] = useState<'dcf' | 'comp' | 'grade' | 'tech' | 'earnings' | 'insider' | 'news' | 'portfolio' | 'dividend' | 'edgar'>('dcf');
   const [analystTarget, setAnalystTarget] = useState<{ mean: number; high: number; low: number } | null>(null);
   const [cacheCleared, setCacheCleared] = useState(false);
 
@@ -803,6 +804,7 @@ ${scenarioComparison ? `<h2>Scenario Comparison</h2><table><thead><tr><th style=
             { id: 'dcf', label: 'DCF Model', Icon: Activity, active: 'text-emerald-400' },
             { id: 'comp', label: 'Comp Analysis', Icon: Users, active: 'text-blue-400' },
             { id: 'grade', label: 'Company Grade', Icon: Award, active: 'text-amber-400' },
+            { id: 'edgar', label: 'Pull Financials', Icon: FileSpreadsheet, active: 'text-teal-400' },
           ] as const).map(({ id, label, Icon, active }) => (
             <button
               key={id}
@@ -905,6 +907,15 @@ ${scenarioComparison ? `<h2>Scenario Comparison</h2><table><thead><tr><th style=
                 <h3 className="text-base font-semibold text-white">Company Grade</h3>
                 <p className="text-slate-400 text-xs leading-relaxed">Letter-grade report card (A–D) across financial health, profitability, growth, and cash flow.</p>
               </button>
+              {/* Pull Financials */}
+              <button onClick={() => { setActiveTab('edgar'); setShowLanding(false); }}
+                className="bg-slate-800/50 border border-slate-700/50 rounded-2xl p-5 space-y-2.5 hover:bg-slate-800 hover:border-teal-500/50 transition-all group text-left">
+                <div className="w-9 h-9 bg-teal-500/10 rounded-lg flex items-center justify-center group-hover:bg-teal-500/20 transition-colors">
+                  <FileSpreadsheet className="w-5 h-5 text-teal-500" />
+                </div>
+                <h3 className="text-base font-semibold text-white">Pull Financials</h3>
+                <p className="text-slate-400 text-xs leading-relaxed">Raw income statement, balance sheet & cash flows from SEC EDGAR — works for US stocks and ADRs (NVO, TSM).</p>
+              </button>
               {/* Technical */}
               <button onClick={() => { setActiveTab('tech'); setShowLanding(false); }}
                 className="bg-slate-800/50 border border-slate-700/50 rounded-2xl p-5 space-y-2.5 hover:bg-slate-800 hover:border-violet-500/50 transition-all group text-left">
@@ -973,6 +984,8 @@ ${scenarioComparison ? `<h2>Scenario Comparison</h2><table><thead><tr><th style=
               </div>
             </div>
           </div>
+        ) : activeTab === 'edgar' ? (
+          <EdgarFinancials />
         ) : activeTab === 'comp' ? (
           <CompAnalysis />
         ) : activeTab === 'grade' ? (
