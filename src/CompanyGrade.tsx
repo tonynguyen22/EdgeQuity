@@ -1,6 +1,6 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import { TrendingUp, TrendingDown, Shield, DollarSign, Activity, Award, Search, AlertCircle, AlertTriangle } from 'lucide-react';
-import { ResponsiveContainer, LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, Legend, BarChart, Bar, ReferenceLine, RadarChart, Radar, PolarGrid, PolarAngleAxis, PolarRadiusAxis } from 'recharts';
+import { ResponsiveContainer, LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, Legend, BarChart, Bar, ReferenceLine, RadarChart, Radar, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Cell } from 'recharts';
 
 const API_KEY = 'ctj1dchr01qgfbsvp4mgctj1dchr01qgfbsvp4n0';
 const BASE_URL = 'https://finnhub.io/api/v1';
@@ -63,11 +63,9 @@ function buildHistoricalSummary(financials: any[]) {
     const prevRev = index < arr.length - 1 ? getRev(arr[index + 1]) : rev;
     const revGrowth = prevRev ? (rev - prevRev) / prevRev : 0;
 
+    const cogs = findConcept(ic, ['us-gaap_CostOfRevenue', 'us-gaap_CostOfGoodsAndServicesSold', 'us-gaap_CostOfGoodsSold', 'us-gaap_CostOfServices', 'ifrs-full_CostOfSales']);
     let gp = findConcept(ic, ['us-gaap_GrossProfit', 'ifrs-full_GrossProfit']);
-    if (!gp && rev > 0) {
-      const cogs = findConcept(ic, ['us-gaap_CostOfRevenue', 'us-gaap_CostOfGoodsAndServicesSold', 'us-gaap_CostOfGoodsSold', 'us-gaap_CostOfServices', 'ifrs-full_CostOfSales']);
-      if (cogs > 0) gp = rev - cogs;
-    }
+    if (!gp && rev > 0 && cogs > 0) gp = rev - cogs;
     let ebit = findConcept(ic, ['us-gaap_OperatingIncomeLoss', 'ifrs-full_ProfitLossFromOperatingActivities']);
     if (!ebit) {
       const ebt = findConcept(ic, [
@@ -107,6 +105,13 @@ function buildHistoricalSummary(financials: any[]) {
     const cfo   = findConcept(cf, ['us-gaap_NetCashProvidedByUsedInOperatingActivities', 'us-gaap_NetCashProvidedByUsedInOperatingActivitiesContinuingOperations', 'ifrs-full_CashFlowsFromUsedInOperatingActivities']);
     const capex = Math.abs(findConcept(cf, ['us-gaap_PaymentsToAcquirePropertyPlantAndEquipment', 'ifrs-full_PurchaseOfPropertyPlantAndEquipment']));
 
+    const shares = findConcept(ic, ['us-gaap_WeightedAverageNumberOfSharesOutstandingBasic', 'ifrs-full_WeightedAverageShares'])
+      || findConcept(bs, ['us-gaap_CommonStockSharesOutstanding']);
+    const netReceivables = findConcept(bs, ['us-gaap_AccountsReceivableNetCurrent', 'us-gaap_ReceivablesNetCurrent', 'ifrs-full_TradeAndOtherCurrentReceivables']);
+    const accountsPayable = findConcept(bs, ['us-gaap_AccountsPayableCurrent', 'ifrs-full_TradeAndOtherCurrentPayables']);
+    const retainedEarnings = findConcept(bs, ['us-gaap_RetainedEarningsAccumulatedDeficit', 'ifrs-full_RetainedEarnings']);
+    const totalLiabilities = findConcept(bs, ['us-gaap_Liabilities', 'ifrs-full_Liabilities']) || (totalAssets - totalEquity);
+
     const currentRatio   = currentLiabilities ? currentAssets / currentLiabilities : 0;
     const quickRatio     = currentLiabilities ? (currentAssets - inventory) / currentLiabilities : 0;
     const interestCoverage = interestExpense ? ebit / interestExpense : 0;
@@ -124,12 +129,13 @@ function buildHistoricalSummary(financials: any[]) {
       : null;
 
     return {
-      year: yearStr, rev, revGrowth, gp,
+      year: yearStr, rev, revGrowth, gp, cogs,
       grossMargin: rev ? gp / rev : 0,
       ebitda, ebitdaMargin: rev ? ebitda / rev : 0,
       netIncome, netProfitMargin: rev ? netIncome / rev : 0,
       eps, epsGrowth, currentRatio, quickRatio, interestCoverage, debtToEquity, roe, roa, cfo, capex,
       ebit, totalAssets, totalEquity, currentAssets, currentLiabilities,
+      longTermDebt, shares, netReceivables, accountsPayable, retainedEarnings, totalLiabilities,
     };
   }).slice(0, 5).reverse();
 
@@ -369,20 +375,129 @@ function computeSingleYearGrades(y: any): {
   };
 }
 
-// ─── Altman Z''-Score ─────────────────────────────────────────────────────────
+// ─── Altman Z-Score ──────────────────────────────────────────────────────────
 
-function computeAltmanZ(y: any): { z: number; zone: 'safe' | 'grey' | 'distress' } | null {
+function computeAltmanZ(y: any, marketCapM: number): { z: number; zone: 'safe' | 'grey' | 'distress' } | null {
   if (!y.totalAssets || y.totalAssets === 0) return null;
-  const wc       = y.currentAssets - y.currentLiabilities;
-  const totalLiab = y.totalAssets - y.totalEquity;
-  const X1 = wc / y.totalAssets;
-  const X2 = y.totalEquity / y.totalAssets;           // retained earnings proxy
-  const X3 = y.ebit / y.totalAssets;
-  const X4 = totalLiab > 0 ? y.totalEquity / totalLiab : 5; // equity / liabilities; cap if debt-free
-  const z  = 6.56 * X1 + 3.26 * X2 + 6.72 * X3 + 1.05 * X4;
+  const TA = y.totalAssets;
+  const wc = y.currentAssets - y.currentLiabilities;
+  const RE = y.retainedEarnings || y.totalEquity;
+  const TL = y.totalLiabilities || (TA - y.totalEquity);
+  const X1 = wc / TA;
+  const X2 = RE / TA;
+  const X3 = y.ebit / TA;
+  const X4 = TL > 0 ? (marketCapM * 1e6) / TL : 5;
+  const X5 = y.rev / TA;
+  const z  = 1.2 * X1 + 1.4 * X2 + 3.3 * X3 + 0.6 * X4 + 1.0 * X5;
   if (!isFinite(z) || isNaN(z)) return null;
   const zone: 'safe' | 'grey' | 'distress' = z > 2.99 ? 'safe' : z >= 1.81 ? 'grey' : 'distress';
   return { z, zone };
+}
+
+// ─── Piotroski F-Score ───────────────────────────────────────────────────────
+
+function computePiotroski(hist: any[]): { score: number; signals: { name: string; passed: boolean; detail: string }[] } | null {
+  if (hist.length < 2) return null;
+  const curr = hist[hist.length - 1];
+  const prev = hist[hist.length - 2];
+  if (!curr.totalAssets || !prev.totalAssets) return null;
+
+  const signals: { name: string; passed: boolean; detail: string }[] = [
+    {
+      name: 'Positive Net Income',
+      passed: curr.netIncome > 0,
+      detail: `Net income: $${(curr.netIncome / 1e6).toFixed(0)}M`,
+    },
+    {
+      name: 'Positive Operating Cash Flow',
+      passed: curr.cfo > 0,
+      detail: `OCF: $${(curr.cfo / 1e6).toFixed(0)}M`,
+    },
+    {
+      name: 'Rising ROA',
+      passed: curr.roa > prev.roa,
+      detail: `${(prev.roa * 100).toFixed(1)}% -> ${(curr.roa * 100).toFixed(1)}%`,
+    },
+    {
+      name: 'Accruals Quality (CFO > NI)',
+      passed: curr.cfo > curr.netIncome,
+      detail: curr.cfo > curr.netIncome ? 'Cash earnings exceed accrual earnings' : 'Accrual earnings exceed cash',
+    },
+    {
+      name: 'Declining LT Debt / Assets',
+      passed: (curr.longTermDebt / curr.totalAssets) <= (prev.longTermDebt / prev.totalAssets) + 0.001,
+      detail: `${((prev.longTermDebt / prev.totalAssets) * 100).toFixed(1)}% -> ${((curr.longTermDebt / curr.totalAssets) * 100).toFixed(1)}%`,
+    },
+    {
+      name: 'Rising Current Ratio',
+      passed: curr.currentRatio >= prev.currentRatio - 0.01,
+      detail: `${prev.currentRatio.toFixed(2)}x -> ${curr.currentRatio.toFixed(2)}x`,
+    },
+    {
+      name: 'No Share Dilution',
+      passed: !curr.shares || !prev.shares || curr.shares <= prev.shares * 1.01,
+      detail: curr.shares && prev.shares ? `${(prev.shares / 1e6).toFixed(0)}M -> ${(curr.shares / 1e6).toFixed(0)}M shares` : 'N/A',
+    },
+    {
+      name: 'Rising Gross Margin',
+      passed: curr.grossMargin >= prev.grossMargin - 0.001,
+      detail: `${(prev.grossMargin * 100).toFixed(1)}% -> ${(curr.grossMargin * 100).toFixed(1)}%`,
+    },
+    {
+      name: 'Rising Asset Turnover',
+      passed: (curr.rev / curr.totalAssets) >= (prev.rev / prev.totalAssets) - 0.001,
+      detail: `${(prev.rev / prev.totalAssets).toFixed(2)}x -> ${(curr.rev / curr.totalAssets).toFixed(2)}x`,
+    },
+  ];
+
+  return { score: signals.filter(s => s.passed).length, signals };
+}
+
+// ─── DuPont Analysis ─────────────────────────────────────────────────────────
+
+function computeDuPont(hist: any[]) {
+  return hist.map(y => ({
+    year: y.year.substring(0, 4),
+    netMargin: y.rev ? y.netIncome / y.rev : 0,
+    assetTurnover: y.totalAssets ? y.rev / y.totalAssets : 0,
+    equityMultiplier: y.totalEquity ? y.totalAssets / y.totalEquity : 0,
+    roe: y.totalEquity ? y.netIncome / y.totalEquity : 0,
+  }));
+}
+
+// ─── Working Capital Efficiency ──────────────────────────────────────────────
+
+function computeWorkingCapital(hist: any[]) {
+  return hist.map(y => {
+    const dso = y.rev ? (y.netReceivables / y.rev) * 365 : null;
+    const dio = y.cogs ? (y.inventory / y.cogs) * 365 : null;
+    const dpo = y.cogs ? (y.accountsPayable / y.cogs) * 365 : null;
+    const ccc = (dso != null && dio != null && dpo != null) ? dso + dio - dpo : null;
+    return { year: y.year.substring(0, 4), dso, dio, dpo, ccc };
+  });
+}
+
+// ─── Earnings Quality ────────────────────────────────────────────────────────
+
+function computeEarningsQuality(hist: any[]) {
+  if (hist.length === 0) return null;
+  const trend = hist.map(y => ({
+    year: y.year.substring(0, 4),
+    accruals: y.totalAssets ? (y.netIncome - y.cfo) / y.totalAssets : 0,
+  }));
+  const latest = trend[trend.length - 1].accruals;
+  let score: number;
+  let label: string;
+  if (latest < -0.10) { score = 95; label = 'Excellent'; }
+  else if (latest < -0.03) { score = 75; label = 'Good'; }
+  else if (latest < 0.05) { score = 50; label = 'Fair'; }
+  else { score = 25; label = 'Poor'; }
+  const interpretation = latest < -0.03
+    ? 'Earnings are well-supported by cash flows.'
+    : latest < 0.05
+      ? 'Moderate accruals — earnings quality is acceptable.'
+      : 'High accruals relative to assets — earnings may not be cash-backed.';
+  return { score, label, trend, interpretation, latest };
 }
 
 // ─── Risk flags ───────────────────────────────────────────────────────────────
@@ -477,6 +592,7 @@ export default function CompanyGrade() {
   const [error, setError] = useState('');
   const [rawResult, setRawResult] = useState<ReturnType<typeof computeGrades> | null>(null);
   const [historicalSummary, setHistoricalSummary] = useState<any[]>([]);
+  const [marketCap, setMarketCap] = useState<number>(0);
   const [hiddenSeries, setHiddenSeries] = useState<Record<string, boolean>>({});
 
   const handleLegendClick = (d: any, chartKeys: string[]) => {
@@ -499,7 +615,7 @@ export default function CompanyGrade() {
     setRawResult(null);
     setCompanyName('');
 
-    const cacheKey = `valuwise_grade_v2_${sym}`;
+    const cacheKey = `valuwise_grade_v3_${sym}`;
     const cached = localStorage.getItem(cacheKey);
     if (cached) {
       try {
@@ -543,6 +659,7 @@ export default function CompanyGrade() {
     setRawResult(result);
     setHistoricalSummary(hs);
     setCompanyName(payload.profile?.name ?? '');
+    setMarketCap(payload.profile?.marketCapitalization ?? 0);
   };
 
   const handleSearch = (e: React.FormEvent) => {
@@ -570,8 +687,16 @@ export default function CompanyGrade() {
 
   const altmanZ = useMemo(() => {
     const latest = historicalSummary[historicalSummary.length - 1];
-    return latest ? computeAltmanZ(latest) : null;
-  }, [historicalSummary]);
+    return latest ? computeAltmanZ(latest, marketCap) : null;
+  }, [historicalSummary, marketCap]);
+
+  const piotroski = useMemo(() => computePiotroski(historicalSummary), [historicalSummary]);
+
+  const dupontData = useMemo(() => historicalSummary.length > 0 ? computeDuPont(historicalSummary) : [], [historicalSummary]);
+
+  const workingCapitalData = useMemo(() => historicalSummary.length > 0 ? computeWorkingCapital(historicalSummary) : [], [historicalSummary]);
+
+  const earningsQuality = useMemo(() => computeEarningsQuality(historicalSummary), [historicalSummary]);
 
   const riskFlags = useMemo(
     () => historicalSummary.length > 0 ? computeRiskFlags(historicalSummary) : null,
@@ -606,7 +731,7 @@ export default function CompanyGrade() {
       }
       // 2. Grade each peer
       const results = await Promise.allSettled(peers.map(async (peerTicker: string) => {
-        const cacheKey = `valuwise_grade_v2_${peerTicker}`;
+        const cacheKey = `valuwise_grade_v3_${peerTicker}`;
         let payload: any = null;
         const cp = localStorage.getItem(cacheKey);
         if (cp) {
@@ -738,7 +863,7 @@ export default function CompanyGrade() {
                 'Cash Flow Quality (20%): FCF margin, FCF conversion, and CFO margin.',
                 'Trend arrows (↑/↓) show whether each metric improved or declined over recent periods.',
                 'Risk flags highlight key financial warning signs automatically.',
-                'The Altman Z″-Score provides a directional bankruptcy-risk signal based on balance sheet ratios.',
+                'Altman Z-Score, Piotroski F-Score, DuPont analysis, working capital efficiency, and earnings quality.',
               ].map((step, i) => (
                 <li key={i} className="flex items-start gap-2.5 text-xs text-slate-400">
                   <span className="flex-shrink-0 w-5 h-5 rounded-full bg-slate-700 flex items-center justify-center text-xs text-emerald-400 font-semibold">{i + 1}</span>
@@ -1069,7 +1194,7 @@ export default function CompanyGrade() {
                 {/* Altman Z''-Score */}
                 {altmanZ && (
                   <div className="bg-slate-800/50 border border-slate-700/50 rounded-xl p-5">
-                    <h3 className="text-sm font-semibold text-slate-300 mb-4">Altman Z&#8243;-Score</h3>
+                    <h3 className="text-sm font-semibold text-slate-300 mb-4">Altman Z-Score</h3>
                     <div className="flex items-start gap-5">
                       <div className={`flex-shrink-0 w-24 h-24 rounded-xl flex flex-col items-center justify-center border
                         ${altmanZ.zone === 'safe'     ? 'bg-emerald-500/10 border-emerald-500/30' :
@@ -1079,7 +1204,7 @@ export default function CompanyGrade() {
                           ${altmanZ.zone === 'safe' ? 'text-emerald-400' : altmanZ.zone === 'grey' ? 'text-amber-400' : 'text-red-400'}`}>
                           {altmanZ.z.toFixed(2)}
                         </span>
-                        <span className="text-xs text-slate-500 mt-1">Z&#8243;-Score</span>
+                        <span className="text-xs text-slate-500 mt-1">Z-Score</span>
                       </div>
                       <div className="flex-1 space-y-3">
                         <span className={`text-sm font-semibold
@@ -1101,7 +1226,7 @@ export default function CompanyGrade() {
                           </div>
                         </div>
                         <p className="text-xs text-slate-600 leading-relaxed">
-                          Uses book equity ratios. Directional signal only — not a definitive bankruptcy predictor.
+                          Standard Altman Z-Score using market cap. Directional signal — not a definitive bankruptcy predictor.
                         </p>
                       </div>
                     </div>
@@ -1193,6 +1318,173 @@ export default function CompanyGrade() {
                     </tbody>
                   </table>
                 </div>
+              </div>
+            )}
+
+            {/* ── Piotroski F-Score ──────────────────────────────────────── */}
+            {piotroski && (
+              <div className="bg-slate-800/50 border border-slate-700/50 rounded-xl p-5">
+                <div className="flex items-center justify-between mb-4">
+                  <h3 className="text-sm font-semibold text-slate-300">Piotroski F-Score</h3>
+                  <div className={`flex items-center gap-2 px-3 py-1.5 rounded-lg border text-sm font-bold
+                    ${piotroski.score >= 7 ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-400'
+                      : piotroski.score >= 4 ? 'bg-amber-500/10 border-amber-500/30 text-amber-400'
+                      : 'bg-red-500/10 border-red-500/30 text-red-400'}`}>
+                    {piotroski.score} / 9
+                    <span className="text-xs font-normal">
+                      {piotroski.score >= 7 ? 'Strong' : piotroski.score >= 4 ? 'Mixed' : 'Weak'}
+                    </span>
+                  </div>
+                </div>
+                <div className="space-y-1.5">
+                  {piotroski.signals.map((s, i) => (
+                    <div key={i} className="flex items-center gap-3 py-1.5 border-b border-slate-700/30 last:border-0">
+                      <span className={`w-5 h-5 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0
+                        ${s.passed ? 'bg-emerald-500/20 text-emerald-400' : 'bg-red-500/20 text-red-400'}`}>
+                        {s.passed ? '+' : '-'}
+                      </span>
+                      <div className="flex-1 min-w-0">
+                        <span className="text-xs text-slate-300 font-medium">{s.name}</span>
+                        <span className="text-xs text-slate-500 ml-2">{s.detail}</span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                <p className="text-xs text-slate-600 mt-3">7-9: Strong fundamentals, 4-6: Mixed signals, 0-3: Weak fundamentals. Compares latest vs prior fiscal year.</p>
+              </div>
+            )}
+
+            {/* ── DuPont Analysis ─────────────────────────────────────────── */}
+            {dupontData.length > 0 && (
+              <div className="bg-slate-800/50 border border-slate-700/50 rounded-xl p-5">
+                <h3 className="text-sm font-semibold text-slate-300 mb-4">DuPont Analysis — ROE Decomposition</h3>
+                <div className="overflow-x-auto mb-4">
+                  <table className="w-full text-sm">
+                    <thead>
+                      <tr className="text-slate-500 text-xs uppercase tracking-wide border-b border-slate-700/50">
+                        <th className="text-left pb-2.5 pr-4">Year</th>
+                        <th className="text-right pb-2.5 px-3">Net Margin</th>
+                        <th className="text-right pb-2.5 px-3">Asset Turnover</th>
+                        <th className="text-right pb-2.5 px-3">Equity Multiplier</th>
+                        <th className="text-right pb-2.5 pl-3">ROE</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-slate-700/30">
+                      {dupontData.map(d => (
+                        <tr key={d.year}>
+                          <td className="py-2 pr-4 font-mono text-slate-400 text-xs">{d.year}</td>
+                          <td className="py-2 px-3 text-right font-mono text-xs text-slate-300">{(d.netMargin * 100).toFixed(1)}%</td>
+                          <td className="py-2 px-3 text-right font-mono text-xs text-slate-300">{d.assetTurnover.toFixed(2)}x</td>
+                          <td className="py-2 px-3 text-right font-mono text-xs text-slate-300">{d.equityMultiplier.toFixed(2)}x</td>
+                          <td className={`py-2 pl-3 text-right font-mono text-xs font-semibold ${d.roe >= 0.12 ? 'text-emerald-400' : d.roe >= 0.05 ? 'text-amber-400' : 'text-red-400'}`}>
+                            {(d.roe * 100).toFixed(1)}%
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+                <ResponsiveContainer width="100%" height={200}>
+                  <LineChart data={dupontData} margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>
+                    <CartesianGrid strokeDasharray="3 3" stroke="#334155" />
+                    <XAxis dataKey="year" tick={{ fill: '#94a3b8', fontSize: 11 }} />
+                    <YAxis tick={{ fill: '#94a3b8', fontSize: 11 }} tickFormatter={(v: number) => `${(v * 100).toFixed(0)}%`} />
+                    <Tooltip
+                      contentStyle={{ backgroundColor: '#1e293b', border: '1px solid #475569', borderRadius: '8px' }}
+                      formatter={(v: number, name: string) => [name === 'assetTurnover' || name === 'equityMultiplier' ? `${v.toFixed(2)}x` : `${(v * 100).toFixed(1)}%`, name === 'netMargin' ? 'Net Margin' : name === 'assetTurnover' ? 'Asset Turnover' : name === 'equityMultiplier' ? 'Equity Mult.' : 'ROE']}
+                    />
+                    <Legend onClick={(d: any) => handleLegendClick(d, ['netMargin', 'assetTurnover', 'equityMultiplier', 'roe'])} />
+                    <Line type="monotone" dataKey="netMargin" name="Net Margin" stroke="#10b981" strokeWidth={2} dot={{ r: 3 }} hide={!!hiddenSeries['netMargin']} />
+                    <Line type="monotone" dataKey="assetTurnover" name="Asset Turnover" stroke="#3b82f6" strokeWidth={2} dot={{ r: 3 }} hide={!!hiddenSeries['assetTurnover']} />
+                    <Line type="monotone" dataKey="equityMultiplier" name="Equity Mult." stroke="#f59e0b" strokeWidth={2} dot={{ r: 3 }} hide={!!hiddenSeries['equityMultiplier']} />
+                    <Line type="monotone" dataKey="roe" name="ROE" stroke="#f1f5f9" strokeWidth={2.5} dot={{ r: 4 }} hide={!!hiddenSeries['roe']} />
+                  </LineChart>
+                </ResponsiveContainer>
+                <p className="text-xs text-slate-600 mt-2">ROE = Net Margin x Asset Turnover x Equity Multiplier. Shows which lever drives profitability.</p>
+              </div>
+            )}
+
+            {/* ── Working Capital Efficiency ──────────────────────────────── */}
+            {workingCapitalData.length > 0 && workingCapitalData.some(w => w.dso != null) && (
+              <div className="bg-slate-800/50 border border-slate-700/50 rounded-xl p-5">
+                <h3 className="text-sm font-semibold text-slate-300 mb-4">Working Capital Efficiency</h3>
+                {(() => {
+                  const latest = workingCapitalData[workingCapitalData.length - 1];
+                  const cards = [
+                    { label: 'DSO', value: latest.dso, unit: 'days', desc: 'Days to collect receivables' },
+                    { label: 'DIO', value: latest.dio, unit: 'days', desc: 'Days inventory held' },
+                    { label: 'DPO', value: latest.dpo, unit: 'days', desc: 'Days to pay suppliers' },
+                    { label: 'CCC', value: latest.ccc, unit: 'days', desc: 'Cash Conversion Cycle' },
+                  ];
+                  return (
+                    <>
+                      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-4">
+                        {cards.map(c => (
+                          <div key={c.label} className="bg-slate-900/50 rounded-lg p-3 text-center">
+                            <div className="text-xs text-slate-500 mb-1">{c.label}</div>
+                            <div className="text-lg font-bold font-mono text-slate-200">
+                              {c.value != null ? `${c.value.toFixed(0)}` : 'N/A'}
+                            </div>
+                            <div className="text-[10px] text-slate-600">{c.value != null ? c.unit : ''}</div>
+                          </div>
+                        ))}
+                      </div>
+                      <ResponsiveContainer width="100%" height={200}>
+                        <LineChart data={workingCapitalData} margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>
+                          <CartesianGrid strokeDasharray="3 3" stroke="#334155" />
+                          <XAxis dataKey="year" tick={{ fill: '#94a3b8', fontSize: 11 }} />
+                          <YAxis tick={{ fill: '#94a3b8', fontSize: 11 }} />
+                          <Tooltip contentStyle={{ backgroundColor: '#1e293b', border: '1px solid #475569', borderRadius: '8px' }} formatter={(v: number) => [`${v.toFixed(1)} days`]} />
+                          <Legend onClick={(d: any) => handleLegendClick(d, ['dso', 'dio', 'dpo', 'ccc'])} />
+                          <Line type="monotone" dataKey="dso" name="DSO" stroke="#10b981" strokeWidth={2} dot={{ r: 3 }} hide={!!hiddenSeries['dso']} />
+                          <Line type="monotone" dataKey="dio" name="DIO" stroke="#3b82f6" strokeWidth={2} dot={{ r: 3 }} hide={!!hiddenSeries['dio']} />
+                          <Line type="monotone" dataKey="dpo" name="DPO" stroke="#f59e0b" strokeWidth={2} dot={{ r: 3 }} hide={!!hiddenSeries['dpo']} />
+                          <Line type="monotone" dataKey="ccc" name="CCC" stroke="#a78bfa" strokeWidth={2.5} dot={{ r: 4 }} hide={!!hiddenSeries['ccc']} />
+                        </LineChart>
+                      </ResponsiveContainer>
+                      <p className="text-xs text-slate-600 mt-2">CCC = DSO + DIO - DPO. Lower CCC means faster cash conversion. Service companies may show N/A for inventory metrics.</p>
+                    </>
+                  );
+                })()}
+              </div>
+            )}
+
+            {/* ── Earnings Quality ────────────────────────────────────────── */}
+            {earningsQuality && (
+              <div className="bg-slate-800/50 border border-slate-700/50 rounded-xl p-5">
+                <div className="flex items-center justify-between mb-4">
+                  <h3 className="text-sm font-semibold text-slate-300">Earnings Quality</h3>
+                  <div className={`flex items-center gap-2 px-3 py-1.5 rounded-lg border text-sm font-bold
+                    ${earningsQuality.score >= 75 ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-400'
+                      : earningsQuality.score >= 50 ? 'bg-blue-500/10 border-blue-500/30 text-blue-400'
+                      : earningsQuality.score >= 30 ? 'bg-amber-500/10 border-amber-500/30 text-amber-400'
+                      : 'bg-red-500/10 border-red-500/30 text-red-400'}`}>
+                    {earningsQuality.score}/100
+                    <span className="text-xs font-normal">{earningsQuality.label}</span>
+                  </div>
+                </div>
+                <p className="text-sm text-slate-400 mb-3">{earningsQuality.interpretation}</p>
+                <div className="text-xs text-slate-500 mb-2">
+                  Latest accruals ratio: <span className={`font-mono font-semibold ${earningsQuality.latest < -0.03 ? 'text-emerald-400' : earningsQuality.latest < 0.05 ? 'text-amber-400' : 'text-red-400'}`}>
+                    {(earningsQuality.latest * 100).toFixed(1)}%
+                  </span>
+                  <span className="text-slate-600 ml-1">(lower is better)</span>
+                </div>
+                <ResponsiveContainer width="100%" height={160}>
+                  <BarChart data={earningsQuality.trend} margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>
+                    <CartesianGrid strokeDasharray="3 3" stroke="#334155" />
+                    <XAxis dataKey="year" tick={{ fill: '#94a3b8', fontSize: 11 }} />
+                    <YAxis tick={{ fill: '#94a3b8', fontSize: 11 }} tickFormatter={(v: number) => `${(v * 100).toFixed(0)}%`} />
+                    <Tooltip contentStyle={{ backgroundColor: '#1e293b', border: '1px solid #475569', borderRadius: '8px' }} formatter={(v: number) => [`${(v * 100).toFixed(1)}%`, 'Accruals Ratio']} />
+                    <ReferenceLine y={0} stroke="#64748b" strokeDasharray="3 3" />
+                    <Bar dataKey="accruals" name="Accruals Ratio" fill="#f59e0b" radius={[3, 3, 0, 0]}>
+                      {earningsQuality.trend.map((entry, idx) => (
+                        <Cell key={idx} fill={entry.accruals < -0.03 ? '#10b981' : entry.accruals < 0.05 ? '#f59e0b' : '#ef4444'} />
+                      ))}
+                    </Bar>
+                  </BarChart>
+                </ResponsiveContainer>
+                <p className="text-xs text-slate-600 mt-2">Accruals ratio = (Net Income - OCF) / Total Assets. Negative values (green) indicate cash-backed earnings.</p>
               </div>
             )}
 

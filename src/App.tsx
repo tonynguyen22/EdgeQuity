@@ -289,6 +289,8 @@ export default function App() {
       const cff = findConcept(cf, ['us-gaap_NetCashProvidedByUsedInFinancingActivities', 'us-gaap_NetCashProvidedByUsedInFinancingActivitiesContinuingOperations', 'ifrs-full_CashFlowsFromUsedInFinancingActivities']);
       const capex = Math.abs(findConcept(cf, ['us-gaap_PaymentsToAcquirePropertyPlantAndEquipment', 'ifrs-full_PurchaseOfPropertyPlantAndEquipment']));
       const changeInCash = findConcept(cf, ['us-gaap_CashAndCashEquivalentsPeriodIncreaseDecrease', 'us-gaap_CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalentsPeriodIncreaseDecreaseIncludingExchangeRateEffect', 'ifrs-full_IncreaseDecreaseInCashAndCashEquivalents']);
+      const dividendsPaid = Math.abs(findConcept(cf, ['us-gaap_PaymentsOfDividends', 'us-gaap_PaymentsOfDividendsCommonStock', 'us-gaap_PaymentsOfOrdinaryDividends', 'ifrs-full_DividendsPaid']));
+      const debtRepayment = Math.abs(findConcept(cf, ['us-gaap_RepaymentsOfLongTermDebt', 'us-gaap_RepaymentsOfDebt', 'ifrs-full_RepaymentsOfBorrowings']));
 
       const currentRatio = currentLiabilities ? currentAssets / currentLiabilities : 0;
       const quickRatio = currentLiabilities ? (currentAssets - inventory) / currentLiabilities : 0;
@@ -315,7 +317,7 @@ export default function App() {
         netIncome, netProfitMargin: rev ? netIncome/rev : 0,
         eps, shares,
         totalAssets, totalLiabilities, totalDebt, totalEquity, cash, wc,
-        cfo, cfi, cff, capex, changeInCash,
+        cfo, cfi, cff, capex, changeInCash, dividendsPaid, debtRepayment,
         currentRatio, quickRatio, interestCoverage, debtToEquity, roe, roa,
         grossMargin: rev ? gp / rev : 0,
         profitMargin: rev ? netIncome / rev : 0,
@@ -819,7 +821,7 @@ ${scenarioComparison ? `<h2>Scenario Comparison</h2><table><thead><tr><th style=
             { id: 'tech', label: 'Technical', Icon: TrendingUp, active: 'text-violet-400' },
             { id: 'earnings', label: 'Earnings', Icon: BarChart2, active: 'text-cyan-400' },
             { id: 'insider', label: 'Insider & Inst.', Icon: Eye, active: 'text-orange-400' },
-            { id: 'news', label: 'News', Icon: Newspaper, active: 'text-sky-400' },
+            { id: 'news', label: 'News & Sentiment', Icon: Newspaper, active: 'text-sky-400' },
             { id: 'dividend', label: 'Dividends', Icon: Coins, active: 'text-rose-400' },
           ] as const).map(({ id, label, Icon, active }) => (
             <button
@@ -936,8 +938,8 @@ ${scenarioComparison ? `<h2>Scenario Comparison</h2><table><thead><tr><th style=
                 <div className="w-9 h-9 bg-sky-500/10 rounded-lg flex items-center justify-center group-hover:bg-sky-500/20 transition-colors">
                   <Newspaper className="w-5 h-5 text-sky-500" />
                 </div>
-                <h3 className="text-base font-semibold text-white">News &amp; Sentiment</h3>
-                <p className="text-slate-400 text-xs leading-relaxed">Latest headlines with AI-powered bullish/bearish sentiment scores and buzz index.</p>
+                <h3 className="text-base font-semibold text-white">News & Sentiment</h3>
+                <p className="text-slate-400 text-xs leading-relaxed">Latest headlines with AI-powered news summary and sentiment analysis.</p>
               </button>
               {/* Portfolio */}
               <button onClick={() => { setActiveTab('portfolio'); setShowLanding(false); }}
@@ -1475,6 +1477,50 @@ ${scenarioComparison ? `<h2>Scenario Comparison</h2><table><thead><tr><th style=
                         </LineChart>
                       </ResponsiveContainer>
                     </div>
+                  </div>
+                );
+              })()}
+
+              {/* Capital Allocation */}
+              {dcf.historicalSummary.length > 0 && dcf.historicalSummary.some((y: any) => y.cfo > 0) && (() => {
+                const allocData = dcf.historicalSummary.map((y: any) => {
+                  const ocf = Math.max(y.cfo, 1);
+                  return {
+                    year: y.year.substring(0, 4),
+                    CapEx: Math.min((y.capex / ocf) * 100, 100),
+                    Dividends: Math.min((y.dividendsPaid / ocf) * 100, 100),
+                    'Debt Repay': Math.min((y.debtRepayment / ocf) * 100, 100),
+                    Retained: Math.max(100 - (y.capex / ocf) * 100 - (y.dividendsPaid / ocf) * 100 - (y.debtRepayment / ocf) * 100, 0),
+                  };
+                });
+                const latest = allocData[allocData.length - 1];
+                const allocKeys = ['CapEx', 'Dividends', 'Debt Repay', 'Retained'];
+                const allocColors: Record<string, string> = { CapEx: '#10b981', Dividends: '#3b82f6', 'Debt Repay': '#f59e0b', Retained: '#64748b' };
+                return (
+                  <div className="bg-slate-800/50 border border-slate-700/50 rounded-xl p-6">
+                    <h3 className="text-lg font-medium mb-4">Capital Allocation</h3>
+                    <p className="text-xs text-slate-500 mb-4">How operating cash flow is deployed: reinvestment, dividends, debt paydown, and retained cash.</p>
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-4">
+                      {allocKeys.map(k => (
+                        <div key={k} className="bg-slate-900/50 rounded-lg p-3 text-center">
+                          <div className="text-xs text-slate-500 mb-1">{k}</div>
+                          <div className="text-lg font-bold font-mono" style={{ color: allocColors[k] }}>{latest[k as keyof typeof latest] != null ? `${(latest[k as keyof typeof latest] as number).toFixed(0)}%` : 'N/A'}</div>
+                          <div className="text-[10px] text-slate-600">of OCF</div>
+                        </div>
+                      ))}
+                    </div>
+                    <ResponsiveContainer width="100%" height={220}>
+                      <BarChart data={allocData} margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>
+                        <CartesianGrid strokeDasharray="3 3" stroke="#334155" />
+                        <XAxis dataKey="year" tick={{ fill: '#94a3b8', fontSize: 11 }} />
+                        <YAxis tick={{ fill: '#94a3b8', fontSize: 11 }} tickFormatter={(v: any) => `${v}%`} domain={[0, 100]} />
+                        <Tooltip contentStyle={{ backgroundColor: '#1e293b', border: '1px solid #475569', borderRadius: '8px' }} formatter={(v: any) => [`${Number(v).toFixed(1)}%`]} />
+                        <Legend wrapperStyle={{ fontSize: '11px', cursor: 'pointer' }} onClick={(d: any) => handleLegendClick(d, allocKeys)} />
+                        {allocKeys.map(k => (
+                          <Bar key={k} dataKey={k} stackId="a" fill={allocColors[k]} hide={!!hiddenSeries[k]} />
+                        ))}
+                      </BarChart>
+                    </ResponsiveContainer>
                   </div>
                 );
               })()}

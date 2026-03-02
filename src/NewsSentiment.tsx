@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { Search, AlertCircle, TrendingUp, TrendingDown, ExternalLink } from 'lucide-react';
+import { Search, AlertCircle, TrendingUp, TrendingDown, ExternalLink, Sparkles, Loader2 } from 'lucide-react';
 
 const API_KEY = 'ctj1dchr01qgfbsvp4mgctj1dchr01qgfbsvp4n0';
 const BASE_URL = 'https://finnhub.io/api/v1';
-const GEMINI_KEY = 'AIzaSyAqwxJo7IhS9kL-rHsFanvtiV9pYqvWu2s';
-const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${GEMINI_KEY}`;
 
+const AI_KEY = 'sk-cM7kHNoyHiVaxum6fVPoGZlOLXTCuEZtDI9k9b4Ai8giprTI';
+const AI_URL = 'https://api.shopaikey.com/v1beta/models/gemini-2.5-flash:generateContent';
 const safeJson = async (res: Response): Promise<any> => {
   const text = await res.text();
   if (!text || text.trim().startsWith('<')) throw new Error('Finnhub returned an error page. This endpoint may not be available on the free plan or the ticker has no data.');
@@ -50,57 +50,42 @@ export default function NewsSentiment() {
   const [error, setError] = useState('');
   const [data, setData] = useState<any>(null);
   const [aiLoading, setAiLoading] = useState(false);
-  const [aiAnalysis, setAiAnalysis] = useState<any>(null);
+  const [aiAnalysis, setAiAnalysis] = useState<string | null>(null);
   const [aiError, setAiError] = useState('');
 
-  const runGeminiAnalysis = async (articles: any[]) => {
+  const runAiAnalysis = async (symbol: string, articles: any[]) => {
     if (!articles.length) return;
     setAiLoading(true);
     setAiError('');
     try {
-      const headlines = articles.slice(0, 15).map((a: any, i: number) =>
-        `${i + 1}. [${new Date((a.datetime ?? 0) * 1000).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}] ${a.headline}`
+      const headlines = articles.slice(0, 15).map((a: any) =>
+        `- ${a.headline} (${a.source}, ${fmtTime(a.datetime)})`
       ).join('\n');
 
-      const prompt = `You are a financial analyst. Analyze these recent news headlines for a stock and return ONLY a JSON object (no markdown, no explanation) with this exact structure:
-{
-  "overall": "Bullish" | "Neutral" | "Bearish",
-  "summary": "2-3 sentence summary of key themes and sentiment",
-  "trend": "Improving" | "Stable" | "Weakening",
-  "trendReason": "1 sentence explaining the trend direction",
-  "headlines": [{"text": "headline text", "sentiment": "Bullish" | "Neutral" | "Bearish"}]
-}
+      const prompt = `You are a stock market analyst. Given the following recent news headlines for ${symbol}, write exactly 5 bullet points summarizing the most important recent news. After the bullet points, write a brief conclusion stating whether this news is significant or not significant for the stock, and why.\n\nHeadlines:\n${headlines}\n\nRespond in plain text. Use "- " for each bullet point. End with a conclusion paragraph starting with "Conclusion:".`;
 
-Headlines:
-${headlines}`;
-
-      const res = await fetch(GEMINI_URL, {
+      const res = await fetch(AI_URL, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${AI_KEY}`,
+        },
         body: JSON.stringify({
           contents: [{ parts: [{ text: prompt }] }],
-          generationConfig: { responseMimeType: 'application/json' },
         }),
-      }).catch(() => null);
+      });
 
-      if (!res || !res.ok) {
-        const errBody = await res.json().catch(() => null);
-        const errMsg = errBody?.error?.message ?? errBody?.error?.status ?? `status ${res?.status ?? 'network error'}`;
-        setAiError(`Gemini: ${errMsg}`);
-        return;
+      if (!res.ok) {
+        const errText = await res.text();
+        throw new Error(`AI API error (${res.status}): ${errText.slice(0, 200)}`);
       }
-      const gemData = await res.json().catch(() => null);
-      const raw = gemData?.candidates?.[0]?.content?.parts?.[0]?.text ?? '';
-      const jsonMatch = raw.match(/\{[\s\S]*\}/);
-      const jsonStr = jsonMatch ? jsonMatch[0] : raw.replace(/```json\s*/g, '').replace(/```\s*/g, '').trim();
-      try {
-        const parsed = JSON.parse(jsonStr);
-        setAiAnalysis(parsed);
-      } catch {
-        setAiError('AI returned an unexpected response format.');
-      }
-    } catch {
-      setAiError('Failed to reach AI service.');
+
+      const json = await res.json();
+      const text = json?.candidates?.[0]?.content?.parts?.[0]?.text;
+      if (!text) throw new Error('No response from AI model.');
+      setAiAnalysis(text);
+    } catch (e: any) {
+      setAiError(e.message || 'AI analysis failed.');
     } finally {
       setAiLoading(false);
     }
@@ -110,6 +95,7 @@ ${headlines}`;
     setLoading(true);
     setError('');
     setAiAnalysis(null);
+    setAiError('');
     try {
       const cacheKey = `news_${symbol}_v2`;
       const cached = localStorage.getItem(cacheKey);
@@ -118,7 +104,7 @@ ${headlines}`;
           const { ts, d } = JSON.parse(cached);
           if (Date.now() - ts < 1 * 60 * 60 * 1000) {
             setData(d);
-            runGeminiAnalysis(d.articles); // re-run AI (not cached — always fresh)
+            runAiAnalysis(symbol, d.articles || []);
             return;
           }
         } catch { localStorage.removeItem(cacheKey); }
@@ -145,7 +131,7 @@ ${headlines}`;
       const d = { articles, sentiment: sentData };
       safeSetItem(cacheKey, JSON.stringify({ ts: Date.now(), d }));
       setData(d);
-      runGeminiAnalysis(articles);
+      runAiAnalysis(symbol, articles);
     } catch (e: any) {
       setError(e.message || 'Failed to fetch news data.');
     } finally {
@@ -181,8 +167,8 @@ ${headlines}`;
   return (
     <div className="max-w-5xl mx-auto space-y-6">
       <div className="max-w-xl mx-auto">
-        <h2 className="text-2xl font-bold text-white mb-1">News &amp; Sentiment</h2>
-        <p className="text-slate-400 text-sm">Latest news headlines and AI-powered sentiment analysis.</p>
+        <h2 className="text-2xl font-bold text-white mb-1">News & Sentiment</h2>
+        <p className="text-slate-400 text-sm">Latest news headlines with AI-powered sentiment analysis.</p>
       </div>
 
       <form onSubmit={handleSearch} className="max-w-xl mx-auto relative">
@@ -281,58 +267,69 @@ ${headlines}`;
             </div>
           )}
 
-          {/* Gemini AI Analysis */}
+          {/* Relative Sentiment */}
+          {compScore !== null && sectorScore !== null && (
+            <div className="bg-slate-800/50 border border-slate-700/50 rounded-xl p-5">
+              <h3 className="text-sm font-semibold text-slate-300 mb-4">Relative Sentiment</h3>
+              <div className="space-y-4">
+                <div className="space-y-3">
+                  <div className="space-y-1">
+                    <div className="flex justify-between text-xs">
+                      <span className="text-slate-400">{sym} News Score</span>
+                      <span className={`font-semibold ${compScore > sectorScore ? 'text-emerald-400' : compScore < sectorScore ? 'text-red-400' : 'text-slate-300'}`}>
+                        {(compScore * 100).toFixed(0)}
+                      </span>
+                    </div>
+                    <div className="h-3 bg-slate-700 rounded-full overflow-hidden">
+                      <div className="h-full rounded-full bg-sky-500 transition-all" style={{ width: `${Math.min(compScore * 100, 100)}%` }} />
+                    </div>
+                  </div>
+                  <div className="space-y-1">
+                    <div className="flex justify-between text-xs">
+                      <span className="text-slate-400">Sector Average</span>
+                      <span className="font-semibold text-slate-400">{(sectorScore * 100).toFixed(0)}</span>
+                    </div>
+                    <div className="h-3 bg-slate-700 rounded-full overflow-hidden">
+                      <div className="h-full rounded-full bg-slate-500 transition-all" style={{ width: `${Math.min(sectorScore * 100, 100)}%` }} />
+                    </div>
+                  </div>
+                </div>
+                <div className="flex items-center gap-2 text-sm">
+                  {compScore > sectorScore * 1.05 ? (
+                    <><TrendingUp className="w-4 h-4 text-emerald-400" />
+                    <span className="text-emerald-400 font-medium">Above sector average</span>
+                    <span className="text-slate-500 text-xs">(+{((compScore - sectorScore) * 100).toFixed(0)} pts)</span></>
+                  ) : compScore < sectorScore * 0.95 ? (
+                    <><TrendingDown className="w-4 h-4 text-red-400" />
+                    <span className="text-red-400 font-medium">Below sector average</span>
+                    <span className="text-slate-500 text-xs">({((compScore - sectorScore) * 100).toFixed(0)} pts)</span></>
+                  ) : (
+                    <span className="text-slate-400">In line with sector average</span>
+                  )}
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* AI Analysis */}
           {(aiLoading || aiAnalysis || aiError) && (
             <div className="bg-slate-800/50 border border-slate-700/50 rounded-xl p-5">
-              <div className="flex items-center justify-between mb-3">
-                <h3 className="text-sm font-semibold text-slate-300">AI Sentiment Analysis</h3>
-                <span className="text-xs text-slate-500 bg-slate-700/50 px-2 py-0.5 rounded">Gemini 2.5 Flash</span>
+              <div className="flex items-center gap-2 mb-3">
+                <Sparkles className="w-4 h-4 text-sky-400" />
+                <h3 className="text-sm font-semibold text-slate-300">AI News Analysis</h3>
               </div>
-              {aiLoading ? (
-                <div className="flex items-center gap-2 text-slate-400 text-sm py-2">
-                  <div className="w-4 h-4 border-2 border-sky-500 border-t-transparent rounded-full animate-spin" />
-                  Analyzing headlines with AI...
+              {aiLoading && (
+                <div className="flex items-center gap-2 py-4">
+                  <Loader2 className="w-4 h-4 text-sky-400 animate-spin" />
+                  <span className="text-slate-400 text-sm">Analyzing headlines...</span>
                 </div>
-              ) : aiError ? (
-                <p className="text-xs text-red-400/70">{aiError}</p>
-              ) : aiAnalysis && (() => {
-                const overall = aiAnalysis.overall ?? 'Neutral';
-                const oColor = overall === 'Bullish' ? 'text-emerald-400 bg-emerald-500/10 border-emerald-500/20'
-                  : overall === 'Bearish' ? 'text-red-400 bg-red-500/10 border-red-500/20'
-                  : 'text-amber-400 bg-amber-500/10 border-amber-500/20';
-                const trend = aiAnalysis.trend ?? 'Stable';
-                const tColor = trend === 'Improving' ? 'text-emerald-400' : trend === 'Weakening' ? 'text-red-400' : 'text-amber-400';
-                return (
-                  <div className="space-y-4">
-                    <div className="flex items-start gap-3">
-                      <span className={`border rounded-lg px-3 py-1.5 text-sm font-bold shrink-0 ${oColor}`}>{overall}</span>
-                      <p className="text-sm text-slate-300 leading-relaxed">{aiAnalysis.summary}</p>
-                    </div>
-                    {aiAnalysis.trendReason && (
-                      <div className="flex items-start gap-2 text-xs text-slate-400 bg-slate-700/30 rounded-lg p-3">
-                        <span className={`font-semibold shrink-0 ${tColor}`}>Trend: {trend}</span>
-                        <span>{aiAnalysis.trendReason}</span>
-                      </div>
-                    )}
-                    {Array.isArray(aiAnalysis.headlines) && aiAnalysis.headlines.length > 0 && (
-                      <div className="space-y-1.5">
-                        <div className="text-xs text-slate-500 font-medium uppercase tracking-wide mb-2">Per-headline classification</div>
-                        {aiAnalysis.headlines.map((h: any, i: number) => {
-                          const sc = h.sentiment === 'Bullish' ? 'text-emerald-400 bg-emerald-500/10'
-                            : h.sentiment === 'Bearish' ? 'text-red-400 bg-red-500/10'
-                            : 'text-slate-400 bg-slate-700/40';
-                          return (
-                            <div key={i} className="flex items-start gap-2">
-                              <span className={`text-xs px-2 py-0.5 rounded font-medium shrink-0 mt-0.5 ${sc}`}>{h.sentiment}</span>
-                              <span className="text-xs text-slate-400 leading-relaxed">{h.text}</span>
-                            </div>
-                          );
-                        })}
-                      </div>
-                    )}
-                  </div>
-                );
-              })()}
+              )}
+              {aiError && (
+                <p className="text-red-400 text-sm">{aiError}</p>
+              )}
+              {aiAnalysis && !aiLoading && (
+                <div className="text-sm text-slate-300 leading-relaxed whitespace-pre-line">{aiAnalysis}</div>
+              )}
             </div>
           )}
 
@@ -400,8 +397,9 @@ ${headlines}`;
         <div className="max-w-xl mx-auto bg-slate-800/30 border border-slate-700/30 rounded-xl p-5 space-y-2">
           <p className="text-sm font-medium text-slate-300">What you'll see here</p>
           <ul className="space-y-1.5 text-xs text-slate-500">
+            <li className="flex items-start gap-2"><span className="text-sky-500 mt-0.5">•</span>AI-generated summary of the 5 most important recent news themes</li>
+            <li className="flex items-start gap-2"><span className="text-sky-500 mt-0.5">•</span>Significance assessment — whether recent news is material for the stock</li>
             <li className="flex items-start gap-2"><span className="text-sky-500 mt-0.5">•</span>Bullish/bearish sentiment score derived from news coverage</li>
-            <li className="flex items-start gap-2"><span className="text-sky-500 mt-0.5">•</span>Buzz index — how much more (or less) coverage vs. the weekly average</li>
             <li className="flex items-start gap-2"><span className="text-sky-500 mt-0.5">•</span>Up to 20 recent news articles with headline, source, date, and summary</li>
           </ul>
         </div>
