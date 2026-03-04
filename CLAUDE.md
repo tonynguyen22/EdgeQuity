@@ -88,6 +88,15 @@ Dividend history and sustainability analysis via Massive API.
 - **FCF Safety:** Payout ratio vs free cash flow for sustainability assessment
 - **Data:** 40 payments fetched for CAGR accuracy, special dividends excluded from growth calculations
 
+### Edgar Financials (`src/EdgarFinancials.tsx`)
+Raw financial statements directly from SEC EDGAR XBRL data.
+- **Source:** Pulls data from `https://data.sec.gov/api/xbrl/companyfacts/CIK{cik}.json`
+- **Taxonomy:** Auto-detects and handles both US-GAAP and IFRS
+- **Form Type:** Auto-detects 10-K vs 20-F
+- **Currency Conversion:** All financials are converted to and displayed in USD.
+- **Data:** 5-year history for Revenue, Gross Profit, Cost of Revenue, SG&A, R&D, Operating Expenses, Operating Income, Interest Expense, Income Tax, Net Income, Assets, Current Assets, Liabilities, Current Liabilities, Equity, Retained Earnings, Debt, OCF, Depreciation & Amortization, CapEx, FCF, and Dividends.
+- **Export:** Excel export with 3 sheets (Income, Balance, Cash Flow)
+
 ### Global Features
 - **Sidebar Navigation:** Grouped into Valuation (DCF, Comp, Grade), Market Data (Tech, Earnings, Insider, News), Tools (Portfolio, Dividends)
 - **Dark Theme:** Slate-900 background throughout
@@ -99,6 +108,7 @@ Dividend history and sustainability analysis via Massive API.
 - `npm run dev` — start dev server (port 3000)
 - `npm run build` — production build
 - `npm run lint` — type-check (`tsc --noEmit`)
+- `netlify dev` — start dev server with Netlify Functions (for local development)
 
 ## Architecture
 Vertical sidebar (w-52) with grouped nav (Valuation | Market Data | Tools). Each tab is a self-contained component:
@@ -114,6 +124,26 @@ Vertical sidebar (w-52) with grouped nav (Valuation | Market Data | Tools). Each
 | News Sentiment | `src/NewsSentiment.tsx` | sky |
 | Portfolio | `src/PortfolioTracker.tsx` | indigo |
 | Dividends | `src/DividendAnalysis.tsx` | rose |
+| Edgar Financials | `src/EdgarFinancials.tsx` | slate |
+
+## Deployment
+This application is configured for deployment on Netlify.
+
+### Netlify Functions
+The application uses a Netlify Function to proxy requests to the SEC EDGAR API. This is necessary to bypass CORS restrictions and to inject a `User-Agent` header, which is required by the SEC API.
+
+- **Function File:** `netlify/functions/sec.js`
+- **Endpoint:** `/.netlify/functions/sec`
+
+### Local Development
+To run the application locally with the SEC EDGAR functionality, you need to use the Netlify CLI.
+
+1. **Install Netlify CLI:** `npm install -g netlify-cli`
+2. **Run the development server:** `netlify dev`
+
+This command will start the Vite development server and the Netlify Functions emulator. The `netlify.toml` file is configured to correctly route the requests.
+
+
 
 ## API Constraints
 

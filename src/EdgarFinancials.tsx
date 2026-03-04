@@ -45,8 +45,8 @@ function extractAnnual(
     }
     const values: Record<string, number> = {};
     Object.entries(byYear)
-      .sort(([a], [b]) => Number(b) - Number(a))
-      .slice(0, 5)
+      .sort(([a], [b]) => Number(a) - Number(b))
+      .slice(-5)
       .forEach(([yr, e]) => { values[yr] = (e as any).val / 1e6; });
     if (Object.keys(values).length) return { values, currency: unit };
   }
@@ -80,6 +80,12 @@ interface FinancialData {
     grossProfit: Record<string, number>;
     operatingIncome: Record<string, number>;
     netIncome: Record<string, number>;
+    costOfRevenue: Record<string, number>;
+    sga: Record<string, number>;
+    rd: Record<string, number>;
+    operatingExpenses: Record<string, number>;
+    interestExpense: Record<string, number>;
+    incomeTax: Record<string, number>;
   };
   balance: {
     totalAssets: Record<string, number>;
@@ -87,12 +93,16 @@ interface FinancialData {
     equity: Record<string, number>;
     longTermDebt: Record<string, number>;
     cash: Record<string, number>;
+    currentAssets: Record<string, number>;
+    currentLiabilities: Record<string, number>;
+    retainedEarnings: Record<string, number>;
   };
   cashflow: {
     ocf: Record<string, number>;
     capex: Record<string, number>;
     fcf: Record<string, number>;
     dividendsPaid: Record<string, number>;
+    depreciation: Record<string, number>;
   };
 }
 
@@ -123,7 +133,7 @@ export default function EdgarFinancials() {
     setError('');
     setData(null);
     try {
-      const cacheKey = `edgar_${symbol}_v1`;
+      const cacheKey = `edgar_${symbol}_v2`;
       const cached = localStorage.getItem(cacheKey);
       if (cached) {
         try {
@@ -146,10 +156,10 @@ export default function EdgarFinancials() {
         } catch { localStorage.removeItem(tickerCacheKey); }
       }
       if (!Object.keys(tickerMap).length) {
-        const res = await fetch('/api/sec', {
+        const res = await fetch('/.netlify/functions/sec', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ url: 'https://www.sec.gov/files/company_tickers.json' }),
+          body: JSON.stringify({ url: 'https://www.sec.gov/files/company_tickers.json', headers: EDGAR_HEADERS }),
         });
         if (!res.ok) throw new Error('Failed to load SEC company list.');
         tickerMap = await res.json();
@@ -162,10 +172,10 @@ export default function EdgarFinancials() {
       const cik = String(entry.cik_str).padStart(10, '0');
 
       // Step 2: Fetch companyfacts
-      const factsRes = await fetch('/api/sec', {
+      const factsRes = await fetch('/.netlify/functions/sec', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ url: `https://data.sec.gov/api/xbrl/companyfacts/CIK${cik}.json` }),
+        body: JSON.stringify({ url: `https://data.sec.gov/api/xbrl/companyfacts/CIK${cik}.json`, headers: EDGAR_HEADERS }),
       });
       if (!factsRes.ok) throw new Error(`SEC EDGAR returned an error for ${symbol}. The company may not have XBRL financial data.`);
       const facts = await factsRes.json();
@@ -198,6 +208,14 @@ export default function EdgarFinancials() {
         ? ['NetIncomeLoss', 'NetIncomeLossAvailableToCommonStockholdersBasic']
         : ['ProfitLoss', 'ProfitLossAttributableToOwnersOfParent', 'ProfitLossAttributableToEquityHoldersOfParentEntity']);
 
+      const costOfRevenue = ex(gaap ? ['CostOfRevenue'] : ['CostOfSales']);
+      const sga = ex(gaap ? ['SellingGeneralAndAdministrativeExpense'] : ['SellingGeneralAndAdministrativeExpense']);
+      const rd = ex(gaap ? ['ResearchAndDevelopmentExpense'] : ['ResearchAndDevelopmentExpense']);
+      const operatingExpenses = ex(gaap ? ['OperatingExpenses'] : ['OperatingExpenses']);
+      const interestExpense = ex(gaap ? ['InterestExpense'] : ['InterestExpense']);
+      const incomeTax = ex(gaap ? ['IncomeTaxExpenseBenefit'] : ['IncomeTaxes']);
+
+
       const totalAssets = ex(['Assets']);
 
       const totalLiabilities = ex(['Liabilities']);
@@ -214,6 +232,11 @@ export default function EdgarFinancials() {
         ? ['CashAndCashEquivalentsAtCarryingValue', 'CashCashEquivalentsAndShortTermInvestments', 'Cash']
         : ['CashAndCashEquivalents', 'CashAndCashEquivalentsAndBankOverdrafts']);
 
+      const currentAssets = ex(gaap ? ['AssetsCurrent'] : ['AssetsCurrent']);
+      const currentLiabilities = ex(gaap ? ['LiabilitiesCurrent'] : ['LiabilitiesCurrent']);
+      const retainedEarnings = ex(gaap ? ['RetainedEarningsAccumulatedDeficit'] : ['RetainedEarnings']);
+
+
       const ocf = ex(gaap
         ? ['NetCashProvidedByUsedInOperatingActivities']
         : ['CashFlowsFromUsedInOperatingActivities', 'CashFlowsFromOperatingActivities']);
@@ -229,30 +252,87 @@ export default function EdgarFinancials() {
         ? ['PaymentsOfDividends', 'PaymentsOfDividendsCommonStock', 'PaymentsOfOrdinaryDividends']
         : ['DividendsPaid', 'DividendsPaidClassifiedAsFinancingActivities', 'DividendsPaidToEquityHoldersOfParent']);
 
+      const depreciation = ex(gaap ? ['DepreciationAndAmortization'] : ['DepreciationAndAmortization']);
+
+
       // FCF = OCF - CapEx
       const fcf: Record<string, number> = {};
-      const allYears = [...new Set([...Object.keys(ocf), ...Object.keys(capex)])].sort((a, b) => Number(b) - Number(a)).slice(0, 5);
+      const allYears = [...new Set([...Object.keys(ocf), ...Object.keys(capex)])].sort((a, b) => Number(a) - Number(b)).slice(-5);
       for (const yr of allYears) {
         if (ocf[yr] !== undefined && capex[yr] !== undefined) fcf[yr] = ocf[yr] - capex[yr];
       }
 
       // Determine years from revenue (most reliable) falling back to assets
       const primaryYears = Object.keys(revenue).length
-        ? Object.keys(revenue).sort((a, b) => Number(b) - Number(a))
-        : Object.keys(totalAssets).sort((a, b) => Number(b) - Number(a));
-      const years = primaryYears.slice(0, 5);
+        ? Object.keys(revenue).sort((a, b) => Number(a) - Number(b))
+        : Object.keys(totalAssets).sort((a, b) => Number(a) - Number(b));
+      const years = primaryYears.slice(-5);
 
       if (!years.length) throw new Error(`No XBRL financial data found for ${symbol}. The company may not file structured financials with the SEC.`);
+
+      let finalCurrency = currency;
+      let exchangeRate = 1;
+
+      if (currency !== 'USD') {
+        try {
+          const ratesRes = await fetch(`https://api.frankfurter.app/latest?from=${currency}&to=USD`);
+          if (ratesRes.ok) {
+            const rates = await ratesRes.json();
+            if (rates.rates?.USD) {
+              exchangeRate = rates.rates.USD;
+              finalCurrency = 'USD';
+            }
+          }
+        } catch (e) {
+          console.error('Failed to fetch exchange rates', e);
+          // If conversion fails, proceed with original currency
+        }
+      }
+
+      const convert = (data: Record<string, number>) => {
+        if (exchangeRate === 1) return data;
+        const convertedData: Record<string, number> = {};
+        for (const year in data) {
+          convertedData[year] = data[year] * exchangeRate;
+        }
+        return convertedData;
+      };
 
       const d: FinancialData = {
         entityName: facts.entityName || entry.title,
         taxonomy,
         formType,
-        currency,
+        currency: finalCurrency,
         years,
-        income: { revenue, grossProfit, operatingIncome, netIncome },
-        balance: { totalAssets, totalLiabilities, equity, longTermDebt, cash },
-        cashflow: { ocf, capex, fcf, dividendsPaid },
+        income: { 
+          revenue: convert(revenue), 
+          grossProfit: convert(grossProfit), 
+          operatingIncome: convert(operatingIncome), 
+          netIncome: convert(netIncome),
+          costOfRevenue: convert(costOfRevenue),
+          sga: convert(sga),
+          rd: convert(rd),
+          operatingExpenses: convert(operatingExpenses),
+          interestExpense: convert(interestExpense),
+          incomeTax: convert(incomeTax)
+        },
+        balance: { 
+          totalAssets: convert(totalAssets), 
+          totalLiabilities: convert(totalLiabilities), 
+          equity: convert(equity), 
+          longTermDebt: convert(longTermDebt), 
+          cash: convert(cash),
+          currentAssets: convert(currentAssets),
+          currentLiabilities: convert(currentLiabilities),
+          retainedEarnings: convert(retainedEarnings)
+        },
+        cashflow: { 
+          ocf: convert(ocf), 
+          capex: convert(capex), 
+          fcf: convert(fcf), 
+          dividendsPaid: convert(dividendsPaid),
+          depreciation: convert(depreciation)
+        },
       };
 
       safeSetItem(cacheKey, JSON.stringify({ ts: Date.now(), d }));
@@ -430,8 +510,14 @@ export default function EdgarFinancials() {
             title="Income Statement"
             rows={[
               { label: 'Revenue', vals: data.income.revenue, bold: true },
+              { label: 'Cost of Revenue', vals: data.income.costOfRevenue },
               { label: 'Gross Profit', vals: data.income.grossProfit },
+              { label: 'SG&A', vals: data.income.sga },
+              { label: 'R&D', vals: data.income.rd },
+              { label: 'Operating Expenses', vals: data.income.operatingExpenses },
               { label: 'Operating Income', vals: data.income.operatingIncome },
+              { label: 'Interest Expense', vals: data.income.interestExpense },
+              { label: 'Income Tax', vals: data.income.incomeTax },
               { label: 'Net Income', vals: data.income.netIncome, bold: true },
             ]}
           />
@@ -441,8 +527,11 @@ export default function EdgarFinancials() {
             title="Balance Sheet"
             rows={[
               { label: 'Total Assets', vals: data.balance.totalAssets, bold: true },
+              { label: 'Current Assets', vals: data.balance.currentAssets },
               { label: 'Total Liabilities', vals: data.balance.totalLiabilities },
+              { label: 'Current Liabilities', vals: data.balance.currentLiabilities },
               { label: "Stockholders' Equity", vals: data.balance.equity, bold: true },
+              { label: 'Retained Earnings', vals: data.balance.retainedEarnings },
               { label: 'Long-term Debt', vals: data.balance.longTermDebt },
               { label: 'Cash & Equivalents', vals: data.balance.cash },
             ]}
@@ -453,6 +542,7 @@ export default function EdgarFinancials() {
             title="Cash Flow Statement"
             rows={[
               { label: 'Operating Cash Flow', vals: data.cashflow.ocf, bold: true },
+              { label: 'Depreciation & Amortization', vals: data.cashflow.depreciation },
               { label: 'Capital Expenditures', vals: data.cashflow.capex, neg: true },
               { label: 'Free Cash Flow', vals: data.cashflow.fcf, bold: true },
               { label: 'Dividends Paid', vals: data.cashflow.dividendsPaid },
