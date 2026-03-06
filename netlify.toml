@@ -1,2 +1,21 @@
 [dev]
   targetPort = 3000
+
+# Proxy SEC EDGAR requests to bypass CORS (works in both dev and production)
+[[redirects]]
+  from = "/sec-api/*"
+  to = "https://www.sec.gov/:splat"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/edgar-search/*"
+  to = "https://efts.sec.gov/:splat"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/edgar-facts/*"
+  to = "https://data.sec.gov/:splat"
+  status = 200
+  force = true

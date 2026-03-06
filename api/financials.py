@@ -1,191 +1,122 @@
-"""
-Vercel Python serverless function: /api/financials?ticker=AAPL&years=5
-
-Fetches financial statements from SEC EDGAR using edgartools.
-Returns standardized Income Statement, Balance Sheet, and Cash Flow data.
+"""Flask API — fetches standardized financials via edgartools.
+Deploy on Render as a Web Service (Python).
 """
 
-from http.server import BaseHTTPRequestHandler
-import json
+from flask import Flask, request, jsonify
+from flask_cors import CORS
+import os
 import traceback
-from urllib.parse import urlparse, parse_qs
 
-# In-memory cache to avoid re-fetching during warm invocations
-_cache: dict[str, dict] = {}
+# Set SEC EDGAR identity (required by edgartools / SEC fair-use policy)
+identity = os.environ.get("EDGAR_IDENTITY", "valuwise-app admin@valuwise.app")
+
+from edgar import set_identity, Company, MultiFinancials
+set_identity(identity)
+
+app = Flask(__name__)
+CORS(app)
 
 
-def _extract_statement_data(statement) -> list[dict]:
-    """Convert an edgartools financial statement to a list of line-item dicts."""
-    rows = []
-    if statement is None:
-        return rows
-    try:
-        df = statement.to_dataframe()
-        if df is None or df.empty:
-            return rows
-        # Each row is a line item; columns are fiscal periods
-        for label, row_data in df.iterrows():
-            item = {"label": str(label), "values": {}}
-            for col in df.columns:
-                val = row_data[col]
-                # Convert to float, handling None/NaN
-                if val is None:
-                    item["values"][str(col)] = None
-                else:
-                    try:
-                        item["values"][str(col)] = float(val)
-                    except (ValueError, TypeError):
-                        item["values"][str(col)] = None
-            rows.append(item)
-    except Exception:
-        # Fallback: try to iterate the statement directly
+def _build_statement_items(df):
+    """Convert an edgartools DataFrame to list of {label, values} dicts."""
+    if df is None or df.empty:
+        return [], []
+
+    # Filter out abstract/header rows (they have no numeric data)
+    if "abstract" in df.columns:
+        df = df[~df["abstract"]].copy()
+
+    # Identify value columns (not metadata columns)
+    meta_cols = {"label", "level", "abstract", "parent_concept",
+                 "parent_abstract_concept", "concept", "units", "decimals"}
+    value_cols = [c for c in df.columns if c not in meta_cols]
+
+    # Derive fiscal year labels from column names (e.g. "2024-09-28" -> "2024")
+    period_map = {}
+    for col in value_cols:
         try:
-            for line_item in statement:
-                item = {"label": str(line_item.concept) if hasattr(line_item, 'concept') else str(line_item), "values": {}}
-                if hasattr(line_item, 'value'):
-                    item["values"]["latest"] = float(line_item.value) if line_item.value is not None else None
-                rows.append(item)
+            year = str(col)[:4]
+            period_map[col] = year
         except Exception:
-            pass
-    return rows
+            period_map[col] = str(col)
+
+    # Build line items
+    items = []
+    seen_labels = set()
+    for _, row in df.iterrows():
+        lbl = str(row.get("label", "")).strip()
+        if not lbl or lbl in seen_labels:
+            continue
+        seen_labels.add(lbl)
+
+        values = {}
+        for col in value_cols:
+            raw = row.get(col)
+            if raw is None or (isinstance(raw, float) and (raw != raw)):  # NaN check
+                values[period_map[col]] = None
+            else:
+                try:
+                    values[period_map[col]] = float(raw)
+                except (ValueError, TypeError):
+                    values[period_map[col]] = None
+        items.append({"label": lbl, "values": values})
+
+    periods = sorted(set(period_map.values()))
+    return items, periods
 
 
-def _get_periods(statement) -> list[str]:
-    """Extract period/column labels from a statement."""
-    try:
-        df = statement.to_dataframe()
-        if df is not None and not df.empty:
-            return [str(c) for c in df.columns]
-    except Exception:
-        pass
-    return []
+@app.route("/api/financials")
+def get_financials():
+    ticker = (request.args.get("ticker", "") or "").strip().upper()
 
-
-def fetch_financials(ticker: str, years: int = 5) -> dict:
-    """Fetch financial statements for a ticker using edgartools."""
-    cache_key = f"{ticker}_{years}"
-    if cache_key in _cache:
-        return _cache[cache_key]
-
-    from edgar import Company, set_identity
-
-    # SEC requires a User-Agent with contact info
-    set_identity("ValuWise App support@valuwise.app")
-
-    company = Company(ticker)
-
-    # Get the latest 10-K filings
-    filings_10k = company.get_filings(form="10-K")
-    if filings_10k is None or len(filings_10k) == 0:
-        raise ValueError(f"No 10-K filings found for {ticker}")
-
-    # Get the most recent filing and its XBRL financial data
-    latest_filings = filings_10k.latest(min(years, len(filings_10k)))
-
-    # Try to get financials from the most recent filing first
-    result = {
-        "ticker": ticker,
-        "company_name": str(company.name) if hasattr(company, 'name') else ticker,
-        "cik": str(company.cik) if hasattr(company, 'cik') else "",
-        "income_statement": [],
-        "balance_sheet": [],
-        "cash_flow": [],
-        "periods": [],
-    }
+    if not ticker:
+        return jsonify({"error": "Missing ?ticker= parameter"}), 400
 
     try:
-        # Try to get the XBRL object from the latest filing
-        if hasattr(latest_filings, '__iter__'):
-            # Multiple filings — use the first one for structure
-            filing = list(latest_filings)[0] if not hasattr(latest_filings, 'obj') else latest_filings
-        else:
-            filing = latest_filings
+        company = Company(ticker)
 
-        tenk = filing.obj() if hasattr(filing, 'obj') else filing
-        financials = tenk.financials if hasattr(tenk, 'financials') else None
+        # Get last 6 annual filings for multi-year view
+        filings = company.get_filings(form="10-K").head(6)
 
-        if financials is not None:
-            # Extract each statement (edgartools uses property accessors, not methods)
-            try:
-                income = financials.income_statement
-                result["income_statement"] = _extract_statement_data(income)
-                if not result["periods"] and income is not None:
-                    result["periods"] = _get_periods(income)
-            except Exception:
-                pass
+        if len(filings) == 0:
+            return jsonify({"error": f"No 10-K filings found for {ticker}"}), 404
 
-            try:
-                balance = financials.balance_sheet
-                result["balance_sheet"] = _extract_statement_data(balance)
-                if not result["periods"] and balance is not None:
-                    result["periods"] = _get_periods(balance)
-            except Exception:
-                pass
+        # Use MultiFinancials for multi-year stitched data
+        multi = MultiFinancials.extract(filings)
 
-            try:
-                cashflow = financials.cash_flow_statement
-                result["cash_flow"] = _extract_statement_data(cashflow)
-                if not result["periods"] and cashflow is not None:
-                    result["periods"] = _get_periods(cashflow)
-            except Exception:
-                pass
+        income_df = multi.income_statement().to_dataframe()
+        balance_df = multi.balance_sheet().to_dataframe()
+        cashflow_df = multi.cashflow_statement().to_dataframe()
+
+        income_items, inc_periods = _build_statement_items(income_df)
+        balance_items, bal_periods = _build_statement_items(balance_df)
+        cashflow_items, cf_periods = _build_statement_items(cashflow_df)
+
+        # Use the union of all periods, sorted
+        all_periods = sorted(set(inc_periods) | set(bal_periods) | set(cf_periods))
+
+        return jsonify({
+            "ticker": ticker,
+            "company_name": str(company.name) if hasattr(company, "name") else ticker,
+            "cik": str(company.cik) if hasattr(company, "cik") else "",
+            "income_statement": income_items,
+            "balance_sheet": balance_items,
+            "cash_flow": cashflow_items,
+            "periods": all_periods,
+        })
+
     except Exception as e:
-        # If XBRL extraction fails, try Company Facts API as fallback
-        raise ValueError(f"Failed to extract financials for {ticker}: {str(e)}")
-
-    if not result["income_statement"] and not result["balance_sheet"] and not result["cash_flow"]:
-        raise ValueError(f"No financial data could be extracted for {ticker}")
-
-    # Cache the result
-    _cache[cache_key] = result
-    return result
+        return jsonify({
+            "error": str(e),
+            "trace": traceback.format_exc(),
+        }), 500
 
 
-class handler(BaseHTTPRequestHandler):
-    def do_OPTIONS(self):
-        """Handle CORS preflight."""
-        self.send_response(204)
-        self.send_header("Access-Control-Allow-Origin", "*")
-        self.send_header("Access-Control-Allow-Methods", "GET, OPTIONS")
-        self.send_header("Access-Control-Allow-Headers", "Content-Type")
-        self.end_headers()
+@app.route("/health")
+def health():
+    return jsonify({"status": "ok"})
 
-    def do_GET(self):
-        """Handle GET /api/financials?ticker=AAPL&years=5"""
-        self.send_header("Access-Control-Allow-Origin", "*")
 
-        parsed = urlparse(self.path)
-        params = parse_qs(parsed.query)
-
-        ticker = params.get("ticker", [None])[0]
-        years = int(params.get("years", ["5"])[0])
-
-        if not ticker:
-            self.send_response(400)
-            self.send_header("Content-Type", "application/json")
-            self.end_headers()
-            self.wfile.write(json.dumps({"error": "Missing 'ticker' parameter"}).encode())
-            return
-
-        ticker = ticker.upper().strip()
-        years = max(1, min(years, 10))
-
-        try:
-            data = fetch_financials(ticker, years)
-            self.send_response(200)
-            self.send_header("Content-Type", "application/json")
-            self.end_headers()
-            self.wfile.write(json.dumps(data).encode())
-        except ValueError as e:
-            self.send_response(404)
-            self.send_header("Content-Type", "application/json")
-            self.end_headers()
-            self.wfile.write(json.dumps({"error": str(e)}).encode())
-        except Exception as e:
-            self.send_response(500)
-            self.send_header("Content-Type", "application/json")
-            self.end_headers()
-            self.wfile.write(json.dumps({
-                "error": f"Internal server error: {str(e)}",
-                "trace": traceback.format_exc()
-            }).encode())
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)

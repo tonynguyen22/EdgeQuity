@@ -1,27 +1,15 @@
 {
-    "functions": {
-        "api/*.py": {
-            "runtime": "@vercel/python@4.4.0",
-            "maxDuration": 30
-        }
-    },
-    "headers": [
-        {
-            "source": "/api/(.*)",
-            "headers": [
-                {
-                    "key": "Access-Control-Allow-Origin",
-                    "value": "*"
-                },
-                {
-                    "key": "Access-Control-Allow-Methods",
-                    "value": "GET, OPTIONS"
-                },
-                {
-                    "key": "Access-Control-Allow-Headers",
-                    "value": "Content-Type"
-                }
-            ]
-        }
-    ]
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "functions": {
+    "api/financials.py": {
+      "maxDuration": 60,
+      "memory": 1024
+    }
+  },
+  "rewrites": [
+    { "source": "/sec-api/(.*)", "destination": "https://www.sec.gov/$1" },
+    { "source": "/edgar-search/(.*)", "destination": "https://efts.sec.gov/$1" },
+    { "source": "/edgar-facts/(.*)", "destination": "https://data.sec.gov/$1" }
+  ]
 }

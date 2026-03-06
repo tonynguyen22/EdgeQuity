@@ -1,15 +1,13 @@
-/* ── Financials — App Shell ───────────────────────────────────────────── */
+/* ── EdgarTools — Financial Statements via Python API ────────────────── */
 
-import React, { useMemo } from 'react';
-import { useFinancialsData } from './hooks/useFinancialsData';
+import { useMemo } from 'react';
+import { useEdgarToolsData } from './hooks/useEdgarToolsData';
 
-import FinancialsControls from './components/FinancialsControls';
-import StatementTable from './components/StatementTable';
+import FinancialsControls from '../financials/components/FinancialsControls';
+import StatementTable from '../financials/components/StatementTable';
 
-export default function Financials() {
-    const fin = useFinancialsData();
-
-    /* ── Derived memos ──────────────────────────────────────────────── */
+export default function EdgarTools() {
+    const fin = useEdgarToolsData();
 
     const currentItems = useMemo(() => {
         if (!fin.data) return [];
@@ -30,13 +28,7 @@ export default function Financials() {
         }
     }, [fin.activeStatement]);
 
-    const periods = useMemo(() => {
-        return fin.data?.periods ?? [];
-    }, [fin.data]);
-
-
-
-    /* ── Render ─────────────────────────────────────────────────────── */
+    const periods = useMemo(() => fin.data?.periods ?? [], [fin.data]);
 
     return (
         <div className="space-y-6">

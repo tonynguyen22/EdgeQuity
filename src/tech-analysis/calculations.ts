@@ -1,88 +1,7 @@
-import React, { useState } from 'react';
-import { Search, AlertCircle, TrendingUp, TrendingDown, Activity } from 'lucide-react';
-
-// ── API Keys ──────────────────────────────────────────────────────────────────
-const FINNHUB_KEY = 'ctj1dchr01qgfbsvp4mgctj1dchr01qgfbsvp4n0';
-const POLYGON_KEY = 'M8zhNduoGphylrTzDQwdpDqz1E35B7Qx';
-const TWELVE_KEY  = '97eed83076bf4f208812f013f332bad3';
-const AV_KEY      = 'RUIU5L10WQRWQLW1';
-const TAAPI_KEY   = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbHVlIjoiNjlhMjNiZGZlZTAzMzMxMWE0OGYzYzNmIiwiaWF0IjoxNzcyMjM5ODM5LCJleHAiOjMzMjc2NzAzODM5fQ.W_Y15aP16FJ1G4Ocsk7xEm69dLgplV887Wc-YEghbx8';
-
-// ── localStorage quota guard ───────────────────────────────────────────────────
-function safeSetItem(key: string, value: string) {
-  try {
-    localStorage.setItem(key, value);
-  } catch (e) {
-    if (e instanceof DOMException && e.name === 'QuotaExceededError') {
-      Object.keys(localStorage)
-        .filter(k => k.startsWith('finnhub_') || k.startsWith('valuwise_') || k.startsWith('tech_'))
-        .forEach(k => localStorage.removeItem(k));
-      try { localStorage.setItem(key, value); } catch { /* skip */ }
-    }
-  }
-}
-
-function clearCache() {
-  const prefixes = ['finnhub_', 'valuwise_', 'tech_', 'earnings_', 'insider_', 'news_', 'dividend_', 'portfolio_profile_'];
-  Object.keys(localStorage).filter(k => prefixes.some(p => k.startsWith(p))).forEach(k => localStorage.removeItem(k));
-}
-
-// ── Types ─────────────────────────────────────────────────────────────────────
-interface Candle {
-  date: string; open: number; high: number; low: number; close: number; volume: number;
-}
-
-interface IndicatorResult {
-  close: number;
-  yearChange: number | null;
-  high52w: number;
-  low52w: number;
-  pos52w: number;
-  // Oscillators
-  rsi: number | null;
-  stochK: number | null;
-  stochD: number | null;
-  williamsR: number | null;
-  cci: number | null;
-  // Trend
-  macd: number | null;
-  macdSignal: number | null;
-  macdHist: number | null;
-  sma20: number | null;
-  sma50: number | null;
-  sma200: number | null;
-  pctVsSMA20: number | null;
-  pctVsSMA50: number | null;
-  pctVsSMA200: number | null;
-  // Volatility
-  bbPctB: number | null;
-  bbWidth: number | null;
-  atr: number | null;
-  atrPct: number | null;
-  // Momentum / Context
-  roc10: number | null;
-  roc20: number | null;
-  volRatio: number | null;
-}
-
-interface TaapiSnap {
-  rsi: number | null; macd: number | null; macdSignal: number | null;
-  bbUpper: number | null; bbMid: number | null; bbLower: number | null;
-  ema20: number | null; ema50: number | null;
-}
-
-interface SignalDetail { name: string; value: string; bull: boolean | null; }
-interface Signal { score: number; label: 'Bullish' | 'Neutral' | 'Bearish'; details: SignalDetail[]; }
-
-interface IndicatorCard {
-  name: string;
-  value: string;
-  label: string;
-  bull: boolean | null;
-  desc: string;
-}
-
 // ── Indicator Math ────────────────────────────────────────────────────────────
+
+import { Candle, IndicatorResult, TaapiSnap, Signal, SignalDetail, IndicatorCard } from './types';
+
 function computeEMA(values: number[], period: number): (number | null)[] {
   if (values.length < period) return values.map(() => null);
   const k = 2 / (period + 1);
@@ -191,7 +110,7 @@ function computeCCI(candles: Candle[], period = 20): (number | null)[] {
   });
 }
 
-function computeAllIndicators(candles: Candle[]): IndicatorResult {
+export function computeAllIndicators(candles: Candle[]): IndicatorResult {
   const closes = candles.map(c => c.close);
   const n = closes.length;
   const last = candles[n - 1];
@@ -240,6 +159,7 @@ function computeAllIndicators(candles: Candle[]): IndicatorResult {
 }
 
 // ── OHLCV Normalizers ─────────────────────────────────────────────────────────
+
 function normalizeFinnhub(data: any): Candle[] {
   if (!data || data.s !== 'ok' || !data.t) return [];
   return data.t.map((t: number, i: number) => ({
@@ -277,7 +197,8 @@ function normalizeAlphaVantage(data: any): Candle[] {
 }
 
 // ── OHLCV Fetcher ─────────────────────────────────────────────────────────────
-async function fetchOHLCV(symbol: string): Promise<Candle[]> {
+
+export async function fetchOHLCV(symbol: string, finnhubKey: string, polygonKey: string, twelveKey: string, avKey: string): Promise<Candle[]> {
   const nowSec = Math.floor(Date.now() / 1000);
   const oneYearAgo = nowSec - 365 * 24 * 3600;
   const toDate   = new Date().toISOString().slice(0, 10);
@@ -285,28 +206,28 @@ async function fetchOHLCV(symbol: string): Promise<Candle[]> {
 
   try {
     const res = await fetch(
-      `https://finnhub.io/api/v1/stock/candle?symbol=${symbol}&resolution=D&from=${oneYearAgo}&to=${nowSec}&token=${FINNHUB_KEY}`
+      `https://finnhub.io/api/v1/stock/candle?symbol=${symbol}&resolution=D&from=${oneYearAgo}&to=${nowSec}&token=${finnhubKey}`
     );
     if (res.ok) { const c = normalizeFinnhub(await res.json()); if (c.length > 20) return c; }
   } catch { /* try next */ }
 
   try {
     const res = await fetch(
-      `https://api.polygon.io/v2/aggs/ticker/${symbol}/range/1/day/${fromDate}/${toDate}?adjusted=true&sort=asc&limit=365&apiKey=${POLYGON_KEY}`
+      `https://api.polygon.io/v2/aggs/ticker/${symbol}/range/1/day/${fromDate}/${toDate}?adjusted=true&sort=asc&limit=365&apiKey=${polygonKey}`
     );
     if (res.ok) { const c = normalizePolygon(await res.json()); if (c.length > 20) return c; }
   } catch { /* try next */ }
 
   try {
     const res = await fetch(
-      `https://api.twelvedata.com/time_series?symbol=${symbol}&interval=1day&outputsize=252&apikey=${TWELVE_KEY}`
+      `https://api.twelvedata.com/time_series?symbol=${symbol}&interval=1day&outputsize=252&apikey=${twelveKey}`
     );
     if (res.ok) { const c = normalizeTwelveData(await res.json()); if (c.length > 20) return c; }
   } catch { /* try next */ }
 
   try {
     const res = await fetch(
-      `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${symbol}&outputsize=compact&apikey=${AV_KEY}`
+      `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${symbol}&outputsize=compact&apikey=${avKey}`
     );
     if (res.ok) { const c = normalizeAlphaVantage(await res.json()); if (c.length > 20) return c; }
   } catch { /* try next */ }
@@ -315,13 +236,14 @@ async function fetchOHLCV(symbol: string): Promise<Candle[]> {
 }
 
 // ── TAAPI Snapshot ────────────────────────────────────────────────────────────
-async function fetchTAAPI(symbol: string): Promise<TaapiSnap | null> {
+
+export async function fetchTAAPI(symbol: string, taapiKey: string): Promise<TaapiSnap | null> {
   try {
     const res = await fetch('https://api.taapi.io/bulk', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        secret: TAAPI_KEY,
+        secret: taapiKey,
         construct: {
           exchange: 'stocks', symbol, interval: '1d',
           indicators: [
@@ -347,7 +269,8 @@ async function fetchTAAPI(symbol: string): Promise<TaapiSnap | null> {
 }
 
 // ── Signal ────────────────────────────────────────────────────────────────────
-function computeSignal(ind: IndicatorResult, snap: TaapiSnap | null): Signal {
+
+export function computeSignal(ind: IndicatorResult, snap: TaapiSnap | null): Signal {
   const rsi = snap?.rsi ?? ind.rsi;
   const macd = snap?.macd ?? ind.macd;
   const macdSig = snap?.macdSignal ?? ind.macdSignal;
@@ -385,7 +308,8 @@ function computeSignal(ind: IndicatorResult, snap: TaapiSnap | null): Signal {
 }
 
 // ── Indicator Card Builder ─────────────────────────────────────────────────────
-function buildIndicatorCards(ind: IndicatorResult, snap: TaapiSnap | null): { section: string; cards: IndicatorCard[] }[] {
+
+export function buildIndicatorCards(ind: IndicatorResult, snap: TaapiSnap | null): { section: string; cards: IndicatorCard[] }[] {
   const rsi = snap?.rsi ?? ind.rsi;
   const macd = snap?.macd ?? ind.macd;
   const macdSig = snap?.macdSignal ?? ind.macdSignal;
@@ -563,243 +487,4 @@ function buildIndicatorCards(ind: IndicatorResult, snap: TaapiSnap | null): { se
     { section: 'Volatility', cards: volatility },
     { section: 'Momentum & Context', cards: context },
   ].filter(s => s.cards.length > 0);
-}
-
-// ── Helpers ───────────────────────────────────────────────────────────────────
-const fmtVol = (v: number) =>
-  v >= 1e9 ? `${(v / 1e9).toFixed(1)}B` : v >= 1e6 ? `${(v / 1e6).toFixed(0)}M` : `${v.toLocaleString()}`;
-
-// ── Component ─────────────────────────────────────────────────────────────────
-export default function TechAnalysis() {
-  const [tickerInput, setTickerInput] = useState('');
-  const [loading, setLoading]         = useState(false);
-  const [error, setError]             = useState('');
-  const [indicators, setIndicators]   = useState<IndicatorResult | null>(null);
-  const [signal, setSignal]           = useState<Signal | null>(null);
-  const [displayName, setDisplayName] = useState('');
-  const [snapState, setSnapState]     = useState<TaapiSnap | null>(null);
-
-  const handleSearch = async (e: React.FormEvent) => {
-    e.preventDefault();
-    const sym = tickerInput.trim().toUpperCase();
-    if (!sym) return;
-
-    setLoading(true);
-    setError('');
-    setIndicators(null);
-    setSignal(null);
-    setDisplayName('');
-    setSnapState(null);
-
-    try {
-      const cacheKey = `tech_${sym}`;
-      const cached = localStorage.getItem(cacheKey);
-      if (cached) {
-        try {
-          const { ts, data } = JSON.parse(cached);
-          if (Date.now() - ts < 24 * 60 * 60 * 1000) {
-            setIndicators(data.indicators);
-            setSignal(data.signal);
-            setDisplayName(data.displayName ?? sym);
-            setSnapState(data.snap ?? null);
-            setLoading(false);
-            return;
-          }
-        } catch { localStorage.removeItem(cacheKey); }
-      }
-
-      const [candles, snap] = await Promise.all([fetchOHLCV(sym), fetchTAAPI(sym)]);
-      const ind = computeAllIndicators(candles);
-      const sig = computeSignal(ind, snap);
-
-      safeSetItem(cacheKey, JSON.stringify({ ts: Date.now(), data: { indicators: ind, signal: sig, displayName: sym, snap } }));
-
-      setIndicators(ind);
-      setSignal(sig);
-      setDisplayName(sym);
-      setSnapState(snap);
-    } catch (err: any) {
-      setError(err.message || 'Failed to load technical data.');
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const cards = indicators && signal ? buildIndicatorCards(indicators, snapState) : [];
-
-  const badgeCls = (bull: boolean | null) => {
-    if (bull === true)  return 'bg-emerald-500/15 text-emerald-300 border border-emerald-500/30';
-    if (bull === false) return 'bg-red-500/15 text-red-300 border border-red-500/30';
-    return 'bg-slate-700/50 text-slate-400 border border-slate-600/40';
-  };
-
-  const cardBorder = (bull: boolean | null) => {
-    if (bull === true)  return 'border-emerald-500/20 hover:border-emerald-500/40';
-    if (bull === false) return 'border-red-500/20 hover:border-red-500/40';
-    return 'border-slate-700/50 hover:border-slate-600/60';
-  };
-
-  const valueColor = (bull: boolean | null) => {
-    if (bull === true)  return 'text-emerald-300';
-    if (bull === false) return 'text-red-300';
-    return 'text-slate-200';
-  };
-
-  return (
-    <div className="max-w-5xl mx-auto py-6 space-y-6">
-
-      {/* ── Search ──────────────────────────────────────────────────────────── */}
-      <form onSubmit={handleSearch} className="flex gap-3 max-w-xl mx-auto">
-        <div className="relative flex-1">
-          <Search className="w-5 h-5 absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" />
-          <input
-            type="text"
-            value={tickerInput}
-            onChange={e => setTickerInput(e.target.value)}
-            placeholder="Enter ticker (e.g. AAPL, MSFT, TSLA)"
-            className="w-full bg-slate-800 border border-slate-700 rounded-xl pl-12 pr-4 py-3.5 text-base focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent uppercase transition-all"
-          />
-        </div>
-        <button
-          type="submit"
-          disabled={!tickerInput.trim() || loading}
-          className="bg-emerald-500 hover:bg-emerald-600 text-white px-6 py-3.5 rounded-xl font-medium transition-colors disabled:opacity-40 disabled:cursor-not-allowed flex items-center gap-2 shrink-0"
-        >
-          <Activity className="w-4 h-4" />
-          Analyze
-        </button>
-      </form>
-
-      {/* ── Loading ─────────────────────────────────────────────────────────── */}
-      {loading && (
-        <div className="flex flex-col items-center justify-center h-48 space-y-4">
-          <div className="w-8 h-8 border-2 border-emerald-500 border-t-transparent rounded-full animate-spin" />
-          <p className="text-slate-400 animate-pulse">Fetching price data & computing indicators…</p>
-        </div>
-      )}
-
-      {/* ── Error ───────────────────────────────────────────────────────────── */}
-      {!loading && error && (
-        <div className="bg-red-500/10 border border-red-500/20 rounded-xl p-5 flex items-start gap-3 max-w-xl mx-auto">
-          <AlertCircle className="w-5 h-5 text-red-500 shrink-0 mt-0.5" />
-          <div>
-            <p className="text-red-400 font-medium">Error loading data</p>
-            <p className="text-red-400/80 text-sm mt-0.5">{error}</p>
-            <button onClick={clearCache} className="mt-2 text-xs bg-slate-700 hover:bg-slate-600 text-slate-200 px-3 py-1.5 rounded-lg font-medium transition-colors">Clear Cache & Retry</button>
-          </div>
-        </div>
-      )}
-
-      {/* ── About / Landing hint ─────────────────────────────────────────────── */}
-      {!loading && !error && !indicators && (
-        <div className="bg-slate-800/30 border border-slate-700/30 rounded-xl p-6 max-w-xl mx-auto space-y-3">
-          <div className="flex items-center gap-2 mb-1">
-            <TrendingUp className="w-4 h-4 text-slate-500" />
-            <span className="text-sm font-semibold text-slate-300">About Technical Analysis</span>
-          </div>
-          <p className="text-xs text-slate-500 leading-relaxed">
-            Fetches 1 year of daily price data and computes 15 indicators across four categories: oscillators, trend, volatility, and momentum context. Each indicator includes a plain-English explanation of what the current reading means.
-          </p>
-          <div className="grid grid-cols-2 gap-x-6 gap-y-2.5 pt-1">
-            {([
-              ['RSI, Stochastic, Williams %R, CCI', 'Momentum oscillators — spot overbought / oversold extremes.'],
-              ['MACD + SMA 20 / 50 / 200', 'Trend-following — where price stands vs. its moving averages.'],
-              ['Bollinger %B + ATR', 'Volatility — how extended or compressed price movement is.'],
-              ['ROC, Volume, 52-Week Position', 'Context — recent momentum, participation, and yearly range.'],
-            ] as [string, string][]).map(([title, desc]) => (
-              <div key={title} className="text-xs space-y-0.5">
-                <p className="font-medium text-slate-300">{title}</p>
-                <p className="text-slate-500 leading-relaxed">{desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
-
-      {/* ── Main Content ─────────────────────────────────────────────────────── */}
-      {!loading && indicators && signal && (
-        <div className="space-y-6">
-
-          {/* Header: ticker + price + 1yr change */}
-          <div className="flex items-baseline gap-4 flex-wrap">
-            <h2 className="text-2xl font-bold text-white">{displayName}</h2>
-            <span className="text-xl font-semibold text-slate-200">${indicators.close.toFixed(2)}</span>
-            {indicators.yearChange !== null && (
-              <span className={`text-sm font-medium flex items-center gap-1 ${indicators.yearChange >= 0 ? 'text-emerald-400' : 'text-red-400'}`}>
-                {indicators.yearChange >= 0 ? <TrendingUp className="w-3.5 h-3.5" /> : <TrendingDown className="w-3.5 h-3.5" />}
-                {indicators.yearChange >= 0 ? '+' : ''}{indicators.yearChange.toFixed(2)}% (1 yr)
-              </span>
-            )}
-          </div>
-
-          {/* Signal Summary */}
-          <div className={`rounded-xl p-4 border ${
-            signal.label === 'Bullish' ? 'bg-emerald-500/5 border-emerald-500/20' :
-            signal.label === 'Bearish' ? 'bg-red-500/5 border-red-500/20' :
-            'bg-slate-800/50 border-slate-700/50'
-          }`}>
-            <div className="flex items-center flex-wrap gap-4">
-              <div className="flex items-center gap-3 shrink-0">
-                <div className={`w-14 h-14 rounded-full flex flex-col items-center justify-center border-2 ${
-                  signal.label === 'Bullish' ? 'border-emerald-500 text-emerald-400' :
-                  signal.label === 'Bearish' ? 'border-red-500 text-red-400' :
-                  'border-amber-500 text-amber-400'
-                }`}>
-                  <span className="text-lg font-bold leading-none">{signal.score}</span>
-                  <span className="text-[9px] text-slate-500 mt-0.5">/ 100</span>
-                </div>
-                <div>
-                  <p className={`text-lg font-bold ${
-                    signal.label === 'Bullish' ? 'text-emerald-400' :
-                    signal.label === 'Bearish' ? 'text-red-400' : 'text-amber-400'
-                  }`}>{signal.label}</p>
-                  <p className="text-xs text-slate-500">Technical Signal</p>
-                </div>
-              </div>
-              <div className="flex flex-wrap gap-2">
-                {signal.details.map((d, i) => (
-                  <div key={i} className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm border ${
-                    d.bull === true  ? 'bg-emerald-500/10 border-emerald-500/20 text-emerald-300' :
-                    d.bull === false ? 'bg-red-500/10 border-red-500/20 text-red-300' :
-                    'bg-slate-700/50 border-slate-600/50 text-slate-300'
-                  }`}>
-                    <span className="text-slate-400 text-xs">{d.name}:</span>
-                    <span className="font-medium">{d.value}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          {/* Indicator Sections */}
-          {cards.map(({ section, cards: sCards }) => (
-            <div key={section} className="space-y-3">
-              <h3 className="text-xs font-semibold text-slate-500 uppercase tracking-widest">{section}</h3>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-                {sCards.map((card) => (
-                  <div
-                    key={card.name}
-                    className={`bg-slate-800/50 border rounded-xl p-4 space-y-2 transition-colors ${cardBorder(card.bull)}`}
-                  >
-                    {/* Name + badge row */}
-                    <div className="flex items-start justify-between gap-2">
-                      <p className="text-xs font-medium text-slate-400 leading-tight">{card.name}</p>
-                      <span className={`shrink-0 text-[10px] font-semibold px-1.5 py-0.5 rounded-md whitespace-nowrap ${badgeCls(card.bull)}`}>
-                        {card.label}
-                      </span>
-                    </div>
-                    {/* Value */}
-                    <p className={`text-2xl font-bold tabular-nums ${valueColor(card.bull)}`}>{card.value}</p>
-                    {/* Description */}
-                    <p className="text-xs text-slate-500 leading-relaxed">{card.desc}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          ))}
-
-        </div>
-      )}
-    </div>
-  );
 }

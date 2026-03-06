@@ -8,7 +8,7 @@ export interface StatementLineItem {
     values: Record<string, number | null>;
 }
 
-/** Full financial data response from the Python backend */
+/** Full financial data response from the SEC EDGAR API */
 export interface FinancialsResponse {
     ticker: string;
     company_name: string;
@@ -23,10 +23,4 @@ export interface FinancialsResponse {
 export interface GrowthData {
     label: string;
     growths: Record<string, number | null>;
-}
-
-/** Chart data point for trend visualization */
-export interface TrendPoint {
-    period: string;
-    [key: string]: string | number | null;
 }

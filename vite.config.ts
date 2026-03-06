@@ -10,7 +10,7 @@ export default defineConfig(({ mode }) => {
     define: {
       'process.env.GEMINI_API_KEY': JSON.stringify(env.GEMINI_API_KEY),
       'process.env.FINNHUB_API_KEY': JSON.stringify(env.FINNHUB_API_KEY),
-      'process.env.EDGAR_API_URL': JSON.stringify(env.EDGAR_API_URL || ''),
+      'process.env.EDGARTOOLS_API_URL': JSON.stringify(env.EDGARTOOLS_API_URL || ''),
     },
     resolve: {
       alias: {
@@ -21,6 +21,23 @@ export default defineConfig(({ mode }) => {
       // HMR is disabled in AI Studio via DISABLE_HMR env var.
       // Do not modify—file watching is disabled to prevent flickering during agent edits.
       hmr: process.env.DISABLE_HMR !== 'true',
+      proxy: {
+        '/sec-api': {
+          target: 'https://www.sec.gov',
+          changeOrigin: true,
+          rewrite: (path: string) => path.replace(/^\/sec-api/, ''),
+        },
+        '/edgar-search': {
+          target: 'https://efts.sec.gov',
+          changeOrigin: true,
+          rewrite: (path: string) => path.replace(/^\/edgar-search/, ''),
+        },
+        '/edgar-facts': {
+          target: 'https://data.sec.gov',
+          changeOrigin: true,
+          rewrite: (path: string) => path.replace(/^\/edgar-facts/, ''),
+        },
+      },
     },
   };
 });
