@@ -3,14 +3,14 @@ import { BarChart, Bar, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, R
 import { Search, TrendingUp, TrendingDown, Info, AlertCircle, Target } from 'lucide-react';
 
 import PeerAnalysis from '../peer-analysis';
-import Financials from '../financials';
-import CompanyGrade from '../CompanyGrade';
+
+import QualityAnalysis from '../quality-analysis';
 import TechAnalysis from '../tech-analysis';
 import EarningsEstimates from '../EarningsEstimates';
 import InsiderInstitutional from '../InsiderInstitutional';
 import NewsSentiment from '../NewsSentiment';
-import PortfolioTracker from '../PortfolioTracker';
 import DividendAnalysis from '../DividendAnalysis';
+import MultiplesAnalysis from '../multiples-analysis';
 
 import { computeDCF } from './calculations';
 import { useDCFData } from './hooks/useDCFData';
@@ -23,7 +23,66 @@ import LandingPage from './components/LandingPage';
 import AssumptionSliders from './components/AssumptionSliders';
 import ForecastTable from './components/ForecastTable';
 import HistoricalTables from './components/HistoricalTables';
-import type { DCFInputs, TabId, FormatUnit, ScenarioComparison, BridgeItem } from './types';
+import SupportedTickersBySector from '../components/SupportedTickersBySector';
+import type { DCFInputs, DCFResult, TabId, FormatUnit, ScenarioComparison, BridgeItem, ScenarioType } from './types';
+import { SUPPORTED_TICKERS } from './types';
+
+function round1(value: number) {
+  return Math.round(value * 10) / 10;
+}
+
+function buildScenarioPatch(dcf: DCFResult, scenario: Exclude<ScenarioType, 'custom'>): Pick<DCFInputs, 'revGrowthStart' | 'revGrowthEnd' | 'ebitMarginStart' | 'ebitMarginEnd' | 'waccAdj'> {
+  const baseRevStart = round1(dcf.revCagr5yr * 100);
+  const baseRevEnd = round1(dcf.revCagr3yr * 100);
+  const baseMarginStart = round1(dcf.baseEbitMargin * 100);
+  const baseMarginEnd = round1(Math.max(dcf.baseEbitMargin, dcf.maxEbitMargin5yr) * 100);
+
+  if (scenario === 'base') {
+    return {
+      revGrowthStart: baseRevStart,
+      revGrowthEnd: baseRevEnd,
+      ebitMarginStart: baseMarginStart,
+      ebitMarginEnd: baseMarginEnd,
+      waccAdj: 0,
+    };
+  }
+
+  if (scenario === 'bull') {
+    return {
+      revGrowthStart: round1(baseRevEnd >= 0 ? baseRevEnd * 1.25 : baseRevEnd * 0.75),
+      revGrowthEnd: round1(baseRevEnd >= 0 ? Math.max(1, baseRevEnd * 0.75) : baseRevEnd * 0.5),
+      ebitMarginStart: baseMarginStart,
+      ebitMarginEnd: round1(baseMarginEnd >= 0 ? baseMarginEnd * 1.15 : baseMarginEnd * 0.85),
+      waccAdj: -0.5,
+    };
+  }
+
+  return {
+    revGrowthStart: round1(baseRevStart >= 0 ? baseRevStart * 0.5 : baseRevStart * 1.5),
+    revGrowthEnd: round1(baseRevEnd >= 0 ? Math.max(-5, baseRevEnd * 0.1) : Math.min(-5, baseRevEnd * 1.25)),
+    ebitMarginStart: round1(baseMarginStart >= 0 ? baseMarginStart * 0.85 : baseMarginStart * 1.15),
+    ebitMarginEnd: round1(baseMarginEnd >= 0 ? baseMarginEnd * 0.7 : baseMarginEnd * 1.3),
+    waccAdj: 1.0,
+  };
+}
+
+function buildAutoFillPatch(dcf: DCFResult): Partial<DCFInputs> {
+  return {
+    ...buildScenarioPatch(dcf, 'base'),
+    dnaMarginProj: round1(dcf.avgDnaMargin5yr * 100),
+    wcMarginProj: round1(dcf.avgNwcMargin5yr * 100),
+    capexMarginProj: round1(dcf.avgCapexMargin5yr * 100),
+    sharesGrowthProj: round1(dcf.sharesCagr5yr * 100),
+  };
+}
+
+function matchesScenario(inputs: DCFInputs, patch: Pick<DCFInputs, 'revGrowthStart' | 'revGrowthEnd' | 'ebitMarginStart' | 'ebitMarginEnd' | 'waccAdj'>) {
+  return inputs.revGrowthStart === patch.revGrowthStart &&
+    inputs.revGrowthEnd === patch.revGrowthEnd &&
+    inputs.ebitMarginStart === patch.ebitMarginStart &&
+    inputs.ebitMarginEnd === patch.ebitMarginEnd &&
+    inputs.waccAdj === patch.waccAdj;
+}
 
 export default function App() {
   // ── App shell state ────────────────────────────────────────────────────────
@@ -61,30 +120,23 @@ export default function App() {
   const { data, loading, error, analystTarget, reset } = useDCFData(appState.ticker);
 
   // ── DCF calculation ────────────────────────────────────────────────────────
-  const dcf = useMemo(() => {
+  const dcfState = useMemo(() => {
     if (!data) return null;
     try {
-      return computeDCF(data, dcfInputs);
-    } catch {
-      return null;
+      return { dcf: computeDCF(data, dcfInputs), calcError: '' };
+    } catch (err: any) {
+      return { dcf: null, calcError: err?.message || 'Unable to build DCF model for this ticker.' };
     }
   }, [data, dcfInputs]);
+  const dcf = dcfState?.dcf ?? null;
+  const calcError = dcfState?.calcError ?? '';
+  const displayError = error || calcError;
 
   // ── Auto-fill sliders when a new ticker loads ──────────────────────────────
   const lastTickerRef = useRef('');
   useEffect(() => {
     if (dcf && appState.ticker !== lastTickerRef.current) {
-      setDcfInputs(prev => ({
-        ...prev,
-        revGrowthStart: Number((dcf.revCagr5yr * 100).toFixed(1)),
-        revGrowthEnd: Number((dcf.revCagr3yr * 100).toFixed(1)),
-        ebitMarginStart: Number((dcf.baseEbitMargin * 100).toFixed(1)),
-        ebitMarginEnd: Number((dcf.maxEbitMargin5yr * 100).toFixed(1)),
-        dnaMarginProj: Number((dcf.avgDnaMargin5yr * 100).toFixed(1)),
-        wcMarginProj: Number((dcf.avgNwcMargin5yr * 100).toFixed(1)),
-        capexMarginProj: Number((dcf.avgCapexMargin5yr * 100).toFixed(1)),
-        sharesGrowthProj: Number((dcf.sharesCagr5yr * 100).toFixed(1)),
-      }));
+      setDcfInputs(prev => ({ ...prev, ...buildAutoFillPatch(dcf) }));
       lastTickerRef.current = appState.ticker;
     }
   }, [dcf, appState.ticker]);
@@ -94,11 +146,37 @@ export default function App() {
     setDcfInputs(prev => ({ ...prev, ...patch }));
   };
 
+  const [showDropdown, setShowDropdown] = useState(false);
+  const dropdownRef = useRef<HTMLFormElement>(null);
+
+  const filteredTickers = useMemo(() => {
+    const q = appState.tickerInput.trim().toUpperCase();
+    if (!q) return [...SUPPORTED_TICKERS];
+    return SUPPORTED_TICKERS.filter(t => t.includes(q));
+  }, [appState.tickerInput]);
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+        setShowDropdown(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
-    if (appState.tickerInput.trim()) {
-      setAppState(prev => ({ ...prev, ticker: prev.tickerInput.trim().toUpperCase() }));
+    const input = appState.tickerInput.trim().toUpperCase();
+    if (input && (SUPPORTED_TICKERS as readonly string[]).includes(input)) {
+      setAppState(prev => ({ ...prev, ticker: input, tickerInput: input }));
+      setShowDropdown(false);
     }
+  };
+
+  const handleTickerSelect = (ticker: string) => {
+    setAppState(prev => ({ ...prev, ticker, tickerInput: ticker }));
+    setShowDropdown(false);
   };
 
   const handleGoBack = () => {
@@ -139,51 +217,15 @@ export default function App() {
   // ── Scenario management ────────────────────────────────────────────────────
   const applyScenario = (s: 'bull' | 'base' | 'bear') => {
     if (!dcf) return;
-    const r1 = (v: number) => Math.round(v * 10) / 10;
-    if (s === 'bull') {
-      setDcfInputs(prev => ({
-        ...prev,
-        revGrowthStart: r1(dcf.revCagr3yr * 100 * 1.25),
-        revGrowthEnd: r1(Math.max(1, dcf.revCagr3yr * 100 * 0.75)),
-        ebitMarginStart: r1(dcf.baseEbitMargin * 100),
-        ebitMarginEnd: r1(dcf.baseEbitMargin * 100 * 1.15),
-        waccAdj: -0.5,
-      }));
-    } else if (s === 'base') {
-      setDcfInputs(prev => ({
-        ...prev,
-        revGrowthStart: r1(dcf.revCagr5yr * 100),
-        revGrowthEnd: r1(dcf.revCagr3yr * 100),
-        ebitMarginStart: r1(dcf.baseEbitMargin * 100),
-        ebitMarginEnd: r1(dcf.baseEbitMargin * 100),
-        waccAdj: 0,
-      }));
-    } else {
-      setDcfInputs(prev => ({
-        ...prev,
-        revGrowthStart: r1(dcf.revCagr5yr * 100 * 0.5),
-        revGrowthEnd: r1(Math.max(-5, dcf.revCagr5yr * 100 * 0.1)),
-        ebitMarginStart: r1(dcf.baseEbitMargin * 100 * 0.85),
-        ebitMarginEnd: r1(dcf.baseEbitMargin * 100 * 0.70),
-        waccAdj: 1.0,
-      }));
-    }
+    setDcfInputs(prev => ({ ...prev, ...buildScenarioPatch(dcf, s) }));
   };
 
   // ── Derived useMemos ───────────────────────────────────────────────────────
   const activeScenario = useMemo((): 'bull' | 'base' | 'bear' | 'custom' => {
     if (!dcf) return 'custom';
-    const r1 = (v: number) => Math.round(v * 10) / 10;
-    const { revGrowthStart, revGrowthEnd, ebitMarginStart, ebitMarginEnd, waccAdj } = dcfInputs;
-    if (revGrowthStart === r1(dcf.revCagr5yr * 100) && revGrowthEnd === r1(dcf.revCagr3yr * 100) &&
-      ebitMarginStart === r1(dcf.baseEbitMargin * 100) && ebitMarginEnd === r1(dcf.baseEbitMargin * 100) && waccAdj === 0)
-      return 'base';
-    if (revGrowthStart === r1(dcf.revCagr3yr * 100 * 1.25) && revGrowthEnd === r1(Math.max(1, dcf.revCagr3yr * 100 * 0.75)) &&
-      ebitMarginStart === r1(dcf.baseEbitMargin * 100) && ebitMarginEnd === r1(dcf.baseEbitMargin * 100 * 1.15) && waccAdj === -0.5)
-      return 'bull';
-    if (revGrowthStart === r1(dcf.revCagr5yr * 100 * 0.5) && revGrowthEnd === r1(Math.max(-5, dcf.revCagr5yr * 100 * 0.1)) &&
-      ebitMarginStart === r1(dcf.baseEbitMargin * 100 * 0.85) && ebitMarginEnd === r1(dcf.baseEbitMargin * 100 * 0.70) && waccAdj === 1.0)
-      return 'bear';
+    if (matchesScenario(dcfInputs, buildScenarioPatch(dcf, 'base'))) return 'base';
+    if (matchesScenario(dcfInputs, buildScenarioPatch(dcf, 'bull'))) return 'bull';
+    if (matchesScenario(dcfInputs, buildScenarioPatch(dcf, 'bear'))) return 'bear';
     return 'custom';
   }, [dcf, dcfInputs]);
 
@@ -209,6 +251,7 @@ export default function App() {
     if (lastFcff <= 0) return null;
     const tvDiscPer = dcf.fractionOfYear + (dcf.projections.length - 1);
     const targetPvTv = (dcf.currentPrice * dcf.terminalShares) - pvFcff - dcf.totalCash + dcf.totalDebt;
+    if (targetPvTv <= 0) return null;
     let lo = -0.05, hi = dcf.wacc - 0.001;
     for (let i = 0; i < 60; i++) {
       const mid = (lo + hi) / 2;
@@ -222,11 +265,15 @@ export default function App() {
 
   const scenarioComparison = useMemo((): ScenarioComparison | null => {
     if (!dcf) return null;
-    const { termGrowth, forecastYears, dnaMarginProj, wcMarginProj, capexMarginProj, sharesGrowthProj } = dcfInputs;
+    const {
+      revGrowthStart, revGrowthEnd, ebitMarginStart, ebitMarginEnd,
+      termGrowth, waccAdj, forecastYears,
+      dnaMarginProj, wcMarginProj, capexMarginProj, sharesGrowthProj,
+    } = dcfInputs;
     const computeScenarioDCF = (revGs: number, revGe: number, ebitMs: number, ebitMe: number, scenWaccAdj: number) => {
       const scenWacc = Math.max(Math.max(dcf.rawWacc, 0.06) + scenWaccAdj / 100, termGrowth / 100 + 0.02);
       let prevRev = dcf.baseRev, prevWc = dcf.baseWc, prevShares = dcf.sharesOut;
-      let sumPvFcff = 0, lastFcff = 0, lastDisc = 0;
+      let sumPvFcff = 0, lastFcff = 0, lastDisc = 0, lastShares = dcf.sharesOut;
       for (let i = 1; i <= forecastYears; i++) {
         const g = forecastYears <= 1 ? revGs : revGs + (revGe - revGs) * (i - 1) / (forecastYears - 1);
         const rev = prevRev * (1 + g / 100);
@@ -241,21 +288,28 @@ export default function App() {
         const fcff = ebiat + dna - capex - deltaWc;
         const discPeriod = i === 1 ? dcf.fractionOfYear * 0.5 : dcf.fractionOfYear + (i - 2) + 0.5;
         sumPvFcff += fcff / Math.pow(1 + scenWacc, discPeriod);
-        if (i === forecastYears) { lastFcff = fcff; lastDisc = dcf.fractionOfYear + (i - 1); }
+        if (i === forecastYears) { lastFcff = fcff; lastDisc = dcf.fractionOfYear + (i - 1); lastShares = shares; }
         prevRev = rev; prevWc = wc; prevShares = shares;
       }
       const tv = lastFcff * (1 + termGrowth / 100) / (scenWacc - termGrowth / 100);
       const pvTv = tv / Math.pow(1 + scenWacc, lastDisc);
       const ev = sumPvFcff + pvTv;
       const eq = ev + dcf.totalCash - dcf.totalDebt;
-      const price = dcf.terminalShares > 0 ? eq / dcf.terminalShares : 0;
+      const price = lastShares > 0 ? eq / lastShares : 0;
       return { price, upside: dcf.currentPrice > 0 ? (price - dcf.currentPrice) / dcf.currentPrice : 0, ev, equityValue: eq };
     };
-    const r1 = (v: number) => Math.round(v * 10) / 10;
+    const bearRevS = round1(revGrowthStart * 0.7);
+    const bearRevE = round1(revGrowthEnd * 0.5);
+    const bearMarginS = round1(ebitMarginStart * 0.85);
+    const bearMarginE = round1(ebitMarginEnd * 0.7);
+    const bullRevS = round1(revGrowthStart * 1.3);
+    const bullRevE = round1(revGrowthEnd * 1.2);
+    const bullMarginS = round1(ebitMarginStart * 1.1);
+    const bullMarginE = round1(ebitMarginEnd * 1.15);
     return {
-      bear: computeScenarioDCF(r1(dcf.revCagr5yr * 100 * 0.5), r1(Math.max(-5, dcf.revCagr5yr * 100 * 0.1)), r1(dcf.baseEbitMargin * 100 * 0.85), r1(dcf.baseEbitMargin * 100 * 0.70), 1.0),
-      base: computeScenarioDCF(r1(dcf.revCagr5yr * 100), r1(dcf.revCagr3yr * 100), r1(dcf.baseEbitMargin * 100), r1(dcf.baseEbitMargin * 100), 0),
-      bull: computeScenarioDCF(r1(dcf.revCagr3yr * 100 * 1.25), r1(Math.max(1, dcf.revCagr3yr * 100 * 0.75)), r1(dcf.baseEbitMargin * 100), r1(dcf.baseEbitMargin * 100 * 1.15), -0.5),
+      bear: computeScenarioDCF(bearRevS, bearRevE, bearMarginS, bearMarginE, waccAdj + 1.0),
+      base: computeScenarioDCF(revGrowthStart, revGrowthEnd, ebitMarginStart, ebitMarginEnd, waccAdj),
+      bull: computeScenarioDCF(bullRevS, bullRevE, bullMarginS, bullMarginE, waccAdj - 0.5),
     };
   }, [dcf, dcfInputs]);
 
@@ -298,12 +352,12 @@ export default function App() {
         <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           {showLanding ? (
             <LandingPage onTabChange={handleTabChange} />
-          ) : activeTab === 'financials' ? (
-            <Financials />
           ) : activeTab === 'comp' ? (
             <PeerAnalysis />
           ) : activeTab === 'grade' ? (
-            <CompanyGrade />
+            <QualityAnalysis />
+          ) : activeTab === 'multiples' ? (
+            <MultiplesAnalysis />
           ) : activeTab === 'tech' ? (
             <TechAnalysis />
           ) : activeTab === 'earnings' ? (
@@ -312,30 +366,52 @@ export default function App() {
             <InsiderInstitutional />
           ) : activeTab === 'news' ? (
             <NewsSentiment />
-          ) : activeTab === 'portfolio' ? (
-            <PortfolioTracker />
           ) : activeTab === 'dividend' ? (
             <DividendAnalysis />
           ) : (
             <>
-              {(!data || error) && !loading && (
+              {(!data || displayError) && !loading && (
                 <div className="max-w-2xl mx-auto py-8 space-y-5">
-                  <form onSubmit={handleSearch} className="relative">
-                    <Search className="w-5 h-5 absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" />
+                  <form onSubmit={handleSearch} className="relative" ref={dropdownRef}>
+                    <Search className="w-5 h-5 absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 z-10" />
                     <input
                       type="text"
                       value={tickerInput}
-                      onChange={(e) => setAppState(prev => ({ ...prev, tickerInput: e.target.value }))}
-                      placeholder="Enter a stock ticker (e.g. AAPL, MSFT, TSLA)"
+                      onChange={(e) => {
+                        setAppState(prev => ({ ...prev, tickerInput: e.target.value }));
+                        setShowDropdown(true);
+                      }}
+                      onFocus={() => setShowDropdown(true)}
+                      placeholder="Search supported tickers (e.g. AAPL, MSFT, TSLA)"
                       className="w-full bg-slate-800 border border-slate-700 rounded-xl pl-12 pr-28 py-4 text-base focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent uppercase transition-all shadow-xl"
+                      autoComplete="off"
                     />
                     <button
                       type="submit"
-                      disabled={!tickerInput.trim()}
-                      className="absolute right-2 top-1/2 -translate-y-1/2 bg-emerald-500 hover:bg-emerald-600 text-white px-5 py-2.5 rounded-lg font-medium transition-colors text-sm disabled:opacity-40 disabled:cursor-not-allowed"
+                      disabled={!tickerInput.trim() || !(SUPPORTED_TICKERS as readonly string[]).includes(tickerInput.trim().toUpperCase())}
+                      className="absolute right-2 top-1/2 -translate-y-1/2 bg-emerald-500 hover:bg-emerald-600 text-white px-5 py-2.5 rounded-lg font-medium transition-colors text-sm disabled:opacity-40 disabled:cursor-not-allowed z-10"
                     >
                       Analyze
                     </button>
+                    {showDropdown && filteredTickers.length > 0 && (
+                      <div className="absolute top-full left-0 right-0 mt-1 bg-slate-800 border border-slate-700 rounded-xl shadow-2xl max-h-64 overflow-y-auto z-50">
+                        {filteredTickers.map(t => (
+                          <button
+                            key={t}
+                            type="button"
+                            onClick={() => handleTickerSelect(t)}
+                            className="w-full text-left px-4 py-2.5 text-sm font-mono hover:bg-slate-700/50 transition-colors first:rounded-t-xl last:rounded-b-xl text-slate-200"
+                          >
+                            {t}
+                          </button>
+                        ))}
+                      </div>
+                    )}
+                    {showDropdown && filteredTickers.length === 0 && tickerInput.trim() && (
+                      <div className="absolute top-full left-0 right-0 mt-1 bg-slate-800 border border-slate-700 rounded-xl shadow-2xl z-50 px-4 py-3 text-sm text-slate-500">
+                        No matching ticker found. Only {SUPPORTED_TICKERS.length} pre-selected stocks are supported.
+                      </div>
+                    )}
                   </form>
                   <div className="bg-slate-800/30 border border-slate-700/30 rounded-xl p-5 space-y-3">
                     <div className="flex items-center gap-2 mb-1">
@@ -343,14 +419,14 @@ export default function App() {
                       <span className="text-sm font-semibold text-slate-300">About the DCF Model</span>
                     </div>
                     <p className="text-xs text-slate-500 leading-relaxed">
-                      Build a Discounted Cash Flow valuation from reported financials. The model projects Free Cash Flow to the Firm (FCFF) using your growth and margin assumptions, discounts at WACC, and adds a Gordon Growth terminal value to arrive at an intrinsic price per share.
+                      Build a Discounted Cash Flow valuation from standardized financial statements (via Financial Modeling Prep). The model projects Free Cash Flow to the Firm (FCFF) using your growth and margin assumptions, discounts at WACC, and adds a Gordon Growth terminal value to arrive at an intrinsic price per share.
                     </p>
                     <ol className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1">
                       {[
-                        'Enter a ticker and press Analyze to fetch historical financials from Finnhub.',
+                        'Select a ticker from the supported list and press Analyze to fetch historical financials.',
                         "The model pre-fills Revenue Growth and EBIT Margin from the company's historical CAGR.",
                         'Adjust sliders to reflect your own projections, or use Bear / Base / Bull presets.',
-                        'The sensitivity table maps implied share price across WACC × terminal growth combinations.',
+                        'The sensitivity table maps implied share price across WACC x terminal growth combinations.',
                         'Cells highlighted green indicate upside vs current price; ring marks the current assumptions.',
                         'Click Print / PDF to generate a clean, printer-friendly report with all key outputs.',
                       ].map((step, i) => (
@@ -360,6 +436,7 @@ export default function App() {
                         </li>
                       ))}
                     </ol>
+                    <SupportedTickersBySector accentClassName="text-emerald-400" className="mt-2" />
                   </div>
                 </div>
               )}
@@ -368,17 +445,36 @@ export default function App() {
                   <div className="w-8 h-8 border-2 border-emerald-500 border-t-transparent rounded-full animate-spin" />
                   <p className="text-slate-400 animate-pulse">Fetching financial data...</p>
                 </div>
-              ) : error ? (
+              ) : displayError ? (
                 <div className="bg-red-500/10 border border-red-500/20 rounded-lg p-6 flex items-start gap-3">
                   <AlertCircle className="w-5 h-5 text-red-500 shrink-0 mt-0.5" />
                   <div>
-                    <h3 className="text-red-500 font-medium">Error loading data</h3>
-                    <p className="text-red-400/80 text-sm mt-1">{error}</p>
-                    <p className="text-slate-500 text-xs mt-2">If this keeps happening, click <span className="text-slate-300 font-medium">Clear Cache</span> in the top-right corner and try again.</p>
+                    <h3 className="text-red-500 font-medium">{error ? 'Error loading data' : 'DCF model unavailable'}</h3>
+                    <p className="text-red-400/80 text-sm mt-1">{displayError}</p>
+                    <p className="text-slate-500 text-xs mt-2">
+                      {error
+                        ? <>If this keeps happening, click <span className="text-slate-300 font-medium">Clear Cache</span> in the top-right corner and try again.</>
+                        : <>This ticker has incomplete financial data from FMP. Try another company from the supported list.</>}
+                    </p>
                   </div>
                 </div>
               ) : dcf && data ? (
                 <div className="space-y-6">
+                  {dcf.warnings.length > 0 && (
+                    <div className="bg-amber-500/10 border border-amber-500/20 rounded-lg p-5">
+                      <div className="flex items-start gap-3">
+                        <AlertCircle className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
+                        <div className="space-y-2">
+                          <h3 className="text-amber-300 font-medium">Best-effort DCF assumptions in use</h3>
+                          <ul className="text-sm text-amber-100/80 list-disc pl-5 space-y-1">
+                            {dcf.warnings.map((warning) => (
+                              <li key={warning}>{warning}</li>
+                            ))}
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  )}
                   {data?.profile?.name && (
                     <div className="flex items-baseline gap-3">
                       <h2 className="text-xl font-bold text-white">{ticker}</h2>
@@ -536,50 +632,6 @@ export default function App() {
                         );
                       })()}
 
-                      {/* Capital Allocation */}
-                      {dcf.historicalSummary.length > 0 && dcf.historicalSummary.some((y: any) => y.cfo > 0) && (() => {
-                        const allocData = dcf.historicalSummary.map((y: any) => {
-                          const ocf = Math.max(y.cfo, 1);
-                          return {
-                            year: y.year.substring(0, 4),
-                            CapEx: Math.min((y.capex / ocf) * 100, 100),
-                            Dividends: Math.min((y.dividendsPaid / ocf) * 100, 100),
-                            'Debt Repay': Math.min((y.debtRepayment / ocf) * 100, 100),
-                            Retained: Math.max(100 - (y.capex / ocf) * 100 - (y.dividendsPaid / ocf) * 100 - (y.debtRepayment / ocf) * 100, 0),
-                          };
-                        });
-                        const latest = allocData[allocData.length - 1];
-                        const allocKeys = ['CapEx', 'Dividends', 'Debt Repay', 'Retained'];
-                        const allocColors: Record<string, string> = { CapEx: '#10b981', Dividends: '#3b82f6', 'Debt Repay': '#f59e0b', Retained: '#64748b' };
-                        return (
-                          <div className="bg-slate-800/50 border border-slate-700/50 rounded-xl p-6">
-                            <h3 className="text-lg font-medium mb-4">Capital Allocation</h3>
-                            <p className="text-xs text-slate-500 mb-4">How operating cash flow is deployed: reinvestment, dividends, debt paydown, and retained cash.</p>
-                            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-4">
-                              {allocKeys.map(k => (
-                                <div key={k} className="bg-slate-900/50 rounded-lg p-3 text-center">
-                                  <div className="text-xs text-slate-500 mb-1">{k}</div>
-                                  <div className="text-lg font-bold font-mono" style={{ color: allocColors[k] }}>{latest[k as keyof typeof latest] != null ? `${(latest[k as keyof typeof latest] as number).toFixed(0)}%` : 'N/A'}</div>
-                                  <div className="text-[10px] text-slate-600">of OCF</div>
-                                </div>
-                              ))}
-                            </div>
-                            <ResponsiveContainer width="100%" height={220}>
-                              <BarChart data={allocData} margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>
-                                <CartesianGrid strokeDasharray="3 3" stroke="#334155" />
-                                <XAxis dataKey="year" tick={{ fill: '#94a3b8', fontSize: 11 }} />
-                                <YAxis tick={{ fill: '#94a3b8', fontSize: 11 }} tickFormatter={(v: any) => `${v}%`} domain={[0, 100]} />
-                                <Tooltip contentStyle={{ backgroundColor: '#1e293b', border: '1px solid #475569', borderRadius: '8px' }} formatter={(v: any) => [`${Number(v).toFixed(1)}%`]} />
-                                <Legend wrapperStyle={{ fontSize: '11px', cursor: 'pointer' }} onClick={(d: any) => handleLegendClick(d, allocKeys)} />
-                                {allocKeys.map(k => (
-                                  <Bar key={k} dataKey={k} stackId="a" fill={allocColors[k]} hide={!!hiddenSeries[k]} />
-                                ))}
-                              </BarChart>
-                            </ResponsiveContainer>
-                          </div>
-                        );
-                      })()}
-
                       {/* Valuation Summary */}
                       <div className="bg-slate-800/50 border border-slate-700/50 rounded-xl p-6">
                         <h3 className="text-lg font-medium mb-4">Valuation Summary</h3>
@@ -695,9 +747,9 @@ export default function App() {
                       <h3 className="text-sm font-medium text-slate-300 mb-4">Scenario Comparison</h3>
                       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                         {([
-                          { key: 'bear', label: 'Bear Case', color: 'border-red-500/30 bg-red-500/5', textColor: 'text-red-400', desc: `Rev ${(dcf.revCagr5yr * 100 * 0.5).toFixed(1)}%→${Math.max(-5, dcf.revCagr5yr * 100 * 0.1).toFixed(1)}%, Margin ×0.85→0.70` },
-                          { key: 'base', label: 'Base Case', color: 'border-slate-500/30 bg-slate-700/20', textColor: 'text-slate-300', desc: `Rev ${(dcf.revCagr5yr * 100).toFixed(1)}%→${(dcf.revCagr3yr * 100).toFixed(1)}%, Margin unchanged` },
-                          { key: 'bull', label: 'Bull Case', color: 'border-emerald-500/30 bg-emerald-500/5', textColor: 'text-emerald-400', desc: `Rev ${(dcf.revCagr3yr * 100 * 1.25).toFixed(1)}%→…, Margin ×1.15` },
+                          { key: 'bear', label: 'Bear Case', color: 'border-red-500/30 bg-red-500/5', textColor: 'text-red-400', desc: `Rev ${round1(dcfInputs.revGrowthStart * 0.7)}%→${round1(dcfInputs.revGrowthEnd * 0.5)}%, Margin ×0.85→0.70, WACC +1%` },
+                          { key: 'base', label: 'Base Case', color: 'border-slate-500/30 bg-slate-700/20', textColor: 'text-slate-300', desc: `Rev ${dcfInputs.revGrowthStart}%→${dcfInputs.revGrowthEnd}%, Margin ${dcfInputs.ebitMarginStart}%→${dcfInputs.ebitMarginEnd}%` },
+                          { key: 'bull', label: 'Bull Case', color: 'border-emerald-500/30 bg-emerald-500/5', textColor: 'text-emerald-400', desc: `Rev ${round1(dcfInputs.revGrowthStart * 1.3)}%→${round1(dcfInputs.revGrowthEnd * 1.2)}%, Margin ×1.1→1.15, WACC -0.5%` },
                         ] as const).map(({ key, label, color, textColor, desc }) => {
                           const s = scenarioComparison[key];
                           return (

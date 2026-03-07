@@ -191,7 +191,9 @@ export function computeMultiHistData(data: PeerData[]): Record<string, any>[] {
     if (data.length === 0) return [];
     const years = Array.from(
         new Set(data.flatMap(d => (d.histEvEbitda ?? []).map(h => h.year))),
-    ).sort();
+    )
+        .sort()
+        .slice(-3);
 
     return years.map(year => {
         const row: Record<string, any> = { year };

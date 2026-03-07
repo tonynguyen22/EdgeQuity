@@ -65,6 +65,41 @@ async function lookupCIK(ticker: string): Promise<{ cik: string; name: string }>
 
 interface ConceptDef { label: string; concepts: string[]; negate?: boolean }
 
+function isDepreciationLikeConcept(conceptName: string): boolean {
+    const lower = conceptName.toLowerCase();
+    return lower.includes('depreci') || lower.includes('amorti') || lower.includes('depletion');
+}
+
+function pickUnits(entry: any): any[] | null {
+    if (!entry?.units) return null;
+    const units = entry.units;
+    const unitKey = units.USD ? 'USD' : units['USD/shares'] ? 'USD/shares' : units.shares ? 'shares' : Object.keys(units)[0];
+    const values = unitKey ? units[unitKey] : null;
+    return values?.length ? values : null;
+}
+
+function toAnnual10KEntries(values: any[] | null): any[] {
+    if (!values?.length) return [];
+    return values.filter((d: any) => d.form === '10-K' && d.fy != null);
+}
+
+function findCustomDepreciationSeries(allFacts: Record<string, any>): any[] | null {
+    let bestAnnualSeries: any[] | null = null;
+    for (const [namespace, concepts] of Object.entries(allFacts)) {
+        if (namespace === 'dei') continue;
+        const conceptMap = concepts as Record<string, any>;
+        for (const [conceptName, entry] of Object.entries(conceptMap)) {
+            if (!isDepreciationLikeConcept(conceptName)) continue;
+            const annualData = toAnnual10KEntries(pickUnits(entry));
+            if (!annualData.length) continue;
+            if (!bestAnnualSeries || annualData.length > bestAnnualSeries.length) {
+                bestAnnualSeries = annualData;
+            }
+        }
+    }
+    return bestAnnualSeries;
+}
+
 const INCOME_CONCEPTS: ConceptDef[] = [
     { label: 'Revenue', concepts: ['Revenues', 'RevenueFromContractWithCustomerExcludingAssessedTax', 'RevenueFromContractWithCustomerIncludingAssessedTax', 'SalesRevenueNet'] },
     { label: 'Cost of Revenue', concepts: ['CostOfRevenue', 'CostOfGoodsAndServicesSold', 'CostOfGoodsSold'], negate: true },
@@ -107,7 +142,8 @@ const BALANCE_CONCEPTS: ConceptDef[] = [
 
 const CASHFLOW_CONCEPTS: ConceptDef[] = [
     { label: 'Net Income', concepts: ['NetIncomeLoss'] },
-    { label: 'Depreciation & Amortization', concepts: ['DepreciationDepletionAndAmortization', 'DepreciationAmortizationAndAccretionNet'] },
+    { label: 'Depreciation & Amortization', concepts: ['DepreciationDepletionAndAmortization', 'DepreciationAmortizationAndAccretionNet', 'Depreciation', 'AmortizationOfIntangibleAssets'] },
+    { label: 'Research & Development', concepts: ['ResearchAndDevelopmentExpense'], negate: true },
     { label: 'Stock-Based Compensation', concepts: ['ShareBasedCompensation'] },
     { label: 'Changes in Working Capital', concepts: ['IncreaseDecreaseInOperatingCapital'] },
     { label: 'Operating Cash Flow', concepts: ['NetCashProvidedByUsedInOperatingActivities', 'NetCashProvidedByUsedInOperatingActivitiesContinuingOperations'] },
@@ -132,29 +168,36 @@ function extractStatementItems(
     const periods = fiscalYears.map(y => String(y));
     const items: StatementLineItem[] = [];
 
+    // We now receive the FULL facts object, containing multiple namespaces (us-gaap, tsla, dei, etc.)
+    const usGaap = facts['us-gaap'] || {};
+
     for (const def of conceptDefs) {
-        // Find the first matching concept in the facts
+        // Find the first matching concept in the us-gaap namespace
         let conceptData: any[] | null = null;
         for (const concept of def.concepts) {
-            const entry = facts[concept];
-            if (entry?.units) {
-                // Get USD values (or shares for EPS/share counts)
-                const unitKey = entry.units.USD ? 'USD' : entry.units['USD/shares'] ? 'USD/shares' : entry.units.shares ? 'shares' : Object.keys(entry.units)[0];
-                conceptData = entry.units[unitKey] || null;
-                if (conceptData?.length) break;
+            const entry = usGaap[concept];
+            conceptData = pickUnits(entry);
+            if (conceptData?.length) break;
+        }
+
+        let annualData = toAnnual10KEntries(conceptData);
+
+        // Check custom namespaces for D&A when standard tags are missing OR only non-annual values.
+        // Some issuers (including TSLA) publish annual D&A under custom concepts.
+        if (def.label === 'Depreciation & Amortization' && annualData.length === 0) {
+            const customAnnualSeries = findCustomDepreciationSeries(facts);
+            if (customAnnualSeries?.length) {
+                annualData = customAnnualSeries;
             }
         }
 
-        if (!conceptData) {
+        if (annualData.length === 0) {
             // Still add the row with null values so the table structure is consistent
             const values: Record<string, number | null> = {};
             for (const p of periods) values[p] = null;
             items.push({ label: def.label, values });
             continue;
         }
-
-        // Filter to only 10-K filings (annual) and pick the right fiscal year values
-        const annualData = conceptData.filter((d: any) => d.form === '10-K' && d.fy != null);
 
         const values: Record<string, number | null> = {};
         for (const fy of fiscalYears) {
@@ -212,15 +255,28 @@ async function fetchFromEdgar(ticker: string): Promise<FinancialsResponse> {
         const entry = facts[concept];
         const data = entry?.units?.USD;
         if (!data) { console.log(`[FY-SCAN] ${concept} → NOT FOUND`); continue; }
-        const matching = data.filter((d: any) => d.form === '10-K' && d.fp === 'FY' && d.fy != null);
-        console.log(`[FY-SCAN] ${concept} → ${matching.length} entries, FYs:`, matching.map((d: any) => d.fy));
+        // Accept fp === 'FY', 'Q4', or missing fp — older XBRL filings often
+        // tag annual data with Q4 or omit fp entirely.
+        const matching = data.filter(
+            (d: any) => d.form === '10-K' && d.fy != null && (!d.fp || d.fp === 'FY' || d.fp === 'Q4')
+        );
+        // Deduplicate per fiscal year: prefer fp==='FY', then 'Q4', then whatever
+        const byYear = new Map<number, any>();
         for (const d of matching) {
-            allFYs.add(Number(d.fy));
+            const fy = Number(d.fy);
+            const existing = byYear.get(fy);
+            if (!existing || (d.fp === 'FY' && existing.fp !== 'FY')) {
+                byYear.set(fy, d);
+            }
+        }
+        console.log(`[FY-SCAN] ${concept} → ${byYear.size} unique FYs:`, [...byYear.keys()]);
+        for (const fy of byYear.keys()) {
+            allFYs.add(fy);
         }
     }
 
-    // Take the last 6 fiscal years
-    const fiscalYears: number[] = [...allFYs].sort((a, b) => a - b).slice(-6);
+    // Take the last 5 fiscal years
+    const fiscalYears: number[] = [...allFYs].sort((a, b) => a - b).slice(-5);
     console.log('[FY-SCAN] Final fiscal years:', fiscalYears);
 
     if (fiscalYears.length === 0) {
@@ -228,9 +284,36 @@ async function fetchFromEdgar(ticker: string): Promise<FinancialsResponse> {
     }
 
     // Step 4: Extract each statement
-    const income = extractStatementItems(facts, INCOME_CONCEPTS, fiscalYears);
-    const balance = extractStatementItems(facts, BALANCE_CONCEPTS, fiscalYears);
-    const cashflow = extractStatementItems(facts, CASHFLOW_CONCEPTS, fiscalYears);
+    // We pass the full json.facts object so we can scan company-specific namespaces for D&A if needed
+    const allFacts = json.facts || {};
+    const income = extractStatementItems(allFacts, INCOME_CONCEPTS, fiscalYears);
+    const balance = extractStatementItems(allFacts, BALANCE_CONCEPTS, fiscalYears);
+    const cashflow = extractStatementItems(allFacts, CASHFLOW_CONCEPTS, fiscalYears);
+    const rdFactCandidates = Object.entries(allFacts)
+        .filter(([namespace]) => namespace !== 'dei')
+        .flatMap(([namespace, concepts]) => Object.entries(concepts as Record<string, any>)
+            .filter(([conceptName]) => /research|development/i.test(conceptName))
+            .map(([conceptName, entry]) => {
+                const units = entry?.units || {};
+                const unitKey = units.USD ? 'USD' : Object.keys(units)[0];
+                const annualEntries = unitKey
+                    ? (units[unitKey] || []).filter((d: any) => d.form === '10-K' && d.fy != null)
+                    : [];
+                return {
+                    namespace,
+                    conceptName,
+                    unitKey: unitKey || null,
+                    annualCount: annualEntries.length,
+                    years: [...new Set<number>(annualEntries.map((d: any) => Number(d.fy)))].sort((a: number, b: number) => a - b),
+                };
+            }))
+        .filter(candidate => candidate.annualCount > 0)
+        .slice(0, 12);
+    const incomeRdRow = income.items.find(item => item.label === 'Research & Development') || null;
+    const cashflowRdRow = cashflow.items.find(item => item.label === 'Research & Development') || null;
+    // #region agent log
+    fetch('http://127.0.0.1:7415/ingest/2e9edde8-908a-4a40-98d1-78f8aa755831',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'832eac'},body:JSON.stringify({sessionId:'832eac',runId:'financials-rd',hypothesisId:'H5',location:'src/financials/hooks/useFinancialsData.ts:fetchFromEdgar',message:'Financials R&D fact coverage',data:{ticker,periods:income.periods,rdFactCandidates,cashflowConceptHasRdRow:CASHFLOW_CONCEPTS.some(def=>def.label==='Research & Development'),incomeHasRdRow:!!incomeRdRow,incomeRdValues:incomeRdRow?.values ?? null,cashflowHasRdRow:!!cashflowRdRow,cashflowRdValues:cashflowRdRow?.values ?? null},timestamp:Date.now()})}).catch(()=>{});
+    // #endregion
 
     return {
         ticker,
@@ -272,6 +355,9 @@ export function useFinancialsData(): UseFinancialsDataResult {
         try {
             // Check cache first
             const cached = getCached<FinancialsResponse>(sym);
+            // #region agent log
+            fetch('http://127.0.0.1:7415/ingest/2e9edde8-908a-4a40-98d1-78f8aa755831',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'832eac'},body:JSON.stringify({sessionId:'832eac',runId:'financials-rd',hypothesisId:'H4',location:'src/financials/hooks/useFinancialsData.ts:fetchData',message:'Financials cache usage',data:{ticker:sym,cacheHit:!!cached},timestamp:Date.now()})}).catch(()=>{});
+            // #endregion
             if (cached) {
                 setData(cached);
                 setTicker(sym);

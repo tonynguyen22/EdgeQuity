@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { Search, AlertCircle, TrendingUp, TrendingDown, ExternalLink, Sparkles, Loader2 } from 'lucide-react';
 
-const API_KEY = 'ctj1dchr01qgfbsvp4mgctj1dchr01qgfbsvp4n0';
+const API_KEY = process.env.FINNHUB_API_KEY;
 const BASE_URL = 'https://finnhub.io/api/v1';
 
-const AI_KEY = 'sk-cM7kHNoyHiVaxum6fVPoGZlOLXTCuEZtDI9k9b4Ai8giprTI';
+const AI_KEY = process.env.GEMINI_API_KEY;
 const AI_URL = 'https://api.shopaikey.com/v1beta/models/gemini-2.5-flash:generateContent';
 const safeJson = async (res: Response): Promise<any> => {
   const text = await res.text();
@@ -33,7 +33,7 @@ function safeSetItem(key: string, value: string) {
 }
 
 function clearCache() {
-  const prefixes = ['finnhub_', 'valuwise_', 'tech_', 'earnings_', 'insider_', 'news_', 'dividend_', 'portfolio_profile_'];
+  const prefixes = ['finnhub_', 'valuwise_', 'tech_', 'earnings_', 'insider_', 'news_', 'dividend_'];
   Object.keys(localStorage).filter(k => prefixes.some(p => k.startsWith(p))).forEach(k => localStorage.removeItem(k));
 }
 

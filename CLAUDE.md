@@ -5,10 +5,10 @@ React + TypeScript + Vite + Tailwind v4 stock analysis app. Single-page with sid
 
 ## App Features
 
-### DCF Valuation (`src/App.tsx`)
-Full discounted cash flow model built from SEC-reported financials (Finnhub `/stock/financials-reported`).
+### DCF Valuation (`src/dcf/index.tsx`)
+Full discounted cash flow model built from standardized financials via Financial Modeling Prep (FMP) `/stable/` API. Restricted to ~87 pre-selected tickers.
 - **Inputs:** 6 adjustable sliders — Revenue Growth (Yr 1 & Yr N), EBIT Margin (Yr 1 & Yr N), Terminal Growth, WACC adjustment, Equity Risk Premium, Forecast Years (1–10)
-- **Scenario Presets:** Bear / Base / Bull with auto-filled assumptions; scenario comparison table shows implied price & upside for all three
+- **Scenario Presets:** Bear / Base / Bull with auto-filled assumptions; scenario comparison is dynamic — base = current slider values, bear/bull = offsets from current (growth ×0.7/×1.3, margins ×0.85/×1.15, WACC +1%/-0.5%)
 - **Outputs:** Intrinsic value per share, upside/downside %, key assumptions summary, company name & industry display
 - **Historical Financials:** 5–6 year income statement (Revenue, COGS, Gross Profit, SG&A, R&D, EBIT, D&A, Interest Expense, Income Tax, Net Income, margins)
 - **Forecast Model:** N-year projection table (Revenue, EBIT, D&A, CapEx, Tax, UFCF, Discount Factor, PV of UFCF) with tabular-nums formatting
@@ -29,16 +29,23 @@ Comparable company analysis with multi-source peer discovery.
 - **Composite Score:** 0–100 relative value score (average of percentile rankings)
 - **Export:** Excel with all companies, metrics, and peer statistics
 
-### Company Grade (`src/CompanyGrade.tsx`)
-Letter-grade scoring system (A–D) across 4 categories from SEC financials.
-- **Financial Health:** Current Ratio, Quick Ratio, Debt-to-Equity, Interest Coverage
-- **Profitability:** Gross Margin, EBITDA Margin, Net Margin, ROE, ROA
-- **Growth:** Revenue Growth, EPS Growth, FCF Margin, FCF Conversion
-- **Cash Flow:** Operating Cash Flow Margin
-- **Overall Grade:** Weighted composite with trend indicator (improving/stable/declining)
-- **Grade Score Trend:** 5-year line chart of category scores over time
-- **Details:** Expandable categories with per-metric narrative explanations and grading thresholds
-- **Charts:** Radar chart (14 metrics scored 0–100)
+### Quality Analysis (`src/quality-analysis/index.tsx`)
+Comprehensive financial quality scoring (A-D) across 4 weighted categories from FMP standardized financials. Restricted to ~87 pre-selected tickers (same as DCF).
+Uses the **same `fmp_{sym}_dcf_v1` cache** as DCF — if a ticker was already looked up on the DCF page, Quality Analysis reuses that data (zero additional FMP calls).
+- **Data Source:** FMP income statement, balance sheet, cash flow (3 FMP calls, 5 years) + Finnhub profile/metrics (2 calls)
+- **Financial Health (25%):** Current Ratio, Quick Ratio, Debt-to-Equity, Interest Coverage
+- **Profitability (30%):** Gross Margin, EBITDA Margin, Net Margin, ROE, ROA
+- **Growth (25%):** Revenue Growth (3yr avg + CAGR), EPS Growth
+- **Cash Flow Quality (20%):** FCF Margin, FCF Conversion, CFO Margin
+- **Overall Grade:** Weighted composite with trend indicators (improving/stable/declining)
+- **Risk Flags:** Automatic detection of financial warning signs
+- **Grade Score Trend:** Line chart of category scores over recent years
+- **Charts:** Historical margins, health ratios, ROE/ROA, radar chart
+- **Altman Z-Score:** Bankruptcy risk (safe/grey/distress zones)
+- **Piotroski F-Score:** 9-signal fundamental strength (0-9)
+- **DuPont Analysis:** ROE decomposition (Net Margin x Asset Turnover x Equity Multiplier)
+- **Working Capital Efficiency:** DSO, DIO, DPO, Cash Conversion Cycle
+- **Earnings Quality:** Accruals ratio analysis
 
 ### Tech Analysis (`src/TechAnalysis.tsx`)
 Technical indicator dashboard using TAAPI.io bulk endpoint.
@@ -89,7 +96,7 @@ Dividend history and sustainability analysis via Massive API.
 - **Data:** 40 payments fetched for CAGR accuracy, special dividends excluded from growth calculations
 
 ### Global Features
-- **Sidebar Navigation:** Grouped into Valuation (DCF, Comp, Grade), Market Data (Tech, Earnings, Insider, News), Tools (Portfolio, Dividends)
+- **Sidebar Navigation:** Grouped into Valuation (DCF, Comp, Quality), Market Data (Tech, Earnings, Insider, News), Tools (Portfolio, Dividends)
 - **Dark Theme:** Slate-900 background throughout
 - **localStorage Caching:** Versioned keys with `safeSetItem` eviction on quota exceeded
 - **Clear Cache:** Button in sidebar to purge all cached data
@@ -105,9 +112,9 @@ Vertical sidebar (w-52) with grouped nav (Valuation | Market Data | Tools). Each
 
 | Tab | File | Color |
 |-----|------|-------|
-| DCF Valuation | `src/App.tsx` (inline) | emerald |
+| DCF Valuation | `src/dcf/index.tsx` | emerald |
 | Comp Analysis | `src/CompAnalysis.tsx` | blue |
-| Company Grade | `src/CompanyGrade.tsx` | amber |
+| Quality Analysis | `src/quality-analysis/index.tsx` | amber |
 | Tech Analysis | `src/TechAnalysis.tsx` | violet |
 | Earnings | `src/EarningsEstimates.tsx` | cyan |
 | Insider/Inst. | `src/InsiderInstitutional.tsx` | orange |
@@ -120,8 +127,16 @@ This application is configured for deployment on Netlify.
 
 ## API Constraints
 
-### Finnhub (free tier)
-Usable: `/stock/financials-reported`, `/stock/profile2`, `/stock/metric`, `/stock/quote`, `/stock/peers`, `/stock/price-target`, `/stock/insider-transactions`, `/company-news`, `/news-sentiment`
+### Financial Modeling Prep (FMP) — financial statements only (DCF + Quality Analysis)
+Free tier: 250 calls/day. Used for the 3 financial statement endpoints (3 FMP calls per ticker, cached 24h).
+Endpoints: `/stable/income-statement`, `/stable/balance-sheet-statement`, `/stable/cash-flow-statement`
+**Both DCF and Quality Analysis are restricted to ~87 pre-selected tickers** defined in `SUPPORTED_TICKERS` (src/dcf/types.ts).
+Both DCF and Quality Analysis share the same cache key `fmp_{sym}_dcf_v1` — NEVER bump the version.
+DO NOT use FMP for profile, price targets, or any non-statement data — use Finnhub instead.
+
+### Finnhub (free tier) — all modules + DCF profile/metrics
+Usable: `/stock/profile2`, `/stock/metric`, `/stock/quote`, `/stock/peers`, `/stock/price-target`, `/stock/insider-transactions`, `/company-news`, `/news-sentiment`
+DCF uses Finnhub for: `/stock/profile2` (name, industry, mktCap, shares), `/stock/metric` (beta), `/stock/price-target` (analyst consensus).
 **DO NOT USE (premium)**: `/stock/eps-estimate`, `/stock/revenue-estimate`, `/stock/eps-surprise`, `/stock/dividends2`, `/stock/ownership`, `/stock/earnings-quality`
 
 ### Other APIs
@@ -132,16 +147,18 @@ Usable: `/stock/financials-reported`, `/stock/profile2`, `/stock/metric`, `/stoc
 
 ## Code Conventions
 - No emoji in code or UI unless the user asks
-- localStorage caching with versioned keys (e.g. `news_AAPL_v2`). Bump suffix when data logic changes.
-- `safeSetItem()` evicts cache on QuotaExceededError — prefixes: `finnhub_`, `valuwise_`, `tech_`, `earnings_`, `insider_`, `news_`, `dividend_`
+- localStorage caching with versioned keys (e.g. `news_AAPL_v2`). Bump suffix when data logic changes — **except** `fmp_{sym}_dcf_v1` which must stay at `v1` (shared across DCF and Quality Analysis).
+- `safeSetItem()` evicts cache on QuotaExceededError — prefixes: `finnhub_`, `fmp_`, `valuwise_`, `tech_`, `earnings_`, `insider_`, `news_`, `dividend_`
 - All `JSON.parse` from localStorage must be wrapped in try/catch
-- EBIT fallback chain: OperatingIncomeLoss -> EBT+IntExp-IntInc -> GrossProfit-SGA-RD (apply in BOTH historicalSummary loop AND DCF useMemo baseEbit)
+- DCF uses FMP standardized fields (no XBRL concept matching) — `operatingIncome`, `depreciationAndAmortization`, `capitalExpenditure`, etc.
 - Page centering: root `max-w-5xl mx-auto`, then title/form/loading/error/hint each need `max-w-xl mx-auto`
 - Chart legend click isolation: EVERY Recharts chart (existing and new) MUST implement legend click isolation using `hiddenSeries` state + `handleLegendClick(d, chartKeys)` pattern with `hide` prop on ALL Line/Bar/Area elements
 - Gemini JSON mode: use `generationConfig: { responseMimeType: 'application/json' }` + fallback regex `/\{[\s\S]*\}/`
 
 ## Common Pitfalls
-- Stale cache showing 0 values: bump cache key version
-- EBIT=0 for some companies (e.g. SHW): missing fallback chain — must be in both places
+- Stale cache showing 0 values: bump cache key version (except `fmp_*_dcf_v1` — never bump)
+- FMP returns `capitalExpenditure` as negative — always use `Math.abs()`
+- DCF profile data comes from Finnhub: `marketCapitalization` is in millions (multiply by 1e6), `shareOutstanding` is in millions (multiply by 1e6)
+- FMP `fiscalYear` field is used for year labels (not `calendarYear`)
 - Payout ratio inflation: use Finnhub's `dividendsPerShareAnnual` from `/stock/metric`, not a 365-day rolling window (can capture 5 quarterly payments)
 - Gemini model 404: older model IDs deprecated for new API keys — use `gemini-2.5-flash`

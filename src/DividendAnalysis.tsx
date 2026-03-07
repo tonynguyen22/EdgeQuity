@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Search, AlertCircle, TrendingUp, TrendingDown, Shield, CheckCircle, XCircle, AlertTriangle } from 'lucide-react';
 
-const FINNHUB_KEY = 'ctj1dchr01qgfbsvp4mgctj1dchr01qgfbsvp4n0';
+const FINNHUB_KEY = process.env.FINNHUB_API_KEY;
 const FINNHUB_URL = 'https://finnhub.io/api/v1';
-const MASSIVE_KEY = 'M8zhNduoGphylrTzDQwdpDqz1E35B7Qx';
+const MASSIVE_KEY = process.env.MASSIVE_API_KEY;
 const MASSIVE_DIV_URL = 'https://api.massive.com/stocks/v1/dividends';
 
 const safeJson = async (res: Response): Promise<any> => {
@@ -33,7 +33,7 @@ function safeSetItem(key: string, value: string) {
 }
 
 function clearCache() {
-  const prefixes = ['finnhub_', 'valuwise_', 'tech_', 'earnings_', 'insider_', 'news_', 'dividend_', 'portfolio_profile_'];
+  const prefixes = ['finnhub_', 'valuwise_', 'tech_', 'earnings_', 'insider_', 'news_', 'dividend_'];
   Object.keys(localStorage).filter(k => prefixes.some(p => k.startsWith(p))).forEach(k => localStorage.removeItem(k));
 }
 

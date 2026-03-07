@@ -1,5 +1,5 @@
 import React from 'react';
-import { Activity, Users, Award, TrendingUp, BarChart2, Eye, Newspaper, Briefcase, Coins } from 'lucide-react';
+import { Activity, Users, Award, BarChart3, TrendingUp, BarChart2, Eye, Newspaper, Coins } from 'lucide-react';
 import type { TabId } from '../types';
 
 interface LandingPageProps {
@@ -14,7 +14,7 @@ export default function LandingPage({ onTabChange }: LandingPageProps) {
           Professional <span className="text-emerald-500">Equity Research</span> Platform
         </h1>
         <p className="text-lg text-slate-400 max-w-2xl mx-auto">
-          A full suite of stock analysis tools — valuation models, market data, insider activity, news sentiment, portfolio tracking, and more.
+          A full suite of stock analysis tools — valuation models, market data, insider activity, news sentiment, and more.
         </p>
       </div>
 
@@ -28,13 +28,13 @@ export default function LandingPage({ onTabChange }: LandingPageProps) {
           <p className="text-slate-400 text-xs leading-relaxed">Project free cash flows, terminal value, and WACC to get an intrinsic price per share.</p>
         </button>
 
-        <button onClick={() => onTabChange('comp')}
-          className="bg-slate-800/50 border border-slate-700/50 rounded-2xl p-5 space-y-2.5 hover:bg-slate-800 hover:border-blue-500/50 transition-all group text-left">
-          <div className="w-9 h-9 bg-blue-500/10 rounded-lg flex items-center justify-center group-hover:bg-blue-500/20 transition-colors">
-            <Users className="w-5 h-5 text-blue-500" />
+        <button onClick={() => onTabChange('multiples')}
+          className="bg-slate-800/50 border border-slate-700/50 rounded-2xl p-5 space-y-2.5 hover:bg-slate-800 hover:border-pink-500/50 transition-all group text-left">
+          <div className="w-9 h-9 bg-pink-500/10 rounded-lg flex items-center justify-center group-hover:bg-pink-500/20 transition-colors">
+            <BarChart3 className="w-5 h-5 text-pink-500" />
           </div>
-          <h3 className="text-base font-semibold text-white">Peer Analysis</h3>
-          <p className="text-slate-400 text-xs leading-relaxed">Compare EV/EBITDA, P/E and other multiples against manually selected peers.</p>
+          <h3 className="text-base font-semibold text-white">Multiples Analysis</h3>
+          <p className="text-slate-400 text-xs leading-relaxed">Historical P/E, EV/EBITDA, P/B and more with 5-year trends and valuation context.</p>
         </button>
 
         <button onClick={() => onTabChange('grade')}
@@ -42,8 +42,17 @@ export default function LandingPage({ onTabChange }: LandingPageProps) {
           <div className="w-9 h-9 bg-amber-500/10 rounded-lg flex items-center justify-center group-hover:bg-amber-500/20 transition-colors">
             <Award className="w-5 h-5 text-amber-500" />
           </div>
-          <h3 className="text-base font-semibold text-white">Company Grade</h3>
-          <p className="text-slate-400 text-xs leading-relaxed">Letter-grade report card (A–D) across financial health, profitability, growth, and cash flow.</p>
+          <h3 className="text-base font-semibold text-white">Quality Analysis</h3>
+          <p className="text-slate-400 text-xs leading-relaxed">Financial quality report (A-D) with Piotroski, Altman Z, DuPont, and earnings quality.</p>
+        </button>
+
+        <button onClick={() => onTabChange('comp')}
+          className="bg-slate-800/50 border border-slate-700/50 rounded-2xl p-5 space-y-2.5 hover:bg-slate-800 hover:border-blue-500/50 transition-all group text-left">
+          <div className="w-9 h-9 bg-blue-500/10 rounded-lg flex items-center justify-center group-hover:bg-blue-500/20 transition-colors">
+            <Users className="w-5 h-5 text-blue-500" />
+          </div>
+          <h3 className="text-base font-semibold text-white">Peer Analysis</h3>
+          <p className="text-slate-400 text-xs leading-relaxed">Compare EV/EBITDA, P/E and other multiples against manually selected peers.</p>
         </button>
 
         <button onClick={() => onTabChange('tech')}
@@ -82,15 +91,6 @@ export default function LandingPage({ onTabChange }: LandingPageProps) {
           <p className="text-slate-400 text-xs leading-relaxed">Latest headlines with AI-powered news summary and sentiment analysis.</p>
         </button>
 
-        <button onClick={() => onTabChange('portfolio')}
-          className="bg-slate-800/50 border border-slate-700/50 rounded-2xl p-5 space-y-2.5 hover:bg-slate-800 hover:border-indigo-500/50 transition-all group text-left">
-          <div className="w-9 h-9 bg-indigo-500/10 rounded-lg flex items-center justify-center group-hover:bg-indigo-500/20 transition-colors">
-            <Briefcase className="w-5 h-5 text-indigo-500" />
-          </div>
-          <h3 className="text-base font-semibold text-white">Portfolio Tracker</h3>
-          <p className="text-slate-400 text-xs leading-relaxed">Track multiple holdings with live prices, weights, P&amp;L, and diversification grade.</p>
-        </button>
-
         <button onClick={() => onTabChange('dividend')}
           className="bg-slate-800/50 border border-slate-700/50 rounded-2xl p-5 space-y-2.5 hover:bg-slate-800 hover:border-rose-500/50 transition-all group text-left">
           <div className="w-9 h-9 bg-rose-500/10 rounded-lg flex items-center justify-center group-hover:bg-rose-500/20 transition-colors">
@@ -106,9 +106,9 @@ export default function LandingPage({ onTabChange }: LandingPageProps) {
           <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" />
         </svg>
         <div>
-          <p className="text-sm font-medium text-amber-400 mb-0.5">US-Listed Stocks Only (DCF, Peers, Grade)</p>
+          <p className="text-sm font-medium text-amber-400 mb-0.5">Supported Tickers</p>
           <p className="text-sm text-slate-400 leading-relaxed">
-            Valuation tools require SEC filings (NYSE / NASDAQ). Market data tabs (Technical, Earnings, News, Dividends) work with any Finnhub-supported ticker.
+            DCF Valuation, Quality Analysis, and Multiples Analysis use Financial Modeling Prep and are restricted to ~87 pre-selected tickers. Peers use Finnhub (US-listed only). Market data tabs work with any supported ticker.
           </p>
         </div>
       </div>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { TrendingUp, Home, Activity, Users, Award, BarChart2, Eye, Newspaper, Coins, Briefcase, Trash2, FileSpreadsheet } from 'lucide-react';
+import { TrendingUp, Home, Activity, Users, Award, BarChart3, BarChart2, Eye, Newspaper, Coins, Trash2 } from 'lucide-react';
 import type { TabId } from '../types';
 
 interface SidebarProps {
@@ -40,9 +40,9 @@ export default function Sidebar({ showLanding, activeTab, cacheCleared, onShowLa
         </div>
         {([
           { id: 'dcf', label: 'DCF Analysis', Icon: Activity, active: 'text-emerald-400' },
-          { id: 'financials', label: 'Financials', Icon: FileSpreadsheet, active: 'text-teal-400' },
+          { id: 'multiples', label: 'Multiples Analysis', Icon: BarChart3, active: 'text-pink-400' },
+          { id: 'grade', label: 'Quality Analysis', Icon: Award, active: 'text-amber-400' },
           { id: 'comp', label: 'Peers Analysis', Icon: Users, active: 'text-blue-400' },
-          { id: 'grade', label: 'Company Grade', Icon: Award, active: 'text-amber-400' },
         ] as const).map(({ id, label, Icon, active }) => (
           <button
             key={id}
@@ -74,16 +74,6 @@ export default function Sidebar({ showLanding, activeTab, cacheCleared, onShowLa
           </button>
         ))}
 
-        <div className="pt-3 pb-1 px-3">
-          <span className="text-xs font-semibold text-slate-600 uppercase tracking-wider">Tools</span>
-        </div>
-        <button
-          onClick={() => onTabChange('portfolio')}
-          className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm transition-colors ${activeTab === 'portfolio' && !showLanding ? 'bg-slate-800 text-indigo-400' : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/50'}`}
-        >
-          <Briefcase className="w-4 h-4 shrink-0" />
-          Portfolio
-        </button>
       </nav>
 
       {/* Clear Cache */}

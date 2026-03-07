@@ -10,6 +10,13 @@ export default defineConfig(({ mode }) => {
     define: {
       'process.env.GEMINI_API_KEY': JSON.stringify(env.GEMINI_API_KEY),
       'process.env.FINNHUB_API_KEY': JSON.stringify(env.FINNHUB_API_KEY),
+      'process.env.FMP_API_KEY': JSON.stringify(env.FMP_API_KEY),
+      'process.env.API_NINJAS_KEY': JSON.stringify(env.API_NINJAS_KEY),
+      'process.env.MASSIVE_API_KEY': JSON.stringify(env.MASSIVE_API_KEY),
+      'process.env.POLYGON_API_KEY': JSON.stringify(env.POLYGON_API_KEY),
+      'process.env.TWELVE_API_KEY': JSON.stringify(env.TWELVE_API_KEY),
+      'process.env.ALPHAVANTAGE_API_KEY': JSON.stringify(env.ALPHAVANTAGE_API_KEY),
+      'process.env.TAAPI_API_KEY': JSON.stringify(env.TAAPI_API_KEY),
     },
     resolve: {
       alias: {

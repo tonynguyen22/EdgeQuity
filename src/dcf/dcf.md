@@ -1,6 +1,13 @@
 # `src/dcf/` — DCF Valuation Module
 
-This folder is the **main entry point** for ValuWise. It was refactored from a single 2,100-line `dcf.tsx` monolith into a modular structure with separated concerns: a pure calculation engine, a data-fetching hook, formatting utilities, export utilities, and focused UI components — all orchestrated by a slim `index.tsx` app shell.
+This folder is the **main entry point** for ValuWise. It was refactored from a single monolith into a modular structure with separated concerns: a pure calculation engine, a data-fetching hook, formatting utilities, export utilities, and focused UI components — all orchestrated by a slim `index.tsx` app shell.
+
+**Data Sources:**
+- **Financial Statements:** Financial Modeling Prep (FMP) `/stable/` API — income statement, balance sheet, cash flow (3 calls). This provides standardized field names across all companies.
+- **Company Profile / Metrics:** Finnhub `/stock/profile2` and `/stock/metric` — company name, industry, beta, market cap, shares outstanding.
+- **Analyst Targets:** Finnhub `/stock/price-target` (non-blocking, optional).
+
+**Supported Tickers:** The DCF module is restricted to ~87 pre-selected tickers defined in `SUPPORTED_TICKERS` (types.ts). The search UI uses a filterable dropdown — free-text entry of unsupported tickers is not allowed.
 
 ---
 
@@ -10,10 +17,10 @@ This folder is the **main entry point** for ValuWise. It was refactored from a s
 src/dcf/
 ├── index.tsx                    # App shell — state, routing, chart JSX
 ├── dcf.md                       # This document
-├── types.ts                     # All TypeScript interfaces & types
+├── types.ts                     # All TypeScript interfaces & types + SUPPORTED_TICKERS
 ├── calculations.ts              # Pure computeDCF() engine (no React deps)
 ├── hooks/
-│   └── useDCFData.ts            # Finnhub data fetching + localStorage caching
+│   └── useDCFData.ts            # FMP + Finnhub data fetching + localStorage caching
 ├── utils/
 │   ├── formatters.ts            # parseNum, formatCurrency, formatPct, …
 │   ├── storage.ts               # safeSetItem, clearAllCache
@@ -24,7 +31,7 @@ src/dcf/
     ├── LandingPage.tsx          # Hero landing page with 9 feature cards
     ├── AssumptionSliders.tsx    # 12 DCF input sliders + scenario presets
     ├── ForecastTable.tsx        # N-year projection table + export buttons
-    └── HistoricalTables.tsx     # Historical income / balance / cash flow tables
+    └── HistoricalTables.tsx     # Historical income / balance / cash flow / ratios tables
 ```
 
 ---
@@ -32,8 +39,8 @@ src/dcf/
 ## Data Flow
 
 ```
-User enters ticker
-  → useDCFData(ticker)         Fetches Finnhub APIs, caches result for 24 h
+User selects ticker from dropdown (SUPPORTED_TICKERS)
+  → useDCFData(ticker)         Fetches FMP (3 stmt) + Finnhub (profile, metrics, analyst)
   → computeDCF(data, inputs)   Pure calculation → DCFResult
   → index.tsx useMemo          Re-runs on any slider input change
   → React components           Render charts, tables, sliders
@@ -41,40 +48,24 @@ User enters ticker
 
 ---
 
-## File Reference
+## API Calls per Ticker (5 total)
 
-### `index.tsx` — App Shell
+| # | Source | Endpoint | Purpose |
+|---|--------|----------|---------|
+| 1 | FMP | `/stable/income-statement?period=annual&limit=5` | Revenue, EBIT, D&A, tax, net income, EPS, shares |
+| 2 | FMP | `/stable/balance-sheet-statement?period=annual&limit=5` | Cash, debt, equity, receivables, inventory, payables — full detail |
+| 3 | FMP | `/stable/cash-flow-statement?period=annual&limit=5` | CFO, CapEx, FCF, SBC, buybacks, dividends, investing — full detail |
+| 4 | Finnhub | `/stock/profile2` | Company name, finnhubIndustry, marketCapitalization, shareOutstanding |
+| 5 | Finnhub | `/stock/metric?metric=all` | Beta, additional financial metrics |
+| +1 | Finnhub | `/stock/price-target` | Analyst consensus target (non-blocking, optional) |
 
-The root component exported to `src/main.tsx`. Manages all application state, routes between tabs, and renders the DCF view.
+**API Keys:** `process.env.FMP_API_KEY` and `process.env.FINNHUB_API_KEY` — injected by Vite `define` from `.env`.
 
-**State** (3 grouped objects replacing 22+ individual hooks):
-- `appState` — `{ tickerInput, ticker, showLanding, activeTab, cacheCleared }`
-- `dcfInputs` — 12 slider values (`revGrowthStart`, `revGrowthEnd`, `ebitMarginStart`, `ebitMarginEnd`, `termGrowth`, `waccAdj`, `erp`, `dnaMarginProj`, `wcMarginProj`, `capexMarginProj`, `sharesGrowthProj`, `forecastYears`)
-- `uiState` — `{ formatUnit: 'M' | 'B', hiddenSeries: Record<string, boolean> }`
-
-**Handlers:**
-- `handleSearch` — validates and sets the active ticker
-- `handleGoBack` — resets ticker and calls `reset()` from the data hook
-- `handleTabChange` — switches the active tab
-- `handleClearCache` — calls `clearAllCache()` and flags the UI
-- `handleLegendClick` — toggles chart series visibility (`hiddenSeries`)
-- `applyScenario(type)` — patches `dcfInputs` with Bear/Base/Bull presets
-- `handleInputChange(patch)` — partial-updates `dcfInputs`
-
-**Derived memos:**
-- `dcf` — `computeDCF(data, dcfInputs)` (null when no ticker loaded)
-- `activeScenario` — Bear/Base/Bull/Custom label based on current inputs
-- `scenarioComparison` — runs `computeDCF` for all 3 scenarios
-- `bridgeData` — valuation bridge breakdown (PV FCFFs → TV → EV → equity → per share)
-- `reverseDcf` — implied terminal growth rate at current market price
-
-**Auto-fill `useEffect`:** when a ticker first loads, populates sliders with historical metrics (5yr CAGR → `revGrowthStart`, 3yr CAGR → `revGrowthEnd`, trailing EBIT margin → both margin sliders, etc.).
-
-**Chart JSX (inline in `index.tsx`):** FCFF bar chart, historical margin/revenue charts, capital allocation chart, valuation bridge chart, sensitivity matrix, scenario comparison table.
-
-**Sibling tab imports** use `'../CompAnalysis'` etc. (relative to `src/dcf/`).
+**FMP Rate Limit:** 250 calls/day on free tier. With `limit=5` and 24h caching, typical usage is well within limits. Each ticker uses 3 FMP calls.
 
 ---
+
+## File Reference
 
 ### `types.ts` — TypeScript Interfaces
 
@@ -86,14 +77,21 @@ All shared types for the DCF module.
 | `FormatUnit` | `'M' \| 'B'` for currency display |
 | `ScenarioType` | `'bull' \| 'base' \| 'bear' \| 'custom'` |
 | `DCFInputs` | 12 slider input parameters |
-| `HistoricalYear` | 60+ per-year financial metrics |
-| `ProjectionYear` | 10 per-year forecast metrics (revenue, FCFF, discount factor, etc.) |
+| `HistoricalYear` | Per-year financial metrics (expanded — income stmt, balance sheet, cash flow, ratios) |
+| `ProjectionYear` | Per-year forecast metrics |
 | `DCFResult` | Complete valuation output including sensitivity matrix |
 | `ScenarioResult` | Implied price + upside for one scenario |
 | `ScenarioComparison` | `{ bear, base, bull: ScenarioResult }` |
 | `BridgeItem` | One row in the valuation bridge |
 | `AnalystTarget` | `{ mean, high, low }` analyst price targets |
-| `FinancialData` | `{ financials, profile, metrics }` raw Finnhub response |
+| `FMPIncomeStatement` | Full FMP income statement response (all fields) |
+| `FMPBalanceSheet` | Full FMP balance sheet response (all fields) |
+| `FMPCashFlow` | Full FMP cash flow response (all fields) |
+| `FinancialData` | `{ incomeStatements, balanceSheets, cashFlows, profile, metrics }` |
+| `SUPPORTED_TICKERS` | Const array of ~87 allowed ticker symbols |
+| `SupportedTicker` | Union type derived from SUPPORTED_TICKERS |
+
+Note: `profile` and `metrics` are typed as `any` since they come from Finnhub (flexible shape).
 
 ---
 
@@ -101,20 +99,38 @@ All shared types for the DCF module.
 
 No React imports. All exports are pure functions safe for unit testing.
 
+**Key advantage:** FMP provides standardized field names (`revenue`, `operatingIncome`, `depreciationAndAmortization`, etc.) across all companies. No concept-matching or XBRL parsing required.
+
 **Exports:**
-- `findConcept(section, concepts)` — searches an XBRL section for the first matching concept key
-- `findConceptByLabel(section, keywords)` — fallback search by label string
-- `REV_CONCEPTS` — ordered revenue XBRL fallback array (us-gaap + ifrs-full variants)
 - `computeDCF(data: FinancialData, inputs: DCFInputs): DCFResult`
 
 **`computeDCF` logic:**
-1. Extracts 5–6 years of historical data from XBRL reports
-2. Applies EBIT fallback chain: `OperatingIncomeLoss` → `EBT+IntExp-IntInc` → `GrossProfit-SGA-RD`
-3. Computes WACC using CAPM (`beta × ERP + risk-free`) + after-tax debt cost
-4. Projects N-year revenue/EBIT/FCFF with linearly tapering growth rates
-5. Calculates terminal value via Gordon Growth Model
-6. Builds 5×5 sensitivity matrix (Terminal Growth % vs WACC adjustment)
-7. Returns intrinsic value per share and upside/downside %
+1. Reads up to 5 years of historical data from FMP income statements, balance sheets, and cash flows
+2. Computes historical metrics (margins, ratios, CAGR) via direct field access
+3. Gets beta from Finnhub `metrics`, marketCap from Finnhub `profile.marketCapitalization` (in millions, × 1e6)
+4. Computes WACC using CAPM (`beta × ERP + risk-free`) + after-tax debt cost
+5. Projects N-year revenue/EBIT/FCFF with linearly tapering growth rates
+6. Calculates terminal value via Gordon Growth Model
+7. Builds 5×5 sensitivity matrix (Terminal Growth % vs WACC adjustment)
+8. Returns intrinsic value per share and upside/downside %
+
+**Profile/Market data (Finnhub):**
+- Beta: `metrics.beta`
+- Market Cap: `profile.marketCapitalization * 1e6` (Finnhub reports in millions)
+- Shares: `profile.shareOutstanding * 1e6` (Finnhub reports in millions)
+- Industry: `profile.finnhubIndustry` (for financial sector detection)
+
+**Historical field mapping (FMP → calculation):**
+- Revenue: `ic.revenue`
+- Operating Income (EBIT): `ic.operatingIncome`
+- D&A: `ic.depreciationAndAmortization` (fallback: `cf.depreciationAndAmortization`)
+- CapEx: `Math.abs(cf.capitalExpenditure)` (FMP reports as negative)
+- Tax: `ic.incomeTaxExpense`
+- Interest Expense: `Math.abs(ic.interestExpense)`
+- Cash: `bs.cashAndCashEquivalents`
+- Total Debt: `bs.totalDebt` (fallback: `bs.shortTermDebt + bs.longTermDebt`)
+- Working Capital: `bs.netReceivables + bs.inventory - bs.accountPayables`
+- Shares: `ic.weightedAverageShsOut`
 
 ---
 
@@ -124,24 +140,44 @@ No React imports. All exports are pure functions safe for unit testing.
 useDCFData(symbol: string): {
   data: FinancialData | null;
   loading: boolean;
-  error: string | null;
+  error: string;
   analystTarget: AnalystTarget | null;
   refetch: () => void;
   reset: () => void;
 }
 ```
 
-**Fetches (Finnhub free tier):**
-- `/stock/financials-reported` — XBRL-reported income, balance, cash flow
-- `/stock/profile2` — company name, industry, country
-- `/stock/metric` — beta, EPS, dividend yield, etc.
-- `/stock/price-target` — analyst consensus targets
+**Fetches (5 parallel calls):**
+- FMP `/stable/income-statement` (5 years)
+- FMP `/stable/balance-sheet-statement` (5 years)
+- FMP `/stable/cash-flow-statement` (5 years)
+- Finnhub `/stock/profile2` (company name, mktCap, shares, industry)
+- Finnhub `/stock/metric?metric=all` (beta, additional metrics)
 
-**Caching:** 24-hour TTL in localStorage, key `finnhub_{symbol}_financials_v2`. Uses `safeSetItem` for quota safety.
+**Analyst target** (separate non-blocking call): Finnhub `/stock/price-target`
 
-**API key:** `process.env.FINNHUB_API_KEY` — injected by Vite `define` from `.env`.
+**Caching:** 24-hour TTL in localStorage, key `fmp_{symbol}_dcf_v1`. Uses `safeSetItem` for quota safety.
+
+> **Rule: NEVER bump the cache key version.** Keep it as `v1` permanently. The same cache key is shared with CompanyGrade so both tabs benefit from a single fetch. Bumping the version would orphan cached data across the app.
 
 **`reset()`** sets `data` to `null`, allowing `handleGoBack` to clear results without triggering a new fetch.
+
+---
+
+### `index.tsx` — App Shell
+
+The root component exported to `src/main.tsx`. Manages all application state, routes between tabs, and renders the DCF view.
+
+**Ticker Selection:** Uses a filterable dropdown combobox restricted to `SUPPORTED_TICKERS`. Users type to filter, then select a ticker. The Analyze button is disabled unless the input matches a supported ticker.
+
+**State** (3 grouped objects):
+- `appState` — `{ tickerInput, ticker, showLanding, activeTab, cacheCleared }`
+- `dcfInputs` — 12 slider values
+- `uiState` — `{ formatUnit: 'M' | 'B', hiddenSeries: Record<string, boolean> }`
+
+**Auto-fill `useEffect`:** when a ticker first loads, populates sliders with historical metrics (5yr CAGR → `revGrowthStart`, 3yr CAGR → `revGrowthEnd`, trailing EBIT margin → both margin sliders, etc.).
+
+**Chart JSX (inline):** FCFF bar chart, historical margin/revenue charts, capital allocation chart, valuation bridge chart, sensitivity matrix, scenario comparison table.
 
 ---
 
@@ -160,27 +196,13 @@ useDCFData(symbol: string): {
 ### `utils/storage.ts` — localStorage Helpers
 
 - **`safeSetItem(key, value)`** — wraps `localStorage.setItem`. On `QuotaExceededError`, calls `clearAllCache()` then retries once.
-- **`clearAllCache()`** — removes all keys starting with: `finnhub_`, `valuwise_`, `tech_`, `earnings_`, `insider_`, `news_`, `dividend_`, `portfolio_`, `edgar_`. Reloads the page after clearing.
+- **`clearAllCache()`** — removes all keys starting with: `finnhub_`, `fmp_`, `valuwise_`, `tech_`, `earnings_`, `insider_`, `news_`, `dividend_`, `edgar_`, `multiples_`. Reloads the page after clearing.
 
 ---
 
 ### `utils/print.ts` — Print / PDF Export
 
-```typescript
-printDCF(args: PrintDCFArgs): void
-```
-
-Generates a complete self-contained HTML document in a new browser window containing:
-- Header (ValuWise logo, ticker, scenario label, date, model type)
-- 3-card summary (intrinsic value, market price, upside %)
-- Key assumptions table (all 12 slider values)
-- Scenario comparison table (Bear / Base / Bull implied prices and upside)
-- N-year forecast model table (last 3 historical + all projected years)
-- Valuation bridge (PV FCFFs → Terminal Value → Enterprise Value → Equity → Per Share)
-- 5×5 sensitivity matrix with green/red color coding
-- Disclaimer footer
-
-Triggers `window.print()` automatically via an inline script.
+Generates a complete self-contained HTML document in a new browser window containing all DCF outputs. Data source labeled as "Financial Modeling Prep".
 
 ---
 
@@ -191,95 +213,43 @@ exportToExcel(data: FinancialData, ticker: string): void
 ```
 
 Uses the `xlsx` library to produce `{ticker}_Financials.xlsx` with 3 sheets:
-- **Income Statement** — Revenue, COGS, Gross Profit, Operating Expenses, Operating Income, Net Income
-- **Balance Sheet** — Cash, Receivables, Inventory, Assets, Payables, Liabilities, Equity
-- **Cash Flow** — Net Income, D&A, Operating CF, CapEx, Investing CF, Financing CF
-
-XBRL concept extraction uses `findConcept` imported from `calculations.ts` (no duplication).
-
----
-
-### `components/Sidebar.tsx`
-
-```typescript
-interface SidebarProps {
-  showLanding: boolean;
-  activeTab: TabId;
-  cacheCleared: boolean;
-  onShowLanding: () => void;
-  onTabChange: (tab: TabId) => void;
-  onClearCache: () => void;
-}
-```
-
-Sticky `w-52` left sidebar. Logo at top. Nav links grouped into:
-- **Valuation** — DCF, Comp Analysis, Company Grade
-- **Market Data** — Technical, Earnings, Insider/Inst., News
-- **Tools** — Portfolio, Dividends, Edgar
-
-Clear Cache button at the bottom.
-
----
-
-### `components/LandingPage.tsx`
-
-```typescript
-interface LandingPageProps {
-  onTabChange: (tab: TabId) => void;
-}
-```
-
-Near-static hero page shown before a ticker is searched. Displays title, subtitle, and 9 feature cards in a 3-column grid — one per analysis tab. Cards link to tabs via `onTabChange`.
-
----
-
-### `components/AssumptionSliders.tsx`
-
-```typescript
-interface AssumptionSlidersProps {
-  inputs: DCFInputs;
-  dcf: DCFResult;
-  activeScenario: ScenarioType;
-  onInputChange: (patch: Partial<DCFInputs>) => void;
-  onApplyScenario: (type: ScenarioType) => void;
-  onNewSearch: () => void;
-}
-```
-
-Left-column panel with all 12 DCF input sliders. Bear / Base / Bull scenario preset buttons auto-fill all sliders at once. `onInputChange` accepts a partial patch, keeping unrelated inputs unchanged.
-
----
-
-### `components/ForecastTable.tsx`
-
-```typescript
-interface ForecastTableProps {
-  dcf: DCFResult;
-  formatUnit: FormatUnit;
-  forecastYears: number;
-  onFormatUnitChange: (unit: FormatUnit) => void;
-  onPrint: () => void;
-  onExport: () => void;
-}
-```
-
-Tabular-nums formatted N-year projection table (Revenue, EBIT, D&A, CapEx, Tax, UFCF, Discount Factor, PV of UFCF). Header includes M/B toggle, Print button, and Excel export button.
+- **Income Statement** — Full detail: Revenue, COGS, Gross Profit, R&D, GA, SGA, Operating Expenses, Operating Income, EBIT, D&A, EBITDA, Interest, Tax, Net Income, EPS, Shares
+- **Balance Sheet** — Full detail: Cash, Investments, Receivables, Inventory, Current Assets, PP&E, Goodwill, Non-Current Assets, Total Assets, Payables, Debt, Liabilities, Equity, Net Debt
+- **Cash Flow** — Full detail: Net Income, D&A, SBC, Working Capital changes, CFO, CapEx, Acquisitions, Investments, CFI, Debt, Buybacks, Dividends, CFF, FCF, Taxes/Interest Paid
 
 ---
 
 ### `components/HistoricalTables.tsx`
 
-```typescript
-interface HistoricalTablesProps {
-  dcf: DCFResult;
-  formatUnit: FormatUnit;
-}
-```
+4 comprehensive tables from `dcf.historicalSummary`:
+- **Income Statement** — Revenue through EPS with section headers (Revenue, Operating Expenses, Operating Income, Below the Line, Per Share)
+- **Balance Sheet** — Full detail with sections (Current Assets, Non-Current Assets, Current Liabilities, Non-Current Liabilities, Equity, Summary)
+- **Cash Flow** — Full detail with sections (Operating Activities, Investing Activities, Financing Activities, Summary)
+- **Key Ratios** — Liquidity (Current/Quick), Leverage (D/E, Interest Coverage), Profitability (Margins, ROE, ROA, Tax Rate)
 
-Purely presentational. Renders 3 tables from `dcf.historicalSummary`:
-- Income Statement (Revenue through EPS)
-- Balance Sheet (Assets, Liabilities, Debt, Equity, Cash, Working Capital)
-- Cash Flow Statement (CFO, CFI, CFF, CapEx, Change in Cash)
+---
+
+### `components/Sidebar.tsx`
+
+Sticky `w-52` left sidebar. Logo at top. Nav links grouped into Valuation and Market Data. Clear Cache button at the bottom.
+
+---
+
+### `components/LandingPage.tsx`
+
+Near-static hero page shown before a ticker is searched. 9 feature cards in a 3-column grid.
+
+---
+
+### `components/AssumptionSliders.tsx`
+
+Left-column panel with all 12 DCF input sliders. Bear / Base / Bull scenario preset buttons.
+
+---
+
+### `components/ForecastTable.tsx`
+
+N-year projection table with M/B toggle, Print button, and Excel export button.
 
 ---
 
@@ -287,13 +257,13 @@ Purely presentational. Renders 3 tables from `dcf.historicalSummary`:
 
 ```
 src/main.tsx → dcf/index.tsx
-  ├── types.ts                (leaf — no imports)
+  ├── types.ts                (leaf — no imports except const exports)
   ├── calculations.ts         → types, utils/formatters
   ├── hooks/useDCFData.ts     → types, utils/storage
   ├── utils/formatters.ts     (leaf)
   ├── utils/storage.ts        (leaf)
   ├── utils/print.ts          → types
-  ├── utils/excel.ts          → utils/formatters, calculations
+  ├── utils/excel.ts          → types
   └── components/*            → types, utils/formatters
 ```
 
@@ -305,16 +275,20 @@ No circular dependencies.
 
 | Variable | Used In | Source |
 |---|---|---|
-| `FINNHUB_API_KEY` | `hooks/useDCFData.ts` | `.env` → Vite `define` block |
+| `FMP_API_KEY` | `hooks/useDCFData.ts` | `.env` → Vite `define` block |
+| `FINNHUB_API_KEY` | `hooks/useDCFData.ts` + other modules | `.env` → Vite `define` block |
 | `GEMINI_API_KEY` | `src/NewsSentiment.tsx` | `.env` → Vite `define` block |
 
-Both are injected at build time via `vite.config.ts`:
-```typescript
-define: {
-  'process.env.FINNHUB_API_KEY': JSON.stringify(env.FINNHUB_API_KEY),
-  'process.env.GEMINI_API_KEY': JSON.stringify(env.GEMINI_API_KEY),
-}
-```
+---
+
+## Supported Tickers
+
+The DCF module only supports a curated list of ~87 tickers. This restriction:
+1. Ensures FMP API call budget stays within the 250/day free tier limit (3 FMP calls per ticker)
+2. Guarantees standardized financial statement data is available for all tickers
+3. Covers major large-cap, mid-cap, and popular retail-investor stocks
+
+The full list is exported as `SUPPORTED_TICKERS` from `types.ts`.
 
 ---
 
@@ -324,11 +298,13 @@ define: {
 |---|---|
 | Intrinsic valuation | UFCF discounted at WACC + Gordon Growth terminal value |
 | WACC | CAPM (beta × ERP + risk-free rate) + after-tax debt cost |
-| EBIT fallback | `OperatingIncomeLoss` → `EBT+IntExp-IntInc` → `GrossProfit-SGA-RD` |
-| Scenario presets | Bear / Base / Bull auto-fill all 12 sliders |
+| Standardized data | FMP provides consistent field names — no XBRL concept matching |
+| Hybrid sourcing | FMP for financial statements, Finnhub for profile/beta/market data |
+| Scenario presets | Bear / Base / Bull auto-fill sliders; scenario comparison is dynamic (offsets from current inputs) |
 | Sensitivity matrix | 5×5 grid of implied share price vs Terminal Growth % and WACC |
 | Reverse DCF | Solves for implied terminal growth at current market price |
 | Valuation bridge | PV FCFFs + Terminal Value = EV → Equity → Per Share |
-| Charts | FCFF, margins, revenue/EBIT, capital allocation — all with legend click isolation |
+| Charts | FCFF, margins, revenue/EBIT — all with legend click isolation |
 | Print/PDF | Full-page report with all outputs, auto-triggers browser print dialog |
-| Excel export | 3-sheet `.xlsx` with 5–6 years of historical financials |
+| Excel export | 3-sheet `.xlsx` with full financial statement detail |
+| Historical tables | 4 detailed tables: Income Stmt, Balance Sheet, Cash Flow, Key Ratios |

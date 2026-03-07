@@ -3,12 +3,12 @@ import { IndicatorResult, Signal, TaapiSnap } from '../types';
 import { computeAllIndicators, computeSignal, fetchOHLCV, fetchTAAPI } from '../calculations';
 import { safeSetItem } from '../utils/storage';
 
-// ── API Keys ──────────────────────────────────────────────────────────────────
-const FINNHUB_KEY = 'ctj1dchr01qgfbsvp4mgctj1dchr01qgfbsvp4n0';
-const POLYGON_KEY = 'M8zhNduoGphylrTzDQwdpDqz1E35B7Qx';
-const TWELVE_KEY  = '97eed83076bf4f208812f013f332bad3';
-const AV_KEY      = 'RUIU5L10WQRWQLW1';
-const TAAPI_KEY   = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbHVlIjoiNjlhMjNiZGZlZTAzMzMxMWE0OGYzYzNmIiwiaWF0IjoxNzcyMjM5ODM5LCJleHAiOjMzMjc2NzAzODM5fQ.W_Y15aP16FJ1G4Ocsk7xEm69dLgplV887Wc-YEghbx8';
+// ── API Keys (from .env via Vite define) ───────────────────────────────────────
+const FINNHUB_KEY = process.env.FINNHUB_API_KEY;
+const POLYGON_KEY = process.env.POLYGON_API_KEY;
+const TWELVE_KEY  = process.env.TWELVE_API_KEY;
+const AV_KEY      = process.env.ALPHAVANTAGE_API_KEY;
+const TAAPI_KEY   = process.env.TAAPI_API_KEY;
 
 export interface UseTechDataResult {
   tickerInput: string;

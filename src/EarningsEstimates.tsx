@@ -1,106 +1,80 @@
 import React, { useState } from 'react';
-import { Search, AlertCircle, TrendingUp, TrendingDown, Minus, Calendar } from 'lucide-react';
+import { Search, AlertCircle, TrendingUp, TrendingDown, Minus } from 'lucide-react';
 
-const NINJAS_KEY = 'B6w1uEBi5PI0NJkm84RzikQ5qH4IC2fsZP1ejSvJ';
-const NINJAS_BASE = 'https://api.api-ninjas.com/v1';
-
-const safeJson = async (res: Response): Promise<any> => {
-  const text = await res.text();
-  if (!text || text.trim().startsWith('<')) throw new Error('API returned an error page.');
-  try {
-    const parsed = JSON.parse(text);
-    if (parsed?.error) throw new Error(parsed.error);
-    return parsed;
-  } catch (e: any) {
-    if (e.message && !e.message.startsWith('JSON')) throw e;
-    throw new Error('Invalid response from API.');
-  }
-};
+const FINNHUB_KEY = process.env.FINNHUB_API_KEY;
+const FINNHUB_URL = 'https://finnhub.io/api/v1';
 
 function safeSetItem(key: string, value: string) {
   try {
     localStorage.setItem(key, value);
   } catch (e) {
     if (e instanceof DOMException && e.name === 'QuotaExceededError') {
+      const prefixes = ['finnhub_', 'valuwise_', 'tech_', 'earnings_', 'insider_', 'news_', 'dividend_', 'multiples_'];
       Object.keys(localStorage)
-        .filter(k => k.startsWith('finnhub_') || k.startsWith('valuwise_') || k.startsWith('tech_') || k.startsWith('earnings_') || k.startsWith('insider_') || k.startsWith('news_') || k.startsWith('dividend_'))
+        .filter(k => prefixes.some(p => k.startsWith(p)))
         .forEach(k => localStorage.removeItem(k));
       try { localStorage.setItem(key, value); } catch { /* skip */ }
     }
   }
 }
 
-function clearCache() {
-  const prefixes = ['finnhub_', 'valuwise_', 'tech_', 'earnings_', 'insider_', 'news_', 'dividend_', 'portfolio_profile_'];
-  Object.keys(localStorage).filter(k => prefixes.some(p => k.startsWith(p))).forEach(k => localStorage.removeItem(k));
-}
-
-const fmtRev = (v: number | null) => {
-  if (v == null || v === 0) return '—';
-  if (Math.abs(v) >= 1e12) return `$${(v / 1e12).toFixed(2)}T`;
-  if (Math.abs(v) >= 1e9) return `$${(v / 1e9).toFixed(2)}B`;
-  return `$${(v / 1e6).toFixed(0)}M`;
-};
-
-const fmtDate = (s: string) => {
-  if (!s) return '—';
-  const d = new Date(s);
-  return isNaN(d.getTime()) ? s : d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-};
-
-const fmtQuarter = (s: string) => {
-  if (!s) return '—';
-  const d = new Date(s);
-  if (isNaN(d.getTime())) return s;
+const fmtQuarter = (period: string, quarter: number, year: number) => {
+  if (quarter && year) return `Q${quarter} ${year}`;
+  if (!period) return '-';
+  const d = new Date(period);
+  if (isNaN(d.getTime())) return period;
   return `Q${Math.ceil((d.getMonth() + 1) / 3)} ${d.getFullYear()}`;
 };
+
+interface EarningsRecord {
+  actual: number | null;
+  estimate: number | null;
+  period: string;
+  quarter: number;
+  surprise: number | null;
+  surprisePercent: number | null;
+  symbol: string;
+  year: number;
+}
 
 export default function EarningsEstimates() {
   const [input, setInput] = useState('');
   const [sym, setSym] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  const [data, setData] = useState<any>(null);
+  const [history, setHistory] = useState<EarningsRecord[]>([]);
 
   const fetchData = async (symbol: string) => {
     setLoading(true);
     setError('');
     try {
-      const cacheKey = `earnings_${symbol}_v3`;
+      const cacheKey = `earnings_${symbol}_v4`;
       const cached = localStorage.getItem(cacheKey);
       if (cached) {
         try {
           const { ts, d } = JSON.parse(cached);
-          if (Date.now() - ts < 6 * 60 * 60 * 1000) { setData(d); return; }
+          if (Date.now() - ts < 6 * 60 * 60 * 1000 && Array.isArray(d) && d.length > 0) {
+            setHistory(d);
+            return;
+          }
         } catch { localStorage.removeItem(cacheKey); }
       }
 
-      const [histRes, upcomingRes] = await Promise.all([
-        fetch(`${NINJAS_BASE}/earningscalendar?ticker=${symbol}`, { headers: { 'X-Api-Key': NINJAS_KEY } }),
-        fetch(`${NINJAS_BASE}/upcomingearnings?ticker=${symbol}`, { headers: { 'X-Api-Key': NINJAS_KEY } }),
-      ]);
+      const res = await fetch(`${FINNHUB_URL}/stock/earnings?symbol=${symbol}&limit=8&token=${FINNHUB_KEY}`);
+      if (!res.ok) throw new Error(`Finnhub request failed (${res.status}).`);
+      const data = await res.json();
 
-      const [histRaw, upcomingRaw] = await Promise.all([
-        safeJson(histRes).catch(() => []),
-        safeJson(upcomingRes).catch(() => []),
-      ]);
-
-      // Historical: past quarters with actual vs estimated
-      const history = (Array.isArray(histRaw) ? histRaw : [])
-        .filter((r: any) => r.actual_eps != null)
-        .sort((a: any, b: any) => new Date(b.date).getTime() - new Date(a.date).getTime());
-
-      // Upcoming: next scheduled earnings event for this ticker
-      const upcoming = (Array.isArray(upcomingRaw) ? upcomingRaw : [])
-        .find((r: any) => r.ticker?.toUpperCase() === symbol.toUpperCase()) ?? null;
-
-      if (!history.length && !upcoming) {
-        throw new Error(`No earnings data found for ${symbol}. Ensure it is a US-listed ticker with analyst coverage.`);
+      if (!Array.isArray(data) || data.length === 0) {
+        throw new Error(`No earnings data found for ${symbol}. Ensure it is a US-listed ticker.`);
       }
 
-      const d = { history, upcoming };
-      safeSetItem(cacheKey, JSON.stringify({ ts: Date.now(), d }));
-      setData(d);
+      // Finnhub returns newest first by default
+      const sorted = [...data].sort(
+        (a: EarningsRecord, b: EarningsRecord) => new Date(b.period).getTime() - new Date(a.period).getTime(),
+      );
+
+      safeSetItem(cacheKey, JSON.stringify({ ts: Date.now(), d: sorted }));
+      setHistory(sorted);
     } catch (e: any) {
       setError(e.message || 'Failed to fetch earnings data.');
     } finally {
@@ -114,33 +88,24 @@ export default function EarningsEstimates() {
     if (s) { setSym(s); fetchData(s); }
   };
 
-  const SurpriseBadge = ({ pct }: { pct: number }) => {
+  const SurpriseBadge = ({ pct }: { pct: number | null }) => {
+    if (pct == null) return <span className="text-slate-600">-</span>;
     if (Math.abs(pct) < 0.5) return <span className="text-slate-400 text-xs flex items-center gap-1"><Minus className="w-3 h-3" />In-line</span>;
     if (pct > 0) return <span className="text-emerald-400 text-xs flex items-center gap-1"><TrendingUp className="w-3 h-3" />+{pct.toFixed(1)}%</span>;
     return <span className="text-red-400 text-xs flex items-center gap-1"><TrendingDown className="w-3 h-3" />{pct.toFixed(1)}%</span>;
   };
 
-  const beats = data?.history.filter((r: any) => {
-    const spct = r.estimated_eps ? ((r.actual_eps - r.estimated_eps) / Math.abs(r.estimated_eps)) * 100 : 0;
-    return spct > 0.5;
-  }).length ?? 0;
-  const misses = data?.history.filter((r: any) => {
-    const spct = r.estimated_eps ? ((r.actual_eps - r.estimated_eps) / Math.abs(r.estimated_eps)) * 100 : 0;
-    return spct < -0.5;
-  }).length ?? 0;
-  const total = data?.history.length ?? 0;
+  const beats = history.filter(r => r.surprisePercent != null && r.surprisePercent > 0.5).length;
+  const misses = history.filter(r => r.surprisePercent != null && r.surprisePercent < -0.5).length;
+  const total = history.length;
 
-  // EPS Momentum: compare YoY growth of the 2 most recent quarters vs the 2 prior
-  // history is sorted newest-first; need 4+ quarters
+  // EPS Momentum: compare YoY growth of 2 most recent quarters vs 2 prior
   const epsMomentum = (() => {
-    const h = data?.history ?? [];
-    if (h.length < 4) return null;
-    // YoY growth for quarter i = (actual[i] - actual[i+4]) / |actual[i+4]|
-    // Recent = avg of quarters 0 and 1; Prior = avg of quarters 1 and 2
+    if (history.length < 4) return null;
     const yoy = (i: number) => {
-      if (i + 4 >= h.length) return null;
-      const base = h[i + 4]?.actual_eps;
-      const curr = h[i]?.actual_eps;
+      if (i + 4 >= history.length) return null;
+      const base = history[i + 4]?.actual;
+      const curr = history[i]?.actual;
       if (!base || base === 0 || curr == null) return null;
       return ((curr - base) / Math.abs(base)) * 100;
     };
@@ -154,17 +119,14 @@ export default function EarningsEstimates() {
     return { recentAvg, priorAvg, delta, trend };
   })();
 
-  // Earnings Quality Score: beat consistency + beat magnitude
+  // Earnings Quality Score
   const qualityScore = (() => {
-    if (!data?.history?.length) return null;
-    const h = data.history;
-    const surprises = h
-      .filter((r: any) => r.estimated_eps != null)
-      .map((r: any) => ((r.actual_eps - r.estimated_eps) / Math.abs(r.estimated_eps)) * 100);
-    if (surprises.length === 0) return null;
-    const avgSurprise = surprises.reduce((a: number, b: number) => a + b, 0) / surprises.length;
-    const beatRate = (surprises.filter((s: number) => s > 0.5).length / surprises.length) * 100;
-    // Score: beat rate weighted with avg surprise magnitude (capped at 20%)
+    if (!history.length) return null;
+    const withEstimate = history.filter(r => r.estimate != null && r.estimate !== 0);
+    if (withEstimate.length === 0) return null;
+    const surprises = withEstimate.map(r => r.surprisePercent ?? 0);
+    const avgSurprise = surprises.reduce((a, b) => a + b, 0) / surprises.length;
+    const beatRate = (surprises.filter(s => s > 0.5).length / surprises.length) * 100;
     const score = Math.round((beatRate * 0.6) + (Math.min(Math.max(avgSurprise, -20), 20) / 20) * 40 + 40);
     const clamped = Math.max(0, Math.min(100, score));
     const label = clamped >= 70 ? 'High Quality' : clamped >= 45 ? 'Average' : 'Low Quality';
@@ -175,7 +137,7 @@ export default function EarningsEstimates() {
     <div className="max-w-5xl mx-auto space-y-6">
       <div className="max-w-xl mx-auto">
         <h2 className="text-2xl font-bold text-white mb-1">Earnings Estimates</h2>
-        <p className="text-slate-400 text-sm">Recent EPS results, surprise history, and next earnings date.</p>
+        <p className="text-slate-400 text-sm">Recent EPS results and surprise history via Finnhub.</p>
       </div>
 
       <form onSubmit={handleSearch} className="max-w-xl mx-auto relative">
@@ -205,35 +167,12 @@ export default function EarningsEstimates() {
           <div>
             <p className="text-red-400 font-medium">Error</p>
             <p className="text-red-400/70 text-sm mt-0.5">{error}</p>
-            <button onClick={clearCache} className="mt-2 text-xs bg-slate-700 hover:bg-slate-600 text-slate-200 px-3 py-1.5 rounded-lg font-medium transition-colors">Clear Cache & Retry</button>
           </div>
         </div>
       )}
 
-      {data && (
+      {history.length > 0 && !loading && (
         <div className="space-y-8">
-          {/* Next Earnings */}
-          {data.upcoming && (
-            <div className="bg-cyan-500/10 border border-cyan-500/20 rounded-xl p-5 flex items-start gap-4">
-              <Calendar className="w-6 h-6 text-cyan-400 shrink-0 mt-0.5" />
-              <div>
-                <div className="text-xs text-cyan-400/70 uppercase tracking-wide mb-1 font-medium">Next Earnings</div>
-                <div className="text-xl font-bold text-white">{fmtDate(data.upcoming.date)}</div>
-                <div className="flex gap-6 mt-2 text-sm text-slate-400">
-                  {data.upcoming.eps_estimated != null && (
-                    <span>EPS Est. <span className="text-white font-semibold">${data.upcoming.eps_estimated.toFixed(2)}</span></span>
-                  )}
-                  {data.upcoming.revenue_estimated != null && (
-                    <span>Rev. Est. <span className="text-white font-semibold">{fmtRev(data.upcoming.revenue_estimated)}</span></span>
-                  )}
-                  {data.upcoming.exchange && (
-                    <span className="text-slate-600">{data.upcoming.exchange}</span>
-                  )}
-                </div>
-              </div>
-            </div>
-          )}
-
           {/* Beat/Miss Summary */}
           {total > 0 && (
             <div className="grid grid-cols-3 gap-3">
@@ -298,67 +237,69 @@ export default function EarningsEstimates() {
             </div>
           )}
 
-          {/* EPS Surprise History */}
-          {data.history.length > 0 && (
-            <div className="space-y-3">
-              <h3 className="text-base font-semibold text-slate-200">{sym} — EPS Results & Surprise History</h3>
-              <div className="overflow-x-auto rounded-xl border border-slate-700/50">
-                <table className="w-full text-sm">
-                  <thead>
-                    <tr className="bg-slate-800/60 text-slate-400 text-xs uppercase tracking-wide">
-                      <th className="text-left px-4 py-3 font-medium">Period</th>
-                      <th className="text-right px-4 py-3 font-medium">Actual EPS</th>
-                      <th className="text-right px-4 py-3 font-medium">Est. EPS</th>
-                      <th className="text-right px-4 py-3 font-medium">Actual Rev.</th>
-                      <th className="text-right px-4 py-3 font-medium">Est. Rev.</th>
-                      <th className="text-right px-4 py-3 font-medium">Surprise %</th>
-                      <th className="text-center px-4 py-3 font-medium">Result</th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-slate-800">
-                    {data.history.map((r: any, i: number) => {
-                      const spct = r.estimated_eps ? ((r.actual_eps - r.estimated_eps) / Math.abs(r.estimated_eps)) * 100 : 0;
-                      const beat = spct > 0.5;
-                      const miss = spct < -0.5;
-                      return (
-                        <tr key={i} className="hover:bg-slate-800/30 transition-colors">
-                          <td className="px-4 py-3 text-slate-300 font-medium">{fmtQuarter(r.date)}</td>
-                          <td className="px-4 py-3 text-right text-white font-semibold">
-                            {r.actual_eps != null ? `$${r.actual_eps.toFixed(2)}` : '—'}
-                          </td>
-                          <td className="px-4 py-3 text-right text-slate-300">
-                            {r.estimated_eps != null ? `$${r.estimated_eps.toFixed(2)}` : '—'}
-                          </td>
-                          <td className="px-4 py-3 text-right text-slate-300">{fmtRev(r.actual_revenue)}</td>
-                          <td className="px-4 py-3 text-right text-slate-500">{fmtRev(r.estimated_revenue)}</td>
-                          <td className="px-4 py-3 text-right">
-                            {r.estimated_eps != null ? <SurpriseBadge pct={spct} /> : <span className="text-slate-600">—</span>}
-                          </td>
-                          <td className="px-4 py-3 text-center">
-                            <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium ${beat ? 'bg-emerald-500/15 text-emerald-400' : miss ? 'bg-red-500/15 text-red-400' : 'bg-slate-700 text-slate-400'}`}>
-                              {beat ? 'Beat' : miss ? 'Miss' : 'In-line'}
+          {/* EPS Surprise History Table */}
+          <div className="space-y-3">
+            <h3 className="text-base font-semibold text-slate-200">{sym} — EPS Results &amp; Surprise History</h3>
+            <div className="overflow-x-auto rounded-xl border border-slate-700/50">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="bg-slate-800/60 text-slate-400 text-xs uppercase tracking-wide">
+                    <th className="text-left px-4 py-3 font-medium">Period</th>
+                    <th className="text-right px-4 py-3 font-medium">Actual EPS</th>
+                    <th className="text-right px-4 py-3 font-medium">Estimate</th>
+                    <th className="text-right px-4 py-3 font-medium">Surprise</th>
+                    <th className="text-right px-4 py-3 font-medium">Surprise %</th>
+                    <th className="text-center px-4 py-3 font-medium">Result</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-slate-800">
+                  {history.map((r, i) => {
+                    const pct = r.surprisePercent;
+                    const beat = pct != null && pct > 0.5;
+                    const miss = pct != null && pct < -0.5;
+                    return (
+                      <tr key={i} className="hover:bg-slate-800/30 transition-colors">
+                        <td className="px-4 py-3 text-slate-300 font-medium tabular-nums">{fmtQuarter(r.period, r.quarter, r.year)}</td>
+                        <td className="px-4 py-3 text-right text-white font-semibold tabular-nums">
+                          {r.actual != null ? `$${r.actual.toFixed(2)}` : '-'}
+                        </td>
+                        <td className="px-4 py-3 text-right text-slate-300 tabular-nums">
+                          {r.estimate != null ? `$${r.estimate.toFixed(2)}` : '-'}
+                        </td>
+                        <td className="px-4 py-3 text-right tabular-nums">
+                          {r.surprise != null ? (
+                            <span className={r.surprise > 0 ? 'text-emerald-400' : r.surprise < 0 ? 'text-red-400' : 'text-slate-400'}>
+                              {r.surprise > 0 ? '+' : ''}{r.surprise.toFixed(4)}
                             </span>
-                          </td>
-                        </tr>
-                      );
-                    })}
-                  </tbody>
-                </table>
-              </div>
-              <p className="text-xs text-slate-600">Showing {data.history.length} most recent quarters. Data via API Ninjas.</p>
+                          ) : <span className="text-slate-600">-</span>}
+                        </td>
+                        <td className="px-4 py-3 text-right">
+                          <SurpriseBadge pct={pct} />
+                        </td>
+                        <td className="px-4 py-3 text-center">
+                          <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium ${beat ? 'bg-emerald-500/15 text-emerald-400' : miss ? 'bg-red-500/15 text-red-400' : 'bg-slate-700 text-slate-400'}`}>
+                            {beat ? 'Beat' : miss ? 'Miss' : 'In-line'}
+                          </span>
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
             </div>
-          )}
+            <p className="text-xs text-slate-600">Showing {history.length} most recent quarters. Data via Finnhub.</p>
+          </div>
         </div>
       )}
 
-      {!data && !loading && !error && (
+      {history.length === 0 && !loading && !error && (
         <div className="max-w-xl mx-auto bg-slate-800/30 border border-slate-700/30 rounded-xl p-5 space-y-2">
           <p className="text-sm font-medium text-slate-300">What you'll see here</p>
           <ul className="space-y-1.5 text-xs text-slate-500">
-            <li className="flex items-start gap-2"><span className="text-cyan-500 mt-0.5">•</span>Next scheduled earnings date with estimated EPS and revenue</li>
-            <li className="flex items-start gap-2"><span className="text-cyan-500 mt-0.5">•</span>Historical EPS surprise — Beat/Miss/In-line vs. consensus</li>
-            <li className="flex items-start gap-2"><span className="text-cyan-500 mt-0.5">•</span>Actual vs. estimated revenue per quarter</li>
-            <li className="flex items-start gap-2"><span className="text-cyan-500 mt-0.5">•</span>Beat rate summary across recent quarters</li>
+            <li className="flex items-start gap-2"><span className="text-cyan-500 mt-0.5">*</span>Historical EPS surprise -- Beat/Miss/In-line vs. consensus</li>
+            <li className="flex items-start gap-2"><span className="text-cyan-500 mt-0.5">*</span>Actual vs. estimated EPS per quarter</li>
+            <li className="flex items-start gap-2"><span className="text-cyan-500 mt-0.5">*</span>Beat rate summary across recent quarters</li>
+            <li className="flex items-start gap-2"><span className="text-cyan-500 mt-0.5">*</span>EPS momentum and earnings quality score</li>
           </ul>
         </div>
       )}

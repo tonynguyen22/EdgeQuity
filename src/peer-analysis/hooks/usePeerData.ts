@@ -4,7 +4,7 @@ import { useState } from 'react';
 import type { PeerData, PeerSuggestion } from '../types';
 import { safeSetItem } from '../utils/storage';
 
-const API_KEY = 'ctj1dchr01qgfbsvp4mgctj1dchr01qgfbsvp4n0';
+const API_KEY = process.env.FINNHUB_API_KEY;
 const BASE_URL = 'https://finnhub.io/api/v1';
 
 /* ── fetchStockData (internal) ─────────────────────────────────────────── */
@@ -12,7 +12,7 @@ const BASE_URL = 'https://finnhub.io/api/v1';
 async function fetchStockData(symbol: string): Promise<PeerData | null> {
     if (!symbol) return null;
     try {
-        const cacheKey = `finnhub_${symbol}_comp_data_v4`;
+        const cacheKey = `finnhub_${symbol}_comp_data_v5`;
         const cached = localStorage.getItem(cacheKey);
         if (cached) {
             try {
@@ -56,8 +56,42 @@ async function fetchStockData(symbol: string): Promise<PeerData | null> {
         const bs = latestReport.bs;
         const cf = latestReport.cf;
 
-        const rev = findConcept(ic, ['us-gaap_RevenueFromContractWithCustomerExcludingAssessedTax', 'us-gaap_SalesRevenueNet', 'us-gaap_Revenues', 'ifrs-full_Revenue']);
-        const prevRev = prevReport ? findConcept(prevReport.ic, ['us-gaap_RevenueFromContractWithCustomerExcludingAssessedTax', 'us-gaap_SalesRevenueNet', 'us-gaap_Revenues', 'ifrs-full_Revenue']) : rev;
+        const getRevenue = (incomeStatement: any[] | undefined) => {
+            const directRevenue = findConcept(incomeStatement ?? [], [
+                'us-gaap_RevenueFromContractWithCustomerExcludingAssessedTax',
+                'us-gaap_SalesRevenueNet',
+                'us-gaap_Revenues',
+                'ifrs-full_Revenue',
+                'ifrs-full_RevenueFromContractsWithCustomers',
+            ]);
+            if (directRevenue > 0) return directRevenue;
+
+            // Banks/financials often report net interest + non-interest income instead of "Revenue".
+            const nonInterestIncome = findConcept(incomeStatement ?? [], [
+                'us-gaap_NoninterestIncome',
+                'ifrs-full_FeeAndCommissionIncome',
+            ]);
+            const netInterestIncome = findConcept(incomeStatement ?? [], [
+                'us-gaap_InterestIncomeExpenseNet',
+                'ifrs-full_NetInterestIncome',
+            ]);
+            const interestIncome = findConcept(incomeStatement ?? [], [
+                'us-gaap_InterestIncomeOperating',
+                'us-gaap_InterestAndDividendIncomeOperating',
+                'ifrs-full_InterestRevenueCalculatedUsingEffectiveInterestMethod',
+            ]);
+            const interestExpense = Math.abs(findConcept(incomeStatement ?? [], [
+                'us-gaap_InterestExpense',
+                'us-gaap_InterestAndDebtExpense',
+                'ifrs-full_FinanceCosts',
+            ]));
+            const derivedNetInterest = interestIncome > 0 ? Math.max(0, interestIncome - interestExpense) : 0;
+            const bankRevenue = nonInterestIncome + (netInterestIncome > 0 ? netInterestIncome : derivedNetInterest);
+            return bankRevenue > 0 ? bankRevenue : 0;
+        };
+
+        const rev = getRevenue(ic);
+        const prevRev = prevReport ? getRevenue(prevReport.ic) : rev;
         const revGrowth = prevRev ? (rev - prevRev) / prevRev : 0;
 
         let ebit = findConcept(ic, ['us-gaap_OperatingIncomeLoss', 'ifrs-full_ProfitLossFromOperatingActivities']);

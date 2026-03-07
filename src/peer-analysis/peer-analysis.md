@@ -112,7 +112,7 @@ Custom hook managing all peer analysis state and API calls.
 - `/stock/metric` — beta, EPS, dividend yield, etc.
 - `/stock/peers` — suggested industry peers
 
-**Caching:** 24-hour TTL in localStorage, key `finnhub_{symbol}_comp_data_v4`.
+**Caching:** 24-hour TTL in localStorage, key `finnhub_{symbol}_comp_data_v5`.
 
 ---
 
