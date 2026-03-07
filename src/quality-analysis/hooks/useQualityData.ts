@@ -1,10 +1,9 @@
 import { useState, useEffect, useRef } from 'react';
 import { safeSetItem } from '../utils/storage';
 import type { QualityData } from '../types';
+import { proxyFetch } from '../../utils/proxyFetch';
 
-const FMP_KEY = process.env.FMP_API_KEY;
 const FMP_URL = 'https://financialmodelingprep.com/stable';
-const FINNHUB_KEY = process.env.FINNHUB_API_KEY;
 const FINNHUB_URL = 'https://finnhub.io/api/v1';
 
 const CACHE_TTL_MS = 24 * 60 * 60 * 1000;
@@ -51,11 +50,11 @@ export function useQualityData(symbol: string): UseQualityDataResult {
 
         if (!fetchedData) {
           const [resIc, resBs, resCf, resProfile, resMetric] = await Promise.all([
-            fetch(`${FMP_URL}/income-statement?symbol=${symbol}&period=annual&limit=5&apikey=${FMP_KEY}`, { signal: controller.signal }),
-            fetch(`${FMP_URL}/balance-sheet-statement?symbol=${symbol}&period=annual&limit=5&apikey=${FMP_KEY}`, { signal: controller.signal }),
-            fetch(`${FMP_URL}/cash-flow-statement?symbol=${symbol}&period=annual&limit=5&apikey=${FMP_KEY}`, { signal: controller.signal }),
-            fetch(`${FINNHUB_URL}/stock/profile2?symbol=${symbol}&token=${FINNHUB_KEY}`, { signal: controller.signal }),
-            fetch(`${FINNHUB_URL}/stock/metric?symbol=${symbol}&metric=all&token=${FINNHUB_KEY}`, { signal: controller.signal }),
+            proxyFetch(`${FMP_URL}/income-statement?symbol=${symbol}&period=annual&limit=5`, { signal: controller.signal }),
+            proxyFetch(`${FMP_URL}/balance-sheet-statement?symbol=${symbol}&period=annual&limit=5`, { signal: controller.signal }),
+            proxyFetch(`${FMP_URL}/cash-flow-statement?symbol=${symbol}&period=annual&limit=5`, { signal: controller.signal }),
+            proxyFetch(`${FINNHUB_URL}/stock/profile2?symbol=${symbol}`, { signal: controller.signal }),
+            proxyFetch(`${FINNHUB_URL}/stock/metric?symbol=${symbol}&metric=all`, { signal: controller.signal }),
           ]);
 
           if (!resIc.ok || !resBs.ok || !resCf.ok) {

@@ -1,10 +1,9 @@
 import { useState, useEffect, useRef } from 'react';
 import { safeSetItem } from '../utils/storage';
 import type { MultiplesData } from '../types';
+import { proxyFetch } from '../../utils/proxyFetch';
 
-const FMP_KEY = process.env.FMP_API_KEY;
 const FMP_URL = 'https://financialmodelingprep.com/stable';
-const FINNHUB_KEY = process.env.FINNHUB_API_KEY;
 const FINNHUB_URL = 'https://finnhub.io/api/v1';
 
 const CACHE_TTL_MS = 24 * 60 * 60 * 1000;
@@ -55,11 +54,11 @@ export function useMultiplesData(symbol: string): UseMultiplesDataResult {
         // If not cached, fetch from FMP + Finnhub
         if (!fmpData) {
           const [resIc, resBs, resCf, resProfile, resMetric] = await Promise.all([
-            fetch(`${FMP_URL}/income-statement?symbol=${symbol}&period=annual&limit=6&apikey=${FMP_KEY}`, { signal: controller.signal }),
-            fetch(`${FMP_URL}/balance-sheet-statement?symbol=${symbol}&period=annual&limit=6&apikey=${FMP_KEY}`, { signal: controller.signal }),
-            fetch(`${FMP_URL}/cash-flow-statement?symbol=${symbol}&period=annual&limit=6&apikey=${FMP_KEY}`, { signal: controller.signal }),
-            fetch(`${FINNHUB_URL}/stock/profile2?symbol=${symbol}&token=${FINNHUB_KEY}`, { signal: controller.signal }),
-            fetch(`${FINNHUB_URL}/stock/metric?symbol=${symbol}&metric=all&token=${FINNHUB_KEY}`, { signal: controller.signal }),
+            proxyFetch(`${FMP_URL}/income-statement?symbol=${symbol}&period=annual&limit=6`, { signal: controller.signal }),
+            proxyFetch(`${FMP_URL}/balance-sheet-statement?symbol=${symbol}&period=annual&limit=6`, { signal: controller.signal }),
+            proxyFetch(`${FMP_URL}/cash-flow-statement?symbol=${symbol}&period=annual&limit=6`, { signal: controller.signal }),
+            proxyFetch(`${FINNHUB_URL}/stock/profile2?symbol=${symbol}`, { signal: controller.signal }),
+            proxyFetch(`${FINNHUB_URL}/stock/metric?symbol=${symbol}&metric=all`, { signal: controller.signal }),
           ]);
 
           if (!resIc.ok || !resBs.ok || !resCf.ok) {
@@ -91,8 +90,8 @@ export function useMultiplesData(symbol: string): UseMultiplesDataResult {
         // Ensure profile/metrics are present; fetch from Finnhub if missing
         if (!fmpData.profile?.name || !fmpData.profile?.marketCapitalization) {
           const [resProfile, resMetric] = await Promise.all([
-            fetch(`${FINNHUB_URL}/stock/profile2?symbol=${symbol}&token=${FINNHUB_KEY}`, { signal: controller.signal }),
-            fetch(`${FINNHUB_URL}/stock/metric?symbol=${symbol}&metric=all&token=${FINNHUB_KEY}`, { signal: controller.signal }),
+            proxyFetch(`${FINNHUB_URL}/stock/profile2?symbol=${symbol}`, { signal: controller.signal }),
+            proxyFetch(`${FINNHUB_URL}/stock/metric?symbol=${symbol}&metric=all`, { signal: controller.signal }),
           ]);
           const profData = resProfile.ok ? await resProfile.json() : null;
           const metricData = resMetric.ok ? await resMetric.json() : null;
@@ -115,8 +114,8 @@ export function useMultiplesData(symbol: string): UseMultiplesDataResult {
         if (!candles) {
           const now = Math.floor(Date.now() / 1000);
           const sixYearsAgo = now - 6 * 365 * 24 * 60 * 60;
-          const resCandle = await fetch(
-            `${FINNHUB_URL}/stock/candle?symbol=${symbol}&resolution=D&from=${sixYearsAgo}&to=${now}&token=${FINNHUB_KEY}`,
+          const resCandle = await proxyFetch(
+            `${FINNHUB_URL}/stock/candle?symbol=${symbol}&resolution=D&from=${sixYearsAgo}&to=${now}`,
             { signal: controller.signal },
           );
           if (resCandle.ok) {

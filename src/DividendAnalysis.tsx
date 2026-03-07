@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { Search, AlertCircle, TrendingUp, TrendingDown, Shield, CheckCircle, XCircle, AlertTriangle } from 'lucide-react';
+import { proxyFetch } from './utils/proxyFetch';
 
-const FINNHUB_KEY = process.env.FINNHUB_API_KEY;
 const FINNHUB_URL = 'https://finnhub.io/api/v1';
-const MASSIVE_KEY = process.env.MASSIVE_API_KEY;
 const MASSIVE_DIV_URL = 'https://api.massive.com/stocks/v1/dividends';
 
 const safeJson = async (res: Response): Promise<any> => {
@@ -85,10 +84,10 @@ export default function DividendAnalysis() {
 
       const [massiveRes, metricRes, finRes, priceRes] = await Promise.all([
         // Fetch 40 for CAGR coverage; table displays only 10
-        fetch(`${MASSIVE_DIV_URL}?ticker=${symbol}&limit=40&sort=ex_dividend_date.desc&apiKey=${MASSIVE_KEY}`).catch(() => null),
-        fetch(`${FINNHUB_URL}/stock/metric?symbol=${symbol}&metric=all&token=${FINNHUB_KEY}`),
-        fetch(`${FINNHUB_URL}/stock/financials-reported?symbol=${symbol}&freq=annual&token=${FINNHUB_KEY}`),
-        fetch(`${FINNHUB_URL}/stock/quote?symbol=${symbol}&token=${FINNHUB_KEY}`),
+        proxyFetch(`${MASSIVE_DIV_URL}?ticker=${symbol}&limit=40&sort=ex_dividend_date.desc`).catch(() => null),
+        proxyFetch(`${FINNHUB_URL}/stock/metric?symbol=${symbol}&metric=all`),
+        proxyFetch(`${FINNHUB_URL}/stock/financials-reported?symbol=${symbol}&freq=annual`),
+        proxyFetch(`${FINNHUB_URL}/stock/quote?symbol=${symbol}`),
       ]);
 
       const [massiveData, metricData, finData, priceData] = await Promise.all([

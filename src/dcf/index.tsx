@@ -131,6 +131,7 @@ export default function App() {
   const dcf = dcfState?.dcf ?? null;
   const calcError = dcfState?.calcError ?? '';
   const displayError = error || calcError;
+  const isAuthError = /401|unauthorized/i.test(displayError);
 
   // ── Auto-fill sliders when a new ticker loads ──────────────────────────────
   const lastTickerRef = useRef('');
@@ -453,7 +454,12 @@ export default function App() {
                     <p className="text-red-400/80 text-sm mt-1">{displayError}</p>
                     <p className="text-slate-500 text-xs mt-2">
                       {error
-                        ? <>If this keeps happening, click <span className="text-slate-300 font-medium">Clear Cache</span> in the top-right corner and try again.</>
+                        ? (
+                          <>
+                            If this keeps happening, click <span className="text-slate-300 font-medium">Clear Cache</span> at the bottom left and try again.
+                            {isAuthError && <> A 401 usually means your API key is missing or invalid in Netlify Environment Variables.</>}
+                          </>
+                        )
                         : <>This ticker has incomplete financial data from FMP. Try another company from the supported list.</>}
                     </p>
                   </div>

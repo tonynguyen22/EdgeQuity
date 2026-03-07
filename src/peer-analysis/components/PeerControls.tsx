@@ -206,7 +206,7 @@ export default function PeerControls({
                     <div>
                         <h3 className="text-red-500 font-medium">Error loading data</h3>
                         <p className="text-red-400/80 text-sm mt-1">{error}</p>
-                        <p className="text-slate-500 text-xs mt-2">If this keeps happening, click <span className="text-slate-300 font-medium">Clear Cache</span> in the top-right corner and try again.</p>
+                        <p className="text-slate-500 text-xs mt-2">If this keeps happening, click <span className="text-slate-300 font-medium">Clear Cache</span> at the bottom left and try again.</p>
                     </div>
                 </div>
             )}

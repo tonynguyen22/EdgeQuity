@@ -1,10 +1,9 @@
 import { useState, useEffect, useRef } from 'react';
 import { safeSetItem } from '../utils/storage';
 import type { FinancialData, AnalystTarget } from '../types';
+import { proxyFetch } from '../../utils/proxyFetch';
 
-const FMP_KEY = process.env.FMP_API_KEY;
 const FMP_URL = 'https://financialmodelingprep.com/stable';
-const FINNHUB_KEY = process.env.FINNHUB_API_KEY;
 const FINNHUB_URL = 'https://finnhub.io/api/v1';
 
 interface UseDCFDataResult {
@@ -46,11 +45,11 @@ export function useDCFData(symbol: string): UseDCFDataResult {
 
       if (!fetchedData) {
         const [resIc, resBs, resCf, resProfile, resMetric] = await Promise.all([
-          fetch(`${FMP_URL}/income-statement?symbol=${sym}&period=annual&limit=5&apikey=${FMP_KEY}`, { signal }),
-          fetch(`${FMP_URL}/balance-sheet-statement?symbol=${sym}&period=annual&limit=5&apikey=${FMP_KEY}`, { signal }),
-          fetch(`${FMP_URL}/cash-flow-statement?symbol=${sym}&period=annual&limit=5&apikey=${FMP_KEY}`, { signal }),
-          fetch(`${FINNHUB_URL}/stock/profile2?symbol=${sym}&token=${FINNHUB_KEY}`, { signal }),
-          fetch(`${FINNHUB_URL}/stock/metric?symbol=${sym}&metric=all&token=${FINNHUB_KEY}`, { signal }),
+          proxyFetch(`${FMP_URL}/income-statement?symbol=${sym}&period=annual&limit=5`, { signal }),
+          proxyFetch(`${FMP_URL}/balance-sheet-statement?symbol=${sym}&period=annual&limit=5`, { signal }),
+          proxyFetch(`${FMP_URL}/cash-flow-statement?symbol=${sym}&period=annual&limit=5`, { signal }),
+          proxyFetch(`${FINNHUB_URL}/stock/profile2?symbol=${sym}`, { signal }),
+          proxyFetch(`${FINNHUB_URL}/stock/metric?symbol=${sym}&metric=all`, { signal }),
         ]);
 
         if (!resIc.ok || !resBs.ok || !resCf.ok) {
@@ -120,7 +119,7 @@ export function useDCFData(symbol: string): UseDCFDataResult {
       fetchData(symbol, controller.signal);
       setAnalystTarget(null);
       const analystRequestId = ++analystRequestIdRef.current;
-      fetch(`${FINNHUB_URL}/stock/price-target?symbol=${symbol}&token=${FINNHUB_KEY}`, { signal: controller.signal })
+      proxyFetch(`${FINNHUB_URL}/stock/price-target?symbol=${symbol}`, { signal: controller.signal })
         .then(r => r.json())
         .then(d => {
           if (analystRequestId !== analystRequestIdRef.current) return;

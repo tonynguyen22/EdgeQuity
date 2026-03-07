@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Search, AlertCircle, TrendingUp, TrendingDown, Eye } from 'lucide-react';
+import { proxyFetch } from './utils/proxyFetch';
 
-const API_KEY = process.env.FINNHUB_API_KEY;
 const BASE_URL = 'https://finnhub.io/api/v1';
 
 const safeJson = async (res: Response): Promise<any> => {
@@ -96,9 +96,9 @@ export default function InsiderInstitutional() {
 
       const { from, to } = getDateRange();
       const [insiderRes, ownerRes, sentRes] = await Promise.all([
-        fetch(`${BASE_URL}/stock/insider-transactions?symbol=${symbol}&from=${from}&to=${to}&token=${API_KEY}`),
-        fetch(`${BASE_URL}/stock/ownership?symbol=${symbol}&limit=10&token=${API_KEY}`),
-        fetch(`${BASE_URL}/stock/insider-sentiment?symbol=${symbol}&from=${from}&to=${to}&token=${API_KEY}`),
+        proxyFetch(`${BASE_URL}/stock/insider-transactions?symbol=${symbol}&from=${from}&to=${to}`),
+        proxyFetch(`${BASE_URL}/stock/ownership?symbol=${symbol}&limit=10`),
+        proxyFetch(`${BASE_URL}/stock/insider-sentiment?symbol=${symbol}&from=${from}&to=${to}`),
       ]);
       // ownerRes may fail on free tier — handle gracefully
       const [insiderData, sentData] = await Promise.all([

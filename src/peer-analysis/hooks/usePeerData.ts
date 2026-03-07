@@ -3,8 +3,8 @@
 import { useState } from 'react';
 import type { PeerData, PeerSuggestion } from '../types';
 import { safeSetItem } from '../utils/storage';
+import { proxyFetch } from '../../utils/proxyFetch';
 
-const API_KEY = process.env.FINNHUB_API_KEY;
 const BASE_URL = 'https://finnhub.io/api/v1';
 
 /* ── fetchStockData (internal) ─────────────────────────────────────────── */
@@ -22,9 +22,9 @@ async function fetchStockData(symbol: string): Promise<PeerData | null> {
         }
 
         const [resFin, resProf, resMetric] = await Promise.all([
-            fetch(`${BASE_URL}/stock/financials-reported?symbol=${symbol}&freq=annual&token=${API_KEY}`),
-            fetch(`${BASE_URL}/stock/profile2?symbol=${symbol}&token=${API_KEY}`),
-            fetch(`${BASE_URL}/stock/metric?symbol=${symbol}&metric=all&token=${API_KEY}`),
+            proxyFetch(`${BASE_URL}/stock/financials-reported?symbol=${symbol}&freq=annual`),
+            proxyFetch(`${BASE_URL}/stock/profile2?symbol=${symbol}`),
+            proxyFetch(`${BASE_URL}/stock/metric?symbol=${symbol}&metric=all`),
         ]);
         const [finData, profData, metricData] = await Promise.all([
             resFin.json(), resProf.json(), resMetric.json(),
@@ -215,13 +215,13 @@ export function usePeerData() {
         setShowPeerFinder(true);
         setPeerSuggestions([]);
         try {
-            const res = await fetch(`${BASE_URL}/stock/peers?symbol=${sym}&grouping=subindustry&token=${API_KEY}`);
+            const res = await proxyFetch(`${BASE_URL}/stock/peers?symbol=${sym}&grouping=subindustry`);
             if (!res.ok) return;
             const list: string[] = await res.json();
             const candidates = list.filter(p => p !== sym).slice(0, 10);
             const profiles = await Promise.all(
                 candidates.map(p =>
-                    fetch(`${BASE_URL}/stock/profile2?symbol=${p}&token=${API_KEY}`)
+                    proxyFetch(`${BASE_URL}/stock/profile2?symbol=${p}`)
                         .then(r => r.ok ? r.json() : null)
                         .catch(() => null)
                 )

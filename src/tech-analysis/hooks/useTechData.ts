@@ -3,13 +3,6 @@ import { IndicatorResult, Signal, TaapiSnap } from '../types';
 import { computeAllIndicators, computeSignal, fetchOHLCV, fetchTAAPI } from '../calculations';
 import { safeSetItem } from '../utils/storage';
 
-// ── API Keys (from .env via Vite define) ───────────────────────────────────────
-const FINNHUB_KEY = process.env.FINNHUB_API_KEY;
-const POLYGON_KEY = process.env.POLYGON_API_KEY;
-const TWELVE_KEY  = process.env.TWELVE_API_KEY;
-const AV_KEY      = process.env.ALPHAVANTAGE_API_KEY;
-const TAAPI_KEY   = process.env.TAAPI_API_KEY;
-
 export interface UseTechDataResult {
   tickerInput: string;
   setTickerInput: (value: string) => void;
@@ -61,8 +54,8 @@ export function useTechData(): UseTechDataResult {
       }
 
       const [candles, snap] = await Promise.all([
-        fetchOHLCV(sym, FINNHUB_KEY, POLYGON_KEY, TWELVE_KEY, AV_KEY),
-        fetchTAAPI(sym, TAAPI_KEY)
+        fetchOHLCV(sym),
+        fetchTAAPI(sym)
       ]);
       const ind = computeAllIndicators(candles);
       const sig = computeSignal(ind, snap);

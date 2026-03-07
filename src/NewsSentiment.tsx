@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import { Search, AlertCircle, TrendingUp, TrendingDown, ExternalLink, Sparkles, Loader2 } from 'lucide-react';
+import { proxyFetch } from './utils/proxyFetch';
 
-const API_KEY = process.env.FINNHUB_API_KEY;
 const BASE_URL = 'https://finnhub.io/api/v1';
 
-const AI_KEY = process.env.GEMINI_API_KEY;
 const AI_URL = 'https://api.shopaikey.com/v1beta/models/gemini-2.5-flash:generateContent';
 const safeJson = async (res: Response): Promise<any> => {
   const text = await res.text();
@@ -64,11 +63,10 @@ export default function NewsSentiment() {
 
       const prompt = `You are a stock market analyst. Given the following recent news headlines for ${symbol}, write exactly 5 bullet points summarizing the most important recent news. After the bullet points, write a brief conclusion stating whether this news is significant or not significant for the stock, and why.\n\nHeadlines:\n${headlines}\n\nRespond in plain text. Use "- " for each bullet point. End with a conclusion paragraph starting with "Conclusion:".`;
 
-      const res = await fetch(AI_URL, {
+      const res = await proxyFetch(AI_URL, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${AI_KEY}`,
         },
         body: JSON.stringify({
           contents: [{ parts: [{ text: prompt }] }],
@@ -116,8 +114,8 @@ export default function NewsSentiment() {
       const toStr = now.toISOString().split('T')[0];
 
       const [newsRes, sentRes] = await Promise.all([
-        fetch(`${BASE_URL}/company-news?symbol=${symbol}&from=${fromStr}&to=${toStr}&token=${API_KEY}`),
-        fetch(`${BASE_URL}/news-sentiment?symbol=${symbol}&token=${API_KEY}`),
+        proxyFetch(`${BASE_URL}/company-news?symbol=${symbol}&from=${fromStr}&to=${toStr}`),
+        proxyFetch(`${BASE_URL}/news-sentiment?symbol=${symbol}`),
       ]);
       const newsData = await safeJson(newsRes);
       const sentData = await safeJson(sentRes).catch(() => ({}));

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Search, AlertCircle, TrendingUp, TrendingDown, Minus } from 'lucide-react';
+import { proxyFetch } from './utils/proxyFetch';
 
-const FINNHUB_KEY = process.env.FINNHUB_API_KEY;
 const FINNHUB_URL = 'https://finnhub.io/api/v1';
 
 function safeSetItem(key: string, value: string) {
@@ -60,7 +60,7 @@ export default function EarningsEstimates() {
         } catch { localStorage.removeItem(cacheKey); }
       }
 
-      const res = await fetch(`${FINNHUB_URL}/stock/earnings?symbol=${symbol}&limit=8&token=${FINNHUB_KEY}`);
+      const res = await proxyFetch(`${FINNHUB_URL}/stock/earnings?symbol=${symbol}&limit=8`);
       if (!res.ok) throw new Error(`Finnhub request failed (${res.status}).`);
       const data = await res.json();
 

@@ -1,6 +1,7 @@
 // ── Indicator Math ────────────────────────────────────────────────────────────
 
 import { Candle, IndicatorResult, TaapiSnap, Signal, SignalDetail, IndicatorCard } from './types';
+import { proxyFetch } from '../utils/proxyFetch';
 
 function computeEMA(values: number[], period: number): (number | null)[] {
   if (values.length < period) return values.map(() => null);
@@ -198,36 +199,36 @@ function normalizeAlphaVantage(data: any): Candle[] {
 
 // ── OHLCV Fetcher ─────────────────────────────────────────────────────────────
 
-export async function fetchOHLCV(symbol: string, finnhubKey: string, polygonKey: string, twelveKey: string, avKey: string): Promise<Candle[]> {
+export async function fetchOHLCV(symbol: string): Promise<Candle[]> {
   const nowSec = Math.floor(Date.now() / 1000);
   const oneYearAgo = nowSec - 365 * 24 * 3600;
   const toDate   = new Date().toISOString().slice(0, 10);
   const fromDate = new Date(oneYearAgo * 1000).toISOString().slice(0, 10);
 
   try {
-    const res = await fetch(
-      `https://finnhub.io/api/v1/stock/candle?symbol=${symbol}&resolution=D&from=${oneYearAgo}&to=${nowSec}&token=${finnhubKey}`
+    const res = await proxyFetch(
+      `https://finnhub.io/api/v1/stock/candle?symbol=${symbol}&resolution=D&from=${oneYearAgo}&to=${nowSec}`
     );
     if (res.ok) { const c = normalizeFinnhub(await res.json()); if (c.length > 20) return c; }
   } catch { /* try next */ }
 
   try {
-    const res = await fetch(
-      `https://api.polygon.io/v2/aggs/ticker/${symbol}/range/1/day/${fromDate}/${toDate}?adjusted=true&sort=asc&limit=365&apiKey=${polygonKey}`
+    const res = await proxyFetch(
+      `https://api.polygon.io/v2/aggs/ticker/${symbol}/range/1/day/${fromDate}/${toDate}?adjusted=true&sort=asc&limit=365`
     );
     if (res.ok) { const c = normalizePolygon(await res.json()); if (c.length > 20) return c; }
   } catch { /* try next */ }
 
   try {
-    const res = await fetch(
-      `https://api.twelvedata.com/time_series?symbol=${symbol}&interval=1day&outputsize=252&apikey=${twelveKey}`
+    const res = await proxyFetch(
+      `https://api.twelvedata.com/time_series?symbol=${symbol}&interval=1day&outputsize=252`
     );
     if (res.ok) { const c = normalizeTwelveData(await res.json()); if (c.length > 20) return c; }
   } catch { /* try next */ }
 
   try {
-    const res = await fetch(
-      `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${symbol}&outputsize=compact&apikey=${avKey}`
+    const res = await proxyFetch(
+      `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${symbol}&outputsize=compact`
     );
     if (res.ok) { const c = normalizeAlphaVantage(await res.json()); if (c.length > 20) return c; }
   } catch { /* try next */ }
@@ -237,13 +238,12 @@ export async function fetchOHLCV(symbol: string, finnhubKey: string, polygonKey:
 
 // ── TAAPI Snapshot ────────────────────────────────────────────────────────────
 
-export async function fetchTAAPI(symbol: string, taapiKey: string): Promise<TaapiSnap | null> {
+export async function fetchTAAPI(symbol: string): Promise<TaapiSnap | null> {
   try {
-    const res = await fetch('https://api.taapi.io/bulk', {
+    const res = await proxyFetch('https://api.taapi.io/bulk', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        secret: taapiKey,
         construct: {
           exchange: 'stocks', symbol, interval: '1d',
           indicators: [
