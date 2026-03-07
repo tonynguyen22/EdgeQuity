@@ -1,4 +1,4 @@
-export type TabId = 'dcf' | 'financials' | 'edgartools' | 'comp' | 'grade' | 'tech' | 'earnings' | 'insider' | 'news' | 'portfolio' | 'dividend';
+export type TabId = 'dcf' | 'financials' | 'comp' | 'grade' | 'tech' | 'earnings' | 'insider' | 'news' | 'portfolio' | 'dividend';
 export type FormatUnit = 'M' | 'B';
 export type ScenarioType = 'bull' | 'base' | 'bear' | 'custom';
 

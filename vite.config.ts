@@ -10,7 +10,6 @@ export default defineConfig(({ mode }) => {
     define: {
       'process.env.GEMINI_API_KEY': JSON.stringify(env.GEMINI_API_KEY),
       'process.env.FINNHUB_API_KEY': JSON.stringify(env.FINNHUB_API_KEY),
-      'process.env.EDGARTOOLS_API_URL': JSON.stringify(env.EDGARTOOLS_API_URL || ''),
     },
     resolve: {
       alias: {

@@ -4,7 +4,6 @@ import { Search, TrendingUp, TrendingDown, Info, AlertCircle, Target } from 'luc
 
 import PeerAnalysis from '../peer-analysis';
 import Financials from '../financials';
-import EdgarTools from '../edgartools';
 import CompanyGrade from '../CompanyGrade';
 import TechAnalysis from '../tech-analysis';
 import EarningsEstimates from '../EarningsEstimates';
@@ -301,8 +300,6 @@ export default function App() {
             <LandingPage onTabChange={handleTabChange} />
           ) : activeTab === 'financials' ? (
             <Financials />
-          ) : activeTab === 'edgartools' ? (
-            <EdgarTools />
           ) : activeTab === 'comp' ? (
             <PeerAnalysis />
           ) : activeTab === 'grade' ? (

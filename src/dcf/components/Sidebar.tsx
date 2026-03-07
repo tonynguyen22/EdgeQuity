@@ -1,5 +1,5 @@
 import React from 'react';
-import { TrendingUp, Home, Activity, Users, Award, BarChart2, Eye, Newspaper, Coins, Briefcase, Trash2, FileSpreadsheet, Database } from 'lucide-react';
+import { TrendingUp, Home, Activity, Users, Award, BarChart2, Eye, Newspaper, Coins, Briefcase, Trash2, FileSpreadsheet } from 'lucide-react';
 import type { TabId } from '../types';
 
 interface SidebarProps {
@@ -41,7 +41,6 @@ export default function Sidebar({ showLanding, activeTab, cacheCleared, onShowLa
         {([
           { id: 'dcf', label: 'DCF Analysis', Icon: Activity, active: 'text-emerald-400' },
           { id: 'financials', label: 'Financials', Icon: FileSpreadsheet, active: 'text-teal-400' },
-          { id: 'edgartools', label: 'EdgarTools', Icon: Database, active: 'text-lime-400' },
           { id: 'comp', label: 'Peers Analysis', Icon: Users, active: 'text-blue-400' },
           { id: 'grade', label: 'Company Grade', Icon: Award, active: 'text-amber-400' },
         ] as const).map(({ id, label, Icon, active }) => (
