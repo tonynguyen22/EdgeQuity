@@ -1,5 +1,6 @@
-import { IndicatorCard } from '../types';
+import type { IndicatorCard } from '../types';
 import { badgeCls, cardBorder, valueColor } from '../utils/formatters';
+import IndicatorHoverCard from './IndicatorHoverCard';
 
 interface IndicatorSectionsProps {
   cards: { section: string; cards: IndicatorCard[] }[];
@@ -17,9 +18,12 @@ export default function IndicatorSections({ cards }: IndicatorSectionsProps) {
                 key={card.name}
                 className={`bg-slate-800/50 border rounded-xl p-4 space-y-2 transition-colors ${cardBorder(card.bull)}`}
               >
-                {/* Name + badge row */}
+                {/* Name + hover info + badge row */}
                 <div className="flex items-start justify-between gap-2">
-                  <p className="text-xs font-medium text-slate-400 leading-tight">{card.name}</p>
+                  <div className="flex items-center gap-1.5">
+                    <p className="text-xs font-medium text-slate-400 leading-tight">{card.name}</p>
+                    <IndicatorHoverCard hoverInfo={card.hoverInfo} />
+                  </div>
                   <span className={`shrink-0 text-[10px] font-semibold px-1.5 py-0.5 rounded-md whitespace-nowrap ${badgeCls(card.bull)}`}>
                     {card.label}
                   </span>

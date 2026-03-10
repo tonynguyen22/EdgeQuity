@@ -1,6 +1,7 @@
 import { useState } from 'react';
-import { IndicatorResult, Signal, TaapiSnap } from '../types';
-import { computeAllIndicators, computeSignal, fetchOHLCV, fetchTAAPI } from '../calculations';
+import type { IndicatorResult, Signal, TaapiSnap, TimeframeData, Timeframe, SupportResistanceResult, Candle } from '../types';
+import { computeAllIndicators, computeSignal, buildIndicatorCards, fetchOHLCV, fetchTAAPI, resampleToWeekly } from '../calculations';
+import { computeSupportResistance } from '../support-resistance';
 import { safeSetItem } from '../utils/storage';
 
 export interface UseTechDataResult {
@@ -8,21 +9,41 @@ export interface UseTechDataResult {
   setTickerInput: (value: string) => void;
   loading: boolean;
   error: string;
-  indicators: IndicatorResult | null;
-  signal: Signal | null;
+  dailyData: TimeframeData | null;
+  weeklyData: TimeframeData | null;
+  srData: SupportResistanceResult | null;
   displayName: string;
-  snapState: TaapiSnap | null;
+  activeTimeframe: Timeframe;
+  setActiveTimeframe: (tf: Timeframe) => void;
   handleSearch: (e: React.FormEvent) => Promise<void>;
+}
+
+interface CachePayload {
+  ts: number;
+  data: {
+    dailyIndicators: IndicatorResult;
+    dailySignal: Signal;
+    weeklyIndicators: IndicatorResult;
+    weeklySignal: Signal;
+    sr: SupportResistanceResult;
+    displayName: string;
+    snap: TaapiSnap | null;
+  };
 }
 
 export function useTechData(): UseTechDataResult {
   const [tickerInput, setTickerInput] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  const [indicators, setIndicators] = useState<IndicatorResult | null>(null);
-  const [signal, setSignal] = useState<Signal | null>(null);
+  const [dailyData, setDailyData] = useState<TimeframeData | null>(null);
+  const [weeklyData, setWeeklyData] = useState<TimeframeData | null>(null);
+  const [srData, setSrData] = useState<SupportResistanceResult | null>(null);
   const [displayName, setDisplayName] = useState('');
-  const [snapState, setSnapState] = useState<TaapiSnap | null>(null);
+  const [activeTimeframe, setActiveTimeframe] = useState<Timeframe>('D1');
+
+  function buildTimeframeData(indicators: IndicatorResult, signal: Signal, snap: TaapiSnap | null): TimeframeData {
+    return { indicators, signal, cards: buildIndicatorCards(indicators, snap) };
+  }
 
   const handleSearch = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -31,22 +52,23 @@ export function useTechData(): UseTechDataResult {
 
     setLoading(true);
     setError('');
-    setIndicators(null);
-    setSignal(null);
+    setDailyData(null);
+    setWeeklyData(null);
+    setSrData(null);
     setDisplayName('');
-    setSnapState(null);
+    setActiveTimeframe('D1');
 
     try {
-      const cacheKey = `tech_${sym}`;
+      const cacheKey = `tech_${sym}_v3`;
       const cached = localStorage.getItem(cacheKey);
       if (cached) {
         try {
-          const { ts, data } = JSON.parse(cached);
+          const { ts, data } = JSON.parse(cached) as CachePayload;
           if (Date.now() - ts < 24 * 60 * 60 * 1000) {
-            setIndicators(data.indicators);
-            setSignal(data.signal);
+            setDailyData(buildTimeframeData(data.dailyIndicators, data.dailySignal, data.snap));
+            setWeeklyData(buildTimeframeData(data.weeklyIndicators, data.weeklySignal, null));
+            setSrData(data.sr);
             setDisplayName(data.displayName ?? sym);
-            setSnapState(data.snap ?? null);
             setLoading(false);
             return;
           }
@@ -55,17 +77,35 @@ export function useTechData(): UseTechDataResult {
 
       const [candles, snap] = await Promise.all([
         fetchOHLCV(sym),
-        fetchTAAPI(sym)
+        fetchTAAPI(sym),
       ]);
-      const ind = computeAllIndicators(candles);
-      const sig = computeSignal(ind, snap);
 
-      safeSetItem(cacheKey, JSON.stringify({ ts: Date.now(), data: { indicators: ind, signal: sig, displayName: sym, snap } }));
+      const weeklyCandles: Candle[] = resampleToWeekly(candles);
 
-      setIndicators(ind);
-      setSignal(sig);
+      const dInd = computeAllIndicators(candles);
+      const dSig = computeSignal(dInd, snap);
+      const wInd = computeAllIndicators(weeklyCandles);
+      const wSig = computeSignal(wInd, null);
+      const sr = computeSupportResistance(candles, weeklyCandles, dInd);
+
+      const payload: CachePayload = {
+        ts: Date.now(),
+        data: {
+          dailyIndicators: dInd,
+          dailySignal: dSig,
+          weeklyIndicators: wInd,
+          weeklySignal: wSig,
+          sr,
+          displayName: sym,
+          snap,
+        },
+      };
+      safeSetItem(cacheKey, JSON.stringify(payload));
+
+      setDailyData(buildTimeframeData(dInd, dSig, snap));
+      setWeeklyData(buildTimeframeData(wInd, wSig, null));
+      setSrData(sr);
       setDisplayName(sym);
-      setSnapState(snap);
     } catch (err: any) {
       setError(err.message || 'Failed to load technical data.');
     } finally {
@@ -78,10 +118,12 @@ export function useTechData(): UseTechDataResult {
     setTickerInput,
     loading,
     error,
-    indicators,
-    signal,
+    dailyData,
+    weeklyData,
+    srData,
     displayName,
-    snapState,
+    activeTimeframe,
+    setActiveTimeframe,
     handleSearch,
   };
 }

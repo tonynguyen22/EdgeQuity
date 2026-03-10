@@ -1,36 +1,54 @@
-import { Signal } from '../types';
+import type { Signal, Timeframe } from '../types';
+import { signalColor, signalBarGradient } from '../utils/formatters';
 
 interface SignalSummaryProps {
-  signal: Signal;
+  dailySignal: Signal;
+  weeklySignal: Signal | null;
+  activeTimeframe: Timeframe;
 }
 
-export default function SignalSummary({ signal }: SignalSummaryProps) {
+function SignalBadge({ signal, label }: { signal: Signal; label: string }) {
+  const sc = signalColor(signal.label);
   return (
-    <div className={`rounded-xl p-4 border ${
-      signal.label === 'Bullish' ? 'bg-emerald-500/5 border-emerald-500/20' :
-      signal.label === 'Bearish' ? 'bg-red-500/5 border-red-500/20' :
-      'bg-slate-800/50 border-slate-700/50'
-    }`}>
-      <div className="flex items-center flex-wrap gap-4">
-        <div className="flex items-center gap-3 shrink-0">
-          <div className={`w-14 h-14 rounded-full flex flex-col items-center justify-center border-2 ${
-            signal.label === 'Bullish' ? 'border-emerald-500 text-emerald-400' :
-            signal.label === 'Bearish' ? 'border-red-500 text-red-400' :
-            'border-amber-500 text-amber-400'
-          }`}>
-            <span className="text-lg font-bold leading-none">{signal.score}</span>
-            <span className="text-[9px] text-slate-500 mt-0.5">/ 100</span>
+    <div className={`rounded-xl p-4 border flex-1 min-w-[240px] ${sc.bg} ${sc.border}`}>
+      <div className="flex items-center gap-3">
+        <div className={`w-14 h-14 rounded-full flex flex-col items-center justify-center border-2 ${sc.ring} ${sc.text}`}>
+          <span className="text-lg font-bold leading-none">{signal.score}</span>
+          <span className="text-[9px] text-slate-500 mt-0.5">/ 100</span>
+        </div>
+        <div className="flex-1 space-y-1.5">
+          <div className="flex items-center gap-2">
+            <span className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">{label}</span>
           </div>
-          <div>
-            <p className={`text-lg font-bold ${
-              signal.label === 'Bullish' ? 'text-emerald-400' :
-              signal.label === 'Bearish' ? 'text-red-400' : 'text-amber-400'
-            }`}>{signal.label}</p>
-            <p className="text-xs text-slate-500">Technical Signal</p>
+          <p className={`text-lg font-bold ${sc.text}`}>{signal.label}</p>
+          {/* Score bar */}
+          <div className="w-full h-1.5 bg-slate-700/50 rounded-full overflow-hidden">
+            <div
+              className={`h-full rounded-full bg-gradient-to-r ${signalBarGradient(signal.score)} transition-all duration-500`}
+              style={{ width: `${signal.score}%` }}
+            />
           </div>
         </div>
+      </div>
+    </div>
+  );
+}
+
+export default function SignalSummary({ dailySignal, weeklySignal, activeTimeframe }: SignalSummaryProps) {
+  const activeSignal = activeTimeframe === 'W1' && weeklySignal ? weeklySignal : dailySignal;
+
+  return (
+    <div className="space-y-4">
+      {/* Dual-timeframe badges */}
+      <div className="flex flex-wrap gap-3">
+        <SignalBadge signal={dailySignal} label="Daily Signal" />
+        {weeklySignal && <SignalBadge signal={weeklySignal} label="Weekly Signal" />}
+      </div>
+
+      {/* Active timeframe detail pills */}
+      {activeSignal.details.length > 0 && (
         <div className="flex flex-wrap gap-2">
-          {signal.details.map((d, i) => (
+          {activeSignal.details.map((d, i) => (
             <div key={i} className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm border ${
               d.bull === true  ? 'bg-emerald-500/10 border-emerald-500/20 text-emerald-300' :
               d.bull === false ? 'bg-red-500/10 border-red-500/20 text-red-300' :
@@ -41,7 +59,7 @@ export default function SignalSummary({ signal }: SignalSummaryProps) {
             </div>
           ))}
         </div>
-      </div>
+      )}
     </div>
   );
 }
