@@ -16,7 +16,7 @@ function computeEMA(values: number[], period: number): (number | null)[] {
   return result;
 }
 
-function computeSMA(values: number[], period: number): (number | null)[] {
+export function computeSMA(values: number[], period: number): (number | null)[] {
   return values.map((_, i) => {
     if (i < period - 1) return null;
     return values.slice(i - period + 1, i + 1).reduce((a, b) => a + b, 0) / period;
@@ -367,7 +367,7 @@ function normalizeFinnhub(data: any): Candle[] {
   }));
 }
 
-function normalizePolygon(data: any): Candle[] {
+export function normalizePolygon(data: any): Candle[] {
   if (!data?.results?.length) return [];
   return data.results.map((r: any) => ({
     date: new Date(r.t).toISOString().slice(0, 10),

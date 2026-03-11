@@ -6,11 +6,12 @@ import PeerAnalysis from '../peer-analysis';
 
 import QualityAnalysis from '../quality-analysis';
 import TechAnalysis from '../tech-analysis';
-import EarningsEstimates from '../EarningsEstimates';
-import InsiderInstitutional from '../InsiderInstitutional';
-import NewsSentiment from '../NewsSentiment';
-import DividendAnalysis from '../DividendAnalysis';
+import EarningsEstimates from '../earnings-estimates';
+import InsiderInstitutional from '../insider-institutional';
+import NewsSentiment from '../news-sentiment';
+import DividendAnalysis from '../dividend-analysis';
 import MultiplesAnalysis from '../multiples-analysis';
+import MarketCycle from '../market-cycle';
 
 import { computeDCF } from './calculations';
 import { useDCFData } from './hooks/useDCFData';
@@ -339,7 +340,7 @@ export default function App() {
   const { forecastYears, termGrowth } = dcfInputs;
 
   return (
-    <div className="min-h-screen bg-slate-900 text-slate-100 font-sans selection:bg-emerald-500/30 flex">
+    <div className="min-h-screen font-sans flex" style={{ background: 'var(--vw-bg-deep)', color: 'var(--vw-text-primary)' }}>
       <Sidebar
         showLanding={showLanding}
         activeTab={activeTab}
@@ -349,8 +350,8 @@ export default function App() {
         onClearCache={handleClearCache}
       />
 
-      <div className="flex-1 min-w-0">
-        <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="flex-1 min-w-0 vw-grid-bg">
+        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           {showLanding ? (
             <LandingPage onTabChange={handleTabChange} />
           ) : activeTab === 'comp' ? (
@@ -361,6 +362,8 @@ export default function App() {
             <MultiplesAnalysis />
           ) : activeTab === 'tech' ? (
             <TechAnalysis />
+          ) : activeTab === 'cycle' ? (
+            <MarketCycle />
           ) : activeTab === 'earnings' ? (
             <EarningsEstimates />
           ) : activeTab === 'insider' ? (

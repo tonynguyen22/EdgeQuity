@@ -1,7 +1,170 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
 @import "tailwindcss";
 
+/* ═══════════════════════════════════════════════════════════════════════════
+   ValuWise Design System — Financial Terminal Aesthetic
+   ═══════════════════════════════════════════════════════════════════════════ */
+
 @theme {
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  --font-sans: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+:root {
+  /* ── Core palette ──────────────────────────────────────────────────────── */
+  --vw-bg-deep:    #0a0e17;
+  --vw-bg-base:    #0d1117;
+  --vw-bg-raised:  #141b27;
+  --vw-bg-surface: #1a2332;
+  --vw-bg-hover:   #1f2b3d;
+
+  --vw-border:     #1e2a3a;
+  --vw-border-dim: #15202e;
+  --vw-border-lit: #2a3a50;
+
+  --vw-accent:     #00d4aa;
+  --vw-accent-dim: #00a88a;
+  --vw-accent-glow: rgba(0, 212, 170, 0.15);
+  --vw-accent-soft: rgba(0, 212, 170, 0.08);
+
+  --vw-green:      #00d4aa;
+  --vw-red:        #ff4d6a;
+  --vw-amber:      #f0b429;
+  --vw-blue:       #38bdf8;
+  --vw-violet:     #a78bfa;
+  --vw-cyan:       #22d3ee;
+  --vw-rose:       #fb7185;
+  --vw-orange:     #fb923c;
+  --vw-pink:       #f472b6;
+
+  --vw-text-primary:   #e8edf5;
+  --vw-text-secondary: #8899ab;
+  --vw-text-tertiary:  #4a5e73;
+  --vw-text-muted:     #2f4054;
+}
+
+/* ── Global resets & base ────────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  scrollbar-width: thin;
+  scrollbar-color: var(--vw-border-lit) transparent;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--vw-border-lit);
+  border-radius: 99px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--vw-text-tertiary);
+}
+
+html {
+  background: var(--vw-bg-deep);
+  color-scheme: dark;
+}
+
+body {
+  background: var(--vw-bg-deep);
+  color: var(--vw-text-primary);
+  font-feature-settings: "cv11", "ss01";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── Noise grain overlay ─────────────────────────────────────────────────── */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+}
+
+/* ── Utility classes ─────────────────────────────────────────────────────── */
+
+/* Glass card */
+.vw-card {
+  background: linear-gradient(135deg, rgba(20, 27, 39, 0.85), rgba(26, 35, 50, 0.6));
+  border: 1px solid var(--vw-border);
+  border-radius: 12px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+.vw-card:hover {
+  border-color: var(--vw-border-lit);
+}
+
+/* Glow border on accent cards */
+.vw-glow {
+  box-shadow: 0 0 0 1px var(--vw-border),
+              0 0 20px -4px var(--vw-accent-glow),
+              0 4px 16px -4px rgba(0, 0, 0, 0.4);
+}
+
+/* Subtle grid pattern on content area — applied via @layer */
+.vw-grid-bg {
+  background-image:
+    linear-gradient(var(--vw-border-dim) 1px, transparent 1px),
+    linear-gradient(90deg, var(--vw-border-dim) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+/* Stat pill */
+.vw-stat {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border-radius: 99px;
+  font-size: 11px;
+  font-weight: 600;
+  font-family: var(--font-mono);
+}
+.vw-stat-up {
+  background: rgba(0, 212, 170, 0.12);
+  color: var(--vw-green);
+}
+.vw-stat-down {
+  background: rgba(255, 77, 106, 0.12);
+  color: var(--vw-red);
+}
+
+/* Tabular numbers for data-heavy tables */
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Animated pulse ring */
+@keyframes pulse-ring {
+  0% { box-shadow: 0 0 0 0 var(--vw-accent-glow); }
+  70% { box-shadow: 0 0 0 8px transparent; }
+  100% { box-shadow: 0 0 0 0 transparent; }
+}
+.vw-pulse {
+  animation: pulse-ring 2.5s ease-out infinite;
+}
+
+/* Gradient text utility */
+.vw-gradient-text {
+  background: linear-gradient(135deg, var(--vw-accent), var(--vw-blue));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Selection color */
+::selection {
+  background: rgba(0, 212, 170, 0.3);
+  color: #fff;
 }

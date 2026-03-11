@@ -1,117 +1,181 @@
 import React from 'react';
-import { Activity, Users, Award, BarChart3, TrendingUp, BarChart2, Eye, Newspaper, Coins } from 'lucide-react';
+import { Activity, Users, Award, BarChart3, TrendingUp, TrendingDown, BarChart2, Eye, Newspaper, Coins, ArrowUpRight, RefreshCw, Zap, Shield, BarChart } from 'lucide-react';
+import { motion } from 'motion/react';
 import type { TabId } from '../types';
 
 interface LandingPageProps {
   onTabChange: (tab: TabId) => void;
 }
 
+/* ── Simulated market data for visual richness ────────────────────────────── */
+const MARKET_INDICES = [
+  { name: 'S&P 500', value: '5,928.42', change: '+0.87%', up: true },
+  { name: 'NASDAQ', value: '19,432.18', change: '+1.24%', up: true },
+  { name: 'DOW', value: '43,856.30', change: '-0.12%', up: false },
+  { name: '10Y Yield', value: '4.28%', change: '+0.03', up: true },
+  { name: 'VIX', value: '14.82', change: '-1.23', up: false },
+];
+
+const FEATURES = [
+  { id: 'dcf' as TabId, label: 'DCF Model', Icon: Activity, color: '#00d4aa', desc: 'Project free cash flows, WACC, and terminal value to derive intrinsic price per share.' },
+  { id: 'multiples' as TabId, label: 'Multiples', Icon: BarChart3, color: '#f472b6', desc: 'Historical P/E, EV/EBITDA, P/B with 5-year trends and valuation context.' },
+  { id: 'grade' as TabId, label: 'Quality', Icon: Award, color: '#f0b429', desc: 'Financial quality report (A-D) with Piotroski, Altman Z, DuPont analysis.' },
+  { id: 'comp' as TabId, label: 'Peers', Icon: Users, color: '#38bdf8', desc: 'Compare EV/EBITDA, P/E and multiples against selected peer companies.' },
+  { id: 'tech' as TabId, label: 'Technical', Icon: TrendingUp, color: '#a78bfa', desc: 'RSI, MACD, Bollinger Bands, moving averages, and signal score.' },
+  { id: 'cycle' as TabId, label: 'Market Cycle', Icon: RefreshCw, color: '#2dd4bf', desc: 'Identify where the market is across economic and sector cycles.' },
+  { id: 'earnings' as TabId, label: 'Earnings', Icon: BarChart2, color: '#22d3ee', desc: 'Consensus EPS estimates, surprise history, and beat rate tracking.' },
+  { id: 'insider' as TabId, label: 'Insider & Inst.', Icon: Eye, color: '#fb923c', desc: 'Recent insider buy/sell transactions and institutional ownership.' },
+  { id: 'news' as TabId, label: 'News & Sentiment', Icon: Newspaper, color: '#38bdf8', desc: 'AI-powered headlines analysis with sentiment scoring.' },
+  { id: 'dividend' as TabId, label: 'Dividends', Icon: Coins, color: '#fb7185', desc: 'Dividend history, growth CAGR, yield, and FCF safety score.' },
+];
+
+const STATS = [
+  { label: 'Supported Tickers', value: '87+' },
+  { label: 'Analysis Modules', value: '10' },
+  { label: 'Data Sources', value: '6' },
+];
+
 export default function LandingPage({ onTabChange }: LandingPageProps) {
   return (
-    <div className="max-w-4xl mx-auto text-center py-16 space-y-8">
-      <div className="space-y-4">
-        <h1 className="text-4xl font-bold tracking-tight text-white">
-          Professional <span className="text-emerald-500">Equity Research</span> Platform
-        </h1>
-        <p className="text-lg text-slate-400 max-w-2xl mx-auto">
-          A full suite of stock analysis tools — valuation models, market data, insider activity, news sentiment, and more.
-        </p>
+    <div className="space-y-8 pb-8">
+
+      {/* ── Market Ticker Bar ───────────────────────────────────────────── */}
+      <motion.div
+        initial={{ opacity: 0, y: -10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.1 }}
+        className="flex items-center gap-1 overflow-x-auto py-2 px-1 -mx-2 rounded-xl"
+        style={{ background: 'var(--vw-bg-raised)', border: '1px solid var(--vw-border-dim)' }}
+      >
+        <div className="flex items-center gap-1 px-2">
+          <BarChart className="w-3.5 h-3.5" style={{ color: 'var(--vw-text-tertiary)' }} />
+          <span className="text-[10px] font-semibold uppercase tracking-wider whitespace-nowrap" style={{ color: 'var(--vw-text-tertiary)' }}>
+            Markets
+          </span>
+        </div>
+        <div className="w-px h-5" style={{ background: 'var(--vw-border)' }} />
+        {MARKET_INDICES.map((idx, i) => (
+          <div key={idx.name} className="flex items-center gap-2.5 px-3 py-1 whitespace-nowrap">
+            <span className="text-xs font-medium" style={{ color: 'var(--vw-text-secondary)' }}>{idx.name}</span>
+            <span className="text-xs font-mono font-medium" style={{ color: 'var(--vw-text-primary)' }}>{idx.value}</span>
+            <span
+              className="text-[11px] font-mono font-semibold flex items-center gap-0.5"
+              style={{ color: idx.up ? 'var(--vw-green)' : 'var(--vw-red)' }}
+            >
+              {idx.up ? <TrendingUp className="w-3 h-3" /> : <TrendingDown className="w-3 h-3" />}
+              {idx.change}
+            </span>
+            {i < MARKET_INDICES.length - 1 && (
+              <div className="w-px h-4 ml-1" style={{ background: 'var(--vw-border-dim)' }} />
+            )}
+          </div>
+        ))}
+      </motion.div>
+
+      {/* ── Hero Section ───────────────────────────────────────────────── */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.2 }}
+        className="relative overflow-hidden rounded-2xl p-8 lg:p-10"
+        style={{
+          background: 'linear-gradient(135deg, rgba(0, 212, 170, 0.06) 0%, rgba(56, 189, 248, 0.04) 50%, rgba(167, 139, 250, 0.04) 100%)',
+          border: '1px solid var(--vw-border)',
+        }}
+      >
+        {/* Decorative mesh dots */}
+        <div className="absolute inset-0 opacity-[0.03]" style={{
+          backgroundImage: 'radial-gradient(circle, var(--vw-accent) 1px, transparent 1px)',
+          backgroundSize: '24px 24px',
+        }} />
+
+        <div className="relative z-10 max-w-3xl">
+          <div className="flex items-center gap-2 mb-4">
+            <div className="vw-stat vw-stat-up">
+              <Zap className="w-3 h-3" />
+              Real-Time Analysis
+            </div>
+          </div>
+          <h1 className="text-3xl lg:text-4xl font-bold tracking-tight mb-3" style={{ color: 'var(--vw-text-primary)' }}>
+            Professional{' '}
+            <span className="vw-gradient-text">Equity Research</span>{' '}
+            Platform
+          </h1>
+          <p className="text-base lg:text-lg leading-relaxed max-w-2xl" style={{ color: 'var(--vw-text-secondary)' }}>
+            A comprehensive suite of stock analysis tools — DCF valuation, comparable analysis, technical indicators, insider activity, and AI-powered news sentiment.
+          </p>
+
+          {/* Stats row */}
+          <div className="flex flex-wrap items-center gap-6 mt-6">
+            {STATS.map((s) => (
+              <div key={s.label} className="flex items-baseline gap-2">
+                <span className="text-2xl font-bold font-mono" style={{ color: 'var(--vw-accent)' }}>{s.value}</span>
+                <span className="text-xs font-medium" style={{ color: 'var(--vw-text-tertiary)' }}>{s.label}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </motion.div>
+
+      {/* ── Feature Grid ───────────────────────────────────────────────── */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-3">
+        {FEATURES.map((f, i) => (
+          <motion.button
+            key={f.id}
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay: 0.3 + i * 0.05 }}
+            onClick={() => onTabChange(f.id)}
+            className="vw-card p-4 space-y-3 text-left group transition-all duration-300 hover:scale-[1.02]"
+            style={{ '--hover-color': f.color } as React.CSSProperties}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.borderColor = `${f.color}40`;
+              e.currentTarget.style.boxShadow = `0 0 24px -6px ${f.color}20`;
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.borderColor = 'var(--vw-border)';
+              e.currentTarget.style.boxShadow = 'none';
+            }}
+          >
+            <div className="flex items-center justify-between">
+              <div
+                className="w-8 h-8 rounded-lg flex items-center justify-center transition-all duration-300"
+                style={{ background: `${f.color}15` }}
+              >
+                <f.Icon className="w-4 h-4" style={{ color: f.color }} />
+              </div>
+              <ArrowUpRight
+                className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                style={{ color: f.color }}
+              />
+            </div>
+            <div>
+              <h3 className="text-sm font-semibold mb-1" style={{ color: 'var(--vw-text-primary)' }}>{f.label}</h3>
+              <p className="text-[11px] leading-relaxed" style={{ color: 'var(--vw-text-tertiary)' }}>{f.desc}</p>
+            </div>
+          </motion.button>
+        ))}
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 text-left">
-        <button onClick={() => onTabChange('dcf')}
-          className="bg-slate-800/50 border border-slate-700/50 rounded-2xl p-5 space-y-2.5 hover:bg-slate-800 hover:border-emerald-500/50 transition-all group text-left">
-          <div className="w-9 h-9 bg-emerald-500/10 rounded-lg flex items-center justify-center group-hover:bg-emerald-500/20 transition-colors">
-            <Activity className="w-5 h-5 text-emerald-500" />
-          </div>
-          <h3 className="text-base font-semibold text-white">DCF Model</h3>
-          <p className="text-slate-400 text-xs leading-relaxed">Project free cash flows, terminal value, and WACC to get an intrinsic price per share.</p>
-        </button>
-
-        <button onClick={() => onTabChange('multiples')}
-          className="bg-slate-800/50 border border-slate-700/50 rounded-2xl p-5 space-y-2.5 hover:bg-slate-800 hover:border-pink-500/50 transition-all group text-left">
-          <div className="w-9 h-9 bg-pink-500/10 rounded-lg flex items-center justify-center group-hover:bg-pink-500/20 transition-colors">
-            <BarChart3 className="w-5 h-5 text-pink-500" />
-          </div>
-          <h3 className="text-base font-semibold text-white">Multiples Analysis</h3>
-          <p className="text-slate-400 text-xs leading-relaxed">Historical P/E, EV/EBITDA, P/B and more with 5-year trends and valuation context.</p>
-        </button>
-
-        <button onClick={() => onTabChange('grade')}
-          className="bg-slate-800/50 border border-slate-700/50 rounded-2xl p-5 space-y-2.5 hover:bg-slate-800 hover:border-amber-500/50 transition-all group text-left">
-          <div className="w-9 h-9 bg-amber-500/10 rounded-lg flex items-center justify-center group-hover:bg-amber-500/20 transition-colors">
-            <Award className="w-5 h-5 text-amber-500" />
-          </div>
-          <h3 className="text-base font-semibold text-white">Quality Analysis</h3>
-          <p className="text-slate-400 text-xs leading-relaxed">Financial quality report (A-D) with Piotroski, Altman Z, DuPont, and earnings quality.</p>
-        </button>
-
-        <button onClick={() => onTabChange('comp')}
-          className="bg-slate-800/50 border border-slate-700/50 rounded-2xl p-5 space-y-2.5 hover:bg-slate-800 hover:border-blue-500/50 transition-all group text-left">
-          <div className="w-9 h-9 bg-blue-500/10 rounded-lg flex items-center justify-center group-hover:bg-blue-500/20 transition-colors">
-            <Users className="w-5 h-5 text-blue-500" />
-          </div>
-          <h3 className="text-base font-semibold text-white">Peer Analysis</h3>
-          <p className="text-slate-400 text-xs leading-relaxed">Compare EV/EBITDA, P/E and other multiples against manually selected peers.</p>
-        </button>
-
-        <button onClick={() => onTabChange('tech')}
-          className="bg-slate-800/50 border border-slate-700/50 rounded-2xl p-5 space-y-2.5 hover:bg-slate-800 hover:border-violet-500/50 transition-all group text-left">
-          <div className="w-9 h-9 bg-violet-500/10 rounded-lg flex items-center justify-center group-hover:bg-violet-500/20 transition-colors">
-            <TrendingUp className="w-5 h-5 text-violet-500" />
-          </div>
-          <h3 className="text-base font-semibold text-white">Technical Analysis</h3>
-          <p className="text-slate-400 text-xs leading-relaxed">RSI, MACD, Bollinger Bands, moving averages, and a bullish/bearish signal score.</p>
-        </button>
-
-        <button onClick={() => onTabChange('earnings')}
-          className="bg-slate-800/50 border border-slate-700/50 rounded-2xl p-5 space-y-2.5 hover:bg-slate-800 hover:border-cyan-500/50 transition-all group text-left">
-          <div className="w-9 h-9 bg-cyan-500/10 rounded-lg flex items-center justify-center group-hover:bg-cyan-500/20 transition-colors">
-            <BarChart2 className="w-5 h-5 text-cyan-500" />
-          </div>
-          <h3 className="text-base font-semibold text-white">Earnings Estimates</h3>
-          <p className="text-slate-400 text-xs leading-relaxed">Consensus EPS and revenue estimates for next 4 quarters + FY with surprise history.</p>
-        </button>
-
-        <button onClick={() => onTabChange('insider')}
-          className="bg-slate-800/50 border border-slate-700/50 rounded-2xl p-5 space-y-2.5 hover:bg-slate-800 hover:border-orange-500/50 transition-all group text-left">
-          <div className="w-9 h-9 bg-orange-500/10 rounded-lg flex items-center justify-center group-hover:bg-orange-500/20 transition-colors">
-            <Eye className="w-5 h-5 text-orange-500" />
-          </div>
-          <h3 className="text-base font-semibold text-white">Insider &amp; Institutional</h3>
-          <p className="text-slate-400 text-xs leading-relaxed">Recent insider buy/sell transactions and top institutional ownership holders.</p>
-        </button>
-
-        <button onClick={() => onTabChange('news')}
-          className="bg-slate-800/50 border border-slate-700/50 rounded-2xl p-5 space-y-2.5 hover:bg-slate-800 hover:border-sky-500/50 transition-all group text-left">
-          <div className="w-9 h-9 bg-sky-500/10 rounded-lg flex items-center justify-center group-hover:bg-sky-500/20 transition-colors">
-            <Newspaper className="w-5 h-5 text-sky-500" />
-          </div>
-          <h3 className="text-base font-semibold text-white">News & Sentiment</h3>
-          <p className="text-slate-400 text-xs leading-relaxed">Latest headlines with AI-powered news summary and sentiment analysis.</p>
-        </button>
-
-        <button onClick={() => onTabChange('dividend')}
-          className="bg-slate-800/50 border border-slate-700/50 rounded-2xl p-5 space-y-2.5 hover:bg-slate-800 hover:border-rose-500/50 transition-all group text-left">
-          <div className="w-9 h-9 bg-rose-500/10 rounded-lg flex items-center justify-center group-hover:bg-rose-500/20 transition-colors">
-            <Coins className="w-5 h-5 text-rose-500" />
-          </div>
-          <h3 className="text-base font-semibold text-white">Dividend Analysis</h3>
-          <p className="text-slate-400 text-xs leading-relaxed">Dividend history, 3/5/10yr growth CAGR, yield, and FCF safety score.</p>
-        </button>
-      </div>
-
-      <div className="flex items-start gap-3 bg-amber-500/5 border border-amber-500/20 rounded-xl px-5 py-4 text-left max-w-2xl mx-auto">
-        <svg className="w-5 h-5 text-amber-400 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-          <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" />
-        </svg>
+      {/* ── Supported Tickers notice ───────────────────────────────────── */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5, delay: 0.8 }}
+        className="flex items-start gap-3 rounded-xl px-5 py-4"
+        style={{
+          background: 'rgba(240, 180, 41, 0.04)',
+          border: '1px solid rgba(240, 180, 41, 0.15)',
+        }}
+      >
+        <Shield className="w-4 h-4 mt-0.5 shrink-0" style={{ color: 'var(--vw-amber)' }} />
         <div>
-          <p className="text-sm font-medium text-amber-400 mb-0.5">Supported Tickers</p>
-          <p className="text-sm text-slate-400 leading-relaxed">
-            DCF Valuation, Quality Analysis, and Multiples Analysis use Financial Modeling Prep and are restricted to ~87 pre-selected tickers. Peers use Finnhub (US-listed only). Market data tabs work with any supported ticker.
+          <p className="text-xs font-medium mb-0.5" style={{ color: 'var(--vw-amber)' }}>Supported Tickers</p>
+          <p className="text-xs leading-relaxed" style={{ color: 'var(--vw-text-secondary)' }}>
+            DCF, Quality, and Multiples use Financial Modeling Prep (~87 pre-selected tickers). Peers use Finnhub (US-listed). Market data tabs work with any supported ticker.
           </p>
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 }

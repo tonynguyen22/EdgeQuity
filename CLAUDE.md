@@ -58,27 +58,30 @@ Technical indicator dashboard using TAAPI.io bulk endpoint.
 - **Charts:** Price + SMAs, MACD histogram, Bollinger Bands — all with legend click isolation
 - **Narratives:** Plain-English explanation of each indicator's signal
 
-### Earnings Estimates (`src/EarningsEstimates.tsx`)
+### Earnings Estimates (`src/earnings-estimates/index.tsx`)
 Earnings history and upcoming event tracking via API Ninjas.
 - **Next Earnings:** Countdown timer + scheduled date
 - **Historical EPS:** Last 8 quarters — actual vs estimated, surprise %, beat/miss badges
 - **Beat Statistics:** Beat rate, average surprise magnitude
 - **EPS Momentum:** YoY growth acceleration (Accelerating/Stable/Decelerating)
 - **Earnings Quality Score:** 0–100 composite of beat rate + magnitude
+- **Structure:** `types.ts`, `calculations.ts`, `hooks/useEarningsData.ts`, `components/` (BeatMissSummary, MomentumQuality, EarningsTable)
 
-### Insider & Institutional (`src/InsiderInstitutional.tsx`)
+### Insider & Institutional (`src/insider-institutional/index.tsx`)
 Insider transaction tracking from Finnhub.
 - **Transaction Table:** 30 most recent insider trades (12-month window) — name, title, type (Purchase/Sale/Award), date, shares, price, value
 - **Net Transaction Score:** -1 to +1 ratio of buy vs sell volume
 - **Buy Clustering:** Detects months with 2+ distinct insider purchases (bullish signal)
 - **Institutional holders** (premium endpoint, fails gracefully)
+- **Structure:** `types.ts`, `calculations.ts`, `hooks/useInsiderData.ts`, `components/` (SummaryCards, TransactionTable, InstitutionalTable)
 
-### News Sentiment (`src/NewsSentiment.tsx`)
+### News Sentiment (`src/news-sentiment/index.tsx`)
 News aggregation with AI-powered sentiment analysis.
 - **Headlines:** 20 most recent articles (30-day window) with source, date, external links
 - **Finnhub Sentiment:** Bullish/Bearish %, Buzz index, company score vs sector average
 - **AI Sentiment (Gemini 2.5 Flash):** Overall sentiment (Bullish/Neutral/Bearish), key themes summary, trend direction, per-headline sentiment breakdown
 - **Visual:** Sentiment percentage bars
+- **Structure:** `types.ts`, `hooks/` (useNewsData, useAiAnalysis), `components/` (SentimentOverview, AiAnalysis, NewsArticles)
 
 ### Portfolio Tracker (`src/PortfolioTracker.tsx`)
 Multi-holding portfolio with live pricing and P&L tracking.
@@ -88,12 +91,13 @@ Multi-holding portfolio with live pricing and P&L tracking.
 - **Summary Cards:** Total value, day P&L, cumulative P&L, diversification grade (A–D by sector count)
 - **Chart:** Sector allocation pie chart
 
-### Dividend Analysis (`src/DividendAnalysis.tsx`)
+### Dividend Analysis (`src/dividend-analysis/index.tsx`)
 Dividend history and sustainability analysis via Massive API.
 - **History Table:** 10 most recent payments — ex-date, pay date, amount, type (recurring/special/irregular)
 - **Metrics:** Yield %, annual recurring dividend, 3/5/10-year CAGR (recurring-only), payout ratio (% of EPS), consecutive growth streak
 - **FCF Safety:** Payout ratio vs free cash flow for sustainability assessment
 - **Data:** 40 payments fetched for CAGR accuracy, special dividends excluded from growth calculations
+- **Structure:** `types.ts`, `calculations.ts`, `hooks/useDividendData.ts`, `components/` (MetricCards, SafetyScore, GrowthSection, PaymentHistory)
 
 ### Global Features
 - **Sidebar Navigation:** Grouped into Valuation (DCF, Comp, Quality), Market Data (Tech, Earnings, Insider, News), Tools (Portfolio, Dividends)
@@ -116,11 +120,11 @@ Vertical sidebar (w-52) with grouped nav (Valuation | Market Data | Tools). Each
 | Comp Analysis | `src/CompAnalysis.tsx` | blue |
 | Quality Analysis | `src/quality-analysis/index.tsx` | amber |
 | Tech Analysis | `src/TechAnalysis.tsx` | violet |
-| Earnings | `src/EarningsEstimates.tsx` | cyan |
-| Insider/Inst. | `src/InsiderInstitutional.tsx` | orange |
-| News Sentiment | `src/NewsSentiment.tsx` | sky |
+| Earnings | `src/earnings-estimates/index.tsx` | cyan |
+| Insider/Inst. | `src/insider-institutional/index.tsx` | orange |
+| News Sentiment | `src/news-sentiment/index.tsx` | sky |
 | Portfolio | `src/PortfolioTracker.tsx` | indigo |
-| Dividends | `src/DividendAnalysis.tsx` | rose |
+| Dividends | `src/dividend-analysis/index.tsx` | rose |
 
 ## Deployment
 This application is configured for deployment on Netlify.
