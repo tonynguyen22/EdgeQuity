@@ -2,8 +2,8 @@ import { useState, useEffect, useCallback } from 'react';
 import { proxyFetch } from '../../utils/proxyFetch';
 
 const FINNHUB_URL = 'https://finnhub.io/api/v1';
-const CACHE_KEY = 'vw_market_ticker_v1';
-const CACHE_TTL = 2 * 60 * 60 * 1000; // 2 hours
+const CACHE_KEY = 'vw_market_ticker_v3';
+const CACHE_TTL = 1 * 60 * 60 * 1000; // 1 hour
 
 export interface MarketIndex {
   name: string;
@@ -14,13 +14,16 @@ export interface MarketIndex {
   spark: number[];
 }
 
-/* ── Default fallback data ──────────────────────────────────────────── */
+/* ── Default fallback data (big-cap stocks) ─────────────────────────── */
 const FALLBACK: MarketIndex[] = [
-  { name: 'S&P 500', symbol: 'SPY', value: '—', change: '—', up: true, spark: [22, 20, 24, 21, 26, 25, 28] },
-  { name: 'NASDAQ', symbol: 'QQQ', value: '—', change: '—', up: true, spark: [18, 22, 20, 26, 24, 29, 31] },
-  { name: 'DOW', symbol: 'DIA', value: '—', change: '—', up: false, spark: [30, 28, 32, 27, 29, 26, 25] },
-  { name: 'Russell 2K', symbol: 'IWM', value: '—', change: '—', up: true, spark: [14, 16, 13, 17, 15, 18, 19] },
-  { name: 'VIX', symbol: 'VIXY', value: '—', change: '—', up: false, spark: [24, 22, 26, 20, 23, 18, 16] },
+  { name: 'AAPL', symbol: 'AAPL', value: '—', change: '—', up: true, spark: [22, 20, 24, 21, 26, 25, 28] },
+  { name: 'MSFT', symbol: 'MSFT', value: '—', change: '—', up: true, spark: [18, 22, 20, 26, 24, 29, 31] },
+  { name: 'GOOGL', symbol: 'GOOGL', value: '—', change: '—', up: true, spark: [30, 28, 32, 27, 29, 26, 25] },
+  { name: 'AMZN', symbol: 'AMZN', value: '—', change: '—', up: true, spark: [14, 16, 13, 17, 15, 18, 19] },
+  { name: 'NVDA', symbol: 'NVDA', value: '—', change: '—', up: true, spark: [24, 22, 26, 20, 23, 28, 30] },
+  { name: 'META', symbol: 'META', value: '—', change: '—', up: true, spark: [20, 18, 22, 24, 21, 26, 28] },
+  { name: 'TSLA', symbol: 'TSLA', value: '—', change: '—', up: false, spark: [28, 25, 30, 22, 26, 20, 18] },
+  { name: 'BRK.B', symbol: 'BRK.B', value: '—', change: '—', up: true, spark: [16, 18, 17, 20, 19, 22, 24] },
 ];
 
 /* ── Helpers ────────────────────────────────────────────────────────── */
@@ -54,31 +57,19 @@ export function useMarketData() {
       }
     } catch { /* ignore bad cache */ }
 
-    // Fetch quotes and intraday candles in parallel for each symbol
+    // Fetch quotes for each symbol (candle endpoint is premium-only)
     const symbols = FALLBACK.map(f => f.symbol);
-    const now = Math.floor(Date.now() / 1000);
-    const fiveDaysAgo = now - 5 * 24 * 60 * 60;
 
     try {
       const results = await Promise.all(
         symbols.map(async (sym) => {
           try {
-            const [quoteRes, candleRes] = await Promise.all([
-              proxyFetch(`${FINNHUB_URL}/stock/quote?symbol=${sym}`),
-              proxyFetch(`${FINNHUB_URL}/stock/candle?symbol=${sym}&resolution=D&from=${fiveDaysAgo}&to=${now}`),
-            ]);
-
+            const quoteRes = await proxyFetch(`${FINNHUB_URL}/quote?symbol=${sym}`);
             const quote = await safeJson(quoteRes);
-            const candle = await safeJson(candleRes);
 
             if (!quote || quote.c === 0 || quote.c === undefined) return null;
 
-            // Build sparkline from recent daily closes (last 7 points)
-            let spark = FALLBACK.find(f => f.symbol === sym)?.spark || [0];
-            if (candle && candle.s === 'ok' && Array.isArray(candle.c) && candle.c.length >= 3) {
-              spark = candle.c.slice(-7);
-            }
-
+            const spark = FALLBACK.find(f => f.symbol === sym)?.spark || [0];
             const up = (quote.d ?? 0) >= 0;
             const changePct = quote.dp != null ? `${up ? '+' : ''}${quote.dp.toFixed(2)}%` : '—';
 
@@ -114,7 +105,7 @@ export function useMarketData() {
   useEffect(() => {
     fetchAll();
 
-    // Re-fetch every 2 hours
+    // Re-fetch every 1 hour
     const interval = setInterval(fetchAll, CACHE_TTL);
     return () => clearInterval(interval);
   }, [fetchAll]);
