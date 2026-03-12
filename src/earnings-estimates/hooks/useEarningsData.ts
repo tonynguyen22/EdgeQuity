@@ -84,5 +84,11 @@ export function useEarningsData() {
     }
   };
 
-  return { quarterly, annual, loading, error, fetchData };
+  const reset = () => {
+    setQuarterly([]);
+    setAnnual([]);
+    setError('');
+  };
+
+  return { quarterly, annual, loading, error, fetchData, reset };
 }

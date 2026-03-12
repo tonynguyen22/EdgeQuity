@@ -33,6 +33,7 @@ export function useQualityData(symbol: string): UseQualityDataResult {
     const fetchData = async () => {
       setLoading(true);
       setError('');
+      const loadStart = Date.now();
 
       try {
         const cacheKey = `fmp_${symbol}_dcf_v1`;
@@ -103,7 +104,14 @@ export function useQualityData(symbol: string): UseQualityDataResult {
         }
         setError(err.message || 'Failed to fetch financial data.');
       } finally {
-        if (requestId === requestIdRef.current) setLoading(false);
+        if (requestId === requestIdRef.current) {
+          const MIN_LOADING_MS = 600;
+          const elapsed = Date.now() - loadStart;
+          if (elapsed < MIN_LOADING_MS) {
+            await new Promise(r => setTimeout(r, MIN_LOADING_MS - elapsed));
+          }
+          setLoading(false);
+        }
       }
     };
 

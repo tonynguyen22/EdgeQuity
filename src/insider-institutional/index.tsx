@@ -13,7 +13,7 @@ export default function InsiderInstitutional() {
   const [input, setInput] = useState('');
   const [sym, setSym] = useState('');
   const [showLoading, setShowLoading] = useState(false);
-  const { data, loading, error, fetchData } = useInsiderData();
+  const { data, loading, error, fetchData, reset } = useInsiderData();
 
   const handleAnalyze = useCallback((s: string) => {
     setSym(s);
@@ -26,6 +26,7 @@ export default function InsiderInstitutional() {
     setSym('');
     setInput('');
     setShowLoading(false);
+    reset();
   };
 
   const netBuySell = data ? computeNetBuySell(data.transactions) : null;

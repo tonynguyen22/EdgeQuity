@@ -81,5 +81,10 @@ export function useInsiderData() {
     }
   };
 
-  return { data, loading, error, fetchData };
+  const reset = () => {
+    setData(null);
+    setError('');
+  };
+
+  return { data, loading, error, fetchData, reset };
 }

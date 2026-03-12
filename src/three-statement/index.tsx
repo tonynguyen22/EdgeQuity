@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useDeferredValue } from 'react';
 import { Search, FileSpreadsheet, Download, AlertCircle, Info, Loader2, ChevronDown, ChevronUp } from 'lucide-react';
 import { buildForecast } from './calculations';
 import { useStatementData } from './hooks/useStatementData';
@@ -8,6 +8,26 @@ import type { ThreeStmtInputs, ForecastRow } from './types';
 import SupportedTickersBySector from '../components/SupportedTickersBySector';
 
 type StatementView = 'income' | 'balance' | 'cashflow';
+
+/* ── Extracted & memoised slider ─────────────────────────────────────────── */
+const SliderInput = React.memo(function SliderInput({ label, value, onChange, min, max, step, suffix = '%' }: {
+  label: string; value: number; onChange: (v: number) => void;
+  min: number; max: number; step: number; suffix?: string;
+}) {
+  return (
+    <div className="space-y-1">
+      <div className="flex items-center justify-between">
+        <label className="text-xs text-slate-400">{label}</label>
+        <span className="text-xs font-mono text-slate-300">{value.toFixed(step < 1 ? 1 : 0)}{suffix}</span>
+      </div>
+      <input
+        type="range" min={min} max={max} step={step} value={value}
+        onChange={e => onChange(parseFloat(e.target.value))}
+        className="w-full h-1.5 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-cyan-500"
+      />
+    </div>
+  );
+});
 
 export default function ThreeStatement() {
   const [tickerInput, setTickerInput] = useState('');
@@ -61,10 +81,16 @@ export default function ThreeStatement() {
     }
   }, [historicals]);
 
+  // ── Deferred inputs for smooth slider interactions ─────────────────────────
+  // inputs updates instantly (slider thumb moves immediately).
+  // deferredInputs lags behind — React uses it for the expensive buildForecast
+  // only when the browser is idle, keeping the UI perfectly responsive.
+  const deferredInputs = useDeferredValue(inputs);
+
   const forecastData = useMemo((): ForecastRow[] => {
     if (!showForecast || historicals.length === 0) return [];
-    return buildForecast(historicals, inputs);
-  }, [showForecast, historicals, inputs]);
+    return buildForecast(historicals, deferredInputs);
+  }, [showForecast, historicals, deferredInputs]);
 
   const [showLoading, setShowLoading] = useState(false);
   const isLoading = loading || showLoading;
@@ -113,22 +139,6 @@ export default function ThreeStatement() {
     if (Math.abs(val) >= 1000) return `${(val / 1000).toFixed(1)}B`;
     return `${val.toFixed(0)}M`;
   };
-
-  const SliderInput = ({ label, value, onChange, min, max, step, suffix = '%' }: {
-    label: string; value: number; onChange: (v: number) => void; min: number; max: number; step: number; suffix?: string;
-  }) => (
-    <div className="space-y-1">
-      <div className="flex items-center justify-between">
-        <label className="text-xs text-slate-400">{label}</label>
-        <span className="text-xs font-mono text-slate-300">{value.toFixed(step < 1 ? 1 : 0)}{suffix}</span>
-      </div>
-      <input
-        type="range" min={min} max={max} step={step} value={value}
-        onChange={e => onChange(parseFloat(e.target.value))}
-        className="w-full h-1.5 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-cyan-500"
-      />
-    </div>
-  );
 
   const StatementTable = ({ rows, fields }: { rows: ForecastRow[]; fields: { label: string; key: keyof ForecastRow; isPercent?: boolean; isBold?: boolean; isDivider?: boolean }[] }) => (
     <div className="overflow-x-auto">

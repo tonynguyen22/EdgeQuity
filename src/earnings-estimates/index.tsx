@@ -14,7 +14,7 @@ export default function EarningsEstimates() {
   const [sym, setSym] = useState('');
   const [view, setView] = useState<EarningsView>('quarterly');
   const [showLoading, setShowLoading] = useState(false);
-  const { quarterly, annual, loading, error, fetchData } = useEarningsData();
+  const { quarterly, annual, loading, error, fetchData, reset } = useEarningsData();
 
   const handleAnalyze = useCallback((s: string) => {
     setSym(s);
@@ -28,6 +28,7 @@ export default function EarningsEstimates() {
     setSym('');
     setInput('');
     setShowLoading(false);
+    reset();
   };
 
   const beats = quarterly.filter(r => r.surprisePercent != null && r.surprisePercent > 0.5).length;
