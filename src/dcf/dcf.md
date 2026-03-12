@@ -239,7 +239,7 @@ Sticky `w-56` left sidebar with gradient background (`linear-gradient(180deg, #0
 - **Logo:** Glowing cyan gradient icon + "ValuWise" wordmark with accent color
 - **Active state:** Left accent bar (3px, colored per tab) + tinted background
 - **Group headers:** Uppercase labels with decorative trailing line dividers
-- **Nav sections:** Valuation (DCF, Multiples, Quality, Peers) and Market Data (Technical, Market Cycle, Earnings, Insider, News, Dividends)
+- **Nav sections:** Valuation (DCF, DDM, Multiples), Fundamentals (Quality, 3-Statement, Peers), Market Intelligence (Technical, Earnings, Insider, News), Income & Macro (Dividends, Market Cycle)
 - **Bottom:** Clear Cache button + version status indicator with pulsing dot ("v1.0 — Live")
 - Hover states use `var(--vw-bg-hover)` and smooth color transitions
 
@@ -248,9 +248,9 @@ Sticky `w-56` left sidebar with gradient background (`linear-gradient(180deg, #0
 ### `components/LandingPage.tsx`
 
 Animated hero landing page shown when no tab is selected. Uses `motion` library for staggered entry animations. Features:
-- **Market ticker bar:** Simulated market indices (S&P 500, NASDAQ, DOW, 10Y Yield, VIX) with green/red trend indicators
-- **Hero section:** Animated gradient mesh background with "Real-Time Analysis" stat pill, gradient text title, description, and stats banner (87+ tickers, 10 modules, 6 data sources)
-- **Feature grid:** 10 glassmorphism cards (`vw-card` class) in a responsive 5-column grid (xl:grid-cols-5). Each card has icon, title, description, and animated arrow on hover with per-card accent color
+- **Market ticker bar:** Simulated market indices (S&P 500, NASDAQ, DOW, 10Y Yield, VIX) with green/red trend indicators and micro sparklines
+- **Hero section:** Animated gradient orbs background with "Real-Time Analysis" shimmer pill, gradient text title, description, and stats banner (87+ tickers, 12 modules, 6 data sources)
+- **Feature grid:** 12 feature cards grouped by category (Valuation, Fundamentals, Market Intelligence, Income & Macro) with responsive grids. Each card has icon, title, description, and animated arrow on hover with per-card accent color
 - **Supported tickers notice:** Amber-bordered warning about FMP ticker restrictions
 
 ---

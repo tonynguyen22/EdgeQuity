@@ -110,7 +110,7 @@ When more than 6 years of data are available, a collapsible "Full Historical Dat
 
 ## Sidebar
 - Tab ID: `multiples`
-- Group: Analysis
+- Group: Valuation
 - Icon: BarChart3 (pink)
 
 ## Ticker Restriction

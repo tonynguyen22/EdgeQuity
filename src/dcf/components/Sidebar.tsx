@@ -13,23 +13,33 @@ interface SidebarProps {
 
 const NAV_SECTIONS = [
   {
-    group: 'Analysis',
+    group: 'Valuation',
     items: [
       { id: 'dcf' as const, label: 'DCF', Icon: Activity, color: '#00d4aa' },
       { id: 'ddm' as const, label: 'DDM', Icon: DollarSign, color: '#f59e0b' },
       { id: 'multiples' as const, label: 'Multiples', Icon: BarChart3, color: '#f472b6' },
+    ],
+  },
+  {
+    group: 'Fundamentals',
+    items: [
       { id: 'grade' as const, label: 'Quality', Icon: Award, color: '#f0b429' },
       { id: 'three-stmt' as const, label: '3-Statement', Icon: FileSpreadsheet, color: '#06b6d4' },
       { id: 'comp' as const, label: 'Peers', Icon: Users, color: '#38bdf8' },
     ],
   },
   {
-    group: 'Market Data',
+    group: 'Market Intelligence',
     items: [
       { id: 'tech' as const, label: 'Technical', Icon: TrendingUp, color: '#a78bfa' },
       { id: 'earnings' as const, label: 'Earnings', Icon: BarChart2, color: '#22d3ee' },
       { id: 'insider' as const, label: 'Insider & Inst.', Icon: Eye, color: '#fb923c' },
       { id: 'news' as const, label: 'News', Icon: Newspaper, color: '#38bdf8' },
+    ],
+  },
+  {
+    group: 'Income & Macro',
+    items: [
       { id: 'dividend' as const, label: 'Dividends', Icon: Coins, color: '#fb7185' },
       { id: 'cycle' as const, label: 'Market Cycle', Icon: RefreshCw, color: '#2dd4bf' },
     ],

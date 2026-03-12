@@ -47,5 +47,5 @@ src/ddm/
 
 ## Sidebar
 - Tab ID: `ddm`
-- Group: Analysis
+- Group: Valuation
 - Icon: DollarSign (amber)

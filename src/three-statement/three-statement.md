@@ -55,5 +55,5 @@ src/three-statement/
 
 ## Sidebar
 - Tab ID: `three-stmt`
-- Group: Analysis
+- Group: Fundamentals
 - Icon: FileSpreadsheet (cyan)

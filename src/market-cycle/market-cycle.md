@@ -63,7 +63,7 @@ Each phase accumulates a raw score from 7-8 weighted indicator checks. Scores ar
 
 ## Sidebar
 - Tab ID: `cycle`
-- Group: Market Data
+- Group: Income & Macro
 - Icon: RefreshCw (teal)
 
 ## Dependencies

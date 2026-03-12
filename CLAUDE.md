@@ -1,7 +1,7 @@
 # ValuWise — Project Instructions
 
 ## Overview
-React + TypeScript + Vite + Tailwind v4 stock analysis app. Single-page with sidebar navigation and 12 tab views. Sidebar groups tabs into Analysis (DCF, DDM, Multiples, Quality, 3-Statement, Peers) and Market Data (Technical, Earnings, Insider & Inst., News, Dividends, Market Cycle). Uses a financial terminal aesthetic with DM Sans + IBM Plex Mono fonts, deep navy-black palette (#0a0e17), cyan accent (#00d4aa), and CSS custom properties (`--vw-*` tokens in `src/index.css`).
+React + TypeScript + Vite + Tailwind v4 stock analysis app. Single-page with sidebar navigation and 12 tab views. Sidebar groups tabs into Valuation (DCF, DDM, Multiples), Fundamentals (Quality, 3-Statement, Peers), Market Intelligence (Technical, Earnings, Insider & Inst., News), and Income & Macro (Dividends, Market Cycle). Uses a financial terminal aesthetic with DM Sans + IBM Plex Mono fonts, deep navy-black palette (#0a0e17), cyan accent (#00d4aa), and CSS custom properties (`--vw-*` tokens in `src/index.css`).
 
 ## App Features
 
@@ -142,8 +142,8 @@ Dividend history and sustainability analysis via Massive API.
 - **Structure:** `types.ts`, `calculations.ts`, `hooks/useDividendData.ts`, `components/` (MetricCards, SafetyScore, GrowthSection, PaymentHistory)
 
 ### Global Features
-- **Sidebar Navigation:** Grouped into Analysis (DCF, DDM, Multiples, Quality, 3-Statement, Peers) and Market Data (Technical, Earnings, Insider & Inst., News, Dividends, Market Cycle). 12 tabs total. Gradient background with active indicator pills (left accent bars), decorative group dividers, and version/status indicator.
-- **Landing Page:** Hero section with animated gradient mesh background, market ticker bar (simulated indices), stats banner (87+ tickers, 12 modules, 6 data sources), and glassmorphism feature cards in a 5-column grid with staggered entry animations via `motion` library.
+- **Sidebar Navigation:** Grouped into Valuation (DCF, DDM, Multiples), Fundamentals (Quality, 3-Statement, Peers), Market Intelligence (Technical, Earnings, Insider & Inst., News), and Income & Macro (Dividends, Market Cycle). 12 tabs total. Gradient background with active indicator pills (left accent bars), decorative group dividers, and version/status indicator.
+- **Landing Page:** Hero section with animated gradient mesh background, market ticker bar (simulated indices), stats banner (87+ tickers, 12 modules, 6 data sources), and glassmorphism feature cards grouped by category (Valuation, Fundamentals, Market Intelligence, Income & Macro) with staggered entry animations via `motion` library.
 - **Design System:** Financial terminal aesthetic defined in `src/index.css` using CSS custom properties (`--vw-bg-deep`, `--vw-accent`, `--vw-border`, `--vw-text-*`). Noise grain overlay, glass card utility (`.vw-card`), glow effects (`.vw-glow`), stat pills (`.vw-stat-up`/`.vw-stat-down`), gradient text (`.vw-gradient-text`), custom scrollbar styling.
 - **Typography:** DM Sans (display/headers) + IBM Plex Mono (data/numbers). Imported via Google Fonts in `index.css`.
 - **Dark Theme:** Deep navy-black background (`#0a0e17` / `--vw-bg-deep`) with layered surface colors.
@@ -158,7 +158,7 @@ Dividend history and sustainability analysis via Massive API.
 - `npm run lint` — type-check (`tsc --noEmit`)
 
 ## Architecture
-Vertical sidebar (w-56, `Sidebar.tsx`) with gradient background and grouped nav (Analysis | Market Data). Each tab is a self-contained module directory. App shell in `dcf/index.tsx` uses `max-w-7xl` content area with subtle grid background pattern:
+Vertical sidebar (w-56, `Sidebar.tsx`) with gradient background and grouped nav (Valuation | Fundamentals | Market Intelligence | Income & Macro). Each tab is a self-contained module directory. App shell in `dcf/index.tsx` uses `max-w-7xl` content area with subtle grid background pattern:
 
 | Tab | File | Color |
 |-----|------|-------|

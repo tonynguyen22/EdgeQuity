@@ -210,3 +210,82 @@ body::before {
   background: rgba(0, 212, 170, 0.3);
   color: #fff;
 }
+
+/* ── Marquee / infinite scroll ───────────────────────────────────────── */
+@keyframes marquee-scroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.vw-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll 40s linear infinite;
+  will-change: transform;
+}
+.vw-marquee:hover {
+  animation-play-state: paused;
+}
+
+/* ── Glassmorphism utility ───────────────────────────────────────────────── */
+.vw-glass {
+  background: rgba(12, 18, 32, 0.55);
+  backdrop-filter: blur(16px) saturate(1.4);
+  -webkit-backdrop-filter: blur(16px) saturate(1.4);
+}
+
+/* ── Shimmer / shine sweep ───────────────────────────────────────────────── */
+@keyframes shimmer-sweep {
+  0%   { transform: translateX(-100%); }
+  100% { transform: translateX(200%); }
+}
+.vw-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+.vw-shimmer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 30%,
+    rgba(0, 212, 170, 0.06) 45%,
+    rgba(0, 212, 170, 0.12) 50%,
+    rgba(0, 212, 170, 0.06) 55%,
+    transparent 70%
+  );
+  animation: shimmer-sweep 6s ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* ── Hero decorative chart path ──────────────────────────────────────────── */
+@keyframes chart-draw {
+  0%   { stroke-dashoffset: 600; opacity: 0; }
+  20%  { opacity: 0.6; }
+  100% { stroke-dashoffset: 0; opacity: 0.6; }
+}
+@keyframes chart-pulse {
+  0%, 100% { opacity: 0.3; }
+  50%      { opacity: 0.6; }
+}
+.vw-hero-chart path {
+  stroke-dasharray: 600;
+  animation: chart-draw 3s ease-out forwards, chart-pulse 4s ease-in-out 3s infinite;
+}
+
+/* ── Floating orb animation ──────────────────────────────────────────────── */
+@keyframes orb-float {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33%      { transform: translate(10px, -15px) scale(1.05); }
+  66%      { transform: translate(-8px, 8px) scale(0.98); }
+}
+.vw-orb {
+  animation: orb-float 12s ease-in-out infinite;
+  will-change: transform;
+}
+.vw-orb-delay {
+  animation-delay: -4s;
+}
+.vw-orb-delay-2 {
+  animation-delay: -8s;
+}
