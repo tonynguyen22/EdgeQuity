@@ -3,7 +3,8 @@ import { proxyFetch } from '../../utils/proxyFetch';
 import { fmtTime } from '../utils/formatters';
 import type { NewsArticle } from '../types';
 
-const AI_URL = 'https://api.shopaikey.com/v1beta/models/gemini-2.5-flash:generateContent';
+const AI_URL_PRIMARY = 'https://api.shopaikey.com/v1/chat/completions';
+const AI_URL_FALLBACK = 'https://api-v2.shopaikey.com/v1/chat/completions';
 
 export function useAiAnalysis() {
   const [aiLoading, setAiLoading] = useState(false);
@@ -20,25 +21,49 @@ export function useAiAnalysis() {
     setAiLoading(true);
     setAiError('');
     try {
-      const headlines = articles.slice(0, 15).map(a =>
-        `- ${a.headline} (${a.source}, ${fmtTime(a.datetime)})`
+      const toAnalyze = articles.slice(0, 30);
+      const articleList = toAnalyze.map((a, i) =>
+        `${i + 1}. [${fmtTime(a.datetime)}] "${a.headline}" — ${a.source}${a.summary ? ` | ${a.summary}` : ''}`
       ).join('\n');
 
-      const prompt = `You are a stock market analyst. Given the following recent news headlines for ${symbol}, write exactly 5 bullet points summarizing the most important recent news. After the bullet points, write a brief conclusion stating whether this news is significant or not significant for the stock, and why.\n\nHeadlines:\n${headlines}\n\nRespond in plain text. Use "- " for each bullet point. End with a conclusion paragraph starting with "Conclusion:".`;
+      const prompt = `You are a stock market analyst. Below are the ${toAnalyze.length} most recent news articles from the last 7 days for ${symbol}.
 
-      const res = await proxyFetch(AI_URL, {
+${articleList}
+
+Go through every article above. For each article that is relevant to ${symbol} investors, write a one-line summary with its date. Skip only articles that have absolutely nothing to do with ${symbol} (e.g. articles about completely unrelated companies). When in doubt, include it.
+
+Format each as:
+- [DATE] One-line summary of what happened and why it matters.
+
+After listing all relevant articles, write one short paragraph starting with "Bottom Line:" giving the overall investor takeaway.
+
+Do NOT use any markdown formatting. No bold, no headers, no asterisks. Plain text only.`;
+
+      const payload = JSON.stringify({
+        model: 'gemini-2.5-flash',
+        messages: [
+          { role: 'user', content: prompt },
+        ],
+        max_tokens: 4096,
+        temperature: 0.3,
+      });
+      const fetchOpts = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] }),
-      });
+        body: payload,
+      };
 
+      let res = await proxyFetch(AI_URL_PRIMARY, fetchOpts);
+      if (!res.ok) {
+        res = await proxyFetch(AI_URL_FALLBACK, fetchOpts);
+      }
       if (!res.ok) {
         const errText = await res.text();
-        throw new Error(`AI API error (${res.status}): ${errText.slice(0, 200)}`);
+        throw new Error(`AI API error (${res.status}): ${errText.slice(0, 300)}`);
       }
 
       const json = await res.json();
-      const text = json?.candidates?.[0]?.content?.parts?.[0]?.text;
+      const text = json?.choices?.[0]?.message?.content;
       if (!text) throw new Error('No response from AI model.');
       setAiAnalysis(text);
     } catch (e: any) {

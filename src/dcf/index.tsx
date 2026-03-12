@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo, useRef } from 'react';
 import { BarChart, Bar, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, ReferenceLine, Legend, ComposedChart } from 'recharts';
-import { Search, TrendingUp, TrendingDown, Info, AlertCircle, Target } from 'lucide-react';
+import { Search, TrendingUp, TrendingDown, Info, AlertCircle, Target, ArrowLeft, Activity, DollarSign, BarChart3, FileSpreadsheet } from 'lucide-react';
 
 import PeerAnalysis from '../peer-analysis';
 
@@ -12,6 +12,8 @@ import NewsSentiment from '../news-sentiment';
 import DividendAnalysis from '../dividend-analysis';
 import MultiplesAnalysis from '../multiples-analysis';
 import MarketCycle from '../market-cycle';
+import DDM from '../ddm';
+import ThreeStatement from '../three-statement';
 
 import { computeDCF } from './calculations';
 import { useDCFData } from './hooks/useDCFData';
@@ -24,9 +26,13 @@ import LandingPage from './components/LandingPage';
 import AssumptionSliders from './components/AssumptionSliders';
 import ForecastTable from './components/ForecastTable';
 import HistoricalTables from './components/HistoricalTables';
+import WACCPanel from './components/WACCPanel';
+import MonteCarloSimulation from './components/MonteCarloSimulation';
 import SupportedTickersBySector from '../components/SupportedTickersBySector';
 import type { DCFInputs, DCFResult, TabId, FormatUnit, ScenarioComparison, BridgeItem, ScenarioType } from './types';
 import { SUPPORTED_TICKERS } from './types';
+
+type DCFSubTab = 'model' | 'history' | 'wacc' | 'montecarlo';
 
 function round1(value: number) {
   return Math.round(value * 10) / 10;
@@ -117,18 +123,27 @@ export default function App() {
     hiddenSeries: {} as Record<string, boolean>,
   });
 
+  // ── DCF sub-tab state ─────────────────────────────────────────────────────
+  const [dcfSubTab, setDcfSubTab] = useState<DCFSubTab>('model');
+
   // ── Data fetching ──────────────────────────────────────────────────────────
   const { data, loading, error, analystTarget, reset } = useDCFData(appState.ticker);
 
-  // ── DCF calculation ────────────────────────────────────────────────────────
+  // ── Deferred inputs for smooth slider interactions ─────────────────────────
+  // dcfInputs updates instantly (slider thumb moves immediately).
+  // deferredInputs lags behind — React uses it for the expensive computeDCF
+  // only when the browser is idle, keeping the UI perfectly responsive.
+  const deferredInputs = React.useDeferredValue(dcfInputs);
+
+  // ── DCF calculation (uses deferred inputs so it doesn't block sliders) ─────
   const dcfState = useMemo(() => {
     if (!data) return null;
     try {
-      return { dcf: computeDCF(data, dcfInputs), calcError: '' };
+      return { dcf: computeDCF(data, deferredInputs), calcError: '' };
     } catch (err: any) {
       return { dcf: null, calcError: err?.message || 'Unable to build DCF model for this ticker.' };
     }
-  }, [data, dcfInputs]);
+  }, [data, deferredInputs]);
   const dcf = dcfState?.dcf ?? null;
   const calcError = dcfState?.calcError ?? '';
   const displayError = error || calcError;
@@ -176,8 +191,9 @@ export default function App() {
     }
   };
 
+  /** Dropdown click only populates input — does NOT trigger fetch */
   const handleTickerSelect = (ticker: string) => {
-    setAppState(prev => ({ ...prev, ticker, tickerInput: ticker }));
+    setAppState(prev => ({ ...prev, tickerInput: ticker }));
     setShowDropdown(false);
   };
 
@@ -360,6 +376,10 @@ export default function App() {
             <QualityAnalysis />
           ) : activeTab === 'multiples' ? (
             <MultiplesAnalysis />
+          ) : activeTab === 'ddm' ? (
+            <DDM />
+          ) : activeTab === 'three-stmt' ? (
+            <ThreeStatement />
           ) : activeTab === 'tech' ? (
             <TechAnalysis />
           ) : activeTab === 'cycle' ? (
@@ -375,9 +395,20 @@ export default function App() {
           ) : (
             <>
               {(!data || displayError) && !loading && (
-                <div className="max-w-2xl mx-auto py-8 space-y-5">
-                  <form onSubmit={handleSearch} className="relative" ref={dropdownRef}>
-                    <Search className="w-5 h-5 absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 z-10" />
+                <div className="flex flex-col items-center justify-center min-h-[60vh] px-4">
+                  {/* Hero Title */}
+                  <div className="text-center mb-8">
+                    <h1 className="text-4xl font-bold tracking-tight mb-2" style={{ color: 'var(--vw-text-primary)' }}>
+                      DCF <span style={{ color: 'var(--vw-accent)' }}>Valuation</span>
+                    </h1>
+                    <p className="text-sm" style={{ color: 'var(--vw-text-secondary)' }}>
+                      Enter a ticker to build a Discounted Cash Flow model
+                    </p>
+                  </div>
+
+                  {/* Search Box */}
+                  <form onSubmit={handleSearch} className="relative w-full max-w-xl" ref={dropdownRef}>
+                    <Search className="w-5 h-5 absolute left-4 top-1/2 -translate-y-1/2 z-10" style={{ color: 'var(--vw-text-tertiary)' }} />
                     <input
                       type="text"
                       value={tickerInput}
@@ -387,24 +418,34 @@ export default function App() {
                       }}
                       onFocus={() => setShowDropdown(true)}
                       placeholder="Search supported tickers (e.g. AAPL, MSFT, TSLA)"
-                      className="w-full bg-slate-800 border border-slate-700 rounded-xl pl-12 pr-28 py-4 text-base focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent uppercase transition-all shadow-xl"
+                      className="w-full rounded-xl pl-12 pr-28 py-4 text-base focus:outline-none uppercase transition-all"
+                      style={{
+                        background: 'var(--vw-bg-raised)',
+                        border: '1px solid var(--vw-border-lit)',
+                        color: 'var(--vw-text-primary)',
+                        boxShadow: '0 0 30px -6px rgba(0, 212, 170, 0.15), 0 8px 24px -8px rgba(0,0,0,0.5)',
+                      }}
                       autoComplete="off"
                     />
                     <button
                       type="submit"
                       disabled={!tickerInput.trim() || !(SUPPORTED_TICKERS as readonly string[]).includes(tickerInput.trim().toUpperCase())}
-                      className="absolute right-2 top-1/2 -translate-y-1/2 bg-emerald-500 hover:bg-emerald-600 text-white px-5 py-2.5 rounded-lg font-medium transition-colors text-sm disabled:opacity-40 disabled:cursor-not-allowed z-10"
+                      className="absolute right-2 top-1/2 -translate-y-1/2 text-white px-5 py-2.5 rounded-lg font-medium transition-all text-sm disabled:opacity-40 disabled:cursor-not-allowed z-10"
+                      style={{ background: 'linear-gradient(135deg, #00d4aa, #00a88a)' }}
                     >
                       Analyze
                     </button>
                     {showDropdown && filteredTickers.length > 0 && (
-                      <div className="absolute top-full left-0 right-0 mt-1 bg-slate-800 border border-slate-700 rounded-xl shadow-2xl max-h-64 overflow-y-auto z-50">
+                      <div className="absolute top-full left-0 right-0 mt-1 rounded-xl shadow-2xl max-h-64 overflow-y-auto z-50" style={{ background: 'var(--vw-bg-raised)', border: '1px solid var(--vw-border-lit)' }}>
                         {filteredTickers.map(t => (
                           <button
                             key={t}
                             type="button"
                             onClick={() => handleTickerSelect(t)}
-                            className="w-full text-left px-4 py-2.5 text-sm font-mono hover:bg-slate-700/50 transition-colors first:rounded-t-xl last:rounded-b-xl text-slate-200"
+                            className="w-full text-left px-4 py-2.5 text-sm font-mono transition-colors first:rounded-t-xl last:rounded-b-xl"
+                            style={{ color: 'var(--vw-text-primary)' }}
+                            onMouseEnter={e => e.currentTarget.style.background = 'var(--vw-bg-hover)'}
+                            onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
                           >
                             {t}
                           </button>
@@ -412,35 +453,32 @@ export default function App() {
                       </div>
                     )}
                     {showDropdown && filteredTickers.length === 0 && tickerInput.trim() && (
-                      <div className="absolute top-full left-0 right-0 mt-1 bg-slate-800 border border-slate-700 rounded-xl shadow-2xl z-50 px-4 py-3 text-sm text-slate-500">
+                      <div className="absolute top-full left-0 right-0 mt-1 rounded-xl shadow-2xl z-50 px-4 py-3 text-sm" style={{ background: 'var(--vw-bg-raised)', border: '1px solid var(--vw-border-lit)', color: 'var(--vw-text-tertiary)' }}>
                         No matching ticker found. Only {SUPPORTED_TICKERS.length} pre-selected stocks are supported.
                       </div>
                     )}
                   </form>
-                  <div className="bg-slate-800/30 border border-slate-700/30 rounded-xl p-5 space-y-3">
-                    <div className="flex items-center gap-2 mb-1">
-                      <Info className="w-4 h-4 text-slate-500" />
-                      <span className="text-sm font-semibold text-slate-300">About the DCF Model</span>
-                    </div>
-                    <p className="text-xs text-slate-500 leading-relaxed">
-                      Build a Discounted Cash Flow valuation from standardized financial statements (via Financial Modeling Prep). The model projects Free Cash Flow to the Firm (FCFF) using your growth and margin assumptions, discounts at WACC, and adds a Gordon Growth terminal value to arrive at an intrinsic price per share.
-                    </p>
-                    <ol className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1">
+
+                  {/* About Section */}
+                  <div className="w-full max-w-2xl mt-8 rounded-xl p-6 space-y-4" style={{ background: 'rgba(17, 24, 39, 0.5)', border: '1px solid var(--vw-border-dim)' }}>
+                    <p className="text-sm font-semibold" style={{ color: 'var(--vw-text-primary)' }}>What you'll see here</p>
+                    <ul className="space-y-2.5">
                       {[
-                        'Select a ticker from the supported list and press Analyze to fetch historical financials.',
-                        "The model pre-fills Revenue Growth and EBIT Margin from the company's historical CAGR.",
-                        'Adjust sliders to reflect your own projections, or use Bear / Base / Bull presets.',
-                        'The sensitivity table maps implied share price across WACC x terminal growth combinations.',
-                        'Cells highlighted green indicate upside vs current price; ring marks the current assumptions.',
-                        'Click Print / PDF to generate a clean, printer-friendly report with all key outputs.',
-                      ].map((step, i) => (
-                        <li key={i} className="flex items-start gap-2.5 text-xs text-slate-400">
-                          <span className="flex-shrink-0 w-5 h-5 rounded-full bg-slate-700 flex items-center justify-center text-xs text-emerald-400 font-semibold">{i + 1}</span>
-                          <span className="leading-relaxed">{step}</span>
+                        'Estimates what a stock should be worth based on its future cash flows',
+                        'Adjusts for how risky the company is using a discount rate (WACC)',
+                        'Shows you whether the current price is above or below the calculated value',
+                        'Includes sensitivity tables and Monte Carlo simulations so you can explore different scenarios',
+                      ].map((item, i) => (
+                        <li key={i} className="flex items-start gap-2.5 text-[13px] leading-relaxed" style={{ color: 'var(--vw-text-secondary)' }}>
+                          <span className="mt-0.5 shrink-0 w-5 h-5 rounded-full flex items-center justify-center text-[11px] font-bold"
+                            style={{ background: 'rgba(0,212,170,0.12)', color: 'var(--vw-accent)' }}>
+                            {i + 1}
+                          </span>
+                          <span>{item}</span>
                         </li>
                       ))}
-                    </ol>
-                    <SupportedTickersBySector accentClassName="text-emerald-400" className="mt-2" />
+                    </ul>
+                    <SupportedTickersBySector className="mt-4" />
                   </div>
                 </div>
               )}
@@ -469,6 +507,77 @@ export default function App() {
                 </div>
               ) : dcf && data ? (
                 <div className="space-y-6">
+                  {/* Go Back + Sub-Tab Nav Row */}
+                  <div className="flex items-center gap-3">
+                    <button
+                      onClick={handleGoBack}
+                      className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-medium transition-all duration-200 shrink-0"
+                      style={{
+                        background: 'var(--vw-bg-raised)',
+                        border: '1px solid var(--vw-border-lit)',
+                        color: 'var(--vw-text-secondary)',
+                      }}
+                      onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--vw-accent)'; e.currentTarget.style.color = 'var(--vw-accent)'; }}
+                      onMouseLeave={e => { e.currentTarget.style.borderColor = 'var(--vw-border-lit)'; e.currentTarget.style.color = 'var(--vw-text-secondary)'; }}
+                    >
+                      <ArrowLeft className="w-3.5 h-3.5" />
+                      Back
+                    </button>
+
+                    {/* DCF Sub-Tab Navigation */}
+                    <div className="flex-1 flex items-center gap-1 p-1 rounded-xl" style={{ background: 'var(--vw-bg-raised)', border: '1px solid var(--vw-border-dim)' }}>
+                      {([
+                        { id: 'model' as DCFSubTab, label: 'Model', Icon: Activity },
+                        { id: 'wacc' as DCFSubTab, label: 'WACC & CAPM', Icon: DollarSign },
+                        { id: 'montecarlo' as DCFSubTab, label: 'Monte Carlo', Icon: BarChart3 },
+                        { id: 'history' as DCFSubTab, label: 'Financials', Icon: FileSpreadsheet },
+                      ]).map(tab => (
+                        <button
+                          key={tab.id}
+                          onClick={() => setDcfSubTab(tab.id)}
+                          className="flex-1 flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-lg text-sm font-medium transition-all duration-200"
+                          style={{
+                            background: dcfSubTab === tab.id ? 'rgba(0, 212, 170, 0.12)' : 'transparent',
+                            color: dcfSubTab === tab.id ? 'var(--vw-accent)' : 'var(--vw-text-secondary)',
+                            boxShadow: dcfSubTab === tab.id ? '0 1px 8px -2px rgba(0, 212, 170, 0.25)' : 'none',
+                            borderBottom: dcfSubTab === tab.id ? '2px solid var(--vw-accent)' : '2px solid transparent',
+                          }}
+                          onMouseEnter={e => { if (dcfSubTab !== tab.id) e.currentTarget.style.background = 'var(--vw-bg-hover)'; }}
+                          onMouseLeave={e => { if (dcfSubTab !== tab.id) e.currentTarget.style.background = 'transparent'; }}
+                        >
+                          <tab.Icon className="w-3.5 h-3.5" />
+                          {tab.label}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Sub-Tab: WACC & CAPM */}
+                  {dcfSubTab === 'wacc' ? (
+                    <WACCPanel dcf={dcf} inputs={dcfInputs} data={data} onInputChange={handleInputChange} />
+                  ) : dcfSubTab === 'montecarlo' ? (
+                    <MonteCarloSimulation dcf={dcf} data={data} inputs={dcfInputs} />
+                  ) : dcfSubTab === 'history' ? (
+                    <div className="space-y-6">
+                      <div className="flex items-center justify-between">
+                        <h2 className="text-xl font-semibold">Historical Financials</h2>
+                        <button
+                          onClick={handleExport}
+                          className="flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-medium transition-all hover:brightness-110"
+                          style={{
+                            background: 'rgba(0, 212, 170, 0.15)',
+                            border: '1px solid rgba(0, 212, 170, 0.3)',
+                            color: 'var(--vw-accent)',
+                          }}
+                        >
+                          <FileSpreadsheet className="w-3.5 h-3.5" />
+                          Export to Excel
+                        </button>
+                      </div>
+                      <HistoricalTables dcf={dcf} formatUnit={formatUnit} showTitle={false} />
+                    </div>
+                  ) : (
+                  <>
                   {dcf.warnings.length > 0 && (
                     <div className="bg-amber-500/10 border border-amber-500/20 rounded-lg p-5">
                       <div className="flex items-start gap-3">
@@ -574,6 +683,7 @@ export default function App() {
                               <Tooltip
                                 cursor={{ fill: '#334155', opacity: 0.4 }}
                                 contentStyle={{ backgroundColor: '#0f172a', border: '1px solid #334155', borderRadius: '8px' }}
+                                labelStyle={{ color: '#e2e8f0' }}
                                 itemStyle={{ color: '#10b981' }}
                                 formatter={(value: number) => [formatCurrency(value), 'FCFF']}
                               />
@@ -805,8 +915,8 @@ export default function App() {
                     onPrint={handlePrint}
                     onExport={handleExport}
                   />
-
-                  <HistoricalTables dcf={dcf} formatUnit={formatUnit} />
+                  </>
+                  )}
                 </div>
               ) : null}
             </>

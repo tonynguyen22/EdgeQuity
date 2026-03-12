@@ -28,13 +28,39 @@ export interface MultipleStats {
 
 export type ValuationSignal = 'Undervalued' | 'Fair Value' | 'Overvalued';
 
+/** Quarterly trend data point from Finnhub series */
+export interface QuarterlyTrendPoint {
+  period: string;
+  pe: number | null;
+  evEbitda: number | null;
+  evRevenue: number | null;
+  ps: number | null;
+  pb: number | null;
+  pfcf: number | null;
+}
+
+/** Snapshot TTM / current metrics from Finnhub metric object */
+export interface CurrentMetrics {
+  peTTM: number | null;
+  forwardPE: number | null;
+  psTTM: number | null;
+  pbQuarterly: number | null;
+  evEbitdaTTM: number | null;
+  evRevenueTTM: number | null;
+  pfcfShareTTM: number | null;
+  pcfShareTTM: number | null;
+}
+
 export interface MultiplesResult {
   years: MultiplesYear[];
+  allYears: MultiplesYear[];
   stats: MultipleStats[];
   signal: ValuationSignal;
   companyName: string;
   industry: string;
   currentPrice: number;
+  currentMetrics: CurrentMetrics;
+  quarterlyTrend: QuarterlyTrendPoint[];
 }
 
 export interface MultiplesData {
@@ -43,6 +69,7 @@ export interface MultiplesData {
   cashFlows: any[];
   profile: any;
   metrics: any;
+  series: { annual?: Record<string, { period: string; v: number }[]>; quarterly?: Record<string, { period: string; v: number }[]> } | null;
   candles: { t: number[]; c: number[]; s: string } | null;
 }
 

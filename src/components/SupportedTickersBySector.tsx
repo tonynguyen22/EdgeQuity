@@ -69,25 +69,25 @@ export default function SupportedTickersBySector({
   const totalTickers = SUPPORTED_TICKERS_BY_SECTOR.reduce((sum, bucket) => sum + bucket.tickers.length, 0);
 
   return (
-    <div className={`bg-slate-900/40 border border-slate-700/40 rounded-lg p-3 space-y-2 ${className}`}>
+    <div className={`rounded-lg p-4 space-y-2.5 ${className}`} style={{ background: 'rgba(15, 23, 42, 0.6)', border: '1px solid var(--vw-border-dim)' }}>
       <div className="flex items-center gap-2">
-        <Grid3X3 className="w-3.5 h-3.5 text-slate-500" />
-        <span className="text-xs font-semibold text-slate-300">Supported Tickers by Sector</span>
-        <span className={`text-[11px] font-medium ${accentClassName}`}>({totalTickers})</span>
+        <Grid3X3 className="w-4 h-4" style={{ color: 'var(--vw-text-tertiary)' }} />
+        <span className="text-[13px] font-semibold" style={{ color: 'var(--vw-text-primary)' }}>Supported Tickers by Sector</span>
+        <span className={`text-[12px] font-medium ${accentClassName}`}>({totalTickers})</span>
       </div>
 
-      <p className="text-[11px] text-slate-500 leading-relaxed">
-        Same curated ticker universe is used across all Valuation tabs.
+      <p className="text-[13px] leading-relaxed" style={{ color: 'var(--vw-text-secondary)' }}>
+        The same curated ticker universe is used across all analysis tabs.
       </p>
 
-      <div className="max-h-40 overflow-y-auto pr-1 grid grid-cols-1 sm:grid-cols-2 gap-x-3 gap-y-2">
+      <div className="max-h-44 overflow-y-auto pr-1 grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-2.5">
         {SUPPORTED_TICKERS_BY_SECTOR.map((bucket) => (
           <div key={bucket.sector}>
-            <div className="text-[11px] text-slate-400 uppercase tracking-wide mb-0.5">
+            <div className="text-[12px] uppercase tracking-wide mb-0.5 font-medium" style={{ color: 'var(--vw-text-secondary)' }}>
               {bucket.sector}{' '}
-              <span className={`normal-case font-medium ${accentClassName}`}>({bucket.tickers.length})</span>
+              <span className={`normal-case font-semibold ${accentClassName}`}>({bucket.tickers.length})</span>
             </div>
-            <p className="text-[11px] text-slate-500 font-mono leading-relaxed">
+            <p className="text-[13px] font-mono leading-relaxed" style={{ color: 'var(--vw-text-secondary)' }}>
               {bucket.tickers.join(', ')}
             </p>
           </div>

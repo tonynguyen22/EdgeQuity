@@ -44,14 +44,48 @@ export default function MarketCycle() {
   }, []);
 
   return (
-    <div className="max-w-5xl mx-auto py-6 space-y-6">
-      <div className="max-w-xl mx-auto text-center">
-        <h1 className="text-2xl font-bold text-teal-400 flex items-center justify-center gap-2">
-          <RefreshCw className="w-6 h-6" />
-          Market Cycle
-        </h1>
-        <p className="text-sm text-slate-500 mt-1">Wyckoff cycle detection based on SPY daily data</p>
-      </div>
+    <div className="max-w-5xl mx-auto space-y-6">
+      {/* Landing — title + about centered when no data */}
+      {!data && !loading && !error && (
+        <div className="flex flex-col items-center justify-center min-h-[60vh] px-4">
+          <div className="text-center mb-8">
+            <h1 className="text-4xl font-bold tracking-tight mb-2" style={{ color: 'var(--vw-text-primary)' }}>
+              Market <span style={{ color: 'var(--vw-accent)' }}>Cycle</span>
+            </h1>
+            <p className="text-sm" style={{ color: 'var(--vw-text-secondary)' }}>Wyckoff cycle detection based on SPY daily data</p>
+          </div>
+
+          <div className="w-full max-w-2xl rounded-xl p-6 space-y-4" style={{ background: 'rgba(17, 24, 39, 0.5)', border: '1px solid var(--vw-border-dim)' }}>
+            <p className="text-sm font-semibold" style={{ color: 'var(--vw-text-primary)' }}>What you'll see here</p>
+            <ul className="space-y-2.5">
+              {[
+                'Analyzes S&P 500 price data to estimate which phase of the market cycle we are in',
+                'Uses Wyckoff methodology: Accumulation → Markup → Distribution → Markdown',
+                'Gives a probability score for each phase so you can gauge market conditions',
+                'Helps you understand the bigger picture before making individual stock decisions',
+              ].map((item, i) => (
+                <li key={i} className="flex items-start gap-2.5 text-[13px] leading-relaxed" style={{ color: 'var(--vw-text-secondary)' }}>
+                  <span className="mt-0.5 shrink-0 w-5 h-5 rounded-full flex items-center justify-center text-[11px] font-bold"
+                    style={{ background: 'rgba(0,212,170,0.12)', color: 'var(--vw-accent)' }}>
+                    {i + 1}
+                  </span>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      )}
+
+      {/* Title — inline when data is loaded or loading */}
+      {(data || loading || error) && (
+        <div className="text-center mb-6">
+          <h1 className="text-4xl font-bold tracking-tight mb-2" style={{ color: 'var(--vw-text-primary)' }}>
+            Market <span style={{ color: 'var(--vw-accent)' }}>Cycle</span>
+          </h1>
+          <p className="text-sm" style={{ color: 'var(--vw-text-secondary)' }}>Wyckoff cycle detection based on SPY daily data</p>
+        </div>
+      )}
 
       {loading && (
         <div className="max-w-xl mx-auto text-center py-16">
@@ -201,7 +235,7 @@ export default function MarketCycle() {
                         {phase}
                       </span>
                     </div>
-                    <p className="text-xs text-slate-500 leading-relaxed mb-2">{what}</p>
+                    <p className="text-xs text-slate-300/80 leading-relaxed mb-2">{what}</p>
                     <p className="text-xs text-slate-400 leading-relaxed">
                       <span className="font-semibold text-slate-300">What to do: </span>{action}
                     </p>

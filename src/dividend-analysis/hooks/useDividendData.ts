@@ -25,6 +25,11 @@ export function useDividendData() {
   const [error, setError] = useState('');
   const [data, setData] = useState<DividendData | null>(null);
 
+  const reset = () => {
+    setData(null);
+    setError('');
+  };
+
   const fetchData = async (symbol: string) => {
     setLoading(true);
     setError('');
@@ -38,18 +43,18 @@ export function useDividendData() {
         } catch { localStorage.removeItem(cacheKey); }
       }
 
-      const [massiveRes, metricRes, finRes, priceRes] = await Promise.all([
+      const [massiveRes, metricRes, finRes, profileRes] = await Promise.all([
         proxyFetch(`${MASSIVE_DIV_URL}?ticker=${symbol}&limit=40&sort=ex_dividend_date.desc`).catch(() => null),
         proxyFetch(`${FINNHUB_URL}/stock/metric?symbol=${symbol}&metric=all`),
         proxyFetch(`${FINNHUB_URL}/stock/financials-reported?symbol=${symbol}&freq=annual`),
-        proxyFetch(`${FINNHUB_URL}/stock/quote?symbol=${symbol}`),
+        proxyFetch(`${FINNHUB_URL}/stock/profile2?symbol=${symbol}`),
       ]);
 
-      const [massiveData, metricData, finData, priceData] = await Promise.all([
+      const [massiveData, metricData, finData, profileData] = await Promise.all([
         massiveRes ? safeJson(massiveRes).catch(() => ({})) : Promise.resolve({}),
         safeJson(metricRes),
         safeJson(finRes).catch(() => ({ data: [] })),
-        safeJson(priceRes).catch(() => ({})),
+        safeJson(profileRes).catch(() => ({})),
       ]);
 
       const payments = (Array.isArray(massiveData?.results) ? massiveData.results : [])
@@ -65,7 +70,11 @@ export function useDividendData() {
 
       const metrics = metricData?.metric ?? {};
       const financials = (finData?.data || []).slice(0, 3);
-      const currentPrice = priceData?.c ?? 0;
+
+      // Derive current price from marketCap / sharesOutstanding (same approach as DDM)
+      const mktCap = (profileData?.marketCapitalization || 0) * 1e6;
+      const shares = profileData?.shareOutstanding || 0;
+      const currentPrice = (mktCap > 0 && shares > 0) ? mktCap / (shares * 1e6) : 0;
 
       if (!payments.length && !metrics.dividendYieldIndicatedAnnual && !metrics.dividendsPerShareAnnual && !metrics.payoutRatioAnnual) {
         throw new Error(`${symbol} does not appear to pay dividends, or no dividend data is available.`);
@@ -89,5 +98,5 @@ export function useDividendData() {
     }
   };
 
-  return { data, loading, error, fetchData };
+  return { data, loading, error, fetchData, reset };
 }

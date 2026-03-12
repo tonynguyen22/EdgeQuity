@@ -8,24 +8,37 @@
 @theme {
   --font-sans: "DM Sans", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+
+  /* Remap slate scale — deep dark terminal aesthetic */
+  --color-slate-950: #080c14;
+  --color-slate-900: #0c1220;
+  --color-slate-800: #141a28;
+  --color-slate-700: #1e2a3c;
+  --color-slate-600: #2c3e56;
+  --color-slate-500: #4a5f7a;
+  --color-slate-400: #788da6;
+  --color-slate-300: #a0b0c4;
+  --color-slate-200: #c8d2e0;
+  --color-slate-100: #e4e9f2;
+  --color-slate-50:  #f2f5fa;
 }
 
 :root {
-  /* ── Core palette ──────────────────────────────────────────────────────── */
-  --vw-bg-deep:    #0a0e17;
-  --vw-bg-base:    #0d1117;
-  --vw-bg-raised:  #141b27;
-  --vw-bg-surface: #1a2332;
-  --vw-bg-hover:   #1f2b3d;
+  /* ── Core palette ───────────────────────────────────────────────────────── */
+  --vw-bg-deep:    #080c14;
+  --vw-bg-base:    #0c1220;
+  --vw-bg-raised:  #111827;
+  --vw-bg-surface: #151c2b;
+  --vw-bg-hover:   #1c2538;
 
-  --vw-border:     #1e2a3a;
-  --vw-border-dim: #15202e;
-  --vw-border-lit: #2a3a50;
+  --vw-border:     #182538;
+  --vw-border-dim: #131e30;
+  --vw-border-lit: #223450;
 
   --vw-accent:     #00d4aa;
   --vw-accent-dim: #00a88a;
-  --vw-accent-glow: rgba(0, 212, 170, 0.15);
-  --vw-accent-soft: rgba(0, 212, 170, 0.08);
+  --vw-accent-glow: rgba(0, 212, 170, 0.22);
+  --vw-accent-soft: rgba(0, 212, 170, 0.14);
 
   --vw-green:      #00d4aa;
   --vw-red:        #ff4d6a;
@@ -37,10 +50,10 @@
   --vw-orange:     #fb923c;
   --vw-pink:       #f472b6;
 
-  --vw-text-primary:   #e8edf5;
-  --vw-text-secondary: #8899ab;
-  --vw-text-tertiary:  #4a5e73;
-  --vw-text-muted:     #2f4054;
+  --vw-text-primary:   #e8edf4;
+  --vw-text-secondary: #9dafc8;
+  --vw-text-tertiary:  #6d85a2;
+  --vw-text-muted:     #4e6580;
 }
 
 /* ── Global resets & base ────────────────────────────────────────────────── */
@@ -72,11 +85,22 @@ html {
 }
 
 body {
-  background: var(--vw-bg-deep);
+  background: var(--vw-bg-base);
   color: var(--vw-text-primary);
   font-feature-settings: "cv11", "ss01";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── Hide number input spinners ──────────────────────────────────────────── */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
 }
 
 /* ── Noise grain overlay ─────────────────────────────────────────────────── */
@@ -93,16 +117,18 @@ body::before {
 
 /* ── Utility classes ─────────────────────────────────────────────────────── */
 
-/* Glass card */
+/* Card — solid opaque background, sits above grid lines */
 .vw-card {
-  background: linear-gradient(135deg, rgba(20, 27, 39, 0.85), rgba(26, 35, 50, 0.6));
+  background: var(--vw-bg-raised);
   border: 1px solid var(--vw-border);
   border-radius: 12px;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  position: relative;
+  z-index: 1;
+  isolation: isolate;
 }
 .vw-card:hover {
   border-color: var(--vw-border-lit);
+  background: var(--vw-bg-surface);
 }
 
 /* Glow border on accent cards */
@@ -112,12 +138,28 @@ body::before {
               0 4px 16px -4px rgba(0, 0, 0, 0.4);
 }
 
-/* Subtle grid pattern on content area — applied via @layer */
+/* Very subtle grid pattern on content area — barely visible, fades at edges */
 .vw-grid-bg {
+  position: relative;
+}
+/* Grid lines — decorative only, sits behind all content */
+.vw-grid-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
   background-image:
-    linear-gradient(var(--vw-border-dim) 1px, transparent 1px),
-    linear-gradient(90deg, var(--vw-border-dim) 1px, transparent 1px);
-  background-size: 48px 48px;
+    linear-gradient(rgba(60, 90, 130, 0.12) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(60, 90, 130, 0.12) 1px, transparent 1px);
+  background-size: 56px 56px;
+  -webkit-mask-image: radial-gradient(ellipse at 50% 30%, rgba(0,0,0,0.6) 20%, transparent 70%);
+  mask-image: radial-gradient(ellipse at 50% 30%, rgba(0,0,0,0.6) 20%, transparent 70%);
+}
+/* All direct content sits above the grid */
+.vw-grid-bg > * {
+  position: relative;
+  z-index: 1;
 }
 
 /* Stat pill */

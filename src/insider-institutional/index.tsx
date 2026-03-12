@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
-import { Search, AlertCircle } from 'lucide-react';
+import React, { useState, useCallback } from 'react';
+import { AlertCircle, ArrowLeft } from 'lucide-react';
+import TickerSearch from '../components/TickerSearch';
+import TabLanding from '../components/TabLanding';
 import { useInsiderData } from './hooks/useInsiderData';
 import { computeNetBuySell, computeNetScore, computeBuyerClusters } from './calculations';
 import { clearCache } from './utils/storage';
@@ -10,47 +12,57 @@ import InstitutionalTable from './components/InstitutionalTable';
 export default function InsiderInstitutional() {
   const [input, setInput] = useState('');
   const [sym, setSym] = useState('');
+  const [showLoading, setShowLoading] = useState(false);
   const { data, loading, error, fetchData } = useInsiderData();
 
-  const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault();
-    const s = input.trim().toUpperCase();
-    if (s) { setSym(s); fetchData(s); }
+  const handleAnalyze = useCallback((s: string) => {
+    setSym(s);
+    setShowLoading(true);
+    fetchData(s);
+    setTimeout(() => setShowLoading(false), 2500);
+  }, [fetchData]);
+
+  const handleGoBack = () => {
+    setSym('');
+    setInput('');
+    setShowLoading(false);
   };
 
   const netBuySell = data ? computeNetBuySell(data.transactions) : null;
   const netScore = netBuySell ? computeNetScore(netBuySell) : null;
   const buyerClusters = data ? computeBuyerClusters(data.transactions) : [];
+  const isLoading = loading || showLoading;
 
   return (
     <div className="max-w-5xl mx-auto space-y-6">
-      <div className="max-w-xl mx-auto">
-        <h2 className="text-2xl font-bold text-white mb-1">Insider &amp; Institutional</h2>
-        <p className="text-slate-400 text-sm">Recent insider transactions and top institutional holders.</p>
-      </div>
-
-      <form onSubmit={handleSearch} className="max-w-xl mx-auto relative">
-        <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
-        <input
-          value={input}
-          onChange={e => setInput(e.target.value)}
-          placeholder="Enter ticker (e.g. AAPL, MSFT)"
-          className="w-full bg-slate-800 border border-slate-700 rounded-xl pl-12 pr-28 py-4 text-base focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent uppercase transition-all"
+      {/* Landing — shown when no results */}
+      {!data && !isLoading && !error && (
+        <TabLanding
+          title="Insider &"
+          accentTitle="Institutional"
+          subtitle="Recent insider transactions and top institutional holders"
+          aboutItems={[
+            'Tracks recent stock purchases and sales by company executives and board members',
+            'Shows whether insiders are net buying or selling — often a strong conviction signal',
+            'Lists top institutional holders (mutual funds, hedge funds) and their ownership stakes',
+            'Detects coordinated buying clusters — when multiple insiders buy in the same month',
+          ]}
+          searchInput={input}
+          setSearchInput={setInput}
+          onAnalyze={handleAnalyze}
         />
-        <button type="submit" disabled={!input.trim()}
-          className="absolute right-2 top-1/2 -translate-y-1/2 bg-orange-500 hover:bg-orange-600 text-white px-5 py-2.5 rounded-lg font-medium text-sm disabled:opacity-40 disabled:cursor-not-allowed transition-colors">
-          Analyze
-        </button>
-      </form>
+      )}
 
-      {loading && (
-        <div className="flex items-center gap-3 py-8 max-w-xl mx-auto">
-          <div className="w-6 h-6 border-2 border-orange-500 border-t-transparent rounded-full animate-spin" />
-          <span className="text-slate-400">Loading insider data...</span>
+      {/* Loading */}
+      {isLoading && (
+        <div className="flex flex-col items-center justify-center h-64 space-y-4">
+          <div className="w-8 h-8 border-2 border-emerald-500 border-t-transparent rounded-full animate-spin" />
+          <p className="text-slate-400 animate-pulse">Loading insider data…</p>
         </div>
       )}
 
-      {error && (
+      {/* Error */}
+      {error && !isLoading && (
         <div className="bg-red-500/10 border border-red-500/20 rounded-lg p-4 flex gap-3 max-w-xl mx-auto">
           <AlertCircle className="w-5 h-5 text-red-400 shrink-0 mt-0.5" />
           <div>
@@ -61,8 +73,21 @@ export default function InsiderInstitutional() {
         </div>
       )}
 
-      {data && (
+      {/* Results */}
+      {data && !isLoading && (
         <div className="space-y-8">
+          <div className="flex items-center gap-3">
+            <button
+              onClick={handleGoBack}
+              className="shrink-0 w-10 h-10 flex items-center justify-center rounded-xl transition-all"
+              style={{ background: 'var(--vw-bg-raised)', border: '1px solid var(--vw-border-lit)', color: 'var(--vw-text-secondary)' }}
+              title="Go back"
+            >
+              <ArrowLeft className="w-5 h-5" />
+            </button>
+            <h2 className="text-xl font-bold text-white">{sym}</h2>
+          </div>
+
           {netBuySell && (
             <SummaryCards
               netBuySell={netBuySell}
@@ -87,17 +112,6 @@ export default function InsiderInstitutional() {
 
           {data.transactions.length > 0 && <TransactionTable transactions={data.transactions} sym={sym} />}
           <InstitutionalTable institutions={data.institutions} sym={sym} />
-        </div>
-      )}
-
-      {!data && !loading && !error && (
-        <div className="max-w-xl mx-auto bg-slate-800/30 border border-slate-700/30 rounded-xl p-5 space-y-2">
-          <p className="text-sm font-medium text-slate-300">What you'll see here</p>
-          <ul className="space-y-1.5 text-xs text-slate-500">
-            <li className="flex items-start gap-2"><span className="text-orange-500 mt-0.5">•</span>Recent insider transactions — purchases, sales, and grants over the last 12 months</li>
-            <li className="flex items-start gap-2"><span className="text-orange-500 mt-0.5">•</span>Net insider sentiment — whether insiders are net buyers or sellers</li>
-            <li className="flex items-start gap-2"><span className="text-orange-500 mt-0.5">•</span>Top institutional holders by ownership percentage (where available)</li>
-          </ul>
         </div>
       )}
     </div>

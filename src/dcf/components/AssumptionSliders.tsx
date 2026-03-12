@@ -12,6 +12,64 @@ interface AssumptionSlidersProps {
   onNewSearch: () => void;
 }
 
+/* ── Extracted & memoised compact slider ─────────────────────────────────── */
+const CompactSlider = React.memo(function CompactSlider({ label, value, onChange, min, max, step, hint }: {
+  label: string; value: number; onChange: (v: number) => void;
+  min: number; max: number; step: number; hint?: string;
+}) {
+  return (
+    <div className="space-y-1">
+      <div className="flex items-center justify-between">
+        <label className="text-xs" style={{ color: 'var(--vw-text-secondary)' }}>{label}</label>
+        <div className="flex items-center gap-0.5">
+          <input
+            type="number" step={step} value={value}
+            onChange={(e) => onChange(Number(e.target.value))}
+            className="w-14 rounded px-1.5 py-0.5 text-xs font-mono text-right focus:outline-none focus:ring-1 focus:ring-emerald-500"
+            style={{ background: 'var(--vw-bg-deep)', border: '1px solid var(--vw-border)', color: 'var(--vw-accent)' }}
+          />
+          <span className="text-xs font-mono" style={{ color: 'var(--vw-accent)' }}>%</span>
+        </div>
+      </div>
+      <input type="range" min={min} max={max} step={step} value={value}
+        onChange={(e) => onChange(Number(e.target.value))}
+        className="w-full h-1 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-emerald-500"
+      />
+      {hint && <div className="text-[10px]" style={{ color: 'var(--vw-text-tertiary)' }}>{hint}</div>}
+    </div>
+  );
+});
+
+/* ── Extracted & memoised taper bar ──────────────────────────────────────── */
+const TaperBar = React.memo(function TaperBar({ start, end, unit = '%' }: { start: number; end: number; unit?: string }) {
+  if (start === end) return null;
+  const rising = end > start;
+  return (
+    <div className="flex items-center gap-2 py-1">
+      <span className="text-[10px] font-mono w-10 text-right shrink-0" style={{ color: 'var(--vw-accent)' }}>
+        {start}{unit}
+      </span>
+      <div className="flex-1 relative h-1.5 rounded-full overflow-hidden" style={{ background: 'var(--vw-border)' }}>
+        <div
+          className="absolute inset-0 rounded-full"
+          style={{
+            background: rising
+              ? 'linear-gradient(90deg, rgba(0, 212, 170, 0.3), rgba(0, 212, 170, 0.7))'
+              : 'linear-gradient(90deg, rgba(0, 212, 170, 0.7), rgba(0, 212, 170, 0.3))',
+          }}
+        />
+        {/* Start dot */}
+        <div className="absolute left-0 top-1/2 -translate-y-1/2 w-2 h-2 rounded-full" style={{ background: 'var(--vw-accent)', boxShadow: '0 0 6px rgba(0, 212, 170, 0.5)' }} />
+        {/* End dot */}
+        <div className="absolute right-0 top-1/2 -translate-y-1/2 w-2 h-2 rounded-full" style={{ background: 'var(--vw-accent)', boxShadow: '0 0 6px rgba(0, 212, 170, 0.5)' }} />
+      </div>
+      <span className="text-[10px] font-mono w-10 shrink-0" style={{ color: 'var(--vw-accent)' }}>
+        {end}{unit}
+      </span>
+    </div>
+  );
+});
+
 export default function AssumptionSliders({
   inputs, dcf, activeScenario, onInputChange, onApplyScenario, onNewSearch
 }: AssumptionSlidersProps) {
@@ -22,29 +80,32 @@ export default function AssumptionSliders({
   } = inputs;
 
   return (
-    <div className="bg-slate-800/50 border border-slate-700/50 rounded-xl p-6">
-      <div className="flex items-center justify-between mb-6">
-        <h2 className="text-lg font-medium flex items-center gap-2">
-          <PieChart className="w-5 h-5 text-emerald-500" />
+    <div className="rounded-xl p-5" style={{ background: 'rgba(30, 41, 59, 0.5)', border: '1px solid var(--vw-border)' }}>
+      <div className="flex items-center justify-between mb-4">
+        <h2 className="text-base font-medium flex items-center gap-2">
+          <PieChart className="w-4 h-4" style={{ color: 'var(--vw-accent)' }} />
           Assumptions
         </h2>
         <button
           onClick={onNewSearch}
-          className="flex items-center gap-1.5 text-xs text-slate-400 hover:text-slate-200 bg-slate-700/50 hover:bg-slate-700 px-3 py-1.5 rounded-lg transition-colors"
+          className="flex items-center gap-1.5 text-xs px-2.5 py-1 rounded-lg transition-colors"
+          style={{ background: 'var(--vw-bg-hover)', color: 'var(--vw-text-secondary)' }}
+          onMouseEnter={e => e.currentTarget.style.color = 'var(--vw-text-primary)'}
+          onMouseLeave={e => e.currentTarget.style.color = 'var(--vw-text-secondary)'}
         >
           <Search className="w-3 h-3" />
           New Search
         </button>
       </div>
 
-      <div className="space-y-6">
+      <div className="space-y-4">
         {/* Scenario Presets */}
-        <div className="space-y-2">
+        <div className="space-y-1.5">
           <div className="flex items-center justify-between">
-            <label className="text-xs text-slate-500 uppercase font-semibold tracking-wide">Scenario</label>
-            {activeScenario === 'custom' && <span className="text-xs text-slate-600 italic">Custom</span>}
+            <label className="text-[10px] uppercase font-semibold tracking-wide" style={{ color: 'var(--vw-text-tertiary)' }}>Scenario</label>
+            {activeScenario === 'custom' && <span className="text-[10px] italic" style={{ color: 'var(--vw-text-tertiary)' }}>Custom</span>}
           </div>
-          <div className="flex gap-2">
+          <div className="flex gap-1.5">
             {(['bear', 'base', 'bull'] as const).map(s => (
               <button
                 key={s}
@@ -58,7 +119,7 @@ export default function AssumptionSliders({
               </button>
             ))}
           </div>
-          <div className="text-xs text-slate-600">
+          <div className="text-[10px]" style={{ color: 'var(--vw-text-tertiary)' }}>
             {activeScenario === 'bull' ? 'High growth + margin expansion + lower WACC' :
               activeScenario === 'bear' ? 'Low growth + margin compression + higher WACC' :
                 activeScenario === 'base' ? 'Historical CAGR defaults' : 'Manually adjusted'}
@@ -66,229 +127,165 @@ export default function AssumptionSliders({
         </div>
 
         {/* Revenue Growth — Tapered */}
-        <div className="space-y-3">
-          <label className="text-sm text-slate-400">Revenue Growth Rate</label>
-          <div className="text-xs text-slate-500">
-            CAGR 3yr: {formatPct(dcf.revCagr3yr)} | CAGR 5yr: {formatPct(dcf.revCagr5yr)}
+        <div className="space-y-2">
+          <div className="flex items-center justify-between">
+            <label className="text-xs font-medium" style={{ color: 'var(--vw-text-secondary)' }}>Revenue Growth Rate</label>
           </div>
-          <div className="space-y-1">
-            <div className="flex justify-between items-center">
-              <span className="text-xs text-slate-500">Yr 1 (Start)</span>
-              <div className="flex items-center gap-1">
-                <input
-                  type="number" step="0.1" value={revGrowthStart}
-                  onChange={(e) => onInputChange({ revGrowthStart: Number(e.target.value) })}
-                  className="w-16 bg-slate-900 border border-slate-700 rounded px-2 py-0.5 text-xs font-mono text-emerald-400 text-right focus:outline-none focus:ring-1 focus:ring-emerald-500"
-                />
-                <span className="text-xs font-mono text-emerald-400">%</span>
+          <div className="text-[10px]" style={{ color: 'var(--vw-text-tertiary)' }}>
+            CAGR 3yr: {formatPct(dcf.revCagr3yr)} | 5yr: {formatPct(dcf.revCagr5yr)}
+          </div>
+          <div className="grid grid-cols-2 gap-3">
+            <div className="space-y-0.5">
+              <div className="flex justify-between items-center">
+                <span className="text-[10px]" style={{ color: 'var(--vw-text-tertiary)' }}>Yr 1</span>
+                <div className="flex items-center gap-0.5">
+                  <input
+                    type="number" step="0.1" value={revGrowthStart}
+                    onChange={(e) => onInputChange({ revGrowthStart: Number(e.target.value) })}
+                    className="w-14 rounded px-1.5 py-0.5 text-xs font-mono text-right focus:outline-none focus:ring-1 focus:ring-emerald-500"
+                    style={{ background: 'var(--vw-bg-deep)', border: '1px solid var(--vw-border)', color: 'var(--vw-accent)' }}
+                  />
+                  <span className="text-xs font-mono" style={{ color: 'var(--vw-accent)' }}>%</span>
+                </div>
               </div>
+              <input type="range" min="-20" max="50" step="0.5" value={revGrowthStart}
+                onChange={(e) => onInputChange({ revGrowthStart: Number(e.target.value) })}
+                className="w-full h-1 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-emerald-500"
+              />
             </div>
-            <input type="range" min="-20" max="50" step="0.5" value={revGrowthStart}
-              onChange={(e) => onInputChange({ revGrowthStart: Number(e.target.value) })}
-              className="w-full h-1.5 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-emerald-500"
-            />
-          </div>
-          <div className="space-y-1">
-            <div className="flex justify-between items-center">
-              <span className="text-xs text-slate-500">Yr {forecastYears} (End)</span>
-              <div className="flex items-center gap-1">
-                <input
-                  type="number" step="0.1" value={revGrowthEnd}
-                  onChange={(e) => onInputChange({ revGrowthEnd: Number(e.target.value) })}
-                  className="w-16 bg-slate-900 border border-slate-700 rounded px-2 py-0.5 text-xs font-mono text-emerald-400 text-right focus:outline-none focus:ring-1 focus:ring-emerald-500"
-                />
-                <span className="text-xs font-mono text-emerald-400">%</span>
+            <div className="space-y-0.5">
+              <div className="flex justify-between items-center">
+                <span className="text-[10px]" style={{ color: 'var(--vw-text-tertiary)' }}>Yr {forecastYears}</span>
+                <div className="flex items-center gap-0.5">
+                  <input
+                    type="number" step="0.1" value={revGrowthEnd}
+                    onChange={(e) => onInputChange({ revGrowthEnd: Number(e.target.value) })}
+                    className="w-14 rounded px-1.5 py-0.5 text-xs font-mono text-right focus:outline-none focus:ring-1 focus:ring-emerald-500"
+                    style={{ background: 'var(--vw-bg-deep)', border: '1px solid var(--vw-border)', color: 'var(--vw-accent)' }}
+                  />
+                  <span className="text-xs font-mono" style={{ color: 'var(--vw-accent)' }}>%</span>
+                </div>
               </div>
+              <input type="range" min="-20" max="50" step="0.5" value={revGrowthEnd}
+                onChange={(e) => onInputChange({ revGrowthEnd: Number(e.target.value) })}
+                className="w-full h-1 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-emerald-500"
+              />
             </div>
-            <input type="range" min="-20" max="50" step="0.5" value={revGrowthEnd}
-              onChange={(e) => onInputChange({ revGrowthEnd: Number(e.target.value) })}
-              className="w-full h-1.5 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-emerald-500"
-            />
           </div>
-          {revGrowthStart !== revGrowthEnd && (
-            <div className="text-xs text-slate-600 italic">
-              Linear taper: {revGrowthStart}% → {revGrowthEnd}%
-            </div>
-          )}
+          <TaperBar start={revGrowthStart} end={revGrowthEnd} />
         </div>
 
         {/* EBIT Margin — Tapered */}
-        <div className="space-y-3">
-          <label className="text-sm text-slate-400">EBIT Margin</label>
-          <div className="text-xs text-slate-500">
+        <div className="space-y-2">
+          <div className="flex items-center justify-between">
+            <label className="text-xs font-medium" style={{ color: 'var(--vw-text-secondary)' }}>EBIT Margin</label>
+          </div>
+          <div className="text-[10px]" style={{ color: 'var(--vw-text-tertiary)' }}>
             Base year: {dcf.baseEbitMargin >= 0 ? '+' : ''}{(dcf.baseEbitMargin * 100).toFixed(1)}%
           </div>
+          <div className="grid grid-cols-2 gap-3">
+            <div className="space-y-0.5">
+              <div className="flex justify-between items-center">
+                <span className="text-[10px]" style={{ color: 'var(--vw-text-tertiary)' }}>Yr 1</span>
+                <div className="flex items-center gap-0.5">
+                  <input
+                    type="number" step="0.1" value={ebitMarginStart}
+                    onChange={(e) => onInputChange({ ebitMarginStart: Number(e.target.value) })}
+                    className="w-14 rounded px-1.5 py-0.5 text-xs font-mono text-right focus:outline-none focus:ring-1 focus:ring-emerald-500"
+                    style={{ background: 'var(--vw-bg-deep)', border: '1px solid var(--vw-border)', color: 'var(--vw-accent)' }}
+                  />
+                  <span className="text-xs font-mono" style={{ color: 'var(--vw-accent)' }}>%</span>
+                </div>
+              </div>
+              <input type="range" min="-30" max="60" step="0.5" value={ebitMarginStart}
+                onChange={(e) => onInputChange({ ebitMarginStart: Number(e.target.value) })}
+                className="w-full h-1 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-emerald-500"
+              />
+            </div>
+            <div className="space-y-0.5">
+              <div className="flex justify-between items-center">
+                <span className="text-[10px]" style={{ color: 'var(--vw-text-tertiary)' }}>Yr {forecastYears}</span>
+                <div className="flex items-center gap-0.5">
+                  <input
+                    type="number" step="0.1" value={ebitMarginEnd}
+                    onChange={(e) => onInputChange({ ebitMarginEnd: Number(e.target.value) })}
+                    className="w-14 rounded px-1.5 py-0.5 text-xs font-mono text-right focus:outline-none focus:ring-1 focus:ring-emerald-500"
+                    style={{ background: 'var(--vw-bg-deep)', border: '1px solid var(--vw-border)', color: 'var(--vw-accent)' }}
+                  />
+                  <span className="text-xs font-mono" style={{ color: 'var(--vw-accent)' }}>%</span>
+                </div>
+              </div>
+              <input type="range" min="-30" max="60" step="0.5" value={ebitMarginEnd}
+                onChange={(e) => onInputChange({ ebitMarginEnd: Number(e.target.value) })}
+                className="w-full h-1 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-emerald-500"
+              />
+            </div>
+          </div>
+          <TaperBar start={ebitMarginStart} end={ebitMarginEnd} />
+        </div>
+
+        {/* Separator */}
+        <div className="h-px" style={{ background: 'var(--vw-border-dim)' }} />
+
+        {/* Secondary inputs — 2-column grid */}
+        <div className="grid grid-cols-2 gap-x-4 gap-y-3">
+          <CompactSlider
+            label="D&A (% Rev)"
+            value={dnaMarginProj}
+            onChange={v => onInputChange({ dnaMarginProj: v })}
+            min={0} max={20} step={0.1}
+            hint={`5yr: ${(dcf.avgDnaMargin5yr * 100).toFixed(1)}%`}
+          />
+          <CompactSlider
+            label="NWC (% Rev)"
+            value={wcMarginProj}
+            onChange={v => onInputChange({ wcMarginProj: v })}
+            min={-20} max={40} step={0.1}
+            hint={`5yr: ${(dcf.avgNwcMargin5yr * 100).toFixed(1)}%`}
+          />
+          <CompactSlider
+            label="Capex (% Rev)"
+            value={capexMarginProj}
+            onChange={v => onInputChange({ capexMarginProj: v })}
+            min={0} max={20} step={0.1}
+            hint={`5yr: ${(dcf.avgCapexMargin5yr * 100).toFixed(1)}%`}
+          />
+          <CompactSlider
+            label="Shares (% YoY)"
+            value={sharesGrowthProj}
+            onChange={v => onInputChange({ sharesGrowthProj: v })}
+            min={-10} max={20} step={0.1}
+            hint={`5yr: ${(dcf.sharesCagr5yr * 100).toFixed(1)}%`}
+          />
+        </div>
+
+        {/* Separator */}
+        <div className="h-px" style={{ background: 'var(--vw-border-dim)' }} />
+
+        {/* Terminal Growth + Forecast Period — side by side */}
+        <div className="grid grid-cols-2 gap-4">
           <div className="space-y-1">
             <div className="flex justify-between items-center">
-              <span className="text-xs text-slate-500">Yr 1 (Start)</span>
-              <div className="flex items-center gap-1">
-                <input
-                  type="number" step="0.1" value={ebitMarginStart}
-                  onChange={(e) => onInputChange({ ebitMarginStart: Number(e.target.value) })}
-                  className="w-16 bg-slate-900 border border-slate-700 rounded px-2 py-0.5 text-xs font-mono text-emerald-400 text-right focus:outline-none focus:ring-1 focus:ring-emerald-500"
-                />
-                <span className="text-xs font-mono text-emerald-400">%</span>
-              </div>
+              <label className="text-xs" style={{ color: 'var(--vw-text-secondary)' }}>Terminal Growth</label>
+              <span className="text-xs font-mono" style={{ color: 'var(--vw-accent)' }}>{termGrowth}%</span>
             </div>
-            <input type="range" min="-30" max="60" step="0.5" value={ebitMarginStart}
-              onChange={(e) => onInputChange({ ebitMarginStart: Number(e.target.value) })}
-              className="w-full h-1.5 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-emerald-500"
+            <input type="range" min="0" max="5" step="0.5" value={termGrowth}
+              onChange={(e) => onInputChange({ termGrowth: Number(e.target.value) })}
+              className="w-full h-1 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-emerald-500"
             />
           </div>
           <div className="space-y-1">
-            <div className="flex justify-between items-center">
-              <span className="text-xs text-slate-500">Yr {forecastYears} (End)</span>
-              <div className="flex items-center gap-1">
-                <input
-                  type="number" step="0.1" value={ebitMarginEnd}
-                  onChange={(e) => onInputChange({ ebitMarginEnd: Number(e.target.value) })}
-                  className="w-16 bg-slate-900 border border-slate-700 rounded px-2 py-0.5 text-xs font-mono text-emerald-400 text-right focus:outline-none focus:ring-1 focus:ring-emerald-500"
-                />
-                <span className="text-xs font-mono text-emerald-400">%</span>
-              </div>
-            </div>
-            <input type="range" min="-30" max="60" step="0.5" value={ebitMarginEnd}
-              onChange={(e) => onInputChange({ ebitMarginEnd: Number(e.target.value) })}
-              className="w-full h-1.5 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-emerald-500"
-            />
-          </div>
-          {ebitMarginStart !== ebitMarginEnd && (
-            <div className="text-xs text-slate-600 italic">
-              Linear taper: {ebitMarginStart}% → {ebitMarginEnd}%
-            </div>
-          )}
-        </div>
-
-        {/* D&A */}
-        <div className="space-y-3">
-          <div className="flex justify-between items-center">
-            <label className="text-sm text-slate-400">D&A Margin (% of Rev)</label>
-            <div className="flex items-center gap-1">
-              <input type="number" step="0.1" value={dnaMarginProj}
-                onChange={(e) => onInputChange({ dnaMarginProj: Number(e.target.value) })}
-                className="w-16 bg-slate-900 border border-slate-700 rounded px-2 py-0.5 text-xs font-mono text-emerald-400 text-right focus:outline-none focus:ring-1 focus:ring-emerald-500"
-              />
-              <span className="text-xs font-mono text-emerald-400">%</span>
-            </div>
-          </div>
-          <input type="range" min="0" max="20" step="0.1" value={dnaMarginProj}
-            onChange={(e) => onInputChange({ dnaMarginProj: Number(e.target.value) })}
-            className="w-full h-1.5 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-emerald-500"
-          />
-          <div className="text-[10px] text-slate-600">
-            Avg 5yr: {(dcf.avgDnaMargin5yr * 100).toFixed(1)}% | Avg 3yr: {(dcf.avgDnaMargin3yr * 100).toFixed(1)}%
-          </div>
-        </div>
-
-        {/* NWC */}
-        <div className="space-y-3">
-          <div className="flex justify-between items-center">
-            <label className="text-sm text-slate-400">NWC Margin (% of Rev)</label>
-            <div className="flex items-center gap-1">
-              <input type="number" step="0.1" value={wcMarginProj}
-                onChange={(e) => onInputChange({ wcMarginProj: Number(e.target.value) })}
-                className="w-16 bg-slate-900 border border-slate-700 rounded px-2 py-0.5 text-xs font-mono text-emerald-400 text-right focus:outline-none focus:ring-1 focus:ring-emerald-500"
-              />
-              <span className="text-xs font-mono text-emerald-400">%</span>
-            </div>
-          </div>
-          <input type="range" min="-20" max="40" step="0.1" value={wcMarginProj}
-            onChange={(e) => onInputChange({ wcMarginProj: Number(e.target.value) })}
-            className="w-full h-1.5 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-emerald-500"
-          />
-          <div className="text-[10px] text-slate-600">
-            Avg 5yr: {(dcf.avgNwcMargin5yr * 100).toFixed(1)}% | Avg 3yr: {(dcf.avgNwcMargin3yr * 100).toFixed(1)}%
-          </div>
-        </div>
-
-        {/* Capex */}
-        <div className="space-y-3">
-          <div className="flex justify-between items-center">
-            <label className="text-sm text-slate-400">Capex Margin (% of Rev)</label>
-            <div className="flex items-center gap-1">
-              <input type="number" step="0.1" value={capexMarginProj}
-                onChange={(e) => onInputChange({ capexMarginProj: Number(e.target.value) })}
-                className="w-16 bg-slate-900 border border-slate-700 rounded px-2 py-0.5 text-xs font-mono text-emerald-400 text-right focus:outline-none focus:ring-1 focus:ring-emerald-500"
-              />
-              <span className="text-xs font-mono text-emerald-400">%</span>
-            </div>
-          </div>
-          <input type="range" min="0" max="20" step="0.1" value={capexMarginProj}
-            onChange={(e) => onInputChange({ capexMarginProj: Number(e.target.value) })}
-            className="w-full h-1.5 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-emerald-500"
-          />
-          <div className="text-[10px] text-slate-600">
-            Avg 5yr: {(dcf.avgCapexMargin5yr * 100).toFixed(1)}% | Avg 3yr: {(dcf.avgCapexMargin3yr * 100).toFixed(1)}%
-          </div>
-        </div>
-
-        {/* Shares Growth */}
-        <div className="space-y-3">
-          <div className="flex justify-between items-center">
-            <label className="text-sm text-slate-400">Shares Growth (% YoY)</label>
-            <div className="flex items-center gap-1">
-              <input type="number" step="0.1" value={sharesGrowthProj}
-                onChange={(e) => onInputChange({ sharesGrowthProj: Number(e.target.value) })}
-                className="w-16 bg-slate-900 border border-slate-700 rounded px-2 py-0.5 text-xs font-mono text-emerald-400 text-right focus:outline-none focus:ring-1 focus:ring-emerald-500"
-              />
-              <span className="text-xs font-mono text-emerald-400">%</span>
-            </div>
-          </div>
-          <input type="range" min="-10" max="20" step="0.1" value={sharesGrowthProj}
-            onChange={(e) => onInputChange({ sharesGrowthProj: Number(e.target.value) })}
-            className="w-full h-1.5 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-emerald-500"
-          />
-          <div className="text-[10px] text-slate-600">
-            5yr CAGR: {(dcf.sharesCagr5yr * 100).toFixed(1)}% | 3yr CAGR: {(dcf.sharesCagr3yr * 100).toFixed(1)}%
-          </div>
-        </div>
-
-        {/* Terminal Growth */}
-        <div className="space-y-3">
-          <div className="flex justify-between items-center">
-            <label className="text-sm text-slate-400">Terminal Growth Rate</label>
-            <span className="text-sm font-mono text-emerald-400">{termGrowth}%</span>
-          </div>
-          <input type="range" min="0" max="5" step="0.5" value={termGrowth}
-            onChange={(e) => onInputChange({ termGrowth: Number(e.target.value) })}
-            className="w-full h-1.5 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-emerald-500"
-          />
-        </div>
-
-        {/* WACC Adjustment */}
-        <div className="space-y-3">
-          <div className="flex justify-between items-center">
-            <label className="text-sm text-slate-400">WACC Adjustment</label>
-            <span className="text-sm font-mono text-emerald-400">{waccAdj > 0 ? '+' : ''}{waccAdj}%</span>
-          </div>
-          <input type="range" min="-5" max="5" step="0.5" value={waccAdj}
-            onChange={(e) => onInputChange({ waccAdj: Number(e.target.value) })}
-            className="w-full h-1.5 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-emerald-500"
-          />
-        </div>
-
-        {/* ERP */}
-        <div className="space-y-3">
-          <div className="flex justify-between items-center">
-            <label className="text-sm text-slate-400">Equity Risk Premium</label>
-            <span className="text-sm font-mono text-emerald-400">{erp}%</span>
-          </div>
-          <input type="range" min="2" max="10" step="0.5" value={erp}
-            onChange={(e) => onInputChange({ erp: Number(e.target.value) })}
-            className="w-full h-1.5 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-emerald-500"
-          />
-        </div>
-
-        {/* Forecast Period */}
-        <div className="space-y-3">
-          <div className="flex justify-between items-center">
-            <label className="text-sm text-slate-400">Forecast Period</label>
-            <div className="flex gap-2">
+            <label className="text-xs" style={{ color: 'var(--vw-text-secondary)' }}>Forecast Period</label>
+            <div className="flex gap-1.5">
               {[3, 5, 7, 10].map(y => (
                 <button
                   key={y}
                   onClick={() => onInputChange({ forecastYears: y })}
-                  className={`px-2.5 py-1 text-xs rounded-md ${forecastYears === y ? 'bg-emerald-500 text-white' : 'bg-slate-700 text-slate-300'}`}
+                  className="flex-1 py-1 text-[10px] rounded-md font-medium transition-colors"
+                  style={{
+                    background: forecastYears === y ? 'var(--vw-accent)' : 'var(--vw-bg-hover)',
+                    color: forecastYears === y ? 'white' : 'var(--vw-text-secondary)',
+                  }}
                 >
                   {y}yr
                 </button>
@@ -298,23 +295,22 @@ export default function AssumptionSliders({
         </div>
       </div>
 
-      <div className="mt-8 pt-6 border-t border-slate-700/50 space-y-3">
-        <div className="flex justify-between text-sm">
-          <span className="text-slate-400">Calculated WACC</span>
+      {/* Footer */}
+      <div className="mt-5 pt-4 space-y-1.5" style={{ borderTop: '1px solid var(--vw-border-dim)' }}>
+        <div className="flex justify-between text-xs">
+          <span style={{ color: 'var(--vw-text-secondary)' }}>WACC</span>
           <span className="font-mono">{formatPct(dcf.wacc)}</span>
         </div>
-        {dcf.rawWacc < 0.06 && (
-          <div className="text-xs text-amber-400/80 bg-amber-500/10 border border-amber-500/20 rounded-lg px-3 py-2">
-            ⚠ Raw WACC: {formatPct(dcf.rawWacc)} → floored to 6.0% (debt-heavy capital structure)
-          </div>
-        )}
-        <div className="flex justify-between text-sm">
-          <span className="text-slate-400">Beta</span>
+        <div className="flex justify-between text-xs">
+          <span style={{ color: 'var(--vw-text-secondary)' }}>Beta</span>
           <span className="font-mono">{dcf.beta.toFixed(2)}</span>
         </div>
-        <div className="flex justify-between text-sm">
-          <span className="text-slate-400">Avg Tax Rate</span>
+        <div className="flex justify-between text-xs">
+          <span style={{ color: 'var(--vw-text-secondary)' }}>Avg Tax Rate</span>
           <span className="font-mono">{formatPct(dcf.avgTaxRate)}</span>
+        </div>
+        <div className="text-[10px] mt-1" style={{ color: 'var(--vw-text-tertiary)' }}>
+          Adjust WACC & CAPM in the dedicated sub-tab
         </div>
       </div>
     </div>

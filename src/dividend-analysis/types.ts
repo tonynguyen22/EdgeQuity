@@ -17,6 +17,12 @@ export interface DividendMetrics {
   fcfTTM?: number;
   sharesOutstanding?: number;
   shareOutstanding?: number;
+  dividendGrowthRate5Y?: number;
+  currentDividendYieldTTM?: number;
+  dividendPerShareTTM?: number;
+  peTTM?: number;
+  beta?: number;
+  marketCapitalization?: number;
   [key: string]: number | undefined;
 }
 

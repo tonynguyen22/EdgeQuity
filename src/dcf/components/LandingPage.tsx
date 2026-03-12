@@ -22,11 +22,11 @@ const FEATURES = [
   { id: 'grade' as TabId, label: 'Quality', Icon: Award, color: '#f0b429', desc: 'Financial quality report (A-D) with Piotroski, Altman Z, DuPont analysis.' },
   { id: 'comp' as TabId, label: 'Peers', Icon: Users, color: '#38bdf8', desc: 'Compare EV/EBITDA, P/E and multiples against selected peer companies.' },
   { id: 'tech' as TabId, label: 'Technical', Icon: TrendingUp, color: '#a78bfa', desc: 'RSI, MACD, Bollinger Bands, moving averages, and signal score.' },
-  { id: 'cycle' as TabId, label: 'Market Cycle', Icon: RefreshCw, color: '#2dd4bf', desc: 'Identify where the market is across economic and sector cycles.' },
   { id: 'earnings' as TabId, label: 'Earnings', Icon: BarChart2, color: '#22d3ee', desc: 'Consensus EPS estimates, surprise history, and beat rate tracking.' },
   { id: 'insider' as TabId, label: 'Insider & Inst.', Icon: Eye, color: '#fb923c', desc: 'Recent insider buy/sell transactions and institutional ownership.' },
   { id: 'news' as TabId, label: 'News & Sentiment', Icon: Newspaper, color: '#38bdf8', desc: 'AI-powered headlines analysis with sentiment scoring.' },
   { id: 'dividend' as TabId, label: 'Dividends', Icon: Coins, color: '#fb7185', desc: 'Dividend history, growth CAGR, yield, and FCF safety score.' },
+  { id: 'cycle' as TabId, label: 'Market Cycle', Icon: RefreshCw, color: '#2dd4bf', desc: 'Identify where the market is across economic and sector cycles.' },
 ];
 
 const STATS = [

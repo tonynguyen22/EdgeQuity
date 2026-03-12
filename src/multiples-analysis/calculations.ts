@@ -1,4 +1,4 @@
-import type { MultiplesData, MultiplesYear, MultipleStats, MultipleKey, MultiplesResult, ValuationSignal } from './types';
+import type { MultiplesData, MultiplesYear, MultipleStats, MultipleKey, MultiplesResult, ValuationSignal, CurrentMetrics, QuarterlyTrendPoint } from './types';
 import { MULTIPLE_KEYS, MULTIPLE_LABELS } from './types';
 
 function findClosestPrice(candles: NonNullable<MultiplesData['candles']>, targetDate: string): number | null {
@@ -28,92 +28,213 @@ function safeDiv(numerator: number, denominator: number): number | null {
   return +result.toFixed(2);
 }
 
+function extractCurrentMetrics(metrics: any): CurrentMetrics {
+  return {
+    peTTM: metrics?.peTTM ?? null,
+    forwardPE: metrics?.forwardPE ?? null,
+    psTTM: metrics?.psTTM ?? null,
+    pbQuarterly: metrics?.pbQuarterly ?? null,
+    evEbitdaTTM: metrics?.evEbitdaTTM ?? null,
+    evRevenueTTM: metrics?.evRevenueTTM ?? null,
+    pfcfShareTTM: metrics?.pfcfShareTTM ?? null,
+    pcfShareTTM: metrics?.pcfShareTTM ?? null,
+  };
+}
+
+function buildQuarterlyTrend(series: MultiplesData['series']): QuarterlyTrendPoint[] {
+  if (!series?.quarterly) return [];
+
+  const q = series.quarterly;
+  // Collect all unique periods from any available series
+  const periodSet = new Set<string>();
+  const seriesKeys = ['peTTM', 'evEbitdaTTM', 'evRevenueTTM', 'psTTM', 'pb', 'pfcfTTM'] as const;
+  for (const key of seriesKeys) {
+    if (q[key]) {
+      for (const entry of q[key]) {
+        if (entry.period) periodSet.add(entry.period);
+      }
+    }
+  }
+
+  const periods = [...periodSet].sort();
+  // Build lookup maps for each series
+  const maps: Record<string, Map<string, number>> = {};
+  for (const key of seriesKeys) {
+    maps[key] = new Map();
+    if (q[key]) {
+      for (const entry of q[key]) {
+        if (entry.period && entry.v != null) maps[key].set(entry.period, entry.v);
+      }
+    }
+  }
+
+  return periods.map((period): QuarterlyTrendPoint => ({
+    period,
+    pe: maps['peTTM']?.get(period) ?? null,
+    evEbitda: maps['evEbitdaTTM']?.get(period) ?? null,
+    evRevenue: maps['evRevenueTTM']?.get(period) ?? null,
+    ps: maps['psTTM']?.get(period) ?? null,
+    pb: maps['pb']?.get(period) ?? null,
+    pfcf: maps['pfcfTTM']?.get(period) ?? null,
+  }));
+}
+
+/** Fallback: build MultiplesYear[] from Finnhub series.annual when FMP is unavailable */
+function buildYearsFromSeries(series: MultiplesData['series'], profile: any): MultiplesYear[] {
+  if (!series?.annual) return [];
+
+  const a = series.annual;
+  const seriesMap: Record<string, keyof MultiplesYear> = {
+    pe: 'pe',
+    evEbitda: 'evEbitda',
+    evRevenue: 'evRevenue',
+    pb: 'pb',
+    ps: 'ps',
+    pfcf: 'pfcf',
+  };
+
+  // Collect all unique periods
+  const periodSet = new Set<string>();
+  for (const key of Object.keys(seriesMap)) {
+    if (a[key]) {
+      for (const entry of a[key]) {
+        if (entry.period) periodSet.add(entry.period);
+      }
+    }
+  }
+
+  const periods = [...periodSet].sort();
+  const currentPrice = profile?.marketCapitalization && profile?.shareOutstanding
+    ? (profile.marketCapitalization * 1e6) / (profile.shareOutstanding * 1e6)
+    : 0;
+
+  // Build lookup maps
+  const maps: Record<string, Map<string, number>> = {};
+  for (const key of Object.keys(seriesMap)) {
+    maps[key] = new Map();
+    if (a[key]) {
+      for (const entry of a[key]) {
+        if (entry.period && entry.v != null && entry.v > 0) maps[key].set(entry.period, +entry.v.toFixed(2));
+      }
+    }
+  }
+
+  return periods.map((period): MultiplesYear => ({
+    year: period.substring(0, 4),
+    date: period,
+    price: currentPrice,
+    marketCap: profile?.marketCapitalization ? profile.marketCapitalization * 1e6 : 0,
+    ev: 0, // not available from series alone
+    pe: maps['pe']?.get(period) ?? null,
+    evEbitda: maps['evEbitda']?.get(period) ?? null,
+    evRevenue: maps['evRevenue']?.get(period) ?? null,
+    evEbit: null, // not in Finnhub series
+    pb: maps['pb']?.get(period) ?? null,
+    ps: maps['ps']?.get(period) ?? null,
+    pfcf: maps['pfcf']?.get(period) ?? null,
+  }));
+}
+
 export function computeHistoricalMultiples(data: MultiplesData): MultiplesResult | null {
   const { incomeStatements, balanceSheets, cashFlows, candles, profile } = data;
-
-  if (!incomeStatements?.length) return null;
 
   const currentPrice = profile?.marketCapitalization && profile?.shareOutstanding
     ? (profile.marketCapitalization * 1e6) / (profile.shareOutstanding * 1e6)
     : null;
   const currentMarketCap = profile?.marketCapitalization ? profile.marketCapitalization * 1e6 : null;
 
-  const sorted = [...incomeStatements].sort(
-    (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime(),
-  );
+  let years: MultiplesYear[] = [];
 
-  const years: MultiplesYear[] = [];
+  // Primary path: compute from FMP financial statements
+  if (incomeStatements?.length) {
+    const sorted = [...incomeStatements].sort(
+      (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime(),
+    );
 
-  for (const ic of sorted) {
-    const year = ic.fiscalYear || ic.date?.substring(0, 4);
-    const date = ic.date;
-    if (!year || !date) continue;
+    for (const ic of sorted) {
+      const year = ic.fiscalYear || ic.date?.substring(0, 4);
+      const date = ic.date;
+      if (!year || !date) continue;
 
-    const bs = balanceSheets?.find((b: any) => (b.fiscalYear || b.date?.substring(0, 4)) === year);
-    const cf = cashFlows?.find((c: any) => (c.fiscalYear || c.date?.substring(0, 4)) === year);
+      const bs = balanceSheets?.find((b: any) => (b.fiscalYear || b.date?.substring(0, 4)) === year);
+      const cf = cashFlows?.find((c: any) => (c.fiscalYear || c.date?.substring(0, 4)) === year);
 
-    let price: number | null = null;
-    let marketCap: number | null = null;
-    let ev: number | null = null;
+      let price: number | null = null;
+      let marketCap: number | null = null;
+      let ev: number | null = null;
 
-    const shares = ic.weightedAverageShsOutDil || ic.weightedAverageShsOut || 0;
-    const totalDebt = bs?.totalDebt ?? 0;
-    const cashEquiv = bs?.cashAndCashEquivalents ?? bs?.cashAndShortTermInvestments ?? 0;
+      const shares = ic.weightedAverageShsOutDil || ic.weightedAverageShsOut || 0;
+      const totalDebt = bs?.totalDebt ?? 0;
+      const cashEquiv = bs?.cashAndCashEquivalents ?? bs?.cashAndShortTermInvestments ?? 0;
 
-    if (candles) {
-      price = findClosestPrice(candles, date);
-      if (price && shares) {
-        marketCap = price * shares;
+      if (candles) {
+        price = findClosestPrice(candles, date);
+        if (price && shares) {
+          marketCap = price * shares;
+          ev = marketCap + totalDebt - cashEquiv;
+        }
+      }
+
+      // Fallback: use current market cap when candle data is unavailable.
+      if (!marketCap && currentMarketCap) {
+        marketCap = currentMarketCap;
+        price = currentPrice;
         ev = marketCap + totalDebt - cashEquiv;
       }
+
+      if (!marketCap || !ev || !price) continue;
+
+      const rev = ic.revenue || 0;
+      const ebitda = ic.ebitda || (ic.operatingIncome || 0) + (ic.depreciationAndAmortization || 0);
+      const ebit = ic.operatingIncome || ic.ebit || 0;
+      const netIncome = ic.netIncome || 0;
+      const bookValue = bs?.totalStockholdersEquity || bs?.totalEquity || 0;
+      const fcf = cf ? (cf.operatingCashFlow || cf.netCashProvidedByOperatingActivities || 0) - Math.abs(cf.capitalExpenditure || cf.investmentsInPropertyPlantAndEquipment || 0) : 0;
+
+      years.push({
+        year,
+        date,
+        price,
+        marketCap,
+        ev,
+        pe: safeDiv(marketCap, netIncome),
+        evEbitda: safeDiv(ev, ebitda),
+        evRevenue: safeDiv(ev, rev),
+        evEbit: safeDiv(ev, ebit),
+        pb: safeDiv(marketCap, bookValue),
+        ps: safeDiv(marketCap, rev),
+        pfcf: safeDiv(marketCap, fcf),
+      });
     }
+  }
 
-    // Fallback: use current market cap when candle data is unavailable.
-    // This gives "current valuation vs historical fundamentals" which is
-    // still useful for seeing how today's price compares to past earnings.
-    if (!marketCap && currentMarketCap) {
-      marketCap = currentMarketCap;
-      price = currentPrice;
-      ev = marketCap + totalDebt - cashEquiv;
-    }
-
-    if (!marketCap || !ev || !price) continue;
-
-    const rev = ic.revenue || 0;
-    const ebitda = ic.ebitda || (ic.operatingIncome || 0) + (ic.depreciationAndAmortization || 0);
-    const ebit = ic.operatingIncome || ic.ebit || 0;
-    const netIncome = ic.netIncome || 0;
-    const bookValue = bs?.totalStockholdersEquity || bs?.totalEquity || 0;
-    const fcf = cf ? (cf.operatingCashFlow || cf.netCashProvidedByOperatingActivities || 0) - Math.abs(cf.capitalExpenditure || cf.investmentsInPropertyPlantAndEquipment || 0) : 0;
-
-    years.push({
-      year,
-      date,
-      price,
-      marketCap,
-      ev,
-      pe: safeDiv(marketCap, netIncome),
-      evEbitda: safeDiv(ev, ebitda),
-      evRevenue: safeDiv(ev, rev),
-      evEbit: safeDiv(ev, ebit),
-      pb: safeDiv(marketCap, bookValue),
-      ps: safeDiv(marketCap, rev),
-      pfcf: safeDiv(marketCap, fcf),
-    });
+  // Fallback path: use Finnhub series.annual when FMP data is unavailable
+  if (years.length === 0 && data.series?.annual) {
+    years = buildYearsFromSeries(data.series, profile);
   }
 
   if (years.length === 0) return null;
 
-  const stats = computeStats(years);
+  // Split: use last 6 years for primary stats, keep all for full historical view
+  const RECENT_COUNT = 6;
+  const allYears = years;
+  const recentYears = years.length > RECENT_COUNT ? years.slice(-RECENT_COUNT) : years;
+
+  const stats = computeStats(recentYears);
   const signal = computeSignal(stats);
+  const currentMetrics = extractCurrentMetrics(data.metrics);
+  const quarterlyTrend = buildQuarterlyTrend(data.series);
 
   return {
-    years,
+    years: recentYears,
+    allYears,
     stats,
     signal,
     companyName: profile?.name ?? '',
     industry: profile?.finnhubIndustry ?? '',
-    currentPrice: currentPrice ?? years[years.length - 1]?.price ?? 0,
+    currentPrice: currentPrice ?? recentYears[recentYears.length - 1]?.price ?? 0,
+    currentMetrics,
+    quarterlyTrend,
   };
 }
 
@@ -160,6 +281,9 @@ export function formatMultiple(value: number | null): string {
 
 export function formatPremiumDiscount(value: number | null): string {
   if (value === null) return '-';
-  const sign = value > 0 ? '+' : '';
-  return `${sign}${value.toFixed(1)}%`;
+  const absVal = Math.abs(value).toFixed(1);
+  if (value < -1) return `${absVal}% Below Avg`;
+  if (value > 1) return `${absVal}% Above Avg`;
+  return 'Near Avg';
 }
+

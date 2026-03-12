@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef, useMemo } from 'react';
-import { AlertCircle, Search } from 'lucide-react';
+import React, { useState, useMemo } from 'react';
+import { AlertCircle, ArrowLeft, ChevronDown, ChevronUp, History } from 'lucide-react';
 import { SUPPORTED_TICKERS } from '../dcf/types';
 
 import { useMultiplesData } from './hooks/useMultiplesData';
@@ -15,40 +15,25 @@ export default function MultiplesAnalysis() {
   const [tickerInput, setTickerInput] = useState('');
   const [ticker, setTicker] = useState('');
   const [hiddenSeries, setHiddenSeries] = useState<Record<string, boolean>>({});
-  const [showDropdown, setShowDropdown] = useState(false);
-  const dropdownRef = useRef<HTMLFormElement>(null);
+  const [showFullHistory, setShowFullHistory] = useState(false);
+
 
   const { data, loading, error } = useMultiplesData(ticker);
 
-  useEffect(() => {
-    const handleClickOutside = (e: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
-        setShowDropdown(false);
-      }
-    };
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
 
-  const filteredTickers = useMemo(() => {
-    const q = tickerInput.trim().toUpperCase();
-    if (!q) return [...SUPPORTED_TICKERS];
-    return SUPPORTED_TICKERS.filter(t => t.includes(q));
-  }, [tickerInput]);
 
   const handleSearch = (sym: string) => {
     setTicker(sym);
     setTickerInput(sym);
     setHiddenSeries({});
-    setShowDropdown(false);
+    setShowFullHistory(false);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    const sym = tickerInput.trim().toUpperCase();
-    if (sym && (SUPPORTED_TICKERS as readonly string[]).includes(sym)) {
-      handleSearch(sym);
-    }
+  const handleGoBack = () => {
+    setTicker('');
+    setTickerInput('');
+    setHiddenSeries({});
+    setShowFullHistory(false);
   };
 
   const handleLegendClick = (d: any, chartKeys: string[]) => {
@@ -71,7 +56,7 @@ export default function MultiplesAnalysis() {
   }, [data]);
 
   const hasResults = !loading && !!result;
-  const isValid = tickerInput.trim() && (SUPPORTED_TICKERS as readonly string[]).includes(tickerInput.trim().toUpperCase());
+  const hasExtraHistory = result && result.allYears.length > result.years.length;
 
   return (
     <div className="space-y-6">
@@ -85,41 +70,19 @@ export default function MultiplesAnalysis() {
         />
       )}
 
-      {/* Compact inline search when results are showing */}
+      {/* Go back button when results are showing */}
       {hasResults && (
-        <form onSubmit={handleSubmit} className="relative max-w-md" ref={dropdownRef}>
-          <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 z-10" />
-          <input
-            type="text"
-            value={tickerInput}
-            onChange={(e) => { setTickerInput(e.target.value); setShowDropdown(true); }}
-            onFocus={() => setShowDropdown(true)}
-            placeholder="Search another ticker..."
-            className="w-full bg-slate-800 border border-slate-700 rounded-lg pl-9 pr-24 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent uppercase transition-all"
-            autoComplete="off"
-          />
+        <div className="flex items-center gap-3">
           <button
-            type="submit"
-            disabled={!isValid}
-            className="absolute right-1.5 top-1/2 -translate-y-1/2 bg-pink-500 hover:bg-pink-600 text-white px-4 py-1.5 rounded-md font-medium transition-colors text-xs disabled:opacity-40 disabled:cursor-not-allowed z-10"
+            onClick={handleGoBack}
+            className="shrink-0 w-10 h-10 flex items-center justify-center rounded-xl transition-all"
+            style={{ background: 'var(--vw-bg-raised)', border: '1px solid var(--vw-border-lit)', color: 'var(--vw-text-secondary)' }}
+            title="Go back"
           >
-            Analyze
+            <ArrowLeft className="w-5 h-5" />
           </button>
-          {showDropdown && filteredTickers.length > 0 && (
-            <div className="absolute top-full left-0 right-0 mt-1 bg-slate-800 border border-slate-700 rounded-xl shadow-2xl max-h-48 overflow-y-auto z-50">
-              {filteredTickers.map(t => (
-                <button key={t} type="button" onClick={() => handleSearch(t)}
-                  className="w-full text-left px-4 py-2 text-sm font-mono hover:bg-slate-700/50 transition-colors first:rounded-t-xl last:rounded-b-xl text-slate-200"
-                >{t}</button>
-              ))}
-            </div>
-          )}
-          {showDropdown && filteredTickers.length === 0 && tickerInput.trim() && (
-            <div className="absolute top-full left-0 right-0 mt-1 bg-slate-800 border border-slate-700 rounded-xl shadow-2xl z-50 px-4 py-2.5 text-xs text-slate-500">
-              No matching ticker. Only {SUPPORTED_TICKERS.length} pre-selected stocks are supported.
-            </div>
-          )}
-        </form>
+          <h2 className="text-xl font-bold text-white">{ticker}</h2>
+        </div>
       )}
 
       {loading && (
@@ -145,11 +108,13 @@ export default function MultiplesAnalysis() {
             companyName={result.companyName}
             ticker={ticker}
             currentPrice={result.currentPrice}
+            currentMetrics={result.currentMetrics}
           />
 
           <MultiplesTable
             years={result.years}
             stats={result.stats}
+            currentMetrics={result.currentMetrics}
           />
 
           <MultiplesCharts
@@ -157,14 +122,60 @@ export default function MultiplesAnalysis() {
             stats={result.stats}
             hiddenSeries={hiddenSeries}
             onLegendClick={handleLegendClick}
+            quarterlyTrend={result.quarterlyTrend}
           />
 
           <ValuationContext
             stats={result.stats}
             signal={result.signal}
           />
+
+          {/* Full Historical Data — collapsible section */}
+          {hasExtraHistory && (
+            <div className="border border-slate-700/40 rounded-xl overflow-hidden">
+              <button
+                onClick={() => setShowFullHistory(!showFullHistory)}
+                className="w-full flex items-center justify-between px-5 py-3.5 bg-slate-800/30 hover:bg-slate-800/50 transition-colors"
+              >
+                <div className="flex items-center gap-2.5">
+                  <History className="w-4 h-4 text-slate-500" />
+                  <span className="text-sm font-semibold text-slate-400">
+                    Full Historical Data
+                  </span>
+                  <span className="text-xs text-slate-600">
+                    {result.allYears.length} years ({result.allYears[0]?.year}–{result.allYears[result.allYears.length - 1]?.year})
+                  </span>
+                </div>
+                {showFullHistory
+                  ? <ChevronUp className="w-4 h-4 text-slate-500" />
+                  : <ChevronDown className="w-4 h-4 text-slate-500" />
+                }
+              </button>
+
+              {showFullHistory && (
+                <div className="p-5 space-y-6 border-t border-slate-700/30">
+                  <p className="text-xs text-slate-500">
+                    Extended view showing all available historical multiples. Note: stats above use only the most recent {result.years.length} years for more relevant comparisons.
+                  </p>
+                  <MultiplesTable
+                    years={result.allYears}
+                    stats={result.stats}
+                    currentMetrics={result.currentMetrics}
+                  />
+                  <MultiplesCharts
+                    years={result.allYears}
+                    stats={result.stats}
+                    hiddenSeries={hiddenSeries}
+                    onLegendClick={handleLegendClick}
+                    quarterlyTrend={[]}
+                  />
+                </div>
+              )}
+            </div>
+          )}
         </>
       )}
     </div>
   );
 }
+

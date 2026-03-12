@@ -70,7 +70,7 @@ export default function AdvancedMetrics({ piotroski, dupontData, workingCapitalD
               <CartesianGrid strokeDasharray="3 3" stroke="#334155" />
               <XAxis dataKey="year" tick={{ fill: '#94a3b8', fontSize: 11 }} />
               <YAxis tick={{ fill: '#94a3b8', fontSize: 11 }} tickFormatter={(v: number) => `${(v * 100).toFixed(0)}%`} />
-              <Tooltip contentStyle={{ backgroundColor: '#1e293b', border: '1px solid #475569', borderRadius: '8px' }} formatter={(v: number, name: string) => [name === 'assetTurnover' || name === 'equityMultiplier' ? `${v.toFixed(2)}x` : `${(v * 100).toFixed(1)}%`, name === 'netMargin' ? 'Net Margin' : name === 'assetTurnover' ? 'Asset Turnover' : name === 'equityMultiplier' ? 'Equity Mult.' : 'ROE']} />
+              <Tooltip contentStyle={{ backgroundColor: '#1e293b', border: '1px solid #475569', borderRadius: '8px' }} labelStyle={{ color: '#e2e8f0' }} itemStyle={{ color: '#e2e8f0' }} formatter={(v: number, name: string) => [name === 'assetTurnover' || name === 'equityMultiplier' ? `${v.toFixed(2)}x` : `${(v * 100).toFixed(1)}%`, name === 'netMargin' ? 'Net Margin' : name === 'assetTurnover' ? 'Asset Turnover' : name === 'equityMultiplier' ? 'Equity Mult.' : 'ROE']} />
               <Legend onClick={(d: any) => onLegendClick(d, ['netMargin', 'assetTurnover', 'equityMultiplier', 'roe'])} />
               <Line type="monotone" dataKey="netMargin" name="Net Margin" stroke="#10b981" strokeWidth={2} dot={{ r: 3 }} hide={!!hiddenSeries['netMargin']} />
               <Line type="monotone" dataKey="assetTurnover" name="Asset Turnover" stroke="#3b82f6" strokeWidth={2} dot={{ r: 3 }} hide={!!hiddenSeries['assetTurnover']} />
@@ -109,7 +109,7 @@ export default function AdvancedMetrics({ piotroski, dupontData, workingCapitalD
                     <CartesianGrid strokeDasharray="3 3" stroke="#334155" />
                     <XAxis dataKey="year" tick={{ fill: '#94a3b8', fontSize: 11 }} />
                     <YAxis tick={{ fill: '#94a3b8', fontSize: 11 }} />
-                    <Tooltip contentStyle={{ backgroundColor: '#1e293b', border: '1px solid #475569', borderRadius: '8px' }} formatter={(v: number) => [`${v.toFixed(1)} days`]} />
+                    <Tooltip contentStyle={{ backgroundColor: '#1e293b', border: '1px solid #475569', borderRadius: '8px' }} labelStyle={{ color: '#e2e8f0' }} itemStyle={{ color: '#e2e8f0' }} formatter={(v: number) => [`${v.toFixed(1)} days`]} />
                     <Legend onClick={(d: any) => onLegendClick(d, ['dso', 'dio', 'dpo', 'ccc'])} />
                     <Line type="monotone" dataKey="dso" name="DSO" stroke="#10b981" strokeWidth={2} dot={{ r: 3 }} hide={!!hiddenSeries['dso']} />
                     <Line type="monotone" dataKey="dio" name="DIO" stroke="#3b82f6" strokeWidth={2} dot={{ r: 3 }} hide={!!hiddenSeries['dio']} />
@@ -143,7 +143,7 @@ export default function AdvancedMetrics({ piotroski, dupontData, workingCapitalD
               <CartesianGrid strokeDasharray="3 3" stroke="#334155" />
               <XAxis dataKey="year" tick={{ fill: '#94a3b8', fontSize: 11 }} />
               <YAxis tick={{ fill: '#94a3b8', fontSize: 11 }} tickFormatter={(v: number) => `${(v * 100).toFixed(0)}%`} />
-              <Tooltip contentStyle={{ backgroundColor: '#1e293b', border: '1px solid #475569', borderRadius: '8px' }} formatter={(v: number) => [`${(v * 100).toFixed(1)}%`, 'Accruals Ratio']} />
+              <Tooltip contentStyle={{ backgroundColor: '#1e293b', border: '1px solid #475569', borderRadius: '8px' }} labelStyle={{ color: '#e2e8f0' }} itemStyle={{ color: '#e2e8f0' }} formatter={(v: number) => [`${(v * 100).toFixed(1)}%`, 'Accruals Ratio']} />
               <ReferenceLine y={0} stroke="#64748b" strokeDasharray="3 3" />
               <Bar dataKey="accruals" name="Accruals Ratio" fill="#f59e0b" radius={[3, 3, 0, 0]}>
                 {earningsQuality.trend.map((entry, idx) => (

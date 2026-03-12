@@ -1,5 +1,5 @@
 import React from 'react';
-import { TrendingUp, TrendingDown, Minus } from 'lucide-react';
+import { TrendingUp, TrendingDown, Minus, ChevronDown, ChevronUp } from 'lucide-react';
 import type { MultipleStats, ValuationSignal } from '../types';
 import { formatMultiple, formatPremiumDiscount } from '../calculations';
 
@@ -33,7 +33,7 @@ export default function ValuationContext({ stats, signal }: Props) {
 
         <div className="flex items-center gap-6 mb-4 text-xs">
           <div className="flex items-center gap-1.5">
-            <TrendingDown className="w-3.5 h-3.5 text-emerald-400" />
+            <ChevronDown className="w-3.5 h-3.5 text-emerald-400" />
             <span className="text-slate-400">{belowAvg} below avg</span>
           </div>
           <div className="flex items-center gap-1.5">
@@ -41,7 +41,7 @@ export default function ValuationContext({ stats, signal }: Props) {
             <span className="text-slate-400">{nearAvg} near avg</span>
           </div>
           <div className="flex items-center gap-1.5">
-            <TrendingUp className="w-3.5 h-3.5 text-red-400" />
+            <ChevronUp className="w-3.5 h-3.5 text-red-400" />
             <span className="text-slate-400">{aboveAvg} above avg</span>
           </div>
         </div>
@@ -74,7 +74,7 @@ export default function ValuationContext({ stats, signal }: Props) {
                     />
                   )}
                 </div>
-                <span className={`w-16 text-right tabular-nums font-medium ${isDiscount ? 'text-emerald-400' : isPremium ? 'text-red-400' : 'text-slate-400'}`}>
+                <span className={`w-28 text-right tabular-nums font-medium ${isDiscount ? 'text-emerald-400' : isPremium ? 'text-red-400' : 'text-slate-400'}`}>
                   {formatPremiumDiscount(s.premiumDiscount)}
                 </span>
               </div>

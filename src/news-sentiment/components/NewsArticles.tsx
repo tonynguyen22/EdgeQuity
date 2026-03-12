@@ -10,14 +10,14 @@ interface NewsArticlesProps {
 
 export default function NewsArticles({ articles, sym }: NewsArticlesProps) {
   if (articles.length === 0) {
-    return <div className="text-center py-8 text-slate-500 text-sm">No news articles found for {sym} in the last 30 days.</div>;
+    return <div className="text-center py-8 text-slate-500 text-sm">No news articles found for {sym} in the last 7 days.</div>;
   }
 
   return (
     <div className="space-y-3">
       <div className="flex items-center justify-between">
         <h3 className="text-base font-semibold text-slate-200">{sym} — Recent Headlines</h3>
-        <span className="text-xs text-slate-500">{articles.length} articles, last 30 days</span>
+        <span className="text-xs text-slate-500">{articles.length} articles, last 7 days</span>
       </div>
       <div className="space-y-2">
         {articles.map((article, i) => (

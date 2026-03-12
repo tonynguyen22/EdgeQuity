@@ -41,7 +41,7 @@ export function useNewsData() {
       }
 
       const now = new Date();
-      const from = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000);
+      const from = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
       const fromStr = from.toISOString().split('T')[0];
       const toStr = now.toISOString().split('T')[0];
 
@@ -52,7 +52,13 @@ export function useNewsData() {
       const newsData = await safeJson(newsRes);
       const sentData = await safeJson(sentRes).catch(() => ({}));
 
-      const articles = Array.isArray(newsData) ? newsData.slice(0, 20) : [];
+      const raw = Array.isArray(newsData) ? newsData : [];
+      const sym = symbol.toUpperCase();
+      const articles = raw.filter((a: any) => {
+        const h = (a.headline || '').toUpperCase();
+        const s = (a.summary || '').toUpperCase();
+        return h.includes(sym) || s.includes(sym);
+      });
 
       if (!articles.length && !sentData?.sentiment) {
         throw new Error('No news data found for this ticker. Try a major US-listed stock.');
@@ -70,5 +76,10 @@ export function useNewsData() {
     }
   };
 
-  return { data, loading, error, fetchData };
+  const reset = () => {
+    setData(null);
+    setError('');
+  };
+
+  return { data, loading, error, fetchData, reset };
 }

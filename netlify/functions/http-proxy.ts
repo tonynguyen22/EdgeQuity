@@ -83,7 +83,7 @@ function applyProviderAuth(url: URL, headers: Headers, body: string | undefined)
       return body;
     }
   }
-  if (host === 'api.shopaikey.com' || host === 'generativelanguage.googleapis.com') {
+  if (host === 'api.shopaikey.com' || host === 'api-v2.shopaikey.com' || host === 'generativelanguage.googleapis.com') {
     if (geminiKey) {
       setHeader(headers, 'Authorization', `Bearer ${geminiKey}`);
       setQueryKey(url, 'key', geminiKey);
@@ -103,6 +103,7 @@ const ALLOWED_HOSTS = new Set([
   'www.alphavantage.co',
   'api.taapi.io',
   'api.shopaikey.com',
+  'api-v2.shopaikey.com',
   'generativelanguage.googleapis.com',
 ]);
 

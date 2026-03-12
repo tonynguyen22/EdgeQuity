@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { useMemo, useState } from 'react';
 import { ResponsiveContainer, LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, Legend, ReferenceLine } from 'recharts';
-import type { MultiplesYear, MultipleStats } from '../types';
+import type { MultiplesYear, MultipleStats, QuarterlyTrendPoint } from '../types';
 
 interface Props {
   years: MultiplesYear[];
   stats: MultipleStats[];
   hiddenSeries: Record<string, boolean>;
   onLegendClick: (d: any, chartKeys: string[]) => void;
+  quarterlyTrend: QuarterlyTrendPoint[];
 }
 
 const EARNINGS_KEYS = ['pe', 'evEbitda', 'evEbit'] as const;
@@ -38,9 +39,14 @@ const tooltipStyle = {
   borderRadius: '8px',
 };
 
-export default function MultiplesCharts({ years, stats, hiddenSeries, onLegendClick }: Props) {
-  const chartData = years.map(y => ({
-    year: y.year,
+type ViewMode = 'annual' | 'quarterly';
+
+export default function MultiplesCharts({ years, stats, hiddenSeries, onLegendClick, quarterlyTrend }: Props) {
+  const [earningsView, setEarningsView] = useState<ViewMode>('annual');
+  const [assetView, setAssetView] = useState<ViewMode>('annual');
+
+  const annualChartData = useMemo(() => years.map(y => ({
+    label: y.year,
     pe: y.pe,
     evEbitda: y.evEbitda,
     evEbit: y.evEbit,
@@ -48,20 +54,55 @@ export default function MultiplesCharts({ years, stats, hiddenSeries, onLegendCl
     ps: y.ps,
     evRevenue: y.evRevenue,
     pfcf: y.pfcf,
-  }));
+  })), [years]);
 
-  if (chartData.length < 2) return null;
+  const quarterlyChartData = useMemo(() => quarterlyTrend.map(q => ({
+    label: q.period.substring(0, 7), // YYYY-MM
+    pe: q.pe,
+    evEbitda: q.evEbitda,
+    evEbit: null as number | null, // not available quarterly
+    pb: q.pb,
+    ps: q.ps,
+    evRevenue: q.evRevenue,
+    pfcf: q.pfcf,
+  })), [quarterlyTrend]);
+
+  const hasQuarterly = quarterlyChartData.length > 2;
 
   const statsMap = new Map(stats.map(s => [s.key, s]));
+
+  if (annualChartData.length < 2 && quarterlyChartData.length < 2) return null;
+
+  const earningsData = earningsView === 'quarterly' && hasQuarterly ? quarterlyChartData : annualChartData;
+  const assetData = assetView === 'quarterly' && hasQuarterly ? quarterlyChartData : annualChartData;
+
+  function ViewToggle({ view, setView }: { view: ViewMode; setView: (v: ViewMode) => void }) {
+    if (!hasQuarterly) return null;
+    return (
+      <div className="flex gap-0.5 bg-slate-700/40 rounded-lg p-0.5">
+        <button
+          onClick={() => setView('annual')}
+          className={`px-2.5 py-1 rounded-md text-[10px] font-semibold uppercase tracking-wider transition-all ${view === 'annual' ? 'bg-slate-600 text-white shadow-sm' : 'text-slate-400 hover:text-slate-300'}`}
+        >Annual</button>
+        <button
+          onClick={() => setView('quarterly')}
+          className={`px-2.5 py-1 rounded-md text-[10px] font-semibold uppercase tracking-wider transition-all ${view === 'quarterly' ? 'bg-slate-600 text-white shadow-sm' : 'text-slate-400 hover:text-slate-300'}`}
+        >Quarterly</button>
+      </div>
+    );
+  }
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
       <div className="bg-slate-800/50 border border-slate-700/50 rounded-xl p-5">
-        <h3 className="text-sm font-semibold text-slate-300 mb-4">Earnings Multiples Trend</h3>
+        <div className="flex items-center justify-between mb-4">
+          <h3 className="text-sm font-semibold text-slate-300">Earnings Multiples Trend</h3>
+          <ViewToggle view={earningsView} setView={setEarningsView} />
+        </div>
         <ResponsiveContainer width="100%" height={280}>
-          <LineChart data={chartData} margin={{ top: 4, right: 12, bottom: 0, left: 0 }}>
+          <LineChart data={earningsData} margin={{ top: 4, right: 12, bottom: 0, left: 0 }}>
             <CartesianGrid strokeDasharray="3 3" stroke="#334155" />
-            <XAxis dataKey="year" tick={{ fill: '#94a3b8', fontSize: 11 }} />
+            <XAxis dataKey="label" tick={{ fill: '#94a3b8', fontSize: 11 }} />
             <YAxis tick={{ fill: '#94a3b8', fontSize: 11 }} tickFormatter={v => `${v}x`} width={42} />
             <Tooltip
               contentStyle={tooltipStyle}
@@ -82,7 +123,7 @@ export default function MultiplesCharts({ years, stats, hiddenSeries, onLegendCl
                     name={LABELS[key]}
                     stroke={COLORS[key]}
                     strokeWidth={2}
-                    dot={{ r: 3 }}
+                    dot={earningsView === 'annual' ? { r: 3 } : false}
                     connectNulls
                     hide={!!hiddenSeries[key]}
                   />
@@ -102,11 +143,14 @@ export default function MultiplesCharts({ years, stats, hiddenSeries, onLegendCl
       </div>
 
       <div className="bg-slate-800/50 border border-slate-700/50 rounded-xl p-5">
-        <h3 className="text-sm font-semibold text-slate-300 mb-4">Asset &amp; Revenue Multiples Trend</h3>
+        <div className="flex items-center justify-between mb-4">
+          <h3 className="text-sm font-semibold text-slate-300">Asset &amp; Revenue Multiples Trend</h3>
+          <ViewToggle view={assetView} setView={setAssetView} />
+        </div>
         <ResponsiveContainer width="100%" height={280}>
-          <LineChart data={chartData} margin={{ top: 4, right: 12, bottom: 0, left: 0 }}>
+          <LineChart data={assetData} margin={{ top: 4, right: 12, bottom: 0, left: 0 }}>
             <CartesianGrid strokeDasharray="3 3" stroke="#334155" />
-            <XAxis dataKey="year" tick={{ fill: '#94a3b8', fontSize: 11 }} />
+            <XAxis dataKey="label" tick={{ fill: '#94a3b8', fontSize: 11 }} />
             <YAxis tick={{ fill: '#94a3b8', fontSize: 11 }} tickFormatter={v => `${v}x`} width={42} />
             <Tooltip
               contentStyle={tooltipStyle}
@@ -127,7 +171,7 @@ export default function MultiplesCharts({ years, stats, hiddenSeries, onLegendCl
                     name={LABELS[key]}
                     stroke={COLORS[key]}
                     strokeWidth={2}
-                    dot={{ r: 3 }}
+                    dot={assetView === 'annual' ? { r: 3 } : false}
                     connectNulls
                     hide={!!hiddenSeries[key]}
                   />

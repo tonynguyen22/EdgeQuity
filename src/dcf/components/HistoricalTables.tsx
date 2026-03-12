@@ -5,9 +5,10 @@ import type { DCFResult, FormatUnit } from '../types';
 interface HistoricalTablesProps {
   dcf: DCFResult;
   formatUnit: FormatUnit;
+  showTitle?: boolean;
 }
 
-export default function HistoricalTables({ dcf, formatUnit }: HistoricalTablesProps) {
+export default function HistoricalTables({ dcf, formatUnit, showTitle = true }: HistoricalTablesProps) {
   const h = dcf.historicalSummary;
 
   const row = (label: string, getter: (p: any) => number | undefined, opts?: { fmt?: 'currency' | 'pct' | 'number' | 'ratio' | 'eps'; dim?: boolean; italic?: boolean; neg?: boolean }) => {
@@ -48,7 +49,7 @@ export default function HistoricalTables({ dcf, formatUnit }: HistoricalTablesPr
 
   return (
     <div className="space-y-6">
-      <h2 className="text-xl font-semibold">Historical Financials</h2>
+      {showTitle && <h2 className="text-xl font-semibold">Historical Financials</h2>}
 
       {/* Income Statement */}
       <div className="bg-slate-800/50 border border-slate-700/50 rounded-xl p-6 overflow-x-auto">

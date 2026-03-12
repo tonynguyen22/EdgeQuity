@@ -16,7 +16,7 @@ export default function IndicatorSections({ cards }: IndicatorSectionsProps) {
             {sCards.map((card) => (
               <div
                 key={card.name}
-                className={`bg-slate-800/50 border rounded-xl p-4 space-y-2 transition-colors ${cardBorder(card.bull)}`}
+                className={`bg-slate-800 border rounded-xl p-4 space-y-2 transition-colors relative z-1 ${cardBorder(card.bull)}`}
               >
                 {/* Name + hover info + badge row */}
                 <div className="flex items-start justify-between gap-2">

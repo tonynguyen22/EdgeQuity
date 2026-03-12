@@ -16,6 +16,7 @@ export interface UseTechDataResult {
   activeTimeframe: Timeframe;
   setActiveTimeframe: (tf: Timeframe) => void;
   handleSearch: (e: React.FormEvent) => Promise<void>;
+  reset: () => void;
 }
 
 interface CachePayload {
@@ -113,6 +114,16 @@ export function useTechData(): UseTechDataResult {
     }
   };
 
+  const reset = () => {
+    setTickerInput('');
+    setDailyData(null);
+    setWeeklyData(null);
+    setSrData(null);
+    setDisplayName('');
+    setError('');
+    setActiveTimeframe('D1');
+  };
+
   return {
     tickerInput,
     setTickerInput,
@@ -125,5 +136,6 @@ export function useTechData(): UseTechDataResult {
     activeTimeframe,
     setActiveTimeframe,
     handleSearch,
+    reset,
   };
 }

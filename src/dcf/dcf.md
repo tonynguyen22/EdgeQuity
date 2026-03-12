@@ -15,10 +15,12 @@ This folder is the **main entry point** for ValuWise. It was refactored from a s
 
 ```
 src/dcf/
-├── index.tsx                    # App shell — state, routing, chart JSX
+├── index.tsx                    # App shell — state, routing, chart JSX, sub-tab nav (Model | Financials | WACC | Monte Carlo)
 ├── dcf.md                       # This document
 ├── types.ts                     # All TypeScript interfaces & types + SUPPORTED_TICKERS
 ├── calculations.ts              # Pure computeDCF() engine (no React deps)
+├── calculations/
+│   └── monte-carlo.ts           # runMonteCarloSimulation() — N triangular-distribution DCF runs
 ├── hooks/
 │   └── useDCFData.ts            # FMP + Finnhub data fetching + localStorage caching
 ├── utils/
@@ -27,11 +29,13 @@ src/dcf/
 │   ├── print.ts                 # printDCF() → browser print/PDF dialog
 │   └── excel.ts                 # exportToExcel() → .xlsx file download
 └── components/
-    ├── Sidebar.tsx              # Sticky left nav with grouped tab links
-    ├── LandingPage.tsx          # Hero landing page with 9 feature cards
+    ├── Sidebar.tsx              # Sticky left nav — Analysis + Market Data groups
+    ├── LandingPage.tsx          # Animated hero with market ticker bar, glassmorphism feature cards
     ├── AssumptionSliders.tsx    # 12 DCF input sliders + scenario presets
     ├── ForecastTable.tsx        # N-year projection table + export buttons
-    └── HistoricalTables.tsx     # Historical income / balance / cash flow / ratios tables
+    ├── HistoricalTables.tsx     # Historical income / balance / cash flow / ratios tables
+    ├── WACCPanel.tsx            # CAPM/WACC assumptions with waterfall decomposition chart
+    └── MonteCarloSimulation.tsx # N-simulation histogram + confidence intervals
 ```
 
 ---
@@ -59,7 +63,7 @@ User selects ticker from dropdown (SUPPORTED_TICKERS)
 | 5 | Finnhub | `/stock/metric?metric=all` | Beta, additional financial metrics |
 | +1 | Finnhub | `/stock/price-target` | Analyst consensus target (non-blocking, optional) |
 
-**API Keys:** `process.env.FMP_API_KEY` and `process.env.FINNHUB_API_KEY` — injected by Vite `define` from `.env`.
+**API Keys:** All API calls are routed through a Netlify serverless function (`netlify/functions/http-proxy.ts`) which reads keys from `process.env`. Keys are defined in `.env` and injected by `netlify dev`. Use `netlify dev` (not `npm run dev`) for local development.
 
 **FMP Rate Limit:** 250 calls/day on free tier. With `limit=5` and 24h caching, typical usage is well within limits. Each ticker uses 3 FMP calls.
 
@@ -166,7 +170,7 @@ useDCFData(symbol: string): {
 
 ### `index.tsx` — App Shell
 
-The root component exported to `src/main.tsx`. Manages all application state, routes between tabs, and renders the DCF view.
+The root component exported to `src/main.tsx`. Manages all application state, routes between tabs, and renders the DCF view. Uses CSS custom properties from the design system (`--vw-bg-deep` background, `--vw-text-primary` text). Content area is `max-w-7xl` with `vw-grid-bg` subtle grid background.
 
 **Ticker Selection:** Uses a filterable dropdown combobox restricted to `SUPPORTED_TICKERS`. Users type to filter, then select a ticker. The Analyze button is disabled unless the input matches a supported ticker.
 
@@ -231,13 +235,23 @@ Uses the `xlsx` library to produce `{ticker}_Financials.xlsx` with 3 sheets:
 
 ### `components/Sidebar.tsx`
 
-Sticky `w-52` left sidebar. Logo at top. Nav links grouped into Valuation and Market Data. Clear Cache button at the bottom.
+Sticky `w-56` left sidebar with gradient background (`linear-gradient(180deg, #0d1117, #0a0e17)`). Features:
+- **Logo:** Glowing cyan gradient icon + "ValuWise" wordmark with accent color
+- **Active state:** Left accent bar (3px, colored per tab) + tinted background
+- **Group headers:** Uppercase labels with decorative trailing line dividers
+- **Nav sections:** Valuation (DCF, Multiples, Quality, Peers) and Market Data (Technical, Market Cycle, Earnings, Insider, News, Dividends)
+- **Bottom:** Clear Cache button + version status indicator with pulsing dot ("v1.0 — Live")
+- Hover states use `var(--vw-bg-hover)` and smooth color transitions
 
 ---
 
 ### `components/LandingPage.tsx`
 
-Near-static hero page shown before a ticker is searched. 9 feature cards in a 3-column grid.
+Animated hero landing page shown when no tab is selected. Uses `motion` library for staggered entry animations. Features:
+- **Market ticker bar:** Simulated market indices (S&P 500, NASDAQ, DOW, 10Y Yield, VIX) with green/red trend indicators
+- **Hero section:** Animated gradient mesh background with "Real-Time Analysis" stat pill, gradient text title, description, and stats banner (87+ tickers, 10 modules, 6 data sources)
+- **Feature grid:** 10 glassmorphism cards (`vw-card` class) in a responsive 5-column grid (xl:grid-cols-5). Each card has icon, title, description, and animated arrow on hover with per-card accent color
+- **Supported tickers notice:** Amber-bordered warning about FMP ticker restrictions
 
 ---
 
@@ -273,11 +287,18 @@ No circular dependencies.
 
 ## Environment Variables
 
-| Variable | Used In | Source |
+All API keys are injected server-side via the Netlify proxy function (`netlify/functions/http-proxy.ts`). They are **never** exposed to the browser. Keys are read from `process.env` which is populated from `.env` by `netlify dev`.
+
+| Variable | Used By Proxy For | Source |
 |---|---|---|
-| `FMP_API_KEY` | `hooks/useDCFData.ts` | `.env` → Vite `define` block |
-| `FINNHUB_API_KEY` | `hooks/useDCFData.ts` + other modules | `.env` → Vite `define` block |
-| `GEMINI_API_KEY` | `src/NewsSentiment.tsx` | `.env` → Vite `define` block |
+| `FMP_API_KEY` | Financial Modeling Prep requests | `.env` → `netlify dev` |
+| `FINNHUB_API_KEY` | Finnhub requests (all modules) | `.env` → `netlify dev` |
+| `GEMINI_API_KEY` | Gemini AI sentiment analysis | `.env` → `netlify dev` |
+| `API_NINJAS_KEY` | API Ninjas (earnings, stock price) | `.env` → `netlify dev` |
+| `MASSIVE_API_KEY` | Massive API (dividends) | `.env` → `netlify dev` |
+| `TAAPI_API_KEY` | TAAPI.io (technical indicators) | `.env` → `netlify dev` |
+| `TWELVE_API_KEY` | Twelve Data (OHLCV fallback) | `.env` → `netlify dev` |
+| `ALPHAVANTAGE_API_KEY` | Alpha Vantage (earnings, OHLCV fallback) | `.env` → `netlify dev` |
 
 ---
 

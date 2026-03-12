@@ -30,7 +30,7 @@ export default function ScoreOverview({ ticker, gradeResult, yoyGrades, altmanZ 
             <PolarRadiusAxis angle={90} domain={[0, 100]} tick={false} axisLine={false} />
             <Radar name="Max" dataKey="fullMark" stroke="#334155" fill="none" strokeDasharray="3 2" />
             <Radar name={ticker} dataKey="score" stroke="#10b981" fill="#10b981" fillOpacity={0.2} strokeWidth={2} dot={{ r: 3, fill: '#10b981' }} />
-            <Tooltip contentStyle={{ backgroundColor: '#1e293b', border: '1px solid #475569', borderRadius: '8px' }} formatter={(v: number) => [`${v}/100`]} />
+            <Tooltip contentStyle={{ backgroundColor: '#1e293b', border: '1px solid #475569', borderRadius: '8px' }} labelStyle={{ color: '#e2e8f0' }} itemStyle={{ color: '#e2e8f0' }} formatter={(v: number) => [`${v}/100`]} />
           </RadarChart>
         </ResponsiveContainer>
       </div>

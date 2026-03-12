@@ -330,7 +330,7 @@ export function computeDCF(data: FinancialData, inputs: DCFInputs): DCFResult {
   const wDebt = totalValue !== 0 ? totalDebt / totalValue : 0;
 
   const rawWacc = wEquity * ke + wDebt * kd * (1 - avgTaxRate);
-  const baseWacc = Math.max(rawWacc, 0.06);
+  const baseWacc = rawWacc;
   const wacc = Math.max(baseWacc + (waccAdj / 100), (termGrowth / 100) + 0.02);
 
   const profileShares = parseNum(profile?.shareOutstanding) * 1e6;

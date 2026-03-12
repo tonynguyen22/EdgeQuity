@@ -43,6 +43,8 @@ export default function RadarScore({ radarScores, compositeScore, targetSymbol }
                     <Radar name={targetSymbol} dataKey="target" stroke="#10b981" fill="#10b981" fillOpacity={0.15} strokeWidth={2} dot={{ r: 3, fill: '#10b981' }} />
                     <Tooltip
                         contentStyle={{ backgroundColor: '#1e293b', border: '1px solid #475569', borderRadius: '8px' }}
+                        labelStyle={{ color: '#e2e8f0' }}
+                        itemStyle={{ color: '#e2e8f0' }}
                         formatter={(v: number, name: string) => [`${v}th percentile`, name]}
                     />
                     <Legend wrapperStyle={{ fontSize: '11px' }} />

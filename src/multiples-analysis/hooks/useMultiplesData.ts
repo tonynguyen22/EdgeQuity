@@ -39,6 +39,7 @@ export function useMultiplesData(symbol: string): UseMultiplesDataResult {
         const candleCacheKey = `multiples_${symbol}_candle_v1`;
 
         let fmpData: Omit<MultiplesData, 'candles'> | undefined;
+        let seriesData: MultiplesData['series'] = null;
 
         // Try shared FMP cache first
         const cached = localStorage.getItem(fmpCacheKey);
@@ -53,38 +54,57 @@ export function useMultiplesData(symbol: string): UseMultiplesDataResult {
 
         // If not cached, fetch from FMP + Finnhub
         if (!fmpData) {
-          const [resIc, resBs, resCf, resProfile, resMetric] = await Promise.all([
-            proxyFetch(`${FMP_URL}/income-statement?symbol=${symbol}&period=annual&limit=6`, { signal: controller.signal }),
-            proxyFetch(`${FMP_URL}/balance-sheet-statement?symbol=${symbol}&period=annual&limit=6`, { signal: controller.signal }),
-            proxyFetch(`${FMP_URL}/cash-flow-statement?symbol=${symbol}&period=annual&limit=6`, { signal: controller.signal }),
+          // Always fetch Finnhub data (profile + metrics) regardless of FMP
+          const [resProfile, resMetric] = await Promise.all([
             proxyFetch(`${FINNHUB_URL}/stock/profile2?symbol=${symbol}`, { signal: controller.signal }),
             proxyFetch(`${FINNHUB_URL}/stock/metric?symbol=${symbol}&metric=all`, { signal: controller.signal }),
           ]);
+          const profData = resProfile.ok ? await resProfile.json() : null;
+          const metricData = resMetric.ok ? await resMetric.json() : null;
+          seriesData = metricData?.series || null;
 
-          if (!resIc.ok || !resBs.ok || !resCf.ok) {
-            const failedRes = [resIc, resBs, resCf].find(r => !r.ok);
-            throw new Error(`FMP request failed (${failedRes?.status ?? 'unknown'}). The API may be temporarily unavailable or quota exceeded.`);
+          // Try FMP financial statements
+          let fmpSuccess = false;
+          try {
+            const [resIc, resBs, resCf] = await Promise.all([
+              proxyFetch(`${FMP_URL}/income-statement?symbol=${symbol}&period=annual&limit=6`, { signal: controller.signal }),
+              proxyFetch(`${FMP_URL}/balance-sheet-statement?symbol=${symbol}&period=annual&limit=6`, { signal: controller.signal }),
+              proxyFetch(`${FMP_URL}/cash-flow-statement?symbol=${symbol}&period=annual&limit=6`, { signal: controller.signal }),
+            ]);
+
+            if (resIc.ok && resBs.ok && resCf.ok) {
+              const [icData, bsData, cfData] = await Promise.all([
+                resIc.json(), resBs.json(), resCf.json(),
+              ]);
+
+              if (Array.isArray(icData) && icData.length > 0) {
+                fmpData = {
+                  incomeStatements: icData,
+                  balanceSheets: Array.isArray(bsData) ? bsData : [],
+                  cashFlows: Array.isArray(cfData) ? cfData : [],
+                  profile: profData || {},
+                  metrics: metricData?.metric || metricData || {},
+                  series: seriesData,
+                };
+                safeSetItem(fmpCacheKey, JSON.stringify({ timestamp: Date.now(), data: fmpData }));
+                fmpSuccess = true;
+              }
+            }
+          } catch {
+            // FMP failed — will fall back to Finnhub-only below
           }
 
-          const [icData, bsData, cfData, profData, metricData] = await Promise.all([
-            resIc.json(), resBs.json(), resCf.json(),
-            resProfile.ok ? resProfile.json() : null,
-            resMetric.ok ? resMetric.json() : null,
-          ]);
-
-          if (!Array.isArray(icData) || icData.length === 0) {
-            throw new Error('No income statement data found for this ticker.');
+          // Finnhub-only fallback: use series data for multiples
+          if (!fmpSuccess) {
+            fmpData = {
+              incomeStatements: [],
+              balanceSheets: [],
+              cashFlows: [],
+              profile: profData || {},
+              metrics: metricData?.metric || metricData || {},
+              series: seriesData,
+            };
           }
-
-          fmpData = {
-            incomeStatements: icData,
-            balanceSheets: Array.isArray(bsData) ? bsData : [],
-            cashFlows: Array.isArray(cfData) ? cfData : [],
-            profile: profData || {},
-            metrics: metricData?.metric || metricData || {},
-          };
-
-          safeSetItem(fmpCacheKey, JSON.stringify({ timestamp: Date.now(), data: fmpData }));
         }
 
         // Ensure profile/metrics are present; fetch from Finnhub if missing
@@ -97,6 +117,7 @@ export function useMultiplesData(symbol: string): UseMultiplesDataResult {
           const metricData = resMetric.ok ? await resMetric.json() : null;
           if (profData?.name) fmpData.profile = profData;
           if (metricData?.metric) fmpData.metrics = metricData.metric;
+          if (metricData?.series) fmpData.series = metricData.series;
         }
 
         // Fetch historical candle prices from Finnhub
@@ -128,7 +149,7 @@ export function useMultiplesData(symbol: string): UseMultiplesDataResult {
         }
 
         if (requestId !== requestIdRef.current) return;
-        setData({ ...fmpData, candles });
+        setData({ ...fmpData, series: fmpData.series ?? seriesData, candles });
       } catch (err: any) {
         if (err?.name === 'AbortError') return;
         if (requestId !== requestIdRef.current) return;
@@ -140,7 +161,7 @@ export function useMultiplesData(symbol: string): UseMultiplesDataResult {
           try {
             const { data: cachedData } = JSON.parse(cached);
             if (cachedData?.incomeStatements?.length) {
-              setData({ ...cachedData, candles: null });
+              setData({ ...cachedData, series: cachedData.series ?? null, candles: null });
               setError('Live data fetch failed, showing cached financials.');
               return;
             }

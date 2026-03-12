@@ -4,6 +4,7 @@ import { useState } from 'react';
 import type { PeerData, PeerSuggestion } from '../types';
 import { safeSetItem } from '../utils/storage';
 import { proxyFetch } from '../../utils/proxyFetch';
+import { SUPPORTED_TICKERS } from '../../dcf/types';
 
 const BASE_URL = 'https://finnhub.io/api/v1';
 
@@ -215,10 +216,24 @@ export function usePeerData() {
         setShowPeerFinder(true);
         setPeerSuggestions([]);
         try {
-            const res = await proxyFetch(`${BASE_URL}/stock/peers?symbol=${sym}&grouping=subindustry`);
-            if (!res.ok) return;
-            const list: string[] = await res.json();
-            const candidates = list.filter(p => p !== sym).slice(0, 10);
+            // Try subindustry first, then industry, then no grouping (broadest)
+            let candidates: string[] = [];
+            for (const grouping of ['subindustry', 'industry', '']) {
+                const url = grouping
+                    ? `${BASE_URL}/stock/peers?symbol=${sym}&grouping=${grouping}`
+                    : `${BASE_URL}/stock/peers?symbol=${sym}`;
+                const res = await proxyFetch(url);
+                if (!res.ok) continue;
+                const list: string[] = await res.json();
+                // Show all Finnhub peers (not limited to supported tickers)
+                const filtered = list.filter(p => p !== sym);
+                if (filtered.length > candidates.length) {
+                    candidates = filtered.slice(0, 10);
+                }
+                // If we found enough, stop searching broader
+                if (candidates.length >= 3) break;
+            }
+
             const profiles = await Promise.all(
                 candidates.map(p =>
                     proxyFetch(`${BASE_URL}/stock/profile2?symbol=${p}`)
@@ -296,6 +311,20 @@ export function usePeerData() {
     const togglePeer = (symbol: string) =>
         setSelectedPeers(prev => ({ ...prev, [symbol]: !prev[symbol] }));
 
+    const handleGoBack = () => {
+        setTickerInput('');
+        setTicker('');
+        setData([]);
+        setError('');
+        setShowPeerFinder(false);
+        setPeerSuggestions([]);
+        setSelectedPeerSymbols([]);
+        setCustomPeerInput('');
+        setSelectedPeers({});
+        setSortKey(null);
+        setHiddenSeries({});
+    };
+
     return {
         // State
         tickerInput, ticker, showPeerFinder, peerFinderLoading, peerSuggestions,
@@ -306,5 +335,6 @@ export function usePeerData() {
         // Handlers
         handleLegendClick, toggleSort, fetchPeerSuggestions, togglePeerSelection,
         addCustomPeer, removePeer, clearAllPeers, fetchData, handleSearch, togglePeer,
+        handleGoBack,
     };
 }

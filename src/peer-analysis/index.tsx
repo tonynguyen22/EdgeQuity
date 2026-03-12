@@ -1,6 +1,7 @@
 /* ── Peer Analysis — App Shell ────────────────────────────────────────── */
 
 import React, { useMemo } from 'react';
+import { ArrowLeft } from 'lucide-react';
 import { usePeerData } from './hooks/usePeerData';
 import {
     computeAllStats, computeDisplayData, computeImpliedPrices,
@@ -10,6 +11,8 @@ import {
 import { exportToExcel } from './utils/excel';
 
 // Components
+import TickerSearch from '../components/TickerSearch';
+import SupportedTickersBySector from '../components/SupportedTickersBySector';
 import PeerControls from './components/PeerControls';
 import ComparisonTable from './components/ComparisonTable';
 import ImpliedValuation from './components/ImpliedValuation';
@@ -72,28 +75,94 @@ export default function PeerAnalysis() {
 
     /* ── Render ─────────────────────────────────────────────────────────── */
 
+    /* Landing: no ticker entered yet — show standard search (same as DCF) */
+    const isLanding = peer.data.length === 0 && !peer.loading && !peer.error && !peer.ticker;
+
     return (
         <div className="space-y-6">
-            <PeerControls
-                tickerInput={peer.tickerInput}
-                onTickerInputChange={peer.setTickerInput}
-                onSearch={peer.handleSearch}
-                showPeerFinder={peer.showPeerFinder}
-                peerFinderLoading={peer.peerFinderLoading}
-                peerSuggestions={peer.peerSuggestions}
-                onFetchPeerSuggestions={peer.fetchPeerSuggestions}
-                selectedPeerSymbols={peer.selectedPeerSymbols}
-                onTogglePeerSelection={peer.togglePeerSelection}
-                onRemovePeer={peer.removePeer}
-                onClearAllPeers={peer.clearAllPeers}
-                customPeerInput={peer.customPeerInput}
-                onCustomPeerInputChange={peer.setCustomPeerInput}
-                onAddCustomPeer={peer.addCustomPeer}
-                loading={peer.loading}
-                onRunAnalysis={peer.fetchData}
-                showAbout={peer.data.length === 0 && !peer.loading && !peer.error}
-                error={peer.error}
-            />
+            {isLanding ? (
+              <div className="flex flex-col items-center justify-center min-h-[60vh] px-4">
+                <div className="text-center mb-8">
+                    <h1 className="text-4xl font-bold tracking-tight mb-2" style={{ color: 'var(--vw-text-primary)' }}>
+                        Peer <span style={{ color: 'var(--vw-accent)' }}>Analysis</span>
+                    </h1>
+                    <p className="text-sm" style={{ color: 'var(--vw-text-secondary)' }}>
+                        Benchmark your target company against up to 5 peers
+                    </p>
+                </div>
+
+                {/* Standard search — identical to DCF */}
+                <div className="w-full max-w-xl">
+                  <TickerSearch input={peer.tickerInput} setInput={peer.setTickerInput} onSelect={(sym: string) => { peer.setTickerInput(sym); peer.handleSearch({ preventDefault: () => {} } as React.FormEvent); }} />
+                </div>
+
+                {/* About box — identical to DCF */}
+                <div className="w-full max-w-2xl mt-8 rounded-xl p-6 space-y-4" style={{ background: 'rgba(17, 24, 39, 0.5)', border: '1px solid var(--vw-border-dim)' }}>
+                    <p className="text-sm font-semibold" style={{ color: 'var(--vw-text-primary)' }}>What you'll see here</p>
+                    <ul className="space-y-2.5">
+                        {[
+                            'Compares your chosen stock against up to 5 similar companies side by side',
+                            'Uses 6 valuation methods (EV/Revenue, EV/EBITDA, P/E, P/Sales, P/Book, P/FCF)',
+                            'Auto-suggests industry peers or lets you pick your own',
+                            'Shows an implied price range using peer medians — a football-field valuation chart',
+                        ].map((item, i) => (
+                            <li key={i} className="flex items-start gap-2.5 text-[13px] leading-relaxed" style={{ color: 'var(--vw-text-secondary)' }}>
+                                <span className="mt-0.5 shrink-0 w-5 h-5 rounded-full flex items-center justify-center text-[11px] font-bold"
+                                    style={{ background: 'rgba(0,212,170,0.12)', color: 'var(--vw-accent)' }}>
+                                    {i + 1}
+                                </span>
+                                <span>{item}</span>
+                            </li>
+                        ))}
+                    </ul>
+                    <SupportedTickersBySector className="mt-4" />
+                </div>
+              </div>
+            ) : (
+              <>
+                <div className="flex items-center gap-3 mb-4">
+                  <button
+                    onClick={peer.handleGoBack}
+                    className="shrink-0 w-10 h-10 flex items-center justify-center rounded-xl transition-all"
+                    style={{ background: 'var(--vw-bg-raised)', border: '1px solid var(--vw-border-lit)', color: 'var(--vw-text-secondary)' }}
+                    title="Go back"
+                  >
+                    <ArrowLeft className="w-5 h-5" />
+                  </button>
+                  <div>
+                    <h1 className="text-2xl font-bold tracking-tight" style={{ color: 'var(--vw-text-primary)' }}>
+                      Peer <span style={{ color: 'var(--vw-accent)' }}>Analysis</span>
+                    </h1>
+                    <p className="text-xs" style={{ color: 'var(--vw-text-secondary)' }}>
+                      Benchmark your target company against up to 5 peers
+                    </p>
+                  </div>
+                </div>
+
+                <PeerControls
+                    tickerInput={peer.tickerInput}
+                    onTickerInputChange={peer.setTickerInput}
+                    onSearch={peer.handleSearch}
+                    showPeerFinder={peer.showPeerFinder}
+                    peerFinderLoading={peer.peerFinderLoading}
+                    peerSuggestions={peer.peerSuggestions}
+                    onFetchPeerSuggestions={peer.fetchPeerSuggestions}
+                    selectedPeerSymbols={peer.selectedPeerSymbols}
+                    onTogglePeerSelection={peer.togglePeerSelection}
+                    onRemovePeer={peer.removePeer}
+                    onClearAllPeers={peer.clearAllPeers}
+                    customPeerInput={peer.customPeerInput}
+                    onCustomPeerInputChange={peer.setCustomPeerInput}
+                    onAddCustomPeer={peer.addCustomPeer}
+                    loading={peer.loading}
+                    onRunAnalysis={peer.fetchData}
+                    showAbout={false}
+                    error={peer.error}
+                    hasData={peer.data.length > 0}
+                    ticker={peer.ticker}
+                />
+              </>
+            )}
 
             {peer.data.length > 0 && !peer.loading && (
                 <>
@@ -128,7 +197,7 @@ export default function PeerAnalysis() {
                     )}
 
                     {rankingData && (
-                        <PeerRanking rankingData={rankingData} />
+                        <PeerRanking rankingData={rankingData} targetSymbol={peer.data[0]?.symbol ?? ''} />
                     )}
 
                     {radarScores && radarScores.length > 0 && (

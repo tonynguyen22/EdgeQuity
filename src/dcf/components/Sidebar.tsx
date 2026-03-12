@@ -1,5 +1,5 @@
 import React from 'react';
-import { TrendingUp, Home, Activity, Users, Award, BarChart3, BarChart2, Eye, Newspaper, Coins, Trash2, RefreshCw, Zap } from 'lucide-react';
+import { TrendingUp, Home, Activity, Users, Award, BarChart3, BarChart2, Eye, Newspaper, Coins, Trash2, RefreshCw, Zap, DollarSign, FileSpreadsheet } from 'lucide-react';
 import type { TabId } from '../types';
 
 interface SidebarProps {
@@ -13,11 +13,13 @@ interface SidebarProps {
 
 const NAV_SECTIONS = [
   {
-    group: 'Valuation',
+    group: 'Analysis',
     items: [
-      { id: 'dcf' as const, label: 'DCF Analysis', Icon: Activity, color: '#00d4aa' },
+      { id: 'dcf' as const, label: 'DCF', Icon: Activity, color: '#00d4aa' },
+      { id: 'ddm' as const, label: 'DDM', Icon: DollarSign, color: '#f59e0b' },
       { id: 'multiples' as const, label: 'Multiples', Icon: BarChart3, color: '#f472b6' },
       { id: 'grade' as const, label: 'Quality', Icon: Award, color: '#f0b429' },
+      { id: 'three-stmt' as const, label: '3-Statement', Icon: FileSpreadsheet, color: '#06b6d4' },
       { id: 'comp' as const, label: 'Peers', Icon: Users, color: '#38bdf8' },
     ],
   },
@@ -25,11 +27,11 @@ const NAV_SECTIONS = [
     group: 'Market Data',
     items: [
       { id: 'tech' as const, label: 'Technical', Icon: TrendingUp, color: '#a78bfa' },
-      { id: 'cycle' as const, label: 'Market Cycle', Icon: RefreshCw, color: '#2dd4bf' },
       { id: 'earnings' as const, label: 'Earnings', Icon: BarChart2, color: '#22d3ee' },
       { id: 'insider' as const, label: 'Insider & Inst.', Icon: Eye, color: '#fb923c' },
       { id: 'news' as const, label: 'News', Icon: Newspaper, color: '#38bdf8' },
       { id: 'dividend' as const, label: 'Dividends', Icon: Coins, color: '#fb7185' },
+      { id: 'cycle' as const, label: 'Market Cycle', Icon: RefreshCw, color: '#2dd4bf' },
     ],
   },
 ];
@@ -39,7 +41,7 @@ export default function Sidebar({ showLanding, activeTab, cacheCleared, onShowLa
     <aside
       className="w-56 shrink-0 flex flex-col sticky top-0 h-screen overflow-y-auto z-10"
       style={{
-        background: 'linear-gradient(180deg, #0d1117 0%, #0a0e17 100%)',
+        background: 'linear-gradient(180deg, #0c1220 0%, #080c14 100%)',
         borderRight: '1px solid var(--vw-border-dim)',
       }}
     >
