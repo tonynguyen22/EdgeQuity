@@ -22,15 +22,33 @@ interface ComparisonTableProps {
 
 /* ── Sub-components ────────────────────────────────────────────────────── */
 
-function SortTh({ label, k, left, sortKey, sortDir, onToggleSort }: {
-    label: string; k: string; left?: boolean;
+function SortTh({ label, k, sortKey, sortDir, onToggleSort, divider }: {
+    label: string; k: string;
     sortKey: string | null; sortDir: 'asc' | 'desc'; onToggleSort: (k: string) => void;
+    divider?: boolean;
 }) {
+    const isActive = sortKey === k;
     return (
-        <th onClick={() => onToggleSort(k)} className={`py-2 px-2 border border-slate-700/50 font-medium cursor-pointer select-none hover:bg-slate-700/30 transition-colors ${left ? 'text-left' : ''}`}>
+        <th
+            onClick={() => onToggleSort(k)}
+            className="py-3 px-3 text-right font-medium cursor-pointer select-none transition-colors whitespace-nowrap"
+            style={{
+                color: isActive ? 'var(--vw-accent)' : 'var(--vw-text-tertiary)',
+                fontSize: '11px',
+                letterSpacing: '0.04em',
+                textTransform: 'uppercase' as const,
+                background: isActive ? 'rgba(0, 212, 170, 0.04)' : undefined,
+                ...(divider ? DIVIDER_STYLE : {}),
+            }}
+        >
             <span className="inline-flex items-center gap-1 justify-end w-full">
                 {label}
-                {sortKey === k ? (sortDir === 'asc' ? <ArrowUp className="w-3 h-3 text-emerald-400" /> : <ArrowDown className="w-3 h-3 text-emerald-400" />) : <ArrowUpDown className="w-3 h-3 text-slate-600" />}
+                {isActive
+                    ? (sortDir === 'asc'
+                        ? <ArrowUp className="w-3 h-3" style={{ color: 'var(--vw-accent)' }} />
+                        : <ArrowDown className="w-3 h-3" style={{ color: 'var(--vw-accent)' }} />)
+                    : <ArrowUpDown className="w-3 h-3" style={{ color: 'var(--vw-text-muted)', opacity: 0.4 }} />
+                }
             </span>
         </th>
     );
@@ -38,15 +56,20 @@ function SortTh({ label, k, left, sortKey, sortDir, onToggleSort }: {
 
 function Sparkline({ histEvEbitda }: { histEvEbitda: HistEvEbitda[] }) {
     const valid = histEvEbitda.filter(d => d.evEbitda != null && (d.evEbitda as number) > 0);
-    if (valid.length < 2) return <span className="text-slate-500 text-xs">—</span>;
+    if (valid.length < 2) return <span className="text-xs" style={{ color: 'var(--vw-text-muted)' }}>—</span>;
     return (
-        <ResponsiveContainer width="100%" height={36}>
+        <ResponsiveContainer width="100%" height={32}>
             <LineChart data={valid} margin={{ top: 4, right: 2, bottom: 4, left: 2 }}>
-                <Line type="monotone" dataKey="evEbitda" stroke="#10b981" strokeWidth={1.5} dot={false} isAnimationActive={false} />
+                <Line type="monotone" dataKey="evEbitda" stroke="var(--vw-accent)" strokeWidth={1.5} dot={false} isAnimationActive={false} />
             </LineChart>
         </ResponsiveContainer>
     );
 }
+
+/* helper: column group divider style */
+const DIVIDER_STYLE: React.CSSProperties = {
+    borderLeft: '2px solid var(--vw-border-lit)',
+};
 
 /* ── Main component ────────────────────────────────────────────────────── */
 
@@ -55,134 +78,291 @@ export default function ComparisonTable({
     sortKey, sortDir, onToggleSort, targetPercentiles, onExportExcel,
 }: ComparisonTableProps) {
 
-    const pctCell = (v: number | null) => {
-        if (v == null) return <td className="py-2.5 px-2 border border-slate-700/50 text-center text-slate-600 text-xs">—</td>;
-        const color = v >= 75 ? 'text-emerald-400' : v >= 40 ? 'text-slate-400' : 'text-amber-400';
-        return <td className={`py-2.5 px-2 border border-slate-700/50 text-center text-xs font-medium ${color}`}>{ordinal(v)}</td>;
+    const pctCell = (v: number | null, divider?: boolean) => {
+        if (v == null) return (
+            <td className="py-3 px-3 text-center text-xs" style={{ color: 'var(--vw-text-muted)', ...(divider ? DIVIDER_STYLE : {}) }}>—</td>
+        );
+        const bg = v >= 75
+            ? 'rgba(0, 212, 170, 0.12)'
+            : v >= 40
+                ? 'rgba(100, 116, 139, 0.08)'
+                : 'rgba(245, 158, 11, 0.10)';
+        const color = v >= 75
+            ? 'var(--vw-accent)'
+            : v >= 40
+                ? 'var(--vw-text-secondary)'
+                : '#f59e0b';
+        return (
+            <td className="py-3 px-3 text-center" style={divider ? DIVIDER_STYLE : undefined}>
+                <span
+                    className="inline-flex items-center justify-center px-2 py-0.5 rounded-md text-[11px] font-semibold tabular-nums"
+                    style={{ background: bg, color }}
+                >
+                    {ordinal(v)}
+                </span>
+            </td>
+        );
     };
 
     const sortProps = { sortKey, sortDir, onToggleSort };
 
+    /* header style object for static (non-sortable) headers */
+    const hStyle: React.CSSProperties = {
+        color: 'var(--vw-text-tertiary)',
+        fontSize: '11px',
+        letterSpacing: '0.04em',
+        textTransform: 'uppercase',
+    };
+
     return (
-        <div className="bg-slate-800/50 border border-slate-700/50 rounded-xl p-6 overflow-x-auto">
-            <div className="flex items-center justify-between mb-6">
+        <div className="rounded-xl overflow-hidden" style={{ background: 'var(--vw-bg-raised)', border: '1px solid var(--vw-border)' }}>
+            {/* Header bar */}
+            <div className="flex items-center justify-between px-6 py-4" style={{ borderBottom: '1px solid var(--vw-border)' }}>
                 <div>
-                    <h3 className="text-lg font-medium">Peer Analysis</h3>
-                    <p className="text-xs text-slate-500 mt-0.5">Click any column header to sort peers</p>
+                    <h3 className="text-base font-semibold" style={{ color: 'var(--vw-text-primary)' }}>Peer Analysis</h3>
+                    <p className="text-[11px] mt-0.5" style={{ color: 'var(--vw-text-muted)' }}>Click any column header to sort peers</p>
                 </div>
-                <button onClick={onExportExcel} className="flex items-center gap-2 px-3 py-1.5 bg-slate-700 hover:bg-slate-600 text-slate-200 text-sm font-medium rounded-lg transition-colors">
-                    <Download className="w-4 h-4" /> Export to Excel
+                <button
+                    onClick={onExportExcel}
+                    className="flex items-center gap-2 px-4 py-2 rounded-lg text-[13px] font-medium transition-all"
+                    style={{
+                        background: 'var(--vw-bg-hover)',
+                        border: '1px solid var(--vw-border-lit)',
+                        color: 'var(--vw-text-secondary)',
+                    }}
+                >
+                    <Download className="w-3.5 h-3.5" /> Export to Excel
                 </button>
             </div>
 
-            <table className="w-full text-sm text-right border-collapse">
-                <thead>
-                    <tr className="text-slate-400 border-b border-slate-700">
-                        <th className="text-left py-2 px-2 border border-slate-700/50 font-medium">Company</th>
-                        <th className="py-2 px-2 border border-slate-700/50 font-medium text-center">Include</th>
-                        <SortTh label="Rev Growth" k="revGrowth" {...sortProps} />
-                        <SortTh label="EBITDA" k="ebitda" {...sortProps} />
-                        <SortTh label="EBITDA %" k="ebitdaMargin" {...sortProps} />
-                        <SortTh label="Net Income" k="netIncome" {...sortProps} />
-                        <SortTh label="NI %" k="niMargin" {...sortProps} />
-                        <SortTh label="Price / Share" k="price" {...sortProps} />
-                        <SortTh label="Market Cap" k="marketCap" {...sortProps} />
-                        <SortTh label="EV" k="ev" {...sortProps} />
-                        <th className="py-2 px-2 border border-slate-700/50 border-l-2 border-l-slate-500 font-medium cursor-pointer hover:bg-slate-700/30" onClick={() => onToggleSort('evToRev')}>
-                            <span className="inline-flex items-center gap-1 justify-end w-full">EV / Rev {sortKey === 'evToRev' ? (sortDir === 'asc' ? <ArrowUp className="w-3 h-3 text-emerald-400" /> : <ArrowDown className="w-3 h-3 text-emerald-400" />) : <ArrowUpDown className="w-3 h-3 text-slate-600" />}</span>
-                        </th>
-                        <SortTh label="EV / EBITDA" k="evToEbitda" {...sortProps} />
-                        <SortTh label="P / Sales" k="pToSales" {...sortProps} />
-                        <SortTh label="P / E" k="pToE" {...sortProps} />
-                        <SortTh label="P / Book" k="pToBook" {...sortProps} />
-                        <SortTh label="P / FCF" k="pToFCF" {...sortProps} />
-                        <th className="py-2 px-2 border border-slate-700/50 font-medium text-center" style={{ minWidth: '80px' }}>EV/EBITDA Trend</th>
-                    </tr>
-                </thead>
-                <tbody className="font-mono text-base">
-                    {displayData.map((d, i) => {
-                        const isTarget = i === 0;
-                        const isIncluded = isTarget || selectedPeers[d.symbol];
-                        return (
-                            <tr key={d.symbol} className={`border-b border-slate-700/50 ${isTarget ? 'bg-slate-700/30 font-semibold' : ''} ${!isIncluded ? 'opacity-50' : ''}`}>
-                                <td className="text-left py-3 px-2 border border-slate-700/50 text-slate-300">
-                                    <div className="flex flex-col"><span>{d.symbol}</span><span className="text-xs text-slate-500 font-sans truncate max-w-[120px]">{d.name}</span></div>
-                                </td>
-                                <td className="py-3 px-2 border border-slate-700/50 text-center">
-                                    {!isTarget && <input type="checkbox" checked={selectedPeers[d.symbol] || false} onChange={() => onTogglePeer(d.symbol)} className="w-4 h-4 accent-emerald-500 cursor-pointer" />}
-                                </td>
-                                <td className={`py-3 px-2 border border-slate-700/50 italic text-xs ${d.revGrowth < 0 ? 'text-red-400' : ''}`} style={{ backgroundColor: getHeatmapColor(d.revGrowth, 'revGrowth', data) }}>{formatPct(d.revGrowth)}</td>
-                                <td className={`py-3 px-2 border border-slate-700/50 ${d.ebitda < 0 ? 'text-red-400' : ''}`} style={{ backgroundColor: getHeatmapColor(d.ebitda, 'ebitda', data) }}>{formatCurrency(d.ebitda)}</td>
-                                <td className={`py-3 px-2 border border-slate-700/50 italic text-xs ${d.ebitdaMargin < 0 ? 'text-red-400' : ''}`} style={{ backgroundColor: getHeatmapColor(d.ebitdaMargin, 'ebitdaMargin', data) }}>{formatPct(d.ebitdaMargin)}</td>
-                                <td className={`py-3 px-2 border border-slate-700/50 ${d.netIncome < 0 ? 'text-red-400' : ''}`} style={{ backgroundColor: getHeatmapColor(d.netIncome, 'netIncome', data) }}>{formatCurrency(d.netIncome)}</td>
-                                <td className={`py-3 px-2 border border-slate-700/50 italic text-xs ${d.niMargin < 0 ? 'text-red-400' : ''}`} style={{ backgroundColor: getHeatmapColor(d.niMargin, 'niMargin', data) }}>{formatPct(d.niMargin)}</td>
-                                <td className="py-3 px-2 border border-slate-700/50" style={{ backgroundColor: getHeatmapColor(d.price, 'price', data) }}>${d.price.toFixed(2)}</td>
-                                <td className="py-3 px-2 border border-slate-700/50" style={{ backgroundColor: getHeatmapColor(d.marketCap, 'marketCap', data) }}>{formatCurrency(d.marketCap)}</td>
-                                <td className="py-3 px-2 border border-slate-700/50" style={{ backgroundColor: getHeatmapColor(d.ev, 'ev', data) }}>{formatCurrency(d.ev)}</td>
-                                <td className="py-3 px-2 border border-slate-700/50 border-l-2 border-l-slate-500" style={{ backgroundColor: getHeatmapColor(d.evToRev, 'evToRev', data) }}>{fmtX(d.evToRev)}</td>
-                                <td className="py-3 px-2 border border-slate-700/50" style={{ backgroundColor: getHeatmapColor(d.evToEbitda, 'evToEbitda', data) }}>{fmtX(d.evToEbitda)}</td>
-                                <td className="py-3 px-2 border border-slate-700/50" style={{ backgroundColor: getHeatmapColor(d.pToSales, 'pToSales', data) }}>{fmtX(d.pToSales)}</td>
-                                <td className="py-3 px-2 border border-slate-700/50" style={{ backgroundColor: getHeatmapColor(d.pToE, 'pToE', data) }}>{fmtX(d.pToE)}</td>
-                                <td className="py-3 px-2 border border-slate-700/50" style={{ backgroundColor: getHeatmapColor(d.pToBook, 'pToBook', data) }}>{fmtX(d.pToBook)}</td>
-                                <td className="py-3 px-2 border border-slate-700/50" style={{ backgroundColor: getHeatmapColor(d.pToFCF, 'pToFCF', data) }}>{fmtX(d.pToFCF)}</td>
-                                <td className="py-1 px-2 border border-slate-700/50" style={{ minWidth: '80px' }}>
-                                    <Sparkline histEvEbitda={d.histEvEbitda ?? []} />
-                                </td>
-                            </tr>
-                        );
-                    })}
+            {/* Table wrapper with horizontal scroll */}
+            <div className="overflow-x-auto">
+                <table className="w-full text-sm text-right" style={{ borderCollapse: 'separate', borderSpacing: 0 }}>
 
-                    {/* Stats rows */}
-                    {(['Mean', 'Median', '25th Percentile', '75th Percentile'] as const).map((label, li) => {
-                        const key = (['mean', 'median', 'p25', 'p75'] as const)[li];
-                        return (
-                            <tr key={label} className={`text-slate-400 text-sm font-mono ${li === 0 ? 'border-t-2 border-slate-600' : ''}`}>
-                                <td className="text-left py-3 px-2 border border-slate-700/50 font-semibold" colSpan={2}>{label}</td>
-                                <td className={`py-3 px-2 border border-slate-700/50 italic text-xs ${stats.revGrowth[key] < 0 ? 'text-red-400' : ''}`}>{formatPct(stats.revGrowth[key])}</td>
-                                <td className="py-3 px-2 border border-slate-700/50">{formatCurrency(stats.ebitda[key])}</td>
-                                <td className="py-3 px-2 border border-slate-700/50 italic text-xs">{formatPct(stats.ebitdaMargin[key])}</td>
-                                <td className="py-3 px-2 border border-slate-700/50">{formatCurrency(stats.netIncome[key])}</td>
-                                <td className="py-3 px-2 border border-slate-700/50 italic text-xs">{formatPct(stats.niMargin[key])}</td>
-                                <td className="py-3 px-2 border border-slate-700/50">${stats.price[key].toFixed(2)}</td>
-                                <td className="py-3 px-2 border border-slate-700/50">{formatCurrency(stats.marketCap[key])}</td>
-                                <td className="py-3 px-2 border border-slate-700/50">{formatCurrency(stats.ev[key])}</td>
-                                <td className="py-3 px-2 border border-slate-700/50 border-l-2 border-l-slate-500">{fmtX(stats.evToRev[key])}</td>
-                                <td className="py-3 px-2 border border-slate-700/50">{fmtX(stats.evToEbitda[key])}</td>
-                                <td className="py-3 px-2 border border-slate-700/50">{fmtX(stats.pToSales[key])}</td>
-                                <td className="py-3 px-2 border border-slate-700/50">{fmtX(stats.pToE[key])}</td>
-                                <td className="py-3 px-2 border border-slate-700/50">{fmtX(stats.pToBook[key])}</td>
-                                <td className="py-3 px-2 border border-slate-700/50">{fmtX(stats.pToFCF[key])}</td>
-                                <td className="py-3 px-2 border border-slate-700/50 text-center text-slate-600">—</td>
-                            </tr>
-                        );
-                    })}
+                    {/* ── Column group header ─────────────────────────────── */}
+                    <thead>
+                        <tr>
+                            <th colSpan={3} className="py-2 px-3 text-left text-[10px] font-semibold uppercase tracking-widest"
+                                style={{ color: 'var(--vw-text-muted)', background: 'var(--vw-bg-surface)' }}>
+                            </th>
+                            <th colSpan={7} className="py-2 px-3 text-center text-[10px] font-semibold uppercase tracking-widest"
+                                style={{ color: 'var(--vw-text-muted)', background: 'var(--vw-bg-surface)' }}>
+                                Fundamentals
+                            </th>
+                            <th colSpan={6} className="py-2 px-3 text-center text-[10px] font-semibold uppercase tracking-widest"
+                                style={{ color: 'var(--vw-accent)', background: 'rgba(0, 212, 170, 0.04)', ...DIVIDER_STYLE }}>
+                                Valuation Multiples
+                            </th>
+                            <th className="py-2 px-3 text-center text-[10px] font-semibold uppercase tracking-widest"
+                                style={{ color: 'var(--vw-text-muted)', background: 'var(--vw-bg-surface)', ...DIVIDER_STYLE }}>
+                            </th>
+                        </tr>
 
-                    {/* Target Percentile row */}
-                    {targetPercentiles && (() => {
-                        return (
-                            <tr className="border-t-2 border-slate-500 bg-slate-700/20">
-                                <td className="text-left py-2.5 px-2 border border-slate-700/50 text-xs font-semibold text-slate-300" colSpan={2}>Target Percentile</td>
-                                {pctCell(targetPercentiles.revGrowth)}
-                                <td className="py-2.5 px-2 border border-slate-700/50 text-center text-slate-600 text-xs">—</td>
-                                {pctCell(targetPercentiles.ebitdaMargin)}
-                                <td className="py-2.5 px-2 border border-slate-700/50 text-center text-slate-600 text-xs">—</td>
-                                <td className="py-2.5 px-2 border border-slate-700/50 text-center text-slate-600 text-xs">—</td>
-                                <td className="py-2.5 px-2 border border-slate-700/50 text-center text-slate-600 text-xs">—</td>
-                                <td className="py-2.5 px-2 border border-slate-700/50 text-center text-slate-600 text-xs">—</td>
-                                <td className="py-2.5 px-2 border border-slate-700/50 text-center text-slate-600 text-xs">—</td>
-                                {pctCell(targetPercentiles.evToRev)}
-                                {pctCell(targetPercentiles.evToEbitda)}
-                                {pctCell(targetPercentiles.pToSales)}
-                                {pctCell(targetPercentiles.pToE)}
-                                {pctCell(targetPercentiles.pToBook)}
-                                {pctCell(targetPercentiles.pToFCF)}
-                                <td className="py-2.5 px-2 border border-slate-700/50 text-center text-slate-600 text-xs">—</td>
-                            </tr>
-                        );
-                    })()}
-                </tbody>
-            </table>
-            <p className="text-xs text-slate-600 mt-2">Target Percentile: higher % = more favorable vs peer group (100 = highest growth / lowest multiple)</p>
+                        {/* ── Metric headers ───────────────────────────────── */}
+                        <tr style={{ borderBottom: '2px solid var(--vw-border-lit)' }}>
+                            <th className="py-3 px-3 text-left font-medium sticky left-0 z-10" style={{ ...hStyle, background: 'var(--vw-bg-raised)', minWidth: 140 }}>
+                                Company
+                            </th>
+                            <th className="py-3 px-3 font-medium text-center" style={{ ...hStyle, width: 56 }}>
+                                Include
+                            </th>
+                            <SortTh label="Rev Growth" k="revGrowth" {...sortProps} />
+                            <SortTh label="EBITDA" k="ebitda" {...sortProps} />
+                            <SortTh label="EBITDA %" k="ebitdaMargin" {...sortProps} />
+                            <SortTh label="Net Income" k="netIncome" {...sortProps} />
+                            <SortTh label="NI %" k="niMargin" {...sortProps} />
+                            <SortTh label="Price" k="price" {...sortProps} />
+                            <SortTh label="Mkt Cap" k="marketCap" {...sortProps} />
+                            <SortTh label="EV" k="ev" {...sortProps} />
+                            <SortTh label="EV / Rev" k="evToRev" {...sortProps} divider />
+                            <SortTh label="EV / EBITDA" k="evToEbitda" {...sortProps} />
+                            <SortTh label="P / Sales" k="pToSales" {...sortProps} />
+                            <SortTh label="P / E" k="pToE" {...sortProps} />
+                            <SortTh label="P / Book" k="pToBook" {...sortProps} />
+                            <SortTh label="P / FCF" k="pToFCF" {...sortProps} />
+                            <th className="py-3 px-3 font-medium text-center" style={{ ...hStyle, minWidth: 80, ...DIVIDER_STYLE }}>
+                                Trend
+                            </th>
+                        </tr>
+                    </thead>
+
+                    {/* ── Data rows ─────────────────────────────────────── */}
+                    <tbody>
+                        {displayData.map((d, i) => {
+                            const isTarget = i === 0;
+                            const isIncluded = isTarget || selectedPeers[d.symbol];
+                            return (
+                                <tr
+                                    key={d.symbol}
+                                    className="transition-colors"
+                                    style={{
+                                        borderBottom: '1px solid var(--vw-border-dim)',
+                                        opacity: isIncluded ? 1 : 0.45,
+                                        background: isTarget ? 'rgba(0, 212, 170, 0.03)' : undefined,
+                                    }}
+                                >
+                                    {/* Company — sticky */}
+                                    <td
+                                        className="py-3 px-3 text-left sticky left-0 z-10"
+                                        style={{
+                                            background: isTarget ? 'var(--vw-bg-raised)' : 'var(--vw-bg-raised)',
+                                            borderLeft: isTarget ? '3px solid var(--vw-accent)' : '3px solid transparent',
+                                        }}
+                                    >
+                                        <div className="flex flex-col">
+                                            <span className="font-semibold text-[13px]" style={{ color: isTarget ? 'var(--vw-accent)' : 'var(--vw-text-primary)' }}>
+                                                {d.symbol}
+                                            </span>
+                                            <span className="text-[11px] truncate max-w-[120px]" style={{ color: 'var(--vw-text-muted)' }}>
+                                                {d.name}
+                                            </span>
+                                        </div>
+                                    </td>
+
+                                    {/* Include checkbox */}
+                                    <td className="py-3 px-3 text-center">
+                                        {!isTarget && (
+                                            <input
+                                                type="checkbox"
+                                                checked={selectedPeers[d.symbol] || false}
+                                                onChange={() => onTogglePeer(d.symbol)}
+                                                className="w-4 h-4 accent-emerald-500 cursor-pointer rounded"
+                                            />
+                                        )}
+                                    </td>
+
+                                    {/* Fundamentals */}
+                                    <td className="py-3 px-3 font-mono text-[13px] tabular-nums" style={{ color: d.revGrowth < 0 ? '#f87171' : 'var(--vw-text-secondary)', backgroundColor: getHeatmapColor(d.revGrowth, 'revGrowth', data) }}>
+                                        {formatPct(d.revGrowth)}
+                                    </td>
+                                    <td className="py-3 px-3 font-mono text-[13px] tabular-nums" style={{ color: d.ebitda < 0 ? '#f87171' : 'var(--vw-text-primary)', backgroundColor: getHeatmapColor(d.ebitda, 'ebitda', data) }}>
+                                        {formatCurrency(d.ebitda)}
+                                    </td>
+                                    <td className="py-3 px-3 font-mono text-[13px] tabular-nums" style={{ color: d.ebitdaMargin < 0 ? '#f87171' : 'var(--vw-text-secondary)', backgroundColor: getHeatmapColor(d.ebitdaMargin, 'ebitdaMargin', data) }}>
+                                        {formatPct(d.ebitdaMargin)}
+                                    </td>
+                                    <td className="py-3 px-3 font-mono text-[13px] tabular-nums" style={{ color: d.netIncome < 0 ? '#f87171' : 'var(--vw-text-primary)', backgroundColor: getHeatmapColor(d.netIncome, 'netIncome', data) }}>
+                                        {formatCurrency(d.netIncome)}
+                                    </td>
+                                    <td className="py-3 px-3 font-mono text-[13px] tabular-nums" style={{ color: d.niMargin < 0 ? '#f87171' : 'var(--vw-text-secondary)', backgroundColor: getHeatmapColor(d.niMargin, 'niMargin', data) }}>
+                                        {formatPct(d.niMargin)}
+                                    </td>
+                                    <td className="py-3 px-3 font-mono text-[13px] tabular-nums" style={{ color: 'var(--vw-text-primary)', backgroundColor: getHeatmapColor(d.price, 'price', data) }}>
+                                        ${d.price.toFixed(2)}
+                                    </td>
+                                    <td className="py-3 px-3 font-mono text-[13px] tabular-nums" style={{ color: 'var(--vw-text-primary)', backgroundColor: getHeatmapColor(d.marketCap, 'marketCap', data) }}>
+                                        {formatCurrency(d.marketCap)}
+                                    </td>
+                                    <td className="py-3 px-3 font-mono text-[13px] tabular-nums" style={{ color: 'var(--vw-text-primary)', backgroundColor: getHeatmapColor(d.ev, 'ev', data) }}>
+                                        {formatCurrency(d.ev)}
+                                    </td>
+
+                                    {/* Valuation Multiples — with divider on first */}
+                                    <td className="py-3 px-3 font-mono text-[13px] font-semibold tabular-nums" style={{ color: 'var(--vw-text-primary)', backgroundColor: getHeatmapColor(d.evToRev, 'evToRev', data), ...DIVIDER_STYLE }}>
+                                        {fmtX(d.evToRev)}
+                                    </td>
+                                    <td className="py-3 px-3 font-mono text-[13px] font-semibold tabular-nums" style={{ color: 'var(--vw-text-primary)', backgroundColor: getHeatmapColor(d.evToEbitda, 'evToEbitda', data) }}>
+                                        {fmtX(d.evToEbitda)}
+                                    </td>
+                                    <td className="py-3 px-3 font-mono text-[13px] font-semibold tabular-nums" style={{ color: 'var(--vw-text-primary)', backgroundColor: getHeatmapColor(d.pToSales, 'pToSales', data) }}>
+                                        {fmtX(d.pToSales)}
+                                    </td>
+                                    <td className="py-3 px-3 font-mono text-[13px] font-semibold tabular-nums" style={{ color: 'var(--vw-text-primary)', backgroundColor: getHeatmapColor(d.pToE, 'pToE', data) }}>
+                                        {fmtX(d.pToE)}
+                                    </td>
+                                    <td className="py-3 px-3 font-mono text-[13px] font-semibold tabular-nums" style={{ color: 'var(--vw-text-primary)', backgroundColor: getHeatmapColor(d.pToBook, 'pToBook', data) }}>
+                                        {fmtX(d.pToBook)}
+                                    </td>
+                                    <td className="py-3 px-3 font-mono text-[13px] font-semibold tabular-nums" style={{ color: 'var(--vw-text-primary)', backgroundColor: getHeatmapColor(d.pToFCF, 'pToFCF', data) }}>
+                                        {fmtX(d.pToFCF)}
+                                    </td>
+
+                                    {/* Sparkline */}
+                                    <td className="py-1 px-3" style={{ minWidth: 80, ...DIVIDER_STYLE }}>
+                                        <Sparkline histEvEbitda={d.histEvEbitda ?? []} />
+                                    </td>
+                                </tr>
+                            );
+                        })}
+
+                        {/* ── Stats rows ────────────────────────────────── */}
+                        {(['Mean', 'Median', '25th Pctl', '75th Pctl'] as const).map((label, li) => {
+                            const key = (['mean', 'median', 'p25', 'p75'] as const)[li];
+                            const isMedian = li === 1;
+                            return (
+                                <tr
+                                    key={label}
+                                    style={{
+                                        borderTop: li === 0 ? '2px solid var(--vw-border-lit)' : undefined,
+                                        borderBottom: '1px solid var(--vw-border-dim)',
+                                        background: isMedian ? 'rgba(0, 212, 170, 0.03)' : 'var(--vw-bg-surface)',
+                                    }}
+                                >
+                                    <td
+                                        className="text-left py-3 px-3 font-semibold text-[13px] sticky left-0 z-10"
+                                        style={{ color: isMedian ? 'var(--vw-accent)' : 'var(--vw-text-secondary)', background: isMedian ? 'rgba(0, 212, 170, 0.03)' : 'var(--vw-bg-surface)', borderLeft: isMedian ? '3px solid var(--vw-accent)' : '3px solid transparent' }}
+                                        colSpan={2}
+                                    >
+                                        {label}
+                                    </td>
+                                    <td className="py-3 px-3 font-mono text-[13px] tabular-nums" style={{ color: stats.revGrowth[key] < 0 ? '#f87171' : 'var(--vw-text-secondary)' }}>{formatPct(stats.revGrowth[key])}</td>
+                                    <td className="py-3 px-3 font-mono text-[13px] tabular-nums" style={{ color: 'var(--vw-text-secondary)' }}>{formatCurrency(stats.ebitda[key])}</td>
+                                    <td className="py-3 px-3 font-mono text-[13px] tabular-nums" style={{ color: 'var(--vw-text-secondary)' }}>{formatPct(stats.ebitdaMargin[key])}</td>
+                                    <td className="py-3 px-3 font-mono text-[13px] tabular-nums" style={{ color: 'var(--vw-text-secondary)' }}>{formatCurrency(stats.netIncome[key])}</td>
+                                    <td className="py-3 px-3 font-mono text-[13px] tabular-nums" style={{ color: 'var(--vw-text-secondary)' }}>{formatPct(stats.niMargin[key])}</td>
+                                    <td className="py-3 px-3 font-mono text-[13px] tabular-nums" style={{ color: 'var(--vw-text-secondary)' }}>${stats.price[key].toFixed(2)}</td>
+                                    <td className="py-3 px-3 font-mono text-[13px] tabular-nums" style={{ color: 'var(--vw-text-secondary)' }}>{formatCurrency(stats.marketCap[key])}</td>
+                                    <td className="py-3 px-3 font-mono text-[13px] tabular-nums" style={{ color: 'var(--vw-text-secondary)' }}>{formatCurrency(stats.ev[key])}</td>
+                                    <td className="py-3 px-3 font-mono text-[13px] tabular-nums font-semibold" style={{ color: isMedian ? 'var(--vw-accent)' : 'var(--vw-text-secondary)', ...DIVIDER_STYLE }}>{fmtX(stats.evToRev[key])}</td>
+                                    <td className="py-3 px-3 font-mono text-[13px] tabular-nums font-semibold" style={{ color: isMedian ? 'var(--vw-accent)' : 'var(--vw-text-secondary)' }}>{fmtX(stats.evToEbitda[key])}</td>
+                                    <td className="py-3 px-3 font-mono text-[13px] tabular-nums font-semibold" style={{ color: isMedian ? 'var(--vw-accent)' : 'var(--vw-text-secondary)' }}>{fmtX(stats.pToSales[key])}</td>
+                                    <td className="py-3 px-3 font-mono text-[13px] tabular-nums font-semibold" style={{ color: isMedian ? 'var(--vw-accent)' : 'var(--vw-text-secondary)' }}>{fmtX(stats.pToE[key])}</td>
+                                    <td className="py-3 px-3 font-mono text-[13px] tabular-nums font-semibold" style={{ color: isMedian ? 'var(--vw-accent)' : 'var(--vw-text-secondary)' }}>{fmtX(stats.pToBook[key])}</td>
+                                    <td className="py-3 px-3 font-mono text-[13px] tabular-nums font-semibold" style={{ color: isMedian ? 'var(--vw-accent)' : 'var(--vw-text-secondary)' }}>{fmtX(stats.pToFCF[key])}</td>
+                                    <td className="py-3 px-3 text-center text-xs" style={{ color: 'var(--vw-text-muted)', ...DIVIDER_STYLE }}>—</td>
+                                </tr>
+                            );
+                        })}
+
+                        {/* ── Target Percentile row ────────────────────── */}
+                        {targetPercentiles && (() => {
+                            return (
+                                <tr style={{ borderTop: '2px solid var(--vw-border-lit)', background: 'rgba(0, 212, 170, 0.02)' }}>
+                                    <td
+                                        className="text-left py-3 px-3 text-[12px] font-semibold sticky left-0 z-10"
+                                        style={{ color: 'var(--vw-accent)', background: 'rgba(0, 212, 170, 0.02)', borderLeft: '3px solid var(--vw-accent)' }}
+                                        colSpan={2}
+                                    >
+                                        Target Percentile
+                                    </td>
+                                    {pctCell(targetPercentiles.revGrowth)}
+                                    <td className="py-3 px-3 text-center text-xs" style={{ color: 'var(--vw-text-muted)' }}>—</td>
+                                    {pctCell(targetPercentiles.ebitdaMargin)}
+                                    <td className="py-3 px-3 text-center text-xs" style={{ color: 'var(--vw-text-muted)' }}>—</td>
+                                    <td className="py-3 px-3 text-center text-xs" style={{ color: 'var(--vw-text-muted)' }}>—</td>
+                                    <td className="py-3 px-3 text-center text-xs" style={{ color: 'var(--vw-text-muted)' }}>—</td>
+                                    <td className="py-3 px-3 text-center text-xs" style={{ color: 'var(--vw-text-muted)' }}>—</td>
+                                    <td className="py-3 px-3 text-center text-xs" style={{ color: 'var(--vw-text-muted)' }}>—</td>
+                                    {pctCell(targetPercentiles.evToRev, true)}
+                                    {pctCell(targetPercentiles.evToEbitda)}
+                                    {pctCell(targetPercentiles.pToSales)}
+                                    {pctCell(targetPercentiles.pToE)}
+                                    {pctCell(targetPercentiles.pToBook)}
+                                    {pctCell(targetPercentiles.pToFCF)}
+                                    <td className="py-3 px-3 text-center text-xs" style={{ color: 'var(--vw-text-muted)', ...DIVIDER_STYLE }}>—</td>
+                                </tr>
+                            );
+                        })()}
+                    </tbody>
+                </table>
+            </div>
+
+            {/* Footer note */}
+            <div className="px-6 py-3" style={{ borderTop: '1px solid var(--vw-border-dim)' }}>
+                <p className="text-[11px]" style={{ color: 'var(--vw-text-muted)' }}>
+                    Target Percentile: higher % = more favorable vs peer group (100 = highest growth / lowest multiple)
+                </p>
+            </div>
         </div>
     );
 }

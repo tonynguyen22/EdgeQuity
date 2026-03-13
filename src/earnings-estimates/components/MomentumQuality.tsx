@@ -25,7 +25,7 @@ function MomentumCard({ momentum, label }: { momentum: EpsMomentum; label: strin
         <div>Recent YoY growth: <span className={`font-semibold ${momentum.recentAvg >= 0 ? 'text-emerald-400' : 'text-red-400'}`}>{momentum.recentAvg >= 0 ? '+' : ''}{momentum.recentAvg.toFixed(1)}%</span></div>
         <div>Prior period: <span className="text-slate-300">{momentum.priorAvg >= 0 ? '+' : ''}{momentum.priorAvg.toFixed(1)}%</span></div>
         <div className={`${Math.abs(momentum.delta) > 3 ? tColor : 'text-slate-500'}`}>
-          {momentum.delta >= 0 ? '+' : ''}{momentum.delta.toFixed(1)}pp change
+          {momentum.delta >= 0 ? '+' : ''}{momentum.delta.toFixed(1)}% change
         </div>
       </div>
     </div>

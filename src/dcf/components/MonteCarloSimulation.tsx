@@ -63,6 +63,24 @@ export default function MonteCarloSimulation({ dcf, data, inputs }: MonteCarloSi
         <p className="text-xs text-slate-500 mt-0.5">Run thousands of DCF simulations with randomized inputs to estimate the probability distribution of intrinsic value</p>
       </div>
 
+      {/* Monte Carlo Definition */}
+      <div className="bg-emerald-500/5 border border-emerald-500/15 rounded-xl p-4">
+        <div className="flex items-start gap-3">
+          <Info className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+          <div className="space-y-1.5">
+            <p className="text-xs font-semibold text-emerald-300">What is a Monte Carlo Simulation?</p>
+            <p className="text-xs leading-relaxed" style={{ color: 'var(--vw-text-secondary)' }}>
+              Instead of producing a single fair-value estimate, a Monte Carlo simulation runs your DCF model thousands of times — each time
+              slightly randomizing key assumptions like revenue growth, profit margins, and discount rate. The result is a <span className="text-slate-300 font-medium">range of possible values</span> rather
+              than a single number, showing you how sensitive the valuation is to changes in your inputs and what the probability is that the stock is undervalued.
+            </p>
+            <p className="text-xs leading-relaxed" style={{ color: 'var(--vw-text-secondary)' }}>
+              <span className="text-slate-300 font-medium">How to use:</span> Adjust the standard deviation sliders below to set how much each input can vary (wider spread = more uncertainty), pick a simulation count, then hit <span className="text-emerald-400 font-medium">Run Simulation</span>.
+            </p>
+          </div>
+        </div>
+      </div>
+
       {/* Config Panel */}
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
         <div className="vw-card rounded-xl p-4 space-y-3">
@@ -87,22 +105,22 @@ export default function MonteCarloSimulation({ dcf, data, inputs }: MonteCarloSi
 
         <div className="vw-card rounded-xl p-4 space-y-3">
           <h3 className="text-xs font-semibold text-slate-300 uppercase tracking-wider">Revenue Growth Spread</h3>
-          <SimSlider label="Std Dev (pp)" value={config.revGrowthStdDev} onChange={v => setConfig(p => ({ ...p, revGrowthStdDev: v }))}
-            min={1} max={15} step={0.5} suffix="pp" />
+          <SimSlider label="Std Dev (%)" value={config.revGrowthStdDev} onChange={v => setConfig(p => ({ ...p, revGrowthStdDev: v }))}
+            min={1} max={15} step={0.5} suffix="%" />
         </div>
 
         <div className="vw-card rounded-xl p-4 space-y-3">
           <h3 className="text-xs font-semibold text-slate-300 uppercase tracking-wider">Margin Spread</h3>
-          <SimSlider label="Std Dev (pp)" value={config.ebitMarginStdDev} onChange={v => setConfig(p => ({ ...p, ebitMarginStdDev: v }))}
-            min={1} max={15} step={0.5} suffix="pp" />
+          <SimSlider label="Std Dev (%)" value={config.ebitMarginStdDev} onChange={v => setConfig(p => ({ ...p, ebitMarginStdDev: v }))}
+            min={1} max={15} step={0.5} suffix="%" />
         </div>
 
         <div className="vw-card rounded-xl p-4 space-y-3">
           <h3 className="text-xs font-semibold text-slate-300 uppercase tracking-wider">WACC & Growth Spread</h3>
-          <SimSlider label="Term Growth Std (pp)" value={config.termGrowthStdDev} onChange={v => setConfig(p => ({ ...p, termGrowthStdDev: v }))}
-            min={0.1} max={2} step={0.1} suffix="pp" />
-          <SimSlider label="WACC Std (pp)" value={config.waccStdDev} onChange={v => setConfig(p => ({ ...p, waccStdDev: v }))}
-            min={0.1} max={2} step={0.1} suffix="pp" />
+          <SimSlider label="Term Growth Std (%)" value={config.termGrowthStdDev} onChange={v => setConfig(p => ({ ...p, termGrowthStdDev: v }))}
+            min={0.1} max={2} step={0.1} suffix="%" />
+          <SimSlider label="WACC Std (%)" value={config.waccStdDev} onChange={v => setConfig(p => ({ ...p, waccStdDev: v }))}
+            min={0.1} max={2} step={0.1} suffix="%" />
         </div>
       </div>
 
@@ -232,8 +250,8 @@ export default function MonteCarloSimulation({ dcf, data, inputs }: MonteCarloSi
                         <td className="py-3 text-right">
                           <span className={`px-2 py-0.5 rounded text-xs font-medium ${diff >= 0.1 ? 'bg-emerald-500/15 text-emerald-400' :
                             diff >= 0 ? 'bg-emerald-500/10 text-emerald-400/70' :
-                            diff >= -0.1 ? 'bg-red-500/10 text-red-400/70' :
-                            'bg-red-500/15 text-red-400'}`}>
+                              diff >= -0.1 ? 'bg-red-500/10 text-red-400/70' :
+                                'bg-red-500/15 text-red-400'}`}>
                             {diff >= 0 ? 'Upside' : 'Downside'}
                           </span>
                         </td>

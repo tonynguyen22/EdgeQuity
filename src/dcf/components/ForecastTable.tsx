@@ -64,7 +64,7 @@ export default function ForecastTable({ dcf, formatUnit, forecastYears, onFormat
           </tr>
           <tr className="border-b border-slate-700/50">
             <td className="text-left py-3 px-3 text-slate-300 whitespace-nowrap">EBIAT (NOPAT)</td>
-            {dcf.historicalSummary.slice(-3).map((p: any) => <td key={p.year} className="py-3 px-3 text-slate-600">-</td>)}
+            {dcf.historicalSummary.slice(-3).map((p: any) => <td key={p.year} className="py-3 px-3 text-slate-500">-</td>)}
             {dcf.projections.map((p: any) => <td key={p.year} className={`py-3 px-3 whitespace-nowrap ${p.ebiat < 0 ? 'text-red-400' : ''}`}>{formatModelCurrency(p.ebiat, formatUnit)}</td>)}
           </tr>
           <tr className="border-b border-slate-700/50">
@@ -79,7 +79,7 @@ export default function ForecastTable({ dcf, formatUnit, forecastYears, onFormat
           </tr>
           <tr className="border-b border-slate-700/50">
             <td className="text-left py-3 px-3 text-slate-300 whitespace-nowrap">Less: Δ WC</td>
-            {dcf.historicalSummary.slice(-3).map((p: any) => <td key={p.year} className="py-3 px-3 text-slate-600">-</td>)}
+            {dcf.historicalSummary.slice(-3).map((p: any) => <td key={p.year} className="py-3 px-3 text-slate-500">-</td>)}
             {dcf.projections.map((p: any) => <td key={p.year} className={`py-3 px-3 whitespace-nowrap ${p.deltaWc > 0 ? 'text-red-400' : 'text-emerald-400'}`}>{formatModelCurrency(-p.deltaWc, formatUnit)}</td>)}
           </tr>
           <tr className="border-b border-slate-700/50">
@@ -89,22 +89,22 @@ export default function ForecastTable({ dcf, formatUnit, forecastYears, onFormat
           </tr>
           <tr className="border-b border-slate-700/50">
             <td className="text-left py-3 px-3 text-slate-300 whitespace-nowrap">Mid-Year DP</td>
-            {dcf.historicalSummary.slice(-3).map((p: any) => <td key={p.year} className="py-3 px-3 text-slate-600">-</td>)}
+            {dcf.historicalSummary.slice(-3).map((p: any) => <td key={p.year} className="py-3 px-3 text-slate-500">-</td>)}
             {dcf.projections.map((p: any) => <td key={p.year} className="py-3 px-3 text-slate-400 whitespace-nowrap">{p.discountPeriod.toFixed(2)}</td>)}
           </tr>
           <tr className="border-b border-slate-700/50">
             <td className="text-left py-3 px-3 text-slate-300 whitespace-nowrap">Discounted FCF</td>
-            {dcf.historicalSummary.slice(-3).map((p: any) => <td key={p.year} className="py-3 px-3 text-slate-600">-</td>)}
+            {dcf.historicalSummary.slice(-3).map((p: any) => <td key={p.year} className="py-3 px-3 text-slate-500">-</td>)}
             {dcf.projections.map((p: any) => <td key={p.year} className={`py-3 px-3 whitespace-nowrap ${p.discountedFcff < 0 ? 'text-red-400' : 'text-emerald-400'}`}>{formatModelCurrency(p.discountedFcff, formatUnit)}</td>)}
           </tr>
           <tr className="border-b border-slate-700/50">
             <td className="text-left py-3 px-3 text-slate-300 whitespace-nowrap">Terminal Value</td>
-            {dcf.historicalSummary.slice(-3).map((p: any) => <td key={p.year} className="py-3 px-3 text-slate-600">-</td>)}
+            {dcf.historicalSummary.slice(-3).map((p: any) => <td key={p.year} className="py-3 px-3 text-slate-500">-</td>)}
             {dcf.projections.map((p: any, i: number) => <td key={p.year} className="py-3 px-3 whitespace-nowrap">{i === dcf.projections.length - 1 ? formatModelCurrency(p.tv, formatUnit) : '-'}</td>)}
           </tr>
           <tr className="border-b border-slate-700/50">
             <td className="text-left py-3 px-3 text-slate-300 whitespace-nowrap">Discounted TV</td>
-            {dcf.historicalSummary.slice(-3).map((p: any) => <td key={p.year} className="py-3 px-3 text-slate-600">-</td>)}
+            {dcf.historicalSummary.slice(-3).map((p: any) => <td key={p.year} className="py-3 px-3 text-slate-500">-</td>)}
             {dcf.projections.map((p: any, i: number) => <td key={p.year} className={`py-3 px-3 whitespace-nowrap ${p.discountedTv < 0 ? 'text-red-400' : 'text-emerald-400'}`}>{i === dcf.projections.length - 1 ? formatModelCurrency(p.discountedTv, formatUnit) : '-'}</td>)}
           </tr>
           <tr className="border-b border-slate-700/50">

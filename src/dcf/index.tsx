@@ -603,7 +603,7 @@ export default function App() {
                         <div className="flex items-baseline gap-3">
                           <h2 className="text-xl font-bold text-white">{ticker}</h2>
                           <span className="text-sm text-slate-400">{data.profile.name}</span>
-                          {data.profile.finnhubIndustry && <span className="text-xs text-slate-600">{data.profile.finnhubIndustry}</span>}
+                          {data.profile.finnhubIndustry && <span className="text-xs text-slate-500">{data.profile.finnhubIndustry}</span>}
                         </div>
                       )}
                       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
@@ -628,7 +628,7 @@ export default function App() {
                             <div className="bg-slate-800/50 border border-slate-700/50 rounded-xl p-5">
                               <div className="text-sm text-slate-400 mb-1">Intrinsic Value</div>
                               <div className="text-3xl font-light tracking-tight">${dcf.intrinsicValue.toFixed(2)}</div>
-                              <div className="text-xs text-slate-600 mt-1">{activeScenario !== 'custom' ? activeScenario.charAt(0).toUpperCase() + activeScenario.slice(1) + ' case' : 'Custom'}</div>
+                              <div className="text-xs text-slate-500 mt-1">{activeScenario !== 'custom' ? activeScenario.charAt(0).toUpperCase() + activeScenario.slice(1) + ' case' : 'Custom'}</div>
                             </div>
 
                             <div className="bg-slate-800/50 border border-slate-700/50 rounded-xl p-5">
@@ -807,7 +807,7 @@ export default function App() {
                                     );
                                   })}
                                 </div>
-                                <p className="text-xs text-slate-600 mt-3">PV of FCFs + PV of Terminal Value = Enterprise Value → +Cash −Debt = Equity Value</p>
+                                <p className="text-xs text-slate-500 mt-3">PV of FCFs + PV of Terminal Value = Enterprise Value → +Cash −Debt = Equity Value</p>
                               </div>
                             );
                           })()}
@@ -844,7 +844,7 @@ export default function App() {
                                         const pct = iv !== null && dcf.currentPrice > 0 ? (iv - dcf.currentPrice) / dcf.currentPrice : null;
                                         const aboveAnalyst = iv !== null && analystTarget && iv >= analystTarget.mean;
                                         const bg = iv === null ? '' : pct !== null && pct >= 0.10 ? 'bg-emerald-500/25' : pct !== null && pct >= 0 ? 'bg-emerald-500/10' : pct !== null && pct >= -0.10 ? 'bg-red-500/10' : 'bg-red-500/25';
-                                        const textColor = iv === null ? 'text-slate-600' : pct !== null && pct >= 0 ? 'text-emerald-400' : 'text-red-400';
+                                        const textColor = iv === null ? 'text-slate-500' : pct !== null && pct >= 0 ? 'text-emerald-400' : 'text-red-400';
                                         return (
                                           <td key={ci} className={`py-2.5 px-3 rounded ${bg} ${textColor} ${isCurrentCell ? 'ring-2 ring-emerald-500' : ''} ${aboveAnalyst && !isCurrentCell ? 'ring-1 ring-blue-400/50' : ''}`}>
                                             {iv === null ? '—' : `$${iv.toFixed(0)}`}
@@ -856,7 +856,7 @@ export default function App() {
                                 })}
                               </tbody>
                             </table>
-                            <div className="flex flex-wrap items-center gap-x-4 gap-y-1 mt-3 text-xs text-slate-600">
+                            <div className="flex flex-wrap items-center gap-x-4 gap-y-1 mt-3 text-xs text-slate-500">
                               <span>Current price: ${dcf.currentPrice.toFixed(2)}</span>
                               {analystTarget && <span className="text-blue-400/70">Analyst target: ${analystTarget.mean.toFixed(0)} (range ${analystTarget.low.toFixed(0)}–${analystTarget.high.toFixed(0)})</span>}
                               <span>Green = upside · Red = downside · Ring = current assumptions{analystTarget ? ' · Blue outline = at/above analyst target' : ''}</span>
@@ -884,7 +884,7 @@ export default function App() {
                                   <div className={`text-sm font-medium ${s.upside >= 0 ? 'text-emerald-400' : 'text-red-400'}`}>
                                     {s.upside >= 0 ? '+' : ''}{(s.upside * 100).toFixed(1)}% vs ${dcf.currentPrice.toFixed(2)}
                                   </div>
-                                  <div className="text-xs text-slate-600 leading-relaxed">{desc}</div>
+                                  <div className="text-xs text-slate-500 leading-relaxed">{desc}</div>
                                 </div>
                               );
                             })}
@@ -908,7 +908,7 @@ export default function App() {
                                 </div>
                               );
                             })}
-                            <div className="text-xs text-slate-600 pl-14">Vertical line = current price (${dcf.currentPrice.toFixed(2)})</div>
+                            <div className="text-xs text-slate-500 pl-14">Vertical line = current price (${dcf.currentPrice.toFixed(2)})</div>
                           </div>
                         </div>
                       )}

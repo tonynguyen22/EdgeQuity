@@ -37,7 +37,7 @@ const SliderInput = React.memo(function SliderInput({
         onChange={e => onChange(parseFloat(e.target.value))}
         className="w-full h-1.5 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-emerald-500"
       />
-      <div className="flex justify-between text-[10px] text-slate-600">
+      <div className="flex justify-between text-[10px] text-slate-500">
         <span>{min}{suffix}</span>
         <span>{max}{suffix}</span>
       </div>
@@ -176,7 +176,7 @@ export default function WACCPanel({ dcf, inputs, data, onInputChange }: WACCPane
                 {(computed.costOfEquity * 100).toFixed(2)}%
               </span>
             </div>
-            <div className="text-[10px] text-slate-600 mt-1 font-mono">
+            <div className="text-[10px] text-slate-400 mt-1 font-mono">
               {overrides.riskFreeRate.toFixed(1)}% + {overrides.beta.toFixed(2)} × {overrides.erp.toFixed(1)}% = {(computed.costOfEquity * 100).toFixed(2)}%
             </div>
           </div>
@@ -203,7 +203,7 @@ export default function WACCPanel({ dcf, inputs, data, onInputChange }: WACCPane
                 {(computed.afterTaxCostOfDebt * 100).toFixed(2)}%
               </span>
             </div>
-            <div className="text-[10px] text-slate-600 mt-1 font-mono">
+            <div className="text-[10px] text-slate-400 mt-1 font-mono">
               {overrides.costOfDebt.toFixed(1)}% × (1 − {overrides.taxRate.toFixed(1)}%) = {(computed.afterTaxCostOfDebt * 100).toFixed(2)}%
             </div>
           </div>
@@ -299,7 +299,7 @@ export default function WACCPanel({ dcf, inputs, data, onInputChange }: WACCPane
           <Info className="w-4 h-4 text-slate-500 shrink-0 mt-0.5" />
           <div className="text-xs text-slate-500 leading-relaxed">
             <p><strong className="text-slate-400">WACC</strong> (Weighted Average Cost of Capital) represents the blended cost of financing from both equity and debt.
-            <strong className="text-slate-400"> CAPM</strong> (Capital Asset Pricing Model) estimates the expected return on equity: Ke = Rf + Beta x ERP.</p>
+              <strong className="text-slate-400"> CAPM</strong> (Capital Asset Pricing Model) estimates the expected return on equity: Ke = Rf + Beta x ERP.</p>
             <p className="mt-1">Adjusting these values here will update the DCF model when you click "Apply to DCF". A higher WACC decreases intrinsic value (future cash flows are discounted more heavily).</p>
           </div>
         </div>
