@@ -2,7 +2,7 @@ import React from 'react';
 import {
   TrendingUp, Home, Activity, Users, Award, BarChart3, BarChart2,
   Eye, Newspaper, Coins, Trash2, RefreshCw, DollarSign, FileSpreadsheet,
-  ChevronRight,
+  ChevronLeft, ChevronRight, PanelLeftClose, PanelLeftOpen,
 } from 'lucide-react';
 import type { TabId } from '../types';
 
@@ -52,31 +52,26 @@ const NAV_SECTIONS = [
   },
 ];
 
-// All nav items flat, for the icon rail
-const ALL_NAV_ITEMS = [
-  { id: 'home' as const, label: 'Home', Icon: Home, color: '#00d4aa', isHome: true },
-  ...NAV_SECTIONS.flatMap(s => s.items.map(i => ({ ...i, isHome: false }))),
-];
-
 /** Small tooltip shown on hover in collapsed mode */
 function IconTooltip({ label }: { label: string }) {
   return (
     <span
       style={{
         position: 'absolute',
-        left: 'calc(100% + 8px)',
+        left: 'calc(100% + 10px)',
         top: '50%',
         transform: 'translateY(-50%)',
-        background: '#1e293b',
-        border: '1px solid rgba(255,255,255,0.1)',
+        background: 'rgba(15, 23, 42, 0.95)',
+        backdropFilter: 'blur(8px)',
+        border: '1px solid rgba(255,255,255,0.08)',
         color: '#f1f5f9',
         fontSize: '11px',
         fontWeight: 500,
-        padding: '4px 8px',
-        borderRadius: '6px',
+        padding: '5px 10px',
+        borderRadius: '8px',
         whiteSpace: 'nowrap',
         pointerEvents: 'none',
-        boxShadow: '0 4px 12px rgba(0,0,0,0.4)',
+        boxShadow: '0 8px 24px rgba(0,0,0,0.5), 0 0 0 1px rgba(0,0,0,0.1)',
         zIndex: 100,
       }}
     >
@@ -97,14 +92,16 @@ export default function Sidebar({
 }: SidebarProps) {
   const [hoveredIcon, setHoveredIcon] = React.useState<string | null>(null);
 
+  const sidebarWidth = collapsed ? 56 : 228;
+
   return (
     <aside
       style={{
-        width: collapsed ? '56px' : '224px',
-        minWidth: collapsed ? '56px' : '224px',
-        transition: 'width 0.22s cubic-bezier(0.4,0,0.2,1), min-width 0.22s cubic-bezier(0.4,0,0.2,1)',
-        background: 'linear-gradient(180deg, #0c1220 0%, #080c14 100%)',
-        borderRight: '1px solid var(--vw-border-dim)',
+        width: `${sidebarWidth}px`,
+        minWidth: `${sidebarWidth}px`,
+        transition: 'width 0.25s cubic-bezier(0.4,0,0.2,1), min-width 0.25s cubic-bezier(0.4,0,0.2,1)',
+        background: 'linear-gradient(180deg, #0c1220 0%, #070a12 100%)',
+        borderRight: '1px solid rgba(255,255,255,0.06)',
         display: 'flex',
         flexDirection: 'column',
         position: 'sticky',
@@ -116,317 +113,504 @@ export default function Sidebar({
         flexShrink: 0,
       }}
     >
-      {/* ───────────────── COLLAPSED ICON RAIL ───────────────── */}
-      {collapsed ? (
-        <div style={{ display: 'flex', flexDirection: 'column', height: '100%', alignItems: 'center', paddingTop: '12px' }}>
-
-          {/* Logo icon — click to go home */}
-          <button
-            onClick={onShowLanding}
-            title="Home"
-            style={{
-              width: '36px',
-              height: '36px',
-              borderRadius: '10px',
-              border: 'none',
-              background: 'linear-gradient(135deg, #00d4aa, #00a88a)',
-              boxShadow: '0 0 16px -2px rgba(0, 212, 170, 0.35)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              cursor: 'pointer',
-              marginBottom: '16px',
-              transition: 'transform 0.15s, box-shadow 0.15s',
-              flexShrink: 0,
-            }}
-            onMouseEnter={e => { e.currentTarget.style.transform = 'scale(1.08)'; e.currentTarget.style.boxShadow = '0 0 22px -2px rgba(0,212,170,0.55)'; }}
-            onMouseLeave={e => { e.currentTarget.style.transform = 'scale(1)'; e.currentTarget.style.boxShadow = '0 0 16px -2px rgba(0,212,170,0.35)'; }}
-          >
-            <TrendingUp style={{ width: '18px', height: '18px', color: 'white' }} />
-          </button>
-
-          {/* Divider */}
-          <div style={{ width: '28px', height: '1px', background: 'var(--vw-border-dim)', marginBottom: '8px' }} />
-
-          {/* Nav icons */}
-          <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '2px', width: '100%', alignItems: 'center', paddingBottom: '8px' }}>
-            {ALL_NAV_ITEMS.map(({ id, label, Icon, color, isHome }) => {
-              const isActive = isHome ? showLanding : (activeTab === id && !showLanding);
-              const tooltipId = `icon-${id}`;
-              return (
-                <div
-                  key={id}
-                  style={{ position: 'relative', width: '100%', display: 'flex', justifyContent: 'center' }}
-                  onMouseEnter={() => setHoveredIcon(tooltipId)}
-                  onMouseLeave={() => setHoveredIcon(null)}
-                >
-                  <button
-                    onClick={isHome ? onShowLanding : () => onTabChange(id as TabId)}
-                    style={{
-                      width: '36px',
-                      height: '36px',
-                      borderRadius: '9px',
-                      border: 'none',
-                      background: isActive ? `${color}1a` : 'transparent',
-                      color: isActive ? color : 'var(--vw-text-tertiary)',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      cursor: 'pointer',
-                      transition: 'background 0.15s, color 0.15s, transform 0.15s',
-                      position: 'relative',
-                      flexShrink: 0,
-                    }}
-                    onMouseEnter={e => {
-                      if (!isActive) {
-                        e.currentTarget.style.background = 'var(--vw-bg-hover)';
-                        e.currentTarget.style.color = 'var(--vw-text-primary)';
-                      }
-                      e.currentTarget.style.transform = 'scale(1.1)';
-                    }}
-                    onMouseLeave={e => {
-                      if (!isActive) {
-                        e.currentTarget.style.background = 'transparent';
-                        e.currentTarget.style.color = 'var(--vw-text-tertiary)';
-                      }
-                      e.currentTarget.style.transform = 'scale(1)';
-                    }}
-                  >
-                    {/* Active indicator dot */}
-                    {isActive && (
-                      <span style={{
-                        position: 'absolute',
-                        left: '2px',
-                        top: '50%',
-                        transform: 'translateY(-50%)',
-                        width: '3px',
-                        height: '18px',
-                        borderRadius: '0 3px 3px 0',
-                        background: color,
-                      }} />
-                    )}
-                    <Icon style={{ width: '16px', height: '16px', opacity: isActive ? 1 : 0.65 }} />
-                  </button>
-                  {hoveredIcon === tooltipId && <IconTooltip label={label} />}
-                </div>
-              );
-            })}
-          </div>
-
-          {/* Expand button — full-width glowing pill */}
-          <button
-            onClick={onToggleCollapse}
-            title="Expand sidebar"
-            style={{
-              width: '40px',
-              height: '56px',
-              borderRadius: '10px',
-              border: '1px solid rgba(0,212,170,0.4)',
-              background: 'linear-gradient(135deg, rgba(0,212,170,0.18), rgba(0,168,138,0.12))',
-              boxShadow: '0 0 18px -4px rgba(0,212,170,0.45), inset 0 1px 0 rgba(255,255,255,0.06)',
-              color: '#00d4aa',
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              justifyContent: 'center',
-              gap: '2px',
-              cursor: 'pointer',
-              marginBottom: '10px',
-              transition: 'background 0.2s, box-shadow 0.2s, transform 0.15s',
-              flexShrink: 0,
-            }}
-            onMouseEnter={e => {
-              e.currentTarget.style.background = 'linear-gradient(135deg, rgba(0,212,170,0.30), rgba(0,168,138,0.22))';
-              e.currentTarget.style.boxShadow = '0 0 28px -4px rgba(0,212,170,0.7), inset 0 1px 0 rgba(255,255,255,0.1)';
-              e.currentTarget.style.transform = 'scale(1.05)';
-            }}
-            onMouseLeave={e => {
-              e.currentTarget.style.background = 'linear-gradient(135deg, rgba(0,212,170,0.18), rgba(0,168,138,0.12))';
-              e.currentTarget.style.boxShadow = '0 0 18px -4px rgba(0,212,170,0.45), inset 0 1px 0 rgba(255,255,255,0.06)';
-              e.currentTarget.style.transform = 'scale(1)';
-            }}
-          >
-            <ChevronRight style={{ width: '14px', height: '14px' }} />
-            <span style={{ fontSize: '8px', fontWeight: 700, letterSpacing: '0.05em', opacity: 0.9 }}>OPEN</span>
-          </button>
+      {/* ─── LOGO AREA ─── */}
+      <div
+        style={{
+          padding: collapsed ? '14px 0 0' : '14px 14px 0',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: collapsed ? 'center' : 'flex-start',
+          gap: '10px',
+          cursor: 'pointer',
+          flexShrink: 0,
+        }}
+        onClick={onShowLanding}
+      >
+        <div
+          style={{
+            width: '34px',
+            height: '34px',
+            borderRadius: '10px',
+            background: 'linear-gradient(135deg, #00d4aa, #00a88a)',
+            boxShadow: '0 0 18px -3px rgba(0, 212, 170, 0.35)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            flexShrink: 0,
+            transition: 'box-shadow 0.2s, transform 0.15s',
+          }}
+        >
+          <TrendingUp style={{ width: '17px', height: '17px', color: 'white' }} />
         </div>
-      ) : (
-        /* ───────────────── EXPANDED FULL SIDEBAR ───────────────── */
-        <>
-          {/* Logo row with collapse button */}
-          <div style={{ padding: '12px 12px 0', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-            <div
-              className="flex items-center gap-2.5 cursor-pointer group"
-              onClick={onShowLanding}
-              style={{ overflow: 'hidden', whiteSpace: 'nowrap' }}
-            >
-              <div
-                className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0 transition-all duration-300"
-                style={{
-                  background: 'linear-gradient(135deg, #00d4aa, #00a88a)',
-                  boxShadow: '0 0 16px -2px rgba(0, 212, 170, 0.3)',
-                }}
-              >
-                <TrendingUp className="w-5 h-5 text-white" />
-              </div>
-              <span className="text-lg font-bold tracking-tight text-white">
-                Valu<span style={{ color: 'var(--vw-accent)' }}>Wise</span>
-              </span>
-            </div>
+        {!collapsed && (
+          <span
+            style={{
+              fontSize: '17px',
+              fontWeight: 700,
+              letterSpacing: '-0.02em',
+              color: 'white',
+              whiteSpace: 'nowrap',
+              overflow: 'hidden',
+            }}
+          >
+            Valu<span style={{ color: '#00d4aa' }}>Wise</span>
+          </span>
+        )}
+      </div>
 
-            {/* Collapse button — labelled chip */}
+      {/* ─── TOGGLE BUTTON ─── */}
+      <div
+        style={{
+          padding: collapsed ? '10px 0 0' : '10px 14px 0',
+          display: 'flex',
+          justifyContent: 'center',
+          flexShrink: 0,
+        }}
+      >
+        <button
+          onClick={onToggleCollapse}
+          title={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
+          style={{
+            width: collapsed ? '36px' : '100%',
+            height: '30px',
+            borderRadius: '8px',
+            border: '1px solid rgba(255,255,255,0.08)',
+            background: 'rgba(255,255,255,0.03)',
+            color: 'var(--vw-text-tertiary)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: '6px',
+            cursor: 'pointer',
+            transition: 'all 0.2s ease',
+            fontSize: '11px',
+            fontWeight: 500,
+            letterSpacing: '0.03em',
+            flexShrink: 0,
+          }}
+          onMouseEnter={e => {
+            e.currentTarget.style.background = 'rgba(0,212,170,0.10)';
+            e.currentTarget.style.borderColor = 'rgba(0,212,170,0.3)';
+            e.currentTarget.style.color = '#00d4aa';
+          }}
+          onMouseLeave={e => {
+            e.currentTarget.style.background = 'rgba(255,255,255,0.03)';
+            e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)';
+            e.currentTarget.style.color = 'var(--vw-text-tertiary)';
+          }}
+        >
+          {collapsed ? (
+            <PanelLeftOpen style={{ width: '14px', height: '14px' }} />
+          ) : (
+            <>
+              <PanelLeftClose style={{ width: '14px', height: '14px' }} />
+              <span>Collapse</span>
+            </>
+          )}
+        </button>
+      </div>
+
+      {/* ─── DIVIDER ─── */}
+      <div
+        style={{
+          margin: collapsed ? '10px 14px 0' : '10px 14px 0',
+          height: '1px',
+          background: 'linear-gradient(90deg, rgba(255,255,255,0.06), transparent)',
+          flexShrink: 0,
+        }}
+      />
+
+      {/* ─── NAVIGATION ─── */}
+      <nav
+        style={{
+          flex: 1,
+          padding: '10px 10px',
+          overflowY: 'auto',
+          overflowX: 'hidden',
+        }}
+      >
+        {/* Home button */}
+        {collapsed ? (
+          <div
+            style={{ position: 'relative', display: 'flex', justifyContent: 'center' }}
+            onMouseEnter={() => setHoveredIcon('icon-home')}
+            onMouseLeave={() => setHoveredIcon(null)}
+          >
             <button
-              onClick={onToggleCollapse}
-              title="Collapse sidebar"
+              onClick={onShowLanding}
               style={{
-                height: '28px',
-                paddingLeft: '8px',
-                paddingRight: '10px',
-                borderRadius: '8px',
-                border: '1px solid rgba(0,212,170,0.25)',
-                background: 'rgba(0,212,170,0.08)',
-                color: 'var(--vw-accent)',
+                width: '36px',
+                height: '35px',
+                borderRadius: '9px',
+                boxSizing: 'border-box',
+                border: 'none',
+                background: showLanding ? 'rgba(0,212,170,0.15)' : 'transparent',
+                color: showLanding ? '#00d4aa' : 'var(--vw-text-tertiary)',
                 display: 'flex',
                 alignItems: 'center',
-                gap: '4px',
+                justifyContent: 'center',
                 cursor: 'pointer',
-                transition: 'background 0.15s, border-color 0.15s, box-shadow 0.15s',
-                flexShrink: 0,
-                fontSize: '11px',
-                fontWeight: 600,
-                letterSpacing: '0.02em',
+                transition: 'all 0.15s ease',
+                position: 'relative',
               }}
               onMouseEnter={e => {
-                e.currentTarget.style.background = 'rgba(0,212,170,0.16)';
-                e.currentTarget.style.borderColor = 'rgba(0,212,170,0.55)';
-                e.currentTarget.style.boxShadow = '0 0 10px -2px rgba(0,212,170,0.35)';
-              }}
-              onMouseLeave={e => {
-                e.currentTarget.style.background = 'rgba(0,212,170,0.08)';
-                e.currentTarget.style.borderColor = 'rgba(0,212,170,0.25)';
-                e.currentTarget.style.boxShadow = 'none';
-              }}
-            >
-              {/* Left-pointing chevron to collapse */}
-              <ChevronRight style={{ width: '13px', height: '13px', transform: 'rotate(180deg)' }} />
-              <span style={{ fontSize: '11px', fontWeight: 600, letterSpacing: '0.02em' }}>Hide</span>
-            </button>
-          </div>
-
-          {/* Separator */}
-          <div className="mx-4 h-px mt-3" style={{ background: 'linear-gradient(90deg, var(--vw-border-lit), transparent)' }} />
-
-          {/* Navigation */}
-          <nav className="flex-1 px-3 pt-4 pb-3 space-y-4">
-            {/* Home */}
-            <button
-              onClick={onShowLanding}
-              className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 relative"
-              style={{
-                background: showLanding ? 'var(--vw-accent-soft)' : 'transparent',
-                color: showLanding ? 'var(--vw-accent)' : 'var(--vw-text-secondary)',
-              }}
-              onMouseEnter={(e) => { if (!showLanding) e.currentTarget.style.background = 'var(--vw-bg-hover)'; }}
-              onMouseLeave={(e) => { if (!showLanding) e.currentTarget.style.background = 'transparent'; }}
-            >
-              {showLanding && (
-                <div className="absolute left-0 top-1/2 -translate-y-1/2 w-[3px] h-5 rounded-r-full" style={{ background: 'var(--vw-accent)' }} />
-              )}
-              <Home className="w-4 h-4 shrink-0" />
-              Home
-            </button>
-
-            {/* Sections */}
-            {NAV_SECTIONS.map((section) => (
-              <div key={section.group}>
-                <div className="flex items-center gap-2 px-3 mb-1.5">
-                  <span className="text-[10px] font-semibold uppercase tracking-[0.15em]" style={{ color: 'var(--vw-text-tertiary)' }}>
-                    {section.group}
-                  </span>
-                  <div className="flex-1 h-px" style={{ background: 'var(--vw-border-dim)' }} />
-                </div>
-
-                <div className="space-y-0.5">
-                  {section.items.map(({ id, label, Icon, color }) => {
-                    const isActive = activeTab === id && !showLanding;
-                    return (
-                      <button
-                        key={id}
-                        onClick={() => onTabChange(id)}
-                        className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm transition-all duration-200 relative group"
-                        style={{
-                          background: isActive ? `${color}12` : 'transparent',
-                          color: isActive ? color : 'var(--vw-text-secondary)',
-                          fontWeight: isActive ? 500 : 400,
-                        }}
-                        onMouseEnter={(e) => {
-                          if (!isActive) {
-                            e.currentTarget.style.background = 'var(--vw-bg-hover)';
-                            e.currentTarget.style.color = 'var(--vw-text-primary)';
-                          }
-                        }}
-                        onMouseLeave={(e) => {
-                          if (!isActive) {
-                            e.currentTarget.style.background = 'transparent';
-                            e.currentTarget.style.color = 'var(--vw-text-secondary)';
-                          }
-                        }}
-                      >
-                        {isActive && (
-                          <div
-                            className="absolute left-0 top-1/2 -translate-y-1/2 w-[3px] h-5 rounded-r-full"
-                            style={{ background: color }}
-                          />
-                        )}
-                        <Icon className="w-4 h-4 shrink-0" style={{ opacity: isActive ? 1 : 0.6 }} />
-                        {label}
-                      </button>
-                    );
-                  })}
-                </div>
-              </div>
-            ))}
-          </nav>
-
-          {/* Bottom section */}
-          <div className="px-3 pb-3 space-y-2">
-            <div className="h-px" style={{ background: 'var(--vw-border-dim)' }} />
-
-            <button
-              onClick={onClearCache}
-              title="Clear cached data if search is stuck or showing stale results"
-              className="w-full flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-medium transition-all duration-200"
-              style={{
-                background: cacheCleared ? 'rgba(0, 212, 170, 0.1)' : 'transparent',
-                border: `1px solid ${cacheCleared ? 'rgba(0, 212, 170, 0.25)' : 'var(--vw-border-dim)'}`,
-                color: cacheCleared ? 'var(--vw-accent)' : 'var(--vw-text-tertiary)',
-              }}
-              onMouseEnter={(e) => {
-                if (!cacheCleared) {
-                  e.currentTarget.style.borderColor = 'var(--vw-border-lit)';
-                  e.currentTarget.style.color = 'var(--vw-text-secondary)';
+                if (!showLanding) {
+                  e.currentTarget.style.background = 'rgba(255,255,255,0.06)';
+                  e.currentTarget.style.color = 'var(--vw-text-primary)';
                 }
               }}
-              onMouseLeave={(e) => {
-                if (!cacheCleared) {
-                  e.currentTarget.style.borderColor = 'var(--vw-border-dim)';
+              onMouseLeave={e => {
+                if (!showLanding) {
+                  e.currentTarget.style.background = 'transparent';
                   e.currentTarget.style.color = 'var(--vw-text-tertiary)';
                 }
               }}
             >
-              <Trash2 className="w-3.5 h-3.5 shrink-0" />
-              {cacheCleared ? 'Cache cleared!' : 'Clear Cache'}
+              {showLanding && (
+                <span style={{
+                  position: 'absolute',
+                  left: '1px',
+                  top: '50%',
+                  transform: 'translateY(-50%)',
+                  width: '3px',
+                  height: '16px',
+                  borderRadius: '0 3px 3px 0',
+                  background: '#00d4aa',
+                }} />
+              )}
+              <Home style={{ width: '16px', height: '16px', opacity: showLanding ? 1 : 0.6 }} />
             </button>
-
-            <div className="flex items-center gap-1.5 px-3 py-1.5">
-              <div className="w-1.5 h-1.5 rounded-full vw-pulse" style={{ background: 'var(--vw-accent)' }} />
-              <span className="text-[10px] font-mono" style={{ color: 'var(--vw-text-muted)' }}>
-                v1.0 — Live
-              </span>
-            </div>
+            {hoveredIcon === 'icon-home' && <IconTooltip label="Home" />}
           </div>
-        </>
-      )}
+        ) : (
+          <button
+            onClick={onShowLanding}
+            style={{
+              width: '100%',
+              height: '35px',
+              boxSizing: 'border-box',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '10px',
+              padding: '0 10px',
+              borderRadius: '8px',
+              border: 'none',
+              background: showLanding ? 'rgba(0,212,170,0.12)' : 'transparent',
+              color: showLanding ? '#00d4aa' : 'var(--vw-text-secondary)',
+              fontSize: '13px',
+              fontWeight: showLanding ? 600 : 400,
+              cursor: 'pointer',
+              transition: 'all 0.15s ease',
+              position: 'relative',
+              textAlign: 'left',
+            }}
+            onMouseEnter={e => { if (!showLanding) e.currentTarget.style.background = 'rgba(255,255,255,0.04)'; }}
+            onMouseLeave={e => { if (!showLanding) e.currentTarget.style.background = 'transparent'; }}
+          >
+            {showLanding && (
+              <div style={{
+                position: 'absolute',
+                left: 0,
+                top: '50%',
+                transform: 'translateY(-50%)',
+                width: '3px',
+                height: '18px',
+                borderRadius: '0 3px 3px 0',
+                background: '#00d4aa',
+              }} />
+            )}
+            <Home style={{ width: '16px', height: '16px', flexShrink: 0, opacity: showLanding ? 1 : 0.55 }} />
+            Home
+          </button>
+        )}
+
+        {/* Section groups */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginTop: '8px' }}>
+          {NAV_SECTIONS.map((section) => (
+            <div key={section.group}>
+              {/* Section header — fixed 18px height in both modes for exact alignment */}
+              <div style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px',
+                padding: collapsed ? '0 14px' : '0 10px',
+                marginBottom: '4px',
+                height: '18px',
+                boxSizing: 'border-box',
+                justifyContent: collapsed ? 'center' : 'flex-start',
+                overflow: 'hidden',
+              }}>
+                {collapsed ? (
+                  <div style={{ width: '20px', height: '1px', background: 'rgba(255,255,255,0.06)' }} />
+                ) : (
+                  <>
+                    <span style={{
+                      fontSize: '10px',
+                      fontWeight: 600,
+                      textTransform: 'uppercase',
+                      letterSpacing: '0.12em',
+                      color: 'var(--vw-text-tertiary)',
+                      whiteSpace: 'nowrap',
+                      lineHeight: '18px',
+                    }}>
+                      {section.group}
+                    </span>
+                    <div style={{ flex: 1, height: '1px', background: 'rgba(255,255,255,0.04)' }} />
+                  </>
+                )}
+              </div>
+
+              {/* Nav items */}
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1px' }}>
+                {section.items.map(({ id, label, Icon, color }) => {
+                  const isActive = activeTab === id && !showLanding;
+                  const tooltipId = `icon-${id}`;
+
+                  if (collapsed) {
+                    return (
+                      <div
+                        key={id}
+                        style={{ position: 'relative', display: 'flex', justifyContent: 'center' }}
+                        onMouseEnter={() => setHoveredIcon(tooltipId)}
+                        onMouseLeave={() => setHoveredIcon(null)}
+                      >
+                        <button
+                          onClick={() => onTabChange(id)}
+                          style={{
+                            width: '36px',
+                            height: '35px',
+                            borderRadius: '9px',
+                            boxSizing: 'border-box',
+                            border: 'none',
+                            background: isActive ? `${color}18` : 'transparent',
+                            color: isActive ? color : 'var(--vw-text-tertiary)',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            cursor: 'pointer',
+                            transition: 'all 0.15s ease',
+                            position: 'relative',
+                          }}
+                          onMouseEnter={e => {
+                            if (!isActive) {
+                              e.currentTarget.style.background = 'rgba(255,255,255,0.06)';
+                              e.currentTarget.style.color = 'var(--vw-text-primary)';
+                            }
+                          }}
+                          onMouseLeave={e => {
+                            if (!isActive) {
+                              e.currentTarget.style.background = 'transparent';
+                              e.currentTarget.style.color = 'var(--vw-text-tertiary)';
+                            }
+                          }}
+                        >
+                          {isActive && (
+                            <span style={{
+                              position: 'absolute',
+                              left: '1px',
+                              top: '50%',
+                              transform: 'translateY(-50%)',
+                              width: '3px',
+                              height: '16px',
+                              borderRadius: '0 3px 3px 0',
+                              background: color,
+                            }} />
+                          )}
+                          <Icon style={{ width: '16px', height: '16px', opacity: isActive ? 1 : 0.55 }} />
+                        </button>
+                        {hoveredIcon === tooltipId && <IconTooltip label={label} />}
+                      </div>
+                    );
+                  }
+
+                  return (
+                    <button
+                      key={id}
+                      onClick={() => onTabChange(id)}
+                      style={{
+                        width: '100%',
+                        height: '35px',
+                        boxSizing: 'border-box',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '10px',
+                        padding: '0 10px',
+                        borderRadius: '8px',
+                        border: 'none',
+                        background: isActive ? `${color}10` : 'transparent',
+                        color: isActive ? color : 'var(--vw-text-secondary)',
+                        fontSize: '13px',
+                        fontWeight: isActive ? 500 : 400,
+                        cursor: 'pointer',
+                        transition: 'all 0.15s ease',
+                        position: 'relative',
+                        textAlign: 'left',
+                      }}
+                      onMouseEnter={e => {
+                        if (!isActive) {
+                          e.currentTarget.style.background = 'rgba(255,255,255,0.04)';
+                          e.currentTarget.style.color = 'var(--vw-text-primary)';
+                        }
+                      }}
+                      onMouseLeave={e => {
+                        if (!isActive) {
+                          e.currentTarget.style.background = 'transparent';
+                          e.currentTarget.style.color = 'var(--vw-text-secondary)';
+                        }
+                      }}
+                    >
+                      {isActive && (
+                        <div style={{
+                          position: 'absolute',
+                          left: 0,
+                          top: '50%',
+                          transform: 'translateY(-50%)',
+                          width: '3px',
+                          height: '18px',
+                          borderRadius: '0 3px 3px 0',
+                          background: color,
+                        }} />
+                      )}
+                      <Icon style={{ width: '16px', height: '16px', flexShrink: 0, opacity: isActive ? 1 : 0.55 }} />
+                      {label}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          ))}
+        </div>
+      </nav>
+
+      {/* ─── BOTTOM SECTION ─── */}
+      <div
+        style={{
+          padding: collapsed ? '8px 10px 10px' : '0 10px 10px',
+          flexShrink: 0,
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '6px',
+        }}
+      >
+        {/* Divider */}
+        <div style={{
+          height: '1px',
+          background: 'linear-gradient(90deg, rgba(255,255,255,0.06), transparent)',
+          marginBottom: '2px',
+        }} />
+
+        {/* Clear cache */}
+        {collapsed ? (
+          <div
+            style={{ position: 'relative', display: 'flex', justifyContent: 'center' }}
+            onMouseEnter={() => setHoveredIcon('icon-cache')}
+            onMouseLeave={() => setHoveredIcon(null)}
+          >
+            <button
+              onClick={onClearCache}
+              title="Clear cached data"
+              style={{
+                width: '36px',
+                height: '36px',
+                borderRadius: '9px',
+                border: 'none',
+                background: cacheCleared ? 'rgba(0,212,170,0.12)' : 'transparent',
+                color: cacheCleared ? '#00d4aa' : 'var(--vw-text-tertiary)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                cursor: 'pointer',
+                transition: 'all 0.15s ease',
+              }}
+              onMouseEnter={e => {
+                if (!cacheCleared) {
+                  e.currentTarget.style.background = 'rgba(255,255,255,0.06)';
+                  e.currentTarget.style.color = 'var(--vw-text-secondary)';
+                }
+              }}
+              onMouseLeave={e => {
+                if (!cacheCleared) {
+                  e.currentTarget.style.background = 'transparent';
+                  e.currentTarget.style.color = 'var(--vw-text-tertiary)';
+                }
+              }}
+            >
+              <Trash2 style={{ width: '15px', height: '15px' }} />
+            </button>
+            {hoveredIcon === 'icon-cache' && (
+              <IconTooltip label={cacheCleared ? 'Cache cleared!' : 'Clear Cache'} />
+            )}
+          </div>
+        ) : (
+          <button
+            onClick={onClearCache}
+            title="Clear cached data if search is stuck or showing stale results"
+            style={{
+              width: '100%',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '8px',
+              padding: '7px 10px',
+              borderRadius: '8px',
+              border: `1px solid ${cacheCleared ? 'rgba(0,212,170,0.2)' : 'rgba(255,255,255,0.06)'}`,
+              background: cacheCleared ? 'rgba(0,212,170,0.08)' : 'transparent',
+              color: cacheCleared ? '#00d4aa' : 'var(--vw-text-tertiary)',
+              fontSize: '12px',
+              fontWeight: 500,
+              cursor: 'pointer',
+              transition: 'all 0.15s ease',
+              textAlign: 'left',
+            }}
+            onMouseEnter={e => {
+              if (!cacheCleared) {
+                e.currentTarget.style.borderColor = 'rgba(255,255,255,0.12)';
+                e.currentTarget.style.color = 'var(--vw-text-secondary)';
+                e.currentTarget.style.background = 'rgba(255,255,255,0.03)';
+              }
+            }}
+            onMouseLeave={e => {
+              if (!cacheCleared) {
+                e.currentTarget.style.borderColor = 'rgba(255,255,255,0.06)';
+                e.currentTarget.style.color = 'var(--vw-text-tertiary)';
+                e.currentTarget.style.background = 'transparent';
+              }
+            }}
+          >
+            <Trash2 style={{ width: '14px', height: '14px', flexShrink: 0 }} />
+            {cacheCleared ? 'Cache cleared!' : 'Clear Cache'}
+          </button>
+        )}
+
+        {/* Version tag */}
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: collapsed ? 'center' : 'flex-start',
+            gap: '6px',
+            padding: collapsed ? '4px 0' : '2px 10px',
+          }}
+        >
+          <div style={{
+            width: '5px',
+            height: '5px',
+            borderRadius: '50%',
+            background: '#00d4aa',
+            boxShadow: '0 0 6px rgba(0,212,170,0.5)',
+            flexShrink: 0,
+          }} />
+          {!collapsed && (
+            <span style={{
+              fontSize: '10px',
+              fontFamily: 'monospace',
+              color: 'var(--vw-text-muted)',
+              whiteSpace: 'nowrap',
+            }}>
+              v1.0 — Live
+            </span>
+          )}
+        </div>
+      </div>
     </aside>
   );
 }

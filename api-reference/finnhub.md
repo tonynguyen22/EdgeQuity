@@ -327,6 +327,68 @@ Contains `annual` and `quarterly` objects, each with arrays of `{ period, v }` e
 
 ---
 
+## Company Profile 2
+
+Get general information of a company. You can query by symbol, ISIN, or CUSIP. This is the free version of Company Profile.
+
+**Endpoint:**
+```
+https://finnhub.io/api/v1/stock/profile2?symbol={symbol}&token={API_KEY}
+```
+
+**Method:** `GET`
+
+**Parameters:**
+| Parameter | Type   | Required | Description                       |
+|-----------|--------|----------|-----------------------------------|
+| `symbol`  | string | No       | Stock ticker symbol (e.g. `AAPL`) |
+| `isin`    | string | No       | ISIN                              |
+| `cusip`   | string | No       | CUSIP                             |
+| `token`   | string | Yes      | Your Finnhub API key              |
+
+> At least one of `symbol`, `isin`, or `cusip` must be provided.
+
+### Response Attributes
+
+| Field                  | Description                         |
+|------------------------|-------------------------------------|
+| `country`              | Country of company's headquarter    |
+| `currency`             | Currency used in company filings    |
+| `exchange`             | Listed exchange                     |
+| `finnhubIndustry`      | Finnhub industry classification     |
+| `ipo`                  | IPO date                            |
+| `logo`                 | Logo image URL                      |
+| `marketCapitalization` | Market capitalization (in millions) |
+| `name`                 | Company name                        |
+| `phone`                | Company phone number                |
+| `shareOutstanding`     | Number of outstanding shares (in millions) |
+| `ticker`               | Company symbol/ticker               |
+| `weburl`               | Company website                     |
+
+> [!IMPORTANT]
+> This endpoint does **NOT** return a current stock price. Current price is derived in the app by calculating `marketCapitalization / shareOutstanding`. For real-time price, use the `/quote` endpoint.
+
+### Sample Response
+
+```json
+{
+  "country": "US",
+  "currency": "USD",
+  "exchange": "NASDAQ/NMS (GLOBAL MARKET)",
+  "ipo": "1980-12-12",
+  "marketCapitalization": 1415993,
+  "name": "Apple Inc",
+  "phone": "14089961010",
+  "shareOutstanding": 4375.47998046875,
+  "ticker": "AAPL",
+  "weburl": "https://www.apple.com/",
+  "logo": "https://static.finnhub.io/logo/87cb30d8-80df-11ea-8951-00000000092a.png",
+  "finnhubIndustry": "Technology"
+}
+```
+
+---
+
 ## Quote
 
 Get real-time quote data for US stocks. Constant polling is not recommended — use websocket for real-time updates.

@@ -1,18 +1,10 @@
 import type { Candle } from '../tech-analysis/types';
 import type { MarketCycleResult, WyckoffPhase, TimeframeResult, ReadinessZone } from './types';
 import { computeAllIndicators, computeSMA, fetchOHLCV } from '../tech-analysis/calculations';
-import { proxyFetch } from '../utils/proxyFetch';
 import { safeSetItem } from '../tech-analysis/utils/storage';
 
-const CACHE_KEY_DAILY = 'market_cycle_daily_v3';
-const CACHE_KEY_WEEKLY = 'market_cycle_weekly_v3';
-const CACHE_KEY_MONTHLY = 'market_cycle_monthly_v3';
-const CACHE_KEY_RESULT = 'market_cycle_result_v3';
-const DAILY_TTL = 24 * 60 * 60 * 1000;        // 24 hours
-const WEEKLY_TTL = 7 * 24 * 60 * 60 * 1000;   // 7 days
-const MONTHLY_TTL = 30 * 24 * 60 * 60 * 1000;  // 30 days
-const AV_BASE = 'https://www.alphavantage.co/query';
-const AV_DELAY_MS = 1500;
+const CACHE_KEY = 'market_cycle_result_v4';
+const CACHE_TTL = 4 * 60 * 60 * 1000; // 4 hours
 
 // ── Helpers ──────────────────────────────────────────────────────────────────
 
@@ -43,123 +35,26 @@ function softmax(scores: Record<string, number>, temperature = 30): Record<strin
   return result;
 }
 
-function sleep(ms: number): Promise<void> {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
+// ── Data Fetch ───────────────────────────────────────────────────────────────
 
-// ── Alpha Vantage Normalizers ────────────────────────────────────────────────
-
-function normalizeAVDaily(data: any): Candle[] {
-  const ts = data?.['Time Series (Daily)'];
-  if (!ts) return [];
-  return Object.entries(ts).map(([date, v]: [string, any]) => ({
-    date,
-    open: parseFloat(v['1. open']), high: parseFloat(v['2. high']),
-    low: parseFloat(v['3. low']), close: parseFloat(v['4. close']),
-    volume: parseInt(v['5. volume'], 10),
-  })).sort((a, b) => a.date.localeCompare(b.date));
-}
-
-function normalizeAVWeekly(data: any): Candle[] {
-  const ts = data?.['Weekly Time Series'];
-  if (!ts) return [];
-  return Object.entries(ts).map(([date, v]: [string, any]) => ({
-    date,
-    open: parseFloat(v['1. open']), high: parseFloat(v['2. high']),
-    low: parseFloat(v['3. low']), close: parseFloat(v['4. close']),
-    volume: parseInt(v['5. volume'], 10),
-  })).sort((a, b) => a.date.localeCompare(b.date));
-}
-
-function normalizeAVMonthly(data: any): Candle[] {
-  const ts = data?.['Monthly Time Series'];
-  if (!ts) return [];
-  return Object.entries(ts).map(([date, v]: [string, any]) => ({
-    date,
-    open: parseFloat(v['1. open']), high: parseFloat(v['2. high']),
-    low: parseFloat(v['3. low']), close: parseFloat(v['4. close']),
-    volume: parseInt(v['5. volume'], 10),
-  })).sort((a, b) => a.date.localeCompare(b.date));
-}
-
-// ── SPY Data Fetch (with per-timeframe caching) ─────────────────────────────
-
-function getCachedCandles(key: string, ttl: number, minCount = 200): Candle[] | null {
-  try {
-    const raw = localStorage.getItem(key);
-    if (!raw) return null;
-    const { ts, candles } = JSON.parse(raw);
-    if (Date.now() - ts < ttl && Array.isArray(candles) && candles.length >= minCount) {
-      return candles as Candle[];
-    }
-  } catch { /* ignore bad cache */ }
-  return null;
-}
-
-function setCachedCandles(key: string, candles: Candle[]) {
-  safeSetItem(key, JSON.stringify({ ts: Date.now(), candles }));
-}
-
-async function fetchAVCandles(
-  fn: string, normalizer: (d: any) => Candle[], label: string, minCount = 200,
-): Promise<Candle[]> {
-  const url = `${AV_BASE}?function=${fn}&symbol=SPY`;
-  const res = await proxyFetch(url);
-  if (!res.ok) throw new Error(`${label}: HTTP ${res.status}`);
-  const json = await res.json();
-  if (json?.['Note'] || json?.['Information']) {
-    throw new Error(`${label}: API rate limit — ${json['Note'] || json['Information']}`);
+/** Monthly + weekly from server-side function (shared cache for all users) */
+async function fetchServerData(): Promise<{ monthly: Candle[]; weekly: Candle[] }> {
+  const res = await fetch('/.netlify/functions/market-cycle');
+  if (!res.ok) {
+    const body = await res.json().catch(() => ({}));
+    throw new Error((body as any).error || `Server error: ${res.status}`);
   }
-  const candles = normalizer(json);
-  if (candles.length < minCount) throw new Error(`${label}: only ${candles.length} candles (need ${minCount}+)`);
+  return res.json();
+}
+
+/** Daily from client-side (uses existing fetchOHLCV proxy chain) */
+async function fetchDailyData(): Promise<Candle[]> {
+  const candles = await fetchOHLCV('SPY');
+  if (candles.length < 50) throw new Error(`Daily: only ${candles.length} candles (need 50+)`);
   return candles;
 }
 
-async function fetchSPYDaily(): Promise<Candle[]> {
-  const cached = getCachedCandles(CACHE_KEY_DAILY, DAILY_TTL);
-  if (cached) return cached;
-
-  const errors: string[] = [];
-
-  try {
-    const all = await fetchAVCandles('TIME_SERIES_DAILY', normalizeAVDaily, 'AV Daily');
-    const trimmed = all.slice(-520);
-    setCachedCandles(CACHE_KEY_DAILY, trimmed);
-    return trimmed;
-  } catch (e: any) { errors.push(e.message); }
-
-  try {
-    const candles = await fetchOHLCV('SPY');
-    if (candles.length >= 200) {
-      setCachedCandles(CACHE_KEY_DAILY, candles);
-      return candles;
-    }
-    errors.push(`fetchOHLCV: ${candles.length} candles`);
-  } catch (e: any) { errors.push(`fetchOHLCV: ${e.message}`); }
-
-  throw new Error(`SPY daily fetch failed: ${errors.join(' | ')}`);
-}
-
-async function fetchSPYWeekly(): Promise<Candle[]> {
-  const cached = getCachedCandles(CACHE_KEY_WEEKLY, WEEKLY_TTL);
-  if (cached) return cached;
-
-  const all = await fetchAVCandles('TIME_SERIES_WEEKLY', normalizeAVWeekly, 'AV Weekly');
-  const trimmed = all.slice(-260);
-  setCachedCandles(CACHE_KEY_WEEKLY, trimmed);
-  return trimmed;
-}
-
-async function fetchSPYMonthly(): Promise<Candle[]> {
-  const cached = getCachedCandles(CACHE_KEY_MONTHLY, MONTHLY_TTL, 200);
-  if (cached) return cached;
-
-  const all = await fetchAVCandles('TIME_SERIES_MONTHLY', normalizeAVMonthly, 'AV Monthly', 200);
-  setCachedCandles(CACHE_KEY_MONTHLY, all);
-  return all;
-}
-
-// ── Cycle Detection (reusable for any timeframe) ─────────────────────────────
+// ── Cycle Detection ──────────────────────────────────────────────────────────
 
 function computeWyckoffPhase(candles: Candle[]): TimeframeResult {
   const closes = candles.map(c => c.close);
@@ -168,8 +63,6 @@ function computeWyckoffPhase(candles: Candle[]): TimeframeResult {
   const ind = computeAllIndicators(candles);
 
   const sma50Arr = computeSMA(closes, 50);
-  const sma200Arr = computeSMA(closes, 200);
-
   const s50Now = sma50Arr[n - 1];
   const s50Prev = sma50Arr[n - 21] ?? sma50Arr[n - 11];
   const sma50Slope = s50Now != null && s50Prev != null
@@ -225,30 +118,19 @@ function computeWyckoffPhase(candles: Candle[]): TimeframeResult {
   if (sma50Slope < -0.2) markdown += 15;
 
   const rawScores: Record<WyckoffPhase, number> = {
-    'Accumulation': accum,
-    'Mark-Up': markup,
-    'Distribution': distrib,
-    'Mark-Down': markdown,
+    'Accumulation': accum, 'Mark-Up': markup,
+    'Distribution': distrib, 'Mark-Down': markdown,
   };
   const probabilities = softmax(rawScores) as Record<WyckoffPhase, number>;
+  const entries = (Object.entries(probabilities) as [WyckoffPhase, number][]).sort((a, b) => b[1] - a[1]);
 
-  const entries = (Object.entries(probabilities) as [WyckoffPhase, number][])
-    .sort((a, b) => b[1] - a[1]);
-
-  return {
-    phase: entries[0][0],
-    confidence: entries[0][1],
-    probabilities,
-  };
+  return { phase: entries[0][0], confidence: entries[0][1], probabilities };
 }
 
 // ── Investment Readiness Score ────────────────────────────────────────────────
 
 const PHASE_SCORE: Record<WyckoffPhase, number> = {
-  'Accumulation': 60,
-  'Mark-Up': 85,
-  'Distribution': 35,
-  'Mark-Down': 15,
+  'Accumulation': 60, 'Mark-Up': 85, 'Distribution': 35, 'Mark-Down': 15,
 };
 
 function isBullish(phase: WyckoffPhase) {
@@ -256,150 +138,88 @@ function isBullish(phase: WyckoffPhase) {
 }
 
 function computeInvestmentReadiness(
-  daily: TimeframeResult,
-  weekly: TimeframeResult,
-  monthly: TimeframeResult,
+  daily: TimeframeResult, weekly: TimeframeResult, monthly: TimeframeResult,
 ): { score: number; zone: ReadinessZone; label: string } {
-  // Weighted avg: monthly 35%, weekly 40%, daily 25%
-  const monthlyBase = PHASE_SCORE[monthly.phase];
-  const weeklyBase = PHASE_SCORE[weekly.phase];
-  const dailyBase = PHASE_SCORE[daily.phase];
-  let score = monthlyBase * 0.35 + weeklyBase * 0.40 + dailyBase * 0.25;
+  let score = PHASE_SCORE[monthly.phase] * 0.35 + PHASE_SCORE[weekly.phase] * 0.40 + PHASE_SCORE[daily.phase] * 0.25;
 
-  // Full alignment bonus/penalty
-  const allBullish = isBullish(monthly.phase) && isBullish(weekly.phase) && isBullish(daily.phase);
-  const allBearish = !isBullish(monthly.phase) && !isBullish(weekly.phase) && !isBullish(daily.phase);
-  if (allBullish) score += 10;
-  if (allBearish) score -= 10;
+  if (isBullish(monthly.phase) && isBullish(weekly.phase) && isBullish(daily.phase)) score += 10;
+  if (!isBullish(monthly.phase) && !isBullish(weekly.phase) && !isBullish(daily.phase)) score -= 10;
+  if (isBullish(monthly.phase) === isBullish(weekly.phase) && isBullish(weekly.phase) !== isBullish(daily.phase)) score -= 3;
+  if (isBullish(monthly.phase) !== isBullish(weekly.phase) && isBullish(weekly.phase) === isBullish(daily.phase)) score -= 5;
 
-  // Partial alignment: monthly+weekly agree but daily diverges (short-term noise)
-  if (isBullish(monthly.phase) === isBullish(weekly.phase) && isBullish(weekly.phase) !== isBullish(daily.phase)) {
-    score -= 3; // mild penalty, larger timeframes agree
-  }
-
-  // Monthly diverges from weekly+daily (structural shift signal)
-  if (isBullish(monthly.phase) !== isBullish(weekly.phase) && isBullish(weekly.phase) === isBullish(daily.phase)) {
-    score -= 5; // possible structural transition
-  }
-
-  // Confidence scaling
   const avgConf = (monthly.confidence + weekly.confidence + daily.confidence) / 3;
-  if (avgConf < 35) {
-    score = score * 0.7 + 50 * 0.3;
-  }
+  if (avgConf < 35) score = score * 0.7 + 50 * 0.3;
 
   score = Math.round(Math.max(0, Math.min(100, score)));
 
-  let zone: ReadinessZone;
-  let label: string;
-  if (score >= 65) {
-    zone = 'strong-buy';
-    label = 'Strong Buy Window';
-  } else if (score >= 40) {
-    zone = 'neutral';
-    label = 'Neutral / Selective';
-  } else {
-    zone = 'defensive';
-    label = 'Defensive / Wait';
-  }
-
-  return { score, zone, label };
+  if (score >= 65) return { score, zone: 'strong-buy', label: 'Strong Buy Window' };
+  if (score >= 40) return { score, zone: 'neutral', label: 'Neutral / Selective' };
+  return { score, zone: 'defensive', label: 'Defensive / Wait' };
 }
 
-// ── Dynamic Guidance Generator ───────────────────────────────────────────────
+// ── Dynamic Guidance ─────────────────────────────────────────────────────────
 
-function generateGuidance(
-  daily: TimeframeResult, weekly: TimeframeResult, monthly: TimeframeResult,
-): string {
-  const m = monthly.phase;
-  const w = weekly.phase;
-  const d = daily.phase;
+function generateGuidance(daily: TimeframeResult, weekly: TimeframeResult, monthly: TimeframeResult): string {
+  const m = monthly.phase, w = weekly.phase, d = daily.phase;
 
-  // All aligned
   if (isBullish(m) && isBullish(w) && isBullish(d)) {
-    if (m === 'Mark-Up' && w === 'Mark-Up') {
+    if (m === 'Mark-Up' && w === 'Mark-Up')
       return 'All three timeframes confirm a sustained uptrend. The monthly, weekly, and daily are all bullish — this is the strongest possible environment for equity exposure. Stay fully invested, add on pullbacks, and let winners run. Growth and momentum strategies tend to outperform.';
-    }
-    return 'All timeframes lean bullish. The monthly and weekly suggest the structural trend is positive, and the daily confirms short-term momentum is constructive. Consider building positions gradually. Dollar-cost averaging into quality names is favorable here.';
+    return 'All timeframes lean bullish. The structural trend is positive and short-term momentum is constructive. Consider building positions gradually via dollar-cost averaging into quality names.';
   }
 
   if (!isBullish(m) && !isBullish(w) && !isBullish(d)) {
-    if (m === 'Mark-Down' && w === 'Mark-Down') {
-      return 'All three timeframes are bearish — a rare full-alignment downtrend. Capital preservation is critical. Maintain elevated cash, consider defensive hedges, and avoid buying dips. Wait for at least the daily to show accumulation before re-engaging.';
-    }
-    return 'All timeframes lean bearish. Distribution or mark-down signals across monthly, weekly, and daily suggest reducing exposure. Take profits on extended positions, tighten stops, and rotate toward defensive sectors. Cash is a valid position.';
+    if (m === 'Mark-Down' && w === 'Mark-Down')
+      return 'All three timeframes are bearish — a rare full-alignment downtrend. Capital preservation is critical. Maintain elevated cash, consider defensive hedges, and wait for at least the daily to show accumulation before re-engaging.';
+    return 'All timeframes lean bearish. Distribution or mark-down signals suggest reducing exposure. Take profits, tighten stops, and rotate toward defensive sectors. Cash is a valid position.';
   }
 
-  // Monthly bullish, shorter-term weakening
-  if (isBullish(m) && isBullish(w) && !isBullish(d)) {
-    return `The structural trend is bullish — monthly (${m}) and weekly (${w}) are positive, but the daily shows ${d.toLowerCase()}. This is likely a pullback within an uptrend. Watch for the daily to stabilize before adding. Existing positions can be held with tighter stops.`;
-  }
+  if (isBullish(m) && isBullish(w) && !isBullish(d))
+    return `Structural trend is bullish — monthly (${m}) and weekly (${w}) are positive, but daily shows ${d.toLowerCase()}. Likely a pullback within an uptrend. Watch for the daily to stabilize before adding. Existing positions can be held with tighter stops.`;
 
-  if (isBullish(m) && !isBullish(w) && !isBullish(d)) {
-    return `The monthly is still ${m.toLowerCase()} but both weekly (${w}) and daily (${d}) are deteriorating. A deeper correction may be underway, though the long-term structure remains positive. Reduce new buying, raise some cash, but don't panic sell — the monthly trend takes precedence for long-term positioning.`;
-  }
+  if (isBullish(m) && !isBullish(w) && !isBullish(d))
+    return `Monthly is still ${m.toLowerCase()} but both weekly (${w}) and daily (${d}) are deteriorating. A deeper correction may be underway, though long-term structure remains positive. Reduce new buying, raise some cash, but don't panic — the monthly trend takes precedence.`;
 
-  if (isBullish(m) && !isBullish(w) && isBullish(d)) {
-    return `Mixed signals: the monthly is ${m.toLowerCase()} and the daily is ${d.toLowerCase()}, but the weekly is ${w.toLowerCase()}. The daily may be leading a recovery within a weekly pullback. Cautiously optimistic — small positions are reasonable but wait for weekly confirmation before sizing up.`;
-  }
+  if (isBullish(m) && !isBullish(w) && isBullish(d))
+    return `Mixed: monthly is ${m.toLowerCase()}, daily is ${d.toLowerCase()}, but weekly is ${w.toLowerCase()}. Daily may be leading a recovery within a weekly pullback. Small positions are reasonable but wait for weekly confirmation.`;
 
-  // Monthly bearish, shorter-term improving
-  if (!isBullish(m) && !isBullish(w) && isBullish(d)) {
-    return `The monthly (${m}) and weekly (${w}) are both bearish, but the daily shows ${d.toLowerCase()} — likely a bear market rally. These bounces can be sharp but short-lived. If participating, keep sizes small and set tight stops. Don't mistake a counter-trend move for a new bull market.`;
-  }
+  if (!isBullish(m) && !isBullish(w) && isBullish(d))
+    return `Monthly (${m}) and weekly (${w}) are bearish, but daily shows ${d.toLowerCase()} — likely a bear market rally. Keep sizes small and set tight stops.`;
 
-  if (!isBullish(m) && isBullish(w) && isBullish(d)) {
-    return `Interesting divergence: the weekly and daily have turned bullish while the monthly remains ${m.toLowerCase()}. This could be the early stages of a structural shift — or a powerful bear-market rally. Build conviction slowly. If the monthly transitions to accumulation, it becomes a higher-confidence entry.`;
-  }
+  if (!isBullish(m) && isBullish(w) && isBullish(d))
+    return `Weekly and daily turned bullish while monthly remains ${m.toLowerCase()}. Could be early stages of a structural shift — or a powerful bear-market rally. Build conviction slowly.`;
 
-  if (!isBullish(m) && isBullish(w) && !isBullish(d)) {
-    return `The monthly is ${m.toLowerCase()}, the weekly is ${w.toLowerCase()}, but the daily is ${d.toLowerCase()}. A choppy, unclear environment. Avoid aggressive positioning. Wait for at least two of three timeframes to agree before making major allocation changes.`;
-  }
+  if (!isBullish(m) && isBullish(w) && !isBullish(d))
+    return `Monthly is ${m.toLowerCase()}, weekly is ${w.toLowerCase()}, but daily is ${d.toLowerCase()}. Choppy environment. Wait for at least two of three timeframes to agree.`;
 
-  return 'Market signals are mixed across timeframes. Consider maintaining a balanced allocation and waiting for clearer directional signals across monthly, weekly, and daily before making major portfolio changes.';
+  return 'Market signals are mixed across timeframes. Maintain a balanced allocation and wait for clearer directional signals.';
 }
 
 // ── Public API ───────────────────────────────────────────────────────────────
 
 export async function fetchMarketCycle(): Promise<MarketCycleResult> {
-  // Check result cache
-  const cachedResult = localStorage.getItem(CACHE_KEY_RESULT);
-  if (cachedResult) {
+  const cached = localStorage.getItem(CACHE_KEY);
+  if (cached) {
     try {
-      const { ts, data } = JSON.parse(cachedResult);
-      if (Date.now() - ts < DAILY_TTL) return data as MarketCycleResult;
-    } catch { localStorage.removeItem(CACHE_KEY_RESULT); }
+      const { ts, data } = JSON.parse(cached);
+      if (Date.now() - ts < CACHE_TTL) return data as MarketCycleResult;
+    } catch { localStorage.removeItem(CACHE_KEY); }
   }
 
-  // Sequential fetch with delays to respect AV rate limit
-  // Monthly fetched first (longest cache = rarely needs API call)
-  const monthlyCached = getCachedCandles(CACHE_KEY_MONTHLY, MONTHLY_TTL, 200);
-  const monthlyCandles = await fetchSPYMonthly();
-
-  // Delay if monthly was a fresh fetch
-  const weeklyCached = getCachedCandles(CACHE_KEY_WEEKLY, WEEKLY_TTL);
-  if (!monthlyCached && !weeklyCached) {
-    await sleep(AV_DELAY_MS);
-  }
-  const weeklyCandles = await fetchSPYWeekly();
-
-  // Delay if weekly was a fresh fetch
-  const dailyCached = getCachedCandles(CACHE_KEY_DAILY, DAILY_TTL);
-  if (!weeklyCached && !dailyCached) {
-    await sleep(AV_DELAY_MS);
-  }
-  const dailyCandles = await fetchSPYDaily();
+  // Fetch: monthly+weekly from server (shared), daily from client (proxy)
+  const [serverData, dailyCandles] = await Promise.all([
+    fetchServerData(),
+    fetchDailyData(),
+  ]);
 
   const daily = computeWyckoffPhase(dailyCandles);
-  const weekly = computeWyckoffPhase(weeklyCandles);
-  const monthly = computeWyckoffPhase(monthlyCandles);
+  const weekly = computeWyckoffPhase(serverData.weekly);
+  const monthly = computeWyckoffPhase(serverData.monthly);
   const { score, zone, label } = computeInvestmentReadiness(daily, weekly, monthly);
   const guidance = generateGuidance(daily, weekly, monthly);
 
   const result: MarketCycleResult = {
-    daily,
-    weekly,
-    monthly,
+    daily, weekly, monthly,
     readinessScore: score,
     readinessZone: zone,
     readinessLabel: label,
@@ -410,11 +230,11 @@ export async function fetchMarketCycle(): Promise<MarketCycleResult> {
     },
     candleCount: {
       daily: dailyCandles.length,
-      weekly: weeklyCandles.length,
-      monthly: monthlyCandles.length,
+      weekly: serverData.weekly.length,
+      monthly: serverData.monthly.length,
     },
   };
 
-  safeSetItem(CACHE_KEY_RESULT, JSON.stringify({ ts: Date.now(), data: result }));
+  safeSetItem(CACHE_KEY, JSON.stringify({ ts: Date.now(), data: result }));
   return result;
 }
