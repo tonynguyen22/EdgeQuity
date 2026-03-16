@@ -6,7 +6,7 @@ React + TypeScript + Vite + Tailwind v4 stock analysis app. Single-page with sid
 ## App Features
 
 ### DCF Valuation (`src/dcf/index.tsx`)
-Full discounted cash flow model built from standardized financials via Financial Modeling Prep (FMP) `/stable/` API. Restricted to ~87 pre-selected tickers.
+Full discounted cash flow model built from standardized financials via Financial Modeling Prep (FMP) `/stable/` API. Restricted to ~84 pre-selected tickers.
 - **Sub-Tabs:** Model (main DCF output), Financials (historical tables), WACC & CAPM (editable CAPM/WACC assumptions with waterfall chart), Monte Carlo (N-simulation probability distribution)
 - **Inputs:** 6 adjustable sliders — Revenue Growth (Yr 1 & Yr N), EBIT Margin (Yr 1 & Yr N), Terminal Growth, WACC adjustment, Equity Risk Premium, Forecast Years (1–10)
 - **Scenario Presets:** Bear / Base / Bull with auto-filled assumptions; scenario comparison is dynamic — base = current slider values, bear/bull = offsets from current (growth ×0.7/×1.3, margins ×0.85/×1.15, WACC +1%/-0.5%)
@@ -54,7 +54,7 @@ Historical valuation multiples analysis with 7 key ratios across fiscal years. U
 - **Structure:** `types.ts`, `calculations.ts`, `hooks/useMultiplesData.ts`, `components/` (SearchForm, MultiplesCards, MultiplesTable, MultiplesCharts, ValuationContext)
 
 ### Quality Analysis (`src/quality-analysis/index.tsx`)
-Comprehensive financial quality scoring (A-D) across 4 weighted categories from FMP standardized financials. Restricted to ~87 pre-selected tickers (same as DCF).
+Comprehensive financial quality scoring (A-D) across 4 weighted categories from FMP standardized financials. Restricted to ~84 pre-selected tickers (same as DCF).
 Uses the **same `fmp_{sym}_dcf_v1` cache** as DCF — if a ticker was already looked up on the DCF page, Quality Analysis reuses that data (zero additional FMP calls).
 - **Data Source:** FMP income statement, balance sheet, cash flow (3 FMP calls, 5 years) + Finnhub profile/metrics (2 calls)
 - **Financial Health (25%):** Current Ratio, Quick Ratio, Debt-to-Equity, Interest Coverage
@@ -143,7 +143,7 @@ Dividend history and sustainability analysis via Massive API.
 
 ### Global Features
 - **Sidebar Navigation:** Grouped into Valuation (DCF, DDM, Multiples), Fundamentals (Quality, 3-Statement, Peers), Market Intelligence (Technical, Earnings, Insider & Inst., News), and Income & Macro (Dividends, Market Cycle). 12 tabs total. Gradient background with active indicator pills (left accent bars), decorative group dividers, and version/status indicator.
-- **Landing Page:** Hero section with animated gradient mesh background, market ticker bar (simulated indices), stats banner (87+ tickers, 12 modules, 6 data sources), and glassmorphism feature cards grouped by category (Valuation, Fundamentals, Market Intelligence, Income & Macro) with staggered entry animations via `motion` library.
+- **Landing Page:** Hero section with animated gradient mesh background, market ticker bar (simulated indices), stats banner (84+ tickers, 12 modules, 6 data sources), and glassmorphism feature cards grouped by category (Valuation, Fundamentals, Market Intelligence, Income & Macro) with staggered entry animations via `motion` library.
 - **Design System:** Financial terminal aesthetic defined in `src/index.css` using CSS custom properties (`--vw-bg-deep`, `--vw-accent`, `--vw-border`, `--vw-text-*`). Noise grain overlay, glass card utility (`.vw-card`), glow effects (`.vw-glow`), stat pills (`.vw-stat-up`/`.vw-stat-down`), gradient text (`.vw-gradient-text`), custom scrollbar styling.
 - **Typography:** DM Sans (display/headers) + IBM Plex Mono (data/numbers). Imported via Google Fonts in `index.css`.
 - **Dark Theme:** Deep navy-black background (`#0a0e17` / `--vw-bg-deep`) with layered surface colors.
@@ -184,7 +184,7 @@ This application is configured for deployment on Netlify.
 Free tier: 250 calls/day. Used for the 3 financial statement endpoints (3 FMP calls per ticker, cached 24h).
 Endpoints: `/stable/income-statement`, `/stable/balance-sheet-statement`, `/stable/cash-flow-statement`
 Also used by 3-Statement Model (same `/stable/` endpoints). 3-Statement shares the DCF cache (`fmp_{sym}_dcf_v1`).
-**All tabs are restricted to ~87 pre-selected tickers** defined in `SUPPORTED_TICKERS` (src/dcf/types.ts). Each tab uses a dropdown with autocomplete filtering. Market Data tabs (Tech, Earnings, Insider, News, Dividend) use the shared `TickerSearch` component (src/components/TickerSearch.tsx). Peer Analysis filters peer suggestions to supported tickers only.
+**All tabs are restricted to ~84 pre-selected tickers** defined in `SUPPORTED_TICKERS` (src/dcf/types.ts). Each tab uses a dropdown with autocomplete filtering. Market Data tabs (Tech, Earnings, Insider, News, Dividend) use the shared `TickerSearch` component (src/components/TickerSearch.tsx). Peer Analysis filters peer suggestions to supported tickers only.
 Both DCF and Quality Analysis share the same cache key `fmp_{sym}_dcf_v1` — NEVER bump the version.
 DO NOT use FMP for profile, price targets, or any non-statement data — use Finnhub instead.
 

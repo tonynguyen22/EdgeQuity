@@ -142,7 +142,7 @@ export default function MultiplesAnalysis() {
                   <span className="text-sm font-semibold text-slate-400">
                     Full Historical Data
                   </span>
-                  <span className="text-xs text-slate-600">
+                  <span className="text-xs text-slate-500">
                     {result.allYears.length} years ({result.allYears[0]?.year}–{result.allYears[result.allYears.length - 1]?.year})
                   </span>
                 </div>

@@ -47,7 +47,7 @@ const FEATURE_SECTIONS = [
 ];
 
 const STATS = [
-  { label: 'Supported Tickers', value: '87+' },
+  { label: 'Supported Tickers', value: '84+' },
   { label: 'Analysis Modules', value: '12' },
   { label: 'Data Sources', value: '6' },
 ];
@@ -119,11 +119,11 @@ export default function LandingPage({ onTabChange }: LandingPageProps) {
     <>
       {items.map((idx, i) => (
         <div key={`${keyPrefix}-${idx.name}`} className="flex items-center gap-2 px-3 py-0.5 whitespace-nowrap shrink-0">
-          <span className="text-xs font-medium" style={{ color: 'var(--vw-text-secondary)' }}>{idx.name}</span>
-          <span className="text-xs font-mono font-medium" style={{ color: 'var(--vw-text-primary)' }}>{idx.value}</span>
+          <span className="text-sm font-medium" style={{ color: 'var(--vw-text-secondary)' }}>{idx.name}</span>
+          <span className="text-sm font-mono font-medium" style={{ color: 'var(--vw-text-primary)' }}>{idx.value}</span>
           <Sparkline data={idx.spark} up={idx.up} />
           <span
-            className="text-[11px] font-mono font-semibold flex items-center gap-0.5"
+            className="text-xs font-mono font-semibold flex items-center gap-0.5"
             style={{ color: idx.up ? 'var(--vw-green)' : 'var(--vw-red)' }}
           >
             {idx.up ? <TrendingUp className="w-3 h-3" /> : <TrendingDown className="w-3 h-3" />}
@@ -136,7 +136,7 @@ export default function LandingPage({ onTabChange }: LandingPageProps) {
   );
 
   return (
-    <div className="space-y-6 pb-10">
+    <div className="space-y-5 pb-10">
 
       {/* ── Market Ticker Bar — Infinite Marquee ──────────────────────── */}
       <motion.div
@@ -167,7 +167,7 @@ export default function LandingPage({ onTabChange }: LandingPageProps) {
           <div className="flex items-center gap-1 shrink-0">
             <div className="flex items-center gap-1 px-3 shrink-0">
               <BarChart className="w-3.5 h-3.5" style={{ color: 'var(--vw-accent)' }} />
-              <span className="text-[10px] font-semibold uppercase tracking-wider whitespace-nowrap" style={{ color: 'var(--vw-text-tertiary)' }}>
+              <span className="text-[11px] font-semibold uppercase tracking-wider whitespace-nowrap" style={{ color: 'var(--vw-text-tertiary)' }}>
                 Live Markets
               </span>
             </div>
@@ -245,7 +245,7 @@ export default function LandingPage({ onTabChange }: LandingPageProps) {
             {/* Badge */}
             <div className="flex items-center gap-2 mb-5">
               <div
-                className="vw-shimmer inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[11px] font-semibold tracking-wide"
+                className="vw-shimmer inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold tracking-wide"
                 style={{
                   background: 'rgba(0, 212, 170, 0.1)',
                   border: '1px solid rgba(0, 212, 170, 0.2)',
@@ -259,7 +259,7 @@ export default function LandingPage({ onTabChange }: LandingPageProps) {
 
             {/* Heading */}
             <h1
-              className="text-4xl lg:text-5xl font-bold mb-4"
+              className="text-5xl lg:text-6xl font-bold mb-4"
               style={{
                 letterSpacing: '-0.03em',
                 lineHeight: '1.15',
@@ -283,7 +283,7 @@ export default function LandingPage({ onTabChange }: LandingPageProps) {
 
             {/* Subtitle */}
             <p
-              className="text-base lg:text-lg max-w-2xl"
+              className="text-lg lg:text-xl max-w-2xl"
               style={{
                 color: 'var(--vw-text-secondary)',
                 lineHeight: '1.7',
@@ -308,8 +308,8 @@ export default function LandingPage({ onTabChange }: LandingPageProps) {
                     border: '1px solid rgba(0, 212, 170, 0.12)',
                   }}
                 >
-                  <span className="text-2xl font-bold font-mono" style={{ color: 'var(--vw-accent)' }}>{s.value}</span>
-                  <span className="text-xs font-medium" style={{ color: 'var(--vw-text-tertiary)' }}>{s.label}</span>
+                  <span className="text-3xl font-bold font-mono" style={{ color: 'var(--vw-accent)' }}>{s.value}</span>
+                  <span className="text-sm font-medium" style={{ color: 'var(--vw-text-tertiary)' }}>{s.label}</span>
                 </div>
               ))}
             </motion.div>
@@ -330,20 +330,19 @@ export default function LandingPage({ onTabChange }: LandingPageProps) {
               transition={{ duration: 0.4, delay: 0.6 + sectionIdx * 0.12 }}
               className="flex items-center gap-3 pt-1"
             >
-              <span className="text-[11px] font-semibold uppercase tracking-[0.15em]" style={{ color: 'var(--vw-text-tertiary)' }}>
+              <span className="text-xs font-semibold uppercase tracking-[0.15em]" style={{ color: 'var(--vw-text-tertiary)' }}>
                 {section.group}
               </span>
               <div className="flex-1 h-px" style={{ background: 'linear-gradient(90deg, var(--vw-border-lit), transparent)' }} />
             </motion.div>
 
             {/* Cards */}
-            <div className={`grid gap-3 ${
-              section.items.length === 4
-                ? 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-4'
-                : section.items.length === 2
-                  ? 'grid-cols-1 sm:grid-cols-2'
-                  : 'grid-cols-1 sm:grid-cols-3'
-            }`}>
+            <div className={`grid gap-4 ${section.items.length === 4
+              ? 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-4'
+              : section.items.length === 2
+                ? 'grid-cols-1 sm:grid-cols-2'
+                : 'grid-cols-1 sm:grid-cols-3'
+              }`}>
               {section.items.map((f, i) => (
                 <motion.button
                   key={f.id}
@@ -383,17 +382,17 @@ export default function LandingPage({ onTabChange }: LandingPageProps) {
                     style={{ background: `linear-gradient(90deg, ${f.color}, transparent)` }}
                   />
 
-                  <div className="p-4 space-y-3">
+                  <div className="p-5 space-y-3">
                     {/* Icon row */}
                     <div className="flex items-center justify-between">
                       <div
-                        className="w-9 h-9 rounded-xl flex items-center justify-center transition-all duration-300"
+                        className="w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-300"
                         style={{
                           background: `linear-gradient(135deg, ${f.color}18, ${f.color}08)`,
                           boxShadow: `0 0 12px -4px ${f.color}20`,
                         }}
                       >
-                        <f.Icon className="w-4 h-4" style={{ color: f.color }} />
+                        <f.Icon className="w-5 h-5" style={{ color: f.color }} />
                       </div>
                       <ArrowUpRight
                         className="w-4 h-4 opacity-0 group-hover:opacity-100 translate-x-1 group-hover:translate-x-0 transition-all duration-300"
@@ -404,13 +403,13 @@ export default function LandingPage({ onTabChange }: LandingPageProps) {
                     {/* Text */}
                     <div>
                       <h3
-                        className="text-sm font-semibold mb-1 transition-colors duration-300"
+                        className="text-base font-semibold mb-1 transition-colors duration-300"
                         style={{ color: 'var(--vw-text-primary)' }}
                       >
                         {f.label}
                       </h3>
                       <p
-                        className="text-[11px] leading-relaxed transition-colors duration-300 group-hover:text-slate-300"
+                        className="text-sm leading-relaxed transition-colors duration-300 group-hover:text-slate-300"
                         style={{ color: 'var(--vw-text-tertiary)' }}
                       >
                         {f.desc}
@@ -443,25 +442,11 @@ export default function LandingPage({ onTabChange }: LandingPageProps) {
 
         <Shield className="w-4 h-4 mt-0.5 shrink-0 ml-1" style={{ color: 'var(--vw-amber)' }} />
         <div>
-          <p className="text-xs font-medium mb-0.5" style={{ color: 'var(--vw-amber)' }}>Supported Tickers</p>
-          <p className="text-xs leading-relaxed" style={{ color: 'var(--vw-text-secondary)' }}>
-            DCF, Quality, and Multiples use Financial Modeling Prep (~87 pre-selected tickers). Peers use Finnhub (US-listed). Market data tabs work with any supported ticker.
+          <p className="text-sm font-medium mb-0.5" style={{ color: 'var(--vw-amber)' }}>Supported Tickers</p>
+          <p className="text-sm leading-relaxed" style={{ color: 'var(--vw-text-secondary)' }}>
+            DCF, Quality, and Multiples use Financial Modeling Prep (~84 pre-selected tickers). Peers use Finnhub (US-listed). Market data tabs work with any supported ticker.
           </p>
         </div>
-      </motion.div>
-
-      {/* ── Footer tagline ──────────────────────────────────────────────── */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.5, delay: 1.4 }}
-        className="flex items-center justify-center gap-3 pt-2 pb-2"
-      >
-        <div className="w-8 h-px" style={{ background: 'var(--vw-border-dim)' }} />
-        <span className="text-[10px] font-medium uppercase tracking-[0.2em]" style={{ color: 'var(--vw-text-muted)' }}>
-          Built for professional investors
-        </span>
-        <div className="w-8 h-px" style={{ background: 'var(--vw-border-dim)' }} />
       </motion.div>
     </div>
   );

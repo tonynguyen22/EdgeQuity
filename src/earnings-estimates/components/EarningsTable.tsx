@@ -11,7 +11,7 @@ interface EarningsTableProps {
 }
 
 function SurpriseBadge({ pct }: { pct: number | null }) {
-  if (pct == null) return <span className="text-slate-600">-</span>;
+  if (pct == null) return <span className="text-slate-500">-</span>;
   if (Math.abs(pct) < 0.5) return <span className="text-slate-400 text-xs flex items-center gap-1"><Minus className="w-3 h-3" />In-line</span>;
   if (pct > 0) return <span className="text-emerald-400 text-xs flex items-center gap-1"><TrendingUp className="w-3 h-3" />+{pct.toFixed(1)}%</span>;
   return <span className="text-red-400 text-xs flex items-center gap-1"><TrendingDown className="w-3 h-3" />{pct.toFixed(1)}%</span>;
@@ -42,7 +42,7 @@ export default function EarningsTable({ quarterly, annual, view, sym }: Earnings
             </tbody>
           </table>
         </div>
-        <p className="text-xs text-slate-600">Showing {annual.length} most recent fiscal years. Data via Alpha Vantage.</p>
+        <p className="text-xs text-slate-500">Showing {annual.length} most recent fiscal years. Data via Alpha Vantage.</p>
       </div>
     );
   }
@@ -81,7 +81,7 @@ export default function EarningsTable({ quarterly, annual, view, sym }: Earnings
                       <span className={r.surprise > 0 ? 'text-emerald-400' : r.surprise < 0 ? 'text-red-400' : 'text-slate-400'}>
                         {r.surprise > 0 ? '+' : ''}{r.surprise.toFixed(4)}
                       </span>
-                    ) : <span className="text-slate-600">-</span>}
+                    ) : <span className="text-slate-500">-</span>}
                   </td>
                   <td className="px-4 py-3 text-right">
                     <SurpriseBadge pct={pct} />
@@ -97,7 +97,7 @@ export default function EarningsTable({ quarterly, annual, view, sym }: Earnings
           </tbody>
         </table>
       </div>
-      <p className="text-xs text-slate-600">Showing {quarterly.length} most recent quarters. Data via Alpha Vantage.</p>
+      <p className="text-xs text-slate-500">Showing {quarterly.length} most recent quarters. Data via Alpha Vantage.</p>
     </div>
   );
 }

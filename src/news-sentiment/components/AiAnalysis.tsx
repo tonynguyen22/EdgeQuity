@@ -85,7 +85,7 @@ export default function AiAnalysis({ aiLoading, aiAnalysis, aiError, onRun }: Ai
       {aiAnalysis && !aiLoading && (
         <div>
           {renderLines(aiAnalysis)}
-          <p className="text-[10px] text-slate-600 mt-3 pt-2 border-t border-slate-700/30">
+          <p className="text-[10px] text-slate-500 mt-3 pt-2 border-t border-slate-700/30">
             AI analysis is for informational purposes only and should not be considered financial advice.
           </p>
         </div>

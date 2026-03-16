@@ -122,50 +122,52 @@ export default function PeerControls({
                     )}
                 </form>
 
-                {/* Row 2: Add peers — always visible when ticker is set */}
-                {ticker && (
-                    <div className="w-full max-w-xl mx-auto space-y-3">
-                        <div className="flex items-center gap-3">
-                            <form onSubmit={onAddCustomPeer} className="flex-1 relative">
-                                <Plus className="w-4.5 h-4.5 absolute left-4 top-1/2 -translate-y-1/2" style={{ color: 'var(--vw-text-tertiary)' }} />
-                                <input
-                                    type="text"
-                                    value={customPeerInput}
-                                    onChange={e => onCustomPeerInputChange(e.target.value)}
-                                    placeholder="Add peer ticker (e.g. MSFT, GOOG)"
-                                    className="w-full rounded-xl pl-11 pr-20 py-3.5 text-[14px] focus:outline-none uppercase transition-all"
-                                    style={{
-                                        background: 'var(--vw-bg-raised)',
-                                        border: '1px solid var(--vw-border-lit)',
-                                        color: 'var(--vw-text-primary)',
-                                    }}
-                                    autoComplete="off"
-                                />
-                                <button
-                                    type="submit"
-                                    disabled={selectedPeerSymbols.length >= 5 || !isCustomValid}
-                                    className="absolute right-2 top-1/2 -translate-y-1/2 px-3.5 py-1.5 rounded-lg text-[13px] font-medium transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
-                                    style={{ background: 'var(--vw-bg-hover)', border: '1px solid var(--vw-border-lit)', color: 'var(--vw-text-primary)' }}
-                                >
-                                    Add
-                                </button>
-                            </form>
+                {/* Row 2: Add peers — always visible */}
+                <div className="w-full max-w-xl mx-auto space-y-3">
+                    <div className="flex items-center gap-3">
+                        <form onSubmit={onAddCustomPeer} className="flex-1 relative">
+                            <Plus className="w-4.5 h-4.5 absolute left-4 top-1/2 -translate-y-1/2" style={{ color: 'var(--vw-text-tertiary)' }} />
+                            <input
+                                type="text"
+                                value={customPeerInput}
+                                onChange={e => onCustomPeerInputChange(e.target.value)}
+                                placeholder="Add peer ticker (e.g. MSFT, GOOG)"
+                                className="w-full rounded-xl pl-11 pr-20 py-3.5 text-[14px] focus:outline-none uppercase transition-all"
+                                style={{
+                                    background: 'var(--vw-bg-raised)',
+                                    border: '1px solid var(--vw-border-lit)',
+                                    color: 'var(--vw-text-primary)',
+                                }}
+                                autoComplete="off"
+                            />
                             <button
-                                type="button"
-                                disabled={!ticker || peerFinderLoading}
-                                onClick={() => onFetchPeerSuggestions(ticker)}
-                                className="flex items-center gap-1.5 px-4 py-3.5 rounded-xl text-[13px] font-medium transition-colors disabled:opacity-40 disabled:cursor-not-allowed shrink-0"
-                                style={{ background: 'var(--vw-bg-raised)', border: '1px solid var(--vw-border-lit)', color: 'var(--vw-text-primary)' }}
+                                type="submit"
+                                disabled={selectedPeerSymbols.length >= 5 || !isCustomValid}
+                                className="absolute right-2 top-1/2 -translate-y-1/2 px-3.5 py-1.5 rounded-lg text-[13px] font-medium transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+                                style={{ background: 'var(--vw-bg-hover)', border: '1px solid var(--vw-border-lit)', color: 'var(--vw-text-primary)' }}
                             >
-                                <Users className="w-4 h-4" />
-                                {peerFinderLoading ? 'Finding…' : 'Find Peers'}
+                                Add
                             </button>
-                        </div>
-                        <p className="text-[11px]" style={{ color: 'var(--vw-text-muted)' }}>
-                            Add up to 5 peers to compare against <strong style={{ color: 'var(--vw-accent)' }}>{ticker}</strong>. Type any ticker or use Find Peers for suggestions.
-                        </p>
+                        </form>
+                        <button
+                            type="button"
+                            disabled={!ticker || peerFinderLoading}
+                            onClick={() => onFetchPeerSuggestions(ticker)}
+                            className="flex items-center gap-1.5 px-4 py-3.5 rounded-xl text-[13px] font-medium transition-colors disabled:opacity-40 disabled:cursor-not-allowed shrink-0"
+                            style={{ background: 'var(--vw-bg-raised)', border: '1px solid var(--vw-border-lit)', color: 'var(--vw-text-primary)' }}
+                        >
+                            <Users className="w-4 h-4" />
+                            {peerFinderLoading ? 'Finding…' : 'Find Peers'}
+                        </button>
                     </div>
-                )}
+                    <p className="text-[11px]" style={{ color: 'var(--vw-text-muted)' }}>
+                        {ticker ? (
+                            <>Add up to 5 peers to compare against <strong style={{ color: 'var(--vw-accent)' }}>{ticker}</strong>. Type any ticker or use Find Peers for suggestions.</>
+                        ) : (
+                            <>Set your target ticker above, then add up to 5 peers for comparison.</>
+                        )}
+                    </p>
+                </div>
 
                 {/* Peer Finder suggestions panel */}
                 {showPeerFinder && (
@@ -210,7 +212,7 @@ export default function PeerControls({
                                             className={`flex items-center gap-2 px-3.5 py-2 rounded-lg border text-[13px] font-medium transition-all ${isSelected
                                                 ? 'bg-emerald-500/15 border-emerald-500/40 text-emerald-300'
                                                 : isFull
-                                                    ? 'bg-slate-800/40 border-slate-700/30 text-slate-600 cursor-not-allowed'
+                                                    ? 'bg-slate-800/40 border-slate-700/30 text-slate-500 cursor-not-allowed'
                                                     : 'hover:border-slate-500 hover:text-slate-100'
                                                 }`}
                                             style={!isSelected && !isFull ? { background: 'var(--vw-bg-hover)', borderColor: 'var(--vw-border-lit)', color: 'var(--vw-text-secondary)' } : undefined}
@@ -280,8 +282,8 @@ export default function PeerControls({
                     </div>
                 )}
 
-                {/* Guidance — show only when ticker is set, no data, no peers */}
-                {ticker && !hasData && !loading && selectedPeerSymbols.length === 0 && !showPeerFinder && (
+                {/* Guidance — show when no data loaded and no peers selected */}
+                {!hasData && !loading && selectedPeerSymbols.length === 0 && !showPeerFinder && (
                     <div className="w-full max-w-xl mx-auto rounded-xl overflow-hidden" style={{ border: '1px solid var(--vw-border)' }}>
                         <table className="w-full text-sm" style={{ background: 'var(--vw-bg-raised)' }}>
                             <thead>
@@ -300,7 +302,7 @@ export default function PeerControls({
                                         <span className="inline-flex items-center justify-center w-6 h-6 rounded-full text-xs font-bold" style={{ background: 'var(--vw-accent-soft)' }}>1</span>
                                     </td>
                                     <td className="px-4 py-3" style={{ color: 'var(--vw-text-secondary)' }}>
-                                        Type a peer ticker above and click <strong style={{ color: 'var(--vw-text-primary)' }}>Add</strong>, or click <strong style={{ color: 'var(--vw-text-primary)' }}>Find Peers</strong> for suggestions
+                                        Select a ticker above and click <strong style={{ color: 'var(--vw-text-primary)' }}>Set Ticker</strong> to choose your target company
                                     </td>
                                 </tr>
                                 <tr style={{ borderBottom: '1px solid var(--vw-border-dim)' }}>
@@ -308,7 +310,7 @@ export default function PeerControls({
                                         <span className="inline-flex items-center justify-center w-6 h-6 rounded-full text-xs font-bold" style={{ background: 'var(--vw-accent-soft)' }}>2</span>
                                     </td>
                                     <td className="px-4 py-3" style={{ color: 'var(--vw-text-secondary)' }}>
-                                        Select up to <strong style={{ color: 'var(--vw-text-primary)' }}>5 peers</strong> to compare against <strong style={{ color: 'var(--vw-accent)' }}>{ticker}</strong>
+                                        Type a peer ticker and click <strong style={{ color: 'var(--vw-text-primary)' }}>Add</strong>, or click <strong style={{ color: 'var(--vw-text-primary)' }}>Find Peers</strong> for suggestions (up to 5)
                                     </td>
                                 </tr>
                                 <tr>

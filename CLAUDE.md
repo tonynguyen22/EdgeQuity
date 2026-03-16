@@ -1,7 +1,7 @@
 # ValuWise — Project Configuration
 
 ## Overview
-Professional equity research and stock analysis platform. Features DCF valuation, DDM, multiples analysis, quality scoring, 3-statement modeling, peer analysis, technical indicators, earnings estimates, insider activity, news sentiment, dividend analysis, and market cycle detection across ~87 supported tickers. Single-page React app with sidebar navigation and 12 tab views, styled as a financial terminal.
+Professional equity research and stock analysis platform. Features DCF valuation, DDM, multiples analysis, quality scoring, 3-statement modeling, peer analysis, technical indicators, earnings estimates, insider activity, news sentiment, dividend analysis, and market cycle detection across ~84 supported tickers. Single-page React app with sidebar navigation and 12 tab views, styled as a financial terminal.
 
 ## Tech Stack
 - Framework: Vite + React 19

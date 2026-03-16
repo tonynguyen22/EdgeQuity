@@ -20,40 +20,40 @@
   --color-slate-300: #a0b0c4;
   --color-slate-200: #c8d2e0;
   --color-slate-100: #e4e9f2;
-  --color-slate-50:  #f2f5fa;
+  --color-slate-50: #f2f5fa;
 }
 
 :root {
   /* ── Core palette ───────────────────────────────────────────────────────── */
-  --vw-bg-deep:    #080c14;
-  --vw-bg-base:    #0c1220;
-  --vw-bg-raised:  #111827;
+  --vw-bg-deep: #080c14;
+  --vw-bg-base: #0c1220;
+  --vw-bg-raised: #111827;
   --vw-bg-surface: #151c2b;
-  --vw-bg-hover:   #1c2538;
+  --vw-bg-hover: #1c2538;
 
-  --vw-border:     #182538;
+  --vw-border: #182538;
   --vw-border-dim: #131e30;
   --vw-border-lit: #223450;
 
-  --vw-accent:     #00d4aa;
+  --vw-accent: #00d4aa;
   --vw-accent-dim: #00a88a;
   --vw-accent-glow: rgba(0, 212, 170, 0.22);
   --vw-accent-soft: rgba(0, 212, 170, 0.14);
 
-  --vw-green:      #00d4aa;
-  --vw-red:        #ff4d6a;
-  --vw-amber:      #f0b429;
-  --vw-blue:       #38bdf8;
-  --vw-violet:     #a78bfa;
-  --vw-cyan:       #22d3ee;
-  --vw-rose:       #fb7185;
-  --vw-orange:     #fb923c;
-  --vw-pink:       #f472b6;
+  --vw-green: #00d4aa;
+  --vw-red: #ff4d6a;
+  --vw-amber: #f0b429;
+  --vw-blue: #38bdf8;
+  --vw-violet: #a78bfa;
+  --vw-cyan: #22d3ee;
+  --vw-rose: #fb7185;
+  --vw-orange: #fb923c;
+  --vw-pink: #f472b6;
 
-  --vw-text-primary:   #e8edf4;
+  --vw-text-primary: #e8edf4;
   --vw-text-secondary: #9dafc8;
-  --vw-text-tertiary:  #6d85a2;
-  --vw-text-muted:     #4e6580;
+  --vw-text-tertiary: #6d85a2;
+  --vw-text-muted: #4e6580;
 }
 
 /* ── Global resets & base ────────────────────────────────────────────────── */
@@ -68,13 +68,16 @@
   width: 6px;
   height: 6px;
 }
+
 ::-webkit-scrollbar-track {
   background: transparent;
 }
+
 ::-webkit-scrollbar-thumb {
   background: var(--vw-border-lit);
   border-radius: 99px;
 }
+
 ::-webkit-scrollbar-thumb:hover {
   background: var(--vw-text-tertiary);
 }
@@ -99,6 +102,7 @@ input[type="number"]::-webkit-outer-spin-button {
   appearance: none;
   margin: 0;
 }
+
 input[type="number"] {
   -moz-appearance: textfield;
 }
@@ -126,6 +130,7 @@ body::before {
   z-index: 1;
   isolation: isolate;
 }
+
 .vw-card:hover {
   border-color: var(--vw-border-lit);
   background: var(--vw-bg-surface);
@@ -134,14 +139,15 @@ body::before {
 /* Glow border on accent cards */
 .vw-glow {
   box-shadow: 0 0 0 1px var(--vw-border),
-              0 0 20px -4px var(--vw-accent-glow),
-              0 4px 16px -4px rgba(0, 0, 0, 0.4);
+    0 0 20px -4px var(--vw-accent-glow),
+    0 4px 16px -4px rgba(0, 0, 0, 0.4);
 }
 
 /* Very subtle grid pattern on content area — barely visible, fades at edges */
 .vw-grid-bg {
   position: relative;
 }
+
 /* Grid lines — decorative only, sits behind all content */
 .vw-grid-bg::after {
   content: "";
@@ -153,11 +159,12 @@ body::before {
     linear-gradient(rgba(60, 90, 130, 0.12) 1px, transparent 1px),
     linear-gradient(90deg, rgba(60, 90, 130, 0.12) 1px, transparent 1px);
   background-size: 56px 56px;
-  -webkit-mask-image: radial-gradient(ellipse at 50% 30%, rgba(0,0,0,0.6) 20%, transparent 70%);
-  mask-image: radial-gradient(ellipse at 50% 30%, rgba(0,0,0,0.6) 20%, transparent 70%);
+  -webkit-mask-image: radial-gradient(ellipse at 50% 30%, rgba(0, 0, 0, 0.6) 20%, transparent 70%);
+  mask-image: radial-gradient(ellipse at 50% 30%, rgba(0, 0, 0, 0.6) 20%, transparent 70%);
 }
+
 /* All direct content sits above the grid */
-.vw-grid-bg > * {
+.vw-grid-bg>* {
   position: relative;
   z-index: 1;
 }
@@ -169,14 +176,16 @@ body::before {
   gap: 4px;
   padding: 2px 8px;
   border-radius: 99px;
-  font-size: 11px;
+  font-size: 13px;
   font-weight: 600;
   font-family: var(--font-mono);
 }
+
 .vw-stat-up {
   background: rgba(0, 212, 170, 0.12);
   color: var(--vw-green);
 }
+
 .vw-stat-down {
   background: rgba(255, 77, 106, 0.12);
   color: var(--vw-red);
@@ -189,10 +198,19 @@ body::before {
 
 /* Animated pulse ring */
 @keyframes pulse-ring {
-  0% { box-shadow: 0 0 0 0 var(--vw-accent-glow); }
-  70% { box-shadow: 0 0 0 8px transparent; }
-  100% { box-shadow: 0 0 0 0 transparent; }
+  0% {
+    box-shadow: 0 0 0 0 var(--vw-accent-glow);
+  }
+
+  70% {
+    box-shadow: 0 0 0 8px transparent;
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 transparent;
+  }
 }
+
 .vw-pulse {
   animation: pulse-ring 2.5s ease-out infinite;
 }
@@ -213,15 +231,22 @@ body::before {
 
 /* ── Marquee / infinite scroll ───────────────────────────────────────── */
 @keyframes marquee-scroll {
-  0%   { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
 }
+
 .vw-marquee {
   display: flex;
   width: max-content;
   animation: marquee-scroll 40s linear infinite;
   will-change: transform;
 }
+
 .vw-marquee:hover {
   animation-play-state: paused;
 }
@@ -235,39 +260,63 @@ body::before {
 
 /* ── Shimmer / shine sweep ───────────────────────────────────────────────── */
 @keyframes shimmer-sweep {
-  0%   { transform: translateX(-100%); }
-  100% { transform: translateX(200%); }
+  0% {
+    transform: translateX(-100%);
+  }
+
+  100% {
+    transform: translateX(200%);
+  }
 }
+
 .vw-shimmer {
   position: relative;
   overflow: hidden;
 }
+
 .vw-shimmer::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    105deg,
-    transparent 30%,
-    rgba(0, 212, 170, 0.06) 45%,
-    rgba(0, 212, 170, 0.12) 50%,
-    rgba(0, 212, 170, 0.06) 55%,
-    transparent 70%
-  );
+  background: linear-gradient(105deg,
+      transparent 30%,
+      rgba(0, 212, 170, 0.06) 45%,
+      rgba(0, 212, 170, 0.12) 50%,
+      rgba(0, 212, 170, 0.06) 55%,
+      transparent 70%);
   animation: shimmer-sweep 6s ease-in-out infinite;
   pointer-events: none;
 }
 
 /* ── Hero decorative chart path ──────────────────────────────────────────── */
 @keyframes chart-draw {
-  0%   { stroke-dashoffset: 600; opacity: 0; }
-  20%  { opacity: 0.6; }
-  100% { stroke-dashoffset: 0; opacity: 0.6; }
+  0% {
+    stroke-dashoffset: 600;
+    opacity: 0;
+  }
+
+  20% {
+    opacity: 0.6;
+  }
+
+  100% {
+    stroke-dashoffset: 0;
+    opacity: 0.6;
+  }
 }
+
 @keyframes chart-pulse {
-  0%, 100% { opacity: 0.3; }
-  50%      { opacity: 0.6; }
+
+  0%,
+  100% {
+    opacity: 0.3;
+  }
+
+  50% {
+    opacity: 0.6;
+  }
 }
+
 .vw-hero-chart path {
   stroke-dasharray: 600;
   animation: chart-draw 3s ease-out forwards, chart-pulse 4s ease-in-out 3s infinite;
@@ -275,17 +324,75 @@ body::before {
 
 /* ── Floating orb animation ──────────────────────────────────────────────── */
 @keyframes orb-float {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  33%      { transform: translate(10px, -15px) scale(1.05); }
-  66%      { transform: translate(-8px, 8px) scale(0.98); }
+
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+
+  33% {
+    transform: translate(10px, -15px) scale(1.05);
+  }
+
+  66% {
+    transform: translate(-8px, 8px) scale(0.98);
+  }
 }
+
 .vw-orb {
   animation: orb-float 12s ease-in-out infinite;
   will-change: transform;
 }
+
 .vw-orb-delay {
   animation-delay: -4s;
 }
+
 .vw-orb-delay-2 {
   animation-delay: -8s;
+}
+
+/* ── Footer ──────────────────────────────────────────────────────────────── */
+.footer-columns {
+  grid-template-columns: 1.2fr 1.4fr 0.8fr;
+}
+
+.vw-footer-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 12px;
+  border-radius: 99px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--vw-text-secondary);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--vw-border);
+  text-decoration: none;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.vw-footer-chip:hover {
+  background: rgba(0, 212, 170, 0.08);
+  border-color: rgba(0, 212, 170, 0.25);
+  color: var(--vw-accent);
+}
+
+.vw-footer-link {
+  transition: color 0.2s ease;
+}
+
+.vw-footer-link:hover {
+  color: var(--vw-accent) !important;
+}
+
+@media (max-width: 768px) {
+  .footer-columns {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-bottom {
+    align-items: flex-start !important;
+  }
 }

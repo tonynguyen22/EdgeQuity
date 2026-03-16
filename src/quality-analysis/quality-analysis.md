@@ -6,7 +6,7 @@ Comprehensive financial quality scoring for individual companies. Grades A-D acr
 - **Financial Statements:** Financial Modeling Prep (FMP) `/stable/` API — income statement, balance sheet, cash flow (3 FMP calls). Standardized field names.
 - **Company Profile / Metrics:** Finnhub `/stock/profile2` and `/stock/metric` — company name, market cap (for Altman Z-Score).
 
-**Supported Tickers:** Restricted to the same ~87 pre-selected tickers defined in `SUPPORTED_TICKERS` (dcf/types.ts). Uses a filterable dropdown — free-text entry of unsupported tickers is not allowed.
+**Supported Tickers:** Restricted to the same ~84 pre-selected tickers defined in `SUPPORTED_TICKERS` (dcf/types.ts). Uses a filterable dropdown — free-text entry of unsupported tickers is not allowed.
 
 ---
 

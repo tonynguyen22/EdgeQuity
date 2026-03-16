@@ -42,7 +42,7 @@ src/ddm/
 | High Growth Period | 5 years | 1–15 |
 
 ## Ticker Restriction
-- Only SUPPORTED_TICKERS (~87 stocks) are selectable via dropdown autocomplete
+- Only SUPPORTED_TICKERS (~84 stocks) are selectable via dropdown autocomplete
 - Imported from `../dcf/types`
 
 ## Sidebar

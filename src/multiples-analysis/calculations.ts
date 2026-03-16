@@ -215,14 +215,15 @@ export function computeHistoricalMultiples(data: MultiplesData): MultiplesResult
 
   if (years.length === 0) return null;
 
-  // Split: use last 6 years for primary stats, keep all for full historical view
-  const RECENT_COUNT = 6;
+  // Split: use last 5 years for primary stats, keep all for full historical view
+  const RECENT_COUNT = 5;
   const allYears = years;
   const recentYears = years.length > RECENT_COUNT ? years.slice(-RECENT_COUNT) : years;
 
-  const stats = computeStats(recentYears);
-  const signal = computeSignal(stats);
   const currentMetrics = extractCurrentMetrics(data.metrics);
+  const stats = computeStats(recentYears, currentMetrics);
+  const signal = computeSignal(stats);
+
   const quarterlyTrend = buildQuarterlyTrend(data.series);
 
   return {
@@ -238,10 +239,24 @@ export function computeHistoricalMultiples(data: MultiplesData): MultiplesResult
   };
 }
 
-function computeStats(years: MultiplesYear[]): MultipleStats[] {
+/** Map from MultipleKey → corresponding TTM metric key in CurrentMetrics */
+const TTM_MAP: Record<string, keyof CurrentMetrics> = {
+  pe: 'peTTM',
+  evEbitda: 'evEbitdaTTM',
+  evRevenue: 'evRevenueTTM',
+  pb: 'pbQuarterly',
+  ps: 'psTTM',
+  pfcf: 'pfcfShareTTM',
+};
+
+function computeStats(years: MultiplesYear[], currentMetrics: CurrentMetrics): MultipleStats[] {
   return MULTIPLE_KEYS.map(key => {
     const values = years.map(y => y[key]).filter((v): v is number => v !== null);
-    const current = years.length > 0 ? years[years.length - 1][key] : null;
+    // Prefer TTM value as "current"; fall back to most recent fiscal year
+    const ttmKey = TTM_MAP[key];
+    const ttmVal = ttmKey ? currentMetrics[ttmKey] : null;
+    const fiscalCurrent = years.length > 0 ? years[years.length - 1][key] : null;
+    const current = ttmVal ?? fiscalCurrent;
 
     if (values.length === 0) {
       return { key, label: MULTIPLE_LABELS[key], current, avg: null, median: null, high: null, low: null, premiumDiscount: null };

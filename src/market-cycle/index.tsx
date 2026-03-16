@@ -82,7 +82,7 @@ function ReadinessGauge({ score, zone, label }: { score: number; zone: keyof typ
           {score}
         </p>
         <p className={`text-sm font-semibold mt-1 ${z.text}`}>{label}</p>
-        <p className="text-[10px] text-slate-600 mt-2">
+        <p className="text-[10px] text-slate-500 mt-2">
           Monthly + Weekly + Daily alignment
         </p>
       </div>
@@ -108,7 +108,7 @@ function TimeframeCard({ tf, result, icon }: { tf: string; result: TimeframeResu
       </div>
       <div className="flex items-center gap-1.5 mt-1.5 pl-4">
         <span className="text-xs tabular-nums text-slate-400 font-medium">{result.confidence}%</span>
-        <span className="text-[10px] text-slate-600">confidence</span>
+        <span className="text-[10px] text-slate-500">confidence</span>
       </div>
       {/* Mini bar */}
       <div className="mt-2.5 h-1 bg-slate-800 rounded-full overflow-hidden">
@@ -169,7 +169,7 @@ function PhaseDonut({ result, label }: { result: TimeframeResult; label: string 
         <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
           <span className={`text-lg font-bold tabular-nums ${PHASE_TEXT[result.phase]}`}>{result.confidence}%</span>
           <span className="text-[9px] text-slate-500 mt-0.5">{result.phase}</span>
-          <span className="text-[8px] text-slate-600">{label}</span>
+          <span className="text-[8px] text-slate-500">{label}</span>
         </div>
       </div>
 
@@ -181,7 +181,7 @@ function PhaseDonut({ result, label }: { result: TimeframeResult; label: string 
             <div key={p} className={`flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg transition-all duration-300 ${active ? 'bg-slate-700/30' : 'hover:bg-slate-800/20'}`}>
               <div className="w-2 h-2 rounded-full shrink-0" style={{ backgroundColor: PHASE_COLORS[p] }} />
               <span className={`text-[13px] flex-1 ${active ? 'text-white font-semibold' : 'text-slate-500'}`}>{p}</span>
-              <span className={`text-[13px] tabular-nums font-semibold ${active ? PHASE_TEXT[p] : 'text-slate-600'}`}>{prob}%</span>
+              <span className={`text-[13px] tabular-nums font-semibold ${active ? PHASE_TEXT[p] : 'text-slate-500'}`}>{prob}%</span>
               <div className="w-16 h-1 bg-slate-800 rounded-full overflow-hidden">
                 <div className="h-full rounded-full transition-all duration-500" style={{ width: `${prob}%`, backgroundColor: PHASE_COLORS[p] }} />
               </div>
@@ -283,7 +283,7 @@ export default function MarketCycle() {
           </h1>
           <p className="text-sm" style={{ color: 'var(--vw-text-secondary)' }}>Multi-timeframe Wyckoff cycle detection</p>
           {data && (
-            <p className="text-[11px] text-slate-600 mt-1.5 font-mono tracking-wide">
+            <p className="text-[11px] text-slate-500 mt-1.5 font-mono tracking-wide">
               SPY · Monthly/{data.candleCount.monthly}mo · Weekly/{data.candleCount.weekly}w · Daily/{data.candleCount.daily}d · Alpha Vantage
             </p>
           )}
@@ -295,7 +295,7 @@ export default function MarketCycle() {
         <div className="max-w-xl mx-auto text-center py-16">
           <RefreshCw className="w-7 h-7 text-teal-400 animate-spin mx-auto mb-3" />
           <p className="text-slate-400 text-sm">Analyzing SPY across monthly, weekly & daily…</p>
-          <p className="text-[10px] text-slate-600 mt-1">First load may take a few seconds</p>
+          <p className="text-[10px] text-slate-500 mt-1">First load may take a few seconds</p>
         </div>
       )}
 
@@ -325,7 +325,7 @@ export default function MarketCycle() {
                 </div>
                 <div className="flex items-center justify-between">
                   <AlignmentBadge daily={data.daily} weekly={data.weekly} monthly={data.monthly} />
-                  <span className="text-[10px] text-slate-600 font-mono">
+                  <span className="text-[10px] text-slate-500 font-mono">
                     {data.dataRange.from} → {data.dataRange.to}
                   </span>
                 </div>
@@ -404,8 +404,8 @@ export default function MarketCycle() {
                           </div>
                         )}
                         {isExpanded
-                          ? <ChevronUp className="w-3.5 h-3.5 text-slate-600" />
-                          : <ChevronDown className="w-3.5 h-3.5 text-slate-600" />}
+                          ? <ChevronUp className="w-3.5 h-3.5 text-slate-500" />
+                          : <ChevronDown className="w-3.5 h-3.5 text-slate-500" />}
                       </button>
                       <div className={`overflow-hidden transition-all duration-300 ${isExpanded ? 'max-h-40 opacity-100' : 'max-h-0 opacity-0'}`}>
                         <div className="px-3 pb-3 space-y-1.5 pl-[26px]">

@@ -62,7 +62,7 @@ export default function ScoreOverview({ ticker, gradeResult, yoyGrades, altmanZ 
                     <td className="text-center py-2.5 pl-2">
                       <div className="flex flex-col items-center gap-0.5">
                         <span className={`text-xs font-bold px-2 py-0.5 rounded ${gradeColors[yg.overall].badge}`}>{yg.overall}</span>
-                        <span className="text-[10px] text-slate-600">{yg.score}/100</span>
+                        <span className="text-[10px] text-slate-500">{yg.score}/100</span>
                       </div>
                     </td>
                   </tr>
@@ -90,7 +90,7 @@ export default function ScoreOverview({ ticker, gradeResult, yoyGrades, altmanZ 
                 <div className={`rounded-lg px-2 py-1.5 text-center ${altmanZ.zone === 'grey' ? 'bg-amber-500/20 ring-1 ring-amber-500/40' : 'bg-amber-500/10'}`}><div className="font-semibold text-amber-400">Grey</div><div className="text-slate-500">1.81-2.99</div></div>
                 <div className={`rounded-lg px-2 py-1.5 text-center ${altmanZ.zone === 'distress' ? 'bg-red-500/20 ring-1 ring-red-500/40' : 'bg-red-500/10'}`}><div className="font-semibold text-red-400">Distress</div><div className="text-slate-500">&lt; 1.81</div></div>
               </div>
-              <p className="text-xs text-slate-600 leading-relaxed">Standard Altman Z-Score using market cap. Directional signal — not a definitive bankruptcy predictor.</p>
+              <p className="text-xs text-slate-500 leading-relaxed">Standard Altman Z-Score using market cap. Directional signal — not a definitive bankruptcy predictor.</p>
             </div>
           </div>
         </div>

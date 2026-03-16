@@ -29,6 +29,7 @@ import HistoricalTables from './components/HistoricalTables';
 import WACCPanel from './components/WACCPanel';
 import MonteCarloSimulation from './components/MonteCarloSimulation';
 import SupportedTickersBySector from '../components/SupportedTickersBySector';
+import Footer from '../components/Footer';
 import type { DCFInputs, DCFResult, TabId, FormatUnit, ScenarioComparison, BridgeItem, ScenarioType } from './types';
 import { SUPPORTED_TICKERS } from './types';
 
@@ -101,8 +102,8 @@ export default function App() {
     cacheCleared: false,
   });
 
-  // ── Nav sidebar collapsed state (default: hidden) ──────────────────────────
-  const [navCollapsed, setNavCollapsed] = useState(true);
+  // ── Nav sidebar collapsed state (default: expanded) ─────────────────────────
+  const [navCollapsed, setNavCollapsed] = useState(false);
   const handleToggleNav = () => setNavCollapsed(prev => !prev);
 
   // ── DCF model inputs (12 sliders) ──────────────────────────────────────────
@@ -372,8 +373,8 @@ export default function App() {
         onClearCache={handleClearCache}
       />
 
-      <div className="flex-1 min-w-0 vw-grid-bg">
-        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+      <div className="flex-1 min-w-0 vw-grid-bg flex flex-col min-h-screen">
+        <main className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 py-6">
           {showLanding ? (
             <LandingPage onTabChange={handleTabChange} />
           ) : activeTab === 'comp' ? (
@@ -404,10 +405,10 @@ export default function App() {
                 <div className="flex flex-col items-center justify-center min-h-[60vh] px-4">
                   {/* Hero Title */}
                   <div className="text-center mb-8">
-                    <h1 className="text-4xl font-bold tracking-tight mb-2" style={{ color: 'var(--vw-text-primary)' }}>
+                    <h1 className="text-5xl font-bold tracking-tight mb-2" style={{ color: 'var(--vw-text-primary)' }}>
                       DCF <span style={{ color: 'var(--vw-accent)' }}>Valuation</span>
                     </h1>
-                    <p className="text-sm" style={{ color: 'var(--vw-text-secondary)' }}>
+                    <p className="text-base" style={{ color: 'var(--vw-text-secondary)' }}>
                       Enter a ticker to build a Discounted Cash Flow model
                     </p>
                   </div>
@@ -466,8 +467,8 @@ export default function App() {
                   </form>
 
                   {/* About Section */}
-                  <div className="w-full max-w-2xl mt-8 rounded-xl p-6 space-y-4" style={{ background: 'rgba(17, 24, 39, 0.5)', border: '1px solid var(--vw-border-dim)' }}>
-                    <p className="text-sm font-semibold" style={{ color: 'var(--vw-text-primary)' }}>What you'll see here</p>
+                  <div className="w-full max-w-3xl mt-8 rounded-xl p-6 space-y-4" style={{ background: 'rgba(17, 24, 39, 0.5)', border: '1px solid var(--vw-border-dim)' }}>
+                    <p className="text-base font-semibold" style={{ color: 'var(--vw-text-primary)' }}>What you'll see here</p>
                     <ul className="space-y-2.5">
                       {[
                         'Estimates what a stock should be worth based on its future cash flows',
@@ -475,8 +476,8 @@ export default function App() {
                         'Shows you whether the current price is above or below the calculated value',
                         'Includes sensitivity tables and Monte Carlo simulations so you can explore different scenarios',
                       ].map((item, i) => (
-                        <li key={i} className="flex items-start gap-2.5 text-[13px] leading-relaxed" style={{ color: 'var(--vw-text-secondary)' }}>
-                          <span className="mt-0.5 shrink-0 w-5 h-5 rounded-full flex items-center justify-center text-[11px] font-bold"
+                        <li key={i} className="flex items-start gap-2.5 text-sm leading-relaxed" style={{ color: 'var(--vw-text-secondary)' }}>
+                          <span className="mt-0.5 shrink-0 w-5 h-5 rounded-full flex items-center justify-center text-xs font-bold"
                             style={{ background: 'rgba(0,212,170,0.12)', color: 'var(--vw-accent)' }}>
                             {i + 1}
                           </span>
@@ -517,7 +518,7 @@ export default function App() {
                   <div className="flex items-center gap-3">
                     <button
                       onClick={handleGoBack}
-                      className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-medium transition-all duration-200 shrink-0"
+                      className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 shrink-0"
                       style={{
                         background: 'var(--vw-bg-raised)',
                         border: '1px solid var(--vw-border-lit)',
@@ -541,7 +542,7 @@ export default function App() {
                         <button
                           key={tab.id}
                           onClick={() => setDcfSubTab(tab.id)}
-                          className="flex-1 flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-lg text-sm font-medium transition-all duration-200"
+                          className="flex-1 flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-lg text-base font-medium transition-all duration-200"
                           style={{
                             background: dcfSubTab === tab.id ? 'rgba(0, 212, 170, 0.12)' : 'transparent',
                             color: dcfSubTab === tab.id ? 'var(--vw-accent)' : 'var(--vw-text-secondary)',
@@ -566,7 +567,7 @@ export default function App() {
                   ) : dcfSubTab === 'history' ? (
                     <div className="space-y-6">
                       <div className="flex items-center justify-between">
-                        <h2 className="text-xl font-semibold">Historical Financials</h2>
+                        <h2 className="text-2xl font-semibold">Historical Financials</h2>
                         <button
                           onClick={handleExport}
                           className="flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-medium transition-all hover:brightness-110"
@@ -601,9 +602,9 @@ export default function App() {
                       )}
                       {data?.profile?.name && (
                         <div className="flex items-baseline gap-3">
-                          <h2 className="text-xl font-bold text-white">{ticker}</h2>
-                          <span className="text-sm text-slate-400">{data.profile.name}</span>
-                          {data.profile.finnhubIndustry && <span className="text-xs text-slate-500">{data.profile.finnhubIndustry}</span>}
+                          <h2 className="text-2xl font-bold text-white">{ticker}</h2>
+                          <span className="text-base text-slate-400">{data.profile.name}</span>
+                          {data.profile.finnhubIndustry && <span className="text-sm text-slate-500">{data.profile.finnhubIndustry}</span>}
                         </div>
                       )}
                       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
@@ -626,19 +627,19 @@ export default function App() {
                           {/* Top Metrics Row */}
                           <div className={`grid grid-cols-1 gap-4 ${analystTarget ? 'sm:grid-cols-4' : 'sm:grid-cols-3'}`}>
                             <div className="bg-slate-800/50 border border-slate-700/50 rounded-xl p-5">
-                              <div className="text-sm text-slate-400 mb-1">Intrinsic Value</div>
-                              <div className="text-3xl font-light tracking-tight">${dcf.intrinsicValue.toFixed(2)}</div>
+                              <div className="text-base text-slate-400 mb-1">Intrinsic Value</div>
+                              <div className="text-4xl font-light tracking-tight">${dcf.intrinsicValue.toFixed(2)}</div>
                               <div className="text-xs text-slate-500 mt-1">{activeScenario !== 'custom' ? activeScenario.charAt(0).toUpperCase() + activeScenario.slice(1) + ' case' : 'Custom'}</div>
                             </div>
 
                             <div className="bg-slate-800/50 border border-slate-700/50 rounded-xl p-5">
-                              <div className="text-sm text-slate-400 mb-1">Current Price</div>
-                              <div className="text-3xl font-light tracking-tight">${dcf.currentPrice.toFixed(2)}</div>
+                              <div className="text-base text-slate-400 mb-1">Current Price</div>
+                              <div className="text-4xl font-light tracking-tight">${dcf.currentPrice.toFixed(2)}</div>
                             </div>
 
                             <div className={`bg-slate-800/50 border rounded-xl p-5 ${dcf.upside >= 0 ? 'border-emerald-500/30' : 'border-red-500/30'}`}>
-                              <div className="text-sm text-slate-400 mb-1">Upside / Downside</div>
-                              <div className={`text-3xl font-light tracking-tight flex items-center gap-2 ${dcf.upside >= 0 ? 'text-emerald-400' : 'text-red-400'}`}>
+                              <div className="text-base text-slate-400 mb-1">Upside / Downside</div>
+                              <div className={`text-4xl font-light tracking-tight flex items-center gap-2 ${dcf.upside >= 0 ? 'text-emerald-400' : 'text-red-400'}`}>
                                 {dcf.upside >= 0 ? <TrendingUp className="w-6 h-6" /> : <TrendingDown className="w-6 h-6" />}
                                 {formatPct(dcf.upside)}
                               </div>
@@ -646,10 +647,10 @@ export default function App() {
 
                             {analystTarget && (
                               <div className="bg-slate-800/50 border border-slate-700/50 rounded-xl p-5">
-                                <div className="text-sm text-slate-400 mb-1 flex items-center gap-1.5">
+                                <div className="text-base text-slate-400 mb-1 flex items-center gap-1.5">
                                   <Target className="w-3.5 h-3.5" /> Analyst Target
                                 </div>
-                                <div className="text-3xl font-light tracking-tight">${analystTarget.mean.toFixed(2)}</div>
+                                <div className="text-4xl font-light tracking-tight">${analystTarget.mean.toFixed(2)}</div>
                                 <div className="text-xs text-slate-500 mt-1">Range: ${analystTarget.low.toFixed(0)}–${analystTarget.high.toFixed(0)}</div>
                                 <div className={`text-xs mt-1 font-medium ${dcf.currentPrice < analystTarget.mean ? 'text-emerald-400' : 'text-red-400'}`}>
                                   {dcf.currentPrice > 0 ? `${dcf.currentPrice < analystTarget.mean ? '+' : ''}${((analystTarget.mean - dcf.currentPrice) / dcf.currentPrice * 100).toFixed(1)}% vs price` : ''}
@@ -664,13 +665,13 @@ export default function App() {
                               reverseDcf.impliedTermGrowth < 0.04 ? 'bg-amber-500/5 border-amber-500/25' :
                                 'bg-red-500/5 border-red-500/25'}`}>
                               <div className="flex-1">
-                                <div className="text-xs text-slate-500 mb-0.5">Market-Implied Terminal Growth</div>
+                                <div className="text-sm text-slate-500 mb-0.5">Market-Implied Terminal Growth</div>
                                 <div className={`text-2xl font-light font-mono ${reverseDcf.impliedTermGrowth < 0.02 ? 'text-emerald-400' :
                                   reverseDcf.impliedTermGrowth < 0.04 ? 'text-amber-400' : 'text-red-400'}`}>
                                   {(reverseDcf.impliedTermGrowth * 100).toFixed(2)}%
                                 </div>
                               </div>
-                              <p className="text-xs text-slate-500 max-w-xs leading-relaxed">
+                              <p className="text-sm text-slate-500 max-w-xs leading-relaxed">
                                 At ${dcf.currentPrice.toFixed(2)}/share, holding WACC at {formatPct(dcf.wacc)} and current revenue projections, the market prices in {(reverseDcf.impliedTermGrowth * 100).toFixed(2)}% long-run terminal growth.
                                 {reverseDcf.impliedTermGrowth >= 0.04 ? ' This implies high long-term expectations.' : reverseDcf.impliedTermGrowth < 0 ? ' This implies the market expects long-run contraction.' : ''}
                               </p>
@@ -679,7 +680,7 @@ export default function App() {
 
                           {/* FCFF Chart */}
                           <div className="bg-slate-800/50 border border-slate-700/50 rounded-xl p-6">
-                            <h3 className="text-lg font-medium mb-6">Projected Free Cash Flow (FCFF)</h3>
+                            <h3 className="text-xl font-medium mb-6">Projected Free Cash Flow (FCFF)</h3>
                             <div className="h-72 w-full">
                               <ResponsiveContainer width="100%" height="100%">
                                 <BarChart data={dcf.projections} margin={{ top: 10, right: 10, left: 10, bottom: 0 }}>
@@ -759,23 +760,23 @@ export default function App() {
 
                           {/* Valuation Summary */}
                           <div className="bg-slate-800/50 border border-slate-700/50 rounded-xl p-6">
-                            <h3 className="text-lg font-medium mb-4">Valuation Summary</h3>
+                            <h3 className="text-xl font-medium mb-4">Valuation Summary</h3>
                             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
                               <div>
-                                <div className="text-xs text-slate-400 mb-1">Enterprise Value</div>
-                                <div className="font-mono text-sm">{formatCurrency(dcf.ev)}</div>
+                                <div className="text-sm text-slate-400 mb-1">Enterprise Value</div>
+                                <div className="font-mono text-base">{formatCurrency(dcf.ev)}</div>
                               </div>
                               <div>
-                                <div className="text-xs text-slate-400 mb-1">Total Cash</div>
-                                <div className="font-mono text-sm">{formatCurrency(dcf.totalCash)}</div>
+                                <div className="text-sm text-slate-400 mb-1">Total Cash</div>
+                                <div className="font-mono text-base">{formatCurrency(dcf.totalCash)}</div>
                               </div>
                               <div>
-                                <div className="text-xs text-slate-400 mb-1">Total Debt</div>
-                                <div className="font-mono text-sm">{formatCurrency(dcf.totalDebt)}</div>
+                                <div className="text-sm text-slate-400 mb-1">Total Debt</div>
+                                <div className="font-mono text-base">{formatCurrency(dcf.totalDebt)}</div>
                               </div>
                               <div>
-                                <div className="text-xs text-slate-400 mb-1">Equity Value</div>
-                                <div className="font-mono text-sm text-emerald-400">{formatCurrency(dcf.equityValue)}</div>
+                                <div className="text-sm text-slate-400 mb-1">Equity Value</div>
+                                <div className="font-mono text-base text-emerald-400">{formatCurrency(dcf.equityValue)}</div>
                               </div>
                             </div>
                           </div>
@@ -815,15 +816,15 @@ export default function App() {
                           {/* Sensitivity Analysis Table */}
                           <div className="bg-slate-800/50 border border-slate-700/50 rounded-xl p-6 overflow-x-auto">
                             <div className="mb-4">
-                              <h3 className="text-lg font-medium">Sensitivity Analysis</h3>
-                              <p className="text-xs text-slate-500 mt-1">Implied price per share — rows: terminal growth rate, columns: WACC</p>
+                              <h3 className="text-xl font-medium">Sensitivity Analysis</h3>
+                              <p className="text-sm text-slate-500 mt-1">Implied price per share — rows: terminal growth rate, columns: WACC</p>
                             </div>
                             <table className="w-full text-sm font-mono text-center">
                               <thead>
                                 <tr>
-                                  <th className="text-left text-xs text-slate-500 pb-3 pr-4">g \ WACC</th>
+                                  <th className="text-left text-sm text-slate-500 pb-3 pr-4">g \ WACC</th>
                                   {dcf.waccSteps.map((w: number) => (
-                                    <th key={w} className={`pb-3 px-3 text-xs font-medium ${Math.abs(w - dcf.wacc) < 0.0001 ? 'text-emerald-400' : 'text-slate-400'}`}>
+                                    <th key={w} className={`pb-3 px-3 text-sm font-medium ${Math.abs(w - dcf.wacc) < 0.0001 ? 'text-emerald-400' : 'text-slate-400'}`}>
                                       {(w * 100).toFixed(1)}%
                                     </th>
                                   ))}
@@ -835,7 +836,7 @@ export default function App() {
                                   const isCurrentG = Math.abs(g - termGrowth / 100) < 0.0001;
                                   return (
                                     <tr key={ri} className="border-t border-slate-700/30">
-                                      <td className={`text-left py-2.5 pr-4 text-xs ${isCurrentG ? 'text-emerald-400 font-medium' : 'text-slate-500'}`}>
+                                      <td className={`text-left py-2.5 pr-4 text-sm ${isCurrentG ? 'text-emerald-400 font-medium' : 'text-slate-500'}`}>
                                         {(g * 100).toFixed(1)}%
                                       </td>
                                       {row.map((iv: number | null, ci: number) => {
@@ -856,7 +857,7 @@ export default function App() {
                                 })}
                               </tbody>
                             </table>
-                            <div className="flex flex-wrap items-center gap-x-4 gap-y-1 mt-3 text-xs text-slate-500">
+                            <div className="flex flex-wrap items-center gap-x-4 gap-y-1 mt-3 text-sm text-slate-500">
                               <span>Current price: ${dcf.currentPrice.toFixed(2)}</span>
                               {analystTarget && <span className="text-blue-400/70">Analyst target: ${analystTarget.mean.toFixed(0)} (range ${analystTarget.low.toFixed(0)}–${analystTarget.high.toFixed(0)})</span>}
                               <span>Green = upside · Red = downside · Ring = current assumptions{analystTarget ? ' · Blue outline = at/above analyst target' : ''}</span>
@@ -869,7 +870,7 @@ export default function App() {
                       {/* Scenario Comparison */}
                       {scenarioComparison && (
                         <div className="bg-slate-800/50 border border-slate-700/50 rounded-xl p-6">
-                          <h3 className="text-sm font-medium text-slate-300 mb-4">Scenario Comparison</h3>
+                          <h3 className="text-base font-medium text-slate-300 mb-4">Scenario Comparison</h3>
                           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                             {([
                               { key: 'bear', label: 'Bear Case', color: 'border-red-500/30 bg-red-500/5', textColor: 'text-red-400', desc: `Rev ${round1(dcfInputs.revGrowthStart * 0.7)}%→${round1(dcfInputs.revGrowthEnd * 0.5)}%, Margin ×0.85→0.70, WACC +1%` },
@@ -879,12 +880,12 @@ export default function App() {
                               const s = scenarioComparison[key];
                               return (
                                 <div key={key} className={`rounded-xl border p-4 space-y-2 ${color}`}>
-                                  <div className="text-xs text-slate-500 font-medium">{label}</div>
+                                  <div className="text-sm text-slate-500 font-medium">{label}</div>
                                   <div className={`text-3xl font-light font-mono ${textColor}`}>${s.price.toFixed(2)}</div>
                                   <div className={`text-sm font-medium ${s.upside >= 0 ? 'text-emerald-400' : 'text-red-400'}`}>
                                     {s.upside >= 0 ? '+' : ''}{(s.upside * 100).toFixed(1)}% vs ${dcf.currentPrice.toFixed(2)}
                                   </div>
-                                  <div className="text-xs text-slate-500 leading-relaxed">{desc}</div>
+                                  <div className="text-sm text-slate-500 leading-relaxed">{desc}</div>
                                 </div>
                               );
                             })}
@@ -928,6 +929,7 @@ export default function App() {
             </>
           )}
         </main>
+        <Footer />
       </div>
     </div>
   );

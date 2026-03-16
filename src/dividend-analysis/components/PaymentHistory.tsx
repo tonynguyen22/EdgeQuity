@@ -54,7 +54,7 @@ export default function PaymentHistory({ payments, sym }: PaymentHistoryProps) {
                       <span className={`text-xs ${change > 0 ? 'text-emerald-400' : 'text-red-400'}`}>
                         {change > 0 ? '+' : ''}{change.toFixed(1)}%
                       </span>
-                    ) : <span className="text-xs text-slate-600">—</span>}
+                    ) : <span className="text-xs text-slate-500">—</span>}
                   </td>
                 </tr>
               );
@@ -63,7 +63,7 @@ export default function PaymentHistory({ payments, sym }: PaymentHistoryProps) {
         </table>
       </div>
       {payments.length > 10 && (
-        <p className="text-xs text-slate-600 text-center">Showing 10 most recent of {payments.length} total payments</p>
+        <p className="text-xs text-slate-500 text-center">Showing 10 most recent of {payments.length} total payments</p>
       )}
     </div>
   );

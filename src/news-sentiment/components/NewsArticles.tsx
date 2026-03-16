@@ -46,11 +46,11 @@ export default function NewsArticles({ articles, sym }: NewsArticlesProps) {
                 </div>
                 <div className="flex items-center gap-2 mt-1.5">
                   <span className="text-xs text-slate-500">{article.source}</span>
-                  <span className="text-slate-700">·</span>
+                  <span className="text-slate-500">·</span>
                   <span className="text-xs text-slate-500">{fmtTime(article.datetime)}</span>
                   {article.category && article.category !== 'company news' && (
                     <>
-                      <span className="text-slate-700">·</span>
+                      <span className="text-slate-500">·</span>
                       <span className="text-xs bg-slate-700 text-slate-400 px-1.5 py-0.5 rounded capitalize">{article.category}</span>
                     </>
                   )}

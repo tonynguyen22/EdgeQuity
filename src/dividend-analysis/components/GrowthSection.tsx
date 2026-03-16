@@ -48,7 +48,7 @@ export default function GrowthSection({ growthStreak, streakBadge, cagr3, cagr5,
                 )
               ))}
             </div>
-            <p className="text-xs text-slate-600">CAGR computed from per-payment amounts. Actual annualized growth may differ slightly by frequency.</p>
+            <p className="text-xs text-slate-500">CAGR computed from per-payment amounts. Actual annualized growth may differ slightly by frequency.</p>
           </>
         ) : (
           <p className="text-sm text-slate-500">CAGR requires payment history data from Massive API, which could not be retrieved for {sym}.</p>

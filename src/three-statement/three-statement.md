@@ -50,7 +50,7 @@ src/three-statement/
 | Dividend Payout | 30% | User slider |
 
 ## Ticker Restriction
-- Only SUPPORTED_TICKERS (~87 stocks) are selectable via dropdown autocomplete
+- Only SUPPORTED_TICKERS (~84 stocks) are selectable via dropdown autocomplete
 - Imported from `../dcf/types`
 
 ## Sidebar

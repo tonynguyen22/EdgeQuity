@@ -142,7 +142,7 @@ export default function SupportResistance({ data }: SupportResistanceProps) {
             </div>
           )}
 
-          <p className="text-[11px] text-slate-600 text-center">
+          <p className="text-[11px] text-slate-500 text-center">
             Current price: <span className="text-slate-400 font-medium tabular-nums">${currentPrice.toFixed(2)}</span> &middot; Percentages show distance from current price
           </p>
         </div>

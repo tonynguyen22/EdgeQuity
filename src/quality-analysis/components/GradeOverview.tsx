@@ -23,7 +23,7 @@ const iconMap: Record<string, React.ReactNode> = {
 function TrendIcon({ trend }: { trend: 'improving' | 'stable' | 'declining' }) {
   if (trend === 'improving') return <TrendingUp className="w-3 h-3 text-emerald-400 flex-shrink-0" />;
   if (trend === 'declining') return <TrendingDown className="w-3 h-3 text-red-400 flex-shrink-0" />;
-  return <span className="w-3 h-3 flex-shrink-0 text-slate-600 text-xs flex items-center justify-center">&mdash;</span>;
+  return <span className="w-3 h-3 flex-shrink-0 text-slate-500 text-xs flex items-center justify-center">&mdash;</span>;
 }
 
 interface Props {
@@ -76,7 +76,7 @@ export default function GradeOverview({ ticker, companyName, gradeResult }: Prop
           <div className="h-2 bg-slate-700 rounded-full overflow-hidden">
             <div className={`h-full rounded-full transition-all duration-700 ${c.bar}`} style={{ width: `${overallScore}%` }} />
           </div>
-          <div className="flex justify-between text-xs text-slate-600 px-0.5">
+          <div className="flex justify-between text-xs text-slate-500 px-0.5">
             <span>D</span><span>C</span><span>B</span><span>A</span>
           </div>
         </div>

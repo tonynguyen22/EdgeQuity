@@ -45,7 +45,7 @@ export default function SummaryCards({ netBuySell, totalTransactions, netScore }
             <div className="h-1.5 bg-slate-700 rounded-full mt-2 overflow-hidden">
               <div className={`h-full rounded-full ${isPositive ? 'bg-emerald-500' : 'bg-red-500'}`} style={{ width: `${pct}%` }} />
             </div>
-            <div className="text-xs text-slate-600 mt-1">-1 (sell) → +1 (buy)</div>
+            <div className="text-xs text-slate-500 mt-1">-1 (sell) → +1 (buy)</div>
           </div>
         );
       })()}

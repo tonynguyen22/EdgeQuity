@@ -11,16 +11,6 @@ interface Props {
   currentMetrics: CurrentMetrics;
 }
 
-/** Map from MultipleKey → corresponding TTM metric key in CurrentMetrics */
-const TTM_MAP: Record<string, keyof CurrentMetrics> = {
-  pe: 'peTTM',
-  evEbitda: 'evEbitdaTTM',
-  evRevenue: 'evRevenueTTM',
-  pb: 'pbQuarterly',
-  ps: 'psTTM',
-  pfcf: 'pfcfShareTTM',
-};
-
 export default function MultiplesCards({ stats, companyName, ticker, currentPrice, currentMetrics }: Props) {
   return (
     <div className="space-y-5">
@@ -66,10 +56,6 @@ export default function MultiplesCards({ stats, companyName, ticker, currentPric
           const borderColor = isDiscount ? 'border-emerald-500/30' : isPremium ? 'border-red-500/30' : 'border-slate-700/50';
           const bgColor = isDiscount ? 'bg-emerald-500/5' : isPremium ? 'bg-red-500/5' : 'bg-slate-800/50';
 
-          // TTM value for this multiple
-          const ttmKey = TTM_MAP[s.key];
-          const ttmVal = ttmKey ? currentMetrics[ttmKey] : null;
-
           return (
             <div key={s.key} className={`${bgColor} border ${borderColor} rounded-xl p-4 space-y-2`}>
               <div className="flex items-center justify-between">
@@ -80,9 +66,9 @@ export default function MultiplesCards({ stats, companyName, ticker, currentPric
               </div>
               <div className="flex items-baseline gap-2">
                 <span className="text-lg font-bold text-white tabular-nums">{formatMultiple(s.current)}</span>
-                {ttmVal !== null && s.current !== null && Math.abs(ttmVal - s.current) > 0.1 && (
-                  <span className="text-[10px] text-pink-400/70 font-medium tabular-nums" title="Trailing 12-month (live)">
-                    TTM {ttmVal.toFixed(1)}x
+                {s.current !== null && (
+                  <span className="text-[10px] text-pink-400/70 font-medium" title="Trailing 12-month value">
+                    TTM
                   </span>
                 )}
               </div>

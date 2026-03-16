@@ -11,6 +11,9 @@ interface EvEbitdaTrendProps {
     onLegendClick: (d: any, chartKeys: string[]) => void;
 }
 
+/* Bright peer colors — easily distinguishable on the dark chart background */
+const PEER_COLORS = ['#38bdf8', '#fbbf24', '#f472b6', '#a78bfa', '#fb923c'];
+
 export default function EvEbitdaTrend({ multiHistData, data, hiddenSeries, onLegendClick }: EvEbitdaTrendProps) {
     return (
         <div className="bg-slate-800/50 border border-slate-700/50 rounded-xl p-6">
@@ -26,18 +29,21 @@ export default function EvEbitdaTrend({ multiHistData, data, hiddenSeries, onLeg
                         formatter={(v: number, name: string) => [`${v?.toFixed(1)}x`, name]}
                     />
                     <Legend wrapperStyle={{ fontSize: '11px', cursor: 'pointer' }} onClick={(d: any) => onLegendClick(d, data.map(dd => dd.symbol))} />
-                    {data.map((d, i) => (
-                        <Line
-                            key={d.symbol}
-                            type="monotone"
-                            dataKey={d.symbol}
-                            stroke={i === 0 ? '#10b981' : '#475569'}
-                            strokeWidth={i === 0 ? 2.5 : 1}
-                            dot={{ r: i === 0 ? 4 : 2, fill: i === 0 ? '#10b981' : '#475569' }}
-                            connectNulls
-                            hide={!!hiddenSeries[d.symbol]}
-                        />
-                    ))}
+                    {data.map((d, i) => {
+                        const color = i === 0 ? '#10b981' : PEER_COLORS[(i - 1) % PEER_COLORS.length];
+                        return (
+                            <Line
+                                key={d.symbol}
+                                type="monotone"
+                                dataKey={d.symbol}
+                                stroke={color}
+                                strokeWidth={i === 0 ? 2.5 : 1.5}
+                                dot={{ r: i === 0 ? 4 : 3, fill: color }}
+                                connectNulls
+                                hide={!!hiddenSeries[d.symbol]}
+                            />
+                        );
+                    })}
                 </LineChart>
             </ResponsiveContainer>
         </div>

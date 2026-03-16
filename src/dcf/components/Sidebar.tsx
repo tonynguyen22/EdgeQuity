@@ -29,7 +29,7 @@ const NAV_SECTIONS = [
   {
     group: 'Fundamentals',
     items: [
-      { id: 'grade' as const, label: 'Quality', Icon: Award, color: '#f0b429' },
+      { id: 'grade' as const, label: 'Quality Compare', Icon: Award, color: '#f0b429' },
       { id: 'three-stmt' as const, label: '3-Statement', Icon: FileSpreadsheet, color: '#06b6d4' },
       { id: 'comp' as const, label: 'Peers', Icon: Users, color: '#38bdf8' },
     ],
@@ -65,7 +65,7 @@ function IconTooltip({ label }: { label: string }) {
         backdropFilter: 'blur(8px)',
         border: '1px solid rgba(255,255,255,0.08)',
         color: '#f1f5f9',
-        fontSize: '11px',
+        fontSize: '12px',
         fontWeight: 500,
         padding: '5px 10px',
         borderRadius: '8px',
@@ -92,7 +92,7 @@ export default function Sidebar({
 }: SidebarProps) {
   const [hoveredIcon, setHoveredIcon] = React.useState<string | null>(null);
 
-  const sidebarWidth = collapsed ? 56 : 228;
+  const sidebarWidth = collapsed ? 56 : 248;
 
   return (
     <aside
@@ -145,7 +145,7 @@ export default function Sidebar({
         {!collapsed && (
           <span
             style={{
-              fontSize: '17px',
+              fontSize: '18px',
               fontWeight: 700,
               letterSpacing: '-0.02em',
               color: 'white',
@@ -183,7 +183,7 @@ export default function Sidebar({
             gap: '6px',
             cursor: 'pointer',
             transition: 'all 0.2s ease',
-            fontSize: '11px',
+            fontSize: '12px',
             fontWeight: 500,
             letterSpacing: '0.03em',
             flexShrink: 0,
@@ -240,7 +240,7 @@ export default function Sidebar({
               onClick={onShowLanding}
               style={{
                 width: '36px',
-                height: '35px',
+                height: '38px',
                 borderRadius: '9px',
                 boxSizing: 'border-box',
                 border: 'none',
@@ -278,7 +278,7 @@ export default function Sidebar({
                   background: '#00d4aa',
                 }} />
               )}
-              <Home style={{ width: '16px', height: '16px', opacity: showLanding ? 1 : 0.6 }} />
+              <Home style={{ width: '18px', height: '18px', opacity: showLanding ? 1 : 0.6 }} />
             </button>
             {hoveredIcon === 'icon-home' && <IconTooltip label="Home" />}
           </div>
@@ -297,7 +297,7 @@ export default function Sidebar({
               border: 'none',
               background: showLanding ? 'rgba(0,212,170,0.12)' : 'transparent',
               color: showLanding ? '#00d4aa' : 'var(--vw-text-secondary)',
-              fontSize: '13px',
+              fontSize: '14px',
               fontWeight: showLanding ? 600 : 400,
               cursor: 'pointer',
               transition: 'all 0.15s ease',
@@ -319,7 +319,7 @@ export default function Sidebar({
                 background: '#00d4aa',
               }} />
             )}
-            <Home style={{ width: '16px', height: '16px', flexShrink: 0, opacity: showLanding ? 1 : 0.55 }} />
+            <Home style={{ width: '18px', height: '18px', flexShrink: 0, opacity: showLanding ? 1 : 0.55 }} />
             Home
           </button>
         )}
@@ -345,7 +345,7 @@ export default function Sidebar({
                 ) : (
                   <>
                     <span style={{
-                      fontSize: '10px',
+                      fontSize: '11px',
                       fontWeight: 600,
                       textTransform: 'uppercase',
                       letterSpacing: '0.12em',
@@ -416,7 +416,7 @@ export default function Sidebar({
                               background: color,
                             }} />
                           )}
-                          <Icon style={{ width: '16px', height: '16px', opacity: isActive ? 1 : 0.55 }} />
+                          <Icon style={{ width: '18px', height: '18px', opacity: isActive ? 1 : 0.55 }} />
                         </button>
                         {hoveredIcon === tooltipId && <IconTooltip label={label} />}
                       </div>
@@ -429,7 +429,7 @@ export default function Sidebar({
                       onClick={() => onTabChange(id)}
                       style={{
                         width: '100%',
-                        height: '35px',
+                        height: '38px',
                         boxSizing: 'border-box',
                         display: 'flex',
                         alignItems: 'center',
@@ -439,7 +439,7 @@ export default function Sidebar({
                         border: 'none',
                         background: isActive ? `${color}10` : 'transparent',
                         color: isActive ? color : 'var(--vw-text-secondary)',
-                        fontSize: '13px',
+                        fontSize: '14px',
                         fontWeight: isActive ? 500 : 400,
                         cursor: 'pointer',
                         transition: 'all 0.15s ease',
@@ -471,7 +471,7 @@ export default function Sidebar({
                           background: color,
                         }} />
                       )}
-                      <Icon style={{ width: '16px', height: '16px', flexShrink: 0, opacity: isActive ? 1 : 0.55 }} />
+                      <Icon style={{ width: '18px', height: '18px', flexShrink: 0, opacity: isActive ? 1 : 0.55 }} />
                       {label}
                     </button>
                   );
@@ -555,7 +555,7 @@ export default function Sidebar({
               border: `1px solid ${cacheCleared ? 'rgba(0,212,170,0.2)' : 'rgba(255,255,255,0.06)'}`,
               background: cacheCleared ? 'rgba(0,212,170,0.08)' : 'transparent',
               color: cacheCleared ? '#00d4aa' : 'var(--vw-text-tertiary)',
-              fontSize: '12px',
+              fontSize: '13px',
               fontWeight: 500,
               cursor: 'pointer',
               transition: 'all 0.15s ease',
@@ -601,7 +601,7 @@ export default function Sidebar({
           }} />
           {!collapsed && (
             <span style={{
-              fontSize: '10px',
+              fontSize: '11px',
               fontFamily: 'monospace',
               color: 'var(--vw-text-muted)',
               whiteSpace: 'nowrap',

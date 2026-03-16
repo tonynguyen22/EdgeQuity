@@ -83,7 +83,7 @@ export default function ValuationContext({ stats, signal }: Props) {
         </div>
       </div>
 
-      <p className="text-xs text-slate-600 text-center">
+      <p className="text-xs text-slate-500 text-center">
         Multiples computed from standardized financials (FMP) with historical closing prices (Finnhub). Premium/discount is relative to the historical average of available fiscal years.
       </p>
     </div>

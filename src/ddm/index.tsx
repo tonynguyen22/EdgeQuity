@@ -227,7 +227,7 @@ export default function DDM() {
           <div className="flex items-baseline gap-3">
             <h2 className="text-xl font-bold text-white">{ticker}</h2>
             <span className="text-sm text-slate-400">{data.companyName}</span>
-            {data.industry && <span className="text-xs text-slate-600">{data.industry}</span>}
+            {data.industry && <span className="text-xs text-slate-500">{data.industry}</span>}
           </div>
 
           {data.dividendsPerShareAnnual <= 0 && (
@@ -514,7 +514,7 @@ export default function DDM() {
                           const isCurrentCell = isCurrentG && Math.abs(coe - inputs.costOfEquity / 100) < 0.0001;
                           const pct = iv !== null && data.currentPrice > 0 ? (iv - data.currentPrice) / data.currentPrice : null;
                           const bg = iv === null ? '' : pct !== null && pct >= 0.10 ? 'bg-emerald-500/25' : pct !== null && pct >= 0 ? 'bg-emerald-500/10' : pct !== null && pct >= -0.10 ? 'bg-red-500/10' : 'bg-red-500/25';
-                          const textColor = iv === null ? 'text-slate-600' : pct !== null && pct >= 0 ? 'text-emerald-400' : 'text-red-400';
+                          const textColor = iv === null ? 'text-slate-500' : pct !== null && pct >= 0 ? 'text-emerald-400' : 'text-red-400';
                           return (
                             <td key={ci} className={`py-2.5 px-3 rounded ${bg} ${textColor} ${isCurrentCell ? 'ring-2 ring-amber-500' : ''}`}>
                               {iv === null ? '—' : `$${iv.toFixed(0)}`}

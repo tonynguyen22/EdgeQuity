@@ -29,7 +29,7 @@ export default function RadarScore({ radarScores, compositeScore, targetSymbol }
                             <div className="text-xs text-slate-400 mb-0.5">Relative Value Score</div>
                             <div className={`text-3xl font-bold ${c.text}`}>{compositeScore}</div>
                             <div className={`text-xs font-medium mt-0.5 ${c.text}`}>{c.label}</div>
-                            <div className="text-xs text-slate-600 mt-0.5">vs peers (0–100)</div>
+                            <div className="text-xs text-slate-500 mt-0.5">vs peers (0–100)</div>
                         </div>
                     );
                 })()}

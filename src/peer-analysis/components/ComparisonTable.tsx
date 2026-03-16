@@ -71,6 +71,12 @@ const DIVIDER_STYLE: React.CSSProperties = {
     borderLeft: '2px solid var(--vw-border-lit)',
 };
 
+/* helper: shadow on the sticky column edge to show separation on scroll */
+const STICKY_SHADOW: React.CSSProperties = {
+    boxShadow: '4px 0 12px -4px rgba(0, 0, 0, 0.35)',
+    clipPath: 'inset(0 -12px 0 0)',
+};
+
 /* ── Main component ────────────────────────────────────────────────────── */
 
 export default function ComparisonTable({
@@ -136,13 +142,13 @@ export default function ComparisonTable({
             </div>
 
             {/* Table wrapper with horizontal scroll */}
-            <div className="overflow-x-auto">
-                <table className="w-full text-sm text-right" style={{ borderCollapse: 'separate', borderSpacing: 0 }}>
+            <div className="overflow-x-auto" style={{ WebkitOverflowScrolling: 'touch' }}>
+                <table className="w-full text-sm text-right" style={{ borderCollapse: 'separate', borderSpacing: 0, minWidth: 1100 }}>
 
                     {/* ── Column group header ─────────────────────────────── */}
                     <thead>
                         <tr>
-                            <th colSpan={3} className="py-2 px-3 text-left text-[10px] font-semibold uppercase tracking-widest"
+                            <th colSpan={2} className="py-2 px-3 text-left text-[10px] font-semibold uppercase tracking-widest"
                                 style={{ color: 'var(--vw-text-muted)', background: 'var(--vw-bg-surface)' }}>
                             </th>
                             <th colSpan={7} className="py-2 px-3 text-center text-[10px] font-semibold uppercase tracking-widest"
@@ -160,11 +166,8 @@ export default function ComparisonTable({
 
                         {/* ── Metric headers ───────────────────────────────── */}
                         <tr style={{ borderBottom: '2px solid var(--vw-border-lit)' }}>
-                            <th className="py-3 px-3 text-left font-medium sticky left-0 z-10" style={{ ...hStyle, background: 'var(--vw-bg-raised)', minWidth: 140 }}>
+                            <th className="py-3 px-3 text-left font-medium sticky left-0 z-20" style={{ ...hStyle, background: 'var(--vw-bg-raised)', minWidth: 170, ...STICKY_SHADOW }}>
                                 Company
-                            </th>
-                            <th className="py-3 px-3 font-medium text-center" style={{ ...hStyle, width: 56 }}>
-                                Include
                             </th>
                             <SortTh label="Rev Growth" k="revGrowth" {...sortProps} />
                             <SortTh label="EBITDA" k="ebitda" {...sortProps} />
@@ -181,7 +184,7 @@ export default function ComparisonTable({
                             <SortTh label="P / Book" k="pToBook" {...sortProps} />
                             <SortTh label="P / FCF" k="pToFCF" {...sortProps} />
                             <th className="py-3 px-3 font-medium text-center" style={{ ...hStyle, minWidth: 80, ...DIVIDER_STYLE }}>
-                                Trend
+                                EV/EBITDA
                             </th>
                         </tr>
                     </thead>
@@ -201,34 +204,33 @@ export default function ComparisonTable({
                                         background: isTarget ? 'rgba(0, 212, 170, 0.03)' : undefined,
                                     }}
                                 >
-                                    {/* Company — sticky */}
+                                    {/* Company + Include checkbox — sticky */}
                                     <td
-                                        className="py-3 px-3 text-left sticky left-0 z-10"
+                                        className="py-3 px-3 text-left sticky left-0 z-20"
                                         style={{
-                                            background: isTarget ? 'var(--vw-bg-raised)' : 'var(--vw-bg-raised)',
+                                            background: 'var(--vw-bg-raised)',
                                             borderLeft: isTarget ? '3px solid var(--vw-accent)' : '3px solid transparent',
+                                            ...STICKY_SHADOW,
                                         }}
                                     >
-                                        <div className="flex flex-col">
-                                            <span className="font-semibold text-[13px]" style={{ color: isTarget ? 'var(--vw-accent)' : 'var(--vw-text-primary)' }}>
-                                                {d.symbol}
-                                            </span>
-                                            <span className="text-[11px] truncate max-w-[120px]" style={{ color: 'var(--vw-text-muted)' }}>
-                                                {d.name}
-                                            </span>
+                                        <div className="flex items-center gap-2">
+                                            {!isTarget && (
+                                                <input
+                                                    type="checkbox"
+                                                    checked={selectedPeers[d.symbol] || false}
+                                                    onChange={() => onTogglePeer(d.symbol)}
+                                                    className="w-4 h-4 accent-emerald-500 cursor-pointer rounded shrink-0"
+                                                />
+                                            )}
+                                            <div className="flex flex-col">
+                                                <span className="font-semibold text-[13px]" style={{ color: isTarget ? 'var(--vw-accent)' : 'var(--vw-text-primary)' }}>
+                                                    {d.symbol}
+                                                </span>
+                                                <span className="text-[11px] truncate max-w-[120px]" style={{ color: 'var(--vw-text-muted)' }}>
+                                                    {d.name}
+                                                </span>
+                                            </div>
                                         </div>
-                                    </td>
-
-                                    {/* Include checkbox */}
-                                    <td className="py-3 px-3 text-center">
-                                        {!isTarget && (
-                                            <input
-                                                type="checkbox"
-                                                checked={selectedPeers[d.symbol] || false}
-                                                onChange={() => onTogglePeer(d.symbol)}
-                                                className="w-4 h-4 accent-emerald-500 cursor-pointer rounded"
-                                            />
-                                        )}
                                     </td>
 
                                     {/* Fundamentals */}
@@ -299,9 +301,8 @@ export default function ComparisonTable({
                                     }}
                                 >
                                     <td
-                                        className="text-left py-3 px-3 font-semibold text-[13px] sticky left-0 z-10"
-                                        style={{ color: isMedian ? 'var(--vw-accent)' : 'var(--vw-text-secondary)', background: isMedian ? 'rgba(0, 212, 170, 0.03)' : 'var(--vw-bg-surface)', borderLeft: isMedian ? '3px solid var(--vw-accent)' : '3px solid transparent' }}
-                                        colSpan={2}
+                                        className="text-left py-3 px-3 font-semibold text-[13px] sticky left-0 z-20"
+                                        style={{ color: isMedian ? 'var(--vw-accent)' : 'var(--vw-text-secondary)', background: isMedian ? 'var(--vw-bg-surface)' : 'var(--vw-bg-surface)', borderLeft: isMedian ? '3px solid var(--vw-accent)' : '3px solid transparent', ...STICKY_SHADOW }}
                                     >
                                         {label}
                                     </td>
@@ -329,9 +330,8 @@ export default function ComparisonTable({
                             return (
                                 <tr style={{ borderTop: '2px solid var(--vw-border-lit)', background: 'rgba(0, 212, 170, 0.02)' }}>
                                     <td
-                                        className="text-left py-3 px-3 text-[12px] font-semibold sticky left-0 z-10"
-                                        style={{ color: 'var(--vw-accent)', background: 'rgba(0, 212, 170, 0.02)', borderLeft: '3px solid var(--vw-accent)' }}
-                                        colSpan={2}
+                                        className="text-left py-3 px-3 text-[12px] font-semibold sticky left-0 z-20"
+                                        style={{ color: 'var(--vw-accent)', background: 'var(--vw-bg-surface)', borderLeft: '3px solid var(--vw-accent)', ...STICKY_SHADOW }}
                                     >
                                         Target Percentile
                                     </td>

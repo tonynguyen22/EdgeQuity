@@ -237,7 +237,7 @@ export default function AiAnalysis({ symbol, currentPrice, dailyData, weeklyData
                     if (trimmed.startsWith('- ') || trimmed.startsWith('* ')) {
                       return (
                         <div key={j} className="flex gap-2 mt-1">
-                          <span className="text-slate-600 shrink-0">-</span>
+                          <span className="text-slate-500 shrink-0">-</span>
                           <span>{trimmed.slice(2)}</span>
                         </div>
                       );
@@ -248,7 +248,7 @@ export default function AiAnalysis({ symbol, currentPrice, dailyData, weeklyData
               </div>
             ))}
 
-          <p className="text-[10px] text-slate-600 pt-2 border-t border-slate-700/30">
+          <p className="text-[10px] text-slate-500 pt-2 border-t border-slate-700/30">
             AI analysis is for informational purposes only and should not be considered financial advice. Always do your own research before making investment decisions.
           </p>
         </div>
@@ -258,7 +258,7 @@ export default function AiAnalysis({ symbol, currentPrice, dailyData, weeklyData
       {analysis && sections.length === 0 && (
         <div className="bg-slate-800/30 border border-slate-700/30 rounded-xl p-5">
           <p className="text-sm text-slate-300 leading-relaxed whitespace-pre-wrap">{analysis}</p>
-          <p className="text-[10px] text-slate-600 mt-3 pt-2 border-t border-slate-700/30">
+          <p className="text-[10px] text-slate-500 mt-3 pt-2 border-t border-slate-700/30">
             AI analysis is for informational purposes only and should not be considered financial advice.
           </p>
         </div>

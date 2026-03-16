@@ -48,10 +48,6 @@ const SUPPORTED_TICKERS_BY_SECTOR: readonly SectorBucket[] = [
     tickers: ['BABA', 'TSM', 'SONY', 'NOK', 'BIDU'],
   },
   {
-    sector: 'ETFs',
-    tickers: ['SPY', 'VWO', 'SPYG'],
-  },
-  {
     sector: 'Other',
     tickers: ['TLRY'],
   },

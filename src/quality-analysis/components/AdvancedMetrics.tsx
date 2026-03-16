@@ -34,7 +34,7 @@ export default function AdvancedMetrics({ piotroski, dupontData, workingCapitalD
               </div>
             ))}
           </div>
-          <p className="text-xs text-slate-600 mt-3">7-9: Strong fundamentals, 4-6: Mixed signals, 0-3: Weak fundamentals. Compares latest vs prior fiscal year.</p>
+          <p className="text-xs text-slate-500 mt-3">7-9: Strong fundamentals, 4-6: Mixed signals, 0-3: Weak fundamentals. Compares latest vs prior fiscal year.</p>
         </div>
       )}
 
@@ -78,7 +78,7 @@ export default function AdvancedMetrics({ piotroski, dupontData, workingCapitalD
               <Line type="monotone" dataKey="roe" name="ROE" stroke="#f1f5f9" strokeWidth={2.5} dot={{ r: 4 }} hide={!!hiddenSeries['roe']} />
             </LineChart>
           </ResponsiveContainer>
-          <p className="text-xs text-slate-600 mt-2">ROE = Net Margin x Asset Turnover x Equity Multiplier. Shows which lever drives profitability.</p>
+          <p className="text-xs text-slate-500 mt-2">ROE = Net Margin x Asset Turnover x Equity Multiplier. Shows which lever drives profitability.</p>
         </div>
       )}
 
@@ -100,7 +100,7 @@ export default function AdvancedMetrics({ piotroski, dupontData, workingCapitalD
                     <div key={c.label} className="bg-slate-900/50 rounded-lg p-3 text-center">
                       <div className="text-xs text-slate-500 mb-1">{c.label}</div>
                       <div className="text-lg font-bold font-mono text-slate-200">{c.value != null ? `${c.value.toFixed(0)}` : 'N/A'}</div>
-                      <div className="text-[10px] text-slate-600">{c.value != null ? c.unit : ''}</div>
+                      <div className="text-[10px] text-slate-500">{c.value != null ? c.unit : ''}</div>
                     </div>
                   ))}
                 </div>
@@ -117,7 +117,7 @@ export default function AdvancedMetrics({ piotroski, dupontData, workingCapitalD
                     <Line type="monotone" dataKey="ccc" name="CCC" stroke="#a78bfa" strokeWidth={2.5} dot={{ r: 4 }} hide={!!hiddenSeries['ccc']} />
                   </LineChart>
                 </ResponsiveContainer>
-                <p className="text-xs text-slate-600 mt-2">CCC = DSO + DIO - DPO. Lower CCC means faster cash conversion. Service companies may show N/A for inventory metrics.</p>
+                <p className="text-xs text-slate-500 mt-2">CCC = DSO + DIO - DPO. Lower CCC means faster cash conversion. Service companies may show N/A for inventory metrics.</p>
               </>
             );
           })()}
@@ -136,7 +136,7 @@ export default function AdvancedMetrics({ piotroski, dupontData, workingCapitalD
           <p className="text-sm text-slate-400 mb-3">{earningsQuality.interpretation}</p>
           <div className="text-xs text-slate-500 mb-2">
             Latest accruals ratio: <span className={`font-mono font-semibold ${earningsQuality.latest < -0.03 ? 'text-emerald-400' : earningsQuality.latest < 0.05 ? 'text-amber-400' : 'text-red-400'}`}>{(earningsQuality.latest * 100).toFixed(1)}%</span>
-            <span className="text-slate-600 ml-1">(lower is better)</span>
+            <span className="text-slate-500 ml-1">(lower is better)</span>
           </div>
           <ResponsiveContainer width="100%" height={160}>
             <BarChart data={earningsQuality.trend} margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>
@@ -152,7 +152,7 @@ export default function AdvancedMetrics({ piotroski, dupontData, workingCapitalD
               </Bar>
             </BarChart>
           </ResponsiveContainer>
-          <p className="text-xs text-slate-600 mt-2">Accruals ratio = (Net Income - OCF) / Total Assets. Negative values (green) indicate cash-backed earnings.</p>
+          <p className="text-xs text-slate-500 mt-2">Accruals ratio = (Net Income - OCF) / Total Assets. Negative values (green) indicate cash-backed earnings.</p>
         </div>
       )}
     </>

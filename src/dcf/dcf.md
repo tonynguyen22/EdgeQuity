@@ -7,7 +7,7 @@ This folder is the **main entry point** for ValuWise. It was refactored from a s
 - **Company Profile / Metrics:** Finnhub `/stock/profile2` and `/stock/metric` — company name, industry, beta, market cap, shares outstanding.
 - **Analyst Targets:** Finnhub `/stock/price-target` (non-blocking, optional).
 
-**Supported Tickers:** The DCF module is restricted to ~87 pre-selected tickers defined in `SUPPORTED_TICKERS` (types.ts). The search UI uses a filterable dropdown — free-text entry of unsupported tickers is not allowed.
+**Supported Tickers:** The DCF module is restricted to ~84 pre-selected tickers defined in `SUPPORTED_TICKERS` (types.ts). The search UI uses a filterable dropdown — free-text entry of unsupported tickers is not allowed.
 
 ---
 
@@ -92,7 +92,7 @@ All shared types for the DCF module.
 | `FMPBalanceSheet` | Full FMP balance sheet response (all fields) |
 | `FMPCashFlow` | Full FMP cash flow response (all fields) |
 | `FinancialData` | `{ incomeStatements, balanceSheets, cashFlows, profile, metrics }` |
-| `SUPPORTED_TICKERS` | Const array of ~87 allowed ticker symbols |
+| `SUPPORTED_TICKERS` | Const array of ~84 allowed ticker symbols |
 | `SupportedTicker` | Union type derived from SUPPORTED_TICKERS |
 
 Note: `profile` and `metrics` are typed as `any` since they come from Finnhub (flexible shape).
@@ -249,7 +249,7 @@ Sticky `w-56` left sidebar with gradient background (`linear-gradient(180deg, #0
 
 Animated hero landing page shown when no tab is selected. Uses `motion` library for staggered entry animations. Features:
 - **Market ticker bar:** Simulated market indices (S&P 500, NASDAQ, DOW, 10Y Yield, VIX) with green/red trend indicators and micro sparklines
-- **Hero section:** Animated gradient orbs background with "Real-Time Analysis" shimmer pill, gradient text title, description, and stats banner (87+ tickers, 12 modules, 6 data sources)
+- **Hero section:** Animated gradient orbs background with "Real-Time Analysis" shimmer pill, gradient text title, description, and stats banner (84+ tickers, 12 modules, 6 data sources)
 - **Feature grid:** 12 feature cards grouped by category (Valuation, Fundamentals, Market Intelligence, Income & Macro) with responsive grids. Each card has icon, title, description, and animated arrow on hover with per-card accent color
 - **Supported tickers notice:** Amber-bordered warning about FMP ticker restrictions
 
@@ -304,7 +304,7 @@ All API keys are injected server-side via the Netlify proxy function (`netlify/f
 
 ## Supported Tickers
 
-The DCF module only supports a curated list of ~87 tickers. This restriction:
+The DCF module only supports a curated list of ~84 tickers. This restriction:
 1. Ensures FMP API call budget stays within the 250/day free tier limit (3 FMP calls per ticker)
 2. Guarantees standardized financial statement data is available for all tickers
 3. Covers major large-cap, mid-cap, and popular retail-investor stocks
