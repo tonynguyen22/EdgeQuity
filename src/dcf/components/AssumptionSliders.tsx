@@ -20,22 +20,22 @@ const CompactSlider = React.memo(function CompactSlider({ label, value, onChange
   return (
     <div className="space-y-1">
       <div className="flex items-center justify-between">
-        <label className="text-xs" style={{ color: 'var(--vw-text-secondary)' }}>{label}</label>
+        <label className="text-sm" style={{ color: 'var(--vw-text-secondary)' }}>{label}</label>
         <div className="flex items-center gap-0.5">
           <input
             type="number" step={step} value={value}
             onChange={(e) => onChange(Number(e.target.value))}
-            className="w-14 rounded px-1.5 py-0.5 text-xs font-mono text-right focus:outline-none focus:ring-1 focus:ring-emerald-500"
+            className="w-16 rounded px-1.5 py-0.5 text-sm font-mono text-right focus:outline-none focus:ring-1 focus:ring-emerald-500"
             style={{ background: 'var(--vw-bg-deep)', border: '1px solid var(--vw-border)', color: 'var(--vw-accent)' }}
           />
-          <span className="text-xs font-mono" style={{ color: 'var(--vw-accent)' }}>%</span>
+          <span className="text-sm font-mono" style={{ color: 'var(--vw-accent)' }}>%</span>
         </div>
       </div>
       <input type="range" min={min} max={max} step={step} value={value}
         onChange={(e) => onChange(Number(e.target.value))}
         className="w-full h-1 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-emerald-500"
       />
-      {hint && <div className="text-[10px]" style={{ color: 'var(--vw-text-tertiary)' }}>{hint}</div>}
+      {hint && <div className="text-xs" style={{ color: 'var(--vw-text-tertiary)' }}>{hint}</div>}
     </div>
   );
 });
@@ -46,7 +46,7 @@ const TaperBar = React.memo(function TaperBar({ start, end, unit = '%' }: { star
   const rising = end > start;
   return (
     <div className="flex items-center gap-2 py-1">
-      <span className="text-[10px] font-mono w-10 text-right shrink-0" style={{ color: 'var(--vw-accent)' }}>
+      <span className="text-xs font-mono w-10 text-right shrink-0" style={{ color: 'var(--vw-accent)' }}>
         {start}{unit}
       </span>
       <div className="flex-1 relative h-1.5 rounded-full overflow-hidden" style={{ background: 'var(--vw-border)' }}>
@@ -63,7 +63,7 @@ const TaperBar = React.memo(function TaperBar({ start, end, unit = '%' }: { star
         {/* End dot */}
         <div className="absolute right-0 top-1/2 -translate-y-1/2 w-2 h-2 rounded-full" style={{ background: 'var(--vw-accent)', boxShadow: '0 0 6px rgba(0, 212, 170, 0.5)' }} />
       </div>
-      <span className="text-[10px] font-mono w-10 shrink-0" style={{ color: 'var(--vw-accent)' }}>
+      <span className="text-xs font-mono w-10 shrink-0" style={{ color: 'var(--vw-accent)' }}>
         {end}{unit}
       </span>
     </div>
@@ -102,15 +102,15 @@ export default function AssumptionSliders({
         {/* Scenario Presets */}
         <div className="space-y-1.5">
           <div className="flex items-center justify-between">
-            <label className="text-[10px] uppercase font-semibold tracking-wide" style={{ color: 'var(--vw-text-tertiary)' }}>Scenario</label>
-            {activeScenario === 'custom' && <span className="text-[10px] italic" style={{ color: 'var(--vw-text-tertiary)' }}>Custom</span>}
+            <label className="text-xs uppercase font-semibold tracking-wide" style={{ color: 'var(--vw-text-tertiary)' }}>Scenario</label>
+            {activeScenario === 'custom' && <span className="text-xs italic" style={{ color: 'var(--vw-text-tertiary)' }}>Custom</span>}
           </div>
           <div className="flex gap-1.5">
             {(['bear', 'base', 'bull'] as const).map(s => (
               <button
                 key={s}
                 onClick={() => onApplyScenario(s)}
-                className={`flex-1 py-1.5 text-xs font-semibold rounded-lg capitalize transition-colors ${activeScenario === s
+                className={`flex-1 py-1.5 text-sm font-semibold rounded-lg capitalize transition-colors ${activeScenario === s
                   ? s === 'bull' ? 'bg-emerald-600 text-white' : s === 'bear' ? 'bg-red-600 text-white' : 'bg-slate-500 text-white'
                   : 'bg-slate-700/60 text-slate-400 hover:text-slate-200 hover:bg-slate-700'
                   }`}
@@ -119,7 +119,7 @@ export default function AssumptionSliders({
               </button>
             ))}
           </div>
-          <div className="text-[10px]" style={{ color: 'var(--vw-text-tertiary)' }}>
+          <div className="text-xs" style={{ color: 'var(--vw-text-tertiary)' }}>
             {activeScenario === 'bull' ? 'High growth + margin expansion + lower WACC' :
               activeScenario === 'bear' ? 'Low growth + margin compression + higher WACC' :
                 activeScenario === 'base' ? 'Historical CAGR defaults' : 'Manually adjusted'}
@@ -129,23 +129,23 @@ export default function AssumptionSliders({
         {/* Revenue Growth — Tapered */}
         <div className="space-y-2">
           <div className="flex items-center justify-between">
-            <label className="text-xs font-medium" style={{ color: 'var(--vw-text-secondary)' }}>Revenue Growth Rate</label>
+            <label className="text-sm font-medium" style={{ color: 'var(--vw-text-secondary)' }}>Revenue Growth Rate</label>
           </div>
-          <div className="text-[10px]" style={{ color: 'var(--vw-text-tertiary)' }}>
+          <div className="text-xs" style={{ color: 'var(--vw-text-tertiary)' }}>
             CAGR 3yr: {formatPct(dcf.revCagr3yr)} | 5yr: {formatPct(dcf.revCagr5yr)}
           </div>
           <div className="grid grid-cols-2 gap-3">
             <div className="space-y-0.5">
               <div className="flex justify-between items-center">
-                <span className="text-[10px]" style={{ color: 'var(--vw-text-tertiary)' }}>Yr 1</span>
+                <span className="text-xs" style={{ color: 'var(--vw-text-tertiary)' }}>Yr 1</span>
                 <div className="flex items-center gap-0.5">
                   <input
                     type="number" step="0.1" value={revGrowthStart}
                     onChange={(e) => onInputChange({ revGrowthStart: Number(e.target.value) })}
-                    className="w-14 rounded px-1.5 py-0.5 text-xs font-mono text-right focus:outline-none focus:ring-1 focus:ring-emerald-500"
+                    className="w-16 rounded px-1.5 py-0.5 text-sm font-mono text-right focus:outline-none focus:ring-1 focus:ring-emerald-500"
                     style={{ background: 'var(--vw-bg-deep)', border: '1px solid var(--vw-border)', color: 'var(--vw-accent)' }}
                   />
-                  <span className="text-xs font-mono" style={{ color: 'var(--vw-accent)' }}>%</span>
+                  <span className="text-sm font-mono" style={{ color: 'var(--vw-accent)' }}>%</span>
                 </div>
               </div>
               <input type="range" min="-20" max="50" step="0.5" value={revGrowthStart}
@@ -155,15 +155,15 @@ export default function AssumptionSliders({
             </div>
             <div className="space-y-0.5">
               <div className="flex justify-between items-center">
-                <span className="text-[10px]" style={{ color: 'var(--vw-text-tertiary)' }}>Yr {forecastYears}</span>
+                <span className="text-xs" style={{ color: 'var(--vw-text-tertiary)' }}>Yr {forecastYears}</span>
                 <div className="flex items-center gap-0.5">
                   <input
                     type="number" step="0.1" value={revGrowthEnd}
                     onChange={(e) => onInputChange({ revGrowthEnd: Number(e.target.value) })}
-                    className="w-14 rounded px-1.5 py-0.5 text-xs font-mono text-right focus:outline-none focus:ring-1 focus:ring-emerald-500"
+                    className="w-16 rounded px-1.5 py-0.5 text-sm font-mono text-right focus:outline-none focus:ring-1 focus:ring-emerald-500"
                     style={{ background: 'var(--vw-bg-deep)', border: '1px solid var(--vw-border)', color: 'var(--vw-accent)' }}
                   />
-                  <span className="text-xs font-mono" style={{ color: 'var(--vw-accent)' }}>%</span>
+                  <span className="text-sm font-mono" style={{ color: 'var(--vw-accent)' }}>%</span>
                 </div>
               </div>
               <input type="range" min="-20" max="50" step="0.5" value={revGrowthEnd}
@@ -178,23 +178,23 @@ export default function AssumptionSliders({
         {/* EBIT Margin — Tapered */}
         <div className="space-y-2">
           <div className="flex items-center justify-between">
-            <label className="text-xs font-medium" style={{ color: 'var(--vw-text-secondary)' }}>EBIT Margin</label>
+            <label className="text-sm font-medium" style={{ color: 'var(--vw-text-secondary)' }}>EBIT Margin</label>
           </div>
-          <div className="text-[10px]" style={{ color: 'var(--vw-text-tertiary)' }}>
+          <div className="text-xs" style={{ color: 'var(--vw-text-tertiary)' }}>
             Base year: {dcf.baseEbitMargin >= 0 ? '+' : ''}{(dcf.baseEbitMargin * 100).toFixed(1)}%
           </div>
           <div className="grid grid-cols-2 gap-3">
             <div className="space-y-0.5">
               <div className="flex justify-between items-center">
-                <span className="text-[10px]" style={{ color: 'var(--vw-text-tertiary)' }}>Yr 1</span>
+                <span className="text-xs" style={{ color: 'var(--vw-text-tertiary)' }}>Yr 1</span>
                 <div className="flex items-center gap-0.5">
                   <input
                     type="number" step="0.1" value={ebitMarginStart}
                     onChange={(e) => onInputChange({ ebitMarginStart: Number(e.target.value) })}
-                    className="w-14 rounded px-1.5 py-0.5 text-xs font-mono text-right focus:outline-none focus:ring-1 focus:ring-emerald-500"
+                    className="w-16 rounded px-1.5 py-0.5 text-sm font-mono text-right focus:outline-none focus:ring-1 focus:ring-emerald-500"
                     style={{ background: 'var(--vw-bg-deep)', border: '1px solid var(--vw-border)', color: 'var(--vw-accent)' }}
                   />
-                  <span className="text-xs font-mono" style={{ color: 'var(--vw-accent)' }}>%</span>
+                  <span className="text-sm font-mono" style={{ color: 'var(--vw-accent)' }}>%</span>
                 </div>
               </div>
               <input type="range" min="-30" max="60" step="0.5" value={ebitMarginStart}
@@ -204,15 +204,15 @@ export default function AssumptionSliders({
             </div>
             <div className="space-y-0.5">
               <div className="flex justify-between items-center">
-                <span className="text-[10px]" style={{ color: 'var(--vw-text-tertiary)' }}>Yr {forecastYears}</span>
+                <span className="text-xs" style={{ color: 'var(--vw-text-tertiary)' }}>Yr {forecastYears}</span>
                 <div className="flex items-center gap-0.5">
                   <input
                     type="number" step="0.1" value={ebitMarginEnd}
                     onChange={(e) => onInputChange({ ebitMarginEnd: Number(e.target.value) })}
-                    className="w-14 rounded px-1.5 py-0.5 text-xs font-mono text-right focus:outline-none focus:ring-1 focus:ring-emerald-500"
+                    className="w-16 rounded px-1.5 py-0.5 text-sm font-mono text-right focus:outline-none focus:ring-1 focus:ring-emerald-500"
                     style={{ background: 'var(--vw-bg-deep)', border: '1px solid var(--vw-border)', color: 'var(--vw-accent)' }}
                   />
-                  <span className="text-xs font-mono" style={{ color: 'var(--vw-accent)' }}>%</span>
+                  <span className="text-sm font-mono" style={{ color: 'var(--vw-accent)' }}>%</span>
                 </div>
               </div>
               <input type="range" min="-30" max="60" step="0.5" value={ebitMarginEnd}
@@ -266,8 +266,8 @@ export default function AssumptionSliders({
         <div className="grid grid-cols-2 gap-4">
           <div className="space-y-1">
             <div className="flex justify-between items-center">
-              <label className="text-xs" style={{ color: 'var(--vw-text-secondary)' }}>Terminal Growth</label>
-              <span className="text-xs font-mono" style={{ color: 'var(--vw-accent)' }}>{termGrowth}%</span>
+              <label className="text-sm" style={{ color: 'var(--vw-text-secondary)' }}>Terminal Growth</label>
+              <span className="text-sm font-mono" style={{ color: 'var(--vw-accent)' }}>{termGrowth}%</span>
             </div>
             <input type="range" min="0" max="5" step="0.5" value={termGrowth}
               onChange={(e) => onInputChange({ termGrowth: Number(e.target.value) })}
@@ -275,13 +275,13 @@ export default function AssumptionSliders({
             />
           </div>
           <div className="space-y-1">
-            <label className="text-xs" style={{ color: 'var(--vw-text-secondary)' }}>Forecast Period</label>
+            <label className="text-sm" style={{ color: 'var(--vw-text-secondary)' }}>Forecast Period</label>
             <div className="flex gap-1.5">
               {[3, 5, 7, 10].map(y => (
                 <button
                   key={y}
                   onClick={() => onInputChange({ forecastYears: y })}
-                  className="flex-1 py-1 text-[10px] rounded-md font-medium transition-colors"
+                  className="flex-1 py-1 text-xs rounded-md font-medium transition-colors"
                   style={{
                     background: forecastYears === y ? 'var(--vw-accent)' : 'var(--vw-bg-hover)',
                     color: forecastYears === y ? 'white' : 'var(--vw-text-secondary)',
@@ -297,19 +297,19 @@ export default function AssumptionSliders({
 
       {/* Footer */}
       <div className="mt-5 pt-4 space-y-1.5" style={{ borderTop: '1px solid var(--vw-border-dim)' }}>
-        <div className="flex justify-between text-xs">
+        <div className="flex justify-between text-sm">
           <span style={{ color: 'var(--vw-text-secondary)' }}>WACC</span>
           <span className="font-mono">{formatPct(dcf.wacc)}</span>
         </div>
-        <div className="flex justify-between text-xs">
+        <div className="flex justify-between text-sm">
           <span style={{ color: 'var(--vw-text-secondary)' }}>Beta</span>
           <span className="font-mono">{dcf.beta.toFixed(2)}</span>
         </div>
-        <div className="flex justify-between text-xs">
+        <div className="flex justify-between text-sm">
           <span style={{ color: 'var(--vw-text-secondary)' }}>Avg Tax Rate</span>
           <span className="font-mono">{formatPct(dcf.avgTaxRate)}</span>
         </div>
-        <div className="text-[10px] mt-1" style={{ color: 'var(--vw-text-tertiary)' }}>
+        <div className="text-xs mt-1" style={{ color: 'var(--vw-text-tertiary)' }}>
           Adjust WACC & CAPM in the dedicated sub-tab
         </div>
       </div>

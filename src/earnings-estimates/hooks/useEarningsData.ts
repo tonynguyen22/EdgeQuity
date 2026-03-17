@@ -63,7 +63,15 @@ export function useEarningsData() {
           };
         });
 
+      // Filter out the current (incomplete) fiscal year — Alpha Vantage includes
+      // a partial-year entry that only contains EPS for quarters reported so far,
+      // which would incorrectly display as a much lower "annual" EPS.
+      const currentYear = new Date().getFullYear();
       const rawAnnual: AnnualEarningsRecord[] = (data.annualEarnings ?? [])
+        .filter((e: Record<string, string>) => {
+          const fy = new Date(e.fiscalDateEnding).getFullYear();
+          return fy < currentYear;
+        })
         .slice(0, 5)
         .map((e: Record<string, string>) => ({
           fiscalYear: new Date(e.fiscalDateEnding).getFullYear().toString(),
