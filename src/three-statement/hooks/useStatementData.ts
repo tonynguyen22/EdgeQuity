@@ -1,14 +1,11 @@
 import { useState } from 'react';
 import { proxyFetch } from '../../utils/proxyFetch';
+import { safeSetItem } from '../../utils/storage';
 import type { HistoricalBase } from '../types';
 
 const FMP_URL = 'https://financialmodelingprep.com/stable';
 const FINNHUB_URL = 'https://finnhub.io/api/v1';
 const CACHE_TTL = 24 * 60 * 60 * 1000;
-
-function safeSetItem(key: string, value: string) {
-  try { localStorage.setItem(key, value); } catch { /* quota */ }
-}
 
 /**
  * Tries to read the DCF cache first (`fmp_{sym}_dcf_v1`).
@@ -27,9 +24,9 @@ export function useStatementData() {
       // ── Try shared DCF cache first ──────────────────────────────
       const dcfCacheKey = `fmp_${symbol}_dcf_v1`;
       const cached = localStorage.getItem(dcfCacheKey);
-      let incStmt: any[] | null = null;
-      let balSheet: any[] | null = null;
-      let cashFlow: any[] | null = null;
+      let incStmt: Record<string, unknown>[] | null = null;
+      let balSheet: Record<string, unknown>[] | null = null;
+      let cashFlow: Record<string, unknown>[] | null = null;
       let profileName = symbol;
 
       if (cached) {
@@ -89,50 +86,51 @@ export function useStatementData() {
 
       // ── Build HistoricalBase rows ──────────────────────────────
       // Sort ascending by date
-      const isSorted = [...incStmt!].sort((a: any, b: any) =>
-        new Date(a.date || a.calendarYear).getTime() - new Date(b.date || b.calendarYear).getTime()
-      );
-      const bsSorted = [...(balSheet || [])].sort((a: any, b: any) =>
-        new Date(a.date || a.calendarYear).getTime() - new Date(b.date || b.calendarYear).getTime()
-      );
-      const cfSorted = [...(cashFlow || [])].sort((a: any, b: any) =>
-        new Date(a.date || a.calendarYear).getTime() - new Date(b.date || b.calendarYear).getTime()
-      );
+      const sortByDate = (arr: Record<string, unknown>[]) =>
+        [...arr].sort((a, b) =>
+          new Date(String(a.date || a.calendarYear)).getTime() - new Date(String(b.date || b.calendarYear)).getTime()
+        );
 
-      const rows: HistoricalBase[] = isSorted.map((is: any, i: number) => {
-        const bs = bsSorted[i] || {};
-        const cf = cfSorted[i] || {};
-        const year = is.calendarYear || (is.date ? new Date(is.date).getFullYear().toString() : `Y${i + 1}`);
+      const isSorted = sortByDate(incStmt!);
+      const bsSorted = sortByDate(balSheet || []);
+      const cfSorted = sortByDate(cashFlow || []);
+
+      const n = (obj: Record<string, unknown>, key: string): number => Number(obj[key]) || 0;
+
+      const rows: HistoricalBase[] = isSorted.map((is, i: number) => {
+        const bs: Record<string, unknown> = bsSorted[i] || {};
+        const cf: Record<string, unknown> = cfSorted[i] || {};
+        const year = String(is.calendarYear || (is.date ? new Date(String(is.date)).getFullYear() : `Y${i + 1}`));
         return {
           year,
-          revenue: is.revenue || 0,
-          cogs: is.costOfRevenue || 0,
-          grossProfit: is.grossProfit || 0,
-          sga: (is.sellingGeneralAndAdministrativeExpenses || 0) + (is.otherExpenses || 0),
-          da: is.depreciationAndAmortization || 0,
-          ebit: is.operatingIncome || 0,
-          interestExpense: is.interestExpense || 0,
-          ebt: is.incomeBeforeTax || 0,
-          tax: is.incomeTaxExpense || 0,
-          netIncome: is.netIncome || 0,
-          totalAssets: bs.totalAssets || 0,
-          totalDebt: (bs.longTermDebt || 0) + (bs.shortTermDebt || 0),
-          cash: bs.cashAndCashEquivalents || 0,
-          ppe: bs.propertyPlantEquipmentNet || 0,
-          receivables: bs.netReceivables || 0,
-          inventory: bs.inventory || 0,
-          payables: bs.accountPayables || 0,
-          totalEquity: bs.totalStockholdersEquity || 0,
-          capex: Math.abs(cf.capitalExpenditure || 0),
-          cfo: cf.operatingCashFlow || 0,
-          cfi: cf.netCashUsedForInvestingActivites || 0,
-          cff: cf.netCashUsedProvidedByFinancingActivities || 0,
+          revenue: n(is, 'revenue'),
+          cogs: n(is, 'costOfRevenue'),
+          grossProfit: n(is, 'grossProfit'),
+          sga: n(is, 'sellingGeneralAndAdministrativeExpenses') + n(is, 'otherExpenses'),
+          da: n(is, 'depreciationAndAmortization'),
+          ebit: n(is, 'operatingIncome'),
+          interestExpense: n(is, 'interestExpense'),
+          ebt: n(is, 'incomeBeforeTax'),
+          tax: n(is, 'incomeTaxExpense'),
+          netIncome: n(is, 'netIncome'),
+          totalAssets: n(bs, 'totalAssets'),
+          totalDebt: n(bs, 'longTermDebt') + n(bs, 'shortTermDebt'),
+          cash: n(bs, 'cashAndCashEquivalents'),
+          ppe: n(bs, 'propertyPlantEquipmentNet'),
+          receivables: n(bs, 'netReceivables'),
+          inventory: n(bs, 'inventory'),
+          payables: n(bs, 'accountPayables'),
+          totalEquity: n(bs, 'totalStockholdersEquity'),
+          capex: Math.abs(n(cf, 'capitalExpenditure')),
+          cfo: n(cf, 'operatingCashFlow'),
+          cfi: n(cf, 'netCashUsedForInvestingActivites'),
+          cff: n(cf, 'netCashUsedProvidedByFinancingActivities'),
         };
       });
 
       setHistoricals(rows);
-    } catch (e: any) {
-      setError(e.message || 'Failed to fetch data');
+    } catch (e: unknown) {
+      setError(e instanceof Error ? e.message : 'Failed to fetch data');
     } finally {
       setLoading(false);
     }

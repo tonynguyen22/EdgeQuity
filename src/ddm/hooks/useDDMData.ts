@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { proxyFetch } from '../../utils/proxyFetch';
+import { safeSetItem } from '../../utils/storage';
 
 const FINNHUB_URL = 'https://finnhub.io/api/v1';
 const MASSIVE_DIV_URL = 'https://api.massive.com/stocks/v1/dividends';
@@ -17,19 +18,38 @@ interface DDMData {
   recentDividends: { date: string; amount: number }[];
 }
 
-function safeSetItem(key: string, value: string) {
-  try { localStorage.setItem(key, value); } catch { /* quota */ }
+interface DividendPayment {
+  cash_amount: number;
+  ex_dividend_date: string;
 }
 
-const safeJson = async (res: Response): Promise<any> => {
+interface FinnhubMetricResponse {
+  metric?: {
+    beta?: number;
+    epsAnnual?: number;
+    epsTTM?: number;
+    dividendYieldIndicatedAnnual?: number;
+    payoutRatioAnnual?: number;
+    dividendsPerShareAnnual?: number;
+  };
+}
+
+interface FinnhubProfileResponse {
+  marketCapitalization?: number;
+  shareOutstanding?: number;
+  name?: string;
+  finnhubIndustry?: string;
+}
+
+const safeJson = async (res: Response): Promise<unknown> => {
   const text = await res.text();
   if (!text || text.trim().startsWith('<')) throw new Error('API returned HTML instead of JSON. Try again later.');
   try {
     const parsed = JSON.parse(text);
     if (parsed?.error) throw new Error(`API: ${parsed.error}`);
     return parsed;
-  } catch (e: any) {
-    if (e.message?.startsWith('API:')) throw e;
+  } catch (e: unknown) {
+    if (e instanceof Error && e.message?.startsWith('API:')) throw e;
     throw new Error('Invalid response from API.');
   }
 };
@@ -64,23 +84,26 @@ export function useDDMData() {
         safeJson(profileRes).catch(() => ({})),
       ]);
 
-      const metrics = metricData?.metric || {};
+      const metricResult = metricData as FinnhubMetricResponse;
+      const profileResult = profileData as FinnhubProfileResponse;
+
+      const metrics = metricResult?.metric || {};
       const beta = metrics.beta || 1.0;
       const eps = metrics.epsAnnual || metrics.epsTTM || 0;
       const divYield = metrics.dividendYieldIndicatedAnnual || 0;
       const payoutRatio = metrics.payoutRatioAnnual || 0;
 
       // Derive current price from market cap / shares (same approach as DCF module)
-      const mktCap = (profileData?.marketCapitalization || 0) * 1e6;
-      const sharesOut = (profileData?.shareOutstanding || 0) * 1e6;
+      const mktCap = (profileResult?.marketCapitalization || 0) * 1e6;
+      const sharesOut = (profileResult?.shareOutstanding || 0) * 1e6;
       const currentPrice = sharesOut > 0 && mktCap > 0 ? mktCap / sharesOut : 0;
 
       // Extract recent dividends from Massive API (same as dividend-analysis tab)
-      const allPayments = (Array.isArray(massiveData?.results) ? massiveData.results : [])
-        .filter((p: any) => p.cash_amount > 0)
-        .sort((a: any, b: any) => new Date(b.ex_dividend_date).getTime() - new Date(a.ex_dividend_date).getTime());
+      const allPayments = (Array.isArray((massiveData as Record<string, unknown>)?.results) ? (massiveData as { results: DividendPayment[] }).results : [] as DividendPayment[])
+        .filter((p: DividendPayment) => p.cash_amount > 0)
+        .sort((a: DividendPayment, b: DividendPayment) => new Date(b.ex_dividend_date).getTime() - new Date(a.ex_dividend_date).getTime());
 
-      const recentDividends = allPayments.slice(0, 12).map((p: any) => ({
+      const recentDividends = allPayments.slice(0, 12).map((p: DividendPayment) => ({
         date: p.ex_dividend_date ?? '',
         amount: p.cash_amount,
       }));
@@ -90,7 +113,7 @@ export function useDDMData() {
       let divAnnual = metrics.dividendsPerShareAnnual || 0;
       if (allPayments.length >= 4 && divAnnual <= 0) {
         // Sum the 4 most recent payments as annualized dividend
-        divAnnual = allPayments.slice(0, 4).reduce((sum: number, p: any) => sum + p.cash_amount, 0);
+        divAnnual = allPayments.slice(0, 4).reduce((sum: number, p: DividendPayment) => sum + p.cash_amount, 0);
       } else if (allPayments.length > 0 && divAnnual <= 0) {
         // If fewer than 4 payments, annualize based on frequency
         const latestAmount = allPayments[0].cash_amount;
@@ -101,8 +124,8 @@ export function useDDMData() {
         dividendsPerShareAnnual: divAnnual,
         beta,
         currentPrice,
-        companyName: profileData?.name || symbol,
-        industry: profileData?.finnhubIndustry || '',
+        companyName: profileResult?.name || symbol,
+        industry: profileResult?.finnhubIndustry || '',
         eps,
         dividendYield: divYield,
         payoutRatio,
@@ -111,8 +134,8 @@ export function useDDMData() {
 
       setData(result);
       safeSetItem(cacheKey, JSON.stringify({ ts: Date.now(), d: result }));
-    } catch (e: any) {
-      setError(e.message || 'Failed to fetch dividend data.');
+    } catch (e: unknown) {
+      setError(e instanceof Error ? e.message : 'Failed to fetch dividend data.');
     } finally {
       setLoading(false);
     }

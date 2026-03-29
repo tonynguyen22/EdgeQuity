@@ -1,188 +1,15 @@
 import React, { useState, useMemo, useDeferredValue } from 'react';
-import { Search, FileSpreadsheet, Download, AlertCircle, Info, Loader2, ChevronDown, ChevronUp, TrendingUp } from 'lucide-react';
+import { Search, FileSpreadsheet, Download, AlertCircle } from 'lucide-react';
 import { buildForecast } from './calculations';
 import { useStatementData } from './hooks/useStatementData';
 import { exportThreeStatementToExcel } from './utils/excel';
 import { SUPPORTED_TICKERS } from '../dcf/types';
-import type { ThreeStmtInputs, ForecastRow } from './types';
+import type { ThreeStmtInputs } from './types';
 import SupportedTickersBySector from '../components/SupportedTickersBySector';
+import HistoricalReferenceTable from './components/HistoricalReferenceTable';
+import StatementTable from './components/StatementTable';
 
 type StatementView = 'income' | 'balance' | 'cashflow';
-
-/* ── Historical Reference Table ───────────────────────────────────────── */
-interface HistRefMetric {
-  label: string;
-  values: (string | number)[];
-  suffix?: string;
-  isBold?: boolean;
-  isDivider?: boolean;
-}
-
-const HistoricalReferenceTable = React.memo(function HistoricalReferenceTable({
-  historicals,
-}: {
-  historicals: import('./types').HistoricalBase[];
-}) {
-  const [expanded, setExpanded] = useState(true);
-
-  const fmtCurrency = (v: number) => {
-    const abs = Math.abs(v);
-    if (abs >= 1e9) return `${(v / 1e9).toFixed(1)}B`;
-    if (abs >= 1e6) return `${(v / 1e6).toFixed(0)}M`;
-    return `${(v / 1e3).toFixed(0)}K`;
-  };
-
-  const metrics: HistRefMetric[] = useMemo(() => {
-    if (historicals.length === 0) return [];
-    return [
-      {
-        label: 'Revenue',
-        values: historicals.map(h => fmtCurrency(h.revenue)),
-        isBold: true,
-      },
-      {
-        label: 'Revenue Growth',
-        values: historicals.map((h, i) => {
-          if (i === 0) return '—';
-          const prev = historicals[i - 1].revenue;
-          return prev > 0 ? ((h.revenue - prev) / prev * 100).toFixed(1) : '—';
-        }),
-        suffix: '%',
-      },
-      {
-        label: 'COGS % of Revenue',
-        values: historicals.map(h => h.revenue > 0 ? (h.cogs / h.revenue * 100).toFixed(1) : '—'),
-        suffix: '%',
-        isDivider: true,
-      },
-      {
-        label: 'Gross Margin',
-        values: historicals.map(h => h.revenue > 0 ? (h.grossProfit / h.revenue * 100).toFixed(1) : '—'),
-        suffix: '%',
-        isBold: true,
-      },
-      {
-        label: 'SG&A % of Revenue',
-        values: historicals.map(h => h.revenue > 0 ? (h.sga / h.revenue * 100).toFixed(1) : '—'),
-        suffix: '%',
-      },
-      {
-        label: 'D&A % of Revenue',
-        values: historicals.map(h => h.revenue > 0 ? (h.da / h.revenue * 100).toFixed(1) : '—'),
-        suffix: '%',
-      },
-      {
-        label: 'EBIT Margin',
-        values: historicals.map(h => h.revenue > 0 ? (h.ebit / h.revenue * 100).toFixed(1) : '—'),
-        suffix: '%',
-        isBold: true,
-        isDivider: true,
-      },
-      {
-        label: 'Net Margin',
-        values: historicals.map(h => h.revenue > 0 ? (h.netIncome / h.revenue * 100).toFixed(1) : '—'),
-        suffix: '%',
-        isBold: true,
-      },
-      {
-        label: 'Effective Tax Rate',
-        values: historicals.map(h => h.ebt > 0 ? (h.tax / h.ebt * 100).toFixed(1) : '—'),
-        suffix: '%',
-        isDivider: true,
-      },
-      {
-        label: 'CapEx % of Revenue',
-        values: historicals.map(h => h.revenue > 0 ? (h.capex / h.revenue * 100).toFixed(1) : '—'),
-        suffix: '%',
-      },
-      {
-        label: 'DSO',
-        values: historicals.map(h => h.revenue > 0 ? Math.round(h.receivables / h.revenue * 365).toString() : '—'),
-        suffix: ' days',
-        isDivider: true,
-      },
-      {
-        label: 'DIO',
-        values: historicals.map(h => h.cogs > 0 ? Math.round(h.inventory / h.cogs * 365).toString() : '—'),
-        suffix: ' days',
-      },
-      {
-        label: 'DPO',
-        values: historicals.map(h => h.cogs > 0 ? Math.round(h.payables / h.cogs * 365).toString() : '—'),
-        suffix: ' days',
-      },
-    ];
-  }, [historicals]);
-
-  if (historicals.length === 0) return null;
-
-  const lastIdx = historicals.length - 1;
-
-  return (
-    <div className="vw-card rounded-xl overflow-hidden">
-      <button
-        onClick={() => setExpanded(e => !e)}
-        className="w-full flex items-center justify-between px-5 py-4 transition-colors"
-        style={{ background: 'rgba(6, 182, 212, 0.04)' }}
-      >
-        <div className="flex items-center gap-2.5">
-          <TrendingUp className="w-4 h-4 text-cyan-400" />
-          <span className="text-sm font-semibold text-slate-200">Historical Reference</span>
-          <span className="text-[11px] text-slate-500 ml-1">{historicals.length}Y data — use as reference for your assumptions</span>
-        </div>
-        {expanded ? <ChevronUp className="w-4 h-4 text-slate-500" /> : <ChevronDown className="w-4 h-4 text-slate-500" />}
-      </button>
-
-      {expanded && (
-        <div className="overflow-x-auto px-5 pb-5">
-          <table className="w-full text-xs font-mono">
-            <thead>
-              <tr>
-                <th className="text-left pb-3 pr-6 text-slate-500 font-medium sticky left-0 bg-[var(--vw-bg-surface)] z-10 min-w-[160px]">Metric</th>
-                {historicals.map((h, i) => (
-                  <th
-                    key={h.year}
-                    className={`pb-3 px-3 text-right min-w-[80px] ${i === lastIdx ? 'text-cyan-400' : 'text-slate-500'
-                      }`}
-                  >
-                    {h.year}
-                    {i === lastIdx && (
-                      <div className="text-[9px] font-normal text-cyan-500/60 mt-0.5">latest</div>
-                    )}
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {metrics.map((m, mi) => (
-                <tr key={m.label} className={m.isDivider ? 'border-t border-slate-700/40' : ''}>
-                  <td
-                    className={`py-1.5 pr-6 sticky left-0 bg-[var(--vw-bg-surface)] z-10 ${m.isBold ? 'text-slate-200 font-semibold' : 'text-slate-500'
-                      }`}
-                  >
-                    {m.label}
-                  </td>
-                  {m.values.map((v, vi) => (
-                    <td
-                      key={vi}
-                      className={`py-1.5 px-3 text-right ${vi === lastIdx
-                          ? 'text-cyan-300 font-medium'
-                          : m.isBold ? 'text-slate-300' : 'text-slate-400'
-                        }`}
-                      style={vi === lastIdx ? { background: 'rgba(6, 182, 212, 0.05)' } : undefined}
-                    >
-                      {v === '—' ? '—' : `${v}${m.suffix || ''}`}
-                    </td>
-                  ))}
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      )}
-    </div>
-  );
-});
 
 /* ── Extracted & memoised slider ─────────────────────────────────────────── */
 const SliderInput = React.memo(function SliderInput({ label, value, onChange, min, max, step, suffix = '%' }: {
@@ -256,13 +83,9 @@ export default function ThreeStatement() {
     }
   }, [historicals]);
 
-  // ── Deferred inputs for smooth slider interactions ─────────────────────────
-  // inputs updates instantly (slider thumb moves immediately).
-  // deferredInputs lags behind — React uses it for the expensive buildForecast
-  // only when the browser is idle, keeping the UI perfectly responsive.
   const deferredInputs = useDeferredValue(inputs);
 
-  const forecastData = useMemo((): ForecastRow[] => {
+  const forecastData = useMemo(() => {
     if (!showForecast || historicals.length === 0) return [];
     return buildForecast(historicals, deferredInputs);
   }, [showForecast, historicals, deferredInputs]);
@@ -270,7 +93,6 @@ export default function ThreeStatement() {
   const [showLoading, setShowLoading] = useState(false);
   const isLoading = loading || showLoading;
 
-  /** Dropdown click only populates input — does NOT trigger fetch */
   const handleDropdownPick = (sym: string) => {
     setTickerInput(sym);
     setShowDropdown(false);
@@ -309,49 +131,9 @@ export default function ThreeStatement() {
     });
   };
 
-  const fmt = (v: number, divisor = 1e6) => {
-    const val = v / divisor;
-    if (Math.abs(val) >= 1000) return `${(val / 1000).toFixed(1)}B`;
-    return `${val.toFixed(0)}M`;
-  };
-
-  const StatementTable = ({ rows, fields }: { rows: ForecastRow[]; fields: { label: string; key: keyof ForecastRow; isPercent?: boolean; isBold?: boolean; isDivider?: boolean }[] }) => (
-    <div className="overflow-x-auto">
-      <table className="w-full text-xs font-mono">
-        <thead>
-          <tr>
-            <th className="text-left pb-3 pr-6 text-slate-500 font-medium sticky left-0 bg-[var(--vw-bg-surface)] z-10 min-w-[160px]">Line Item</th>
-            {rows.map(r => (
-              <th key={r.year} className={`pb-3 px-3 text-right min-w-[80px] ${r.isProjected ? 'text-cyan-400' : 'text-slate-400'}`}>
-                {r.year}
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {fields.map(({ label, key, isPercent, isBold, isDivider }) => (
-            <tr key={label} className={`${isDivider ? 'border-t border-slate-700/50' : ''}`}>
-              <td className={`py-1.5 pr-6 sticky left-0 bg-[var(--vw-bg-surface)] z-10 ${isBold ? 'text-slate-200 font-semibold' : 'text-slate-500'}`}>
-                {label}
-              </td>
-              {rows.map(r => {
-                const v = r[key] as number;
-                return (
-                  <td key={r.year} className={`py-1.5 px-3 text-right ${r.isProjected ? 'text-slate-200' : 'text-slate-400'} ${isBold ? 'font-semibold' : ''}`}>
-                    {isPercent ? `${v.toFixed(1)}%` : fmt(v)}
-                  </td>
-                );
-              })}
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-  );
-
   return (
     <div className="space-y-6">
-      {/* Hero title + search — shown when no ticker selected */}
+      {/* Hero title + search */}
       {!ticker && (
         <div className="flex flex-col items-center justify-center min-h-[60vh] px-4">
           <div className="text-center mb-8">
@@ -393,10 +175,7 @@ export default function ThreeStatement() {
               >
                 {filteredTickers.length > 0 ? (
                   filteredTickers.slice(0, 20).map(t => (
-                    <button
-                      key={t}
-                      type="button"
-                      onMouseDown={() => handleDropdownPick(t)}
+                    <button key={t} type="button" onMouseDown={() => handleDropdownPick(t)}
                       className="w-full text-left px-4 py-2.5 text-sm font-mono transition-colors first:rounded-t-xl last:rounded-b-xl"
                       style={{ color: 'var(--vw-text-primary)' }}
                       onMouseEnter={e => e.currentTarget.style.background = 'var(--vw-bg-hover)'}
@@ -440,7 +219,7 @@ export default function ThreeStatement() {
       {isLoading && (
         <div className="flex flex-col items-center justify-center h-64 space-y-4">
           <div className="w-8 h-8 border-2 border-emerald-500 border-t-transparent rounded-full animate-spin" />
-          <p className="text-slate-400 animate-pulse">Loading financial statements…</p>
+          <p className="text-slate-400 animate-pulse">Loading financial statements...</p>
         </div>
       )}
 
@@ -464,7 +243,6 @@ export default function ThreeStatement() {
             <span className="text-xs text-slate-500">{historicals.length} years of historical data loaded</span>
           </div>
 
-          {/* Historical Reference Table */}
           <HistoricalReferenceTable historicals={historicals} />
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
