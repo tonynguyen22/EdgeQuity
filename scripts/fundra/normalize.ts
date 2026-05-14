@@ -51,6 +51,22 @@ export function absNumber(value: unknown): number | null {
   return normalizedValue === null ? null : Math.abs(normalizedValue);
 }
 
+function normalizeRatioPercent(value: unknown): number | null {
+  const normalizedValue = normalizeNumber(value);
+
+  if (normalizedValue === null) return null;
+
+  return Math.abs(normalizedValue) > 1 ? normalizedValue / 100 : normalizedValue;
+}
+
+function normalizeDividendYield(value: unknown): number | null {
+  const normalizedValue = normalizeNumber(value);
+
+  if (normalizedValue === null) return null;
+
+  return Math.abs(normalizedValue) > 0.1 ? normalizedValue / 100 : normalizedValue;
+}
+
 function normalizeString(value: unknown): string | null {
   return typeof value === "string" && value.trim().length > 0 ? value : null;
 }
@@ -67,6 +83,24 @@ function firstNumber(...values: unknown[]): number | null {
 function firstString(...values: unknown[]): string | null {
   for (const value of values) {
     const normalizedValue = normalizeString(value);
+    if (normalizedValue !== null) return normalizedValue;
+  }
+
+  return null;
+}
+
+function firstRatioPercent(...values: unknown[]): number | null {
+  for (const value of values) {
+    const normalizedValue = normalizeRatioPercent(value);
+    if (normalizedValue !== null) return normalizedValue;
+  }
+
+  return null;
+}
+
+function firstDividendYield(...values: unknown[]): number | null {
+  for (const value of values) {
+    const normalizedValue = normalizeDividendYield(value);
     if (normalizedValue !== null) return normalizedValue;
   }
 
@@ -185,17 +219,17 @@ export function normalizeFundraRecord(raw: RawFundraPayload): FundraStockRecord 
       earningsYield: ratio(netIncome, marketCap),
     },
     profitability: {
-      grossMargin: firstNumber(metric.grossMarginAnnual, metric.grossMarginTTM, ratio(grossProfit, revenue)),
-      operatingMargin: firstNumber(metric.operatingMarginAnnual, metric.operatingMarginTTM, ratio(operatingIncome, revenue)),
-      netMargin: firstNumber(metric.netProfitMarginAnnual, metric.netProfitMarginTTM, ratio(netIncome, revenue)),
-      roe: firstNumber(metric.returnOnEquityAnnual, metric.roeTTM, ratio(netIncome, totalEquity)),
-      roa: firstNumber(metric.returnOnAssetsAnnual, metric.roaTTM, ratio(netIncome, totalAssets)),
-      roic: firstNumber(metric.returnOnInvestedCapitalAnnual, metric.roicTTM),
+      grossMargin: firstNumber(firstRatioPercent(metric.grossMarginAnnual, metric.grossMarginTTM), ratio(grossProfit, revenue)),
+      operatingMargin: firstNumber(firstRatioPercent(metric.operatingMarginAnnual, metric.operatingMarginTTM), ratio(operatingIncome, revenue)),
+      netMargin: firstNumber(firstRatioPercent(metric.netProfitMarginAnnual, metric.netProfitMarginTTM), ratio(netIncome, revenue)),
+      roe: firstNumber(firstRatioPercent(metric.returnOnEquityAnnual, metric.roeTTM), ratio(netIncome, totalEquity)),
+      roa: firstNumber(firstRatioPercent(metric.returnOnAssetsAnnual, metric.roaTTM), ratio(netIncome, totalAssets)),
+      roic: firstRatioPercent(metric.returnOnInvestedCapitalAnnual, metric.roicTTM),
     },
     growth: {
       revenueCagr3y: growthFromHistory(history, "revenue", 3),
       revenueCagr5y: growthFromHistory(history, "revenue", 5),
-      epsCagr3y: firstNumber(metric.epsGrowth3Y, epsCagr3y(raw.incomeStatements)),
+      epsCagr3y: firstNumber(firstRatioPercent(metric.epsGrowth3Y), epsCagr3y(raw.incomeStatements)),
       fcfCagr3y: growthFromHistory(history, "freeCashFlow", 3),
     },
     financialHealth: {
@@ -217,8 +251,8 @@ export function normalizeFundraRecord(raw: RawFundraPayload): FundraStockRecord 
       fcfConversion: ratio(freeCashFlow, netIncome),
     },
     dividends: {
-      dividendYield: firstNumber(metric.dividendYieldIndicatedAnnual, metric.currentDividendYieldTTM, metric.dividendYieldTTM),
-      payoutRatio: firstNumber(metric.payoutRatioAnnual, metric.payoutRatioTTM),
+      dividendYield: firstDividendYield(metric.dividendYieldIndicatedAnnual, metric.currentDividendYieldTTM, metric.dividendYieldTTM),
+      payoutRatio: firstRatioPercent(metric.payoutRatioAnnual, metric.payoutRatioTTM),
     },
     history,
     warnings: buildWarnings({ peTTM, marketCap, historyLength: history.length }),

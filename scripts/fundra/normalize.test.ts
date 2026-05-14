@@ -148,6 +148,56 @@ test("normalizeFundraRecord builds a stock record with full-unit money values an
   assert.equal(record.warnings.length, 0);
 });
 
+test("normalizeFundraRecord converts provider percentage-point ratio fields to decimals", () => {
+  const record = normalizeFundraRecord({
+    ticker: "PCT",
+    profile: { companyName: "Percent Co", mktCap: 100000000 },
+    metrics: {
+      metric: {
+        grossMarginTTM: 45,
+        operatingMarginTTM: 30,
+        netProfitMarginTTM: 25,
+        dividendYieldIndicatedAnnual: 0.5,
+        payoutRatioAnnual: 15,
+      },
+    },
+    incomeStatements: [{ calendarYear: "2025" }],
+    balanceSheets: [{}],
+    cashFlows: [{}],
+  });
+
+  assert.equal(record.profitability.grossMargin, 0.45);
+  assert.equal(record.profitability.operatingMargin, 0.3);
+  assert.equal(record.profitability.netMargin, 0.25);
+  assert.equal(record.dividends.dividendYield, 0.005);
+  assert.equal(record.dividends.payoutRatio, 0.15);
+});
+
+test("normalizeFundraRecord preserves provider ratio fields that are already decimals", () => {
+  const record = normalizeFundraRecord({
+    ticker: "DEC",
+    profile: { companyName: "Decimal Co", mktCap: 100000000 },
+    metrics: {
+      metric: {
+        grossMarginTTM: 0.45,
+        operatingMarginTTM: 0.3,
+        netProfitMarginTTM: 0.25,
+        dividendYieldIndicatedAnnual: 0.005,
+        payoutRatioAnnual: 0.15,
+      },
+    },
+    incomeStatements: [{ calendarYear: "2025" }],
+    balanceSheets: [{}],
+    cashFlows: [{}],
+  });
+
+  assert.equal(record.profitability.grossMargin, 0.45);
+  assert.equal(record.profitability.operatingMargin, 0.3);
+  assert.equal(record.profitability.netMargin, 0.25);
+  assert.equal(record.dividends.dividendYield, 0.005);
+  assert.equal(record.dividends.payoutRatio, 0.15);
+});
+
 test("normalizeFundraRecord uses mktCap fallback and warnings preserve unavailable values as null", () => {
   const record = normalizeFundraRecord({
     ticker: "TEST",
