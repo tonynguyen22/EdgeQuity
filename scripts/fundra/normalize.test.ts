@@ -169,7 +169,7 @@ test("normalizeFundraRecord converts provider percentage-point ratio fields to d
   assert.equal(record.profitability.grossMargin, 0.45);
   assert.equal(record.profitability.operatingMargin, 0.3);
   assert.equal(record.profitability.netMargin, 0.25);
-  assert.equal(record.dividends.dividendYield, 0.005);
+  assert.equal(record.dividends.dividendYield, 0.5);
   assert.equal(record.dividends.payoutRatio, 0.15);
 });
 
@@ -196,6 +196,51 @@ test("normalizeFundraRecord preserves provider ratio fields that are already dec
   assert.equal(record.profitability.netMargin, 0.25);
   assert.equal(record.dividends.dividendYield, 0.005);
   assert.equal(record.dividends.payoutRatio, 0.15);
+});
+
+test("normalizeFundraRecord preserves valid decimal ratios above generic thresholds", () => {
+  const record = normalizeFundraRecord({
+    ticker: "HIGH",
+    profile: { companyName: "High Return Co", mktCap: 100000000 },
+    metrics: {
+      metric: {
+        returnOnEquityAnnual: 1.4,
+        returnOnInvestedCapitalAnnual: 1.2,
+        dividendYieldIndicatedAnnual: 0.12,
+      },
+    },
+    incomeStatements: [{ calendarYear: "2025" }],
+    balanceSheets: [{}],
+    cashFlows: [{}],
+  });
+
+  assert.equal(record.profitability.roe, 1.4);
+  assert.equal(record.profitability.roic, 1.2);
+  assert.equal(record.dividends.dividendYield, 0.12);
+});
+
+test("normalizeFundraRecord returns null CAGR values when required history points are missing", () => {
+  const record = normalizeFundraRecord({
+    ticker: "SHORT",
+    profile: { companyName: "Short History Co", mktCap: 100000000 },
+    metrics: { metric: {} },
+    incomeStatements: [
+      { calendarYear: "2025", revenue: 130, epsdiluted: 1.3 },
+      { calendarYear: "2024", revenue: 120, epsdiluted: 1.2 },
+      { calendarYear: "2023", revenue: 110, epsdiluted: 1.1 },
+    ],
+    balanceSheets: [{}, {}, {}],
+    cashFlows: [
+      { calendarYear: "2025", freeCashFlow: 130 },
+      { calendarYear: "2024", freeCashFlow: 120 },
+      { calendarYear: "2023", freeCashFlow: 110 },
+    ],
+  });
+
+  assert.equal(record.growth.revenueCagr3y, null);
+  assert.equal(record.growth.revenueCagr5y, null);
+  assert.equal(record.growth.epsCagr3y, null);
+  assert.equal(record.growth.fcfCagr3y, null);
 });
 
 test("normalizeFundraRecord uses mktCap fallback and warnings preserve unavailable values as null", () => {

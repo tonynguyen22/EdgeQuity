@@ -51,20 +51,12 @@ export function absNumber(value: unknown): number | null {
   return normalizedValue === null ? null : Math.abs(normalizedValue);
 }
 
-function normalizeRatioPercent(value: unknown): number | null {
+function normalizeProviderPercentPoints(value: unknown): number | null {
   const normalizedValue = normalizeNumber(value);
 
   if (normalizedValue === null) return null;
 
   return Math.abs(normalizedValue) > 1 ? normalizedValue / 100 : normalizedValue;
-}
-
-function normalizeDividendYield(value: unknown): number | null {
-  const normalizedValue = normalizeNumber(value);
-
-  if (normalizedValue === null) return null;
-
-  return Math.abs(normalizedValue) > 0.1 ? normalizedValue / 100 : normalizedValue;
 }
 
 function normalizeString(value: unknown): string | null {
@@ -89,18 +81,9 @@ function firstString(...values: unknown[]): string | null {
   return null;
 }
 
-function firstRatioPercent(...values: unknown[]): number | null {
+function firstProviderPercentPoints(...values: unknown[]): number | null {
   for (const value of values) {
-    const normalizedValue = normalizeRatioPercent(value);
-    if (normalizedValue !== null) return normalizedValue;
-  }
-
-  return null;
-}
-
-function firstDividendYield(...values: unknown[]): number | null {
-  for (const value of values) {
-    const normalizedValue = normalizeDividendYield(value);
+    const normalizedValue = normalizeProviderPercentPoints(value);
     if (normalizedValue !== null) return normalizedValue;
   }
 
@@ -148,14 +131,14 @@ function growthFromHistory(
   years: 3 | 5,
 ): number | null {
   const latest = history[0];
-  const oldest = history[years] ?? history[years - 1];
+  const oldest = history[years];
 
   return latest && oldest ? cagr(oldest[key], latest[key], years) : null;
 }
 
 function epsCagr3y(incomeStatements: RawObject[]): number | null {
   const latest = incomeStatements[0];
-  const oldest = incomeStatements[3] ?? incomeStatements[2];
+  const oldest = incomeStatements[3];
 
   return latest && oldest ? cagr(oldest.epsdiluted, latest.epsdiluted, 3) : null;
 }
@@ -219,17 +202,17 @@ export function normalizeFundraRecord(raw: RawFundraPayload): FundraStockRecord 
       earningsYield: ratio(netIncome, marketCap),
     },
     profitability: {
-      grossMargin: firstNumber(firstRatioPercent(metric.grossMarginAnnual, metric.grossMarginTTM), ratio(grossProfit, revenue)),
-      operatingMargin: firstNumber(firstRatioPercent(metric.operatingMarginAnnual, metric.operatingMarginTTM), ratio(operatingIncome, revenue)),
-      netMargin: firstNumber(firstRatioPercent(metric.netProfitMarginAnnual, metric.netProfitMarginTTM), ratio(netIncome, revenue)),
-      roe: firstNumber(firstRatioPercent(metric.returnOnEquityAnnual, metric.roeTTM), ratio(netIncome, totalEquity)),
-      roa: firstNumber(firstRatioPercent(metric.returnOnAssetsAnnual, metric.roaTTM), ratio(netIncome, totalAssets)),
-      roic: firstRatioPercent(metric.returnOnInvestedCapitalAnnual, metric.roicTTM),
+      grossMargin: firstNumber(firstProviderPercentPoints(metric.grossMarginAnnual, metric.grossMarginTTM), ratio(grossProfit, revenue)),
+      operatingMargin: firstNumber(firstProviderPercentPoints(metric.operatingMarginAnnual, metric.operatingMarginTTM), ratio(operatingIncome, revenue)),
+      netMargin: firstNumber(firstProviderPercentPoints(metric.netProfitMarginAnnual, metric.netProfitMarginTTM), ratio(netIncome, revenue)),
+      roe: firstNumber(metric.returnOnEquityAnnual, metric.roeTTM, ratio(netIncome, totalEquity)),
+      roa: firstNumber(metric.returnOnAssetsAnnual, metric.roaTTM, ratio(netIncome, totalAssets)),
+      roic: firstNumber(metric.returnOnInvestedCapitalAnnual, metric.roicTTM),
     },
     growth: {
       revenueCagr3y: growthFromHistory(history, "revenue", 3),
       revenueCagr5y: growthFromHistory(history, "revenue", 5),
-      epsCagr3y: firstNumber(firstRatioPercent(metric.epsGrowth3Y), epsCagr3y(raw.incomeStatements)),
+      epsCagr3y: firstNumber(firstProviderPercentPoints(metric.epsGrowth3Y), epsCagr3y(raw.incomeStatements)),
       fcfCagr3y: growthFromHistory(history, "freeCashFlow", 3),
     },
     financialHealth: {
@@ -251,8 +234,8 @@ export function normalizeFundraRecord(raw: RawFundraPayload): FundraStockRecord 
       fcfConversion: ratio(freeCashFlow, netIncome),
     },
     dividends: {
-      dividendYield: firstDividendYield(metric.dividendYieldIndicatedAnnual, metric.currentDividendYieldTTM, metric.dividendYieldTTM),
-      payoutRatio: firstRatioPercent(metric.payoutRatioAnnual, metric.payoutRatioTTM),
+      dividendYield: firstNumber(metric.dividendYieldIndicatedAnnual, metric.currentDividendYieldTTM, metric.dividendYieldTTM),
+      payoutRatio: firstProviderPercentPoints(metric.payoutRatioAnnual, metric.payoutRatioTTM),
     },
     history,
     warnings: buildWarnings({ peTTM, marketCap, historyLength: history.length }),
