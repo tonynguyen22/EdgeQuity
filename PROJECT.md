@@ -1,7 +1,7 @@
-# ValuWise — Project Instructions
+# Fundra — Project Instructions
 
 ## Overview
-React + TypeScript + Vite + Tailwind v4 stock analysis app. Single-page with sidebar navigation and 12 tab views. Sidebar groups tabs into Valuation (DCF, DDM, Multiples), Fundamentals (Quality, 3-Statement, Peers), Market Intelligence (Technical, Earnings, Insider & Inst., News), and Income & Macro (Dividends, Market Cycle). Uses a financial terminal aesthetic with DM Sans + IBM Plex Mono fonts, deep navy-black palette (#0a0e17), cyan accent (#00d4aa), and CSS custom properties (`--vw-*` tokens in `src/index.css`).
+React + TypeScript + Vite + Tailwind v4 static-data fundamental stock screener for value investors. Single-page with sidebar navigation and 12 tab views. Sidebar groups tabs into Valuation (DCF, DDM, Multiples), Fundamentals (Quality, 3-Statement, Peers), Market Intelligence (Technical, Earnings, Insider & Inst., News), and Income & Macro (Dividends, Market Cycle). Uses a financial terminal aesthetic with DM Sans + IBM Plex Mono fonts, deep navy-black palette (#0a0e17), cyan accent (#00d4aa), and CSS custom properties (`--vw-*` tokens in `src/index.css`).
 
 ## App Features
 
