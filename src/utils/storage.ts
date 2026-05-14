@@ -24,7 +24,7 @@ export function safeSetItem(key: string, value: string): void {
 }
 
 /**
- * Clear all ValuWise cache entries from localStorage.
+ * Clear all Fundra cache entries from localStorage.
  * @param reload - If true, reloads the page after clearing (default: true)
  */
 export function clearAllCache(reload = true): void {

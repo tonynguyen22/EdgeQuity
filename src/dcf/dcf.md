@@ -1,6 +1,6 @@
 # `src/dcf/` — DCF Valuation Module
 
-This folder is the **main entry point** for ValuWise. It was refactored from a single monolith into a modular structure with separated concerns: a pure calculation engine, a data-fetching hook, formatting utilities, export utilities, and focused UI components — all orchestrated by a slim `index.tsx` app shell.
+This folder is the **main entry point** for Fundra. It was refactored from a single monolith into a modular structure with separated concerns: a pure calculation engine, a data-fetching hook, formatting utilities, export utilities, and focused UI components — all orchestrated by a slim `index.tsx` app shell.
 
 **Data Sources:**
 - **Financial Statements:** Financial Modeling Prep (FMP) `/stable/` API — income statement, balance sheet, cash flow (3 calls). This provides standardized field names across all companies.
@@ -236,7 +236,7 @@ Uses the `xlsx` library to produce `{ticker}_Financials.xlsx` with 3 sheets:
 ### `components/Sidebar.tsx`
 
 Sticky `w-56` left sidebar with gradient background (`linear-gradient(180deg, #0d1117, #0a0e17)`). Features:
-- **Logo:** Glowing cyan gradient icon + "ValuWise" wordmark with accent color
+- **Logo:** Glowing cyan gradient icon + "Fundra" wordmark with accent color
 - **Active state:** Left accent bar (3px, colored per tab) + tinted background
 - **Group headers:** Uppercase labels with decorative trailing line dividers
 - **Nav sections:** Valuation (DCF, DDM, Multiples), Fundamentals (Quality, 3-Statement, Peers), Market Intelligence (Technical, Earnings, Insider, News), Income & Macro (Dividends, Market Cycle)
