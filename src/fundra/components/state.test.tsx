@@ -171,12 +171,42 @@ test('ScreenerTable renders an empty state when no stocks are visible', () => {
   assert.match(html, /No stocks match the current filters/);
 });
 
-test('StockDetail renders selected stock basics', () => {
-  const html = renderToStaticMarkup(<StockDetail stock={stock} onBack={() => undefined} />);
+test('StockDetail renders metric groups, data notes, and historical fundamentals', () => {
+  const detailStock: FundraStockRecord = {
+    ...stock,
+    warnings: ['Missing forward estimates'],
+    history: [
+      {
+        year: '2025',
+        revenue: 391000000000,
+        grossProfit: 181000000000,
+        operatingIncome: 123000000000,
+        netIncome: 97000000000,
+        freeCashFlow: 99000000000,
+        totalAssets: 365000000000,
+        totalDebt: 106000000000,
+        totalEquity: 74000000000,
+        sharesDiluted: 15000000000,
+      },
+    ],
+  };
+  const html = renderToStaticMarkup(<StockDetail stock={detailStock} onBack={() => undefined} />);
 
-  assert.match(html, /Back/);
+  assert.match(html, /Back to screener/);
   assert.match(html, /AAPL/);
   assert.match(html, /Apple Inc\./);
+  assert.match(html, /Technology \/ Consumer Electronics/);
+  assert.match(html, /Data notes/);
+  assert.match(html, /Missing forward estimates/);
+  assert.match(html, /Valuation/);
+  assert.match(html, /P\/E TTM/);
+  assert.match(html, /28\.0x/);
+  assert.match(html, /Profitability/);
+  assert.match(html, /46\.0%/);
+  assert.match(html, /Historical fundamentals/);
+  assert.match(html, /Gross Profit/);
+  assert.match(html, /\$391\.0B/);
+  assert.match(html, /\$106\.0B/);
 });
 
 test('MetricCell renders text values left-aligned without mono numeric styling', () => {
