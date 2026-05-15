@@ -115,6 +115,21 @@ test('ScreenerTable derives sorted non-empty sectors', () => {
   ]), ['Consumer Defensive', 'Technology']);
 });
 
+test('ScreenerTable filters trimmed sector options against trimmed stock sectors', () => {
+  const stocks: FundraStockRecord[] = [
+    { ...stock, ticker: 'AAPL', sector: ' Technology ' },
+    { ...stock, ticker: 'KO', sector: 'Consumer Defensive' },
+  ];
+
+  const visible = getVisibleScreenerStocks(stocks, {
+    query: '',
+    sector: 'Technology',
+    sort: { columnId: 'ticker', direction: 'asc' },
+  });
+
+  assert.deepEqual(visible.map((item) => item.ticker), ['AAPL']);
+});
+
 test('ScreenerTable filters by query and sector, then sorts nulls last', () => {
   const stocks: FundraStockRecord[] = [
     { ...stock, ticker: 'AAA', name: 'Acme Software', sector: 'Technology', marketCap: null },
@@ -140,6 +155,14 @@ test('ScreenerTable server render uses market cap descending by default', () => 
 
   assert.ok(html.indexOf('BIG') < html.indexOf('SMOL'));
   assert.match(html, /Market Cap[\s\S]*>v</);
+});
+
+test('ScreenerTable exposes active and inactive sort state to assistive tech', () => {
+  const html = renderToStaticMarkup(<ScreenerTable stocks={[stock]} onSelectStock={() => undefined} />);
+
+  assert.match(html, /aria-sort="descending"[\s\S]*Market Cap/);
+  assert.match(html, /aria-sort="none"[\s\S]*Ticker/);
+  assert.match(html, /aria-label="Sort by Market Cap ascending"/);
 });
 
 test('ScreenerTable renders an empty state when no stocks are visible', () => {

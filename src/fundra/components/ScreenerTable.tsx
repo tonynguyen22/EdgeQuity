@@ -25,9 +25,13 @@ interface VisibleStocksOptions {
 
 const DEFAULT_SORT: ScreenerSort = { columnId: 'marketCap', direction: 'desc' };
 
+function normalizeSector(sector: string | null): string {
+  return sector?.trim() ?? '';
+}
+
 export function getScreenerSectors(stocks: FundraStockRecord[]): string[] {
   return Array.from(
-    new Set(stocks.map((stock) => stock.sector?.trim()).filter((sector): sector is string => Boolean(sector))),
+    new Set(stocks.map((stock) => normalizeSector(stock.sector)).filter(Boolean)),
   ).sort((a, b) => a.localeCompare(b));
 }
 
@@ -36,6 +40,7 @@ export function getVisibleScreenerStocks(
   { query, sector, sort }: VisibleStocksOptions,
 ): FundraStockRecord[] {
   const normalizedQuery = query.trim().toLowerCase();
+  const normalizedSector = sector.trim();
   const column = FUNDRA_COLUMNS.find((item) => item.id === sort.columnId) ?? FUNDRA_COLUMNS[0];
 
   return [...stocks]
@@ -44,7 +49,7 @@ export function getVisibleScreenerStocks(
         normalizedQuery.length === 0
         || stock.ticker.toLowerCase().includes(normalizedQuery)
         || stock.name.toLowerCase().includes(normalizedQuery);
-      const matchesSector = sector.length === 0 || stock.sector === sector;
+      const matchesSector = normalizedSector.length === 0 || normalizeSector(stock.sector) === normalizedSector;
 
       return matchesQuery && matchesSector;
     })
@@ -94,6 +99,16 @@ function getColumnWidthClass(column: FundraColumn): string {
   return 'w-[116px] min-w-[116px]';
 }
 
+function getAriaSort(isActiveSort: boolean, direction: SortDirection): 'ascending' | 'descending' | 'none' {
+  if (!isActiveSort) return 'none';
+  return direction === 'asc' ? 'ascending' : 'descending';
+}
+
+function getSortButtonLabel(column: FundraColumn, isActiveSort: boolean, direction: SortDirection): string {
+  const nextDirection = isActiveSort && direction === 'desc' ? 'ascending' : 'descending';
+  return `Sort by ${column.label} ${nextDirection}`;
+}
+
 export default function ScreenerTable({ stocks, onSelectStock }: ScreenerTableProps) {
   const [query, setQuery] = useState('');
   const [sector, setSector] = useState('');
@@ -128,15 +143,18 @@ export default function ScreenerTable({ stocks, onSelectStock }: ScreenerTablePr
               {FUNDRA_COLUMNS.map((column) => {
                 const isActiveSort = sort.columnId === column.id;
                 const arrow = isActiveSort ? (sort.direction === 'desc' ? 'v' : '^') : '';
+                const ariaSort = getAriaSort(isActiveSort, sort.direction);
 
                 return (
                   <th
                     key={column.id}
                     scope="col"
+                    aria-sort={ariaSort}
                     className={`${getColumnWidthClass(column)} px-3 py-2 text-xs font-semibold uppercase`}
                   >
                     <button
                       type="button"
+                      aria-label={getSortButtonLabel(column, isActiveSort, sort.direction)}
                       className={`flex w-full items-center gap-1 transition-colors hover:text-[var(--vw-text-primary)] ${
                         column.format === 'text' ? 'justify-start text-left' : 'justify-end text-right'
                       }`}
