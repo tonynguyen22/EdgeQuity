@@ -178,6 +178,11 @@ Vertical sidebar (w-56, `Sidebar.tsx`) with gradient background and grouped nav 
 ## Deployment
 This application is configured for deployment on Netlify.
 
+## Static Data Refresh
+Fundra reads static JSON from `public/data/fundra` at runtime. To refresh this data in GitHub Actions, configure repository secrets named `FMP_API_KEY` and `FINNHUB_API_KEY`.
+
+The `Refresh Fundra static data` workflow can be run manually and also runs weekly on Monday at 09:00 UTC. The generator has a free-tier budget guard for FMP requests. The workflow sets `FUNDRA_MAX_TICKERS: 80` as a safe default because each ticker uses 3 FMP calls, matching the default 240-call budget. If the full supported universe exceeds that budget, set `FUNDRA_MAX_TICKERS`, set `FUNDRA_TICKERS` to a comma-separated subset, or intentionally raise `FUNDRA_FMP_CALL_BUDGET`.
+
 ## API Constraints
 
 ### Financial Modeling Prep (FMP) — financial statements only (DCF + Quality Analysis)
