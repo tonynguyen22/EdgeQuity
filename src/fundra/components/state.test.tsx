@@ -5,9 +5,10 @@ import { renderToStaticMarkup } from 'react-dom/server';
 
 import ErrorState from './ErrorState.tsx';
 import LoadingState from './LoadingState.tsx';
+import MetricCell from './MetricCell.tsx';
 import ScreenerTable from './ScreenerTable.tsx';
 import StockDetail from './StockDetail.tsx';
-import type { FundraStockRecord } from '../types.ts';
+import type { FundraColumn, FundraStockRecord } from '../types.ts';
 
 const stock: FundraStockRecord = {
   ticker: 'AAPL',
@@ -91,4 +92,56 @@ test('StockDetail renders selected stock basics', () => {
   assert.match(html, /Back/);
   assert.match(html, /AAPL/);
   assert.match(html, /Apple Inc\./);
+});
+
+test('MetricCell renders text values left-aligned without mono numeric styling', () => {
+  const column: FundraColumn = {
+    id: 'name',
+    label: 'Company',
+    group: 'profile',
+    accessor: (row) => row.name,
+    format: 'text',
+    sortable: true,
+  };
+
+  const html = renderToStaticMarkup(
+    <table>
+      <tbody>
+        <tr>
+          <MetricCell stock={stock} column={column} />
+        </tr>
+      </tbody>
+    </table>,
+  );
+
+  assert.match(html, /Apple Inc\./);
+  assert.match(html, /text-left/);
+  assert.match(html, /font-normal/);
+  assert.doesNotMatch(html, /font-mono/);
+  assert.doesNotMatch(html, /tabular-nums/);
+  assert.match(html, /--vw-text-primary/);
+});
+
+test('MetricCell keeps missing text values tertiary', () => {
+  const column: FundraColumn = {
+    id: 'sector',
+    label: 'Sector',
+    group: 'profile',
+    accessor: () => null,
+    format: 'text',
+    sortable: true,
+  };
+
+  const html = renderToStaticMarkup(
+    <table>
+      <tbody>
+        <tr>
+          <MetricCell stock={stock} column={column} />
+        </tr>
+      </tbody>
+    </table>,
+  );
+
+  assert.match(html, />-</);
+  assert.match(html, /--vw-text-tertiary/);
 });

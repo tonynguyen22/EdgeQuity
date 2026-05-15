@@ -223,18 +223,19 @@ export function getColumnValue(stock: FundraStockRecord, column: FundraColumn): 
 
 function formatMoney(value: number): string {
   const absValue = Math.abs(value);
+  const sign = value < 0 ? '-' : '';
 
   if (absValue >= 1_000_000_000_000) {
-    return `$${(value / 1_000_000_000_000).toFixed(2)}T`;
+    return `${sign}$${(absValue / 1_000_000_000_000).toFixed(2)}T`;
   }
 
   if (absValue >= 1_000_000_000) {
-    return `$${(value / 1_000_000_000).toFixed(1)}B`;
+    return `${sign}$${(absValue / 1_000_000_000).toFixed(1)}B`;
   }
 
   if (absValue >= 1_000_000) {
-    return `$${(value / 1_000_000).toFixed(1)}M`;
+    return `${sign}$${(absValue / 1_000_000).toFixed(1)}M`;
   }
 
-  return `$${value.toLocaleString('en-US', { maximumFractionDigits: 0 })}`;
+  return `${sign}$${absValue.toLocaleString('en-US', { maximumFractionDigits: 2 })}`;
 }

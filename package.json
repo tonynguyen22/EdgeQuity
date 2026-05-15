@@ -10,7 +10,7 @@
     "clean": "rm -rf dist",
     "lint": "tsc --noEmit",
     "test:fundra": "tsx --test scripts/fundra/normalize.test.ts",
-    "test:fundra:ui": "tsx --test src/fundra/*.test.ts",
+    "test:fundra:ui": "tsx --test src/fundra/*.test.ts src/fundra/components/*.test.tsx",
     "fundra:data": "tsx scripts/fundra/build-static-data.ts"
   },
   "dependencies": {
