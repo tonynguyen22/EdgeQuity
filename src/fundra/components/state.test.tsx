@@ -6,7 +6,8 @@ import { renderToStaticMarkup } from 'react-dom/server';
 import ErrorState from './ErrorState.tsx';
 import LoadingState from './LoadingState.tsx';
 import MetricCell from './MetricCell.tsx';
-import ScreenerTable from './ScreenerTable.tsx';
+import ScreenerTable, { getScreenerSectors, getVisibleScreenerStocks } from './ScreenerTable.tsx';
+import ScreenerToolbar from './ScreenerToolbar.tsx';
 import StockDetail from './StockDetail.tsx';
 import type { FundraColumn, FundraStockRecord } from '../types.ts';
 
@@ -84,6 +85,67 @@ test('ScreenerTable renders ticker and company buttons', () => {
 
   assert.match(html, /AAPL/);
   assert.match(html, /Apple Inc\./);
+});
+
+test('ScreenerToolbar renders search, sector options, and reset control', () => {
+  const html = renderToStaticMarkup(
+    <ScreenerToolbar
+      query=""
+      sector=""
+      sectors={['Consumer Defensive', 'Technology']}
+      onQueryChange={() => undefined}
+      onSectorChange={() => undefined}
+      onReset={() => undefined}
+    />,
+  );
+
+  assert.match(html, /Search ticker or company/);
+  assert.match(html, /All sectors/);
+  assert.match(html, /Consumer Defensive/);
+  assert.match(html, /Technology/);
+  assert.match(html, /Reset/);
+});
+
+test('ScreenerTable derives sorted non-empty sectors', () => {
+  assert.deepEqual(getScreenerSectors([
+    { ...stock, sector: 'Technology' },
+    { ...stock, ticker: 'KO', sector: 'Consumer Defensive' },
+    { ...stock, ticker: 'BRK.B', sector: null },
+    { ...stock, ticker: 'MSFT', sector: 'Technology' },
+  ]), ['Consumer Defensive', 'Technology']);
+});
+
+test('ScreenerTable filters by query and sector, then sorts nulls last', () => {
+  const stocks: FundraStockRecord[] = [
+    { ...stock, ticker: 'AAA', name: 'Acme Software', sector: 'Technology', marketCap: null },
+    { ...stock, ticker: 'BBB', name: 'Beta Stores', sector: 'Consumer Defensive', marketCap: 20 },
+    { ...stock, ticker: 'CCC', name: 'Cloud Components', sector: 'Technology', marketCap: 10 },
+  ];
+
+  const visible = getVisibleScreenerStocks(stocks, {
+    query: 'c',
+    sector: 'Technology',
+    sort: { columnId: 'marketCap', direction: 'asc' },
+  });
+
+  assert.deepEqual(visible.map((item) => item.ticker), ['CCC', 'AAA']);
+});
+
+test('ScreenerTable server render uses market cap descending by default', () => {
+  const stocks: FundraStockRecord[] = [
+    { ...stock, ticker: 'SMOL', name: 'Small Co.', marketCap: 10 },
+    { ...stock, ticker: 'BIG', name: 'Big Co.', marketCap: 20 },
+  ];
+  const html = renderToStaticMarkup(<ScreenerTable stocks={stocks} onSelectStock={() => undefined} />);
+
+  assert.ok(html.indexOf('BIG') < html.indexOf('SMOL'));
+  assert.match(html, /Market Cap[\s\S]*>v</);
+});
+
+test('ScreenerTable renders an empty state when no stocks are visible', () => {
+  const html = renderToStaticMarkup(<ScreenerTable stocks={[]} onSelectStock={() => undefined} />);
+
+  assert.match(html, /No stocks match the current filters/);
 });
 
 test('StockDetail renders selected stock basics', () => {
