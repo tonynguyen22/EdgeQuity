@@ -1,14 +1,14 @@
 import { useEffect, useMemo, useState } from 'react';
 
-import ErrorState from './fundra/components/ErrorState';
-import LoadingState from './fundra/components/LoadingState';
-import ScreenerTable from './fundra/components/ScreenerTable';
-import StockDetail from './fundra/components/StockDetail';
-import { loadAllFundraStocks } from './fundra/data';
-import type { FundraStockRecord } from './fundra/types';
+import ErrorState from './edgequity/components/ErrorState';
+import LoadingState from './edgequity/components/LoadingState';
+import ScreenerTable from './edgequity/components/ScreenerTable';
+import StockDetail from './edgequity/components/StockDetail';
+import { loadAllEdgequityStocks } from './edgequity/data';
+import type { EdgequityStockRecord } from './edgequity/types';
 
 export default function App() {
-  const [stocks, setStocks] = useState<FundraStockRecord[]>([]);
+  const [stocks, setStocks] = useState<EdgequityStockRecord[]>([]);
   const [selectedTicker, setSelectedTicker] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -20,7 +20,7 @@ export default function App() {
       try {
         setLoading(true);
         setError(null);
-        const records = await loadAllFundraStocks();
+        const records = await loadAllEdgequityStocks();
 
         if (isMounted) {
           setStocks(records);
@@ -67,7 +67,7 @@ export default function App() {
           style={{ borderColor: 'var(--vw-border)' }}
         >
           <div>
-            <h1 className="text-3xl font-semibold tracking-normal">Fundra</h1>
+            <h1 className="text-3xl font-semibold tracking-normal">Edgequity</h1>
             <p className="mt-1 text-sm" style={{ color: 'var(--vw-text-secondary)' }}>
               Fundamental stock screener for value investors
             </p>

@@ -1,0 +1,181 @@
+import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
+import test from 'node:test';
+
+import {
+  assertEdgequityManifest,
+  assertEdgequityStockRecord,
+  loadEdgequityManifest,
+  loadEdgequityStock,
+} from './data.ts';
+
+const stockFixture = JSON.parse(readFileSync(
+  new URL('../../public/data/edgequity/stocks/AAPL.json', import.meta.url),
+  'utf8',
+)) as unknown;
+
+type MockFetchResponse = {
+  ok: boolean;
+  status: number;
+  json: () => Promise<unknown>;
+};
+
+async function withMockFetch<T>(
+  response: MockFetchResponse,
+  callback: (calls: Array<{ input: Parameters<typeof fetch>[0]; init: Parameters<typeof fetch>[1] }>) => Promise<T>,
+): Promise<T> {
+  const originalFetch = globalThis.fetch;
+  const calls: Array<{ input: Parameters<typeof fetch>[0]; init: Parameters<typeof fetch>[1] }> = [];
+
+  globalThis.fetch = (async (input, init) => {
+    calls.push({ input, init });
+    return response as Response;
+  }) as typeof fetch;
+
+  try {
+    return await callback(calls);
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
+}
+
+test('assertEdgequityManifest accepts valid manifest shape', () => {
+  assert.doesNotThrow(() => assertEdgequityManifest({
+    app: 'Edgequity',
+    version: 1,
+    generatedAt: '2026-05-14T00:00:00.000Z',
+    universe: ['AAPL'],
+    stocks: [{
+      ticker: 'AAPL',
+      name: 'Apple Inc.',
+      sector: 'Technology',
+      industry: 'Consumer Electronics',
+      marketCap: 1,
+      dataPath: '/data/edgequity/stocks/AAPL.json',
+    }],
+  }));
+});
+
+test('assertEdgequityManifest rejects wrong app name', () => {
+  assert.throws(
+    () => assertEdgequityManifest({
+      app: 'NotEdgequity',
+      version: 1,
+      generatedAt: '2026-05-14T00:00:00.000Z',
+      universe: ['AAPL'],
+      stocks: [],
+    }),
+    /Invalid Edgequity manifest/,
+  );
+});
+
+test('assertEdgequityManifest rejects non-number version', () => {
+  assert.throws(
+    () => assertEdgequityManifest({
+      app: 'Edgequity',
+      version: '1',
+      generatedAt: '2026-05-14T00:00:00.000Z',
+      universe: ['AAPL'],
+      stocks: [],
+    }),
+    /Invalid Edgequity manifest/,
+  );
+});
+
+test('assertEdgequityStockRecord accepts valid stock fixture', () => {
+  assert.doesNotThrow(() => assertEdgequityStockRecord(stockFixture));
+});
+
+test('assertEdgequityStockRecord rejects missing valuation', () => {
+  assert.throws(
+    () => assertEdgequityStockRecord({
+      ...(stockFixture as Record<string, unknown>),
+      valuation: undefined,
+    }),
+    /Invalid Edgequity stock record/,
+  );
+});
+
+test('assertEdgequityStockRecord rejects wrong metric type', () => {
+  assert.throws(
+    () => assertEdgequityStockRecord({
+      ...(stockFixture as Record<string, unknown>),
+      valuation: {
+        ...((stockFixture as Record<string, unknown>).valuation as Record<string, unknown>),
+        peTTM: '28',
+      },
+    }),
+    /Invalid Edgequity stock record/,
+  );
+});
+
+test('loadEdgequityManifest uses manifest path and no-cache', async () => {
+  await withMockFetch({
+    ok: true,
+    status: 200,
+    json: async () => ({
+      app: 'Edgequity',
+      version: 1,
+      generatedAt: '2026-05-14T00:00:00.000Z',
+      universe: ['AAPL'],
+      stocks: [{
+        ticker: 'AAPL',
+        name: 'Apple Inc.',
+        sector: 'Technology',
+        industry: 'Consumer Electronics',
+        marketCap: 1,
+        dataPath: '/data/edgequity/stocks/AAPL.json',
+      }],
+    }),
+  }, async (calls) => {
+    const manifest = await loadEdgequityManifest();
+
+    assert.equal(manifest.app, 'Edgequity');
+    assert.deepEqual(calls, [{
+      input: '/data/edgequity/manifest.json',
+      init: { cache: 'no-cache' },
+    }]);
+  });
+});
+
+test('loadEdgequityManifest throws status on failure', async () => {
+  await withMockFetch({
+    ok: false,
+    status: 500,
+    json: async () => ({}),
+  }, async () => {
+    await assert.rejects(
+      () => loadEdgequityManifest(),
+      /Failed to load Edgequity manifest: 500/,
+    );
+  });
+});
+
+test('loadEdgequityStock validates stock data on success', async () => {
+  await withMockFetch({
+    ok: true,
+    status: 200,
+    json: async () => stockFixture,
+  }, async (calls) => {
+    const stock = await loadEdgequityStock('/data/edgequity/stocks/AAPL.json');
+
+    assert.equal(stock.ticker, 'AAPL');
+    assert.deepEqual(calls, [{
+      input: '/data/edgequity/stocks/AAPL.json',
+      init: { cache: 'no-cache' },
+    }]);
+  });
+});
+
+test('loadEdgequityStock throws status on failure', async () => {
+  await withMockFetch({
+    ok: false,
+    status: 404,
+    json: async () => ({}),
+  }, async () => {
+    await assert.rejects(
+      () => loadEdgequityStock('/data/edgequity/stocks/MISSING.json'),
+      /Failed to load stock data: 404/,
+    );
+  });
+});

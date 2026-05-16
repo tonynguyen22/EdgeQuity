@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { Search } from 'lucide-react';
-import { SUPPORTED_TICKERS } from '../dcf/types';
+import { EDGEQUITY_SUPPORTED_TICKERS } from '../edgequity/universe';
 
 interface TickerSearchProps {
   input: string;
@@ -13,8 +13,8 @@ interface TickerSearchProps {
 }
 
 /**
- * Shared dropdown ticker search that restricts to SUPPORTED_TICKERS.
- * Selecting from the dropdown only populates the input — the user must
+ * Shared dropdown ticker search that restricts to the Edgequity ticker universe.
+ * Selecting from the dropdown only populates the input; the user must
  * click the Analyze button (or press Enter) to trigger the search.
  */
 export default function TickerSearch({
@@ -27,16 +27,16 @@ export default function TickerSearch({
 
   const filtered = useMemo(() => {
     const q = input.trim().toUpperCase();
-    if (!q) return [...SUPPORTED_TICKERS];
-    return SUPPORTED_TICKERS.filter(t => t.includes(q));
+    if (!q) return [...EDGEQUITY_SUPPORTED_TICKERS];
+    return EDGEQUITY_SUPPORTED_TICKERS.filter(t => t.includes(q));
   }, [input]);
 
-  const isValid = input.trim() && (SUPPORTED_TICKERS as readonly string[]).includes(input.trim().toUpperCase());
+  const isValid = input.trim() && (EDGEQUITY_SUPPORTED_TICKERS as readonly string[]).includes(input.trim().toUpperCase());
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const sym = input.trim().toUpperCase();
-    if (sym && (SUPPORTED_TICKERS as readonly string[]).includes(sym)) {
+    if (sym && (EDGEQUITY_SUPPORTED_TICKERS as readonly string[]).includes(sym)) {
       onSelect(sym);
       setShowDropdown(false);
     }
@@ -93,7 +93,7 @@ export default function TickerSearch({
             ))
           ) : (
             <div className="px-4 py-3 text-xs" style={{ color: 'var(--vw-text-tertiary)' }}>
-              No matching ticker. Only {SUPPORTED_TICKERS.length} pre-selected stocks are supported.
+              No matching ticker. Only {EDGEQUITY_SUPPORTED_TICKERS.length} pre-selected stocks are supported.
             </div>
           )}
         </div>
