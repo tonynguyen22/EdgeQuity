@@ -80,7 +80,7 @@ export default function Footer() {
                                     color: 'var(--vw-text-primary)',
                                 }}
                             >
-                                Valu<span style={{ color: 'var(--vw-accent)' }}>Wise</span>
+                                Fund<span style={{ color: 'var(--vw-accent)' }}>ra</span>
                             </span>
                         </div>
 
@@ -93,8 +93,7 @@ export default function Footer() {
                                 maxWidth: '280px',
                             }}
                         >
-                            Professional Equity Research Platform — DCF valuation, peer analysis,
-                            technical indicators, and AI-powered insights for informed investment decisions.
+                            Static-data fundamental stock screener for value investors.
                         </p>
 
                         {/* Creator credit */}

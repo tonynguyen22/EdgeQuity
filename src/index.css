@@ -1,8 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
 @import "tailwindcss";
+@source not "../.agents";
+@source not "../docs";
 
 /* ═══════════════════════════════════════════════════════════════════════════
-   ValuWise Design System — Financial Terminal Aesthetic
+   Edgequity Design System — Financial Terminal Aesthetic
    ═══════════════════════════════════════════════════════════════════════════ */
 
 @theme {
@@ -134,6 +136,130 @@ body::before {
 .vw-card:hover {
   border-color: var(--vw-border-lit);
   background: var(--vw-bg-surface);
+}
+
+.eq-table-shell {
+  border-radius: 8px;
+}
+
+.eq-table-shell table {
+  background: rgba(8, 12, 20, 0.58);
+}
+
+.eq-table-shell thead th {
+  letter-spacing: 0;
+}
+
+.eq-table-shell tbody tr:nth-child(even) {
+  background: rgba(255, 255, 255, 0.012);
+}
+
+.eq-sticky-col {
+  position: sticky;
+  left: 0;
+  z-index: 2;
+  background: var(--vw-bg-raised);
+}
+
+thead .eq-sticky-col {
+  z-index: 12;
+}
+
+.eq-sticky-name {
+  left: 72px;
+  box-shadow: 10px 0 18px -18px rgba(0, 0, 0, 0.9);
+}
+
+.eq-group-start {
+  border-left: 1px solid rgba(109, 133, 162, 0.28);
+}
+
+.eq-scrollbar {
+  scrollbar-gutter: stable;
+}
+
+.eq-back-button {
+  border: 1px solid var(--vw-border-lit);
+  border-radius: 6px;
+  background: rgba(17, 24, 39, 0.84);
+  color: var(--vw-text-secondary);
+  padding: 0.45rem 0.65rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  transition: border-color 0.15s ease, color 0.15s ease, background 0.15s ease;
+}
+
+.eq-back-button:hover {
+  border-color: rgba(0, 212, 170, 0.42);
+  color: var(--vw-text-primary);
+  background: var(--vw-bg-hover);
+}
+
+.eq-detail-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0.9rem;
+  border: 1px solid var(--vw-border);
+  border-radius: 8px;
+  background: linear-gradient(135deg, rgba(17, 24, 39, 0.96), rgba(8, 12, 20, 0.96));
+  padding: 1rem;
+}
+
+.eq-kpi-strip {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+  overflow: hidden;
+  border: 1px solid var(--vw-border-dim);
+  border-radius: 8px;
+  background: var(--vw-border-dim);
+}
+
+.eq-kpi-strip>div {
+  background: rgba(12, 18, 32, 0.94);
+  padding: 0.65rem 0.75rem;
+}
+
+.eq-note-panel {
+  border: 1px solid rgba(240, 180, 41, 0.25);
+  border-radius: 8px;
+  background: rgba(240, 180, 41, 0.055);
+  padding: 0.75rem 0.9rem;
+}
+
+.eq-note-panel h3 {
+  color: var(--vw-amber);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.eq-note-panel ul {
+  margin-top: 0.45rem;
+  color: var(--vw-text-secondary);
+  font-size: 0.875rem;
+}
+
+.eq-metric-panel {
+  border: 1px solid var(--vw-border);
+  border-radius: 8px;
+  background: rgba(17, 24, 39, 0.88);
+  padding: 0.8rem;
+}
+
+.eq-history-panel {
+  border-radius: 8px;
+}
+
+@media (min-width: 900px) {
+  .eq-detail-hero {
+    grid-template-columns: minmax(0, 1fr) minmax(420px, 0.85fr);
+    align-items: end;
+  }
+
+  .eq-kpi-strip {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
 }
 
 /* Glow border on accent cards */

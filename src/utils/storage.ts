@@ -3,7 +3,7 @@
 // All cache prefixes MUST be listed here — add new ones to CACHE_PREFIXES only.
 
 const CACHE_PREFIXES = [
-  'finnhub_', 'fmp_', 'valuwise_', 'vw_', 'tech_', 'earnings_',
+  'finnhub_', 'fmp_', 'edgequity_', 'vw_', 'tech_', 'earnings_',
   'insider_', 'news_', 'dividend_', 'edgar_', 'multiples_',
   'market_cycle_', 'ddm_', 'stmt_',
 ] as const;
@@ -24,7 +24,7 @@ export function safeSetItem(key: string, value: string): void {
 }
 
 /**
- * Clear all ValuWise cache entries from localStorage.
+ * Clear all Edgequity cache entries from localStorage.
  * @param reload - If true, reloads the page after clearing (default: true)
  */
 export function clearAllCache(reload = true): void {

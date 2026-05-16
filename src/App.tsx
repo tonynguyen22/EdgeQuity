@@ -1,90 +1,93 @@
-import { useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
-import PeerAnalysis from './peer-analysis';
-import QualityAnalysis from './quality-analysis';
-import TechAnalysis from './tech-analysis';
-import EarningsEstimates from './earnings-estimates';
-import InsiderInstitutional from './insider-institutional';
-import NewsSentiment from './news-sentiment';
-import DividendAnalysis from './dividend-analysis';
-import MultiplesAnalysis from './multiples-analysis';
-import MarketCycle from './market-cycle';
-import DDM from './ddm';
-import ThreeStatement from './three-statement';
-import DCFView from './dcf/DCFView';
-
-import { clearAllCache } from './utils/storage';
-import Sidebar from './dcf/components/Sidebar';
-import LandingPage from './dcf/components/LandingPage';
-import Footer from './components/Footer';
-import type { TabId } from './dcf/types';
+import ErrorState from './edgequity/components/ErrorState';
+import LoadingState from './edgequity/components/LoadingState';
+import ScreenerTable from './edgequity/components/ScreenerTable';
+import StockDetail from './edgequity/components/StockDetail';
+import { loadAllEdgequityStocks } from './edgequity/data';
+import type { EdgequityStockRecord } from './edgequity/types';
 
 export default function App() {
-  // ── App shell state ────────────────────────────────────────────────────────
-  const [showLanding, setShowLanding] = useState(true);
-  const [activeTab, setActiveTab] = useState<TabId>('dcf');
-  const [cacheCleared, setCacheCleared] = useState(false);
-  const [navCollapsed, setNavCollapsed] = useState(false);
+  const [stocks, setStocks] = useState<EdgequityStockRecord[]>([]);
+  const [selectedTicker, setSelectedTicker] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-  // ── Handlers ───────────────────────────────────────────────────────────────
-  const handleToggleNav = () => setNavCollapsed(prev => !prev);
+  useEffect(() => {
+    let isMounted = true;
 
-  const handleTabChange = (tab: TabId) => {
-    setActiveTab(tab);
-    setShowLanding(false);
-  };
+    async function loadStocks() {
+      try {
+        setLoading(true);
+        setError(null);
+        const records = await loadAllEdgequityStocks();
 
-  const handleShowLanding = () => {
-    setShowLanding(true);
-  };
-
-  const handleClearCache = () => {
-    clearAllCache();
-    setCacheCleared(true);
-    setTimeout(() => setCacheCleared(false), 2500);
-  };
-
-  // ── Tab content renderer ───────────────────────────────────────────────────
-  const renderTabContent = () => {
-    if (showLanding) return <LandingPage onTabChange={handleTabChange} />;
-
-    switch (activeTab) {
-      case 'comp':       return <PeerAnalysis />;
-      case 'grade':      return <QualityAnalysis />;
-      case 'multiples':  return <MultiplesAnalysis />;
-      case 'ddm':        return <DDM />;
-      case 'three-stmt': return <ThreeStatement />;
-      case 'tech':       return <TechAnalysis />;
-      case 'cycle':      return <MarketCycle />;
-      case 'earnings':   return <EarningsEstimates />;
-      case 'insider':    return <InsiderInstitutional />;
-      case 'news':       return <NewsSentiment />;
-      case 'dividend':   return <DividendAnalysis />;
-      case 'dcf':
-      default:           return <DCFView />;
+        if (isMounted) {
+          setStocks(records);
+        }
+      } catch (err) {
+        if (isMounted) {
+          setError(err instanceof Error ? err.message : 'Unknown error');
+        }
+      } finally {
+        if (isMounted) {
+          setLoading(false);
+        }
+      }
     }
-  };
 
-  // ── Render ─────────────────────────────────────────────────────────────────
+    void loadStocks();
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  const selectedStock = useMemo(
+    () => stocks.find((stock) => stock.ticker === selectedTicker) ?? null,
+    [selectedTicker, stocks],
+  );
+
+  if (loading) {
+    return <LoadingState />;
+  }
+
+  if (error !== null) {
+    return <ErrorState message={error} />;
+  }
+
   return (
-    <div className="min-h-screen font-sans flex" style={{ background: 'var(--vw-bg-deep)', color: 'var(--vw-text-primary)' }}>
-      <Sidebar
-        showLanding={showLanding}
-        activeTab={activeTab}
-        cacheCleared={cacheCleared}
-        collapsed={navCollapsed}
-        onToggleCollapse={handleToggleNav}
-        onShowLanding={handleShowLanding}
-        onTabChange={handleTabChange}
-        onClearCache={handleClearCache}
-      />
+    <div
+      className="min-h-screen font-sans vw-grid-bg"
+      style={{ background: 'var(--vw-bg-deep)', color: 'var(--vw-text-primary)' }}
+    >
+      <main className="mx-auto w-full max-w-[1600px] px-4 py-5 sm:px-6 lg:px-8">
+        <header
+          className="mb-5 flex flex-col gap-3 border-b pb-5 md:flex-row md:items-end md:justify-between"
+          style={{ borderColor: 'var(--vw-border)' }}
+        >
+          <div>
+            <h1 className="text-3xl font-semibold tracking-normal">Edgequity</h1>
+            <p className="mt-1 text-sm" style={{ color: 'var(--vw-text-secondary)' }}>
+              Fundamental stock screener for value investors
+            </p>
+          </div>
+          <div className="vw-card px-4 py-2">
+            <p className="text-xs uppercase font-semibold" style={{ color: 'var(--vw-text-tertiary)' }}>
+              Stocks
+            </p>
+            <p className="font-mono text-lg" style={{ color: 'var(--vw-accent)' }}>
+              {stocks.length}
+            </p>
+          </div>
+        </header>
 
-      <div className="flex-1 min-w-0 vw-grid-bg flex flex-col min-h-screen">
-        <main className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          {renderTabContent()}
-        </main>
-        <Footer />
-      </div>
+        {selectedStock ? (
+          <StockDetail stock={selectedStock} onBack={() => setSelectedTicker(null)} />
+        ) : (
+          <ScreenerTable stocks={stocks} onSelectStock={setSelectedTicker} />
+        )}
+      </main>
     </div>
   );
 }
