@@ -228,6 +228,20 @@ test('StockDetail renders metric groups, data notes, and historical fundamentals
   assert.match(html, /\$106\.0B/);
 });
 
+test('StockDetail renders the analyst sheet layout sections', () => {
+  const detailStock: EdgequityStockRecord = {
+    ...stock,
+    warnings: ['Revenue history is partially estimated'],
+  };
+  const html = renderToStaticMarkup(<StockDetail stock={detailStock} onBack={() => undefined} />);
+
+  assert.match(html, /eq-detail-hero/);
+  assert.match(html, /eq-kpi-strip/);
+  assert.match(html, /eq-metric-panel/);
+  assert.match(html, /Investment notes/);
+  assert.match(html, /Historical fundamentals/);
+});
+
 test('MetricCell renders text values left-aligned without mono numeric styling', () => {
   const column: EdgequityColumn = {
     id: 'name',
