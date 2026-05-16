@@ -190,7 +190,7 @@ test('ScreenerTable renders an empty state when no stocks are visible', () => {
   assert.match(html, /No stocks match the current filters/);
 });
 
-test('StockDetail renders metric groups, data notes, and historical fundamentals', () => {
+test('StockDetail renders metric groups, investment notes, and historical fundamentals', () => {
   const detailStock: EdgequityStockRecord = {
     ...stock,
     warnings: ['Missing forward estimates'],
@@ -215,7 +215,7 @@ test('StockDetail renders metric groups, data notes, and historical fundamentals
   assert.match(html, /AAPL/);
   assert.match(html, /Apple Inc\./);
   assert.match(html, /Technology \/ Consumer Electronics/);
-  assert.match(html, /Data notes/);
+  assert.match(html, /Investment notes/);
   assert.match(html, /Missing forward estimates/);
   assert.match(html, /Valuation/);
   assert.match(html, /P\/E TTM/);
