@@ -87,6 +87,25 @@ test('ScreenerTable renders ticker and company buttons', () => {
   assert.match(html, /Apple Inc\./);
 });
 
+test('ScreenerTable renders compact analyst table labels and sticky identifier columns', () => {
+  const html = renderToStaticMarkup(<ScreenerTable stocks={[stock]} onSelectStock={() => undefined} />);
+
+  assert.match(html, /eq-table-shell/);
+  assert.match(html, /eq-sticky-col/);
+  assert.match(html, />MCap</);
+  assert.match(html, />Fwd P\/E</);
+  assert.match(html, />FCFY</);
+  assert.doesNotMatch(html, />Market Cap</);
+  assert.doesNotMatch(html, />FCF Yield</);
+});
+
+test('ScreenerTable marks metric group boundaries for faster scanning', () => {
+  const html = renderToStaticMarkup(<ScreenerTable stocks={[stock]} onSelectStock={() => undefined} />);
+
+  assert.match(html, /eq-group-start/);
+  assert.match(html, /aria-label="Sort by FCFY descending"/);
+});
+
 test('ScreenerToolbar renders search, sector options, and reset control', () => {
   const html = renderToStaticMarkup(
     <ScreenerToolbar
