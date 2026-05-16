@@ -25,7 +25,7 @@ export default function ScreenerToolbar({
 
   return (
     <div
-      className="flex flex-col gap-2 border-b px-3 py-3 sm:flex-row sm:items-center"
+      className="flex flex-col gap-2 border-b px-2.5 py-2 sm:flex-row sm:items-center"
       style={{ borderColor: 'var(--vw-border)' }}
     >
       <input
@@ -33,14 +33,14 @@ export default function ScreenerToolbar({
         value={query}
         placeholder="Search ticker or company"
         onChange={(event: ChangeEvent<HTMLInputElement>) => onQueryChange(event.target.value)}
-        className="h-9 min-w-0 flex-1 rounded-md border px-3 text-sm outline-none transition-colors placeholder:text-[var(--vw-text-muted)] focus:border-[var(--vw-accent)]"
+        className="h-8 min-w-0 flex-1 rounded-md border px-2.5 text-sm outline-none transition-colors placeholder:text-[var(--vw-text-muted)] focus:border-[var(--vw-accent)]"
         style={inputStyle}
       />
       <div className="flex gap-2">
         <select
           value={sector}
           onChange={(event: ChangeEvent<HTMLSelectElement>) => onSectorChange(event.target.value)}
-          className="h-9 w-full min-w-[160px] rounded-md border px-2 text-sm outline-none transition-colors focus:border-[var(--vw-accent)] sm:w-[210px]"
+          className="h-8 w-full min-w-[160px] rounded-md border px-2 text-sm outline-none transition-colors focus:border-[var(--vw-accent)] sm:w-[210px]"
           style={inputStyle}
         >
           <option value="">All sectors</option>
@@ -53,7 +53,7 @@ export default function ScreenerToolbar({
         <button
           type="button"
           onClick={onReset}
-          className="h-9 rounded-md border px-3 text-xs font-semibold uppercase transition-colors hover:bg-[var(--vw-bg-hover)]"
+          className="h-8 rounded-md border px-2.5 text-xs font-semibold uppercase transition-colors hover:bg-[var(--vw-bg-hover)]"
           style={{ borderColor: 'var(--vw-border-lit)', color: 'var(--vw-text-secondary)' }}
         >
           Reset

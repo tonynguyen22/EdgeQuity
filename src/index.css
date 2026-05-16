@@ -138,6 +138,46 @@ body::before {
   background: var(--vw-bg-surface);
 }
 
+.eq-table-shell {
+  border-radius: 8px;
+}
+
+.eq-table-shell table {
+  background: rgba(8, 12, 20, 0.58);
+}
+
+.eq-table-shell thead th {
+  letter-spacing: 0;
+}
+
+.eq-table-shell tbody tr:nth-child(even) {
+  background: rgba(255, 255, 255, 0.012);
+}
+
+.eq-sticky-col {
+  position: sticky;
+  left: 0;
+  z-index: 2;
+  background: var(--vw-bg-raised);
+}
+
+thead .eq-sticky-col {
+  z-index: 12;
+}
+
+.eq-sticky-name {
+  left: 72px;
+  box-shadow: 10px 0 18px -18px rgba(0, 0, 0, 0.9);
+}
+
+.eq-group-start {
+  border-left: 1px solid rgba(109, 133, 162, 0.28);
+}
+
+.eq-scrollbar {
+  scrollbar-gutter: stable;
+}
+
 /* Glow border on accent cards */
 .vw-glow {
   box-shadow: 0 0 0 1px var(--vw-border),

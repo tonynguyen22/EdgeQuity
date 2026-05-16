@@ -173,15 +173,15 @@ test('ScreenerTable server render uses market cap descending by default', () => 
   const html = renderToStaticMarkup(<ScreenerTable stocks={stocks} onSelectStock={() => undefined} />);
 
   assert.ok(html.indexOf('BIG') < html.indexOf('SMOL'));
-  assert.match(html, /Market Cap[\s\S]*>v</);
+  assert.match(html, /MCap[\s\S]*>v</);
 });
 
 test('ScreenerTable exposes active and inactive sort state to assistive tech', () => {
   const html = renderToStaticMarkup(<ScreenerTable stocks={[stock]} onSelectStock={() => undefined} />);
 
-  assert.match(html, /aria-sort="descending"[\s\S]*Market Cap/);
+  assert.match(html, /aria-sort="descending"[\s\S]*MCap/);
   assert.match(html, /aria-sort="none"[\s\S]*Ticker/);
-  assert.match(html, /aria-label="Sort by Market Cap ascending"/);
+  assert.match(html, /aria-label="Sort by MCap ascending"/);
 });
 
 test('ScreenerTable renders an empty state when no stocks are visible', () => {

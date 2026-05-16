@@ -92,11 +92,42 @@ function getNextSort(currentSort: ScreenerSort, columnId: string): ScreenerSort 
   return { columnId, direction: currentSort.direction === 'desc' ? 'asc' : 'desc' };
 }
 
+const COMPACT_COLUMN_LABELS: Record<string, string> = {
+  marketCap: 'MCap',
+  forwardPE: 'Fwd P/E',
+  psTTM: 'P/S',
+  pb: 'P/B',
+  evEbitda: 'EV/EBITDA',
+  fcfYield: 'FCFY',
+  grossMargin: 'Gross',
+  operatingMargin: 'Op Mgn',
+  netMargin: 'Net Mgn',
+  revenueCagr3y: 'Rev 3Y',
+  fcfCagr3y: 'FCF 3Y',
+  currentRatio: 'Curr',
+  debtToEquity: 'D/E',
+  netDebtToEbitda: 'ND/EBITDA',
+  fcfMargin: 'FCF Mgn',
+  fcfConversion: 'FCF Conv',
+  dividendYield: 'Div Yld',
+};
+
+function getCompactColumnLabel(column: EdgequityColumn): string {
+  return COMPACT_COLUMN_LABELS[column.id] ?? column.label;
+}
+
+function isGroupStart(index: number): boolean {
+  if (index === 0) return false;
+  return EDGEQUITY_COLUMNS[index - 1].group !== EDGEQUITY_COLUMNS[index].group;
+}
+
 function getColumnWidthClass(column: EdgequityColumn): string {
-  if (column.id === 'ticker') return 'w-[92px] min-w-[92px]';
-  if (column.id === 'name') return 'w-[220px] min-w-[220px]';
-  if (column.id === 'sector') return 'w-[170px] min-w-[170px]';
-  return 'w-[116px] min-w-[116px]';
+  if (column.id === 'ticker') return 'w-[72px] min-w-[72px]';
+  if (column.id === 'name') return 'w-[168px] min-w-[168px]';
+  if (column.id === 'sector') return 'w-[118px] min-w-[118px]';
+  if (column.format === 'money') return 'w-[92px] min-w-[92px]';
+  if (column.format === 'percent') return 'w-[74px] min-w-[74px]';
+  return 'w-[82px] min-w-[82px]';
 }
 
 function getAriaSort(isActiveSort: boolean, direction: SortDirection): 'ascending' | 'descending' | 'none' {
@@ -106,7 +137,7 @@ function getAriaSort(isActiveSort: boolean, direction: SortDirection): 'ascendin
 
 function getSortButtonLabel(column: EdgequityColumn, isActiveSort: boolean, direction: SortDirection): string {
   const nextDirection = isActiveSort && direction === 'desc' ? 'ascending' : 'descending';
-  return `Sort by ${column.label} ${nextDirection}`;
+  return `Sort by ${getCompactColumnLabel(column)} ${nextDirection}`;
 }
 
 export default function ScreenerTable({ stocks, onSelectStock }: ScreenerTableProps) {
@@ -121,7 +152,7 @@ export default function ScreenerTable({ stocks, onSelectStock }: ScreenerTablePr
   );
 
   return (
-    <section className="vw-card overflow-hidden">
+    <section className="vw-card eq-table-shell overflow-hidden">
       <ScreenerToolbar
         query={query}
         sector={sector}
@@ -133,24 +164,27 @@ export default function ScreenerTable({ stocks, onSelectStock }: ScreenerTablePr
           setSector('');
         }}
       />
-      <div className="overflow-x-auto">
-        <table className="min-w-[2760px] table-fixed border-collapse text-sm">
+      <div className="eq-scrollbar overflow-x-auto">
+        <table className="min-w-[1900px] table-fixed border-collapse text-[12px]">
           <thead
             className="sticky top-0 z-10"
             style={{ background: 'var(--vw-bg-raised)', color: 'var(--vw-text-tertiary)' }}
           >
             <tr className="border-b" style={{ borderColor: 'var(--vw-border)' }}>
-              {EDGEQUITY_COLUMNS.map((column) => {
+              {EDGEQUITY_COLUMNS.map((column, index) => {
                 const isActiveSort = sort.columnId === column.id;
                 const arrow = isActiveSort ? (sort.direction === 'desc' ? 'v' : '^') : '';
                 const ariaSort = getAriaSort(isActiveSort, sort.direction);
+                const stickyClass = column.id === 'ticker' || column.id === 'name' ? 'eq-sticky-col' : '';
+                const stickyNameClass = column.id === 'name' ? 'eq-sticky-name' : '';
+                const groupClass = isGroupStart(index) ? 'eq-group-start' : '';
 
                 return (
                   <th
                     key={column.id}
                     scope="col"
                     aria-sort={ariaSort}
-                    className={`${getColumnWidthClass(column)} px-3 py-2 text-xs font-semibold uppercase`}
+                    className={`${getColumnWidthClass(column)} ${stickyClass} ${stickyNameClass} ${groupClass} px-2 py-1.5 text-[10px] font-semibold uppercase`}
                   >
                     <button
                       type="button"
@@ -160,7 +194,7 @@ export default function ScreenerTable({ stocks, onSelectStock }: ScreenerTablePr
                       }`}
                       onClick={() => setSort((currentSort) => getNextSort(currentSort, column.id))}
                     >
-                      <span className="truncate">{column.label}</span>
+                      <span className="truncate">{getCompactColumnLabel(column)}</span>
                       <span className="inline-block w-3 text-center" aria-hidden="true">
                         {arrow}
                       </span>
@@ -186,8 +220,8 @@ export default function ScreenerTable({ stocks, onSelectStock }: ScreenerTablePr
                   }
                 }}
               >
-                {EDGEQUITY_COLUMNS.map((column) => (
-                  <MetricCell key={column.id} stock={stock} column={column} />
+                {EDGEQUITY_COLUMNS.map((column, index) => (
+                  <MetricCell key={column.id} stock={stock} column={column} groupStart={isGroupStart(index)} />
                 ))}
               </tr>
             ))}
