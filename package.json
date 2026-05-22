@@ -5,8 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite --port=3000 --host=0.0.0.0",
-    "build": "vite build",
-    "build:cf": "vite build && node scripts/edgequity/prepare-cloudflare-dist.mjs",
+    "build": "vite build && node scripts/edgequity/prepare-cloudflare-dist.mjs",
+    "build:full": "vite build",
+    "build:cf": "npm run build",
     "preview": "vite preview",
     "clean": "rm -rf dist",
     "lint": "tsc --noEmit",
