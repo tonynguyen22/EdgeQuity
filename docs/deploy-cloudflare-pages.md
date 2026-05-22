@@ -31,7 +31,7 @@ Repo phải có **`public/data/edgequity/`** (JSON ~500 mã). Cloudflare build `
    |-------|--------|
    | Production branch | `main` (hoặc nhánh chính của anh) |
    | Framework preset | **Vite** (hoặc None) |
-   | Build command | `npm run build` |
+   | Build command | `npm run build:cf` |
    | Build output directory | `dist` |
    | Root directory | `/` (để trống nếu app ở root) |
 
@@ -64,14 +64,25 @@ URL giống Cách 1: `https://edgequity.pages.dev`.
 
 ---
 
+## HTTP 500 sau deploy thành công
+
+Deploy log **Success** nhưng `edgequity.pages.dev` báo **HTTP ERROR 500** thường do **quá nhiều file static** (~5k file, ~470 MB trong `raw/`). Cloudflare build OK nhưng edge không serve được.
+
+**Cách xử lý (đã có trong repo):**
+
+- Đổi **Build command** thành: `npm run build:cf`
+- Script này build Vite rồi **xóa** `dist/data/edgequity/raw`, `stocks`, `sec` — giữ screener (`manifest.raw-first.json` + `stocks-raw-first/`).
+- Redeploy → site chạy; tab **Statements / Fundamentals** sẽ báo thiếu cache cho đến khi host `raw/` trên R2 hoặc GitHub Pages full build.
+
 ## Lỗi thường gặp
 
 | Triệu chứng | Cách xử lý |
 |-------------|------------|
+| **HTTP 500** mọi URL | Dùng `npm run build:cf`, redeploy; hoặc rollback deployment cũ trong Pages. |
 | Build fail `npm ci` / native module | Đặt `NODE_VERSION=22`; nếu vẫn lỗi `better-sqlite3`, báo để tách dependency script-only. |
 | Site trắng / 404 asset | Kiểm tra **Build output** = `dist`, không phải `dist/assets` only. |
-| Screener trống | Thiếu data trên Git — commit `public/data/edgequity/manifest.raw-first.json` + `stocks-raw-first/` + `raw/`. |
-| Build timeout | Data quá lớn — tăng thời gian hoặc deploy nhánh có data đầy đủ; build local rồi `wrangler pages deploy dist`. |
+| Screener trống | Thiếu data trên Git — commit `manifest.raw-first.json` + `stocks-raw-first/`. |
+| Build timeout | Data quá lớn — dùng `build:cf` hoặc build local rồi `wrangler pages deploy dist`. |
 
 ---
 

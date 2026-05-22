@@ -14,7 +14,7 @@ Edgequity is a static-data fundamental stock screener for value investors. It us
 
 ## Deploy (Cloudflare Pages, free)
 
-- Git connect: build `npm run build`, output `dist`, `NODE_VERSION=22`.
+- Git connect: build `npm run build:cf`, output `dist`, `NODE_VERSION=22` (slim data; avoids Pages HTTP 500).
 - Production URL: `https://<project-name>.pages.dev` (e.g. `edgequity.pages.dev`).
 - See `docs/deploy-cloudflare-pages.md`.
 
