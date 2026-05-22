@@ -1,0 +1,98 @@
+{
+  "ticker": "AASP",
+  "name": "Agassi Sports Entertainment Corp",
+  "sector": "Energy",
+  "industry": "Energy",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 73725515,
+  "enterpriseValue": 73.6373,
+  "valuation": {
+    "peTTM": null,
+    "forwardPE": null,
+    "psTTM": null,
+    "pb": 190.2401,
+    "evRevenue": null,
+    "evEbitda": null,
+    "pfcf": null,
+    "fcfYield": null,
+    "earningsYield": -0.12874150828244468
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": null,
+    "netMargin": null,
+    "roe": -31.013726829236415,
+    "roa": -11.857851214889754,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 1.004,
+    "quickRatio": 0.1937,
+    "debtToEquity": null,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": null,
+    "freeCashFlow": null,
+    "fcfMargin": null,
+    "capexToRevenue": null,
+    "fcfConversion": null
+  },
+  "dividends": {
+    "dividendYield": null,
+    "payoutRatio": null
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": null,
+      "grossProfit": null,
+      "operatingIncome": null,
+      "netIncome": -9491534,
+      "freeCashFlow": null,
+      "totalAssets": 800443,
+      "totalDebt": null,
+      "totalEquity": 306043,
+      "sharesDiluted": null
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items",
+    "Revenue unavailable from mapped line items",
+    "Free cash flow unavailable from mapped line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T15:56:51.649Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T15:56:51.649Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T15:56:51.649Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T15:56:51.649Z",
+      "status": "partial",
+      "message": "Thin summary mapped from Finnhub as-reported line items"
+    }
+  }
+}

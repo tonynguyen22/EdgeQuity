@@ -1,0 +1,97 @@
+{
+  "ticker": "AEMD",
+  "name": "Aethlon Medical Inc",
+  "sector": "Health Care",
+  "industry": "Health Care",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 3248057.9999999995,
+  "enterpriseValue": -3.7083,
+  "valuation": {
+    "peTTM": null,
+    "forwardPE": null,
+    "psTTM": 5.6983,
+    "pb": 1.1222,
+    "evRevenue": null,
+    "evEbitda": null,
+    "pfcf": -0.4248308685386445,
+    "fcfYield": -2.353877917204681,
+    "earningsYield": -4.121874978833507
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": null,
+    "netMargin": null,
+    "roe": -2.6130595507394316,
+    "roa": -1.8191490113368591,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 3.1326,
+    "quickRatio": 2.8965,
+    "debtToEquity": null,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": -7645532,
+    "freeCashFlow": -7645532,
+    "fcfMargin": null,
+    "capexToRevenue": null,
+    "fcfConversion": 0.5710697023301832
+  },
+  "dividends": {
+    "dividendYield": null,
+    "payoutRatio": null
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": null,
+      "grossProfit": null,
+      "operatingIncome": -9341365,
+      "netIncome": -13388089,
+      "freeCashFlow": -7645532,
+      "totalAssets": 7359534,
+      "totalDebt": null,
+      "totalEquity": 5123530,
+      "sharesDiluted": 1560839
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items",
+    "Revenue unavailable from mapped line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T17:20:26.647Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T17:20:26.647Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T17:20:26.647Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T17:20:26.647Z",
+      "status": "partial",
+      "message": "Thin summary mapped from Finnhub as-reported line items"
+    }
+  }
+}

@@ -1,0 +1,96 @@
+{
+  "ticker": "BA",
+  "name": "Boeing Co",
+  "sector": "Aerospace & Defense",
+  "industry": "Aerospace & Defense",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 173910000000,
+  "enterpriseValue": 179911000000,
+  "valuation": {
+    "peTTM": 75.1164,
+    "forwardPE": null,
+    "psTTM": 1.8481,
+    "pb": 31.1735,
+    "evRevenue": 2.011010138269452,
+    "evEbitda": null,
+    "pfcf": -92.65316995205114,
+    "fcfYield": -0.010792938876430338,
+    "earningsYield": 0.012868725202691047
+  },
+  "profitability": {
+    "grossMargin": 0.04794160714485318,
+    "operatingMargin": 0.0478521847020556,
+    "netMargin": 0.02501592837262332,
+    "roe": 0.41034103410341033,
+    "roa": 0.013302820459476328,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 1.1882,
+    "quickRatio": 0.4049,
+    "debtToEquity": 3.102676934360103,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 1065000000,
+    "freeCashFlow": -1877000000,
+    "fcfMargin": -0.020980740641382473,
+    "capexToRevenue": 0.03288510333881046,
+    "fcfConversion": -0.8386952636282395
+  },
+  "dividends": {
+    "dividendYield": 0.2025,
+    "payoutRatio": 14.81
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 89463000000,
+      "grossProfit": 4289000000,
+      "operatingIncome": 4281000000,
+      "netIncome": 2238000000,
+      "freeCashFlow": -1877000000,
+      "totalAssets": 168235000000,
+      "totalDebt": 16922000000,
+      "totalEquity": 5454000000,
+      "sharesDiluted": null
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T17:57:31.421Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T17:57:31.421Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T17:57:31.421Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T17:57:31.421Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

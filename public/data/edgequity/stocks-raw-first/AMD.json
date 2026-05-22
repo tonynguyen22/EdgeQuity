@@ -1,0 +1,96 @@
+{
+  "ticker": "AMD",
+  "name": "Advanced Micro Devices Inc",
+  "sector": "Semiconductors",
+  "industry": "Semiconductors",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 686470000000,
+  "enterpriseValue": 684153000000,
+  "valuation": {
+    "peTTM": 145.7026,
+    "forwardPE": 43.7464,
+    "psTTM": 19.4859,
+    "pb": 5.5719,
+    "evRevenue": 19.750945466093132,
+    "evEbitda": null,
+    "pfcf": 124.38304040587063,
+    "fcfYield": 0.008039681267935962,
+    "earningsYield": 0.006314915436945533
+  },
+  "profitability": {
+    "grossMargin": 0.4951644100580271,
+    "operatingMargin": 0.10664280146655504,
+    "netMargin": 0.12514795461762754,
+    "roe": 0.06881061604152447,
+    "roa": 0.056352858591373525,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 2.85,
+    "quickRatio": 1.7857,
+    "debtToEquity": 0.051143668947126145,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 6493000000,
+    "freeCashFlow": 5519000000,
+    "fcfMargin": 0.1593290799387973,
+    "capexToRevenue": 0.02811859464765149,
+    "fcfConversion": 1.2731257208765858
+  },
+  "dividends": {
+    "dividendYield": null,
+    "payoutRatio": null
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 34639000000,
+      "grossProfit": 17152000000,
+      "operatingIncome": 3694000000,
+      "netIncome": 4335000000,
+      "freeCashFlow": 5519000000,
+      "totalAssets": 76926000000,
+      "totalDebt": 3222000000,
+      "totalEquity": 62999000000,
+      "sharesDiluted": 1636000000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T17:57:30.265Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T17:57:30.265Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T17:57:30.265Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T17:57:30.265Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

@@ -1,0 +1,96 @@
+{
+  "ticker": "CAH",
+  "name": "Cardinal Health Inc",
+  "sector": "Health Care",
+  "industry": "Health Care",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 46790000000,
+  "enterpriseValue": 51738.2,
+  "valuation": {
+    "peTTM": 30.0702,
+    "forwardPE": 16.68232,
+    "psTTM": 0.1865,
+    "pb": 9.2487,
+    "evRevenue": 2.3244974795352638e-7,
+    "evEbitda": null,
+    "pfcf": 25.291891891891893,
+    "fcfYield": 0.03953836289805514,
+    "earningsYield": 0.03353280615516136
+  },
+  "profitability": {
+    "grossMargin": 0.03669724770642202,
+    "operatingMargin": 0.010221135961325917,
+    "netMargin": 0.007049214208052907,
+    "roe": -0.564185544768069,
+    "roa": 0.029535785550242836,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 0.9351,
+    "quickRatio": 0.4403,
+    "debtToEquity": null,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 2397000000,
+    "freeCashFlow": 1850000000,
+    "fcfMargin": 0.008311692979539757,
+    "capexToRevenue": 0.0024575654377341875,
+    "fcfConversion": 1.1790949649458253
+  },
+  "dividends": {
+    "dividendYield": 1.0253475882146263,
+    "payoutRatio": 31.65
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 222578000000,
+      "grossProfit": 8168000000,
+      "operatingIncome": 2275000000,
+      "netIncome": 1569000000,
+      "freeCashFlow": 1850000000,
+      "totalAssets": 53122000000,
+      "totalDebt": null,
+      "totalEquity": -2781000000,
+      "sharesDiluted": 242000000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T20:37:37.756Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T20:37:37.756Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T20:37:37.756Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T20:37:37.756Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

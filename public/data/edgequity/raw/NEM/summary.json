@@ -1,0 +1,96 @@
+{
+  "ticker": "NEM",
+  "name": "Newmont Corporation",
+  "sector": "Metals & Mining",
+  "industry": "Metals & Mining",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 117270000000,
+  "enterpriseValue": 114738000000,
+  "valuation": {
+    "peTTM": 13.5578,
+    "forwardPE": 10.01677,
+    "psTTM": 4.592,
+    "pb": 3.2174,
+    "evRevenue": 5.061449556663285,
+    "evEbitda": null,
+    "pfcf": 16.066584463625155,
+    "fcfYield": 0.062240982348426704,
+    "earningsYield": 0.06111537477615758
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": null,
+    "netMargin": 0.31615863072918965,
+    "roe": 0.2116219328549916,
+    "roa": 0.12547049246336725,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 2.2875,
+    "quickRatio": 1.8167,
+    "debtToEquity": 0.15103197803171228,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 10334000000,
+    "freeCashFlow": 7299000000,
+    "fcfMargin": 0.32198156072169043,
+    "capexToRevenue": 0.13388327672151396,
+    "fcfConversion": 1.0184177480117205
+  },
+  "dividends": {
+    "dividendYield": 0.9684328149734612,
+    "payoutRatio": 15.61
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 22669000000,
+      "grossProfit": null,
+      "operatingIncome": null,
+      "netIncome": 7167000000,
+      "freeCashFlow": 7299000000,
+      "totalAssets": 57121000000,
+      "totalDebt": 5115000000,
+      "totalEquity": 33867000000,
+      "sharesDiluted": 1108000000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T18:31:03.035Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T18:31:03.035Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T18:31:03.035Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T18:31:03.035Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

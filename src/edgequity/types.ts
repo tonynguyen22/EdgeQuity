@@ -82,11 +82,68 @@ export interface EdgequityStockRecord {
   };
   history: EdgequityHistoryYear[];
   warnings: string[];
+  sources?: {
+    profile?: EdgequityDataSource;
+    metrics?: EdgequityDataSource;
+    financialsReported?: EdgequityDataSource;
+    summary?: EdgequityDataSource;
+  };
+}
+
+export interface EdgequityDataSource {
+  provider: 'fmp' | 'finnhub' | 'sec' | 'manual' | 'derived';
+  endpoint?: string;
+  fetchedAt?: string;
+  status: 'ok' | 'partial' | 'missing' | 'error';
+  message?: string;
+}
+
+export interface EdgequityAnalysisNote {
+  ticker: string;
+  quickTake: string;
+  strengths: string[];
+  watchItems: string[];
+  valuationRead: string;
+  bottomLine: string;
+  updatedAt: string;
+  research?: EdgequityResearchReportNote;
+}
+
+export interface EdgequityResearchReportNote {
+  sourceLabel: string;
+  sourceUrl: string;
+  earningsTitle: string;
+  earningsDate: string;
+  earningsTakeaways: string[];
+  businessSummary: string[];
+  coreSegmentTitle: string;
+  coreSegmentBody: string[];
+  industryContext: string[];
+  moatPoints: Array<{
+    title: string;
+    body: string;
+  }>;
+  forecastSummary: string;
+  valuationNarrative: string;
+  valuationModel?: {
+    targetYears: number;
+    basePriceTarget: number;
+    bearPriceTarget: number;
+    bullPriceTarget: number;
+    method: string;
+    assumptions: string[];
+  };
+  riskPoints: Array<{
+    title: string;
+    body: string;
+  }>;
+  finalVerdict: string;
 }
 
 export type EdgequityMetricGroup =
   | 'profile'
   | 'valuation'
+  | 'margin'
   | 'profitability'
   | 'growth'
   | 'financialHealth'

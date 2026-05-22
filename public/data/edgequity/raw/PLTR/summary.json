@@ -1,0 +1,96 @@
+{
+  "ticker": "PLTR",
+  "name": "Palantir Technologies Inc",
+  "sector": "Technology",
+  "industry": "Technology",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 323970000000,
+  "enterpriseValue": 326499.749,
+  "valuation": {
+    "peTTM": 144.1101,
+    "forwardPE": 96.45705,
+    "psTTM": 62.9365,
+    "pb": 57.3495,
+    "evRevenue": 0.00007295356686238645,
+    "evEbitda": null,
+    "pfcf": 154.22802439884777,
+    "fcfYield": 0.006483905917214557,
+    "earningsYield": 0.005045664722042165
+  },
+  "profitability": {
+    "grossMargin": 0.8236651721415028,
+    "operatingMargin": 0.3159495165398041,
+    "netMargin": 0.3652471731309014,
+    "roe": 0.2212785565651605,
+    "roa": 0.1836597758840285,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 7.1098,
+    "quickRatio": 6.9937,
+    "debtToEquity": null,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 2134473000,
+    "freeCashFlow": 2100591000,
+    "fcfMargin": 0.4693590314797676,
+    "capexToRevenue": 0.007570642121477949,
+    "fcfConversion": 1.2850449394485894
+  },
+  "dividends": {
+    "dividendYield": null,
+    "payoutRatio": null
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 4475446000,
+      "grossProfit": 3686269000,
+      "operatingIncome": 1414015000,
+      "netIncome": 1634644000,
+      "freeCashFlow": 2100591000,
+      "totalAssets": 8900392000,
+      "totalDebt": null,
+      "totalEquity": 7387268000,
+      "sharesDiluted": 2565197000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T17:57:30.609Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T17:57:30.609Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T17:57:30.609Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T17:57:30.609Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

@@ -1,0 +1,96 @@
+{
+  "ticker": "CSX",
+  "name": "CSX Corp",
+  "sector": "Road & Rail",
+  "industry": "Road & Rail",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 85850000000,
+  "enterpriseValue": 86596000000,
+  "valuation": {
+    "peTTM": 28.0153,
+    "forwardPE": 22.69727,
+    "psTTM": 6.0382,
+    "pb": 5.1313,
+    "evRevenue": 6.145046835083735,
+    "evEbitda": null,
+    "pfcf": 50.17533606078317,
+    "fcfYield": 0.019930110658124636,
+    "earningsYield": 0.03365171811298777
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": 0.3208203235878513,
+    "netMargin": 0.20500993471473175,
+    "roe": 0.2195288753799392,
+    "roa": 0.06610983981693364,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 0.8139,
+    "quickRatio": 0.6894,
+    "debtToEquity": 0.10759878419452888,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 4613000000,
+    "freeCashFlow": 1711000000,
+    "fcfMargin": 0.12141640647175703,
+    "capexToRevenue": 0.20593244393982402,
+    "fcfConversion": 0.5922464520595362
+  },
+  "dividends": {
+    "dividendYield": 1.218981279930344,
+    "payoutRatio": 33.64
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 14092000000,
+      "grossProfit": null,
+      "operatingIncome": 4521000000,
+      "netIncome": 2889000000,
+      "freeCashFlow": 1711000000,
+      "totalAssets": 43700000000,
+      "totalDebt": 1416000000,
+      "totalEquity": 13160000000,
+      "sharesDiluted": 1873000000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T19:02:08.866Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T19:02:08.866Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T19:02:08.866Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T19:02:08.866Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

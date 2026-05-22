@@ -1,0 +1,96 @@
+{
+  "ticker": "YUM",
+  "name": "Yum! Brands Inc",
+  "sector": "Hotels, Restaurants & Leisure",
+  "industry": "Hotels, Restaurants & Leisure",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 41980000000,
+  "enterpriseValue": 53143000000,
+  "valuation": {
+    "peTTM": 24.1351,
+    "forwardPE": 22.61578,
+    "psTTM": 4.9436,
+    "pb": 34.9538,
+    "evRevenue": 6.464298747111057,
+    "evEbitda": null,
+    "pfcf": 25.613178767541182,
+    "fcfYield": 0.03904240114340162,
+    "earningsYield": 0.037136731777036684
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": 0.31310059603454565,
+    "netMargin": 0.1896362972874346,
+    "roe": -0.21283276450511945,
+    "roa": 0.19019153348786141,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 1.3456,
+    "quickRatio": 1.2249,
+    "debtToEquity": -1.6207508532423207,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 2010000000,
+    "freeCashFlow": 1639000000,
+    "fcfMargin": 0.19936747354336457,
+    "capexToRevenue": 0.045128329886875075,
+    "fcfConversion": 1.0513149454778705
+  },
+  "dividends": {
+    "dividendYield": 1.8896799,
+    "payoutRatio": 50.61
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 8221000000,
+      "grossProfit": null,
+      "operatingIncome": 2574000000,
+      "netIncome": 1559000000,
+      "freeCashFlow": 1639000000,
+      "totalAssets": 8197000000,
+      "totalDebt": 11872000000,
+      "totalEquity": -7325000000,
+      "sharesDiluted": null
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T20:54:46.028Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T20:54:46.028Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T20:54:46.028Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T20:54:46.028Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

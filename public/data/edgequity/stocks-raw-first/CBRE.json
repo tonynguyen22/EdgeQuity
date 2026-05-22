@@ -1,0 +1,96 @@
+{
+  "ticker": "CBRE",
+  "name": "CBRE Group Inc",
+  "sector": "Real Estate",
+  "industry": "Real Estate",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 38190000000,
+  "enterpriseValue": 42232000000,
+  "valuation": {
+    "peTTM": 29.2638,
+    "forwardPE": 16.904739361641248,
+    "psTTM": 0.9105,
+    "pb": 5.3897,
+    "evRevenue": 1.0414796547472256,
+    "evEbitda": null,
+    "pfcf": 32.01173512154233,
+    "fcfYield": 0.031238544121497774,
+    "earningsYield": 0.03343807279392511
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": 0.043230579531442666,
+    "netMargin": 0.031491985203452526,
+    "roe": 0.1438387024104528,
+    "roa": 0.04135764484891667,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 1.0949,
+    "quickRatio": 1.0593,
+    "debtToEquity": 0.6652399189006533,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 1559000000,
+    "freeCashFlow": 1193000000,
+    "fcfMargin": 0.029420468557336623,
+    "capexToRevenue": 0.009025893958076448,
+    "fcfConversion": 0.9342208300704777
+  },
+  "dividends": {
+    "dividendYield": null,
+    "payoutRatio": null
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 40550000000,
+      "grossProfit": null,
+      "operatingIncome": 1753000000,
+      "netIncome": 1277000000,
+      "freeCashFlow": 1193000000,
+      "totalAssets": 30877000000,
+      "totalDebt": 5906000000,
+      "totalEquity": 8878000000,
+      "sharesDiluted": 300751541
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T21:12:37.788Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T21:12:37.788Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T21:12:37.788Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T21:12:37.788Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

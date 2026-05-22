@@ -1,0 +1,96 @@
+{
+  "ticker": "CTVA",
+  "name": "Corteva Inc",
+  "sector": "Chemicals",
+  "industry": "Chemicals",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 54230000000,
+  "enterpriseValue": 51395000000,
+  "valuation": {
+    "peTTM": 45.3554,
+    "forwardPE": 21.35757,
+    "psTTM": 2.9461,
+    "pb": 1.876,
+    "evRevenue": 2.9535658870179873,
+    "evEbitda": null,
+    "pfcf": 18.921842288904397,
+    "fcfYield": 0.0528489765812281,
+    "earningsYield": 0.02037617554858934
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": null,
+    "netMargin": 0.06350209758059881,
+    "roe": 0.04576706428098078,
+    "roa": 0.025790640681526433,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 1.4297,
+    "quickRatio": 0.9623,
+    "debtToEquity": 0.069831013916501,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 3457000000,
+    "freeCashFlow": 2866000000,
+    "fcfMargin": 0.1647031779782771,
+    "capexToRevenue": 0.03396356531233837,
+    "fcfConversion": 2.593665158371041
+  },
+  "dividends": {
+    "dividendYield": 0.9137055837563453,
+    "payoutRatio": 43.42
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 17401000000,
+      "grossProfit": null,
+      "operatingIncome": null,
+      "netIncome": 1105000000,
+      "freeCashFlow": 2866000000,
+      "totalAssets": 42845000000,
+      "totalDebt": 1686000000,
+      "totalEquity": 24144000000,
+      "sharesDiluted": null
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T20:15:12.413Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T20:15:12.413Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T20:15:12.413Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T20:15:12.413Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

@@ -1,0 +1,96 @@
+{
+  "ticker": "IBM",
+  "name": "International Business Machines Corp",
+  "sector": "Technology",
+  "industry": "Technology",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 209360000000,
+  "enterpriseValue": 257033000000,
+  "valuation": {
+    "peTTM": 19.5324,
+    "forwardPE": 18.22918,
+    "psTTM": 3.0476,
+    "pb": 8.481,
+    "evRevenue": 3.8059228548160213,
+    "evEbitda": null,
+    "pfcf": 17.299619897537596,
+    "fcfYield": 0.05780473824990447,
+    "earningsYield": 0.0505970576996561
+  },
+  "profitability": {
+    "grossMargin": 0.5818760642629748,
+    "operatingMargin": null,
+    "netMargin": 0.15685200266528468,
+    "roe": 0.3244609164420485,
+    "roa": 5.015625,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 0.9557,
+    "quickRatio": 0.8711,
+    "debtToEquity": 1.8763783386424895,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 13193000000,
+    "freeCashFlow": 12102000000,
+    "fcfMargin": 0.1791959724587251,
+    "capexToRevenue": 0.016154586510698156,
+    "fcfConversion": 1.1424525630133107
+  },
+  "dividends": {
+    "dividendYield": 3.0044444444444443,
+    "payoutRatio": 59.05
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 67535000000,
+      "grossProfit": 39297000000,
+      "operatingIncome": null,
+      "netIncome": 10593000000,
+      "freeCashFlow": 12102000000,
+      "totalAssets": 2112000000,
+      "totalDebt": 61260000000,
+      "totalEquity": 32648000000,
+      "sharesDiluted": 948675228
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T17:57:31.086Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T17:57:31.086Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T17:57:31.086Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T17:57:31.086Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

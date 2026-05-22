@@ -1,0 +1,96 @@
+{
+  "ticker": "KEYS",
+  "name": "Keysight Technologies Inc",
+  "sector": "Electrical Equipment",
+  "industry": "Electrical Equipment",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 58390000000,
+  "enterpriseValue": 59051000000,
+  "valuation": {
+    "peTTM": 59.9902,
+    "forwardPE": 33.67962451327777,
+    "psTTM": 10.1657,
+    "pb": 5.3465,
+    "evRevenue": 10.986232558139536,
+    "evEbitda": null,
+    "pfcf": 45.5815768930523,
+    "fcfYield": 0.021938688131529372,
+    "earningsYield": 0.014557287206713478
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": 0.16297674418604652,
+    "netMargin": 0.15813953488372093,
+    "roe": 0.14453324264580852,
+    "roa": 0.07521458278028494,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 2.3503,
+    "quickRatio": 1.6286,
+    "debtToEquity": 0.4308791021935045,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 1409000000,
+    "freeCashFlow": 1281000000,
+    "fcfMargin": 0.23832558139534885,
+    "capexToRevenue": 0.02381395348837209,
+    "fcfConversion": 1.5070588235294118
+  },
+  "dividends": {
+    "dividendYield": null,
+    "payoutRatio": null
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 5375000000,
+      "grossProfit": null,
+      "operatingIncome": 876000000,
+      "netIncome": 850000000,
+      "freeCashFlow": 1281000000,
+      "totalAssets": 11301000000,
+      "totalDebt": 2534000000,
+      "totalEquity": 5881000000,
+      "sharesDiluted": 173000000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T20:05:31.478Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T20:05:31.478Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T20:05:31.478Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T20:05:31.478Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

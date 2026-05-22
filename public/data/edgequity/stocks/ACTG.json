@@ -1,0 +1,96 @@
+{
+  "ticker": "ACTG",
+  "name": "Acacia Research Corp",
+  "sector": "Financial Services",
+  "industry": "Financial Services",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 443344140.99999994,
+  "enterpriseValue": 136625140.99999994,
+  "valuation": {
+    "peTTM": 20.4921,
+    "forwardPE": null,
+    "psTTM": 1.5577,
+    "pb": 0.6642,
+    "evRevenue": 0.47899653965894406,
+    "evEbitda": null,
+    "pfcf": 6.096423929484887,
+    "fcfYield": 0.16403058769643244,
+    "earningsYield": 0.006288568500559028
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": 0.02246942839513098,
+    "netMargin": 0.009774499354911089,
+    "roe": 0.005130186769712025,
+    "roa": 0.00361628938616471,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 9.1212,
+    "quickRatio": 8.1564,
+    "debtToEquity": 0,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 75242000,
+    "freeCashFlow": 72722000,
+    "fcfMargin": 0.2549573680372469,
+    "capexToRevenue": 0.008834913333707298,
+    "fcfConversion": 26.08393113342898
+  },
+  "dividends": {
+    "dividendYield": 0,
+    "payoutRatio": null
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 285232000,
+      "grossProfit": null,
+      "operatingIncome": 6409000,
+      "netIncome": 2788000,
+      "freeCashFlow": 72722000,
+      "totalAssets": 770956000,
+      "totalDebt": 0,
+      "totalEquity": 543450000,
+      "sharesDiluted": null
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T17:17:33.413Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T17:17:33.413Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T17:17:33.413Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T17:17:33.413Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items"
+    }
+  }
+}

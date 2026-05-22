@@ -1,0 +1,96 @@
+{
+  "ticker": "RBLX",
+  "name": "Roblox Corp",
+  "sector": "Media",
+  "industry": "Media",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 33640000000,
+  "enterpriseValue": 33427779000,
+  "valuation": {
+    "peTTM": null,
+    "forwardPE": null,
+    "psTTM": 6.1889,
+    "pb": 144.1807,
+    "evRevenue": 6.835176445353499,
+    "evEbitda": null,
+    "pfcf": 24.819607785270552,
+    "fcfYield": 0.040290725326991676,
+    "earningsYield": -0.03185546967895363
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": -0.25198428561526093,
+    "netMargin": -0.21912009505677377,
+    "roe": -2.716505612394926,
+    "roa": -0.11212773557886384,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 0.9555,
+    "quickRatio": 0.9432,
+    "debtToEquity": 2.5174607842143155,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 1796358000,
+    "freeCashFlow": 1355380000,
+    "fcfMargin": 0.2771425959978743,
+    "capexToRevenue": 0.09016938991127993,
+    "fcfConversion": -1.2647977170969507
+  },
+  "dividends": {
+    "dividendYield": null,
+    "payoutRatio": null
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 4890551000,
+      "grossProfit": null,
+      "operatingIncome": -1232342000,
+      "netIncome": -1071618000,
+      "freeCashFlow": 1355380000,
+      "totalAssets": 9557118000,
+      "totalDebt": 993098000,
+      "totalEquity": 394484000,
+      "sharesDiluted": 689612000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T21:36:12.971Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T21:36:12.971Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T21:36:12.971Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T21:36:12.971Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

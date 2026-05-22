@@ -1,0 +1,96 @@
+{
+  "ticker": "MPLX",
+  "name": "MPLX LP",
+  "sector": "Energy",
+  "industry": "Energy",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 56260000000,
+  "enterpriseValue": 55625000000,
+  "valuation": {
+    "peTTM": 11.9746,
+    "forwardPE": 12.35244,
+    "psTTM": 4.3569,
+    "pb": 3.7956,
+    "evRevenue": 10.717726396917149,
+    "evEbitda": null,
+    "pfcf": 13.718605218239453,
+    "fcfYield": 0.07289370778528262,
+    "earningsYield": 0.0880199075719872
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": 1.1450867052023121,
+    "netMargin": 0.9541425818882466,
+    "roe": 0.11514940123241484,
+    "roa": 0.11514940123241484,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 1.2293,
+    "quickRatio": 1.1748,
+    "debtToEquity": 0.034926171375421464,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 5909000000,
+    "freeCashFlow": 4101000000,
+    "fcfMargin": 0.7901734104046243,
+    "capexToRevenue": 0.34836223506743735,
+    "fcfConversion": 0.8281502423263328
+  },
+  "dividends": {
+    "dividendYield": 7.766955266955268,
+    "payoutRatio": 81.92
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 5190000000,
+      "grossProfit": null,
+      "operatingIncome": 5943000000,
+      "netIncome": 4952000000,
+      "freeCashFlow": 4101000000,
+      "totalAssets": 43005000000,
+      "totalDebt": 1502000000,
+      "totalEquity": 43005000000,
+      "sharesDiluted": null
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T20:13:13.750Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T20:13:13.750Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T20:13:13.750Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T20:13:13.750Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

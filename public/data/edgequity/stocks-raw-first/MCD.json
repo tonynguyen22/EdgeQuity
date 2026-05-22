@@ -1,0 +1,96 @@
+{
+  "ticker": "MCD",
+  "name": "McDonald's Corp",
+  "sector": "Hotels, Restaurants & Leisure",
+  "industry": "Hotels, Restaurants & Leisure",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 200700000000,
+  "enterpriseValue": 239899000000,
+  "valuation": {
+    "peTTM": 23.1412,
+    "forwardPE": 21.13361,
+    "psTTM": 7.3158,
+    "pb": 15.305,
+    "evRevenue": 370.78670788253476,
+    "evEbitda": null,
+    "pfcf": 27.929306985805734,
+    "fcfYield": 0.03580468360737419,
+    "earningsYield": 0.04266567015445939
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": 19.154559505409583,
+    "netMargin": 13.234930448222565,
+    "roe": -4.781127861529872,
+    "roa": 0.684766093562575,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 0.9546,
+    "quickRatio": 0.9546,
+    "debtToEquity": -22.318816303740928,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 10551000000,
+    "freeCashFlow": 7186000000,
+    "fcfMargin": 11.106646058732611,
+    "capexToRevenue": 5.200927357032458,
+    "fcfConversion": 0.839191872007474
+  },
+  "dividends": {
+    "dividendYield": 2.6545830806008497,
+    "payoutRatio": 59.73
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 647000000,
+      "grossProfit": null,
+      "operatingIncome": 12393000000,
+      "netIncome": 8563000000,
+      "freeCashFlow": 7186000000,
+      "totalAssets": 12505000000,
+      "totalDebt": 39973000000,
+      "totalEquity": -1791000000,
+      "sharesDiluted": 716
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T17:57:31.225Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T17:57:31.225Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T17:57:31.225Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T17:57:31.225Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

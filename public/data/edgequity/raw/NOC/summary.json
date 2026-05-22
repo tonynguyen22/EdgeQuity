@@ -1,0 +1,96 @@
+{
+  "ticker": "NOC",
+  "name": "Northrop Grumman Corp",
+  "sector": "Aerospace & Defense",
+  "industry": "Aerospace & Defense",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 78120000000,
+  "enterpriseValue": 88879000000,
+  "valuation": {
+    "peTTM": 17.1877,
+    "forwardPE": 19.8056,
+    "psTTM": 1.8564,
+    "pb": 4.8807,
+    "evRevenue": 2.118486914239405,
+    "evEbitda": null,
+    "pfcf": 23.622618687632293,
+    "fcfYield": 0.04233230926779314,
+    "earningsYield": 0.05353302611367128
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": 0.10752252466987654,
+    "netMargin": 0.09968060256471373,
+    "roe": 0.250809643756747,
+    "roa": 0.08139829106409482,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 1.1012,
+    "quickRatio": 0.9678,
+    "debtToEquity": 0.9093198992443325,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 4757000000,
+    "freeCashFlow": 3307000000,
+    "fcfMargin": 0.07882442675311055,
+    "capexToRevenue": 0.03456166277351385,
+    "fcfConversion": 0.7907699665231946
+  },
+  "dividends": {
+    "dividendYield": 1.7893040186898963,
+    "payoutRatio": 30.92
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 41954000000,
+      "grossProfit": null,
+      "operatingIncome": 4511000000,
+      "netIncome": 4182000000,
+      "freeCashFlow": 3307000000,
+      "totalAssets": 51377000000,
+      "totalDebt": 15162000000,
+      "totalEquity": 16674000000,
+      "sharesDiluted": 143800000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T19:14:40.671Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T19:14:40.671Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T19:14:40.671Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T19:14:40.671Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

@@ -1,0 +1,96 @@
+{
+  "ticker": "CPRT",
+  "name": "Copart Inc",
+  "sector": "Commercial Services & Supplies",
+  "industry": "Commercial Services & Supplies",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 32210000000,
+  "enterpriseValue": 26398.363,
+  "valuation": {
+    "peTTM": 20.226,
+    "forwardPE": 20.11473,
+    "psTTM": 6.8278,
+    "pb": 4.771,
+    "evRevenue": 0.0000056807836438375385,
+    "evEbitda": null,
+    "pfcf": 26.170821281159608,
+    "fcfYield": 0.03821049363551692,
+    "earningsYield": 0.0480708786091276
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": 0.36512359268149186,
+    "netMargin": 0.33319926713346665,
+    "roe": 0.16853787289106287,
+    "roa": 0.15344148620212544,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 8.4221,
+    "quickRatio": 8.2962,
+    "debtToEquity": null,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 1799750000,
+    "freeCashFlow": 1230760000,
+    "fcfMargin": 0.2648528349083422,
+    "capexToRevenue": 0.12244354263584908,
+    "fcfConversion": 0.7948782036253772
+  },
+  "dividends": {
+    "dividendYield": null,
+    "payoutRatio": null
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 4646958000,
+      "grossProfit": null,
+      "operatingIncome": 1696714000,
+      "netIncome": 1548363000,
+      "freeCashFlow": 1230760000,
+      "totalAssets": 10090902000,
+      "totalDebt": null,
+      "totalEquity": 9187033000,
+      "sharesDiluted": 977563000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T21:42:48.639Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T21:42:48.639Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T21:42:48.639Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T21:42:48.639Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

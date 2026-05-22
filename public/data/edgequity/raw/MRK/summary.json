@@ -1,0 +1,96 @@
+{
+  "ticker": "MRK",
+  "name": "Merck & Co Inc",
+  "sector": "Pharmaceuticals",
+  "industry": "Pharmaceuticals",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 278000000000,
+  "enterpriseValue": 312774000000,
+  "valuation": {
+    "peTTM": 31.6143,
+    "forwardPE": 16.88389,
+    "psTTM": 4.295,
+    "pb": 4.9663,
+    "evRevenue": 4.811093507252619,
+    "evEbitda": null,
+    "pfcf": 22.491909385113267,
+    "fcfYield": 0.04446043165467626,
+    "earningsYield": 0.06569424460431654
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": null,
+    "netMargin": 0.2809216901755088,
+    "roe": 0.15797759612473508,
+    "roa": 0.13343708444756186,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 1.5362,
+    "quickRatio": 1.3012,
+    "debtToEquity": 0.42678949872410366,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 16472000000,
+    "freeCashFlow": 12360000000,
+    "fcfMargin": 0.19012167171709404,
+    "capexToRevenue": 0.0632508344741659,
+    "fcfConversion": 0.6767781854021793
+  },
+  "dividends": {
+    "dividendYield": 3.0088495575221237,
+    "payoutRatio": 44.79
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 65011000000,
+      "grossProfit": null,
+      "operatingIncome": null,
+      "netIncome": 18263000000,
+      "freeCashFlow": 12360000000,
+      "totalAssets": 136866000000,
+      "totalDebt": 49339000000,
+      "totalEquity": 115605000000,
+      "sharesDiluted": null
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T17:57:30.802Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T17:57:30.802Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T17:57:30.802Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T17:57:30.802Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

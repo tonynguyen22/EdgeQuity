@@ -1,0 +1,96 @@
+{
+  "ticker": "AEYE",
+  "name": "AudioEye Inc",
+  "sector": "Technology",
+  "industry": "Technology",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 92576202,
+  "enterpriseValue": 100270202,
+  "valuation": {
+    "peTTM": null,
+    "forwardPE": 96.87332,
+    "psTTM": 2.2965,
+    "pb": 25.8247,
+    "evRevenue": 2.4874153953015306,
+    "evEbitda": null,
+    "pfcf": 19.70125601191743,
+    "fcfYield": 0.0507581851327191,
+    "earningsYield": -0.03323748364617507
+  },
+  "profitability": {
+    "grossMargin": 0.7828136240728337,
+    "operatingMargin": -0.045397038029322025,
+    "netMargin": -0.07633152241323708,
+    "roe": -0.6405079100749376,
+    "roa": -0.09547005895128761,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 0.8756,
+    "quickRatio": 0.8217,
+    "debtToEquity": 2.70233139050791,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 4753000,
+    "freeCashFlow": 4699000,
+    "fcfMargin": 0.11656867852447222,
+    "capexToRevenue": 0.0013395847287340924,
+    "fcfConversion": -1.5271368215794605
+  },
+  "dividends": {
+    "dividendYield": null,
+    "payoutRatio": null
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 40311000,
+      "grossProfit": 31556000,
+      "operatingIncome": -1830000,
+      "netIncome": -3077000,
+      "freeCashFlow": 4699000,
+      "totalAssets": 32230000,
+      "totalDebt": 12982000,
+      "totalEquity": 4804000,
+      "sharesDiluted": 12416000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T17:27:42.456Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T17:27:42.456Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T17:27:42.456Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T17:27:42.456Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items"
+    }
+  }
+}

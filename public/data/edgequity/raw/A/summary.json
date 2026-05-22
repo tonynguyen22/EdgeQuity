@@ -1,0 +1,96 @@
+{
+  "ticker": "A",
+  "name": "Agilent Technologies Inc",
+  "sector": "Life Sciences Tools & Services",
+  "industry": "Life Sciences Tools & Services",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 31680000000,
+  "enterpriseValue": 30499000000,
+  "valuation": {
+    "peTTM": 24.49,
+    "forwardPE": 18.2544,
+    "psTTM": 4.4716,
+    "pb": 6.1553,
+    "evRevenue": 4.389608520437536,
+    "evEbitda": null,
+    "pfcf": 27.5,
+    "fcfYield": 0.03636363636363636,
+    "earningsYield": 0.0411300505050505
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": 0.21286701208981001,
+    "netMargin": 0.18753598157743234,
+    "roe": 0.19329476338822132,
+    "roa": 0.10238076530211361,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 1.9574,
+    "quickRatio": 1.5207,
+    "debtToEquity": 0.09019433318498739,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 1559000000,
+    "freeCashFlow": 1152000000,
+    "fcfMargin": 0.16580310880829016,
+    "capexToRevenue": 0.05857800805987334,
+    "fcfConversion": 0.884113584036838
+  },
+  "dividends": {
+    "dividendYield": 0.8964668658815258,
+    "payoutRatio": 21.64
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 6948000000,
+      "grossProfit": null,
+      "operatingIncome": 1479000000,
+      "netIncome": 1303000000,
+      "freeCashFlow": 1152000000,
+      "totalAssets": 12727000000,
+      "totalDebt": 608000000,
+      "totalEquity": 6741000000,
+      "sharesDiluted": 285000000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T21:44:47.462Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T21:44:47.462Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T21:44:47.462Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T21:44:47.462Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

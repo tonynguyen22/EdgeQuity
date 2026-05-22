@@ -1,0 +1,96 @@
+{
+  "ticker": "MSTR",
+  "name": "Strategy Inc",
+  "sector": "Technology",
+  "industry": "Technology",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 58480000000,
+  "enterpriseValue": 64368685000,
+  "valuation": {
+    "peTTM": null,
+    "forwardPE": 4.37835,
+    "psTTM": 116.9738,
+    "pb": 0.8554,
+    "evRevenue": 134.87894801910178,
+    "evEbitda": null,
+    "pfcf": -775.0520191377414,
+    "fcfYield": -0.001290235978112175,
+    "earningsYield": -0.06580287277701778
+  },
+  "profitability": {
+    "grossMargin": 0.686909748487636,
+    "operatingMargin": -11.408232456682585,
+    "netMargin": -8.063465854205388,
+    "roe": -0.0872132913970614,
+    "roa": -26.989991373082614,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 5.617,
+    "quickRatio": 5.5177,
+    "debtToEquity": 0.18561906458011518,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": -67241000,
+    "freeCashFlow": -75453000,
+    "fcfMargin": -0.15810516037239672,
+    "capexToRevenue": 0.01720752755991308,
+    "fcfConversion": 0.01960759346304408
+  },
+  "dividends": {
+    "dividendYield": 1.0488,
+    "payoutRatio": null
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 477233000,
+      "grossProfit": 327816000,
+      "operatingIncome": -5444385000,
+      "netIncome": -3848152000,
+      "freeCashFlow": -75453000,
+      "totalAssets": 142577000,
+      "totalDebt": 8190155000,
+      "totalEquity": 44123458000,
+      "sharesDiluted": 277660000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T20:04:52.045Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T20:04:52.045Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T20:04:52.045Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T20:04:52.045Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

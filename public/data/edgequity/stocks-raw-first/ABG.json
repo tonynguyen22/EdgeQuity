@@ -1,0 +1,96 @@
+{
+  "ticker": "ABG",
+  "name": "Asbury Automotive Group Inc",
+  "sector": "Retail",
+  "industry": "Retail",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 3404075441.9999995,
+  "enterpriseValue": 4322075442,
+  "valuation": {
+    "peTTM": 6.1958,
+    "forwardPE": 6.958973037880944,
+    "psTTM": 0.1889,
+    "pb": 1.1615,
+    "evRevenue": 0.24012864281348964,
+    "evEbitda": null,
+    "pfcf": 5.777453228105905,
+    "fcfYield": 0.1730866457101276,
+    "earningsYield": 0.14453263694735707
+  },
+  "profitability": {
+    "grossMargin": 0.17065948108228235,
+    "operatingMargin": 0.047813767431523976,
+    "netMargin": 0.02733485193621868,
+    "roe": 0.1264164032991598,
+    "roa": 0.04234735156908988,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 0.9496,
+    "quickRatio": 0.3392,
+    "debtToEquity": 0.24625504252421695,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 775200000,
+    "freeCashFlow": 589200000,
+    "fcfMargin": 0.032735151952886274,
+    "capexToRevenue": 0.010333907439302183,
+    "fcfConversion": 1.197560975609756
+  },
+  "dividends": {
+    "dividendYield": null,
+    "payoutRatio": null
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 17999000000,
+      "grossProfit": 3071700000,
+      "operatingIncome": 860600000,
+      "netIncome": 492000000,
+      "freeCashFlow": 589200000,
+      "totalAssets": 11618200000,
+      "totalDebt": 958400000,
+      "totalEquity": 3891900000,
+      "sharesDiluted": 19600000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T16:31:01.116Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T16:31:01.116Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T16:31:01.116Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T16:31:01.116Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items"
+    }
+  }
+}

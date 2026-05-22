@@ -1,0 +1,96 @@
+{
+  "ticker": "STT",
+  "name": "State Street Corp",
+  "sector": "Financial Services",
+  "industry": "Financial Services",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 42550000000,
+  "enterpriseValue": 71514000000,
+  "valuation": {
+    "peTTM": 13.8817,
+    "forwardPE": 11.7898,
+    "psTTM": 1.80473,
+    "pb": 1.2943,
+    "evRevenue": 5.128657487091222,
+    "evEbitda": null,
+    "pfcf": 3.924190722124873,
+    "fcfYield": 0.25482961222091655,
+    "earningsYield": 0.06921269095182139
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": null,
+    "netMargin": 0.21120195065978198,
+    "roe": 0.10577924643511367,
+    "roa": 0.05036943285215845,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": null,
+    "quickRatio": null,
+    "debtToEquity": 1.0403361948205883,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 11898000000,
+    "freeCashFlow": 10843000000,
+    "fcfMargin": 0.7776104417670683,
+    "capexToRevenue": 0.07565978198508319,
+    "fcfConversion": 3.6818336162988117
+  },
+  "dividends": {
+    "dividendYield": 2.1808268968650615,
+    "payoutRatio": 38.03
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 13944000000,
+      "grossProfit": null,
+      "operatingIncome": null,
+      "netIncome": 2945000000,
+      "freeCashFlow": 10843000000,
+      "totalAssets": 58468000000,
+      "totalDebt": 28964000000,
+      "totalEquity": 27841000000,
+      "sharesDiluted": 289019000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T20:50:48.820Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T20:50:48.820Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T20:50:48.820Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T20:50:48.820Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

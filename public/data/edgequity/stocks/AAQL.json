@@ -1,0 +1,97 @@
+{
+  "ticker": "AAQL",
+  "name": "Antiaging Quantum Living Inc",
+  "sector": "Media",
+  "industry": "Media",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 21250712,
+  "enterpriseValue": 20.7142,
+  "valuation": {
+    "peTTM": null,
+    "forwardPE": null,
+    "psTTM": 16.2211,
+    "pb": null,
+    "evRevenue": 0.000025326140912436516,
+    "evEbitda": null,
+    "pfcf": null,
+    "fcfYield": null,
+    "earningsYield": -0.03390046413503698
+  },
+  "profitability": {
+    "grossMargin": 0.5239247436721939,
+    "operatingMargin": -0.9658404837767056,
+    "netMargin": -0.8808054305060045,
+    "roe": 0.6375204974792414,
+    "roa": -0.45327272155283604,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 0.2573,
+    "quickRatio": 0.2263,
+    "debtToEquity": null,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": -900280,
+    "freeCashFlow": null,
+    "fcfMargin": null,
+    "capexToRevenue": null,
+    "fcfConversion": null
+  },
+  "dividends": {
+    "dividendYield": null,
+    "payoutRatio": null
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 817898,
+      "grossProfit": 428517,
+      "operatingIncome": -789959,
+      "netIncome": -720409,
+      "freeCashFlow": null,
+      "totalAssets": 1589350,
+      "totalDebt": null,
+      "totalEquity": -1130017,
+      "sharesDiluted": 29995000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items",
+    "Free cash flow unavailable from mapped line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T15:53:33.862Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T15:53:33.862Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T15:53:33.862Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T15:53:33.862Z",
+      "status": "partial",
+      "message": "Thin summary mapped from Finnhub as-reported line items"
+    }
+  }
+}

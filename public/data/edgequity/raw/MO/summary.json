@@ -1,0 +1,96 @@
+{
+  "ticker": "MO",
+  "name": "Altria Group Inc",
+  "sector": "Tobacco",
+  "industry": "Tobacco",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 123100000000,
+  "enterpriseValue": 144335000000,
+  "valuation": {
+    "peTTM": 15.2204,
+    "forwardPE": 13.02694,
+    "psTTM": 5.2273,
+    "pb": 26.8387,
+    "evRevenue": 6.200223377292839,
+    "evEbitda": null,
+    "pfcf": 13.566233193740358,
+    "fcfYield": 0.07371242891957758,
+    "earningsYield": 0.05643379366368806
+  },
+  "profitability": {
+    "grossMargin": 0.6246831908587138,
+    "operatingMargin": 0.4252330426564715,
+    "netMargin": 0.2984234717986168,
+    "roe": -1.9837235865219873,
+    "roa": 0.19838935374246794,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 0.648,
+    "quickRatio": 0.5311,
+    "debtToEquity": -7.341233580810965,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 9290000000,
+    "freeCashFlow": 9074000000,
+    "fcfMargin": 0.3897933760041239,
+    "capexToRevenue": 0.009278749087160101,
+    "fcfConversion": 1.3061753274794876
+  },
+  "dividends": {
+    "dividendYield": 5.782081003681986,
+    "payoutRatio": 100.19
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 23279000000,
+      "grossProfit": 14542000000,
+      "operatingIncome": 9899000000,
+      "netIncome": 6947000000,
+      "freeCashFlow": 9074000000,
+      "totalAssets": 35017000000,
+      "totalDebt": 25709000000,
+      "totalEquity": -3502000000,
+      "sharesDiluted": null
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T18:21:49.513Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T18:21:49.513Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T18:21:49.513Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T18:21:49.513Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

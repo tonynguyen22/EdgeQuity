@@ -1,0 +1,96 @@
+{
+  "ticker": "CNC",
+  "name": "Centene Corp",
+  "sector": "Health Care",
+  "industry": "Health Care",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 28750000000,
+  "enterpriseValue": 28263000000,
+  "valuation": {
+    "peTTM": null,
+    "forwardPE": 16.58261973816856,
+    "psTTM": 0.1439,
+    "pb": 1.0137,
+    "evRevenue": 0.16189046918049502,
+    "evEbitda": null,
+    "pfcf": 6.653552418421661,
+    "fcfYield": 0.15029565217391305,
+    "earningsYield": -0.23224347826086955
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": -0.043664545397265456,
+    "netMargin": -0.03824585722386743,
+    "roe": -0.3346363955294943,
+    "roa": -0.08700014332807797,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 1.1001,
+    "quickRatio": 1.1001,
+    "debtToEquity": 0.8720994336691225,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 5088000000,
+    "freeCashFlow": 4321000000,
+    "fcfMargin": 0.02475068879202204,
+    "capexToRevenue": 0.004393376140588037,
+    "fcfConversion": -0.6471469222704808
+  },
+  "dividends": {
+    "dividendYield": null,
+    "payoutRatio": null
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 174581000000,
+      "grossProfit": null,
+      "operatingIncome": -7623000000,
+      "netIncome": -6677000000,
+      "freeCashFlow": 4321000000,
+      "totalAssets": 76747000000,
+      "totalDebt": 17401000000,
+      "totalEquity": 19953000000,
+      "sharesDiluted": 493116000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T22:05:59.088Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T22:05:59.088Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T22:05:59.088Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T22:05:59.088Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

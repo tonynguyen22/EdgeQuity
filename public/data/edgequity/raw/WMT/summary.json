@@ -1,0 +1,96 @@
+{
+  "ticker": "WMT",
+  "name": "Walmart Inc",
+  "sector": "Retail",
+  "industry": "Retail",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 1060000000000,
+  "enterpriseValue": 1090524000000,
+  "valuation": {
+    "peTTM": 48.8607,
+    "forwardPE": 43.90991,
+    "psTTM": 1.4999,
+    "pb": 9.9258,
+    "evRevenue": 1.5437484870748415,
+    "evEbitda": null,
+    "pfcf": 71.03129397574214,
+    "fcfYield": 0.014078301886792453,
+    "earningsYield": 0.02100943396226415
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": 0.04222034418958881,
+    "netMargin": 0.03152546739655131,
+    "roe": 0.22355622032384032,
+    "roa": 0.07823148369328481,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 0.7898,
+    "quickRatio": 0.2038,
+    "debtToEquity": 0.41382494955680255,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 41565000000,
+    "freeCashFlow": 14923000000,
+    "fcfMargin": 0.02112503592091312,
+    "capexToRevenue": 0.03771448147188684,
+    "fcfConversion": 0.6700942972608891
+  },
+  "dividends": {
+    "dividendYield": 0.7596102202102354,
+    "payoutRatio": 34.29
+  },
+  "history": [
+    {
+      "year": "2026",
+      "revenue": 706413000000,
+      "grossProfit": null,
+      "operatingIncome": 29825000000,
+      "netIncome": 22270000000,
+      "freeCashFlow": 14923000000,
+      "totalAssets": 284668000000,
+      "totalDebt": 41224000000,
+      "totalEquity": 99617000000,
+      "sharesDiluted": 8022000000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T17:57:30.175Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T17:57:30.175Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T17:57:30.175Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T17:57:30.175Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

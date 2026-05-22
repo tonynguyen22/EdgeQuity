@@ -1,0 +1,96 @@
+{
+  "ticker": "CMI",
+  "name": "Cummins Inc",
+  "sector": "Machinery",
+  "industry": "Machinery",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 93540000000,
+  "enterpriseValue": 90883000000,
+  "valuation": {
+    "peTTM": 32.7472,
+    "forwardPE": 23.73422,
+    "psTTM": 2.5826,
+    "pb": 5.7058,
+    "evRevenue": 2.699227799227799,
+    "evEbitda": null,
+    "pfcf": 39.20368818105616,
+    "fcfYield": 0.025507804147958092,
+    "earningsYield": 0.03161214453709643
+  },
+  "profitability": {
+    "grossMargin": 0.25292545292545293,
+    "operatingMargin": 0.11954261954261955,
+    "netMargin": 0.08782298782298782,
+    "roe": 0.23945258725402865,
+    "roa": 0.08699105671922805,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 1.7612,
+    "quickRatio": 1.0084,
+    "debtToEquity": 0.015223904769616972,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 3621000000,
+    "freeCashFlow": 2386000000,
+    "fcfMargin": 0.07086427086427087,
+    "capexToRevenue": 0.03667953667953668,
+    "fcfConversion": 0.8068988840040582
+  },
+  "dividends": {
+    "dividendYield": 1.1942615731410573,
+    "payoutRatio": 37.11
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 33670000000,
+      "grossProfit": 8516000000,
+      "operatingIncome": 4025000000,
+      "netIncome": 2957000000,
+      "freeCashFlow": 2386000000,
+      "totalAssets": 33992000000,
+      "totalDebt": 188000000,
+      "totalEquity": 12349000000,
+      "sharesDiluted": null
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T18:52:53.787Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T18:52:53.787Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T18:52:53.787Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T18:52:53.787Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

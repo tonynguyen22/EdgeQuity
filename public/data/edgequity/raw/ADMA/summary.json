@@ -1,0 +1,96 @@
+{
+  "ticker": "ADMA",
+  "name": "ADMA Biologics Inc",
+  "sector": "Biotechnology",
+  "industry": "Biotechnology",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 1983974582.9999998,
+  "enterpriseValue": 2049.6397,
+  "valuation": {
+    "peTTM": 12.0404,
+    "forwardPE": 9.95543,
+    "psTTM": 3.9048,
+    "pb": 9.0947,
+    "evRevenue": 0.000004806238656455327,
+    "evEbitda": null,
+    "pfcf": 17.963299558155114,
+    "fcfYield": 0.05566905994984716,
+    "earningsYield": 0.09963484496918075
+  },
+  "profitability": {
+    "grossMargin": 0.5148339563000933,
+    "operatingMargin": 0.32590384894971086,
+    "netMargin": 0.4635271330553823,
+    "roe": 0.5663690697900968,
+    "roa": 34.94307937069118,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 6.7084,
+    "quickRatio": 3.6322,
+    "debtToEquity": null,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 118672000,
+    "freeCashFlow": 110446000,
+    "fcfMargin": 0.2589869012836086,
+    "capexToRevenue": 0.019289302011471342,
+    "fcfConversion": 0.5587308332448033
+  },
+  "dividends": {
+    "dividendYield": null,
+    "payoutRatio": null
+  },
+  "history": [
+    {
+      "year": "2024",
+      "revenue": 426454000,
+      "grossProfit": 219553000,
+      "operatingIncome": 138983000,
+      "netIncome": 197673000,
+      "freeCashFlow": 110446000,
+      "totalAssets": 5657000,
+      "totalDebt": null,
+      "totalEquity": 349018000,
+      "sharesDiluted": 243342466
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T17:05:57.166Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T17:05:57.166Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T17:05:57.166Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T17:05:57.166Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items"
+    }
+  }
+}

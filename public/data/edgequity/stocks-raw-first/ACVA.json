@@ -1,0 +1,96 @@
+{
+  "ticker": "ACVA",
+  "name": "ACV Auctions Inc",
+  "sector": "Commercial Services & Supplies",
+  "industry": "Commercial Services & Supplies",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 1040525918.9999999,
+  "enterpriseValue": 959028919,
+  "valuation": {
+    "peTTM": null,
+    "forwardPE": 28.38730573033012,
+    "psTTM": 1.3321,
+    "pb": 3.2136,
+    "evRevenue": 1.2625346811373264,
+    "evEbitda": null,
+    "pfcf": 15.050856582868052,
+    "fcfYield": 0.06644140115840787,
+    "earningsYield": -0.06356497112879704
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": -0.08318917965366256,
+    "netMargin": -0.08707277193703052,
+    "roe": -0.1539297575189151,
+    "roa": -0.06092513800983962,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 1.6003,
+    "quickRatio": 1.6003,
+    "debtToEquity": 0.44218644907990307,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 78232000,
+    "freeCashFlow": 69134000,
+    "fcfMargin": 0.0910129725146984,
+    "capexToRevenue": 0.011977261896298871,
+    "fcfConversion": -1.0452518105259976
+  },
+  "dividends": {
+    "dividendYield": null,
+    "payoutRatio": null
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 759606000,
+      "grossProfit": null,
+      "operatingIncome": -63191000,
+      "netIncome": -66141000,
+      "freeCashFlow": 69134000,
+      "totalAssets": 1085611000,
+      "totalDebt": 190000000,
+      "totalEquity": 429683000,
+      "sharesDiluted": 170584000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T16:58:39.570Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T16:58:39.570Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T16:58:39.570Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T16:58:39.570Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items"
+    }
+  }
+}

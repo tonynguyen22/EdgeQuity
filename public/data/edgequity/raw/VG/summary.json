@@ -1,0 +1,96 @@
+{
+  "ticker": "VG",
+  "name": "Venture Global Inc",
+  "sector": "Energy",
+  "industry": "Energy",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 35180000000,
+  "enterpriseValue": 67030000000,
+  "valuation": {
+    "peTTM": 13.6147,
+    "forwardPE": 11.00402,
+    "psTTM": 2.6668,
+    "pb": 1.9784,
+    "evRevenue": 4.868182148304162,
+    "evEbitda": null,
+    "pfcf": -5.174290336814237,
+    "fcfYield": -0.19326321773735078,
+    "earningsYield": 0.07768618533257533
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": 0.37446437649793013,
+    "netMargin": 0.19848936015687413,
+    "roe": 0.4053092095506451,
+    "roa": 0.05113572577929125,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 0.93,
+    "quickRatio": 0.8133,
+    "debtToEquity": 5.07266795195017,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 6566000000,
+    "freeCashFlow": -6799000000,
+    "fcfMargin": -0.4937903987217663,
+    "capexToRevenue": 0.9706587261239015,
+    "fcfConversion": -2.487742407610684
+  },
+  "dividends": {
+    "dividendYield": 0.5982532751091704,
+    "payoutRatio": null
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 13769000000,
+      "grossProfit": null,
+      "operatingIncome": 5156000000,
+      "netIncome": 2733000000,
+      "freeCashFlow": -6799000000,
+      "totalAssets": 53446000000,
+      "totalDebt": 34205000000,
+      "totalEquity": 6743000000,
+      "sharesDiluted": 2635000000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T21:25:51.720Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T21:25:51.720Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T21:25:51.720Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T21:25:51.720Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

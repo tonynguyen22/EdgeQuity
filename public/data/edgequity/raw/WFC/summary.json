@@ -1,0 +1,97 @@
+{
+  "ticker": "WFC",
+  "name": "Wells Fargo & Co",
+  "sector": "Banking",
+  "industry": "Banking",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 227590000000,
+  "enterpriseValue": 420625000000,
+  "valuation": {
+    "peTTM": 10.5147,
+    "forwardPE": 11.07881,
+    "psTTM": 1.90599,
+    "pb": 1.6153,
+    "evRevenue": 26.156644487283128,
+    "evEbitda": null,
+    "pfcf": null,
+    "fcfYield": null,
+    "earningsYield": 0.0000878773232567336
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": null,
+    "netMargin": 0.0012437037497668056,
+    "roe": 0.00011042585731874975,
+    "roa": 0.00008774431307170904,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": null,
+    "quickRatio": null,
+    "debtToEquity": 1.065802768376243,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": -19001000000,
+    "freeCashFlow": null,
+    "fcfMargin": null,
+    "capexToRevenue": null,
+    "fcfConversion": null
+  },
+  "dividends": {
+    "dividendYield": 2.2733013387218994,
+    "payoutRatio": 30.39
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 16081000000,
+      "grossProfit": null,
+      "operatingIncome": null,
+      "netIncome": 20000000,
+      "freeCashFlow": null,
+      "totalAssets": 227935000000,
+      "totalDebt": 193035000000,
+      "totalEquity": 181117000000,
+      "sharesDiluted": 3242300000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items",
+    "Free cash flow unavailable from mapped line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T17:57:30.991Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T17:57:30.991Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T17:57:30.991Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T17:57:30.991Z",
+      "status": "partial",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

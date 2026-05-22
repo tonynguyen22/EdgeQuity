@@ -1,0 +1,96 @@
+{
+  "ticker": "EIX",
+  "name": "Edison International",
+  "sector": "Utilities",
+  "industry": "Utilities",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 26340000000,
+  "enterpriseValue": 64642000000,
+  "valuation": {
+    "peTTM": 7.1664,
+    "forwardPE": 11.18276,
+    "psTTM": 1.3811,
+    "pb": 1.3138,
+    "evRevenue": 3.3463788372935754,
+    "evEbitda": null,
+    "pfcf": -36.83916083916084,
+    "fcfYield": -0.027145026575550492,
+    "earningsYield": 0.17847380410022778
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": 0.36718952218253353,
+    "netMargin": 0.24336077030594813,
+    "roe": 0.26742135502588316,
+    "roa": 0.049996809393146574,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 0.7295,
+    "quickRatio": 0.6674,
+    "debtToEquity": 2.1878377609647877,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 5800000000,
+    "freeCashFlow": -715000000,
+    "fcfMargin": -0.037014029093544544,
+    "capexToRevenue": 0.33726769167054926,
+    "fcfConversion": -0.1520952988725803
+  },
+  "dividends": {
+    "dividendYield": 5.0329796386578725,
+    "payoutRatio": 29.31
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 19317000000,
+      "grossProfit": null,
+      "operatingIncome": 7093000000,
+      "netIncome": 4701000000,
+      "freeCashFlow": -715000000,
+      "totalAssets": 94026000000,
+      "totalDebt": 38460000000,
+      "totalEquity": 17579000000,
+      "sharesDiluted": 386000000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T22:26:41.453Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T22:26:41.453Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T22:26:41.453Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T22:26:41.453Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

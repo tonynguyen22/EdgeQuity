@@ -1,0 +1,96 @@
+{
+  "ticker": "DOV",
+  "name": "Dover Corp",
+  "sector": "Machinery",
+  "industry": "Machinery",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 28390000000,
+  "enterpriseValue": 30041164000,
+  "valuation": {
+    "peTTM": 25.5355,
+    "forwardPE": 20.79838,
+    "psTTM": 3.3972,
+    "pb": 3.6161,
+    "evRevenue": 3.7121903533500045,
+    "evEbitda": null,
+    "pfcf": 25.399421333366735,
+    "fcfYield": 0.03937097569566749,
+    "earningsYield": 0.038533145473758364
+  },
+  "profitability": {
+    "grossMargin": 0.397669541607976,
+    "operatingMargin": 0.16970638873603952,
+    "netMargin": 0.13518027830710413,
+    "roe": 0.14772796327340523,
+    "roa": 0.08150212521241508,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 1.7895,
+    "quickRatio": 1.2246,
+    "debtToEquity": 0.44940978009254573,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 1338005000,
+    "freeCashFlow": 1117742000,
+    "fcfMargin": 0.13811951727084013,
+    "capexToRevenue": 0.027217926169569598,
+    "fcfConversion": 1.021743104841511
+  },
+  "dividends": {
+    "dividendYield": 0.9858754384301831,
+    "payoutRatio": 25.87
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 8092571000,
+      "grossProfit": 3218169000,
+      "operatingIncome": 1373361000,
+      "netIncome": 1093956000,
+      "freeCashFlow": 1117742000,
+      "totalAssets": 13422423000,
+      "totalDebt": 3327972000,
+      "totalEquity": 7405206000,
+      "sharesDiluted": 137777000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T22:07:58.118Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T22:07:58.118Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T22:07:58.118Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T22:07:58.118Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

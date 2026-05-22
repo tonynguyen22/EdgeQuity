@@ -1,0 +1,96 @@
+{
+  "ticker": "SNDK",
+  "name": "Sandisk Corp",
+  "sector": "Technology",
+  "industry": "Technology",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 197410000000,
+  "enterpriseValue": 197778000000,
+  "valuation": {
+    "peTTM": 45.7564,
+    "forwardPE": 10.0641,
+    "psTTM": 15.642,
+    "pb": 0.747,
+    "evRevenue": 26.890278721957852,
+    "evEbitda": null,
+    "pfcf": -1645.0833333333333,
+    "fcfYield": -0.0006078719416442936,
+    "earningsYield": -0.008312648801985715
+  },
+  "profitability": {
+    "grossMargin": 0.3007477906186268,
+    "operatingMargin": -0.18721957851801496,
+    "netMargin": -0.22311352821210062,
+    "roe": -0.17805989583333334,
+    "roa": -0.12637658837119753,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 3.5641,
+    "quickRatio": 2.1072,
+    "debtToEquity": 0.2006293402777778,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 84000000,
+    "freeCashFlow": -120000000,
+    "fcfMargin": -0.016315431679129844,
+    "capexToRevenue": 0.027736233854520734,
+    "fcfConversion": 0.07312614259597806
+  },
+  "dividends": {
+    "dividendYield": null,
+    "payoutRatio": null
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 7355000000,
+      "grossProfit": 2212000000,
+      "operatingIncome": -1377000000,
+      "netIncome": -1641000000,
+      "freeCashFlow": -120000000,
+      "totalAssets": 12985000000,
+      "totalDebt": 1849000000,
+      "totalEquity": 9216000000,
+      "sharesDiluted": 145000000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T17:57:31.253Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T17:57:31.253Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T17:57:31.253Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T17:57:31.253Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

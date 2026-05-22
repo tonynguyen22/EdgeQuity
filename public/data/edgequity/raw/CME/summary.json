@@ -1,0 +1,96 @@
+{
+  "ticker": "CME",
+  "name": "CME Group Inc",
+  "sector": "Financial Services",
+  "industry": "Financial Services",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 110560000000,
+  "enterpriseValue": 106143100000,
+  "valuation": {
+    "peTTM": 24.8381,
+    "forwardPE": 23.24646,
+    "psTTM": 8.3613,
+    "pb": 3.4277,
+    "evRevenue": 16.278118578044964,
+    "evEbitda": null,
+    "pfcf": 26.363983212514306,
+    "fcfYield": 0.03793053545586107,
+    "earningsYield": 0.03683248914616498
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": 0.6486366285311168,
+    "netMargin": 0.624513081618256,
+    "roe": 0.14174922201878293,
+    "roa": 0.23709629526121814,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 1.0316,
+    "quickRatio": 1.0316,
+    "debtToEquity": 0,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 4277100000,
+    "freeCashFlow": 4193600000,
+    "fcfMargin": 0.6431310002147042,
+    "capexToRevenue": 0.012805570039566911,
+    "fcfConversion": 1.0298118952900153
+  },
+  "dividends": {
+    "dividendYield": 1.7406590376395974,
+    "payoutRatio": 96.58
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 6520600000,
+      "grossProfit": null,
+      "operatingIncome": 4229500000,
+      "netIncome": 4072200000,
+      "freeCashFlow": 4193600000,
+      "totalAssets": 17175300000,
+      "totalDebt": 0,
+      "totalEquity": 28728200000,
+      "sharesDiluted": 360310000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T18:35:05.201Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T18:35:05.201Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T18:35:05.201Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T18:35:05.201Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

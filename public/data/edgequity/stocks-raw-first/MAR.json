@@ -1,0 +1,96 @@
+{
+  "ticker": "MAR",
+  "name": "Marriott International Inc",
+  "sector": "Hotels, Restaurants & Leisure",
+  "industry": "Hotels, Restaurants & Leisure",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 94710000000,
+  "enterpriseValue": 96770000000,
+  "valuation": {
+    "peTTM": 37.2833,
+    "forwardPE": 29.42538,
+    "psTTM": 3.6249,
+    "pb": 82.9746,
+    "evRevenue": 3.695486137630795,
+    "evEbitda": null,
+    "pfcf": 36.315184049079754,
+    "fcfYield": 0.027536690951325098,
+    "earningsYield": 0.027462781121317708
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": 0.15813793630184067,
+    "netMargin": 0.09932788512945849,
+    "roe": -0.6897374701670644,
+    "roa": 8.205047318611987,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 0.4268,
+    "quickRatio": 0.389,
+    "debtToEquity": -0.6412092283214001,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 3212000000,
+    "freeCashFlow": 2608000000,
+    "fcfMargin": 0.09959520354387841,
+    "capexToRevenue": 0.0230657603299473,
+    "fcfConversion": 1.0026912725874664
+  },
+  "dividends": {
+    "dividendYield": 0.7897227856659906,
+    "payoutRatio": 27.6
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 26186000000,
+      "grossProfit": null,
+      "operatingIncome": 4141000000,
+      "netIncome": 2601000000,
+      "freeCashFlow": 2608000000,
+      "totalAssets": 317000000,
+      "totalDebt": 2418000000,
+      "totalEquity": -3771000000,
+      "sharesDiluted": null
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T18:50:15.764Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T18:50:15.764Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T18:50:15.764Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T18:50:15.764Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

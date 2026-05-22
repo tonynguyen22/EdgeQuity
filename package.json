@@ -9,9 +9,13 @@
     "preview": "vite preview",
     "clean": "rm -rf dist",
     "lint": "tsc --noEmit",
-    "test:edgequity": "tsx --test scripts/edgequity/normalize.test.ts",
+    "test:edgequity": "tsx --test scripts/edgequity/*.test.ts",
     "test:edgequity:ui": "tsx --test src/edgequity/*.test.ts src/edgequity/components/*.test.tsx",
-    "edgequity:data": "tsx scripts/edgequity/build-static-data.ts"
+    "edgequity:data": "tsx scripts/edgequity/build-static-data.ts",
+    "edgequity:finnhub-raw": "tsx scripts/edgequity/build-finnhub-raw-data.ts",
+    "edgequity:sec-statements": "tsx scripts/edgequity/build-sec-statements.ts",
+    "edgequity:fundamentals-charts": "tsx scripts/edgequity/build-fundamentals-charts.ts",
+    "edgequity:market-cap-universe": "tsx scripts/edgequity/market-cap-universe.ts"
   },
   "dependencies": {
     "@google/genai": "^1.29.0",

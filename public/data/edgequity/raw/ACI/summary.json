@@ -1,0 +1,96 @@
+{
+  "ticker": "ACI",
+  "name": "Albertsons Companies Inc",
+  "sector": "Retail",
+  "industry": "Retail",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 8431818834,
+  "enterpriseValue": 9301218834,
+  "valuation": {
+    "peTTM": 38.7848,
+    "forwardPE": 7.14596,
+    "psTTM": 0.1014,
+    "pb": 4.9539,
+    "evRevenue": 0.1118304587934714,
+    "evEbitda": null,
+    "pfcf": 15.990553449649155,
+    "fcfYield": 0.06253692238663201,
+    "earningsYield": 0.025783286415425374
+  },
+  "profitability": {
+    "grossMargin": 0.27180498361838346,
+    "operatingMargin": 0.008748083801737354,
+    "netMargin": 0.002613844720310199,
+    "roe": 0.1183966888138547,
+    "roa": 0.00812227498421499,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 0.8583,
+    "quickRatio": 0.15,
+    "debtToEquity": 0.5816359873652107,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 2366700000,
+    "freeCashFlow": 527300000,
+    "fcfMargin": 0.0063398358832546815,
+    "capexToRevenue": 0.022115482881962186,
+    "fcfConversion": 2.4254829806807727
+  },
+  "dividends": {
+    "dividendYield": 3.988269794721408,
+    "payoutRatio": 148.44
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 83172500000,
+      "grossProfit": 22606700000,
+      "operatingIncome": 727600000,
+      "netIncome": 217400000,
+      "freeCashFlow": 527300000,
+      "totalAssets": 26765900000,
+      "totalDebt": 1068000000,
+      "totalEquity": 1836200000,
+      "sharesDiluted": 547200000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T16:56:53.165Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T16:56:53.165Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T16:56:53.165Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T16:56:53.165Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items"
+    }
+  }
+}

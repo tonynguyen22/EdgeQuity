@@ -1,0 +1,96 @@
+{
+  "ticker": "MDB",
+  "name": "MongoDB Inc",
+  "sector": "Technology",
+  "industry": "Technology",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 26520000000,
+  "enterpriseValue": 25442.182,
+  "valuation": {
+    "peTTM": null,
+    "forwardPE": 43.127,
+    "psTTM": 10.754,
+    "pb": 10.2742,
+    "evRevenue": 0.000012680241601680188,
+    "evEbitda": null,
+    "pfcf": 219.82576404373305,
+    "fcfYield": 0.004549057315233786,
+    "earningsYield": -0.0048669683257918555
+  },
+  "profitability": {
+    "grossMargin": 0.7332114592839168,
+    "operatingMargin": -0.1076850924745931,
+    "netMargin": -0.06432876488392643,
+    "roe": -0.04639166364749927,
+    "roa": -0.037627106489154134,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 4.6525,
+    "quickRatio": 4.5074,
+    "debtToEquity": null,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 150191000,
+    "freeCashFlow": 120641000,
+    "fcfMargin": 0.060126801508938954,
+    "capexToRevenue": 0.014727555180984458,
+    "fcfConversion": -0.934679868600471
+  },
+  "dividends": {
+    "dividendYield": null,
+    "payoutRatio": null
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 2006443000,
+      "grossProfit": 1471147000,
+      "operatingIncome": -216064000,
+      "netIncome": -129072000,
+      "freeCashFlow": 120641000,
+      "totalAssets": 3430293000,
+      "totalDebt": null,
+      "totalEquity": 2782224000,
+      "sharesDiluted": 74555001
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T22:24:42.813Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T22:24:42.813Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T22:24:42.813Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T22:24:42.813Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

@@ -1,0 +1,96 @@
+{
+  "ticker": "ACGL",
+  "name": "Arch Capital Group Ltd",
+  "sector": "Insurance",
+  "industry": "Insurance",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 33834886365,
+  "enterpriseValue": 35649.887,
+  "valuation": {
+    "peTTM": 6.9448,
+    "forwardPE": 9.76398,
+    "psTTM": 1.7764,
+    "pb": 1.437,
+    "evRevenue": 0.0000017888447488584476,
+    "evEbitda": null,
+    "pfcf": 5.521358741024804,
+    "fcfYield": 0.18111483910107112,
+    "earningsYield": 0.13001373648916642
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": null,
+    "netMargin": 0.22073360429524813,
+    "roe": 0.1817318020325539,
+    "roa": 0.6472925250147146,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 1.3626,
+    "quickRatio": 1.3626,
+    "debtToEquity": null,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 6172000000,
+    "freeCashFlow": 6128000000,
+    "fcfMargin": 0.30749159516282804,
+    "capexToRevenue": 0.0022078378242761806,
+    "fcfConversion": 1.393043873607638
+  },
+  "dividends": {
+    "dividendYield": 0.1389,
+    "payoutRatio": 1.07
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 19929000000,
+      "grossProfit": null,
+      "operatingIncome": null,
+      "netIncome": 4399000000,
+      "freeCashFlow": 6128000000,
+      "totalAssets": 6796000000,
+      "totalDebt": null,
+      "totalEquity": 24206000000,
+      "sharesDiluted": 375900000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T16:52:56.234Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T16:52:56.234Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T16:52:56.234Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T16:52:56.234Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items"
+    }
+  }
+}

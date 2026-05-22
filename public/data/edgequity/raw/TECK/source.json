@@ -1,0 +1,14 @@
+{
+  "ticker": "TECK",
+  "provider": "finnhub",
+  "fetchedAt": "2026-05-21T21:57:57.975Z",
+  "endpoints": {
+    "profile": "stock/profile2",
+    "metrics": "stock/metric?metric=all",
+    "financialsReportedAnnual": "stock/financials-reported?freq=annual"
+  },
+  "status": "partial",
+  "warnings": [
+    "No annual as-reported filings returned by Finnhub"
+  ]
+}

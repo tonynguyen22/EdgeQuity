@@ -1,0 +1,96 @@
+{
+  "ticker": "ATO",
+  "name": "Atmos Energy Corp",
+  "sector": "Utilities",
+  "industry": "Utilities",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 29800000000,
+  "enterpriseValue": 38513249000,
+  "valuation": {
+    "peTTM": 21.9446,
+    "forwardPE": 21.93341,
+    "psTTM": 6.052,
+    "pb": 2.0215,
+    "evRevenue": 8.189507852312103,
+    "evEbitda": null,
+    "pfcf": -19.709737734822014,
+    "fcfYield": -0.0507363422818792,
+    "earningsYield": 0.04022664429530201
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": 0.33171428237277933,
+    "netMargin": 0.25490462505488803,
+    "roe": 0.08841092449308166,
+    "roa": 0.04243448791806106,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 0.7726,
+    "quickRatio": 0.5727,
+    "debtToEquity": 0.6575712318633753,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 2049456000,
+    "freeCashFlow": -1511943000,
+    "fcfMargin": -0.32150154537074543,
+    "capexToRevenue": 0.7573005610541055,
+    "fcfConversion": -1.2612621104913935
+  },
+  "dividends": {
+    "dividendYield": 2.272727272727273,
+    "payoutRatio": 46.19
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 4702755000,
+      "grossProfit": null,
+      "operatingIncome": 1559971000,
+      "netIncome": 1198754000,
+      "freeCashFlow": -1511943000,
+      "totalAssets": 28249522000,
+      "totalDebt": 8915936000,
+      "totalEquity": 13558890000,
+      "sharesDiluted": 160573000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T21:59:57.012Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T21:59:57.012Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T21:59:57.012Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T21:59:57.012Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

@@ -1,0 +1,96 @@
+{
+  "ticker": "ACON",
+  "name": "Aclarion Inc",
+  "sector": "Health Care",
+  "industry": "Health Care",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 7854578,
+  "enterpriseValue": -4.1612,
+  "valuation": {
+    "peTTM": null,
+    "forwardPE": null,
+    "psTTM": 103.7182,
+    "pb": 1.5497,
+    "evRevenue": -0.00005494784101412914,
+    "evEbitda": null,
+    "pfcf": -1.0930797307776021,
+    "fcfYield": -0.9148463482061034,
+    "earningsYield": -0.920944320624227
+  },
+  "profitability": {
+    "grossMargin": 0.09016241912055989,
+    "operatingMargin": -93.1254588670276,
+    "netMargin": -95.51867159646112,
+    "roe": -0.5635810721476088,
+    "roa": -0.5290678215769516,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 0.713,
+    "quickRatio": 0.5565,
+    "debtToEquity": null,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": -7164204,
+    "freeCashFlow": -7185732,
+    "fcfMargin": -94.88620097715568,
+    "capexToRevenue": 0.2842730753994454,
+    "fcfConversion": 0.9933785655858215
+  },
+  "dividends": {
+    "dividendYield": null,
+    "payoutRatio": null
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 75730,
+      "grossProfit": 6828,
+      "operatingIncome": -7052391,
+      "netIncome": -7233629,
+      "freeCashFlow": -7185732,
+      "totalAssets": 13672404,
+      "totalDebt": null,
+      "totalEquity": 12835117,
+      "sharesDiluted": 532036
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T17:08:57.925Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T17:08:57.925Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T17:08:57.925Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T17:08:57.925Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items"
+    }
+  }
+}

@@ -1,0 +1,96 @@
+{
+  "ticker": "UPS",
+  "name": "United Parcel Service Inc",
+  "sector": "Logistics & Transportation",
+  "industry": "Logistics & Transportation",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 81200000000,
+  "enterpriseValue": 76529000000,
+  "valuation": {
+    "peTTM": 15.6803,
+    "forwardPE": 14.60306,
+    "psTTM": 0.9319,
+    "pb": 5.1859,
+    "evRevenue": 0.8631641871848953,
+    "evEbitda": null,
+    "pfcf": 17.040923399790138,
+    "fcfYield": 0.05868226600985222,
+    "earningsYield": 0.06862068965517241
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": 0.08873123470296974,
+    "netMargin": 0.06284612174462277,
+    "roe": 0.3433783200838109,
+    "roa": 0.07623477903954029,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 1.2193,
+    "quickRatio": 1.2193,
+    "debtToEquity": 0.0749368336722746,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 8450000000,
+    "freeCashFlow": 4765000000,
+    "fcfMargin": 0.05374403627299489,
+    "capexToRevenue": 0.0415628066455375,
+    "fcfConversion": 0.8551687006460876
+  },
+  "dividends": {
+    "dividendYield": 6.6309511776003225,
+    "payoutRatio": 96.88
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 88661000000,
+      "grossProfit": null,
+      "operatingIncome": 7867000000,
+      "netIncome": 5572000000,
+      "freeCashFlow": 4765000000,
+      "totalAssets": 73090000000,
+      "totalDebt": 1216000000,
+      "totalEquity": 16227000000,
+      "sharesDiluted": null
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T19:09:23.810Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T19:09:23.810Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T19:09:23.810Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T19:09:23.810Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

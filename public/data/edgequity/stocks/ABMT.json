@@ -1,0 +1,96 @@
+{
+  "ticker": "ABMT",
+  "name": "Advanced Biomedical Technologies Inc",
+  "sector": "Health Care",
+  "industry": "Health Care",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 50000,
+  "enterpriseValue": 6.3922,
+  "valuation": {
+    "peTTM": null,
+    "forwardPE": null,
+    "psTTM": 0.4552,
+    "pb": null,
+    "evRevenue": 0.000051722268523388384,
+    "evEbitda": null,
+    "pfcf": 0.08117489293031623,
+    "fcfYield": 12.31908,
+    "earningsYield": -13.44
+  },
+  "profitability": {
+    "grossMargin": 0.5807245098594512,
+    "operatingMargin": -3.613842879914554,
+    "netMargin": -5.437465105553173,
+    "roe": 0.09078875159792256,
+    "roa": -1.4321457037760057,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 0.0421,
+    "quickRatio": 0.0294,
+    "debtToEquity": null,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 646660,
+    "freeCashFlow": 615954,
+    "fcfMargin": 4.983970805990921,
+    "capexToRevenue": 0.24845655287368412,
+    "fcfConversion": -0.9165982142857143
+  },
+  "dividends": {
+    "dividendYield": null,
+    "payoutRatio": null
+  },
+  "history": [
+    {
+      "year": "2020",
+      "revenue": 123587,
+      "grossProfit": 71770,
+      "operatingIncome": -446624,
+      "netIncome": -672000,
+      "freeCashFlow": 615954,
+      "totalAssets": 469226,
+      "totalDebt": null,
+      "totalEquity": -7401798,
+      "sharesDiluted": 70104002
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T16:22:39.633Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T16:22:39.633Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T16:22:39.633Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T16:22:39.633Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items"
+    }
+  }
+}

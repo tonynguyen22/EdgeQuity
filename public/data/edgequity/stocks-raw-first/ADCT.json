@@ -1,0 +1,96 @@
+{
+  "ticker": "ADCT",
+  "name": "ADC Therapeutics SA",
+  "sector": "Biotechnology",
+  "industry": "Biotechnology",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 412099342,
+  "enterpriseValue": 153761342,
+  "valuation": {
+    "peTTM": null,
+    "forwardPE": null,
+    "psTTM": 5.2049,
+    "pb": 3.3259,
+    "evRevenue": 1.8899583563799058,
+    "evEbitda": null,
+    "pfcf": -2.913639488680553,
+    "fcfYield": -0.3432133604328832,
+    "earningsYield": -0.34608888067576676
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": -1.4934056073847364,
+    "netMargin": -1.7530513662008187,
+    "roe": 0.7674752736313054,
+    "roa": -0.4413523131672598,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 4.366,
+    "quickRatio": 4.2264,
+    "debtToEquity": -0.016143439844161993,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": -141174000,
+    "freeCashFlow": -141438000,
+    "fcfMargin": -1.7384859323721376,
+    "capexToRevenue": 0.0032449574099339944,
+    "fcfConversion": 0.9916913821753854
+  },
+  "dividends": {
+    "dividendYield": null,
+    "payoutRatio": null
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 81357000,
+      "grossProfit": null,
+      "operatingIncome": -121499000,
+      "netIncome": -142623000,
+      "freeCashFlow": -141438000,
+      "totalAssets": 323150000,
+      "totalDebt": 3000000,
+      "totalEquity": -185834000,
+      "sharesDiluted": 127067540
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T17:01:58.046Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T17:01:58.046Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T17:01:58.046Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T17:01:58.046Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items"
+    }
+  }
+}

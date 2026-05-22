@@ -1,0 +1,96 @@
+{
+  "ticker": "WMB",
+  "name": "Williams Companies Inc",
+  "sector": "Energy",
+  "industry": "Energy",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 95010000000,
+  "enterpriseValue": 101583000000,
+  "valuation": {
+    "peTTM": 34.7801,
+    "forwardPE": 29.86542,
+    "psTTM": 8.1383,
+    "pb": 5.7318,
+    "evRevenue": 8.500669456066946,
+    "evEbitda": null,
+    "pfcf": 94.53731343283582,
+    "fcfYield": 0.010577833912219767,
+    "earningsYield": 0.029133775392063993
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": 0.3511297071129707,
+    "netMargin": 0.2316317991631799,
+    "roe": 0.21613180292027798,
+    "roa": 0.04725726870742492,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 0.5313,
+    "quickRatio": 0.4799,
+    "debtToEquity": 0.5181541344577184,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 5898000000,
+    "freeCashFlow": 1005000000,
+    "fcfMargin": 0.08410041841004184,
+    "capexToRevenue": 0.4094560669456067,
+    "fcfConversion": 0.36307803468208094
+  },
+  "dividends": {
+    "dividendYield": 2.784776554833577,
+    "payoutRatio": 93.28
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 11950000000,
+      "grossProfit": null,
+      "operatingIncome": 4196000000,
+      "netIncome": 2768000000,
+      "freeCashFlow": 1005000000,
+      "totalAssets": 58573000000,
+      "totalDebt": 6636000000,
+      "totalEquity": 12807000000,
+      "sharesDiluted": 1225000000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T18:48:56.768Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T18:48:56.768Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T18:48:56.768Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T18:48:56.768Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

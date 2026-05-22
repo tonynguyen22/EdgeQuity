@@ -1,0 +1,96 @@
+{
+  "ticker": "RSG",
+  "name": "Republic Services Inc",
+  "sector": "Commercial Services & Supplies",
+  "industry": "Commercial Services & Supplies",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 66000000000,
+  "enterpriseValue": 67116000000,
+  "valuation": {
+    "peTTM": 29.8912,
+    "forwardPE": 27.52496,
+    "psTTM": 3.8832,
+    "pb": 5.4818,
+    "evRevenue": 4.045325779036827,
+    "evEbitda": null,
+    "pfcf": 27.397260273972602,
+    "fcfYield": 0.0365,
+    "earningsYield": 0.03240909090909091
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": 0.19902356699415347,
+    "netMargin": 0.12892532095714543,
+    "roe": 0.17872660427807488,
+    "roa": 0.06224175056742129,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 0.6423,
+    "quickRatio": 0.582,
+    "debtToEquity": 0.09959893048128342,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 4296000000,
+    "freeCashFlow": 2409000000,
+    "fcfMargin": 0.14519920438792117,
+    "capexToRevenue": 0.11373636308842143,
+    "fcfConversion": 1.1262272089761571
+  },
+  "dividends": {
+    "dividendYield": 1.17813383600377,
+    "payoutRatio": 34.5
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 16591000000,
+      "grossProfit": null,
+      "operatingIncome": 3302000000,
+      "netIncome": 2139000000,
+      "freeCashFlow": 2409000000,
+      "totalAssets": 34366000000,
+      "totalDebt": 1192000000,
+      "totalEquity": 11968000000,
+      "sharesDiluted": 312168000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T19:47:37.913Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T19:47:37.913Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T19:47:37.913Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T19:47:37.913Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

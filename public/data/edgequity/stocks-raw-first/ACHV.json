@@ -1,0 +1,97 @@
+{
+  "ticker": "ACHV",
+  "name": "Achieve Life Sciences Inc",
+  "sector": "Biotechnology",
+  "industry": "Biotechnology",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 469151910.99999994,
+  "enterpriseValue": 463.1119,
+  "valuation": {
+    "peTTM": null,
+    "forwardPE": null,
+    "psTTM": 26.3273,
+    "pb": 12.2954,
+    "evRevenue": null,
+    "evEbitda": null,
+    "pfcf": -9.477242005535016,
+    "fcfYield": -0.10551592957275624,
+    "earningsYield": -0.11648252670125009
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": null,
+    "netMargin": null,
+    "roe": -2.5396412305976392,
+    "roa": -1050.923076923077,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 4.3921,
+    "quickRatio": 4.0084,
+    "debtToEquity": null,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": -49500000,
+    "freeCashFlow": -49503000,
+    "fcfMargin": null,
+    "capexToRevenue": null,
+    "fcfConversion": 0.9058519982433025
+  },
+  "dividends": {
+    "dividendYield": null,
+    "payoutRatio": null
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": null,
+      "grossProfit": null,
+      "operatingIncome": -36000,
+      "netIncome": -54648000,
+      "freeCashFlow": -49503000,
+      "totalAssets": 52000,
+      "totalDebt": null,
+      "totalEquity": 21518000,
+      "sharesDiluted": 43594652
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items",
+    "Revenue unavailable from mapped line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T16:46:09.718Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T16:46:09.718Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T16:46:09.718Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T16:46:09.718Z",
+      "status": "partial",
+      "message": "Thin summary mapped from Finnhub as-reported line items"
+    }
+  }
+}

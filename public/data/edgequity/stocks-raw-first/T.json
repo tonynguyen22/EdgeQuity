@@ -1,0 +1,96 @@
+{
+  "ticker": "T",
+  "name": "AT&T Inc",
+  "sector": "Telecommunication",
+  "industry": "Telecommunication",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 169750000000,
+  "enterpriseValue": 278605000000,
+  "valuation": {
+    "peTTM": 8.159,
+    "forwardPE": 10.91496,
+    "psTTM": 1.3819,
+    "pb": 1.5932,
+    "evRevenue": 2.217345282057812,
+    "evEbitda": null,
+    "pfcf": 8.731097623701265,
+    "fcfYield": 0.11453313696612666,
+    "earningsYield": 0.13776730486008837
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": 0.1922991213548962,
+    "netMargin": 0.18612313765439958,
+    "roe": 0.18488271892861943,
+    "roa": 0.05565471515809214,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 0.9061,
+    "quickRatio": 0.7381,
+    "debtToEquity": 1.0047276090789068,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 40284000000,
+    "freeCashFlow": 19442000000,
+    "fcfMargin": 0.15473385967146314,
+    "capexToRevenue": 0.16587609830637973,
+    "fcfConversion": 0.8313520909946122
+  },
+  "dividends": {
+    "dividendYield": 4.452466907340554,
+    "payoutRatio": 37.26
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 125648000000,
+      "grossProfit": null,
+      "operatingIncome": 24162000000,
+      "netIncome": 23386000000,
+      "freeCashFlow": 19442000000,
+      "totalAssets": 420198000000,
+      "totalDebt": 127089000000,
+      "totalEquity": 126491000000,
+      "sharesDiluted": null
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T17:57:31.453Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T17:57:31.453Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T17:57:31.453Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T17:57:31.453Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

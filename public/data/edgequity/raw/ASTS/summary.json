@@ -1,0 +1,96 @@
+{
+  "ticker": "ASTS",
+  "name": "AST SpaceMobile Inc",
+  "sector": "Telecommunication",
+  "industry": "Telecommunication",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 33700000000.000004,
+  "enterpriseValue": 33583899000,
+  "valuation": {
+    "peTTM": null,
+    "forwardPE": null,
+    "psTTM": 490.2591,
+    "pb": 14.4908,
+    "evRevenue": 473.55958994895514,
+    "evEbitda": null,
+    "pfcf": -29.65875707805798,
+    "fcfYield": -0.03371685459940652,
+    "earningsYield": -0.013679851632047477
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": -2.3886742434924844,
+    "netMargin": -6.5006204348684395,
+    "roe": -0.1927041685389736,
+    "roa": -1.0262911257989185,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 16.3526,
+    "quickRatio": 16.1932,
+    "debtToEquity": 0.9277928375116257,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": -71517000,
+    "freeCashFlow": -1136258000,
+    "fcfMargin": -16.022138244169323,
+    "capexToRevenue": 15.013691869483065,
+    "fcfConversion": 2.4647090850326783
+  },
+  "dividends": {
+    "dividendYield": null,
+    "payoutRatio": null
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 70918000,
+      "grossProfit": null,
+      "operatingIncome": -169400000,
+      "netIncome": -461011000,
+      "freeCashFlow": -1136258000,
+      "totalAssets": 449201000,
+      "totalDebt": 2219582000,
+      "totalEquity": 2392325000,
+      "sharesDiluted": 255982592
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T21:34:53.944Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T21:34:53.944Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T21:34:53.944Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T21:34:53.944Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

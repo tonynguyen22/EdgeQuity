@@ -1,0 +1,96 @@
+{
+  "ticker": "AZO",
+  "name": "Autozone Inc",
+  "sector": "Retail",
+  "industry": "Retail",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 55460000000,
+  "enterpriseValue": 63987972000,
+  "valuation": {
+    "peTTM": 23.0132,
+    "forwardPE": 23.150766836307547,
+    "psTTM": 2.8694,
+    "pb": 38.1151,
+    "evRevenue": 3.3786856839351893,
+    "evEbitda": null,
+    "pfcf": 30.981855559528064,
+    "fcfYield": 0.03227695636494771,
+    "earningsYield": 0.04504592499098449
+  },
+  "profitability": {
+    "grossMargin": 0.5262486365892685,
+    "operatingMargin": 0.1906230501253068,
+    "netMargin": 0.13191215645706095,
+    "roe": -0.7316982947960542,
+    "roa": 0.1290728587131892,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 0.8763,
+    "quickRatio": 0.1382,
+    "debtToEquity": -2.5773193611716323,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 3117337000,
+    "freeCashFlow": 1790080000,
+    "fcfMargin": 0.0945196023574353,
+    "capexToRevenue": 0.07008167448724219,
+    "fcfConversion": 0.7165344339450823
+  },
+  "dividends": {
+    "dividendYield": null,
+    "payoutRatio": null
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 18938717000,
+      "grossProfit": 9966474000,
+      "operatingIncome": 3610156000,
+      "netIncome": 2498247000,
+      "freeCashFlow": 1790080000,
+      "totalAssets": 19355324000,
+      "totalDebt": 8799775000,
+      "totalEquity": -3414313000,
+      "sharesDiluted": 17245000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T20:14:32.828Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T20:14:32.828Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T20:14:32.828Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T20:14:32.828Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

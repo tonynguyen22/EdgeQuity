@@ -1,0 +1,96 @@
+{
+  "ticker": "TEL",
+  "name": "TE Connectivity PLC",
+  "sector": "Electrical Equipment",
+  "industry": "Electrical Equipment",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 58530000000,
+  "enterpriseValue": 62117000000,
+  "valuation": {
+    "peTTM": 20.1173,
+    "forwardPE": 17.29483,
+    "psTTM": 3.1269,
+    "pb": 5.0799,
+    "evRevenue": 3.5984822152705362,
+    "evEbitda": null,
+    "pfcf": 18.273493599750235,
+    "fcfYield": 0.05472407312489322,
+    "earningsYield": 0.031471040492055354
+  },
+  "profitability": {
+    "grossMargin": 0.3521608156644653,
+    "operatingMargin": 0.18601552543158384,
+    "netMargin": 0.10670837678136948,
+    "roe": 0.1463647199046484,
+    "roa": 0.07344204776524062,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 1.5559,
+    "quickRatio": 0.9119,
+    "debtToEquity": 0.3847437425506555,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 4139000000,
+    "freeCashFlow": 3203000000,
+    "fcfMargin": 0.18555207971266366,
+    "capexToRevenue": 0.054223149113660066,
+    "fcfConversion": 1.738870792616721
+  },
+  "dividends": {
+    "dividendYield": 1.549232831818859,
+    "payoutRatio": 43.59
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 17262000000,
+      "grossProfit": 6079000000,
+      "operatingIncome": 3211000000,
+      "netIncome": 1842000000,
+      "freeCashFlow": 3203000000,
+      "totalAssets": 25081000000,
+      "totalDebt": 4842000000,
+      "totalEquity": 12585000000,
+      "sharesDiluted": 299000000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T20:04:12.558Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T20:04:12.558Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T20:04:12.558Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T20:04:12.558Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

@@ -1,0 +1,96 @@
+{
+  "ticker": "BMY",
+  "name": "Bristol-Myers Squibb Co",
+  "sector": "Pharmaceuticals",
+  "industry": "Pharmaceuticals",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 117030000000,
+  "enterpriseValue": 149671000000,
+  "valuation": {
+    "peTTM": 19.9895,
+    "forwardPE": 9.30449,
+    "psTTM": 2.4642,
+    "pb": 5.9443,
+    "evRevenue": 3.1055940573515377,
+    "evEbitda": null,
+    "pfcf": 9.110938108213313,
+    "fcfYield": 0.1097581816628215,
+    "earningsYield": 0.06028368794326241
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": null,
+    "netMargin": 0.1463875171183135,
+    "roe": 0.3819087316624262,
+    "roa": 0.07835580532663987,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 1.2551,
+    "quickRatio": 1.1402,
+    "debtToEquity": 2.3196015806853247,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 14156000000,
+    "freeCashFlow": 12845000000,
+    "fcfMargin": 0.26652695356268413,
+    "capexToRevenue": 0.02720255633481346,
+    "fcfConversion": 1.820694542877392
+  },
+  "dividends": {
+    "dividendYield": 4.304748889648104,
+    "payoutRatio": 71.52
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 48194000000,
+      "grossProfit": null,
+      "operatingIncome": null,
+      "netIncome": 7055000000,
+      "freeCashFlow": 12845000000,
+      "totalAssets": 90038000000,
+      "totalDebt": 42850000000,
+      "totalEquity": 18473000000,
+      "sharesDiluted": null
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T18:31:42.573Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T18:31:42.573Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T18:31:42.573Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T18:31:42.573Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

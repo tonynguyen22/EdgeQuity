@@ -1,0 +1,96 @@
+{
+  "ticker": "PH",
+  "name": "Parker-Hannifin Corp",
+  "sector": "Machinery",
+  "industry": "Machinery",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 108240000000,
+  "enterpriseValue": 109564000000,
+  "valuation": {
+    "peTTM": 31.0485,
+    "forwardPE": 26.20831,
+    "psTTM": 5.1486,
+    "pb": 6.5231,
+    "evRevenue": 5.519596977329975,
+    "evEbitda": null,
+    "pfcf": 32.39748578269979,
+    "fcfYield": 0.030866592756836658,
+    "earningsYield": 0.03263118994826312
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": null,
+    "netMargin": 0.1779345088161209,
+    "roe": 0.25814939336354337,
+    "roa": 0.11975317013629891,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 1.1944,
+    "quickRatio": 0.6613,
+    "debtToEquity": 0.13090191492471862,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 3776000000,
+    "freeCashFlow": 3341000000,
+    "fcfMargin": 0.16831234256926952,
+    "capexToRevenue": 0.021914357682619647,
+    "fcfConversion": 0.9459229898074745
+  },
+  "dividends": {
+    "dividendYield": 0.9308386856557758,
+    "payoutRatio": 24.38
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 19850000000,
+      "grossProfit": null,
+      "operatingIncome": null,
+      "netIncome": 3532000000,
+      "freeCashFlow": 3341000000,
+      "totalAssets": 29494000000,
+      "totalDebt": 1791000000,
+      "totalEquity": 13682000000,
+      "sharesDiluted": null
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T18:36:24.321Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T18:36:24.321Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T18:36:24.321Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T18:36:24.321Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

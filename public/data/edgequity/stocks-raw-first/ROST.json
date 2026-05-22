@@ -1,0 +1,96 @@
+{
+  "ticker": "ROST",
+  "name": "Ross Stores Inc",
+  "sector": "Retail",
+  "industry": "Retail",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 68000000000,
+  "enterpriseValue": 64923214000,
+  "valuation": {
+    "peTTM": 32.8299,
+    "forwardPE": 30.29137,
+    "psTTM": 3.0954,
+    "pb": 9.9379,
+    "evRevenue": 2.8536975289266517,
+    "evEbitda": null,
+    "pfcf": 30.802570021489323,
+    "fcfYield": 0.03246482352941176,
+    "earningsYield": 0.031544764705882355
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": 0.11900177925298451,
+    "netMargin": 0.09428533162635697,
+    "roe": 0.34667697140805986,
+    "roa": 0.13795615682482765,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 1.5827,
+    "quickRatio": 0.9937,
+    "debtToEquity": 0.24527191604027707,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 3026883000,
+    "freeCashFlow": 2207608000,
+    "fcfMargin": 0.09703532998903455,
+    "capexToRevenue": 0.03601120306538402,
+    "fcfConversion": 1.0291667676746956
+  },
+  "dividends": {
+    "dividendYield": 0.8173010698379174,
+    "payoutRatio": 24.62
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 22750559000,
+      "grossProfit": null,
+      "operatingIncome": 2707357000,
+      "netIncome": 2145044000,
+      "freeCashFlow": 2207608000,
+      "totalAssets": 15548737000,
+      "totalDebt": 1517606000,
+      "totalEquity": 6187443000,
+      "sharesDiluted": 324416000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T19:43:01.000Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T19:43:01.000Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T19:43:01.000Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T19:43:01.000Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

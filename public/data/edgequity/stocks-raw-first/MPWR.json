@@ -1,0 +1,96 @@
+{
+  "ticker": "MPWR",
+  "name": "Monolithic Power Systems Inc",
+  "sector": "Semiconductors",
+  "industry": "Semiconductors",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 73020000000,
+  "enterpriseValue": 74916.62,
+  "valuation": {
+    "peTTM": 111.584,
+    "forwardPE": 63.3942,
+    "psTTM": 25.694,
+    "pb": 12.2953,
+    "evRevenue": 0.0000268474182921161,
+    "evEbitda": null,
+    "pfcf": 109.60853451497998,
+    "fcfYield": 0.009123377156943304,
+    "earningsYield": 0.00851113393590797
+  },
+  "profitability": {
+    "grossMargin": 0.551787716644466,
+    "operatingMargin": 0.26111689868942706,
+    "netMargin": 0.2227171228819345,
+    "roe": 0.17598287638358465,
+    "roa": 0.1481768032465794,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 5.9123,
+    "quickRatio": 4.2564,
+    "debtToEquity": null,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 838202000,
+    "freeCashFlow": 666189000,
+    "fcfMargin": 0.23873814307968688,
+    "capexToRevenue": 0.06164326370679519,
+    "fcfConversion": 1.0719343891948774
+  },
+  "dividends": {
+    "dividendYield": 0.5150424588126984,
+    "payoutRatio": 45.83
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 2790459000,
+      "grossProfit": 1539741000,
+      "operatingIncome": 728636000,
+      "netIncome": 621483000,
+      "freeCashFlow": 666189000,
+      "totalAssets": 4194199000,
+      "totalDebt": null,
+      "totalEquity": 3531497000,
+      "sharesDiluted": 48309000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T19:28:30.673Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T19:28:30.673Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T19:28:30.673Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T19:28:30.673Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

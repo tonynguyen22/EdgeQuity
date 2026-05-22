@@ -1,0 +1,96 @@
+{
+  "ticker": "GM",
+  "name": "General Motors Co",
+  "sector": "Automobiles",
+  "industry": "Automobiles",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 65910000000,
+  "enterpriseValue": 116301000000,
+  "valuation": {
+    "peTTM": 27.05,
+    "forwardPE": 5.80163,
+    "psTTM": 0.3719,
+    "pb": 1.2412,
+    "evRevenue": 0.6923873763923535,
+    "evEbitda": null,
+    "pfcf": 3.7525620587565474,
+    "fcfYield": 0.2664846002124109,
+    "earningsYield": 0.042178728569261116
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": 0.017318465687529396,
+    "netMargin": 0.016550475975019498,
+    "roe": 0.04548503738608289,
+    "roa": 0.009883249669373302,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 1.1653,
+    "quickRatio": 1.0103,
+    "debtToEquity": 1.1671656931559744,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 26867000000,
+    "freeCashFlow": 17564000000,
+    "fcfMargin": 0.10456566907382822,
+    "capexToRevenue": 0.05538456043007424,
+    "fcfConversion": 6.3179856115107915
+  },
+  "dividends": {
+    "dividendYield": 0.8668242710795903,
+    "payoutRatio": 24.37
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 167971000000,
+      "grossProfit": null,
+      "operatingIncome": 2909000000,
+      "netIncome": 2780000000,
+      "freeCashFlow": 17564000000,
+      "totalAssets": 281284000000,
+      "totalDebt": 71336000000,
+      "totalEquity": 61119000000,
+      "sharesDiluted": 973000000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T19:48:23.495Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T19:48:23.495Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T19:48:23.495Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T19:48:23.495Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

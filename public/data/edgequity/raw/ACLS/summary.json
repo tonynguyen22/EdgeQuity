@@ -1,0 +1,96 @@
+{
+  "ticker": "ACLS",
+  "name": "Axcelis Technologies Inc",
+  "sector": "Semiconductors",
+  "industry": "Semiconductors",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 4596561449,
+  "enterpriseValue": 4472.233,
+  "valuation": {
+    "peTTM": 38.0525,
+    "forwardPE": 35.73152,
+    "psTTM": 5.453,
+    "pb": 2.407,
+    "evRevenue": 0.000005330127716173568,
+    "evEbitda": null,
+    "pfcf": 42.9545037753481,
+    "fcfYield": 0.02328044586965773,
+    "earningsYield": 0.026158249233491318
+  },
+  "profitability": {
+    "grossMargin": 0.4491375940351446,
+    "operatingMargin": 0.14220282987385705,
+    "netMargin": 0.14330288612808803,
+    "roe": 0.11620824663155749,
+    "roa": 0.08832255604910122,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 4.7718,
+    "quickRatio": 2.7458,
+    "debtToEquity": null,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 118305000,
+    "freeCashFlow": 107010000,
+    "fcfMargin": 0.12753739952899,
+    "capexToRevenue": 0.013461685147929559,
+    "fcfConversion": 0.8899848633543472
+  },
+  "dividends": {
+    "dividendYield": null,
+    "payoutRatio": null
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 839048000,
+      "grossProfit": 376848000,
+      "operatingIncome": 119315000,
+      "netIncome": 120238000,
+      "freeCashFlow": 107010000,
+      "totalAssets": 1361351000,
+      "totalDebt": null,
+      "totalEquity": 1034677000,
+      "sharesDiluted": 31668000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T17:02:21.585Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T17:02:21.585Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T17:02:21.585Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T17:02:21.585Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items"
+    }
+  }
+}

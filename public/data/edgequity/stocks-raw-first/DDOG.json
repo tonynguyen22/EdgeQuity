@@ -1,0 +1,96 @@
+{
+  "ticker": "DDOG",
+  "name": "Datadog Inc (Pre-Reincorporation)",
+  "sector": "Technology",
+  "industry": "Technology",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 74330000000,
+  "enterpriseValue": 75639.126,
+  "valuation": {
+    "peTTM": 553.3967,
+    "forwardPE": 60.52627,
+    "psTTM": 20.4467,
+    "pb": 12.7774,
+    "evRevenue": 0.000022070510317878545,
+    "evEbitda": null,
+    "pfcf": 74.28862123797045,
+    "fcfYield": 0.013461011704560743,
+    "earningsYield": 0.0014494954930714381
+  },
+  "profitability": {
+    "grossMargin": 0.7995549081775629,
+    "operatingMargin": -0.012947462591453327,
+    "netMargin": 0.03143741840907247,
+    "roe": 0.02886791350745377,
+    "roa": 0.01621666613484603,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 3.3821,
+    "quickRatio": 3.3466,
+    "debtToEquity": null,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 1050135000,
+    "freeCashFlow": 1000557000,
+    "fcfMargin": 0.2919494811736138,
+    "capexToRevenue": 0.014466213696596422,
+    "fcfConversion": 9.28668751914313
+  },
+  "dividends": {
+    "dividendYield": null,
+    "payoutRatio": null
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 3427158000,
+      "grossProfit": 2740201000,
+      "operatingIncome": -44373000,
+      "netIncome": 107741000,
+      "freeCashFlow": 1000557000,
+      "totalAssets": 6643844000,
+      "totalDebt": null,
+      "totalEquity": 3732206000,
+      "sharesDiluted": 363472000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T19:24:33.636Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T19:24:33.636Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T19:24:33.636Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T19:24:33.636Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

@@ -1,0 +1,96 @@
+{
+  "ticker": "COR",
+  "name": "Cencora Inc",
+  "sector": "Health Care",
+  "industry": "Health Care",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 50950000000,
+  "enterpriseValue": 54136850000,
+  "valuation": {
+    "peTTM": 20.2105,
+    "forwardPE": 16.22576,
+    "psTTM": 0.1567,
+    "pb": 40.1803,
+    "evRevenue": 0.16847594394022977,
+    "evEbitda": null,
+    "pfcf": 15.886433360075756,
+    "fcfYield": 0.06294679097154073,
+    "earningsYield": 0.03077161923454367
+  },
+  "profitability": {
+    "grossMargin": 0.03572165157521616,
+    "operatingMargin": 0.008180306662046867,
+    "netMargin": 0.004879097021210274,
+    "roe": 1.0396513571778605,
+    "roa": 0.020470188109922075,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 0.9035,
+    "quickRatio": 0.5404,
+    "debtToEquity": 5.001918410842304,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 3875120000,
+    "freeCashFlow": 3207139000,
+    "fcfMargin": 0.009980739004440128,
+    "capexToRevenue": 0.002078782372988798,
+    "fcfConversion": 2.0456119156991837
+  },
+  "dividends": {
+    "dividendYield": 0.9065155807365438,
+    "payoutRatio": 28.12
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 321332819000,
+      "grossProfit": 11478539000,
+      "operatingIncome": 2628601000,
+      "netIncome": 1567814000,
+      "freeCashFlow": 3207139000,
+      "totalAssets": 76590112000,
+      "totalDebt": 7542988000,
+      "totalEquity": 1508019000,
+      "sharesDiluted": 195214000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T20:24:26.382Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T20:24:26.382Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T20:24:26.382Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T20:24:26.382Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

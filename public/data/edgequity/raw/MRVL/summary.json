@@ -1,0 +1,96 @@
+{
+  "ticker": "MRVL",
+  "name": "Marvell Technology Inc",
+  "sector": "Semiconductors",
+  "industry": "Semiconductors",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 147720000000,
+  "enterpriseValue": 149551800000,
+  "valuation": {
+    "peTTM": 62.9489,
+    "forwardPE": 39.59253,
+    "psTTM": 20.5111,
+    "pb": 4.7977,
+    "evRevenue": 18.25004271105362,
+    "evEbitda": null,
+    "pfcf": 105.78630764823832,
+    "fcfYield": 0.009453019225561873,
+    "earningsYield": 0.018075412943406446
+  },
+  "profitability": {
+    "grossMargin": 0.5101774339198984,
+    "operatingMargin": 0.16143557952798185,
+    "netMargin": 0.3258365264930564,
+    "roe": 0.1866106622683179,
+    "roa": 0.11981440680628037,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 2.0061,
+    "quickRatio": 1.4983,
+    "debtToEquity": 0.31244583601241227,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 1750500000,
+    "freeCashFlow": 1396400000,
+    "fcfMargin": 0.17040490078832402,
+    "capexToRevenue": 0.04321138310594782,
+    "fcfConversion": 0.5229766675405415
+  },
+  "dividends": {
+    "dividendYield": 0.1284796573875803,
+    "payoutRatio": 7.68
+  },
+  "history": [
+    {
+      "year": "2026",
+      "revenue": 8194600000,
+      "grossProfit": 4180700000,
+      "operatingIncome": 1322900000,
+      "netIncome": 2670100000,
+      "freeCashFlow": 1396400000,
+      "totalAssets": 22285300000,
+      "totalDebt": 4470600000,
+      "totalEquity": 14308400000,
+      "sharesDiluted": 869700000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T18:10:35.443Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T18:10:35.443Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T18:10:35.443Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T18:10:35.443Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

@@ -1,0 +1,97 @@
+{
+  "ticker": "PRU",
+  "name": "Prudential Financial Inc",
+  "sector": "Insurance",
+  "industry": "Insurance",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 35770000000,
+  "enterpriseValue": 34914000000,
+  "valuation": {
+    "peTTM": 10.3594,
+    "forwardPE": 7.08872,
+    "psTTM": 0.6166,
+    "pb": 1.218,
+    "evRevenue": 0.5744890907295883,
+    "evEbitda": null,
+    "pfcf": null,
+    "fcfYield": null,
+    "earningsYield": 0.10433324014537322
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": null,
+    "netMargin": 0.06140783887846776,
+    "roe": 0.11505024970713361,
+    "roa": 0.24865080951429142,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": null,
+    "quickRatio": null,
+    "debtToEquity": 0.5812935446081756,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 6271000000,
+    "freeCashFlow": null,
+    "fcfMargin": null,
+    "capexToRevenue": null,
+    "fcfConversion": null
+  },
+  "dividends": {
+    "dividendYield": 5.425305173416004,
+    "payoutRatio": 53.86
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 60774000000,
+      "grossProfit": null,
+      "operatingIncome": null,
+      "netIncome": 3732000000,
+      "freeCashFlow": null,
+      "totalAssets": 15009000000,
+      "totalDebt": 18856000000,
+      "totalEquity": 32438000000,
+      "sharesDiluted": null
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items",
+    "Free cash flow unavailable from mapped line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T21:22:34.231Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T21:22:34.231Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T21:22:34.231Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T21:22:34.231Z",
+      "status": "partial",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

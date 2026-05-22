@@ -1,0 +1,96 @@
+{
+  "ticker": "LVS",
+  "name": "Las Vegas Sands Corp",
+  "sector": "Hotels, Restaurants & Leisure",
+  "industry": "Hotels, Restaurants & Leisure",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 33259999999.999996,
+  "enterpriseValue": 30547000000,
+  "valuation": {
+    "peTTM": 17.6883,
+    "forwardPE": 15.67161,
+    "psTTM": 2.3713,
+    "pb": 27.679,
+    "evRevenue": 2.346700468617961,
+    "evEbitda": null,
+    "pfcf": 17.929919137466307,
+    "fcfYield": 0.05577269993986771,
+    "earningsYield": 0.0561034275405893
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": 0.21648613351770762,
+    "netMargin": 0.14335100253514635,
+    "roe": 1.1735849056603773,
+    "roa": 0.08512773722627737,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 1.1445,
+    "quickRatio": 1.0855,
+    "debtToEquity": 0.7094339622641509,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 3023000000,
+    "freeCashFlow": 1855000000,
+    "fcfMargin": 0.14250595375278483,
+    "capexToRevenue": 0.08972881616347853,
+    "fcfConversion": 0.9941050375133976
+  },
+  "dividends": {
+    "dividendYield": 2.418379685610641,
+    "payoutRatio": 51.2
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 13017000000,
+      "grossProfit": null,
+      "operatingIncome": 2818000000,
+      "netIncome": 1866000000,
+      "freeCashFlow": 1855000000,
+      "totalAssets": 21920000000,
+      "totalDebt": 1128000000,
+      "totalEquity": 1590000000,
+      "sharesDiluted": 693000000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T21:38:11.529Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T21:38:11.529Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T21:38:11.529Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T21:38:11.529Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

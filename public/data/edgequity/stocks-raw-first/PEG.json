@@ -1,0 +1,96 @@
+{
+  "ticker": "PEG",
+  "name": "Public Service Enterprise Group Inc",
+  "sector": "Utilities",
+  "industry": "Utilities",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 38290000000,
+  "enterpriseValue": 60703000000,
+  "valuation": {
+    "peTTM": 17.2706,
+    "forwardPE": 17.91762,
+    "psTTM": 3.0548,
+    "pb": 2.3603,
+    "evRevenue": 4.988740959894806,
+    "evEbitda": null,
+    "pfcf": 1472.6923076923076,
+    "fcfYield": 0.0006790284669626535,
+    "earningsYield": 0.055131888221467744
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": 0.24490466798159105,
+    "netMargin": 0.17348783694937542,
+    "roe": 0.12430809091979743,
+    "roa": 0.19338585562477098,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 0.8007,
+    "quickRatio": 0.5864,
+    "debtToEquity": 1.3275821458014367,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 3298000000,
+    "freeCashFlow": 26000000,
+    "fcfMargin": 0.002136752136752137,
+    "capexToRevenue": 0.2689020381328074,
+    "fcfConversion": 0.01231643770724775
+  },
+  "dividends": {
+    "dividendYield": 3.4332564693825263,
+    "payoutRatio": 59.59
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 12168000000,
+      "grossProfit": null,
+      "operatingIncome": 2980000000,
+      "netIncome": 2111000000,
+      "freeCashFlow": 26000000,
+      "totalAssets": 10916000000,
+      "totalDebt": 22545000000,
+      "totalEquity": 16982000000,
+      "sharesDiluted": 501000000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T21:11:18.779Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T21:11:18.779Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T21:11:18.779Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T21:11:18.779Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

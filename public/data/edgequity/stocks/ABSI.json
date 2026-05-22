@@ -1,0 +1,96 @@
+{
+  "ticker": "ABSI",
+  "name": "Absci Corp",
+  "sector": "Biotechnology",
+  "industry": "Biotechnology",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 771730015.9999999,
+  "enterpriseValue": 752578015.9999999,
+  "valuation": {
+    "peTTM": null,
+    "forwardPE": null,
+    "psTTM": 420.3323,
+    "pb": 2.7701,
+    "evRevenue": null,
+    "evEbitda": null,
+    "pfcf": -8.20709988089161,
+    "fcfYield": -0.12184572071899302,
+    "earningsYield": -0.14925297398306717
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": null,
+    "netMargin": null,
+    "roe": -0.6079894852968345,
+    "roa": -0.5325224113140727,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 6.5703,
+    "quickRatio": 6.3383,
+    "debtToEquity": 0.004608100333071169,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": -92925000,
+    "freeCashFlow": -94032000,
+    "fcfMargin": null,
+    "capexToRevenue": null,
+    "fcfConversion": 0.8163704713369161
+  },
+  "dividends": {
+    "dividendYield": null,
+    "payoutRatio": null
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 0,
+      "grossProfit": null,
+      "operatingIncome": -120317000,
+      "netIncome": -115183000,
+      "freeCashFlow": -94032000,
+      "totalAssets": 216297000,
+      "totalDebt": 873000,
+      "totalEquity": 189449000,
+      "sharesDiluted": 136776885
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T16:29:54.068Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T16:29:54.068Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T16:29:54.068Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T16:29:54.068Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items"
+    }
+  }
+}

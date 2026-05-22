@@ -1,0 +1,96 @@
+{
+  "ticker": "AENT",
+  "name": "Alliance Entertainment Holding Corp",
+  "sector": "Distributors",
+  "industry": "Distributors",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 312878249.99999994,
+  "enterpriseValue": 399.5462,
+  "valuation": {
+    "peTTM": 14.301,
+    "forwardPE": 17.32812,
+    "psTTM": 0.2942,
+    "pb": 1.8611,
+    "evRevenue": 3.757050825750359e-7,
+    "evEbitda": null,
+    "pfcf": 11.69419734629041,
+    "fcfYield": 0.08551249567523471,
+    "earningsYield": 0.048191269287654236
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": 0.028337770121405943,
+    "netMargin": 0.01417828835580564,
+    "roe": 0.1460735114607351,
+    "roa": 0.04174095031392915,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 1.2629,
+    "quickRatio": 0.628,
+    "debtToEquity": null,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 26809000,
+    "freeCashFlow": 26755000,
+    "fcfMargin": 0.02515851604719326,
+    "capexToRevenue": 0.00005077779355441734,
+    "fcfConversion": 1.774439580846266
+  },
+  "dividends": {
+    "dividendYield": null,
+    "payoutRatio": null
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 1063457000,
+      "grossProfit": null,
+      "operatingIncome": 30136000,
+      "netIncome": 15078000,
+      "freeCashFlow": 26755000,
+      "totalAssets": 361228000,
+      "totalDebt": null,
+      "totalEquity": 103222000,
+      "sharesDiluted": 51016546
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T17:21:06.639Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T17:21:06.639Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T17:21:06.639Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T17:21:06.639Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items"
+    }
+  }
+}

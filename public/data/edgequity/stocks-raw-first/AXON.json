@@ -1,0 +1,96 @@
+{
+  "ticker": "AXON",
+  "name": "Axon Enterprise Inc",
+  "sector": "Aerospace & Defense",
+  "industry": "Aerospace & Defense",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 32189999999.999996,
+  "enterpriseValue": 33387.16,
+  "valuation": {
+    "peTTM": 155.9076,
+    "forwardPE": 46.37504,
+    "psTTM": 10.7651,
+    "pb": 13.8206,
+    "evRevenue": 0.000012011774627132011,
+    "evEbitda": null,
+    "pfcf": 428.73696407879487,
+    "fcfYield": 0.002332432432432433,
+    "earningsYield": 0.0038725069897483696
+  },
+  "profitability": {
+    "grossMargin": 0.5965474093517767,
+    "operatingMargin": -0.02233322396256066,
+    "netMargin": 0.04484777315350476,
+    "roe": 0.03844253695579367,
+    "roa": 0.017807203763603143,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 2.5256,
+    "quickRatio": 2.1128,
+    "debtToEquity": null,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 211339000,
+    "freeCashFlow": 75081000,
+    "fcfMargin": 0.02701206244495484,
+    "capexToRevenue": 0.04902185112910932,
+    "fcfConversion": 0.6023055448594532
+  },
+  "dividends": {
+    "dividendYield": null,
+    "payoutRatio": null
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 2779536000,
+      "grossProfit": 1658125000,
+      "operatingIncome": -62076000,
+      "netIncome": 124656000,
+      "freeCashFlow": 75081000,
+      "totalAssets": 7000313000,
+      "totalDebt": null,
+      "totalEquity": 3242658000,
+      "sharesDiluted": 82370000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T21:43:28.192Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T21:43:28.192Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T21:43:28.192Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T21:43:28.192Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

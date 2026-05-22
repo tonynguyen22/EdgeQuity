@@ -1,0 +1,97 @@
+{
+  "ticker": "VICI",
+  "name": "VICI Properties Inc",
+  "sector": "Real Estate",
+  "industry": "Real Estate",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 31150000000,
+  "enterpriseValue": 48173.526,
+  "valuation": {
+    "peTTM": 9.9875,
+    "forwardPE": 9.92325,
+    "psTTM": 7.6734,
+    "pb": 1.0897,
+    "evRevenue": 0.000012024995282213494,
+    "evEbitda": null,
+    "pfcf": null,
+    "fcfYield": null,
+    "earningsYield": 0.09048295345104333
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": null,
+    "netMargin": 0.7035602563680133,
+    "roe": 0.10139508246023764,
+    "roa": 2.712616332226553,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 0.6677,
+    "quickRatio": 0.6677,
+    "debtToEquity": null,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 2509991000,
+    "freeCashFlow": null,
+    "fcfMargin": null,
+    "capexToRevenue": null,
+    "fcfConversion": null
+  },
+  "dividends": {
+    "dividendYield": 6.2413314840499305,
+    "payoutRatio": 66.78
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 4006116000,
+      "grossProfit": null,
+      "operatingIncome": null,
+      "netIncome": 2818544000,
+      "freeCashFlow": null,
+      "totalAssets": 1039050000,
+      "totalDebt": null,
+      "totalEquity": 27797640000,
+      "sharesDiluted": 1062693000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items",
+    "Free cash flow unavailable from mapped line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T21:48:05.425Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T21:48:05.425Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T21:48:05.425Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T21:48:05.425Z",
+      "status": "partial",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

@@ -1,0 +1,96 @@
+{
+  "ticker": "ABTC",
+  "name": "American Bitcoin Corp",
+  "sector": "Technology",
+  "industry": "Technology",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 1179944670.0000002,
+  "enterpriseValue": 1176.1226,
+  "valuation": {
+    "peTTM": null,
+    "forwardPE": 73.18143,
+    "psTTM": 8.1109,
+    "pb": 2.3684,
+    "evRevenue": 0.000006351788684625521,
+    "evEbitda": null,
+    "pfcf": -3.402633040539372,
+    "fcfYield": -0.2938900516411502,
+    "earningsYield": -0.12981201906696183
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": -1.2312760579810331,
+    "netMargin": -0.8272180337430602,
+    "roe": -0.23004900731279823,
+    "roa": -0.12287968346875121,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 0.08,
+    "quickRatio": 0.0606,
+    "debtToEquity": null,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": -79608000,
+    "freeCashFlow": -346774000,
+    "fcfMargin": -1.8727938476161672,
+    "capexToRevenue": 1.4428614633514074,
+    "fcfConversion": 2.263966416619334
+  },
+  "dividends": {
+    "dividendYield": null,
+    "payoutRatio": null
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 185164000,
+      "grossProfit": null,
+      "operatingIncome": -227988000,
+      "netIncome": -153171000,
+      "freeCashFlow": -346774000,
+      "totalAssets": 1246512000,
+      "totalDebt": null,
+      "totalEquity": 665819000,
+      "sharesDiluted": 905078048
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T16:32:20.219Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T16:32:20.219Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T16:32:20.219Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T16:32:20.219Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items"
+    }
+  }
+}

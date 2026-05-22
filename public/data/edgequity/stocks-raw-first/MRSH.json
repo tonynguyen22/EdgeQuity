@@ -1,0 +1,100 @@
+{
+  "ticker": "MRSH",
+  "name": "Marsh & McLennan Companies Inc",
+  "sector": "Insurance",
+  "industry": "Insurance",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 79970000000,
+  "enterpriseValue": 98092.02,
+  "valuation": {
+    "peTTM": 20.1531,
+    "forwardPE": 15.53979,
+    "psTTM": 2.8746,
+    "pb": 5.8608,
+    "evRevenue": null,
+    "evEbitda": null,
+    "pfcf": null,
+    "fcfYield": null,
+    "earningsYield": null
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": null,
+    "netMargin": null,
+    "roe": null,
+    "roa": null,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 1.1016,
+    "quickRatio": 1.1016,
+    "debtToEquity": null,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": null,
+    "freeCashFlow": null,
+    "fcfMargin": null,
+    "capexToRevenue": null,
+    "fcfConversion": null
+  },
+  "dividends": {
+    "dividendYield": 2.203452074917371,
+    "payoutRatio": 40.84
+  },
+  "history": [
+    {
+      "year": "",
+      "revenue": null,
+      "grossProfit": null,
+      "operatingIncome": null,
+      "netIncome": null,
+      "freeCashFlow": null,
+      "totalAssets": null,
+      "totalDebt": null,
+      "totalEquity": null,
+      "sharesDiluted": null
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items",
+    "Finnhub as-reported financial filing unavailable",
+    "Revenue unavailable from mapped line items",
+    "Free cash flow unavailable from mapped line items",
+    "Total assets unavailable from mapped line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T19:12:41.814Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T19:12:41.814Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T19:12:41.814Z",
+      "status": "missing"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T19:12:41.814Z",
+      "status": "partial",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

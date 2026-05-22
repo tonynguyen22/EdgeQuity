@@ -1,0 +1,96 @@
+{
+  "ticker": "AMZN",
+  "name": "Amazon.com Inc",
+  "sector": "Retail",
+  "industry": "Retail",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 2850000000000,
+  "enterpriseValue": 2828838000000,
+  "valuation": {
+    "peTTM": 31.0174,
+    "forwardPE": 29.69118,
+    "psTTM": 3.7916,
+    "pb": 6.0027,
+    "evRevenue": 3.9457989968253258,
+    "evEbitda": null,
+    "pfcf": 370.3703703703704,
+    "fcfYield": 0.0027,
+    "earningsYield": 0.02725263157894737
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": 0.11155296795755199,
+    "netMargin": 0.10833784334183261,
+    "roe": 0.1889482198679041,
+    "roa": 0.09494622525493801,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 1.0508,
+    "quickRatio": 0.8434,
+    "debtToEquity": 0.1597022368725141,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 139514000000,
+    "freeCashFlow": 7695000000,
+    "fcfMargin": 0.010733355278941701,
+    "capexToRevenue": 0.18386746712343288,
+    "fcfConversion": 0.09907300115874855
+  },
+  "dividends": {
+    "dividendYield": null,
+    "payoutRatio": null
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 716924000000,
+      "grossProfit": null,
+      "operatingIncome": 79975000000,
+      "netIncome": 77670000000,
+      "freeCashFlow": 7695000000,
+      "totalAssets": 818042000000,
+      "totalDebt": 65648000000,
+      "totalEquity": 411065000000,
+      "sharesDiluted": 10827000000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T17:57:30.082Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T17:57:30.082Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T17:57:30.082Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T17:57:30.082Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

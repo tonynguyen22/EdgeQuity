@@ -1,0 +1,100 @@
+{
+  "ticker": "HMC",
+  "name": "Honda Motor Co Ltd",
+  "sector": "Automobiles",
+  "industry": "Automobiles",
+  "currency": "JPY",
+  "price": null,
+  "marketCap": 32890000000,
+  "enterpriseValue": 13616929.5,
+  "valuation": {
+    "peTTM": 10.5395,
+    "forwardPE": 15.37754,
+    "psTTM": 0.245,
+    "pb": 0.5751,
+    "evRevenue": null,
+    "evEbitda": null,
+    "pfcf": null,
+    "fcfYield": null,
+    "earningsYield": null
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": null,
+    "netMargin": null,
+    "roe": null,
+    "roa": null,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 1.3567,
+    "quickRatio": 1.0699,
+    "debtToEquity": null,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": null,
+    "freeCashFlow": null,
+    "fcfMargin": null,
+    "capexToRevenue": null,
+    "fcfConversion": null
+  },
+  "dividends": {
+    "dividendYield": 5.057803468208093,
+    "payoutRatio": 41.61
+  },
+  "history": [
+    {
+      "year": "",
+      "revenue": null,
+      "grossProfit": null,
+      "operatingIncome": null,
+      "netIncome": null,
+      "freeCashFlow": null,
+      "totalAssets": null,
+      "totalDebt": null,
+      "totalEquity": null,
+      "sharesDiluted": null
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items",
+    "Finnhub as-reported financial filing unavailable",
+    "Revenue unavailable from mapped line items",
+    "Free cash flow unavailable from mapped line items",
+    "Total assets unavailable from mapped line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T21:40:10.466Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T21:40:10.466Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T21:40:10.466Z",
+      "status": "missing"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T21:40:10.466Z",
+      "status": "partial",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

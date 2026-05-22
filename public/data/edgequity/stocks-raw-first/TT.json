@@ -1,0 +1,96 @@
+{
+  "ticker": "TT",
+  "name": "Trane Technologies PLC",
+  "sector": "Building",
+  "industry": "Building",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 101780000000,
+  "enterpriseValue": 104631800000,
+  "valuation": {
+    "peTTM": 34.4531,
+    "forwardPE": 31.26042,
+    "psTTM": 4.622,
+    "pb": 10.0593,
+    "evRevenue": 4.907245601939789,
+    "evEbitda": null,
+    "pfcf": 35.870867695777825,
+    "fcfYield": 0.027877775594419337,
+    "earningsYield": 0.028843584201218315
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": 0.18607159774691748,
+    "netMargin": 0.13768472790886366,
+    "roe": 0.3421880828049235,
+    "roa": 0.13704967624774167,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 1.2507,
+    "quickRatio": 0.9161,
+    "debtToEquity": 0.5379406005221932,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 3220400000,
+    "freeCashFlow": 2837400000,
+    "fcfMargin": 0.13307444458514486,
+    "capexToRevenue": 0.017962751912353025,
+    "fcfConversion": 0.9665156521442927
+  },
+  "dividends": {
+    "dividendYield": 0.9298412628129913,
+    "payoutRatio": 28.69
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 21321900000,
+      "grossProfit": null,
+      "operatingIncome": 3967400000,
+      "netIncome": 2935700000,
+      "freeCashFlow": 2837400000,
+      "totalAssets": 21420700000,
+      "totalDebt": 4615100000,
+      "totalEquity": 8579200000,
+      "sharesDiluted": null
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T18:42:20.550Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T18:42:20.550Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T18:42:20.550Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T18:42:20.550Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

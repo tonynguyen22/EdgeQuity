@@ -1,0 +1,96 @@
+{
+  "ticker": "ACCO",
+  "name": "ACCO Brands Corp",
+  "sector": "Commercial Services & Supplies",
+  "industry": "Commercial Services & Supplies",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 348734470.99999994,
+  "enterpriseValue": 1121134471,
+  "valuation": {
+    "peTTM": 4.7128,
+    "forwardPE": 4.50829,
+    "psTTM": 0.2245,
+    "pb": 0.5059,
+    "evRevenue": 0.7353147970092477,
+    "evEbitda": null,
+    "pfcf": 6.864851791338581,
+    "fcfYield": 0.1456695687533568,
+    "earningsYield": 0.1184282123920007
+  },
+  "profitability": {
+    "grossMargin": 0.3279333639404473,
+    "operatingMargin": 0.06053649898340657,
+    "netMargin": 0.027087295861480946,
+    "roe": 0.06214264219079146,
+    "roa": 0.018331114070128718,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 1.6125,
+    "quickRatio": 0.9912,
+    "debtToEquity": 1.259103219981944,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 68700000,
+    "freeCashFlow": 50800000,
+    "fcfMargin": 0.03331802977634945,
+    "capexToRevenue": 0.011740014429068014,
+    "fcfConversion": 1.2300242130750605
+  },
+  "dividends": {
+    "dividendYield": 7.936507936507936,
+    "payoutRatio": 65.38
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 1524700000,
+      "grossProfit": 500000000,
+      "operatingIncome": 92300000,
+      "netIncome": 41300000,
+      "freeCashFlow": 50800000,
+      "totalAssets": 2253000000,
+      "totalDebt": 836800000,
+      "totalEquity": 664600000,
+      "sharesDiluted": 94000000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T16:46:21.466Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T16:46:21.466Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T16:46:21.466Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T16:46:21.466Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items"
+    }
+  }
+}

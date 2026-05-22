@@ -1,0 +1,96 @@
+{
+  "ticker": "ACEL",
+  "name": "Accel Entertainment Inc",
+  "sector": "Hotels, Restaurants & Leisure",
+  "industry": "Hotels, Restaurants & Leisure",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 949855131.9999999,
+  "enterpriseValue": 1260709132,
+  "valuation": {
+    "peTTM": 18.4424,
+    "forwardPE": 16.416134232492972,
+    "psTTM": 0.6991,
+    "pb": 3.5932,
+    "evRevenue": 0.9472178968564045,
+    "evEbitda": null,
+    "pfcf": 15.332114088326444,
+    "fcfYield": 0.06522257754143503,
+    "earningsYield": 0.05397875767859725
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": 0.08103248782833443,
+    "netMargin": 0.03852257017491134,
+    "roe": 0.19011951068476693,
+    "roa": 0.04646757773522217,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 2.7627,
+    "quickRatio": 2.6181,
+    "debtToEquity": 2.252348127245692,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 150875000,
+    "freeCashFlow": 61952000,
+    "fcfMargin": 0.04654685339905031,
+    "capexToRevenue": 0.06681117388952335,
+    "fcfConversion": 1.2083008269620845
+  },
+  "dividends": {
+    "dividendYield": null,
+    "payoutRatio": null
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 1330960000,
+      "grossProfit": null,
+      "operatingIncome": 107851000,
+      "netIncome": 51272000,
+      "freeCashFlow": 61952000,
+      "totalAssets": 1103393000,
+      "totalDebt": 607420000,
+      "totalEquity": 269683000,
+      "sharesDiluted": 86367000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T16:41:33.190Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T16:41:33.190Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T16:41:33.190Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T16:41:33.190Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items"
+    }
+  }
+}

@@ -1,0 +1,96 @@
+{
+  "ticker": "HPE",
+  "name": "Hewlett Packard Enterprise Co",
+  "sector": "Technology",
+  "industry": "Technology",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 43790000000,
+  "enterpriseValue": 55773000000,
+  "valuation": {
+    "peTTM": 786.8012,
+    "forwardPE": 11.13695,
+    "psTTM": 1.2547,
+    "pb": 1.3047,
+    "evRevenue": 1.6634256911926988,
+    "evEbitda": null,
+    "pfcf": 69.84051036682615,
+    "fcfYield": 0.014318337519981732,
+    "earningsYield": 0.0013016670472710665
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": -0.01303349339377852,
+    "netMargin": 0.0017000208774493723,
+    "roe": 0.002308813998703824,
+    "roa": 0.0007509287803335704,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 1.0142,
+    "quickRatio": 0.7565,
+    "debtToEquity": 0.7192158133506157,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 2919000000,
+    "freeCashFlow": 627000000,
+    "fcfMargin": 0.018700229651943095,
+    "capexToRevenue": 0.0683587342300695,
+    "fcfConversion": 11
+  },
+  "dividends": {
+    "dividendYield": 1.6863905325443789,
+    "payoutRatio": 1396.49
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 33529000000,
+      "grossProfit": null,
+      "operatingIncome": -437000000,
+      "netIncome": 57000000,
+      "freeCashFlow": 627000000,
+      "totalAssets": 75906000000,
+      "totalDebt": 17756000000,
+      "totalEquity": 24688000000,
+      "sharesDiluted": 1324000000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T20:43:33.839Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T20:43:33.839Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T20:43:33.839Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T20:43:33.839Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

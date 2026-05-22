@@ -1,0 +1,96 @@
+{
+  "ticker": "CRM",
+  "name": "Salesforce Inc",
+  "sector": "Technology",
+  "industry": "Technology",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 146820000000,
+  "enterpriseValue": 160371000000,
+  "valuation": {
+    "peTTM": 19.1596,
+    "forwardPE": 13.52378,
+    "psTTM": 3.4407,
+    "pb": 3.3399,
+    "evRevenue": 3.8620349187236602,
+    "evEbitda": null,
+    "pfcf": 10.194417442021942,
+    "fcfYield": 0.0980929028742678,
+    "earningsYield": 0.05079008309494619
+  },
+  "profitability": {
+    "grossMargin": 0.7767609873570138,
+    "operatingMargin": 0.20062612883804937,
+    "netMargin": 0.179578567128236,
+    "roe": 0.1260863684014744,
+    "roa": 0.06639953697520146,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 0.7603,
+    "quickRatio": 0.6999,
+    "debtToEquity": 0.3530147779919516,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 14996000000,
+    "freeCashFlow": 14402000000,
+    "fcfMargin": 0.34682721252257676,
+    "capexToRevenue": 0.014304635761589404,
+    "fcfConversion": 1.9313396808367977
+  },
+  "dividends": {
+    "dividendYield": 0.9772348695169351,
+    "payoutRatio": 21.28
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 41525000000,
+      "grossProfit": 32255000000,
+      "operatingIncome": 8331000000,
+      "netIncome": 7457000000,
+      "freeCashFlow": 14402000000,
+      "totalAssets": 112305000000,
+      "totalDebt": 20878000000,
+      "totalEquity": 59142000000,
+      "sharesDiluted": 956000000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T18:11:14.968Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T18:11:14.968Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T18:11:14.968Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T18:11:14.968Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

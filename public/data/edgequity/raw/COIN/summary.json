@@ -1,0 +1,97 @@
+{
+  "ticker": "COIN",
+  "name": "Coinbase Global Inc",
+  "sector": "Financial Services",
+  "industry": "Financial Services",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 49910000000,
+  "enterpriseValue": 45831167000,
+  "valuation": {
+    "peTTM": 62.9494,
+    "forwardPE": 48.96273,
+    "psTTM": 7.6825,
+    "pb": 4.1222,
+    "evRevenue": 6.381993155859121,
+    "evEbitda": null,
+    "pfcf": null,
+    "fcfYield": null,
+    "earningsYield": 0.025251993588459226
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": 0.1998852579433461,
+    "netMargin": 0.1755006214034318,
+    "roe": 0.08519719181794595,
+    "roa": 0.04247553706828753,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 2.3432,
+    "quickRatio": 2.3322,
+    "debtToEquity": 0.48716222163125433,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 2426383000,
+    "freeCashFlow": null,
+    "fcfMargin": null,
+    "capexToRevenue": null,
+    "fcfConversion": null
+  },
+  "dividends": {
+    "dividendYield": null,
+    "payoutRatio": null
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 7181325000,
+      "grossProfit": null,
+      "operatingIncome": 1435441000,
+      "netIncome": 1260327000,
+      "freeCashFlow": null,
+      "totalAssets": 29671832000,
+      "totalDebt": 7206619000,
+      "totalEquity": 14793058000,
+      "sharesDiluted": 287209000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items",
+    "Free cash flow unavailable from mapped line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T20:29:03.341Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T20:29:03.341Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T20:29:03.341Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T20:29:03.341Z",
+      "status": "partial",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

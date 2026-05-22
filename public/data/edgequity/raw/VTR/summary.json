@@ -1,0 +1,96 @@
+{
+  "ticker": "VTR",
+  "name": "Ventas Inc",
+  "sector": "Real Estate",
+  "industry": "Real Estate",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 43150000000,
+  "enterpriseValue": 55419949000,
+  "valuation": {
+    "peTTM": 164.9346,
+    "forwardPE": 103.41264,
+    "psTTM": 7.0038,
+    "pb": 2.9409,
+    "evRevenue": 12.90724082436867,
+    "evEbitda": null,
+    "pfcf": 33.635703890438805,
+    "fcfYield": 0.02973031286210892,
+    "earningsYield": 0.006060672074159907
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": null,
+    "netMargin": 0.06090723407030284,
+    "roe": 0.020875925472248386,
+    "roa": 0.31678838659816916,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 0.2233,
+    "quickRatio": 0.2233,
+    "debtToEquity": 1.0386168460076604,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 1646726000,
+    "freeCashFlow": 1282863000,
+    "fcfMargin": 0.2987772811857345,
+    "capexToRevenue": 0.0847432639838275,
+    "fcfConversion": 4.905448190946704
+  },
+  "dividends": {
+    "dividendYield": 2.3968656372436046,
+    "payoutRatio": 342.13
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 4293710000,
+      "grossProfit": null,
+      "operatingIncome": null,
+      "netIncome": 261518000,
+      "freeCashFlow": 1282863000,
+      "totalAssets": 825529000,
+      "totalDebt": 13011016000,
+      "totalEquity": 12527253000,
+      "sharesDiluted": null
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T20:47:31.174Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T20:47:31.174Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T20:47:31.174Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T20:47:31.174Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

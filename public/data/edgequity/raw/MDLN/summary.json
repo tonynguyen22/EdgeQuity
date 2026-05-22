@@ -1,0 +1,96 @@
+{
+  "ticker": "MDLN",
+  "name": "Medline Inc",
+  "sector": "Health Care",
+  "industry": "Health Care",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 47320000000,
+  "enterpriseValue": 57865000000,
+  "valuation": {
+    "peTTM": 49.2973,
+    "forwardPE": 23.983639518951044,
+    "psTTM": 1.6342,
+    "pb": 4.97,
+    "evRevenue": 2.0352068092290376,
+    "evEbitda": null,
+    "pfcf": 36.48419429452583,
+    "fcfYield": 0.027409129332206256,
+    "earningsYield": 0.02445054945054945
+  },
+  "profitability": {
+    "grossMargin": 0.26442037141249297,
+    "operatingMargin": 0.07779966235227913,
+    "netMargin": 0.04069358469330332,
+    "roe": 0.1077582192418739,
+    "roa": 0.030064442365658455,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 4.2888,
+    "quickRatio": 2.3735,
+    "debtToEquity": 1.1627083915432617,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 1744000000,
+    "freeCashFlow": 1297000000,
+    "fcfMargin": 0.04561761395610579,
+    "capexToRevenue": 0.015721722003376477,
+    "fcfConversion": 1.1210025929127052
+  },
+  "dividends": {
+    "dividendYield": null,
+    "payoutRatio": null
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 28432000000,
+      "grossProfit": 7518000000,
+      "operatingIncome": 2212000000,
+      "netIncome": 1157000000,
+      "freeCashFlow": 1297000000,
+      "totalAssets": 38484000000,
+      "totalDebt": 12484000000,
+      "totalEquity": 10737000000,
+      "sharesDiluted": 810000000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T20:34:59.798Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T20:34:59.798Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T20:34:59.798Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T20:34:59.798Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

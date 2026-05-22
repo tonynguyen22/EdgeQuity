@@ -1,0 +1,97 @@
+{
+  "ticker": "LLY",
+  "name": "Eli Lilly and Co",
+  "sector": "Pharmaceuticals",
+  "industry": "Pharmaceuticals",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 881120000000,
+  "enterpriseValue": 916355000000,
+  "valuation": {
+    "peTTM": 38.6284,
+    "forwardPE": 24.92454,
+    "psTTM": 13.5142,
+    "pb": 38.2885,
+    "evRevenue": 14.059052762392795,
+    "evEbitda": null,
+    "pfcf": null,
+    "fcfYield": null,
+    "earningsYield": 0.023424732159070275
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": null,
+    "netMargin": 0.31666641096058545,
+    "roe": 0.7778405879027699,
+    "roa": 0.18350581457377574,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 1.5791,
+    "quickRatio": 0.7826,
+    "debtToEquity": 1.6017712455247786,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 16813000000,
+    "freeCashFlow": null,
+    "fcfMargin": null,
+    "capexToRevenue": null,
+    "fcfConversion": null
+  },
+  "dividends": {
+    "dividendYield": 0.6791838016626263,
+    "payoutRatio": 26.09
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 65179000000,
+      "grossProfit": null,
+      "operatingIncome": null,
+      "netIncome": 20640000000,
+      "freeCashFlow": null,
+      "totalAssets": 112476000000,
+      "totalDebt": 42503000000,
+      "totalEquity": 26535000000,
+      "sharesDiluted": 899300000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items",
+    "Free cash flow unavailable from mapped line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T17:57:30.209Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T17:57:30.209Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T17:57:30.209Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T17:57:30.209Z",
+      "status": "partial",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

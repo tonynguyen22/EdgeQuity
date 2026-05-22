@@ -1,0 +1,100 @@
+{
+  "ticker": "NTES",
+  "name": "NetEase Inc",
+  "sector": "Media",
+  "industry": "Media",
+  "currency": "CNY",
+  "price": null,
+  "marketCap": 71340000000,
+  "enterpriseValue": 448187.2506,
+  "valuation": {
+    "peTTM": 14.4838,
+    "forwardPE": 12.45808,
+    "psTTM": 4.3416,
+    "pb": 3.7133,
+    "evRevenue": null,
+    "evEbitda": null,
+    "pfcf": null,
+    "fcfYield": null,
+    "earningsYield": null
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": null,
+    "netMargin": null,
+    "roe": null,
+    "roa": null,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 3.4489,
+    "quickRatio": 3.3607,
+    "debtToEquity": null,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": null,
+    "freeCashFlow": null,
+    "fcfMargin": null,
+    "capexToRevenue": null,
+    "fcfConversion": null
+  },
+  "dividends": {
+    "dividendYield": 2.5380927923300804,
+    "payoutRatio": 40.95
+  },
+  "history": [
+    {
+      "year": "",
+      "revenue": null,
+      "grossProfit": null,
+      "operatingIncome": null,
+      "netIncome": null,
+      "freeCashFlow": null,
+      "totalAssets": null,
+      "totalDebt": null,
+      "totalEquity": null,
+      "sharesDiluted": null
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items",
+    "Finnhub as-reported financial filing unavailable",
+    "Revenue unavailable from mapped line items",
+    "Free cash flow unavailable from mapped line items",
+    "Total assets unavailable from mapped line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T19:33:47.108Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T19:33:47.108Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T19:33:47.108Z",
+      "status": "missing"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T19:33:47.108Z",
+      "status": "partial",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

@@ -1,0 +1,96 @@
+{
+  "ticker": "AD",
+  "name": "Array Digital Infrastructure Inc",
+  "sector": "Telecommunication",
+  "industry": "Telecommunication",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 4430207674,
+  "enterpriseValue": 4324933674,
+  "valuation": {
+    "peTTM": 90.9359,
+    "forwardPE": 17.730700834244146,
+    "psTTM": 2.2806,
+    "pb": 1.8044,
+    "evRevenue": 26.53968540939243,
+    "evEbitda": null,
+    "pfcf": 92.43271660163992,
+    "fcfYield": 0.01081868018993459,
+    "earningsYield": 0.015618455181250268
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": -0.5678168396119316,
+    "netMargin": 0.42459852357312483,
+    "roe": 0.02694823934638456,
+    "roa": 0.014790871826267484,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 0.724,
+    "quickRatio": 0.7079,
+    "debtToEquity": 0.0031647911339112472,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 75129000,
+    "freeCashFlow": 47929000,
+    "fcfMargin": 0.29411331545584524,
+    "capexToRevenue": 0.1669111014291763,
+    "fcfConversion": 0.6926856762967352
+  },
+  "dividends": {
+    "dividendYield": 45.5032,
+    "payoutRatio": 4074.82
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 162961000,
+      "grossProfit": null,
+      "operatingIncome": -92532000,
+      "netIncome": 69193000,
+      "freeCashFlow": 47929000,
+      "totalAssets": 4678088000,
+      "totalDebt": 8126000,
+      "totalEquity": 2567626000,
+      "sharesDiluted": 87293000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T16:59:58.520Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T16:59:58.520Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T16:59:58.520Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T16:59:58.520Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items"
+    }
+  }
+}

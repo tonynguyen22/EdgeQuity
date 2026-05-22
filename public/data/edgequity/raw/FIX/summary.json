@@ -1,0 +1,96 @@
+{
+  "ticker": "FIX",
+  "name": "Comfort Systems USA Inc",
+  "sector": "Construction",
+  "industry": "Construction",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 65170000000,
+  "enterpriseValue": 64333328000,
+  "valuation": {
+    "peTTM": 53.4057,
+    "forwardPE": 42.53865,
+    "psTTM": 6.4475,
+    "pb": 13.443,
+    "evRevenue": 7.068321855366522,
+    "evEbitda": null,
+    "pfcf": 63.18271409361357,
+    "fcfYield": 0.015827113702623907,
+    "earningsYield": 0.015690624520484885
+  },
+  "profitability": {
+    "grossMargin": 0.2412640753464128,
+    "operatingMargin": 0.14443428388353266,
+    "netMargin": 0.11234875117574952,
+    "roe": 0.4175795724717757,
+    "roa": 0.15875348092869476,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 1.2112,
+    "quickRatio": 1.1456,
+    "debtToEquity": 0.059305595371398095,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 1186356000,
+    "freeCashFlow": 1031453000,
+    "fcfMargin": 0.1133260474677039,
+    "capexToRevenue": 0.017019238618618336,
+    "fcfConversion": 1.0086987730769306
+  },
+  "dividends": {
+    "dividendYield": 0.17433846723798838,
+    "payoutRatio": 6.73
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 9101641000,
+      "grossProfit": 2195899000,
+      "operatingIncome": 1314589000,
+      "netIncome": 1022558000,
+      "freeCashFlow": 1031453000,
+      "totalAssets": 6441169000,
+      "totalDebt": 145226000,
+      "totalEquity": 2448774000,
+      "sharesDiluted": 35413000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T19:50:22.202Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T19:50:22.202Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T19:50:22.202Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T19:50:22.202Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

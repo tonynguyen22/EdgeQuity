@@ -1,0 +1,96 @@
+{
+  "ticker": "MSFT",
+  "name": "Microsoft Corp",
+  "sector": "Technology",
+  "industry": "Technology",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 3150000000000,
+  "enterpriseValue": 3162909000000,
+  "valuation": {
+    "peTTM": 24.9165,
+    "forwardPE": 22.0356,
+    "psTTM": 9.8027,
+    "pb": 10.7635,
+    "evRevenue": 11.22697746730843,
+    "evEbitda": null,
+    "pfcf": 43.987655527782046,
+    "fcfYield": 0.022733650793650792,
+    "earningsYield": 0.03232761904761905
+  },
+  "profitability": {
+    "grossMargin": 0.6882374238616519,
+    "operatingMargin": 0.4562195624085985,
+    "netMargin": 0.3614601524896707,
+    "roe": 0.2964722734140952,
+    "roa": 0.16450970350709124,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 1.3534,
+    "quickRatio": 1.3468,
+    "debtToEquity": 0.12562922332951942,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 136162000000,
+    "freeCashFlow": 71611000000,
+    "fcfMargin": 0.2541884965427156,
+    "capexToRevenue": 0.22912850875324786,
+    "fcfConversion": 0.7032268834943829
+  },
+  "dividends": {
+    "dividendYield": 0.8644848715147485,
+    "payoutRatio": 23.65
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 281724000000,
+      "grossProfit": 193893000000,
+      "operatingIncome": 128528000000,
+      "netIncome": 101832000000,
+      "freeCashFlow": 71611000000,
+      "totalAssets": 619003000000,
+      "totalDebt": 43151000000,
+      "totalEquity": 343479000000,
+      "sharesDiluted": 7465000000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T17:57:30.067Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T17:57:30.067Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T17:57:30.067Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T17:57:30.067Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

@@ -1,0 +1,96 @@
+{
+  "ticker": "KHC",
+  "name": "Kraft Heinz Co",
+  "sector": "Food Products",
+  "industry": "Food Products",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 27690000000,
+  "enterpriseValue": 28891000000,
+  "valuation": {
+    "peTTM": null,
+    "forwardPE": 10.91115,
+    "psTTM": 1.1165,
+    "pb": 0.6889,
+    "evRevenue": 1.1583273193809638,
+    "evEbitda": null,
+    "pfcf": 7.5635072384594375,
+    "fcfYield": 0.13221379559407728,
+    "earningsYield": -0.2111953773925605
+  },
+  "profitability": {
+    "grossMargin": 0.33313286825435007,
+    "operatingMargin": -0.18719429075455055,
+    "netMargin": -0.23446395637879883,
+    "roe": -0.14036098310291859,
+    "roa": -0.07150368033648791,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 1.1537,
+    "quickRatio": 0.7597,
+    "debtToEquity": 0.09158986175115208,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 4462000000,
+    "freeCashFlow": 3661000000,
+    "fcfMargin": 0.14678053083152914,
+    "capexToRevenue": 0.03211450565311523,
+    "fcfConversion": -0.6260259917920656
+  },
+  "dividends": {
+    "dividendYield": 6.799830004249893,
+    "payoutRatio": 70.37
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 24942000000,
+      "grossProfit": 8309000000,
+      "operatingIncome": -4669000000,
+      "netIncome": -5848000000,
+      "freeCashFlow": 3661000000,
+      "totalAssets": 81786000000,
+      "totalDebt": 3816000000,
+      "totalEquity": 41664000000,
+      "sharesDiluted": null
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T22:15:14.033Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T22:15:14.033Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T22:15:14.033Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T22:15:14.033Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

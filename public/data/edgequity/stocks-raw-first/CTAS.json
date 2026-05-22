@@ -1,0 +1,96 @@
+{
+  "ticker": "CTAS",
+  "name": "Cintas Corp",
+  "sector": "Commercial Services & Supplies",
+  "industry": "Commercial Services & Supplies",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 69820000000,
+  "enterpriseValue": 71981026000,
+  "valuation": {
+    "peTTM": 35.3323,
+    "forwardPE": 31.46622,
+    "psTTM": 6.2071,
+    "pb": 19.4993,
+    "evRevenue": 6.961292650486485,
+    "evEbitda": null,
+    "pfcf": 39.73771514398519,
+    "fcfYield": 0.025165010025780577,
+    "earningsYield": 0.02595647378974506
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": 0.22820935146106244,
+    "netMargin": 0.17526588751202712,
+    "roe": 0.3868691110071745,
+    "roa": 0.18445155696435334,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 2.0895,
+    "quickRatio": 1.7727,
+    "debtToEquity": 0.5176665248508853,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 2165905000,
+    "freeCashFlow": 1757021000,
+    "fcfMargin": 0.16992168705750896,
+    "capexToRevenue": 0.039543214959196556,
+    "fcfConversion": 0.9695080398679896
+  },
+  "dividends": {
+    "dividendYield": 1.0504201680672267,
+    "payoutRatio": 33.75
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 10340181000,
+      "grossProfit": null,
+      "operatingIncome": 2359726000,
+      "netIncome": 1812281000,
+      "freeCashFlow": 1757021000,
+      "totalAssets": 9825241000,
+      "totalDebt": 2424999000,
+      "totalEquity": 4684481000,
+      "sharesDiluted": null
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T19:39:03.804Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T19:39:03.804Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T19:39:03.804Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T19:39:03.804Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

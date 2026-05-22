@@ -1,0 +1,96 @@
+{
+  "ticker": "ADM",
+  "name": "Archer-Daniels-Midland Co",
+  "sector": "Food Products",
+  "industry": "Food Products",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 39000000000,
+  "enterpriseValue": 45383000000,
+  "valuation": {
+    "peTTM": 34.6532,
+    "forwardPE": 16.93916,
+    "psTTM": 0.4649,
+    "pb": 1.2153,
+    "evRevenue": 0.565386388269444,
+    "evEbitda": null,
+    "pfcf": 9.276879162702189,
+    "fcfYield": 0.1077948717948718,
+    "earningsYield": 0.027512820512820512
+  },
+  "profitability": {
+    "grossMargin": 0.06270166564925438,
+    "operatingMargin": null,
+    "netMargin": 0.013367551607719045,
+    "roe": 0.04718557607739666,
+    "roa": 0.02048139876691672,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 1.3651,
+    "quickRatio": 0.8208,
+    "debtToEquity": 0.3253298153034301,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 5452000000,
+    "freeCashFlow": 4204000000,
+    "fcfMargin": 0.052373892785508726,
+    "capexToRevenue": 0.0155477207888475,
+    "fcfConversion": 3.917986952469711
+  },
+  "dividends": {
+    "dividendYield": 2.68214055448098,
+    "payoutRatio": 91.56
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 80269000000,
+      "grossProfit": 5033000000,
+      "operatingIncome": null,
+      "netIncome": 1073000000,
+      "freeCashFlow": 4204000000,
+      "totalAssets": 52389000000,
+      "totalDebt": 7398000000,
+      "totalEquity": 22740000000,
+      "sharesDiluted": 484000000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T21:06:02.441Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T21:06:02.441Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T21:06:02.441Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T21:06:02.441Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

@@ -1,0 +1,96 @@
+{
+  "ticker": "MMM",
+  "name": "3M Co",
+  "sector": "Industrial Conglomerates",
+  "industry": "Industrial Conglomerates",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 79550000000,
+  "enterpriseValue": 86917000000,
+  "valuation": {
+    "peTTM": 28.1276,
+    "forwardPE": 15.91454,
+    "psTTM": 3.1327,
+    "pb": 18.0879,
+    "evRevenue": 3.4839265672599007,
+    "evEbitda": null,
+    "pfcf": 56.98424068767908,
+    "fcfYield": 0.017548711502199874,
+    "earningsYield": 0.041005656819610305
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": 0.18554593554593554,
+    "netMargin": 0.1307519640852974,
+    "roe": 0.6937473415567843,
+    "roa": 0.08644952693928391,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 1.7079,
+    "quickRatio": 1.2856,
+    "debtToEquity": 2.6801361122926415,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 2306000000,
+    "freeCashFlow": 1396000000,
+    "fcfMargin": 0.05595638928972262,
+    "capexToRevenue": 0.03647586980920314,
+    "fcfConversion": 0.42795830778663396
+  },
+  "dividends": {
+    "dividendYield": 2.08305514754974,
+    "payoutRatio": 48.06
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 24948000000,
+      "grossProfit": null,
+      "operatingIncome": 4629000000,
+      "netIncome": 3262000000,
+      "freeCashFlow": 1396000000,
+      "totalAssets": 37733000000,
+      "totalDebt": 12602000000,
+      "totalEquity": 4702000000,
+      "sharesDiluted": 541300000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T19:13:21.560Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T19:13:21.560Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T19:13:21.560Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T19:13:21.560Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

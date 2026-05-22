@@ -1,0 +1,96 @@
+{
+  "ticker": "MPC",
+  "name": "Marathon Petroleum Corp",
+  "sector": "Energy",
+  "industry": "Energy",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 75770000000,
+  "enterpriseValue": 102603000000,
+  "valuation": {
+    "peTTM": 16.284,
+    "forwardPE": 11.59181,
+    "psTTM": 0.5475,
+    "pb": 2.8236,
+    "evRevenue": 0.7732010037754617,
+    "evEbitda": null,
+    "pfcf": 15.894692678833648,
+    "fcfYield": 0.06291408209053716,
+    "earningsYield": 0.0775768773921077
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": 0.06247974739824716,
+    "netMargin": 0.04429573696862825,
+    "roe": 0.33949405105694813,
+    "roa": 0.07001369781430528,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 1.2593,
+    "quickRatio": 0.7445,
+    "debtToEquity": 1.7618690077394017,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 8253000000,
+    "freeCashFlow": 4767000000,
+    "fcfMargin": 0.035923405602152236,
+    "capexToRevenue": 0.026269979427124546,
+    "fcfConversion": 0.8109901326981966
+  },
+  "dividends": {
+    "dividendYield": 1.54816735689128,
+    "payoutRatio": 28.17
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 132699000000,
+      "grossProfit": null,
+      "operatingIncome": 8291000000,
+      "netIncome": 5878000000,
+      "freeCashFlow": 4767000000,
+      "totalAssets": 83955000000,
+      "totalDebt": 30505000000,
+      "totalEquity": 17314000000,
+      "sharesDiluted": 306000000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T19:22:34.888Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T19:22:34.888Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T19:22:34.888Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T19:22:34.888Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

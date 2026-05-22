@@ -1,0 +1,97 @@
+{
+  "ticker": "CI",
+  "name": "Cigna Group",
+  "sector": "Health Care",
+  "industry": "Health Care",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 75840000000,
+  "enterpriseValue": 68756000000,
+  "valuation": {
+    "peTTM": 11.9877,
+    "forwardPE": 9.01698,
+    "psTTM": 0.2713,
+    "pb": 1.7625,
+    "evRevenue": 0.2943410119310082,
+    "evEbitda": null,
+    "pfcf": null,
+    "fcfYield": null,
+    "earningsYield": 0.08291139240506329
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": 0.039384741837298204,
+    "netMargin": 0.026918614855753382,
+    "roe": 0.15074437225804904,
+    "roa": 0.03981788131890399,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 0.8486,
+    "quickRatio": 0.7184,
+    "debtToEquity": 0.014192218253302328,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 9601000000,
+    "freeCashFlow": null,
+    "fcfMargin": null,
+    "capexToRevenue": null,
+    "fcfConversion": null
+  },
+  "dividends": {
+    "dividendYield": 2.2041681384669727,
+    "payoutRatio": 27.04
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 233593000000,
+      "grossProfit": null,
+      "operatingIncome": 9200000000,
+      "netIncome": 6288000000,
+      "freeCashFlow": null,
+      "totalAssets": 157919000000,
+      "totalDebt": 592000000,
+      "totalEquity": 41713000000,
+      "sharesDiluted": null
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items",
+    "Free cash flow unavailable from mapped line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T19:21:55.267Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T19:21:55.267Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T19:21:55.267Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T19:21:55.267Z",
+      "status": "partial",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

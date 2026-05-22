@@ -1,0 +1,96 @@
+{
+  "ticker": "FDX",
+  "name": "FedEx Corp",
+  "sector": "Logistics & Transportation",
+  "industry": "Logistics & Transportation",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 88220000000,
+  "enterpriseValue": 109137000000,
+  "valuation": {
+    "peTTM": 20.4045,
+    "forwardPE": 17.70827,
+    "psTTM": 0.9952,
+    "pb": 1.8596,
+    "evRevenue": 1.2412369492527808,
+    "evEbitda": null,
+    "pfcf": 29.59409594095941,
+    "fcfYield": 0.03379052369077307,
+    "earningsYield": 0.04638403990024938
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": 0.05933398539681096,
+    "netMargin": 0.04653913518185747,
+    "roe": 0.14575764052147894,
+    "roa": 0.046697935567804445,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 1.193,
+    "quickRatio": 1.0947,
+    "debtToEquity": 0.9410486571204674,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 7036000000,
+    "freeCashFlow": 2981000000,
+    "fcfMargin": 0.03390350976957896,
+    "capexToRevenue": 0.04611832677478789,
+    "fcfConversion": 0.728494623655914
+  },
+  "dividends": {
+    "dividendYield": 1.4993278874987075,
+    "payoutRatio": 32.72
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 87926000000,
+      "grossProfit": null,
+      "operatingIncome": 5217000000,
+      "netIncome": 4092000000,
+      "freeCashFlow": 2981000000,
+      "totalAssets": 87627000000,
+      "totalDebt": 26419000000,
+      "totalEquity": 28074000000,
+      "sharesDiluted": null
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T18:58:49.886Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T18:58:49.886Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T18:58:49.886Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T18:58:49.886Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

@@ -1,0 +1,96 @@
+{
+  "ticker": "FTNT",
+  "name": "Fortinet Inc",
+  "sector": "Technology",
+  "industry": "Technology",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 92680000000,
+  "enterpriseValue": 91181000000,
+  "valuation": {
+    "peTTM": 48.0186,
+    "forwardPE": 27.94698,
+    "psTTM": 13.201,
+    "pb": 47.7197,
+    "evRevenue": 13.409759397611625,
+    "evEbitda": null,
+    "pfcf": 41.638961272351516,
+    "fcfYield": 0.024015968925334485,
+    "earningsYield": 0.01999784203711696
+  },
+  "profitability": {
+    "grossMargin": 0.8045620330607682,
+    "operatingMargin": 0.3065915642096594,
+    "netMargin": 0.27257485734454967,
+    "roe": 1.4976969696969697,
+    "roa": 0.1783967966734686,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 1.1721,
+    "quickRatio": 1.0476,
+    "debtToEquity": 0.8050909090909091,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 2590600000,
+    "freeCashFlow": 2225800000,
+    "fcfMargin": 0.3273427848696982,
+    "capexToRevenue": 0.053650214718512855,
+    "fcfConversion": 1.2009280241717923
+  },
+  "dividends": {
+    "dividendYield": null,
+    "payoutRatio": null
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 6799600000,
+      "grossProfit": 5470700000,
+      "operatingIncome": 2084700000,
+      "netIncome": 1853400000,
+      "freeCashFlow": 2225800000,
+      "totalAssets": 10389200000,
+      "totalDebt": 996300000,
+      "totalEquity": 1237500000,
+      "sharesDiluted": 764600000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T18:54:52.393Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T18:54:52.393Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T18:54:52.393Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T18:54:52.393Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

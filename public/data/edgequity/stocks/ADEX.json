@@ -1,0 +1,98 @@
+{
+  "ticker": "ADEX",
+  "name": "ADEX",
+  "sector": null,
+  "industry": null,
+  "currency": null,
+  "price": null,
+  "marketCap": null,
+  "enterpriseValue": 48.3222,
+  "valuation": {
+    "peTTM": 9.9076,
+    "forwardPE": null,
+    "psTTM": null,
+    "pb": 27.1467,
+    "evRevenue": null,
+    "evEbitda": null,
+    "pfcf": null,
+    "fcfYield": null,
+    "earningsYield": null
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": null,
+    "netMargin": null,
+    "roe": -0.3889516549998962,
+    "roa": 0.17764849876415909,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 0.3032,
+    "quickRatio": 0.2923,
+    "debtToEquity": null,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": -965683,
+    "freeCashFlow": null,
+    "fcfMargin": null,
+    "capexToRevenue": null,
+    "fcfConversion": null
+  },
+  "dividends": {
+    "dividendYield": null,
+    "payoutRatio": null
+  },
+  "history": [
+    {
+      "year": "2022",
+      "revenue": null,
+      "grossProfit": null,
+      "operatingIncome": -2941239,
+      "netIncome": 4832848,
+      "freeCashFlow": null,
+      "totalAssets": 27204553,
+      "totalDebt": null,
+      "totalEquity": -12425318,
+      "sharesDiluted": 6900000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items",
+    "Revenue unavailable from mapped line items",
+    "Free cash flow unavailable from mapped line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T17:34:00.731Z",
+      "status": "missing"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T17:34:00.731Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T17:34:00.731Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T17:34:00.731Z",
+      "status": "partial",
+      "message": "Thin summary mapped from Finnhub as-reported line items"
+    }
+  }
+}

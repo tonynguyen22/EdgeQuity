@@ -1,0 +1,100 @@
+{
+  "ticker": "ACGBF",
+  "name": "Agricultural Bank of China Ltd",
+  "sector": "Banking",
+  "industry": "Banking",
+  "currency": "CNY",
+  "price": null,
+  "marketCap": 2222866657048.424,
+  "enterpriseValue": 7825637.8,
+  "valuation": {
+    "peTTM": 7.5532,
+    "forwardPE": 8.26967,
+    "psTTM": 1.72134,
+    "pb": 0.8007,
+    "evRevenue": null,
+    "evEbitda": null,
+    "pfcf": null,
+    "fcfYield": null,
+    "earningsYield": null
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": null,
+    "netMargin": null,
+    "roe": null,
+    "roa": null,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": null,
+    "quickRatio": null,
+    "debtToEquity": null,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": null,
+    "freeCashFlow": null,
+    "fcfMargin": null,
+    "capexToRevenue": null,
+    "fcfConversion": null
+  },
+  "dividends": {
+    "dividendYield": 3.862229102167183,
+    "payoutRatio": 43.05
+  },
+  "history": [
+    {
+      "year": "",
+      "revenue": null,
+      "grossProfit": null,
+      "operatingIncome": null,
+      "netIncome": null,
+      "freeCashFlow": null,
+      "totalAssets": null,
+      "totalDebt": null,
+      "totalEquity": null,
+      "sharesDiluted": null
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items",
+    "Finnhub as-reported financial filing unavailable",
+    "Revenue unavailable from mapped line items",
+    "Free cash flow unavailable from mapped line items",
+    "Total assets unavailable from mapped line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T16:52:56.217Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T16:52:56.217Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T16:52:56.217Z",
+      "status": "missing"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T16:52:56.217Z",
+      "status": "partial",
+      "message": "Thin summary mapped from Finnhub as-reported line items"
+    }
+  }
+}

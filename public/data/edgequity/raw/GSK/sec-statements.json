@@ -1,0 +1,4405 @@
+{
+  "schemaVersion": 2,
+  "ticker": "GSK",
+  "cik": "0001131399",
+  "entityName": "GSK plc",
+  "source": "sec-edgar",
+  "fetchedAt": "2026-05-22T02:45:14.259Z",
+  "status": "ok",
+  "recentFilings": [
+    {
+      "form": "20-F",
+      "filingDate": "2026-03-06",
+      "reportDate": "2025-12-31"
+    },
+    {
+      "form": "20-F",
+      "filingDate": "2025-03-03",
+      "reportDate": "2024-12-31"
+    },
+    {
+      "form": "20-F",
+      "filingDate": "2024-03-05",
+      "reportDate": "2023-12-31"
+    },
+    {
+      "form": "20-F/A",
+      "filingDate": "2023-04-17",
+      "reportDate": "2022-12-31"
+    },
+    {
+      "form": "20-F",
+      "filingDate": "2023-03-10",
+      "reportDate": "2022-12-31"
+    },
+    {
+      "form": "20-F",
+      "filingDate": "2022-03-08",
+      "reportDate": "2021-12-31"
+    }
+  ],
+  "statements": {
+    "ic": {
+      "years": [
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "rows": [
+        {
+          "key": "ifrs-full:AccrualsAndDeferredIncome",
+          "label": "AccrualsAndDeferredIncome",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "AccrualsAndDeferredIncome",
+          "valuesByYear": {
+            "2017": 104000000
+          }
+        },
+        {
+          "key": "ifrs-full:AccruedIncome",
+          "label": "AccruedIncome",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "AccruedIncome",
+          "valuesByYear": {
+            "2017": 21000000,
+            "2018": 9000000,
+            "2019": 7000000,
+            "2020": 13000000
+          }
+        },
+        {
+          "key": "ifrs-full:AdjustmentsForAmortisationExpense",
+          "label": "AdjustmentsForAmortisationExpense",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "AdjustmentsForAmortisationExpense",
+          "valuesByYear": {
+            "2021": 1182000000,
+            "2022": 1086000000,
+            "2023": 1212000000,
+            "2024": 1454000000,
+            "2025": 1258000000
+          }
+        },
+        {
+          "key": "ifrs-full:AdjustmentsForCurrentTaxOfPriorPeriod",
+          "label": "AdjustmentsForCurrentTaxOfPriorPeriod",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "AdjustmentsForCurrentTaxOfPriorPeriod",
+          "valuesByYear": {
+            "2021": 172000000,
+            "2022": -60000000,
+            "2023": 43000000,
+            "2024": -92000000,
+            "2025": -49000000
+          }
+        },
+        {
+          "key": "ifrs-full:AdjustmentsForDepreciationExpense",
+          "label": "AdjustmentsForDepreciationExpense",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "AdjustmentsForDepreciationExpense",
+          "valuesByYear": {
+            "2021": 1195000000,
+            "2022": 1061000000,
+            "2023": 1082000000,
+            "2024": 1097000000,
+            "2025": 1056000000
+          }
+        },
+        {
+          "key": "ifrs-full:AdjustmentsForFairValueGainsLosses",
+          "label": "AdjustmentsForFairValueGainsLosses",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "AdjustmentsForFairValueGainsLosses",
+          "valuesByYear": {
+            "2021": -17000000,
+            "2022": -283000000,
+            "2023": -107000000,
+            "2024": -39000000,
+            "2025": 45000000
+          }
+        },
+        {
+          "key": "ifrs-full:AdjustmentsForFinanceIncomeCost",
+          "label": "AdjustmentsForFinanceIncomeCost",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "AdjustmentsForFinanceIncomeCost",
+          "valuesByYear": {
+            "2021": -756000000,
+            "2022": -803000000,
+            "2023": -677000000,
+            "2024": -547000000,
+            "2025": -532000000
+          }
+        },
+        {
+          "key": "ifrs-full:AdjustmentsForGainLossOnDisposalOfInvestmentsInSubsidiariesJointVenturesAndAssociates",
+          "label": "AdjustmentsForGainLossOnDisposalOfInvestmentsInSubsidiariesJointVenturesAndAssociates",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "AdjustmentsForGainLossOnDisposalOfInvestmentsInSubsidiariesJointVenturesAndAssociates",
+          "valuesByYear": {
+            "2021": -36000000,
+            "2022": 0,
+            "2023": 1000000,
+            "2024": 6000000,
+            "2025": 0
+          }
+        },
+        {
+          "key": "ifrs-full:AdjustmentsForIncomeTaxExpense",
+          "label": "AdjustmentsForIncomeTaxExpense",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "AdjustmentsForIncomeTaxExpense",
+          "valuesByYear": {
+            "2021": 346000000,
+            "2022": 707000000,
+            "2023": 756000000,
+            "2024": 526000000,
+            "2025": 1112000000
+          }
+        },
+        {
+          "key": "ifrs-full:AdjustmentsForReconcileProfitLoss",
+          "label": "AdjustmentsForReconcileProfitLoss",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "AdjustmentsForReconcileProfitLoss",
+          "valuesByYear": {
+            "2021": 4147000000,
+            "2022": 3023000000,
+            "2023": -2788000000,
+            "2024": 4910000000,
+            "2025": 2654000000
+          }
+        },
+        {
+          "key": "ifrs-full:AdvertisingExpense",
+          "label": "AdvertisingExpense",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "AdvertisingExpense",
+          "valuesByYear": {
+            "2021": 1806000000,
+            "2022": 735000000,
+            "2023": 835000000,
+            "2024": 851000000,
+            "2025": 738000000
+          }
+        },
+        {
+          "key": "ifrs-full:ApplicableTaxRate",
+          "label": "ApplicableTaxRate",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "ApplicableTaxRate",
+          "valuesByYear": {
+            "2018": 0.19,
+            "2019": 0.19,
+            "2020": 0.25,
+            "2021": 0.19,
+            "2022": 0.19
+          }
+        },
+        {
+          "key": "ifrs-full:AuditorsRemunerationForTaxServices",
+          "label": "AuditorsRemunerationForTaxServices",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "AuditorsRemunerationForTaxServices",
+          "valuesByYear": {
+            "2017": 200000,
+            "2018": 100000,
+            "2019": 100000,
+            "2020": 100000
+          }
+        },
+        {
+          "key": "ifrs-full:AverageEffectiveTaxRate",
+          "label": "AverageEffectiveTaxRate",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "AverageEffectiveTaxRate",
+          "valuesByYear": {
+            "2021": 0.064,
+            "2022": 0.126,
+            "2023": 0.125,
+            "2024": 0.151,
+            "2025": 0.15
+          }
+        },
+        {
+          "key": "ifrs-full:BasicEarningsLossPerShare",
+          "label": "BasicEarningsLossPerShare",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "BasicEarningsLossPerShare",
+          "valuesByYear": {
+            "2021": 0.876,
+            "2022": 3.714,
+            "2023": 1.216,
+            "2024": 0.632,
+            "2025": 1.411
+          }
+        },
+        {
+          "key": "ifrs-full:BasicEarningsLossPerShareFromContinuingOperations",
+          "label": "BasicEarningsLossPerShareFromContinuingOperations",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "BasicEarningsLossPerShareFromContinuingOperations",
+          "valuesByYear": {
+            "2022": 1.108,
+            "2023": 1.216,
+            "2024": 0.632
+          }
+        },
+        {
+          "key": "ifrs-full:BasicEarningsLossPerShareFromDiscontinuedOperations",
+          "label": "BasicEarningsLossPerShareFromDiscontinuedOperations",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "BasicEarningsLossPerShareFromDiscontinuedOperations",
+          "valuesByYear": {
+            "2022": 2.606,
+            "2023": 0,
+            "2024": 0
+          }
+        },
+        {
+          "key": "ifrs-full:ComprehensiveIncome",
+          "label": "ComprehensiveIncome",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "ComprehensiveIncome",
+          "valuesByYear": {
+            "2021": 4759000000,
+            "2022": 14790000000,
+            "2023": 4991000000,
+            "2024": 2778000000,
+            "2025": 6782000000
+          }
+        },
+        {
+          "key": "ifrs-full:ComprehensiveIncomeAttributableToNoncontrollingInterests",
+          "label": "ComprehensiveIncomeAttributableToNoncontrollingInterests",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "ComprehensiveIncomeAttributableToNoncontrollingInterests",
+          "valuesByYear": {
+            "2021": 691000000,
+            "2022": 637000000,
+            "2023": 355000000,
+            "2024": 372000000,
+            "2025": 555000000
+          }
+        },
+        {
+          "key": "ifrs-full:ComprehensiveIncomeAttributableToOwnersOfParent",
+          "label": "ComprehensiveIncomeAttributableToOwnersOfParent",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "ComprehensiveIncomeAttributableToOwnersOfParent",
+          "valuesByYear": {
+            "2021": 4068000000,
+            "2022": 14153000000,
+            "2023": 4636000000,
+            "2024": 2406000000,
+            "2025": 6227000000
+          }
+        },
+        {
+          "key": "ifrs-full:ComprehensiveIncomeFromContinuingOperations",
+          "label": "ComprehensiveIncomeFromContinuingOperations",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "ComprehensiveIncomeFromContinuingOperations",
+          "valuesByYear": {
+            "2022": -1187000000,
+            "2023": -1187000000,
+            "2024": -1187000000
+          }
+        },
+        {
+          "key": "ifrs-full:ComprehensiveIncomeFromDiscontinuedOperations",
+          "label": "ComprehensiveIncomeFromDiscontinuedOperations",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "ComprehensiveIncomeFromDiscontinuedOperations",
+          "valuesByYear": {
+            "2022": 356000000,
+            "2023": 356000000,
+            "2024": 356000000
+          }
+        },
+        {
+          "key": "ifrs-full:ContingentRentsRecognisedAsExpenseClassifiedAsOperatingLease",
+          "label": "ContingentRentsRecognisedAsExpenseClassifiedAsOperatingLease",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "ContingentRentsRecognisedAsExpenseClassifiedAsOperatingLease",
+          "valuesByYear": {
+            "2017": 4000000,
+            "2018": 12000000
+          }
+        },
+        {
+          "key": "ifrs-full:CostOfInventoriesRecognisedAsExpenseDuringPeriod",
+          "label": "CostOfInventoriesRecognisedAsExpenseDuringPeriod",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "CostOfInventoriesRecognisedAsExpenseDuringPeriod",
+          "valuesByYear": {
+            "2021": 9192000000,
+            "2022": 6137000000,
+            "2023": 6576000000,
+            "2024": 6495000000,
+            "2025": 6362000000
+          }
+        },
+        {
+          "key": "ifrs-full:CostOfSales",
+          "label": "CostOfSales",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "CostOfSales",
+          "valuesByYear": {
+            "2021": 11603000000,
+            "2022": 9554000000,
+            "2023": 8565000000,
+            "2024": 9048000000,
+            "2025": 9017000000
+          }
+        },
+        {
+          "key": "ifrs-full:CurrentTaxExpenseIncomeAndAdjustmentsForCurrentTaxOfPriorPeriods",
+          "label": "CurrentTaxExpenseIncomeAndAdjustmentsForCurrentTaxOfPriorPeriods",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "CurrentTaxExpenseIncomeAndAdjustmentsForCurrentTaxOfPriorPeriods",
+          "valuesByYear": {
+            "2021": 1348000000,
+            "2022": 1491000000,
+            "2023": 1621000000,
+            "2024": 1552000000,
+            "2025": 1395000000
+          }
+        },
+        {
+          "key": "ifrs-full:CurrentTaxExpenseIncomeRelatedToPillarTwoIncomeTaxes",
+          "label": "CurrentTaxExpenseIncomeRelatedToPillarTwoIncomeTaxes",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "CurrentTaxExpenseIncomeRelatedToPillarTwoIncomeTaxes",
+          "valuesByYear": {
+            "2024": 6000000,
+            "2025": 169000000
+          }
+        },
+        {
+          "key": "ifrs-full:DecreaseIncreaseThroughTaxOnSharebasedPaymentTransactions",
+          "label": "DecreaseIncreaseThroughTaxOnSharebasedPaymentTransactions",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "DecreaseIncreaseThroughTaxOnSharebasedPaymentTransactions",
+          "valuesByYear": {
+            "2021": -11000000,
+            "2022": 8000000,
+            "2023": -7000000,
+            "2024": -4000000,
+            "2025": -31000000
+          }
+        },
+        {
+          "key": "ifrs-full:DeferredIncome",
+          "label": "DeferredIncome",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "DeferredIncome",
+          "valuesByYear": {
+            "2017": 240000000,
+            "2018": 216000000,
+            "2019": 158000000,
+            "2020": 361000000
+          }
+        },
+        {
+          "key": "ifrs-full:DeferredIncomeClassifiedAsNoncurrent",
+          "label": "DeferredIncomeClassifiedAsNoncurrent",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "DeferredIncomeClassifiedAsNoncurrent",
+          "valuesByYear": {
+            "2018": 19000000,
+            "2019": 24000000,
+            "2020": 21000000
+          }
+        },
+        {
+          "key": "ifrs-full:DeferredTaxExpenseIncome",
+          "label": "DeferredTaxExpenseIncome",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "DeferredTaxExpenseIncome",
+          "valuesByYear": {
+            "2021": -1002000000,
+            "2022": -784000000,
+            "2023": -865000000,
+            "2024": -1026000000,
+            "2025": -283000000
+          }
+        },
+        {
+          "key": "ifrs-full:DeferredTaxExpenseIncomeRecognisedInProfitOrLoss",
+          "label": "DeferredTaxExpenseIncomeRecognisedInProfitOrLoss",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "DeferredTaxExpenseIncomeRecognisedInProfitOrLoss",
+          "valuesByYear": {
+            "2017": 247000000,
+            "2018": 396000000
+          }
+        },
+        {
+          "key": "ifrs-full:DepreciationAndAmortisationExpense",
+          "label": "DepreciationAndAmortisationExpense",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "DepreciationAndAmortisationExpense",
+          "valuesByYear": {
+            "2021": 2376000000,
+            "2022": 2147000000,
+            "2023": 2294000000,
+            "2024": 2551000000,
+            "2025": 2314000000
+          }
+        },
+        {
+          "key": "ifrs-full:DilutedEarningsLossPerShare",
+          "label": "DilutedEarningsLossPerShare",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "DilutedEarningsLossPerShare",
+          "valuesByYear": {
+            "2021": 0.866,
+            "2022": 3.662,
+            "2023": 1.199,
+            "2024": 0.622,
+            "2025": 1.388
+          }
+        },
+        {
+          "key": "ifrs-full:DilutedEarningsLossPerShareFromContinuingOperations",
+          "label": "DilutedEarningsLossPerShareFromContinuingOperations",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "DilutedEarningsLossPerShareFromContinuingOperations",
+          "valuesByYear": {
+            "2022": 1.092,
+            "2023": 1.199,
+            "2024": 0.622
+          }
+        },
+        {
+          "key": "ifrs-full:DilutedEarningsLossPerShareFromDiscontinuedOperations",
+          "label": "DilutedEarningsLossPerShareFromDiscontinuedOperations",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "DilutedEarningsLossPerShareFromDiscontinuedOperations",
+          "valuesByYear": {
+            "2022": 2.57,
+            "2023": 0,
+            "2024": 0
+          }
+        },
+        {
+          "key": "ifrs-full:DividendsPaidOrdinarySharesPerShare",
+          "label": "DividendsPaidOrdinarySharesPerShare",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "DividendsPaidOrdinarySharesPerShare",
+          "valuesByYear": {
+            "2021": 80,
+            "2022": 0.6125,
+            "2023": 0.58,
+            "2024": 0.61,
+            "2025": 0.66
+          }
+        },
+        {
+          "key": "ifrs-full:DividendsRecognisedAsDistributionsToNoncontrollingInterests",
+          "label": "DividendsRecognisedAsDistributionsToNoncontrollingInterests",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "DividendsRecognisedAsDistributionsToNoncontrollingInterests",
+          "valuesByYear": {
+            "2021": 642000000,
+            "2022": 1409000000,
+            "2023": 412000000,
+            "2024": 416000000,
+            "2025": 391000000
+          }
+        },
+        {
+          "key": "ifrs-full:EmployeeBenefitsExpense",
+          "label": "EmployeeBenefitsExpense",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "EmployeeBenefitsExpense",
+          "valuesByYear": {
+            "2021": 9003000000,
+            "2022": 7693000000,
+            "2023": 8473000000,
+            "2024": 8759000000,
+            "2025": 8772000000
+          }
+        },
+        {
+          "key": "ifrs-full:ExpenseDueToUnwindingOfDiscountOnProvisions",
+          "label": "ExpenseDueToUnwindingOfDiscountOnProvisions",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "ExpenseDueToUnwindingOfDiscountOnProvisions",
+          "valuesByYear": {
+            "2021": 2000000,
+            "2022": 7000000,
+            "2023": 15000000,
+            "2024": 25000000,
+            "2025": 29000000
+          }
+        },
+        {
+          "key": "ifrs-full:ExpenseFromSharebasedPaymentTransactionsWithEmployees",
+          "label": "ExpenseFromSharebasedPaymentTransactionsWithEmployees",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "ExpenseFromSharebasedPaymentTransactionsWithEmployees",
+          "valuesByYear": {
+            "2021": 404000000,
+            "2022": 314000000,
+            "2023": 321000000,
+            "2024": 347000000,
+            "2025": 390000000
+          }
+        },
+        {
+          "key": "ifrs-full:ExpenseOfRestructuringActivities",
+          "label": "ExpenseOfRestructuringActivities",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "ExpenseOfRestructuringActivities",
+          "valuesByYear": {
+            "2021": 626000000,
+            "2022": 321000000,
+            "2023": 382000000,
+            "2024": 353000000,
+            "2025": 109000000
+          }
+        },
+        {
+          "key": "ifrs-full:ExpenseRelatingToShorttermLeasesForWhichRecognitionExemptionHasBeenUsed",
+          "label": "ExpenseRelatingToShorttermLeasesForWhichRecognitionExemptionHasBeenUsed",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "ExpenseRelatingToShorttermLeasesForWhichRecognitionExemptionHasBeenUsed",
+          "valuesByYear": {
+            "2020": 11000000,
+            "2021": 7000000,
+            "2022": 6000000,
+            "2023": 8000000,
+            "2024": 13000000
+          }
+        },
+        {
+          "key": "ifrs-full:FinanceIncome",
+          "label": "FinanceIncome",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "FinanceIncome",
+          "valuesByYear": {
+            "2021": 28000000,
+            "2022": 76000000,
+            "2023": 115000000,
+            "2024": 122000000,
+            "2025": 169000000
+          }
+        },
+        {
+          "key": "ifrs-full:GainLossOnHedgeIneffectivenessRecognisedInProfitOrLoss",
+          "label": "GainLossOnHedgeIneffectivenessRecognisedInProfitOrLoss",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "GainLossOnHedgeIneffectivenessRecognisedInProfitOrLoss",
+          "valuesByYear": {
+            "2024": -15000000,
+            "2025": 0
+          }
+        },
+        {
+          "key": "ifrs-full:GainLossOnRemeasurementOfReimbursementRights",
+          "label": "GainLossOnRemeasurementOfReimbursementRights",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "GainLossOnRemeasurementOfReimbursementRights",
+          "valuesByYear": {
+            "2017": 1186000000
+          }
+        },
+        {
+          "key": "ifrs-full:GainsLossesOnCashFlowHedgesBeforeTax",
+          "label": "GainsLossesOnCashFlowHedgesBeforeTax",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "GainsLossesOnCashFlowHedgesBeforeTax",
+          "valuesByYear": {
+            "2021": 5000000,
+            "2022": -18000000,
+            "2023": -1000000,
+            "2024": 0,
+            "2025": -41000000
+          }
+        },
+        {
+          "key": "ifrs-full:GainsLossesOnCashFlowHedgesNetOfTax",
+          "label": "GainsLossesOnCashFlowHedgesNetOfTax",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "GainsLossesOnCashFlowHedgesNetOfTax",
+          "valuesByYear": {
+            "2018": 513000000,
+            "2019": 513000000,
+            "2020": 513000000
+          }
+        },
+        {
+          "key": "ifrs-full:GainsLossesOnChangeInFairValueOfDerivatives",
+          "label": "GainsLossesOnChangeInFairValueOfDerivatives",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "GainsLossesOnChangeInFairValueOfDerivatives",
+          "valuesByYear": {
+            "2021": -4000000,
+            "2022": 3000000,
+            "2023": 7000000,
+            "2024": 0,
+            "2025": 0
+          }
+        },
+        {
+          "key": "ifrs-full:GainsLossesOnChangeInValueOfForwardElementsOfForwardContractsNetOfTax",
+          "label": "GainsLossesOnChangeInValueOfForwardElementsOfForwardContractsNetOfTax",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "GainsLossesOnChangeInValueOfForwardElementsOfForwardContractsNetOfTax",
+          "valuesByYear": {
+            "2023": 0,
+            "2024": -16000000,
+            "2025": 15000000
+          }
+        },
+        {
+          "key": "ifrs-full:GainsLossesOnChangeInValueOfTimeValueOfOptionsNetOfTax",
+          "label": "GainsLossesOnChangeInValueOfTimeValueOfOptionsNetOfTax",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "GainsLossesOnChangeInValueOfTimeValueOfOptionsNetOfTax",
+          "valuesByYear": {
+            "2024": -4000000,
+            "2025": 4000000
+          }
+        },
+        {
+          "key": "ifrs-full:GainsLossesOnDisposalsOfInvestments",
+          "label": "GainsLossesOnDisposalsOfInvestments",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "GainsLossesOnDisposalsOfInvestments",
+          "valuesByYear": {
+            "2025": 0
+          }
+        },
+        {
+          "key": "ifrs-full:GainsLossesOnExchangeDifferencesOnTranslationBeforeTax",
+          "label": "GainsLossesOnExchangeDifferencesOnTranslationBeforeTax",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "GainsLossesOnExchangeDifferencesOnTranslationBeforeTax",
+          "valuesByYear": {
+            "2019": -832000000,
+            "2020": -59000000,
+            "2021": -239000000,
+            "2022": 113000000,
+            "2023": -22000000
+          }
+        },
+        {
+          "key": "ifrs-full:GainsLossesOnExchangeDifferencesOnTranslationRecognisedInProfitOrLoss",
+          "label": "GainsLossesOnExchangeDifferencesOnTranslationRecognisedInProfitOrLoss",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "GainsLossesOnExchangeDifferencesOnTranslationRecognisedInProfitOrLoss",
+          "valuesByYear": {
+            "2021": 2000000,
+            "2022": -11000000,
+            "2023": -11000000,
+            "2024": -13000000,
+            "2025": 9000000
+          }
+        },
+        {
+          "key": "ifrs-full:GainsLossesOnIneffectivenessOfHedgesOfNetInvestmentsInForeignOperations",
+          "label": "GainsLossesOnIneffectivenessOfHedgesOfNetInvestmentsInForeignOperations",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "GainsLossesOnIneffectivenessOfHedgesOfNetInvestmentsInForeignOperations",
+          "valuesByYear": {
+            "2021": 0,
+            "2022": 12000000
+          }
+        },
+        {
+          "key": "ifrs-full:GrossFinanceLeaseObligations",
+          "label": "GrossFinanceLeaseObligations",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "GrossFinanceLeaseObligations",
+          "valuesByYear": {
+            "2017": 78,
+            "2018": 84
+          }
+        },
+        {
+          "key": "ifrs-full:GrossProfit",
+          "label": "GrossProfit",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "GrossProfit",
+          "valuesByYear": {
+            "2021": 22511000000,
+            "2022": 19770000000,
+            "2023": 21763000000,
+            "2024": 22328000000,
+            "2025": 23650000000
+          }
+        },
+        {
+          "key": "ifrs-full:ImpairmentLoss",
+          "label": "ImpairmentLoss",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "ImpairmentLoss",
+          "valuesByYear": {
+            "2019": 521000000,
+            "2020": 361000000,
+            "2021": 27000000,
+            "2022": 122000000,
+            "2023": 33000000
+          }
+        },
+        {
+          "key": "ifrs-full:ImpairmentLossRecognisedInProfitOrLoss",
+          "label": "ImpairmentLossRecognisedInProfitOrLoss",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "ImpairmentLossRecognisedInProfitOrLoss",
+          "valuesByYear": {
+            "2021": 576000000,
+            "2022": 501000000,
+            "2023": 507000000,
+            "2024": 437000000,
+            "2025": 1114000000
+          }
+        },
+        {
+          "key": "ifrs-full:ImpairmentLossReversalOfImpairmentLossRecognisedInProfitOrLoss",
+          "label": "ImpairmentLossReversalOfImpairmentLossRecognisedInProfitOrLoss",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "ImpairmentLossReversalOfImpairmentLossRecognisedInProfitOrLoss",
+          "valuesByYear": {
+            "2024": -12000000,
+            "2025": 4000000
+          }
+        },
+        {
+          "key": "ifrs-full:IncomeFromContinuingOperationsAttributableToOwnersOfParent",
+          "label": "IncomeFromContinuingOperationsAttributableToOwnersOfParent",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "IncomeFromContinuingOperationsAttributableToOwnersOfParent",
+          "valuesByYear": {
+            "2022": 4461000000,
+            "2023": 4928000000,
+            "2024": 2575000000
+          }
+        },
+        {
+          "key": "ifrs-full:IncomeFromDiscontinuedOperationsAttributableToOwnersOfParent",
+          "label": "IncomeFromDiscontinuedOperationsAttributableToOwnersOfParent",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "IncomeFromDiscontinuedOperationsAttributableToOwnersOfParent",
+          "valuesByYear": {
+            "2022": 10495000000,
+            "2023": 0,
+            "2024": 0
+          }
+        },
+        {
+          "key": "ifrs-full:IncomeTaxExpenseContinuingOperations",
+          "label": "IncomeTaxExpenseContinuingOperations",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "IncomeTaxExpenseContinuingOperations",
+          "valuesByYear": {
+            "2021": 346000000,
+            "2022": 707000000,
+            "2023": 756000000,
+            "2024": 526000000,
+            "2025": 1112000000
+          }
+        },
+        {
+          "key": "ifrs-full:IncomeTaxRelatingToCashFlowHedgesOfOtherComprehensiveIncome",
+          "label": "IncomeTaxRelatingToCashFlowHedgesOfOtherComprehensiveIncome",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "IncomeTaxRelatingToCashFlowHedgesOfOtherComprehensiveIncome",
+          "valuesByYear": {
+            "2021": 8000000,
+            "2022": -9000000,
+            "2023": -1000000,
+            "2024": -1000000,
+            "2025": 2000000
+          }
+        },
+        {
+          "key": "ifrs-full:IncomeTaxRelatingToRemeasurementsOfDefinedBenefitPlansOfOtherComprehensiveIncome",
+          "label": "IncomeTaxRelatingToRemeasurementsOfDefinedBenefitPlansOfOtherComprehensiveIncome",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "IncomeTaxRelatingToRemeasurementsOfDefinedBenefitPlansOfOtherComprehensiveIncome",
+          "valuesByYear": {
+            "2021": 223000000,
+            "2022": -211000000,
+            "2023": 41000000,
+            "2024": 122000000,
+            "2025": 33000000
+          }
+        },
+        {
+          "key": "ifrs-full:InterestExpense",
+          "label": "InterestExpense",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "InterestExpense",
+          "valuesByYear": {
+            "2021": 775000000,
+            "2022": 912000000
+          }
+        },
+        {
+          "key": "ifrs-full:InterestIncomeOnCashAndCashEquivalents",
+          "label": "InterestIncomeOnCashAndCashEquivalents",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "InterestIncomeOnCashAndCashEquivalents",
+          "valuesByYear": {
+            "2017": 60000000
+          }
+        },
+        {
+          "key": "ifrs-full:MiscellaneousOtherOperatingIncome",
+          "label": "MiscellaneousOtherOperatingIncome",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "MiscellaneousOtherOperatingIncome",
+          "valuesByYear": {
+            "2021": 6000000,
+            "2022": 61000000,
+            "2023": 237000000
+          }
+        },
+        {
+          "key": "ifrs-full:NoncontrollingInterests",
+          "label": "NoncontrollingInterests",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "NoncontrollingInterests",
+          "valuesByYear": {
+            "2021": 6287000000,
+            "2022": -502000000,
+            "2023": -552000000,
+            "2024": -585000000,
+            "2025": -421000000
+          }
+        },
+        {
+          "key": "ifrs-full:OtherAdjustmentsToReconcileProfitLoss",
+          "label": "OtherAdjustmentsToReconcileProfitLoss",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "OtherAdjustmentsToReconcileProfitLoss",
+          "valuesByYear": {
+            "2021": -129000000,
+            "2022": -170000000,
+            "2023": -100000000,
+            "2024": -110000000,
+            "2025": -9000000
+          }
+        },
+        {
+          "key": "ifrs-full:OtherComprehensiveIncome",
+          "label": "OtherComprehensiveIncome",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "OtherComprehensiveIncome",
+          "valuesByYear": {
+            "2021": -337000000,
+            "2022": -831000000,
+            "2023": -317000000,
+            "2024": -173000000,
+            "2025": 493000000
+          }
+        },
+        {
+          "key": "ifrs-full:OtherComprehensiveIncomeBeforeTaxGainsLossesOnRemeasurementsOfDefinedBenefitPlans",
+          "label": "OtherComprehensiveIncomeBeforeTaxGainsLossesOnRemeasurementsOfDefinedBenefitPlans",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "OtherComprehensiveIncomeBeforeTaxGainsLossesOnRemeasurementsOfDefinedBenefitPlans",
+          "valuesByYear": {
+            "2021": 941000000,
+            "2022": -786000000,
+            "2023": 71000000,
+            "2024": 506000000,
+            "2025": 133000000
+          }
+        },
+        {
+          "key": "ifrs-full:OtherComprehensiveIncomeNetOfTaxExchangeDifferencesOnTranslation",
+          "label": "OtherComprehensiveIncomeNetOfTaxExchangeDifferencesOnTranslation",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "OtherComprehensiveIncomeNetOfTaxExchangeDifferencesOnTranslation",
+          "valuesByYear": {
+            "2021": -259000000,
+            "2022": 85000000,
+            "2023": -47000000,
+            "2024": -396000000,
+            "2025": 213000000
+          }
+        },
+        {
+          "key": "ifrs-full:OtherComprehensiveIncomeThatWillBeReclassifiedToProfitOrLossNetOfTax",
+          "label": "OtherComprehensiveIncomeThatWillBeReclassifiedToProfitOrLossNetOfTax",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "OtherComprehensiveIncomeThatWillBeReclassifiedToProfitOrLossNetOfTax",
+          "valuesByYear": {
+            "2021": -255000000,
+            "2022": 120000000,
+            "2023": -52000000,
+            "2024": -478000000,
+            "2025": 216000000
+          }
+        },
+        {
+          "key": "ifrs-full:OtherComprehensiveIncomeThatWillNotBeReclassifiedToProfitOrLossNetOfTax",
+          "label": "OtherComprehensiveIncomeThatWillNotBeReclassifiedToProfitOrLossNetOfTax",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "OtherComprehensiveIncomeThatWillNotBeReclassifiedToProfitOrLossNetOfTax",
+          "valuesByYear": {
+            "2021": -82000000,
+            "2022": -1307000000,
+            "2023": -265000000,
+            "2024": 305000000,
+            "2025": 277000000
+          }
+        },
+        {
+          "key": "ifrs-full:OtherFinanceIncome",
+          "label": "OtherFinanceIncome",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "OtherFinanceIncome",
+          "valuesByYear": {
+            "2021": 2000000,
+            "2022": 2000000,
+            "2023": 7000000,
+            "2024": 6000000,
+            "2025": 7000000
+          }
+        },
+        {
+          "key": "ifrs-full:OtherFinanceIncomeCost",
+          "label": "OtherFinanceIncomeCost",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "OtherFinanceIncomeCost",
+          "valuesByYear": {
+            "2021": -5000000,
+            "2022": -33000000,
+            "2023": -65000000,
+            "2024": -29000000,
+            "2025": -9000000
+          }
+        },
+        {
+          "key": "ifrs-full:OtherIncome",
+          "label": "OtherIncome",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "OtherIncome",
+          "valuesByYear": {
+            "2017": 9000000,
+            "2018": -7000000
+          }
+        },
+        {
+          "key": "ifrs-full:OtherIncomeExpenseFromSubsidiariesJointlyControlledEntitiesAndAssociates",
+          "label": "OtherIncomeExpenseFromSubsidiariesJointlyControlledEntitiesAndAssociates",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "OtherIncomeExpenseFromSubsidiariesJointlyControlledEntitiesAndAssociates",
+          "valuesByYear": {
+            "2019": 3000000,
+            "2020": 0,
+            "2021": -36000000
+          }
+        },
+        {
+          "key": "ifrs-full:OtherOperatingIncomeExpense",
+          "label": "OtherOperatingIncomeExpense",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "OtherOperatingIncomeExpense",
+          "valuesByYear": {
+            "2021": -476000000,
+            "2022": -235000000,
+            "2023": -363000000,
+            "2024": -1530000000,
+            "2025": 16000000
+          }
+        },
+        {
+          "key": "ifrs-full:OtherTaxEffectsForReconciliationBetweenAccountingProfitAndTaxExpenseIncome",
+          "label": "OtherTaxEffectsForReconciliationBetweenAccountingProfitAndTaxExpenseIncome",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "OtherTaxEffectsForReconciliationBetweenAccountingProfitAndTaxExpenseIncome",
+          "valuesByYear": {
+            "2021": 74000000,
+            "2022": 82000000,
+            "2023": 102000000,
+            "2024": 302000000,
+            "2025": 33000000
+          }
+        },
+        {
+          "key": "ifrs-full:OtherTaxRateEffectsForReconciliationBetweenAccountingProfitAndTaxExpenseIncome",
+          "label": "OtherTaxRateEffectsForReconciliationBetweenAccountingProfitAndTaxExpenseIncome",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "OtherTaxRateEffectsForReconciliationBetweenAccountingProfitAndTaxExpenseIncome",
+          "valuesByYear": {
+            "2021": 0.014,
+            "2022": 0.015,
+            "2023": 0.017,
+            "2024": 0.087,
+            "2025": 0.005
+          }
+        },
+        {
+          "key": "ifrs-full:ParValuePerShare",
+          "label": "ParValuePerShare",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "ParValuePerShare",
+          "valuesByYear": {
+            "2017": 0.25,
+            "2018": 0.25,
+            "2019": 0.25
+          }
+        },
+        {
+          "key": "ifrs-full:PaymentsFromChangesInOwnershipInterestsInSubsidiaries",
+          "label": "PaymentsFromChangesInOwnershipInterestsInSubsidiaries",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "PaymentsFromChangesInOwnershipInterestsInSubsidiaries",
+          "valuesByYear": {
+            "2020": 7000000,
+            "2021": 0
+          }
+        },
+        {
+          "key": "ifrs-full:PostemploymentBenefitExpenseDefinedBenefitPlans",
+          "label": "PostemploymentBenefitExpenseDefinedBenefitPlans",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "PostemploymentBenefitExpenseDefinedBenefitPlans",
+          "valuesByYear": {
+            "2024": 218000000,
+            "2025": 170000000
+          }
+        },
+        {
+          "key": "ifrs-full:PostemploymentBenefitExpenseDefinedContributionPlans",
+          "label": "PostemploymentBenefitExpenseDefinedContributionPlans",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "PostemploymentBenefitExpenseDefinedContributionPlans",
+          "valuesByYear": {
+            "2024": 150000000,
+            "2025": 130000000
+          }
+        },
+        {
+          "key": "ifrs-full:PostemploymentBenefitExpenseInProfitOrLoss",
+          "label": "PostemploymentBenefitExpenseInProfitOrLoss",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "PostemploymentBenefitExpenseInProfitOrLoss",
+          "valuesByYear": {
+            "2024": 368000000,
+            "2025": 300000000
+          }
+        },
+        {
+          "key": "ifrs-full:ProfitLoss",
+          "label": "ProfitLoss",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "ProfitLoss",
+          "valuesByYear": {
+            "2021": 5096000000,
+            "2022": 15621000000,
+            "2023": 5308000000,
+            "2024": 2951000000,
+            "2025": 6289000000
+          }
+        },
+        {
+          "key": "ifrs-full:ProfitLossAttributableToNoncontrollingInterests",
+          "label": "ProfitLossAttributableToNoncontrollingInterests",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "ProfitLossAttributableToNoncontrollingInterests",
+          "valuesByYear": {
+            "2021": 711000000,
+            "2022": 665000000,
+            "2023": 380000000,
+            "2024": 376000000,
+            "2025": 573000000
+          }
+        },
+        {
+          "key": "ifrs-full:ProfitLossAttributableToOwnersOfParent",
+          "label": "ProfitLossAttributableToOwnersOfParent",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "ProfitLossAttributableToOwnersOfParent",
+          "valuesByYear": {
+            "2021": 4385000000,
+            "2022": 14956000000,
+            "2023": 4928000000,
+            "2024": 2575000000,
+            "2025": 5716000000
+          }
+        },
+        {
+          "key": "ifrs-full:ProfitLossBeforeTax",
+          "label": "ProfitLossBeforeTax",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "ProfitLossBeforeTax",
+          "valuesByYear": {
+            "2021": 5442000000,
+            "2022": 5628000000,
+            "2023": 6064000000,
+            "2024": 3477000000,
+            "2025": 7401000000
+          }
+        },
+        {
+          "key": "ifrs-full:ProfitLossFromContinuingOperations",
+          "label": "ProfitLossFromContinuingOperations",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "ProfitLossFromContinuingOperations",
+          "valuesByYear": {
+            "2022": 4921000000,
+            "2023": 5308000000,
+            "2024": 2951000000
+          }
+        },
+        {
+          "key": "ifrs-full:ProfitLossFromContinuingOperationsAttributableToNoncontrollingInterests",
+          "label": "ProfitLossFromContinuingOperationsAttributableToNoncontrollingInterests",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "ProfitLossFromContinuingOperationsAttributableToNoncontrollingInterests",
+          "valuesByYear": {
+            "2022": 460000000,
+            "2023": 380000000,
+            "2024": 376000000
+          }
+        },
+        {
+          "key": "ifrs-full:ProfitLossFromDiscontinuedOperations",
+          "label": "ProfitLossFromDiscontinuedOperations",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "ProfitLossFromDiscontinuedOperations",
+          "valuesByYear": {
+            "2022": 10700000000,
+            "2023": 0,
+            "2024": 0
+          }
+        },
+        {
+          "key": "ifrs-full:ProfitLossFromDiscontinuedOperationsAttributableToNoncontrollingInterests",
+          "label": "ProfitLossFromDiscontinuedOperationsAttributableToNoncontrollingInterests",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "ProfitLossFromDiscontinuedOperationsAttributableToNoncontrollingInterests",
+          "valuesByYear": {
+            "2022": 205000000,
+            "2023": 0,
+            "2024": 0
+          }
+        },
+        {
+          "key": "ifrs-full:ProfitLossOfAcquiree",
+          "label": "ProfitLossOfAcquiree",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "ProfitLossOfAcquiree",
+          "valuesByYear": {
+            "2019": 0,
+            "2020": 0
+          }
+        },
+        {
+          "key": "ifrs-full:ProfitsLossesOnDisposalOfInvestmentsAndChangesInValueOfInvestments",
+          "label": "ProfitsLossesOnDisposalOfInvestmentsAndChangesInValueOfInvestments",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "ProfitsLossesOnDisposalOfInvestmentsAndChangesInValueOfInvestments",
+          "valuesByYear": {
+            "2018": 0,
+            "2021": 0,
+            "2022": 0,
+            "2023": 0
+          }
+        },
+        {
+          "key": "ifrs-full:ReclassificationAdjustmentsOnCashFlowHedgesBeforeTax",
+          "label": "ReclassificationAdjustmentsOnCashFlowHedgesBeforeTax",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "ReclassificationAdjustmentsOnCashFlowHedgesBeforeTax",
+          "valuesByYear": {
+            "2021": -12000000,
+            "2022": -14000000,
+            "2023": -4000000,
+            "2024": -4000000,
+            "2025": -36000000
+          }
+        },
+        {
+          "key": "ifrs-full:ReclassificationAdjustmentsOnCashFlowHedgesNetOfTax",
+          "label": "ReclassificationAdjustmentsOnCashFlowHedgesNetOfTax",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "ReclassificationAdjustmentsOnCashFlowHedgesNetOfTax",
+          "valuesByYear": {
+            "2021": 2000000,
+            "2022": 2000000,
+            "2023": 4000000,
+            "2024": -4000000,
+            "2025": -36000000
+          }
+        },
+        {
+          "key": "ifrs-full:ReclassificationAdjustmentsOnExchangeDifferencesOnTranslationNetOfTax",
+          "label": "ReclassificationAdjustmentsOnExchangeDifferencesOnTranslationNetOfTax",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "ReclassificationAdjustmentsOnExchangeDifferencesOnTranslationNetOfTax",
+          "valuesByYear": {
+            "2021": 25000000,
+            "2022": -2000000,
+            "2023": 34000000,
+            "2024": 87000000,
+            "2025": 12000000
+          }
+        },
+        {
+          "key": "ifrs-full:ResearchAndDevelopmentExpense",
+          "label": "ResearchAndDevelopmentExpense",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "ResearchAndDevelopmentExpense",
+          "valuesByYear": {
+            "2021": 5278000000,
+            "2022": 5488000000,
+            "2023": 6223000000,
+            "2024": 6401000000,
+            "2025": 7525000000
+          }
+        },
+        {
+          "key": "ifrs-full:Revenue",
+          "label": "Revenue",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "Revenue",
+          "valuesByYear": {
+            "2021": 34114000000,
+            "2022": 29324000000,
+            "2023": 30328000000,
+            "2024": 31376000000,
+            "2025": 32667000000
+          }
+        },
+        {
+          "key": "ifrs-full:RevenueAndOperatingIncome",
+          "label": "RevenueAndOperatingIncome",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "RevenueAndOperatingIncome",
+          "valuesByYear": {
+            "2021": 29000000,
+            "2022": 85000000,
+            "2023": 192000000,
+            "2024": 176000000,
+            "2025": 127000000
+          }
+        },
+        {
+          "key": "ifrs-full:RevenueFromPerformanceObligationsSatisfiedOrPartiallySatisfiedInPreviousPeriods",
+          "label": "RevenueFromPerformanceObligationsSatisfiedOrPartiallySatisfiedInPreviousPeriods",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "RevenueFromPerformanceObligationsSatisfiedOrPartiallySatisfiedInPreviousPeriods",
+          "valuesByYear": {
+            "2019": 793000000,
+            "2020": 1207000000,
+            "2021": 1558000000,
+            "2022": 1601000000,
+            "2023": 1751000000
+          }
+        },
+        {
+          "key": "ifrs-full:RevenueFromRenderingOfServices",
+          "label": "RevenueFromRenderingOfServices",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "RevenueFromRenderingOfServices",
+          "valuesByYear": {
+            "2021": 7000000
+          }
+        },
+        {
+          "key": "ifrs-full:RevenueFromRoyalties",
+          "label": "RevenueFromRoyalties",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "RevenueFromRoyalties",
+          "valuesByYear": {
+            "2021": 419000000,
+            "2022": 758000000,
+            "2023": 953000000,
+            "2024": 639000000,
+            "2025": 879000000
+          }
+        },
+        {
+          "key": "ifrs-full:RevenueFromSaleOfGoods",
+          "label": "RevenueFromSaleOfGoods",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "RevenueFromSaleOfGoods",
+          "valuesByYear": {
+            "2024": 31376000000,
+            "2025": 32667000000
+          }
+        },
+        {
+          "key": "ifrs-full:ReversalOfImpairmentLossRecognisedInProfitOrLoss",
+          "label": "ReversalOfImpairmentLossRecognisedInProfitOrLoss",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "ReversalOfImpairmentLossRecognisedInProfitOrLoss",
+          "valuesByYear": {
+            "2021": 48000000,
+            "2022": 26000000,
+            "2023": 39000000,
+            "2024": 33000000,
+            "2025": 16000000
+          }
+        },
+        {
+          "key": "ifrs-full:ReversalOfProvisionsForCostOfRestructuring",
+          "label": "ReversalOfProvisionsForCostOfRestructuring",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "ReversalOfProvisionsForCostOfRestructuring",
+          "valuesByYear": {
+            "2018": 99000000,
+            "2019": 148000000,
+            "2020": 96000000,
+            "2021": 151000000,
+            "2022": 111000000
+          }
+        },
+        {
+          "key": "ifrs-full:SellingGeneralAndAdministrativeExpense",
+          "label": "SellingGeneralAndAdministrativeExpense",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "SellingGeneralAndAdministrativeExpense",
+          "valuesByYear": {
+            "2021": 10975000000,
+            "2022": 8372000000,
+            "2023": 9385000000,
+            "2024": 11015000000,
+            "2025": 9088000000
+          }
+        },
+        {
+          "key": "ifrs-full:SubleasePaymentsRecognisedAsExpense",
+          "label": "SubleasePaymentsRecognisedAsExpense",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "SubleasePaymentsRecognisedAsExpense",
+          "valuesByYear": {
+            "2017": 5000000,
+            "2018": 5000000
+          }
+        },
+        {
+          "key": "ifrs-full:TaxEffectFromChangeInTaxRate",
+          "label": "TaxEffectFromChangeInTaxRate",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "TaxEffectFromChangeInTaxRate",
+          "valuesByYear": {
+            "2017": 35000000
+          }
+        },
+        {
+          "key": "ifrs-full:TaxEffectOfForeignTaxRates",
+          "label": "TaxEffectOfForeignTaxRates",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "TaxEffectOfForeignTaxRates",
+          "valuesByYear": {
+            "2021": 419000000,
+            "2022": 318000000,
+            "2023": 159000000,
+            "2024": 185000000,
+            "2025": -20000000
+          }
+        },
+        {
+          "key": "ifrs-full:TaxExpenseIncomeAtApplicableTaxRate",
+          "label": "TaxExpenseIncomeAtApplicableTaxRate",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "TaxExpenseIncomeAtApplicableTaxRate",
+          "valuesByYear": {
+            "2018": 912000000,
+            "2019": 1182000000,
+            "2020": 1324000000,
+            "2021": 1034000000,
+            "2022": 1069000000
+          }
+        },
+        {
+          "key": "ifrs-full:TaxRateEffectFromChangeInTaxRate",
+          "label": "TaxRateEffectFromChangeInTaxRate",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "TaxRateEffectFromChangeInTaxRate",
+          "valuesByYear": {
+            "2017": 0.01
+          }
+        },
+        {
+          "key": "ifrs-full:TaxRateEffectOfForeignTaxRates",
+          "label": "TaxRateEffectOfForeignTaxRates",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "TaxRateEffectOfForeignTaxRates",
+          "valuesByYear": {
+            "2021": 0.077,
+            "2022": 0.056,
+            "2023": 0.026,
+            "2024": 0.053,
+            "2025": -0.003
+          }
+        },
+        {
+          "key": "ifrs-full:TaxRateEffectOfTaxLosses",
+          "label": "TaxRateEffectOfTaxLosses",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "TaxRateEffectOfTaxLosses",
+          "valuesByYear": {
+            "2018": 0.005
+          }
+        },
+        {
+          "key": "ifrs-full:TerminationBenefitsExpense",
+          "label": "TerminationBenefitsExpense",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "TerminationBenefitsExpense",
+          "valuesByYear": {
+            "2021": 339000000,
+            "2022": 137000000,
+            "2023": 272000000,
+            "2024": 432000000,
+            "2025": 374000000
+          }
+        }
+      ]
+    },
+    "bs": {
+      "years": [
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "rows": [
+        {
+          "key": "ifrs-full:AccruedIncomeOtherThanContractAssets",
+          "label": "AccruedIncomeOtherThanContractAssets",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "AccruedIncomeOtherThanContractAssets",
+          "valuesByYear": {
+            "2021": 12000000,
+            "2022": 19000000,
+            "2023": 69000000,
+            "2024": 18000000,
+            "2025": 13000000
+          }
+        },
+        {
+          "key": "ifrs-full:AcquisitionsThroughBusinessCombinationsRightofuseAssets",
+          "label": "AcquisitionsThroughBusinessCombinationsRightofuseAssets",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "AcquisitionsThroughBusinessCombinationsRightofuseAssets",
+          "valuesByYear": {
+            "2024": 1000000
+          }
+        },
+        {
+          "key": "ifrs-full:ActuarialGainsLossesArisingFromChangesInDemographicAssumptionsNetDefinedBenefitLiabilityAsset",
+          "label": "ActuarialGainsLossesArisingFromChangesInDemographicAssumptionsNetDefinedBenefitLiabilityAsset",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "ActuarialGainsLossesArisingFromChangesInDemographicAssumptionsNetDefinedBenefitLiabilityAsset",
+          "valuesByYear": {
+            "2021": -716000000,
+            "2022": -5868000000,
+            "2023": 137000000,
+            "2024": 890000000,
+            "2025": -62000000
+          }
+        },
+        {
+          "key": "ifrs-full:ActuarialGainsLossesArisingFromChangesInFinancialAssumptionsNetDefinedBenefitLiabilityAsset",
+          "label": "ActuarialGainsLossesArisingFromChangesInFinancialAssumptionsNetDefinedBenefitLiabilityAsset",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "ActuarialGainsLossesArisingFromChangesInFinancialAssumptionsNetDefinedBenefitLiabilityAsset",
+          "valuesByYear": {
+            "2021": 62000000,
+            "2022": -92000000,
+            "2023": -135000000,
+            "2024": 90000000,
+            "2025": 211000000
+          }
+        },
+        {
+          "key": "ifrs-full:ActuarialGainsLossesArisingFromExperienceAdjustmentsNetDefinedBenefitLiabilityAsset",
+          "label": "ActuarialGainsLossesArisingFromExperienceAdjustmentsNetDefinedBenefitLiabilityAsset",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "ActuarialGainsLossesArisingFromExperienceAdjustmentsNetDefinedBenefitLiabilityAsset",
+          "valuesByYear": {
+            "2021": 215000000,
+            "2022": 949000000,
+            "2023": 267000000,
+            "2024": 23000000,
+            "2025": -99000000
+          }
+        },
+        {
+          "key": "ifrs-full:AdditionalRecognitionGoodwill",
+          "label": "AdditionalRecognitionGoodwill",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "AdditionalRecognitionGoodwill",
+          "valuesByYear": {
+            "2022": 1127000000,
+            "2023": 1127000000
+          }
+        },
+        {
+          "key": "ifrs-full:AdditionsOtherThanThroughBusinessCombinationsRightofuseAssets",
+          "label": "AdditionsOtherThanThroughBusinessCombinationsRightofuseAssets",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "AdditionsOtherThanThroughBusinessCombinationsRightofuseAssets",
+          "valuesByYear": {
+            "2024": 230000000,
+            "2025": 181000000
+          }
+        },
+        {
+          "key": "ifrs-full:AdditionsToRightofuseAssets",
+          "label": "AdditionsToRightofuseAssets",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "AdditionsToRightofuseAssets",
+          "valuesByYear": {
+            "2019": 132000000,
+            "2020": 187000000,
+            "2021": 215000000
+          }
+        },
+        {
+          "key": "ifrs-full:AdjustmentsForDecreaseIncreaseInOtherOperatingReceivables",
+          "label": "AdjustmentsForDecreaseIncreaseInOtherOperatingReceivables",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "AdjustmentsForDecreaseIncreaseInOtherOperatingReceivables",
+          "valuesByYear": {
+            "2021": -314000000,
+            "2022": -458000000,
+            "2023": 145000000,
+            "2024": 42000000,
+            "2025": -484000000
+          }
+        },
+        {
+          "key": "ifrs-full:AdjustmentsForDecreaseIncreaseInTradeAccountReceivable",
+          "label": "AdjustmentsForDecreaseIncreaseInTradeAccountReceivable",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "AdjustmentsForDecreaseIncreaseInTradeAccountReceivable",
+          "valuesByYear": {
+            "2021": -782000000,
+            "2022": -158000000,
+            "2023": -794000000,
+            "2024": 298000000,
+            "2025": -613000000
+          }
+        },
+        {
+          "key": "ifrs-full:AdjustmentsForIncreaseDecreaseInEmployeeBenefitLiabilities",
+          "label": "AdjustmentsForIncreaseDecreaseInEmployeeBenefitLiabilities",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "AdjustmentsForIncreaseDecreaseInEmployeeBenefitLiabilities",
+          "valuesByYear": {
+            "2021": -340000000,
+            "2022": -962000000,
+            "2023": -457000000,
+            "2024": 999000000,
+            "2025": -1139000000
+          }
+        },
+        {
+          "key": "ifrs-full:AdjustmentsForIncreaseDecreaseInOtherOperatingPayables",
+          "label": "AdjustmentsForIncreaseDecreaseInOtherOperatingPayables",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "AdjustmentsForIncreaseDecreaseInOtherOperatingPayables",
+          "valuesByYear": {
+            "2021": 1324000000,
+            "2022": -5000000,
+            "2023": 689000000,
+            "2024": -610000000,
+            "2025": 343000000
+          }
+        },
+        {
+          "key": "ifrs-full:AdjustmentsForIncreaseDecreaseInTradeAccountPayable",
+          "label": "AdjustmentsForIncreaseDecreaseInTradeAccountPayable",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "AdjustmentsForIncreaseDecreaseInTradeAccountPayable",
+          "valuesByYear": {
+            "2021": 284000000,
+            "2022": 494000000,
+            "2023": -15000000,
+            "2024": -179000000,
+            "2025": 131000000
+          }
+        },
+        {
+          "key": "ifrs-full:AmortisationIntangibleAssetsOtherThanGoodwill",
+          "label": "AmortisationIntangibleAssetsOtherThanGoodwill",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "AmortisationIntangibleAssetsOtherThanGoodwill",
+          "valuesByYear": {
+            "2021": 1181000000,
+            "2022": 1086000000,
+            "2023": 1212000000,
+            "2024": 1454000000,
+            "2025": 1258000000
+          }
+        },
+        {
+          "key": "ifrs-full:Assets",
+          "label": "Assets",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "Assets",
+          "valuesByYear": {
+            "2021": 79103000000,
+            "2022": 60146000000,
+            "2023": 59005000000,
+            "2024": 59463000000,
+            "2025": 61118000000
+          }
+        },
+        {
+          "key": "ifrs-full:ContingentLiabilitiesRecognisedInBusinessCombination",
+          "label": "ContingentLiabilitiesRecognisedInBusinessCombination",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "ContingentLiabilitiesRecognisedInBusinessCombination",
+          "valuesByYear": {
+            "2021": 6076000000,
+            "2022": 7068000000,
+            "2023": 6662000000,
+            "2024": 7280000000,
+            "2025": 6733000000
+          }
+        },
+        {
+          "key": "ifrs-full:ContractLiabilities",
+          "label": "ContractLiabilities",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "ContractLiabilities",
+          "valuesByYear": {
+            "2021": 307000000,
+            "2022": 299000000,
+            "2023": 222000000,
+            "2024": 171000000,
+            "2025": 153000000
+          }
+        },
+        {
+          "key": "ifrs-full:ContractualCommitmentsForAcquisitionOfIntangibleAssets",
+          "label": "ContractualCommitmentsForAcquisitionOfIntangibleAssets",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "ContractualCommitmentsForAcquisitionOfIntangibleAssets",
+          "valuesByYear": {
+            "2021": 12082000000,
+            "2022": 10659000000,
+            "2023": 16329000000,
+            "2024": 19183000000,
+            "2025": 17048000000
+          }
+        },
+        {
+          "key": "ifrs-full:ContractualCommitmentsForAcquisitionOfPropertyPlantAndEquipment",
+          "label": "ContractualCommitmentsForAcquisitionOfPropertyPlantAndEquipment",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "ContractualCommitmentsForAcquisitionOfPropertyPlantAndEquipment",
+          "valuesByYear": {
+            "2021": 616000000,
+            "2022": 743000000,
+            "2023": 762000000,
+            "2024": 754000000,
+            "2025": 764000000
+          }
+        },
+        {
+          "key": "ifrs-full:ContributionsToPlanByEmployerNetDefinedBenefitLiabilityAsset",
+          "label": "ContributionsToPlanByEmployerNetDefinedBenefitLiabilityAsset",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "ContributionsToPlanByEmployerNetDefinedBenefitLiabilityAsset",
+          "valuesByYear": {
+            "2021": 312000000,
+            "2022": 919000000,
+            "2023": 606000000,
+            "2024": 351000000,
+            "2025": 283000000
+          }
+        },
+        {
+          "key": "ifrs-full:CurrentAndDeferredTaxRelatingToItemsChargedOrCreditedDirectlyToEquity",
+          "label": "CurrentAndDeferredTaxRelatingToItemsChargedOrCreditedDirectlyToEquity",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "CurrentAndDeferredTaxRelatingToItemsChargedOrCreditedDirectlyToEquity",
+          "valuesByYear": {
+            "2021": 89000000,
+            "2022": -268000000,
+            "2023": 19000000,
+            "2024": 100000000,
+            "2025": 24000000
+          }
+        },
+        {
+          "key": "ifrs-full:CurrentAssets",
+          "label": "CurrentAssets",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "CurrentAssets",
+          "valuesByYear": {
+            "2021": 18674000000,
+            "2022": 20769000000,
+            "2023": 18644000000,
+            "2024": 16997000000,
+            "2025": 17510000000
+          }
+        },
+        {
+          "key": "ifrs-full:CurrentAssetsOtherThanAssetsOrDisposalGroupsClassifiedAsHeldForSaleOrAsHeldForDistributionToOwners",
+          "label": "CurrentAssetsOtherThanAssetsOrDisposalGroupsClassifiedAsHeldForSaleOrAsHeldForDistributionToOwners",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "CurrentAssetsOtherThanAssetsOrDisposalGroupsClassifiedAsHeldForSaleOrAsHeldForDistributionToOwners",
+          "valuesByYear": {
+            "2017": 113000000
+          }
+        },
+        {
+          "key": "ifrs-full:CurrentDerivativeFinancialAssets",
+          "label": "CurrentDerivativeFinancialAssets",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "CurrentDerivativeFinancialAssets",
+          "valuesByYear": {
+            "2021": 188000000,
+            "2022": 190000000,
+            "2023": 130000000,
+            "2024": 109000000,
+            "2025": 121000000
+          }
+        },
+        {
+          "key": "ifrs-full:CurrentDerivativeFinancialLiabilities",
+          "label": "CurrentDerivativeFinancialLiabilities",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "CurrentDerivativeFinancialLiabilities",
+          "valuesByYear": {
+            "2021": 227000000,
+            "2022": 183000000,
+            "2023": 114000000,
+            "2024": 192000000,
+            "2025": 75000000
+          }
+        },
+        {
+          "key": "ifrs-full:CurrentFinancialAssetsAtFairValueThroughProfitOrLossClassifiedAsHeldForTrading",
+          "label": "CurrentFinancialAssetsAtFairValueThroughProfitOrLossClassifiedAsHeldForTrading",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "CurrentFinancialAssetsAtFairValueThroughProfitOrLossClassifiedAsHeldForTrading",
+          "valuesByYear": {
+            "2022": 4087000000,
+            "2023": 2204000000,
+            "2024": 0
+          }
+        },
+        {
+          "key": "ifrs-full:CurrentLeaseLiabilities",
+          "label": "CurrentLeaseLiabilities",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "CurrentLeaseLiabilities",
+          "valuesByYear": {
+            "2021": 203000000,
+            "2022": 167000000,
+            "2023": 156000000,
+            "2024": 168000000,
+            "2025": 137000000
+          }
+        },
+        {
+          "key": "ifrs-full:CurrentLiabilities",
+          "label": "CurrentLiabilities",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "CurrentLiabilities",
+          "valuesByYear": {
+            "2021": 23670000000,
+            "2022": 22810000000,
+            "2023": 21068000000,
+            "2024": 21697000000,
+            "2025": 21391000000
+          }
+        },
+        {
+          "key": "ifrs-full:CurrentPayablesOnSocialSecurityAndTaxesOtherThanIncomeTax",
+          "label": "CurrentPayablesOnSocialSecurityAndTaxesOtherThanIncomeTax",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "CurrentPayablesOnSocialSecurityAndTaxesOtherThanIncomeTax",
+          "valuesByYear": {
+            "2021": 152000000,
+            "2022": 126000000,
+            "2023": 126000000,
+            "2024": 125000000,
+            "2025": 138000000
+          }
+        },
+        {
+          "key": "ifrs-full:CurrentServiceCostNetDefinedBenefitLiabilityAsset",
+          "label": "CurrentServiceCostNetDefinedBenefitLiabilityAsset",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "CurrentServiceCostNetDefinedBenefitLiabilityAsset",
+          "valuesByYear": {
+            "2021": 216000000,
+            "2022": 146000000,
+            "2023": 96000000,
+            "2024": 97000000,
+            "2025": 92000000
+          }
+        },
+        {
+          "key": "ifrs-full:CurrentTaxAssets",
+          "label": "CurrentTaxAssets",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "CurrentTaxAssets",
+          "valuesByYear": {
+            "2021": 486000000,
+            "2022": 405000000,
+            "2023": 373000000,
+            "2024": 489000000,
+            "2025": 288000000
+          }
+        },
+        {
+          "key": "ifrs-full:CurrentTaxLiabilities",
+          "label": "CurrentTaxLiabilities",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "CurrentTaxLiabilities",
+          "valuesByYear": {
+            "2021": 489000000,
+            "2022": 471000000,
+            "2023": 500000000,
+            "2024": 703000000,
+            "2025": 498000000
+          }
+        },
+        {
+          "key": "ifrs-full:CurrentTaxLiabilitiesNoncurrent",
+          "label": "CurrentTaxLiabilitiesNoncurrent",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "CurrentTaxLiabilitiesNoncurrent",
+          "valuesByYear": {
+            "2020": 176000000,
+            "2021": 180000000,
+            "2022": 127000000,
+            "2023": 75000000,
+            "2024": 0
+          }
+        },
+        {
+          "key": "ifrs-full:CurrentTaxRelatingToItemsChargedOrCreditedDirectlyToEquity",
+          "label": "CurrentTaxRelatingToItemsChargedOrCreditedDirectlyToEquity",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "CurrentTaxRelatingToItemsChargedOrCreditedDirectlyToEquity",
+          "valuesByYear": {
+            "2021": 41000000,
+            "2022": 9000000,
+            "2023": -150000000,
+            "2024": 0,
+            "2025": 7000000
+          }
+        },
+        {
+          "key": "ifrs-full:DebtSecurities",
+          "label": "DebtSecurities",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "DebtSecurities",
+          "valuesByYear": {
+            "2023": 16811000000,
+            "2024": 15884000000,
+            "2025": 16890000000
+          }
+        },
+        {
+          "key": "ifrs-full:DecreaseThroughClassifiedAsHeldForSaleRightofuseAssets",
+          "label": "DecreaseThroughClassifiedAsHeldForSaleRightofuseAssets",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "DecreaseThroughClassifiedAsHeldForSaleRightofuseAssets",
+          "valuesByYear": {
+            "2025": 16000000
+          }
+        },
+        {
+          "key": "ifrs-full:DecreaseThroughTransferToLiabilitiesIncludedInDisposalGroupsClassifiedAsHeldForSaleOtherProvisions",
+          "label": "DecreaseThroughTransferToLiabilitiesIncludedInDisposalGroupsClassifiedAsHeldForSaleOtherProvisions",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "DecreaseThroughTransferToLiabilitiesIncludedInDisposalGroupsClassifiedAsHeldForSaleOtherProvisions",
+          "valuesByYear": {
+            "2025": 1000000
+          }
+        },
+        {
+          "key": "ifrs-full:DeferredTaxAssets",
+          "label": "DeferredTaxAssets",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "DeferredTaxAssets",
+          "valuesByYear": {
+            "2021": 5218000000,
+            "2022": 5658000000,
+            "2023": 6049000000,
+            "2024": 6757000000,
+            "2025": 6520000000
+          }
+        },
+        {
+          "key": "ifrs-full:DeferredTaxLiabilities",
+          "label": "DeferredTaxLiabilities",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "DeferredTaxLiabilities",
+          "valuesByYear": {
+            "2021": 3556000000,
+            "2022": 289000000,
+            "2023": 311000000,
+            "2024": 382000000,
+            "2025": 291000000
+          }
+        },
+        {
+          "key": "ifrs-full:DeferredTaxLiabilitiesRecognisedAsOfAcquisitionDate",
+          "label": "DeferredTaxLiabilitiesRecognisedAsOfAcquisitionDate",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "DeferredTaxLiabilitiesRecognisedAsOfAcquisitionDate",
+          "valuesByYear": {
+            "2025": 316000000
+          }
+        },
+        {
+          "key": "ifrs-full:DeferredTaxLiabilityAsset",
+          "label": "DeferredTaxLiabilityAsset",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "DeferredTaxLiabilityAsset",
+          "valuesByYear": {
+            "2021": 1662000000,
+            "2022": 5369000000,
+            "2023": -5738000000,
+            "2024": -6375000000,
+            "2025": -6229000000
+          }
+        },
+        {
+          "key": "ifrs-full:DeferredTaxRelatingToItemsChargedOrCreditedDirectlyToEquity",
+          "label": "DeferredTaxRelatingToItemsChargedOrCreditedDirectlyToEquity",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "DeferredTaxRelatingToItemsChargedOrCreditedDirectlyToEquity",
+          "valuesByYear": {
+            "2021": 48000000,
+            "2022": -277000000,
+            "2023": 169000000,
+            "2024": 100000000,
+            "2025": 17000000
+          }
+        },
+        {
+          "key": "ifrs-full:DepreciationPropertyPlantAndEquipment",
+          "label": "DepreciationPropertyPlantAndEquipment",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "DepreciationPropertyPlantAndEquipment",
+          "valuesByYear": {
+            "2021": 982000000,
+            "2022": 885000000,
+            "2023": 892000000,
+            "2024": 886000000,
+            "2025": 850000000
+          }
+        },
+        {
+          "key": "ifrs-full:DepreciationRightofuseAssets",
+          "label": "DepreciationRightofuseAssets",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "DepreciationRightofuseAssets",
+          "valuesByYear": {
+            "2021": 213000000,
+            "2022": 176000000,
+            "2023": 190000000,
+            "2024": 211000000,
+            "2025": 206000000
+          }
+        },
+        {
+          "key": "ifrs-full:DerivativeFinancialAssets",
+          "label": "DerivativeFinancialAssets",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "DerivativeFinancialAssets",
+          "valuesByYear": {
+            "2017": 156000000
+          }
+        },
+        {
+          "key": "ifrs-full:DerivativeFinancialAssetsHeldForTrading",
+          "label": "DerivativeFinancialAssetsHeldForTrading",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "DerivativeFinancialAssetsHeldForTrading",
+          "valuesByYear": {
+            "2025": 15000000
+          }
+        },
+        {
+          "key": "ifrs-full:DerivativeFinancialLiabilities",
+          "label": "DerivativeFinancialLiabilities",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "DerivativeFinancialLiabilities",
+          "valuesByYear": {
+            "2021": 22000000,
+            "2022": -7000000,
+            "2023": -16000000,
+            "2024": 82000000,
+            "2025": 21000000
+          }
+        },
+        {
+          "key": "ifrs-full:DerivativeFinancialLiabilitiesHeldForTrading",
+          "label": "DerivativeFinancialLiabilitiesHeldForTrading",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "DerivativeFinancialLiabilitiesHeldForTrading",
+          "valuesByYear": {
+            "2025": 54000000
+          }
+        },
+        {
+          "key": "ifrs-full:DisposalsPropertyPlantAndEquipment",
+          "label": "DisposalsPropertyPlantAndEquipment",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "DisposalsPropertyPlantAndEquipment",
+          "valuesByYear": {
+            "2021": 44000000
+          }
+        },
+        {
+          "key": "ifrs-full:DisposalsRightofuseAssets",
+          "label": "DisposalsRightofuseAssets",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "DisposalsRightofuseAssets",
+          "valuesByYear": {
+            "2024": 102000000,
+            "2025": 45000000
+          }
+        },
+        {
+          "key": "ifrs-full:Equity",
+          "label": "Equity",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "Equity",
+          "valuesByYear": {
+            "2021": 21342000000,
+            "2022": 10096000000,
+            "2023": 12795000000,
+            "2024": 13086000000,
+            "2025": 15956000000
+          }
+        },
+        {
+          "key": "ifrs-full:EquityAndLiabilities",
+          "label": "EquityAndLiabilities",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "EquityAndLiabilities",
+          "valuesByYear": {
+            "2017": 16700000000
+          }
+        },
+        {
+          "key": "ifrs-full:EquityAttributableToOwnersOfParent",
+          "label": "EquityAttributableToOwnersOfParent",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "EquityAttributableToOwnersOfParent",
+          "valuesByYear": {
+            "2021": 15055000000,
+            "2022": 10598000000,
+            "2023": 13347000000,
+            "2024": 13671000000,
+            "2025": 16377000000
+          }
+        },
+        {
+          "key": "ifrs-full:EstimatedFinancialEffectOfContingentLiabilities",
+          "label": "EstimatedFinancialEffectOfContingentLiabilities",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "EstimatedFinancialEffectOfContingentLiabilities",
+          "valuesByYear": {
+            "2021": 126000000,
+            "2022": 58000000,
+            "2023": 32000000,
+            "2024": 26000000,
+            "2025": 38000000
+          }
+        },
+        {
+          "key": "ifrs-full:ExpenseRelatingToLeasesOfLowvalueAssetsForWhichRecognitionExemptionHasBeenUsed",
+          "label": "ExpenseRelatingToLeasesOfLowvalueAssetsForWhichRecognitionExemptionHasBeenUsed",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "ExpenseRelatingToLeasesOfLowvalueAssetsForWhichRecognitionExemptionHasBeenUsed",
+          "valuesByYear": {
+            "2020": 5000000,
+            "2021": 3000000,
+            "2022": 2000000,
+            "2023": 2000000,
+            "2024": 2000000
+          }
+        },
+        {
+          "key": "ifrs-full:ExpenseRelatingToVariableLeasePaymentsNotIncludedInMeasurementOfLeaseLiabilities",
+          "label": "ExpenseRelatingToVariableLeasePaymentsNotIncludedInMeasurementOfLeaseLiabilities",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "ExpenseRelatingToVariableLeasePaymentsNotIncludedInMeasurementOfLeaseLiabilities",
+          "valuesByYear": {
+            "2020": 11000000,
+            "2021": 10000000,
+            "2022": 9000000,
+            "2023": 17000000,
+            "2024": 15000000
+          }
+        },
+        {
+          "key": "ifrs-full:FinanceLeaseLiabilities",
+          "label": "FinanceLeaseLiabilities",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "FinanceLeaseLiabilities",
+          "valuesByYear": {
+            "2017": 66,
+            "2018": 68
+          }
+        },
+        {
+          "key": "ifrs-full:FinancialAssets",
+          "label": "FinancialAssets",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "FinancialAssets",
+          "valuesByYear": {
+            "2021": 13543000000,
+            "2022": 15734000000,
+            "2023": 12869000000,
+            "2024": 11086000000,
+            "2025": 11073000000
+          }
+        },
+        {
+          "key": "ifrs-full:FinancialAssetsAtFairValue",
+          "label": "FinancialAssetsAtFairValue",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "FinancialAssetsAtFairValue",
+          "valuesByYear": {
+            "2021": 13543000000,
+            "2022": 15734000000,
+            "2023": 12869000000,
+            "2024": 11086000000,
+            "2025": 11073000000
+          }
+        },
+        {
+          "key": "ifrs-full:FinancialAssetsPledgedAsCollateralForLiabilitiesOrContingentLiabilities",
+          "label": "FinancialAssetsPledgedAsCollateralForLiabilitiesOrContingentLiabilities",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "FinancialAssetsPledgedAsCollateralForLiabilitiesOrContingentLiabilities",
+          "valuesByYear": {
+            "2020": 400000,
+            "2021": 200000,
+            "2022": 500000,
+            "2023": 200000,
+            "2024": 500000
+          }
+        },
+        {
+          "key": "ifrs-full:FinancialAssetsWithModifiedContractualCashFlowsWhileLossAllowanceMeasuredAtLifetimeExpectedCreditLossesForWhichLossAllowanceChangedDuringReportingPeriodTo12monthExpectedCreditLossesGrossCarryingAmount",
+          "label": "FinancialAssetsWithModifiedContractualCashFlowsWhileLossAllowanceMeasuredAtLifetimeExpectedCreditLossesForWhichLossAllowanceChangedDuringReportingPeriodTo12monthExpectedCreditLossesGrossCarryingAmount",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "FinancialAssetsWithModifiedContractualCashFlowsWhileLossAllowanceMeasuredAtLifetimeExpectedCreditLossesForWhichLossAllowanceChangedDuringReportingPeriodTo12monthExpectedCreditLossesGrossCarryingAmount",
+          "valuesByYear": {
+            "2018": 15000000
+          }
+        },
+        {
+          "key": "ifrs-full:FinancialLiabilities",
+          "label": "FinancialLiabilities",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "FinancialLiabilities",
+          "valuesByYear": {
+            "2021": 45058000000,
+            "2022": 41442000000,
+            "2023": 37223000000,
+            "2024": 36744000000,
+            "2025": 37269000000
+          }
+        },
+        {
+          "key": "ifrs-full:FinancialLiabilitiesAtFairValue",
+          "label": "FinancialLiabilitiesAtFairValue",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "FinancialLiabilitiesAtFairValue",
+          "valuesByYear": {
+            "2021": 48760000000,
+            "2022": 41068000000,
+            "2023": 37414000000,
+            "2024": 36499000000,
+            "2025": 37264000000
+          }
+        },
+        {
+          "key": "ifrs-full:GainsLossesArisingFromSettlementsNetDefinedBenefitLiabilityAsset",
+          "label": "GainsLossesArisingFromSettlementsNetDefinedBenefitLiabilityAsset",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "GainsLossesArisingFromSettlementsNetDefinedBenefitLiabilityAsset",
+          "valuesByYear": {
+            "2021": 10000000,
+            "2022": 21000000,
+            "2023": 6000000,
+            "2024": 2000000,
+            "2025": 0
+          }
+        },
+        {
+          "key": "ifrs-full:GainsLossesOnDisposalsOfNoncurrentAssets",
+          "label": "GainsLossesOnDisposalsOfNoncurrentAssets",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "GainsLossesOnDisposalsOfNoncurrentAssets",
+          "valuesByYear": {
+            "2024": 6000000
+          }
+        },
+        {
+          "key": "ifrs-full:GainsLossesOnFinancialAssetsAtFairValueThroughProfitOrLossMandatorilyMeasuredAtFairValue",
+          "label": "GainsLossesOnFinancialAssetsAtFairValueThroughProfitOrLossMandatorilyMeasuredAtFairValue",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "GainsLossesOnFinancialAssetsAtFairValueThroughProfitOrLossMandatorilyMeasuredAtFairValue",
+          "valuesByYear": {
+            "2021": -599000000,
+            "2022": 743000000,
+            "2023": -23000000,
+            "2024": -262000000,
+            "2025": 337000000
+          }
+        },
+        {
+          "key": "ifrs-full:GainsLossesOnFinancialAssetsMeasuredAtFairValueThroughOtherComprehensiveIncomeBeforeTax",
+          "label": "GainsLossesOnFinancialAssetsMeasuredAtFairValueThroughOtherComprehensiveIncomeBeforeTax",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "GainsLossesOnFinancialAssetsMeasuredAtFairValueThroughOtherComprehensiveIncomeBeforeTax",
+          "valuesByYear": {
+            "2018": -14000000,
+            "2019": -14000000
+          }
+        },
+        {
+          "key": "ifrs-full:GainsLossesOnFinancialLiabilitiesAtFairValueThroughProfitOrLoss",
+          "label": "GainsLossesOnFinancialLiabilitiesAtFairValueThroughProfitOrLoss",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "GainsLossesOnFinancialLiabilitiesAtFairValueThroughProfitOrLoss",
+          "valuesByYear": {
+            "2017": -4000000,
+            "2018": 808000000,
+            "2019": 904000000,
+            "2020": 892000000
+          }
+        },
+        {
+          "key": "ifrs-full:GainsLossesOnRemeasuringAvailableforsaleFinancialAssetsBeforeTax",
+          "label": "GainsLossesOnRemeasuringAvailableforsaleFinancialAssetsBeforeTax",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "GainsLossesOnRemeasuringAvailableforsaleFinancialAssetsBeforeTax",
+          "valuesByYear": {
+            "2017": -14000000,
+            "2018": -14000000,
+            "2019": -14000000
+          }
+        },
+        {
+          "key": "ifrs-full:GainsLossesRecognisedInOtherComprehensiveIncomeFairValueMeasurementAssets",
+          "label": "GainsLossesRecognisedInOtherComprehensiveIncomeFairValueMeasurementAssets",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "GainsLossesRecognisedInOtherComprehensiveIncomeFairValueMeasurementAssets",
+          "valuesByYear": {
+            "2017": 22000000,
+            "2018": 123000000,
+            "2019": 31000000,
+            "2020": 160000000
+          }
+        },
+        {
+          "key": "ifrs-full:GainsLossesRecognisedInProfitOrLossFairValueMeasurementAssets",
+          "label": "GainsLossesRecognisedInProfitOrLossFairValueMeasurementAssets",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "GainsLossesRecognisedInProfitOrLossFairValueMeasurementAssets",
+          "valuesByYear": {
+            "2019": 105000000,
+            "2020": 1269000000
+          }
+        },
+        {
+          "key": "ifrs-full:GainsLossesRecognisedInProfitOrLossFairValueMeasurementEntitysOwnEquityInstruments",
+          "label": "GainsLossesRecognisedInProfitOrLossFairValueMeasurementEntitysOwnEquityInstruments",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "GainsLossesRecognisedInProfitOrLossFairValueMeasurementEntitysOwnEquityInstruments",
+          "valuesByYear": {
+            "2021": 37000000,
+            "2022": 256000000,
+            "2023": -122000000,
+            "2024": 51000000,
+            "2025": -24000000
+          }
+        },
+        {
+          "key": "ifrs-full:Goodwill",
+          "label": "Goodwill",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "Goodwill",
+          "valuesByYear": {
+            "2021": 10552000000,
+            "2022": 7046000000,
+            "2023": 6811000000,
+            "2024": 6982000000,
+            "2025": 7018000000
+          }
+        },
+        {
+          "key": "ifrs-full:GoodwillRecognisedAsOfAcquisitionDate",
+          "label": "GoodwillRecognisedAsOfAcquisitionDate",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "GoodwillRecognisedAsOfAcquisitionDate",
+          "valuesByYear": {
+            "2019": 3900000,
+            "2020": 3900000000,
+            "2024": 1127000000,
+            "2025": 315000000
+          }
+        },
+        {
+          "key": "ifrs-full:HedgingInstrumentAssets",
+          "label": "HedgingInstrumentAssets",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "HedgingInstrumentAssets",
+          "valuesByYear": {
+            "2019": 524000000,
+            "2020": 157000000,
+            "2021": 206000000,
+            "2022": 190000000,
+            "2023": 130000000
+          }
+        },
+        {
+          "key": "ifrs-full:HedgingInstrumentLiabilities",
+          "label": "HedgingInstrumentLiabilities",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "HedgingInstrumentLiabilities",
+          "valuesByYear": {
+            "2017": 74000000,
+            "2018": 128000000,
+            "2019": 189000000
+          }
+        },
+        {
+          "key": "ifrs-full:IdentifiableAssetsAcquiredLiabilitiesAssumed",
+          "label": "IdentifiableAssetsAcquiredLiabilitiesAssumed",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "IdentifiableAssetsAcquiredLiabilitiesAssumed",
+          "valuesByYear": {
+            "2024": 2742000000,
+            "2025": 1698000000
+          }
+        },
+        {
+          "key": "ifrs-full:IdentifiableIntangibleAssetsRecognisedAsOfAcquisitionDate",
+          "label": "IdentifiableIntangibleAssetsRecognisedAsOfAcquisitionDate",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "IdentifiableIntangibleAssetsRecognisedAsOfAcquisitionDate",
+          "valuesByYear": {
+            "2024": 2964000000,
+            "2025": 1970000000
+          }
+        },
+        {
+          "key": "ifrs-full:ImpairmentLossRecognisedInProfitOrLossGoodwill",
+          "label": "ImpairmentLossRecognisedInProfitOrLossGoodwill",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "ImpairmentLossRecognisedInProfitOrLossGoodwill",
+          "valuesByYear": {
+            "2019": 4000000
+          }
+        },
+        {
+          "key": "ifrs-full:ImpairmentLossRecognisedInProfitOrLossIntangibleAssetsAndGoodwill",
+          "label": "ImpairmentLossRecognisedInProfitOrLossIntangibleAssetsAndGoodwill",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "ImpairmentLossRecognisedInProfitOrLossIntangibleAssetsAndGoodwill",
+          "valuesByYear": {
+            "2019": 4000000,
+            "2020": 16000000,
+            "2021": 0,
+            "2022": 2000000
+          }
+        },
+        {
+          "key": "ifrs-full:ImpairmentLossRecognisedInProfitOrLossIntangibleAssetsOtherThanGoodwill",
+          "label": "ImpairmentLossRecognisedInProfitOrLossIntangibleAssetsOtherThanGoodwill",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "ImpairmentLossRecognisedInProfitOrLossIntangibleAssetsOtherThanGoodwill",
+          "valuesByYear": {
+            "2018": 134000000,
+            "2019": 126000000,
+            "2020": 257000000,
+            "2024": 317000000,
+            "2025": 888000000
+          }
+        },
+        {
+          "key": "ifrs-full:ImpairmentLossRecognisedInProfitOrLossPropertyPlantAndEquipment",
+          "label": "ImpairmentLossRecognisedInProfitOrLossPropertyPlantAndEquipment",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "ImpairmentLossRecognisedInProfitOrLossPropertyPlantAndEquipment",
+          "valuesByYear": {
+            "2021": 103000000,
+            "2022": 70000000,
+            "2023": 17000000,
+            "2024": 88000000,
+            "2025": 193000000
+          }
+        },
+        {
+          "key": "ifrs-full:ImpairmentLossRecognisedInProfitOrLossRightofuseAssets",
+          "label": "ImpairmentLossRecognisedInProfitOrLossRightofuseAssets",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "ImpairmentLossRecognisedInProfitOrLossRightofuseAssets",
+          "valuesByYear": {
+            "2024": 10000000,
+            "2025": 17000000
+          }
+        },
+        {
+          "key": "ifrs-full:IncomeTaxRelatingToFinancialAssetsMeasuredAtFairValueThroughOtherComprehensiveIncome",
+          "label": "IncomeTaxRelatingToFinancialAssetsMeasuredAtFairValueThroughOtherComprehensiveIncome",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "IncomeTaxRelatingToFinancialAssetsMeasuredAtFairValueThroughOtherComprehensiveIncome",
+          "valuesByYear": {
+            "2018": -47000000,
+            "2019": -47000000
+          }
+        },
+        {
+          "key": "ifrs-full:IncomeTaxRelatingToInvestmentsInEquityInstrumentsOfOtherComprehensiveIncome",
+          "label": "IncomeTaxRelatingToInvestmentsInEquityInstrumentsOfOtherComprehensiveIncome",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "IncomeTaxRelatingToInvestmentsInEquityInstrumentsOfOtherComprehensiveIncome",
+          "valuesByYear": {
+            "2021": -131000000,
+            "2022": -56000000,
+            "2023": -14000000,
+            "2024": -17000000,
+            "2025": 20000000
+          }
+        },
+        {
+          "key": "ifrs-full:IncreaseDecreaseInContingentLiabilitiesRecognisedInBusinessCombination",
+          "label": "IncreaseDecreaseInContingentLiabilitiesRecognisedInBusinessCombination",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "IncreaseDecreaseInContingentLiabilitiesRecognisedInBusinessCombination",
+          "valuesByYear": {
+            "2021": -1058000000,
+            "2022": -1607000000,
+            "2023": -791000000,
+            "2024": -1751000000,
+            "2025": -581000000
+          }
+        },
+        {
+          "key": "ifrs-full:IncreaseDecreaseThroughBusinessCombinationsAndDisposalsNetDefinedBenefitLiabilityAsset",
+          "label": "IncreaseDecreaseThroughBusinessCombinationsAndDisposalsNetDefinedBenefitLiabilityAsset",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "IncreaseDecreaseThroughBusinessCombinationsAndDisposalsNetDefinedBenefitLiabilityAsset",
+          "valuesByYear": {
+            "2021": -42000000,
+            "2022": -3000000,
+            "2023": 0,
+            "2024": 0,
+            "2025": 0
+          }
+        },
+        {
+          "key": "ifrs-full:IncreaseDecreaseThroughBusinessCombinationsDeferredTaxLiabilityAsset",
+          "label": "IncreaseDecreaseThroughBusinessCombinationsDeferredTaxLiabilityAsset",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "IncreaseDecreaseThroughBusinessCombinationsDeferredTaxLiabilityAsset",
+          "valuesByYear": {
+            "2021": -1000000,
+            "2022": -495000000,
+            "2023": -144000000,
+            "2024": -190000000,
+            "2025": 321000000
+          }
+        },
+        {
+          "key": "ifrs-full:IncreaseDecreaseThroughChangesInForeignExchangeRatesNetDefinedBenefitLiabilityAsset",
+          "label": "IncreaseDecreaseThroughChangesInForeignExchangeRatesNetDefinedBenefitLiabilityAsset",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "IncreaseDecreaseThroughChangesInForeignExchangeRatesNetDefinedBenefitLiabilityAsset",
+          "valuesByYear": {
+            "2021": -65000000,
+            "2022": 87000000,
+            "2023": -44000000,
+            "2024": -14000000,
+            "2025": -11000000
+          }
+        },
+        {
+          "key": "ifrs-full:IncreaseDecreaseThroughForeignExchangeFinancialAssets",
+          "label": "IncreaseDecreaseThroughForeignExchangeFinancialAssets",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "IncreaseDecreaseThroughForeignExchangeFinancialAssets",
+          "valuesByYear": {
+            "2021": -15000000,
+            "2022": 2000000,
+            "2023": -3000000,
+            "2024": -3000000,
+            "2025": 3000000
+          }
+        },
+        {
+          "key": "ifrs-full:IncreaseDecreaseThroughNetExchangeDifferencesDeferredTaxLiabilityAsset",
+          "label": "IncreaseDecreaseThroughNetExchangeDifferencesDeferredTaxLiabilityAsset",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "IncreaseDecreaseThroughNetExchangeDifferencesDeferredTaxLiabilityAsset",
+          "valuesByYear": {
+            "2021": -36000000,
+            "2022": -102000000,
+            "2023": -127000000,
+            "2024": -30000000,
+            "2025": 79000000
+          }
+        },
+        {
+          "key": "ifrs-full:IncreaseDecreaseThroughNetExchangeDifferencesRightofuseAssets",
+          "label": "IncreaseDecreaseThroughNetExchangeDifferencesRightofuseAssets",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "IncreaseDecreaseThroughNetExchangeDifferencesRightofuseAssets",
+          "valuesByYear": {
+            "2024": -9000000,
+            "2025": -17000000
+          }
+        },
+        {
+          "key": "ifrs-full:IncreaseDecreaseThroughTransfersAndOtherChangesEquity",
+          "label": "IncreaseDecreaseThroughTransfersAndOtherChangesEquity",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "IncreaseDecreaseThroughTransfersAndOtherChangesEquity",
+          "valuesByYear": {
+            "2019": -10000000,
+            "2020": -131000000,
+            "2021": 10000000,
+            "2022": -20000000,
+            "2023": -20000000
+          }
+        },
+        {
+          "key": "ifrs-full:IncreaseDecreaseThroughTransfersIntangibleAssetsOtherThanGoodwill",
+          "label": "IncreaseDecreaseThroughTransfersIntangibleAssetsOtherThanGoodwill",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "IncreaseDecreaseThroughTransfersIntangibleAssetsOtherThanGoodwill",
+          "valuesByYear": {
+            "2020": 785000000,
+            "2021": 48000000
+          }
+        },
+        {
+          "key": "ifrs-full:IncreaseDecreaseThroughTransfersRightofuseAssets",
+          "label": "IncreaseDecreaseThroughTransfersRightofuseAssets",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "IncreaseDecreaseThroughTransfersRightofuseAssets",
+          "valuesByYear": {
+            "2024": 6000000
+          }
+        },
+        {
+          "key": "ifrs-full:IntangibleAssetsOtherThanGoodwill",
+          "label": "IntangibleAssetsOtherThanGoodwill",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "IntangibleAssetsOtherThanGoodwill",
+          "valuesByYear": {
+            "2021": 30079000000,
+            "2022": 14318000000,
+            "2023": 14768000000,
+            "2024": 15515000000,
+            "2025": 16748000000
+          }
+        },
+        {
+          "key": "ifrs-full:InterestExpenseForFinancialLiabilitiesNotAtFairValueThroughProfitOrLoss",
+          "label": "InterestExpenseForFinancialLiabilitiesNotAtFairValueThroughProfitOrLoss",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "InterestExpenseForFinancialLiabilitiesNotAtFairValueThroughProfitOrLoss",
+          "valuesByYear": {
+            "2021": 744000000,
+            "2022": 789000000,
+            "2023": 672000000,
+            "2024": 569000000,
+            "2025": 612000000
+          }
+        },
+        {
+          "key": "ifrs-full:InterestExpenseIncomeNetDefinedBenefitLiabilityAsset",
+          "label": "InterestExpenseIncomeNetDefinedBenefitLiabilityAsset",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "InterestExpenseIncomeNetDefinedBenefitLiabilityAsset",
+          "valuesByYear": {
+            "2021": 27000000,
+            "2022": 18000000,
+            "2023": 45000000,
+            "2024": 25000000,
+            "2025": -4000000
+          }
+        },
+        {
+          "key": "ifrs-full:InterestExpenseOnFinancialLiabilitiesDesignatedAtFairValueThroughProfitOrLoss",
+          "label": "InterestExpenseOnFinancialLiabilitiesDesignatedAtFairValueThroughProfitOrLoss",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "InterestExpenseOnFinancialLiabilitiesDesignatedAtFairValueThroughProfitOrLoss",
+          "valuesByYear": {
+            "2017": 22000000,
+            "2018": 38000000,
+            "2019": 6000000,
+            "2020": 7000000,
+            "2021": 0
+          }
+        },
+        {
+          "key": "ifrs-full:InterestExpenseOnLeaseLiabilities",
+          "label": "InterestExpenseOnLeaseLiabilities",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "InterestExpenseOnLeaseLiabilities",
+          "valuesByYear": {
+            "2021": 31000000,
+            "2022": 30000000,
+            "2023": 38000000,
+            "2024": 46000000,
+            "2025": 46000000
+          }
+        },
+        {
+          "key": "ifrs-full:InterestIncomeForFinancialAssetsMeasuredAtAmortisedCost",
+          "label": "InterestIncomeForFinancialAssetsMeasuredAtAmortisedCost",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "InterestIncomeForFinancialAssetsMeasuredAtAmortisedCost",
+          "valuesByYear": {
+            "2021": 26000000,
+            "2022": 31000000,
+            "2023": 48000000,
+            "2024": 60000000,
+            "2025": 56000000
+          }
+        },
+        {
+          "key": "ifrs-full:InterestIncomeOnAvailableforsaleFinancialAssets",
+          "label": "InterestIncomeOnAvailableforsaleFinancialAssets",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "InterestIncomeOnAvailableforsaleFinancialAssets",
+          "valuesByYear": {
+            "2017": 2000000
+          }
+        },
+        {
+          "key": "ifrs-full:InterestIncomeOnFinancialAssetsDesignatedAtFairValueThroughProfitOrLoss",
+          "label": "InterestIncomeOnFinancialAssetsDesignatedAtFairValueThroughProfitOrLoss",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "InterestIncomeOnFinancialAssetsDesignatedAtFairValueThroughProfitOrLoss",
+          "valuesByYear": {
+            "2021": 0,
+            "2022": 31000000,
+            "2023": 60000000,
+            "2024": 72000000,
+            "2025": 91000000
+          }
+        },
+        {
+          "key": "ifrs-full:InterestIncomeOnLoansAndReceivables",
+          "label": "InterestIncomeOnLoansAndReceivables",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "InterestIncomeOnLoansAndReceivables",
+          "valuesByYear": {
+            "2017": 1000000
+          }
+        },
+        {
+          "key": "ifrs-full:InterestPayable",
+          "label": "InterestPayable",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "InterestPayable",
+          "valuesByYear": {
+            "2017": 52000000
+          }
+        },
+        {
+          "key": "ifrs-full:InterestReceivable",
+          "label": "InterestReceivable",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "InterestReceivable",
+          "valuesByYear": {
+            "2021": 3000000,
+            "2022": 2000000,
+            "2023": 2000000,
+            "2024": 1000000,
+            "2025": 2000000
+          }
+        },
+        {
+          "key": "ifrs-full:InventoryRecognisedAsOfAcquisitionDate",
+          "label": "InventoryRecognisedAsOfAcquisitionDate",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "InventoryRecognisedAsOfAcquisitionDate",
+          "valuesByYear": {
+            "2024": 60000000
+          }
+        },
+        {
+          "key": "ifrs-full:InventoryWritedown2011",
+          "label": "InventoryWritedown2011",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "InventoryWritedown2011",
+          "valuesByYear": {
+            "2021": 946000000,
+            "2022": 687000000,
+            "2023": 979000000,
+            "2024": 1046000000,
+            "2025": 1064000000
+          }
+        },
+        {
+          "key": "ifrs-full:InvestmentAccountedForUsingEquityMethod",
+          "label": "InvestmentAccountedForUsingEquityMethod",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "InvestmentAccountedForUsingEquityMethod",
+          "valuesByYear": {
+            "2021": 88000000,
+            "2022": 74000000,
+            "2023": 55000000,
+            "2024": 96000000,
+            "2025": 89000000
+          }
+        },
+        {
+          "key": "ifrs-full:InvestmentsOtherThanInvestmentsAccountedForUsingEquityMethod",
+          "label": "InvestmentsOtherThanInvestmentsAccountedForUsingEquityMethod",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "InvestmentsOtherThanInvestmentsAccountedForUsingEquityMethod",
+          "valuesByYear": {
+            "2017": 918000000,
+            "2018": 1322000000,
+            "2019": 1837000000,
+            "2020": 3060000000,
+            "2021": 2126000000
+          }
+        },
+        {
+          "key": "ifrs-full:IssueOfEquity",
+          "label": "IssueOfEquity",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "IssueOfEquity",
+          "valuesByYear": {
+            "2021": 21000000,
+            "2022": 25000000,
+            "2023": 10000000,
+            "2024": 20000000,
+            "2025": 15000000
+          }
+        },
+        {
+          "key": "ifrs-full:LeaseLiabilities",
+          "label": "LeaseLiabilities",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "LeaseLiabilities",
+          "valuesByYear": {
+            "2023": 1207000000,
+            "2024": 1102000000,
+            "2025": 830000000
+          }
+        },
+        {
+          "key": "ifrs-full:Liabilities",
+          "label": "Liabilities",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "Liabilities",
+          "valuesByYear": {
+            "2021": 57761000000,
+            "2022": 50050000000,
+            "2023": 46210000000,
+            "2024": 46377000000,
+            "2025": 45162000000
+          }
+        },
+        {
+          "key": "ifrs-full:LiabilitiesIncludedInDisposalGroupsClassifiedAsHeldForSale",
+          "label": "LiabilitiesIncludedInDisposalGroupsClassifiedAsHeldForSale",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "LiabilitiesIncludedInDisposalGroupsClassifiedAsHeldForSale",
+          "valuesByYear": {
+            "2025": 139000000
+          }
+        },
+        {
+          "key": "ifrs-full:LiabilityAssetOfDefinedBenefitPlans",
+          "label": "LiabilityAssetOfDefinedBenefitPlans",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "LiabilityAssetOfDefinedBenefitPlans",
+          "valuesByYear": {
+            "2021": -1129000000,
+            "2022": -1356000000,
+            "2023": 763000000,
+            "2024": 103000000,
+            "2025": -229000000
+          }
+        },
+        {
+          "key": "ifrs-full:MinimumLeasePaymentsPayableUnderNoncancellableOperatingLease",
+          "label": "MinimumLeasePaymentsPayableUnderNoncancellableOperatingLease",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "MinimumLeasePaymentsPayableUnderNoncancellableOperatingLease",
+          "valuesByYear": {
+            "2017": 1045000000,
+            "2018": 1138000000
+          }
+        },
+        {
+          "key": "ifrs-full:NetAssetsLiabilities",
+          "label": "NetAssetsLiabilities",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "NetAssetsLiabilities",
+          "valuesByYear": {
+            "2021": 21342000000,
+            "2022": 10096000000,
+            "2023": 12795000000,
+            "2024": 13086000000,
+            "2025": 15956000000
+          }
+        },
+        {
+          "key": "ifrs-full:NetDebt",
+          "label": "NetDebt",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "NetDebt",
+          "valuesByYear": {
+            "2022": 17197000000,
+            "2023": 15040000000,
+            "2024": 13095000000,
+            "2025": 14453000000
+          }
+        },
+        {
+          "key": "ifrs-full:NewLiabilitiesContingentLiabilitiesRecognisedInBusinessCombination",
+          "label": "NewLiabilitiesContingentLiabilitiesRecognisedInBusinessCombination",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "NewLiabilitiesContingentLiabilitiesRecognisedInBusinessCombination",
+          "valuesByYear": {
+            "2018": 194000000,
+            "2022": 482000000,
+            "2023": 482000000,
+            "2024": 104000000,
+            "2025": 280000000
+          }
+        },
+        {
+          "key": "ifrs-full:NoncurrentAccruedIncomeOtherThanNoncurrentContractAssets",
+          "label": "NoncurrentAccruedIncomeOtherThanNoncurrentContractAssets",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "NoncurrentAccruedIncomeOtherThanNoncurrentContractAssets",
+          "valuesByYear": {
+            "2021": -85000000,
+            "2022": -83000000
+          }
+        },
+        {
+          "key": "ifrs-full:NoncurrentAssets",
+          "label": "NoncurrentAssets",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "NoncurrentAssets",
+          "valuesByYear": {
+            "2021": 60429000000,
+            "2022": 39377000000,
+            "2023": 40361000000,
+            "2024": 42466000000,
+            "2025": 43608000000
+          }
+        },
+        {
+          "key": "ifrs-full:NoncurrentAssetsOrDisposalGroupsClassifiedAsHeldForSale",
+          "label": "NoncurrentAssetsOrDisposalGroupsClassifiedAsHeldForSale",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "NoncurrentAssetsOrDisposalGroupsClassifiedAsHeldForSale",
+          "valuesByYear": {
+            "2021": 22000000,
+            "2022": 98000000,
+            "2023": 76000000,
+            "2024": 3000000,
+            "2025": 300000000
+          }
+        },
+        {
+          "key": "ifrs-full:NoncurrentAssetsOrDisposalGroupsClassifiedAsHeldForSaleOrAsHeldForDistributionToOwners",
+          "label": "NoncurrentAssetsOrDisposalGroupsClassifiedAsHeldForSaleOrAsHeldForDistributionToOwners",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "NoncurrentAssetsOrDisposalGroupsClassifiedAsHeldForSaleOrAsHeldForDistributionToOwners",
+          "valuesByYear": {
+            "2019": 873000000,
+            "2020": 106000000,
+            "2021": 22000000,
+            "2022": 98000000,
+            "2023": 76000000
+          }
+        },
+        {
+          "key": "ifrs-full:NoncurrentAssetsOtherThanFinancialInstrumentsDeferredTaxAssetsPostemploymentBenefitAssetsAndRightsArisingUnderInsuranceContracts",
+          "label": "NoncurrentAssetsOtherThanFinancialInstrumentsDeferredTaxAssetsPostemploymentBenefitAssetsAndRightsArisingUnderInsuranceContracts",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "NoncurrentAssetsOtherThanFinancialInstrumentsDeferredTaxAssetsPostemploymentBenefitAssetsAndRightsArisingUnderInsuranceContracts",
+          "valuesByYear": {
+            "2021": 51477000000,
+            "2022": 31166000000,
+            "2023": 31687000000,
+            "2024": 32746000000,
+            "2025": 33973000000
+          }
+        },
+        {
+          "key": "ifrs-full:NoncurrentDeferredIncomeOtherThanNoncurrentContractLiabilities",
+          "label": "NoncurrentDeferredIncomeOtherThanNoncurrentContractLiabilities",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "NoncurrentDeferredIncomeOtherThanNoncurrentContractLiabilities",
+          "valuesByYear": {
+            "2023": 254000000,
+            "2024": 165000000,
+            "2025": 121000000
+          }
+        },
+        {
+          "key": "ifrs-full:NoncurrentDerivativeFinancialAssets",
+          "label": "NoncurrentDerivativeFinancialAssets",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "NoncurrentDerivativeFinancialAssets",
+          "valuesByYear": {
+            "2020": 5000000,
+            "2021": 18000000,
+            "2022": 0,
+            "2024": 1000000,
+            "2025": 0
+          }
+        },
+        {
+          "key": "ifrs-full:NoncurrentDerivativeFinancialLiabilities",
+          "label": "NoncurrentDerivativeFinancialLiabilities",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "NoncurrentDerivativeFinancialLiabilities",
+          "valuesByYear": {
+            "2019": 1000000,
+            "2020": 10000000,
+            "2021": 1000000,
+            "2022": 0,
+            "2025": 67000000
+          }
+        },
+        {
+          "key": "ifrs-full:NoncurrentFinancialLiabilitiesAtFairValueThroughProfitOrLoss",
+          "label": "NoncurrentFinancialLiabilitiesAtFairValueThroughProfitOrLoss",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "NoncurrentFinancialLiabilitiesAtFairValueThroughProfitOrLoss",
+          "valuesByYear": {
+            "2024": 6108000000,
+            "2025": 5385000000
+          }
+        },
+        {
+          "key": "ifrs-full:NoncurrentInvestmentsOtherThanInvestmentsAccountedForUsingEquityMethod",
+          "label": "NoncurrentInvestmentsOtherThanInvestmentsAccountedForUsingEquityMethod",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "NoncurrentInvestmentsOtherThanInvestmentsAccountedForUsingEquityMethod",
+          "valuesByYear": {
+            "2022": 1467000000,
+            "2023": 1137000000,
+            "2024": 1100000000,
+            "2025": 1037000000
+          }
+        },
+        {
+          "key": "ifrs-full:NoncurrentLeaseLiabilities",
+          "label": "NoncurrentLeaseLiabilities",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "NoncurrentLeaseLiabilities",
+          "valuesByYear": {
+            "2021": 812000000,
+            "2022": 841000000,
+            "2023": 1051000000,
+            "2024": 934000000,
+            "2025": 693000000
+          }
+        },
+        {
+          "key": "ifrs-full:NoncurrentLiabilities",
+          "label": "NoncurrentLiabilities",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "NoncurrentLiabilities",
+          "valuesByYear": {
+            "2021": 34091000000,
+            "2022": 27240000000,
+            "2023": 25142000000,
+            "2024": 24680000000,
+            "2025": 23771000000
+          }
+        },
+        {
+          "key": "ifrs-full:NoncurrentRecognisedAssetsDefinedBenefitPlan",
+          "label": "NoncurrentRecognisedAssetsDefinedBenefitPlan",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "NoncurrentRecognisedAssetsDefinedBenefitPlan",
+          "valuesByYear": {
+            "2021": 741000000,
+            "2022": 229000000,
+            "2023": 634000000,
+            "2024": 898000000,
+            "2025": 1115000000
+          }
+        },
+        {
+          "key": "ifrs-full:OtherComprehensiveIncomeBeforeTaxGainsLossesFromInvestmentsInEquityInstruments",
+          "label": "OtherComprehensiveIncomeBeforeTaxGainsLossesFromInvestmentsInEquityInstruments",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "OtherComprehensiveIncomeBeforeTaxGainsLossesFromInvestmentsInEquityInstruments",
+          "valuesByYear": {
+            "2021": -911000000,
+            "2022": -754000000,
+            "2023": -244000000,
+            "2024": -100000000,
+            "2025": 215000000
+          }
+        },
+        {
+          "key": "ifrs-full:OtherComprehensiveIncomeNetOfTaxGainsLossesFromInvestmentsInEquityInstruments",
+          "label": "OtherComprehensiveIncomeNetOfTaxGainsLossesFromInvestmentsInEquityInstruments",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "OtherComprehensiveIncomeNetOfTaxGainsLossesFromInvestmentsInEquityInstruments",
+          "valuesByYear": {
+            "2021": -911000000,
+            "2022": -754000000,
+            "2023": -244000000,
+            "2024": -100000000,
+            "2025": 215000000
+          }
+        },
+        {
+          "key": "ifrs-full:OtherCurrentFinancialAssets",
+          "label": "OtherCurrentFinancialAssets",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "OtherCurrentFinancialAssets",
+          "valuesByYear": {
+            "2019": 79000000,
+            "2020": 78000000,
+            "2021": 61000000,
+            "2022": 67000000,
+            "2023": 42000000
+          }
+        },
+        {
+          "key": "ifrs-full:OtherCurrentFinancialLiabilities",
+          "label": "OtherCurrentFinancialLiabilities",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "OtherCurrentFinancialLiabilities",
+          "valuesByYear": {
+            "2019": 755000000,
+            "2020": 765000000,
+            "2021": 958000000,
+            "2022": 1289000000,
+            "2023": 1053000000
+          }
+        },
+        {
+          "key": "ifrs-full:OtherCurrentPayables",
+          "label": "OtherCurrentPayables",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "OtherCurrentPayables",
+          "valuesByYear": {
+            "2021": 518000000,
+            "2022": 418000000,
+            "2023": 346000000,
+            "2024": 420000000,
+            "2025": 438000000
+          }
+        },
+        {
+          "key": "ifrs-full:OtherNoncurrentAssets",
+          "label": "OtherNoncurrentAssets",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "OtherNoncurrentAssets",
+          "valuesByYear": {
+            "2021": 1676000000,
+            "2022": 1194000000,
+            "2023": 1584000000,
+            "2024": 1942000000,
+            "2025": 2148000000
+          }
+        },
+        {
+          "key": "ifrs-full:OtherNoncurrentFinancialLiabilities",
+          "label": "OtherNoncurrentFinancialLiabilities",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "OtherNoncurrentFinancialLiabilities",
+          "valuesByYear": {
+            "2019": 4724000000,
+            "2020": 5104000000,
+            "2021": 5118000000,
+            "2022": 5779000000,
+            "2023": 5609000000
+          }
+        },
+        {
+          "key": "ifrs-full:OtherNoncurrentLiabilities",
+          "label": "OtherNoncurrentLiabilities",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "OtherNoncurrentLiabilities",
+          "valuesByYear": {
+            "2021": 921000000,
+            "2022": 899000000,
+            "2023": 1107000000,
+            "2024": 1100000000,
+            "2025": 1023000000
+          }
+        },
+        {
+          "key": "ifrs-full:OtherNoncurrentPayables",
+          "label": "OtherNoncurrentPayables",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "OtherNoncurrentPayables",
+          "valuesByYear": {
+            "2021": 823000000,
+            "2022": 805000000,
+            "2023": 849000000,
+            "2024": 929000000,
+            "2025": 896000000
+          }
+        },
+        {
+          "key": "ifrs-full:OtherNoncurrentReceivables",
+          "label": "OtherNoncurrentReceivables",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "OtherNoncurrentReceivables",
+          "valuesByYear": {
+            "2021": 86000000,
+            "2022": 108000000,
+            "2023": 96000000,
+            "2024": 87000000,
+            "2025": 80000000
+          }
+        },
+        {
+          "key": "ifrs-full:OtherReceivables",
+          "label": "OtherReceivables",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "OtherReceivables",
+          "valuesByYear": {
+            "2021": 1266000000,
+            "2022": 1226000000,
+            "2023": 1045000000,
+            "2024": 857000000,
+            "2025": 1147000000
+          }
+        },
+        {
+          "key": "ifrs-full:OtherTangibleOrIntangibleAssetsTransferred",
+          "label": "OtherTangibleOrIntangibleAssetsTransferred",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "OtherTangibleOrIntangibleAssetsTransferred",
+          "valuesByYear": {
+            "2019": 6000000,
+            "2020": 6000000,
+            "2021": 6000000
+          }
+        },
+        {
+          "key": "ifrs-full:PastServiceCostNetDefinedBenefitLiabilityAsset",
+          "label": "PastServiceCostNetDefinedBenefitLiabilityAsset",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "PastServiceCostNetDefinedBenefitLiabilityAsset",
+          "valuesByYear": {
+            "2021": -5000000,
+            "2022": -6000000,
+            "2023": -3000000,
+            "2024": 18000000,
+            "2025": 3000000
+          }
+        },
+        {
+          "key": "ifrs-full:PropertyPlantAndEquipment",
+          "label": "PropertyPlantAndEquipment",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "PropertyPlantAndEquipment",
+          "valuesByYear": {
+            "2021": 9932000000,
+            "2022": 8933000000,
+            "2023": 9020000000,
+            "2024": 9227000000,
+            "2025": 9322000000
+          }
+        },
+        {
+          "key": "ifrs-full:PropertyPlantAndEquipmentRecognisedAsOfAcquisitionDate",
+          "label": "PropertyPlantAndEquipmentRecognisedAsOfAcquisitionDate",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "PropertyPlantAndEquipmentRecognisedAsOfAcquisitionDate",
+          "valuesByYear": {
+            "2024": 30000000
+          }
+        },
+        {
+          "key": "ifrs-full:PurchaseOfInterestsInInvestmentsAccountedForUsingEquityMethod",
+          "label": "PurchaseOfInterestsInInvestmentsAccountedForUsingEquityMethod",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "PurchaseOfInterestsInInvestmentsAccountedForUsingEquityMethod",
+          "valuesByYear": {
+            "2024": 43000000,
+            "2025": 0
+          }
+        },
+        {
+          "key": "ifrs-full:ReceivablesFromTaxesOtherThanIncomeTax",
+          "label": "ReceivablesFromTaxesOtherThanIncomeTax",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "ReceivablesFromTaxesOtherThanIncomeTax",
+          "valuesByYear": {
+            "2023": 565000000,
+            "2024": 447000000,
+            "2025": 511000000
+          }
+        },
+        {
+          "key": "ifrs-full:ReclassificationAdjustmentsOnAvailableforsaleFinancialAssetsBeforeTax",
+          "label": "ReclassificationAdjustmentsOnAvailableforsaleFinancialAssetsBeforeTax",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "ReclassificationAdjustmentsOnAvailableforsaleFinancialAssetsBeforeTax",
+          "valuesByYear": {
+            "2017": 42000000,
+            "2018": 42000000,
+            "2019": 42000000
+          }
+        },
+        {
+          "key": "ifrs-full:RetainedEarnings",
+          "label": "RetainedEarnings",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "RetainedEarnings",
+          "valuesByYear": {
+            "2021": 7944000000,
+            "2022": 4363000000,
+            "2023": 7239000000,
+            "2024": 7796000000,
+            "2025": 10209000000
+          }
+        },
+        {
+          "key": "ifrs-full:ReturnOnPlanAssetsNetDefinedBenefitLiabilityAsset",
+          "label": "ReturnOnPlanAssetsNetDefinedBenefitLiabilityAsset",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "ReturnOnPlanAssetsNetDefinedBenefitLiabilityAsset",
+          "valuesByYear": {
+            "2021": -424000000,
+            "2022": -5883000000,
+            "2023": 380000000,
+            "2024": -547000000,
+            "2025": 98000000
+          }
+        },
+        {
+          "key": "ifrs-full:ReversalOfImpairmentLossRecognisedInProfitOrLossPropertyPlantAndEquipment",
+          "label": "ReversalOfImpairmentLossRecognisedInProfitOrLossPropertyPlantAndEquipment",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "ReversalOfImpairmentLossRecognisedInProfitOrLossPropertyPlantAndEquipment",
+          "valuesByYear": {
+            "2017": 33000000
+          }
+        },
+        {
+          "key": "ifrs-full:ReversalOfImpairmentLossRecognisedInProfitOrLossRightofuseAssets",
+          "label": "ReversalOfImpairmentLossRecognisedInProfitOrLossRightofuseAssets",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "ReversalOfImpairmentLossRecognisedInProfitOrLossRightofuseAssets",
+          "valuesByYear": {
+            "2024": 1000000,
+            "2025": 1000000
+          }
+        },
+        {
+          "key": "ifrs-full:ReversalOfInventoryWritedown",
+          "label": "ReversalOfInventoryWritedown",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "ReversalOfInventoryWritedown",
+          "valuesByYear": {
+            "2021": 384000000,
+            "2022": 483000000,
+            "2023": 598000000,
+            "2024": 630000000,
+            "2025": 575000000
+          }
+        },
+        {
+          "key": "ifrs-full:RightofuseAssets",
+          "label": "RightofuseAssets",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "RightofuseAssets",
+          "valuesByYear": {
+            "2021": 740000000,
+            "2022": 687000000,
+            "2023": 937000000,
+            "2024": 846000000,
+            "2025": 726000000
+          }
+        },
+        {
+          "key": "ifrs-full:RightofuseAssetsIncreaseDecreaseInRevaluationSurplus",
+          "label": "RightofuseAssetsIncreaseDecreaseInRevaluationSurplus",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "RightofuseAssetsIncreaseDecreaseInRevaluationSurplus",
+          "valuesByYear": {
+            "2020": -2000000,
+            "2021": -2000000
+          }
+        },
+        {
+          "key": "ifrs-full:ShareOfOtherComprehensiveIncomeOfAssociatesAndJointVenturesAccountedForUsingEquityMethodThatWillBeReclassifiedToProfitOrLossNetOfTax",
+          "label": "ShareOfOtherComprehensiveIncomeOfAssociatesAndJointVenturesAccountedForUsingEquityMethodThatWillBeReclassifiedToProfitOrLossNetOfTax",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "ShareOfOtherComprehensiveIncomeOfAssociatesAndJointVenturesAccountedForUsingEquityMethodThatWillBeReclassifiedToProfitOrLossNetOfTax",
+          "valuesByYear": {
+            "2017": -77000000
+          }
+        },
+        {
+          "key": "ifrs-full:ShareOfProfitLossOfAssociatesAndJointVenturesAccountedForUsingEquityMethod",
+          "label": "ShareOfProfitLossOfAssociatesAndJointVenturesAccountedForUsingEquityMethod",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "ShareOfProfitLossOfAssociatesAndJointVenturesAccountedForUsingEquityMethod",
+          "valuesByYear": {
+            "2021": 33000000,
+            "2022": -2000000,
+            "2023": -5000000,
+            "2024": -3000000,
+            "2025": 1000000
+          }
+        },
+        {
+          "key": "ifrs-full:ShorttermDepositsClassifiedAsCashEquivalents",
+          "label": "ShorttermDepositsClassifiedAsCashEquivalents",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "ShorttermDepositsClassifiedAsCashEquivalents",
+          "valuesByYear": {
+            "2018": 3305000000,
+            "2019": 3912000000,
+            "2020": 4530000000,
+            "2021": 2847000000,
+            "2022": 2844000000
+          }
+        },
+        {
+          "key": "ifrs-full:TradeAndOtherCurrentPayables",
+          "label": "TradeAndOtherCurrentPayables",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "TradeAndOtherCurrentPayables",
+          "valuesByYear": {
+            "2021": 17554000000,
+            "2022": 16263000000,
+            "2023": 15844000000,
+            "2024": 15335000000,
+            "2025": 15381000000
+          }
+        },
+        {
+          "key": "ifrs-full:TradeAndOtherCurrentReceivables",
+          "label": "TradeAndOtherCurrentReceivables",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "TradeAndOtherCurrentReceivables",
+          "valuesByYear": {
+            "2021": 7860000000,
+            "2022": 7053000000,
+            "2023": 7385000000,
+            "2024": 6836000000,
+            "2025": 7471000000
+          }
+        },
+        {
+          "key": "ifrs-full:TradeAndOtherPayablesRecognisedAsOfAcquisitionDate",
+          "label": "TradeAndOtherPayablesRecognisedAsOfAcquisitionDate",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "TradeAndOtherPayablesRecognisedAsOfAcquisitionDate",
+          "valuesByYear": {
+            "2024": 117000000,
+            "2025": 39000000
+          }
+        },
+        {
+          "key": "ifrs-full:TradeAndOtherPayablesToTradeSuppliers",
+          "label": "TradeAndOtherPayablesToTradeSuppliers",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "TradeAndOtherPayablesToTradeSuppliers",
+          "valuesByYear": {
+            "2021": 4535000000,
+            "2022": 3866000000,
+            "2023": 3717000000,
+            "2024": 3462000000,
+            "2025": 3535000000
+          }
+        },
+        {
+          "key": "ifrs-full:TradeAndOtherReceivables",
+          "label": "TradeAndOtherReceivables",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "TradeAndOtherReceivables",
+          "valuesByYear": {
+            "2021": 7860000000,
+            "2022": 7053000000,
+            "2023": 7385000000,
+            "2024": 6836000000,
+            "2025": 7471000000
+          }
+        },
+        {
+          "key": "ifrs-full:TradeReceivables",
+          "label": "TradeReceivables",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "TradeReceivables",
+          "valuesByYear": {
+            "2021": 6246000000,
+            "2022": 5452000000,
+            "2023": 5905000000,
+            "2024": 5563000000,
+            "2025": 5913000000
+          }
+        },
+        {
+          "key": "ifrs-full:UnusedTaxLossesForWhichNoDeferredTaxAssetRecognised",
+          "label": "UnusedTaxLossesForWhichNoDeferredTaxAssetRecognised",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "UnusedTaxLossesForWhichNoDeferredTaxAssetRecognised",
+          "valuesByYear": {
+            "2018": 24000000,
+            "2019": 15000000,
+            "2020": 18000000,
+            "2021": 5000000
+          }
+        },
+        {
+          "key": "ifrs-full:WeightedAverageLesseesIncrementalBorrowingRateAppliedToLeaseLiabilitiesRecognisedAtDateOfInitialApplicationOfIFRS16",
+          "label": "WeightedAverageLesseesIncrementalBorrowingRateAppliedToLeaseLiabilitiesRecognisedAtDateOfInitialApplicationOfIFRS16",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "WeightedAverageLesseesIncrementalBorrowingRateAppliedToLeaseLiabilitiesRecognisedAtDateOfInitialApplicationOfIFRS16",
+          "valuesByYear": {
+            "2019": 0.0313
+          }
+        },
+        {
+          "key": "ifrs-full:WritedownsReversalsOfPropertyPlantAndEquipment",
+          "label": "WritedownsReversalsOfPropertyPlantAndEquipment",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "WritedownsReversalsOfPropertyPlantAndEquipment",
+          "valuesByYear": {
+            "2020": 3000000
+          }
+        }
+      ]
+    },
+    "cf": {
+      "years": [
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "rows": [
+        {
+          "key": "ifrs-full:CashFlowsFromLosingControlOfSubsidiariesOrOtherBusinessesClassifiedAsInvestingActivities",
+          "label": "CashFlowsFromLosingControlOfSubsidiariesOrOtherBusinessesClassifiedAsInvestingActivities",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "CashFlowsFromLosingControlOfSubsidiariesOrOtherBusinessesClassifiedAsInvestingActivities",
+          "valuesByYear": {
+            "2020": 259000000,
+            "2022": -43000000,
+            "2023": 49000000,
+            "2024": -18000000,
+            "2025": -27000000
+          }
+        },
+        {
+          "key": "ifrs-full:CashFlowsFromUsedInFinancingActivities",
+          "label": "CashFlowsFromUsedInFinancingActivities",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "CashFlowsFromUsedInFinancingActivities",
+          "valuesByYear": {
+            "2021": -7589000000,
+            "2022": 823000000,
+            "2023": -5641000000,
+            "2024": -4726000000,
+            "2025": -3685000000
+          }
+        },
+        {
+          "key": "ifrs-full:CashFlowsFromUsedInFinancingActivitiesContinuingOperations",
+          "label": "CashFlowsFromUsedInFinancingActivitiesContinuingOperations",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "CashFlowsFromUsedInFinancingActivitiesContinuingOperations",
+          "valuesByYear": {
+            "2022": -9251000000,
+            "2023": -5641000000,
+            "2024": -4726000000
+          }
+        },
+        {
+          "key": "ifrs-full:CashFlowsFromUsedInFinancingActivitiesDiscontinuedOperations",
+          "label": "CashFlowsFromUsedInFinancingActivitiesDiscontinuedOperations",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "CashFlowsFromUsedInFinancingActivitiesDiscontinuedOperations",
+          "valuesByYear": {
+            "2022": 10074000000,
+            "2023": 0,
+            "2024": 0
+          }
+        },
+        {
+          "key": "ifrs-full:CashFlowsFromUsedInInvestingActivities",
+          "label": "CashFlowsFromUsedInInvestingActivities",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "CashFlowsFromUsedInInvestingActivities",
+          "valuesByYear": {
+            "2021": -1777000000,
+            "2022": -8772000000,
+            "2023": -1595000000,
+            "2024": -1229000000,
+            "2025": -4233000000
+          }
+        },
+        {
+          "key": "ifrs-full:CashFlowsFromUsedInInvestingActivitiesContinuingOperations",
+          "label": "CashFlowsFromUsedInInvestingActivitiesContinuingOperations",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "CashFlowsFromUsedInInvestingActivitiesContinuingOperations",
+          "valuesByYear": {
+            "2022": -4981000000,
+            "2023": -1595000000,
+            "2024": -1229000000
+          }
+        },
+        {
+          "key": "ifrs-full:CashFlowsFromUsedInInvestingActivitiesDiscontinuedOperations",
+          "label": "CashFlowsFromUsedInInvestingActivitiesDiscontinuedOperations",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "CashFlowsFromUsedInInvestingActivitiesDiscontinuedOperations",
+          "valuesByYear": {
+            "2022": -3791000000,
+            "2023": 0,
+            "2024": 0
+          }
+        },
+        {
+          "key": "ifrs-full:CashFlowsFromUsedInOperatingActivities",
+          "label": "CashFlowsFromUsedInOperatingActivities",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "CashFlowsFromUsedInOperatingActivities",
+          "valuesByYear": {
+            "2021": 7952000000,
+            "2022": 7403000000,
+            "2023": 6768000000,
+            "2024": 6554000000,
+            "2025": 7741000000
+          }
+        },
+        {
+          "key": "ifrs-full:CashFlowsFromUsedInOperatingActivitiesContinuingOperations",
+          "label": "CashFlowsFromUsedInOperatingActivitiesContinuingOperations",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "CashFlowsFromUsedInOperatingActivitiesContinuingOperations",
+          "valuesByYear": {
+            "2022": 7944000000,
+            "2023": 6768000000,
+            "2024": 6554000000
+          }
+        },
+        {
+          "key": "ifrs-full:CashFlowsFromUsedInOperatingActivitiesDiscontinuedOperations",
+          "label": "CashFlowsFromUsedInOperatingActivitiesDiscontinuedOperations",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "CashFlowsFromUsedInOperatingActivitiesDiscontinuedOperations",
+          "valuesByYear": {
+            "2022": 932000000,
+            "2023": 0,
+            "2024": 0
+          }
+        },
+        {
+          "key": "ifrs-full:CashFlowsUsedInObtainingControlOfSubsidiariesOrOtherBusinessesClassifiedAsInvestingActivities",
+          "label": "CashFlowsUsedInObtainingControlOfSubsidiariesOrOtherBusinessesClassifiedAsInvestingActivities",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "CashFlowsUsedInObtainingControlOfSubsidiariesOrOtherBusinessesClassifiedAsInvestingActivities",
+          "valuesByYear": {
+            "2020": -15000000,
+            "2022": 3108000000,
+            "2023": 1457000000,
+            "2024": 805000000,
+            "2025": 1692000000
+          }
+        },
+        {
+          "key": "ifrs-full:DividendsPaidClassifiedAsFinancingActivities",
+          "label": "DividendsPaidClassifiedAsFinancingActivities",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "DividendsPaidClassifiedAsFinancingActivities",
+          "valuesByYear": {
+            "2018": -3906000000
+          }
+        },
+        {
+          "key": "ifrs-full:DividendsPaidToEquityHoldersOfParentClassifiedAsFinancingActivities",
+          "label": "DividendsPaidToEquityHoldersOfParentClassifiedAsFinancingActivities",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "DividendsPaidToEquityHoldersOfParentClassifiedAsFinancingActivities",
+          "valuesByYear": {
+            "2021": 3999000000,
+            "2022": 3467000000,
+            "2023": 2247000000,
+            "2024": 2444000000,
+            "2025": 2564000000
+          }
+        },
+        {
+          "key": "ifrs-full:DividendsPaidToNoncontrollingInterestsClassifiedAsFinancingActivities",
+          "label": "DividendsPaidToNoncontrollingInterestsClassifiedAsFinancingActivities",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "DividendsPaidToNoncontrollingInterestsClassifiedAsFinancingActivities",
+          "valuesByYear": {
+            "2019": 364000000,
+            "2020": 1208000000,
+            "2021": 642000000,
+            "2022": 521000000,
+            "2023": 412000000
+          }
+        },
+        {
+          "key": "ifrs-full:DividendsReceivedClassifiedAsInvestingActivities",
+          "label": "DividendsReceivedClassifiedAsInvestingActivities",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "DividendsReceivedClassifiedAsInvestingActivities",
+          "valuesByYear": {
+            "2019": 7000000,
+            "2020": 31000000,
+            "2021": 9000000,
+            "2022": 6000000,
+            "2023": 220000000
+          }
+        },
+        {
+          "key": "ifrs-full:DividendsReceivedFromInvestmentsAccountedForUsingEquityMethodClassifiedAsInvestingActivities",
+          "label": "DividendsReceivedFromInvestmentsAccountedForUsingEquityMethodClassifiedAsInvestingActivities",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "DividendsReceivedFromInvestmentsAccountedForUsingEquityMethodClassifiedAsInvestingActivities",
+          "valuesByYear": {
+            "2023": 11000000,
+            "2024": 15000000,
+            "2025": 67000000
+          }
+        },
+        {
+          "key": "ifrs-full:EffectOfExchangeRateChangesOnCashAndCashEquivalents",
+          "label": "EffectOfExchangeRateChangesOnCashAndCashEquivalents",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "EffectOfExchangeRateChangesOnCashAndCashEquivalents",
+          "valuesByYear": {
+            "2021": -29000000,
+            "2022": 152000000,
+            "2023": -99000000,
+            "2024": -54000000,
+            "2025": -19000000
+          }
+        },
+        {
+          "key": "ifrs-full:IncomeTaxesPaidClassifiedAsOperatingActivities",
+          "label": "IncomeTaxesPaidClassifiedAsOperatingActivities",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "IncomeTaxesPaidClassifiedAsOperatingActivities",
+          "valuesByYear": {
+            "2022": 1500000000,
+            "2023": 1300000000,
+            "2024": 1300000000,
+            "2025": 1200000000
+          }
+        },
+        {
+          "key": "ifrs-full:IncomeTaxesPaidRefundClassifiedAsOperatingActivities",
+          "label": "IncomeTaxesPaidRefundClassifiedAsOperatingActivities",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "IncomeTaxesPaidRefundClassifiedAsOperatingActivities",
+          "valuesByYear": {
+            "2019": 1512000000,
+            "2020": 1655000000,
+            "2021": 1291000000,
+            "2024": 1307000000,
+            "2025": 1202000000
+          }
+        },
+        {
+          "key": "ifrs-full:IncreaseDecreaseInCashAndCashEquivalentsBeforeEffectOfExchangeRateChanges",
+          "label": "IncreaseDecreaseInCashAndCashEquivalentsBeforeEffectOfExchangeRateChanges",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "IncreaseDecreaseInCashAndCashEquivalentsBeforeEffectOfExchangeRateChanges",
+          "valuesByYear": {
+            "2021": -1414000000,
+            "2022": -546000000,
+            "2023": -468000000,
+            "2024": 599000000,
+            "2025": -177000000
+          }
+        },
+        {
+          "key": "ifrs-full:IncreaseDecreaseThroughEffectOfChangesInForeignExchangeRatesLiabilitiesArisingFromFinancingActivities",
+          "label": "IncreaseDecreaseThroughEffectOfChangesInForeignExchangeRatesLiabilitiesArisingFromFinancingActivities",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "IncreaseDecreaseThroughEffectOfChangesInForeignExchangeRatesLiabilitiesArisingFromFinancingActivities",
+          "valuesByYear": {
+            "2018": 809000000,
+            "2019": -914000000,
+            "2020": 88000000,
+            "2021": -342000000,
+            "2022": 2450000000
+          }
+        },
+        {
+          "key": "ifrs-full:IncreaseDecreaseThroughFinancingCashFlowsLiabilitiesArisingFromFinancingActivities",
+          "label": "IncreaseDecreaseThroughFinancingCashFlowsLiabilitiesArisingFromFinancingActivities",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "IncreaseDecreaseThroughFinancingCashFlowsLiabilitiesArisingFromFinancingActivities",
+          "valuesByYear": {
+            "2018": 7333000000,
+            "2019": 2395000000,
+            "2020": -4979000000,
+            "2021": -2976000000,
+            "2022": 5670000000
+          }
+        },
+        {
+          "key": "ifrs-full:IncreaseDecreaseThroughOtherChangesLiabilitiesArisingFromFinancingActivities",
+          "label": "IncreaseDecreaseThroughOtherChangesLiabilitiesArisingFromFinancingActivities",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "IncreaseDecreaseThroughOtherChangesLiabilitiesArisingFromFinancingActivities",
+          "valuesByYear": {
+            "2018": -105000000,
+            "2019": -80000000,
+            "2020": 406000000,
+            "2021": 157000000,
+            "2022": 301000000
+          }
+        },
+        {
+          "key": "ifrs-full:InterestPaidClassifiedAsFinancingActivities",
+          "label": "InterestPaidClassifiedAsFinancingActivities",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "InterestPaidClassifiedAsFinancingActivities",
+          "valuesByYear": {
+            "2021": 786000000,
+            "2022": 848000000,
+            "2023": 766000000,
+            "2024": 632000000,
+            "2025": 679000000
+          }
+        },
+        {
+          "key": "ifrs-full:InterestReceivedClassifiedAsInvestingActivities",
+          "label": "InterestReceivedClassifiedAsInvestingActivities",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "InterestReceivedClassifiedAsInvestingActivities",
+          "valuesByYear": {
+            "2021": 27000000,
+            "2022": 64000000,
+            "2023": 115000000,
+            "2024": 138000000,
+            "2025": 154000000
+          }
+        },
+        {
+          "key": "ifrs-full:LiabilitiesArisingFromFinancingActivities",
+          "label": "LiabilitiesArisingFromFinancingActivities",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "LiabilitiesArisingFromFinancingActivities",
+          "valuesByYear": {
+            "2018": 25902000000,
+            "2019": 30034000000,
+            "2020": 26441000000,
+            "2021": 23983000000,
+            "2022": 20888000000
+          }
+        },
+        {
+          "key": "ifrs-full:OtherCashPaymentsToAcquireEquityOrDebtInstrumentsOfOtherEntitiesClassifiedAsInvestingActivities",
+          "label": "OtherCashPaymentsToAcquireEquityOrDebtInstrumentsOfOtherEntitiesClassifiedAsInvestingActivities",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "OtherCashPaymentsToAcquireEquityOrDebtInstrumentsOfOtherEntitiesClassifiedAsInvestingActivities",
+          "valuesByYear": {
+            "2021": 162000000,
+            "2022": 143000000,
+            "2023": 123000000,
+            "2024": 103000000,
+            "2025": 92000000
+          }
+        },
+        {
+          "key": "ifrs-full:OtherCashPaymentsToAcquireInterestsInJointVenturesClassifiedAsInvestingActivities",
+          "label": "OtherCashPaymentsToAcquireInterestsInJointVenturesClassifiedAsInvestingActivities",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "OtherCashPaymentsToAcquireInterestsInJointVenturesClassifiedAsInvestingActivities",
+          "valuesByYear": {
+            "2020": 4000000
+          }
+        },
+        {
+          "key": "ifrs-full:OtherCashReceiptsFromSalesOfEquityOrDebtInstrumentsOfOtherEntitiesClassifiedAsInvestingActivities",
+          "label": "OtherCashReceiptsFromSalesOfEquityOrDebtInstrumentsOfOtherEntitiesClassifiedAsInvestingActivities",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "OtherCashReceiptsFromSalesOfEquityOrDebtInstrumentsOfOtherEntitiesClassifiedAsInvestingActivities",
+          "valuesByYear": {
+            "2021": 202000000,
+            "2022": 238000000,
+            "2023": 1832000000,
+            "2024": 2356000000,
+            "2025": 189000000
+          }
+        },
+        {
+          "key": "ifrs-full:OtherCashReceiptsFromSalesOfInterestsInJointVenturesClassifiedAsInvestingActivities",
+          "label": "OtherCashReceiptsFromSalesOfInterestsInJointVenturesClassifiedAsInvestingActivities",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "OtherCashReceiptsFromSalesOfInterestsInJointVenturesClassifiedAsInvestingActivities",
+          "valuesByYear": {
+            "2023": 0
+          }
+        },
+        {
+          "key": "ifrs-full:OtherInflowsOutflowsOfCashClassifiedAsFinancingActivities",
+          "label": "OtherInflowsOutflowsOfCashClassifiedAsFinancingActivities",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "OtherInflowsOutflowsOfCashClassifiedAsFinancingActivities",
+          "valuesByYear": {
+            "2021": 20000000,
+            "2022": 376000000,
+            "2023": 334000000,
+            "2024": 129000000,
+            "2025": 46000000
+          }
+        },
+        {
+          "key": "ifrs-full:OtherInflowsOutflowsOfCashClassifiedAsInvestingActivities",
+          "label": "OtherInflowsOutflowsOfCashClassifiedAsInvestingActivities",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "OtherInflowsOutflowsOfCashClassifiedAsInvestingActivities",
+          "valuesByYear": {
+            "2019": -113000000,
+            "2020": -120000000,
+            "2021": -114000000,
+            "2022": -79000000,
+            "2023": -11000000
+          }
+        },
+        {
+          "key": "ifrs-full:PaymentsOfFinanceLeaseLiabilitiesClassifiedAsFinancingActivities",
+          "label": "PaymentsOfFinanceLeaseLiabilitiesClassifiedAsFinancingActivities",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "PaymentsOfFinanceLeaseLiabilitiesClassifiedAsFinancingActivities",
+          "valuesByYear": {
+            "2017": 23000000,
+            "2018": 28000000
+          }
+        },
+        {
+          "key": "ifrs-full:PaymentsOfLeaseLiabilitiesClassifiedAsFinancingActivities",
+          "label": "PaymentsOfLeaseLiabilitiesClassifiedAsFinancingActivities",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "PaymentsOfLeaseLiabilitiesClassifiedAsFinancingActivities",
+          "valuesByYear": {
+            "2021": 215000000,
+            "2022": 202000000,
+            "2023": 197000000,
+            "2024": 226000000,
+            "2025": 241000000
+          }
+        },
+        {
+          "key": "ifrs-full:PaymentsToAcquireOrRedeemEntitysShares",
+          "label": "PaymentsToAcquireOrRedeemEntitysShares",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "PaymentsToAcquireOrRedeemEntitysShares",
+          "valuesByYear": {
+            "2025": 1377000000
+          }
+        },
+        {
+          "key": "ifrs-full:ProceedsFromContributionsOfNoncontrollingInterests",
+          "label": "ProceedsFromContributionsOfNoncontrollingInterests",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "ProceedsFromContributionsOfNoncontrollingInterests",
+          "valuesByYear": {
+            "2021": 7000000,
+            "2022": 8000000,
+            "2023": 7000000,
+            "2024": 9000000,
+            "2025": 0
+          }
+        },
+        {
+          "key": "ifrs-full:ProceedsFromDisposalOfNoncurrentAssetsOrDisposalGroupsClassifiedAsHeldForSaleAndDiscontinuedOperations",
+          "label": "ProceedsFromDisposalOfNoncurrentAssetsOrDisposalGroupsClassifiedAsHeldForSaleAndDiscontinuedOperations",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "ProceedsFromDisposalOfNoncurrentAssetsOrDisposalGroupsClassifiedAsHeldForSaleAndDiscontinuedOperations",
+          "valuesByYear": {
+            "2019": 104000000,
+            "2020": 104000000,
+            "2021": 104000000
+          }
+        },
+        {
+          "key": "ifrs-full:ProceedsFromIssuingShares",
+          "label": "ProceedsFromIssuingShares",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "ProceedsFromIssuingShares",
+          "valuesByYear": {
+            "2021": 21000000,
+            "2022": 25000000,
+            "2023": 10000000,
+            "2024": 20000000,
+            "2025": 15000000
+          }
+        },
+        {
+          "key": "ifrs-full:ProceedsFromNoncurrentBorrowings",
+          "label": "ProceedsFromNoncurrentBorrowings",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "ProceedsFromNoncurrentBorrowings",
+          "valuesByYear": {
+            "2021": 0,
+            "2022": 1025000000,
+            "2023": 223000000,
+            "2024": 1075000000,
+            "2025": 1979000000
+          }
+        },
+        {
+          "key": "ifrs-full:ProceedsFromSalesOfIntangibleAssetsClassifiedAsInvestingActivities",
+          "label": "ProceedsFromSalesOfIntangibleAssetsClassifiedAsInvestingActivities",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "ProceedsFromSalesOfIntangibleAssetsClassifiedAsInvestingActivities",
+          "valuesByYear": {
+            "2021": 772000000,
+            "2022": 196000000,
+            "2023": 12000000,
+            "2024": 131000000,
+            "2025": 115000000
+          }
+        },
+        {
+          "key": "ifrs-full:ProceedsFromSalesOfInterestsInAssociates",
+          "label": "ProceedsFromSalesOfInterestsInAssociates",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "ProceedsFromSalesOfInterestsInAssociates",
+          "valuesByYear": {
+            "2018": 3000000,
+            "2019": 3000000,
+            "2020": 3000000
+          }
+        },
+        {
+          "key": "ifrs-full:ProceedsFromSalesOfInvestmentsAccountedForUsingEquityMethod",
+          "label": "ProceedsFromSalesOfInvestmentsAccountedForUsingEquityMethod",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "ProceedsFromSalesOfInvestmentsAccountedForUsingEquityMethod",
+          "valuesByYear": {
+            "2024": 0,
+            "2025": 0
+          }
+        },
+        {
+          "key": "ifrs-full:ProceedsFromSalesOfPropertyPlantAndEquipmentClassifiedAsInvestingActivities",
+          "label": "ProceedsFromSalesOfPropertyPlantAndEquipmentClassifiedAsInvestingActivities",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "ProceedsFromSalesOfPropertyPlantAndEquipmentClassifiedAsInvestingActivities",
+          "valuesByYear": {
+            "2021": 143000000,
+            "2022": 146000000,
+            "2023": 28000000,
+            "2024": 65000000,
+            "2025": 24000000
+          }
+        },
+        {
+          "key": "ifrs-full:ProfitLossFromOperatingActivities",
+          "label": "ProfitLossFromOperatingActivities",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "ProfitLossFromOperatingActivities",
+          "valuesByYear": {
+            "2021": 6201000000,
+            "2022": 6433000000,
+            "2023": 6745000000,
+            "2024": 4021000000,
+            "2025": 7932000000
+          }
+        },
+        {
+          "key": "ifrs-full:PurchaseOfIntangibleAssetsClassifiedAsInvestingActivities",
+          "label": "PurchaseOfIntangibleAssetsClassifiedAsInvestingActivities",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "PurchaseOfIntangibleAssetsClassifiedAsInvestingActivities",
+          "valuesByYear": {
+            "2021": 1759000000,
+            "2022": 1115000000,
+            "2023": 1030000000,
+            "2024": 1583000000,
+            "2025": 1637000000
+          }
+        },
+        {
+          "key": "ifrs-full:PurchaseOfPropertyPlantAndEquipmentClassifiedAsInvestingActivities",
+          "label": "PurchaseOfPropertyPlantAndEquipmentClassifiedAsInvestingActivities",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "PurchaseOfPropertyPlantAndEquipmentClassifiedAsInvestingActivities",
+          "valuesByYear": {
+            "2021": 1172000000,
+            "2022": 1143000000,
+            "2023": 1314000000,
+            "2024": 1399000000,
+            "2025": 1348000000
+          }
+        },
+        {
+          "key": "ifrs-full:RepaymentsOfBorrowingsClassifiedAsFinancingActivities",
+          "label": "RepaymentsOfBorrowingsClassifiedAsFinancingActivities",
+          "unit": "usd",
+          "taxonomy": "ifrs-full",
+          "concept": "RepaymentsOfBorrowingsClassifiedAsFinancingActivities",
+          "valuesByYear": {
+            "2019": 2500000000,
+            "2020": 2500000000
+          }
+        }
+      ]
+    }
+  }
+}

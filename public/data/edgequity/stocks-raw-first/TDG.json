@@ -1,0 +1,96 @@
+{
+  "ticker": "TDG",
+  "name": "TransDigm Group Inc",
+  "sector": "Aerospace & Defense",
+  "industry": "Aerospace & Defense",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 66129999999.99999,
+  "enterpriseValue": 63569999999.99999,
+  "valuation": {
+    "peTTM": 32.2846,
+    "forwardPE": 30.4311087681859,
+    "psTTM": 7.0732,
+    "pb": 5.9821,
+    "evRevenue": 7.19850526554184,
+    "evEbitda": null,
+    "pfcf": 36.415198237885456,
+    "fcfYield": 0.027461061545440802,
+    "earningsYield": 0.03136246786632391
+  },
+  "profitability": {
+    "grossMargin": 0.6014041444909977,
+    "operatingMargin": 0.471634016532669,
+    "netMargin": 0.23485448986524743,
+    "roe": -0.2141234771835639,
+    "roa": 0.09053210528613209,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 3.2136,
+    "quickRatio": 2.1563,
+    "debtToEquity": -0.025603964484823456,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 2038000000,
+    "freeCashFlow": 1816000000,
+    "fcfMargin": 0.20563922545578078,
+    "capexToRevenue": 0.02513871588721549,
+    "fcfConversion": 0.875602700096432
+  },
+  "dividends": {
+    "dividendYield": 7.8731,
+    "payoutRatio": 464.27
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 8831000000,
+      "grossProfit": 5311000000,
+      "operatingIncome": 4165000000,
+      "netIncome": 2074000000,
+      "freeCashFlow": 1816000000,
+      "totalAssets": 22909000000,
+      "totalDebt": 248000000,
+      "totalEquity": -9686000000,
+      "sharesDiluted": 58200000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T19:46:58.375Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T19:46:58.375Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T19:46:58.375Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T19:46:58.375Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

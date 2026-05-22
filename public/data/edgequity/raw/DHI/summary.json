@@ -1,0 +1,96 @@
+{
+  "ticker": "DHI",
+  "name": "D.R. Horton Inc",
+  "sector": "Consumer products",
+  "industry": "Consumer products",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 38990000000,
+  "enterpriseValue": 44846.146,
+  "valuation": {
+    "peTTM": 12.6711,
+    "forwardPE": 13.09149,
+    "psTTM": 1.2055,
+    "pb": 2.063,
+    "evRevenue": 0.0000013093612337374163,
+    "evEbitda": null,
+    "pfcf": 11.874524135830669,
+    "fcfYield": 0.08421390100025647,
+    "earningsYield": 0.09286740189792254
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": null,
+    "netMargin": 0.10571847336089506,
+    "roe": 0.14968334545935577,
+    "roa": 0.9535710523543663,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 4.6615,
+    "quickRatio": 0.5379,
+    "debtToEquity": null,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 3420900000,
+    "freeCashFlow": 3283500000,
+    "fcfMargin": 0.09586749351832387,
+    "capexToRevenue": 0.004011631980940369,
+    "fcfConversion": 0.9068187467204286
+  },
+  "dividends": {
+    "dividendYield": 1.2697516930022574,
+    "payoutRatio": 13.8
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 34250400000,
+      "grossProfit": null,
+      "operatingIncome": null,
+      "netIncome": 3620900000,
+      "freeCashFlow": 3283500000,
+      "totalAssets": 3797200000,
+      "totalDebt": null,
+      "totalEquity": 24190400000,
+      "sharesDiluted": 309900000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T21:06:41.925Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T21:06:41.925Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T21:06:41.925Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T21:06:41.925Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

@@ -1,0 +1,97 @@
+{
+  "ticker": "ABNB",
+  "name": "Airbnb Inc",
+  "sector": "Hotels, Restaurants & Leisure",
+  "industry": "Hotels, Restaurants & Leisure",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 81696650533,
+  "enterpriseValue": 77135650533,
+  "valuation": {
+    "peTTM": 32.4579,
+    "forwardPE": 27.08747,
+    "psTTM": 6.4598,
+    "pb": 10.1893,
+    "evRevenue": 6.301417411404297,
+    "evEbitda": null,
+    "pfcf": null,
+    "fcfYield": null,
+    "earningsYield": 0.030735654199014237
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": 0.20782615799362797,
+    "netMargin": 0.20513029981210684,
+    "roe": 0.3062568605927552,
+    "roa": 0.11306736311239193,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 1.3772,
+    "quickRatio": 1.3358,
+    "debtToEquity": 0.2438102207586291,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 4646000000,
+    "freeCashFlow": null,
+    "fcfMargin": null,
+    "capexToRevenue": null,
+    "fcfConversion": null
+  },
+  "dividends": {
+    "dividendYield": null,
+    "payoutRatio": null
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 12241000000,
+      "grossProfit": null,
+      "operatingIncome": 2544000000,
+      "netIncome": 2511000000,
+      "freeCashFlow": null,
+      "totalAssets": 22208000000,
+      "totalDebt": 1999000000,
+      "totalEquity": 8199000000,
+      "sharesDiluted": 623000000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items",
+    "Free cash flow unavailable from mapped line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T16:23:58.839Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T16:23:58.839Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T16:23:58.839Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T16:23:58.839Z",
+      "status": "partial",
+      "message": "Thin summary mapped from Finnhub as-reported line items"
+    }
+  }
+}

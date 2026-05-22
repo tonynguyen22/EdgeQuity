@@ -1,0 +1,5330 @@
+{
+  "schemaVersion": 2,
+  "ticker": "FLEX",
+  "cik": "0000866374",
+  "entityName": "FLEX LTD.",
+  "source": "sec-edgar",
+  "fetchedAt": "2026-05-22T02:46:55.358Z",
+  "status": "ok",
+  "recentFilings": [
+    {
+      "form": "10-K",
+      "filingDate": "2026-05-20",
+      "reportDate": "2026-03-31"
+    },
+    {
+      "form": "10-K",
+      "filingDate": "2025-05-21",
+      "reportDate": "2025-03-31"
+    },
+    {
+      "form": "10-K",
+      "filingDate": "2024-05-17",
+      "reportDate": "2024-03-31"
+    },
+    {
+      "form": "10-K",
+      "filingDate": "2023-05-19",
+      "reportDate": "2023-03-31"
+    },
+    {
+      "form": "10-K",
+      "filingDate": "2022-05-20",
+      "reportDate": "2022-03-31"
+    },
+    {
+      "form": "10-K",
+      "filingDate": "2021-05-19",
+      "reportDate": "2021-03-31"
+    },
+    {
+      "form": "10-K",
+      "filingDate": "2020-05-28",
+      "reportDate": "2020-03-31"
+    },
+    {
+      "form": "10-K",
+      "filingDate": "2019-05-21",
+      "reportDate": "2019-03-31"
+    }
+  ],
+  "statements": {
+    "ic": {
+      "years": [
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "rows": [
+        {
+          "key": "us-gaap:IncomeTaxPaidFederalAfterRefundReceived",
+          "label": "",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "IncomeTaxPaidFederalAfterRefundReceived",
+          "valuesByYear": {
+            "2026": 0
+          }
+        },
+        {
+          "key": "us-gaap:AccumulatedOtherComprehensiveIncomeLossNetOfTax",
+          "label": "Accumulated Other Comprehensive Income (Loss), Net of Tax",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "AccumulatedOtherComprehensiveIncomeLossNetOfTax",
+          "valuesByYear": {
+            "2022": -182000000,
+            "2023": -194000000,
+            "2024": -195000000,
+            "2025": -224000000,
+            "2026": -167000000
+          }
+        },
+        {
+          "key": "us-gaap:AntidilutiveSecuritiesExcludedFromComputationOfEarningsPerShareAmount",
+          "label": "Antidilutive Securities Excluded from Computation of Earnings Per Share, Amount",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "AntidilutiveSecuritiesExcludedFromComputationOfEarningsPerShareAmount",
+          "valuesByYear": {
+            "2011": 24200000,
+            "2012": 20600000
+          }
+        },
+        {
+          "key": "us-gaap:BuildingsAndImprovementsGross",
+          "label": "Buildings and Improvements, Gross",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "BuildingsAndImprovementsGross",
+          "valuesByYear": {
+            "2010": 1019970000
+          }
+        },
+        {
+          "key": "us-gaap:BusinessAcquisitionCostOfAcquiredEntityCashPaid",
+          "label": "Business Acquisition, Cost of Acquired Entity, Cash Paid (Deprecated 2013-01-31)",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "BusinessAcquisitionCostOfAcquiredEntityCashPaid",
+          "valuesByYear": {
+            "2010": 17000000,
+            "2011": 92300000
+          }
+        },
+        {
+          "key": "us-gaap:BusinessAcquisitionsProFormaNetIncomeLoss",
+          "label": "Business Acquisition, Pro Forma Net Income (Loss)",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "BusinessAcquisitionsProFormaNetIncomeLoss",
+          "valuesByYear": {
+            "2016": 410100000,
+            "2017": 410100000,
+            "2018": 410100000
+          }
+        },
+        {
+          "key": "us-gaap:ComprehensiveIncomeNetOfTaxAttributableToNoncontrollingInterest",
+          "label": "Comprehensive Income (Loss), Net of Tax, Attributable to Noncontrolling Interest",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "ComprehensiveIncomeNetOfTaxAttributableToNoncontrollingInterest",
+          "valuesByYear": {
+            "2022": 4000000,
+            "2023": 240000000,
+            "2024": 239000000,
+            "2025": 0,
+            "2026": 0
+          }
+        },
+        {
+          "key": "us-gaap:ComprehensiveIncomeNetOfTax",
+          "label": "Comprehensive Income (Loss), Net of Tax, Attributable to Parent",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "ComprehensiveIncomeNetOfTax",
+          "valuesByYear": {
+            "2022": 873000000,
+            "2023": 781000000,
+            "2024": 1005000000,
+            "2025": 809000000,
+            "2026": 937000000
+          }
+        },
+        {
+          "key": "us-gaap:ComprehensiveIncomeNetOfTaxIncludingPortionAttributableToNoncontrollingInterest",
+          "label": "Comprehensive Income (Loss), Net of Tax, Including Portion Attributable to Noncontrolling Interest",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "ComprehensiveIncomeNetOfTaxIncludingPortionAttributableToNoncontrollingInterest",
+          "valuesByYear": {
+            "2022": 877000000,
+            "2023": 1021000000,
+            "2024": 1244000000,
+            "2025": 809000000,
+            "2026": 937000000
+          }
+        },
+        {
+          "key": "us-gaap:ConstructionInProgressGross",
+          "label": "Construction in Progress, Gross",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "ConstructionInProgressGross",
+          "valuesByYear": {
+            "2010": 102016000
+          }
+        },
+        {
+          "key": "us-gaap:CostOfGoodsAndServicesSold",
+          "label": "Cost of Goods and Services Sold",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "CostOfGoodsAndServicesSold",
+          "valuesByYear": {
+            "2022": 24094000000,
+            "2023": 28058000000,
+            "2024": 24395000000,
+            "2025": 23584000000,
+            "2026": 25288000000
+          }
+        },
+        {
+          "key": "us-gaap:CostOfRevenue",
+          "label": "Cost of Revenue",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "CostOfRevenue",
+          "valuesByYear": {
+            "2009": 22800733000,
+            "2010": 27094999000
+          }
+        },
+        {
+          "key": "us-gaap:CurrentFederalTaxExpenseBenefit",
+          "label": "Current Federal Tax Expense (Benefit)",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "CurrentFederalTaxExpenseBenefit",
+          "valuesByYear": {
+            "2022": 3000000,
+            "2023": 6000000,
+            "2024": 3000000,
+            "2025": 2000000,
+            "2026": 2000000
+          }
+        },
+        {
+          "key": "us-gaap:CurrentForeignTaxExpenseBenefit",
+          "label": "Current Foreign Tax Expense (Benefit)",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "CurrentForeignTaxExpenseBenefit",
+          "valuesByYear": {
+            "2022": 146000000,
+            "2023": 136000000,
+            "2024": 161000000,
+            "2025": 128000000,
+            "2026": 223000000
+          }
+        },
+        {
+          "key": "us-gaap:CurrentIncomeTaxExpenseBenefit",
+          "label": "Current Income Tax Expense (Benefit)",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "CurrentIncomeTaxExpenseBenefit",
+          "valuesByYear": {
+            "2022": 149000000,
+            "2023": 142000000,
+            "2024": 164000000,
+            "2025": 130000000,
+            "2026": 225000000
+          }
+        },
+        {
+          "key": "us-gaap:DeconsolidationGainOrLossAmount",
+          "label": "Deconsolidation, Gain (Loss), Amount",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "DeconsolidationGainOrLossAmount",
+          "valuesByYear": {
+            "2018": 151574000,
+            "2019": 86614000,
+            "2020": 0,
+            "2021": 0
+          }
+        },
+        {
+          "key": "us-gaap:DecreaseInUnrecognizedTaxBenefitsIsReasonablyPossible",
+          "label": "Decrease in Unrecognized Tax Benefits is Reasonably Possible",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "DecreaseInUnrecognizedTaxBenefitsIsReasonablyPossible",
+          "valuesByYear": {
+            "2023": 84000000,
+            "2024": 24000000,
+            "2025": 15000000,
+            "2026": 10000000
+          }
+        },
+        {
+          "key": "us-gaap:DeferredFederalIncomeTaxExpenseBenefit",
+          "label": "Deferred Federal Income Tax Expense (Benefit)",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "DeferredFederalIncomeTaxExpenseBenefit",
+          "valuesByYear": {
+            "2022": 0,
+            "2023": 1000000,
+            "2024": -1000000,
+            "2025": 3000000,
+            "2026": 0
+          }
+        },
+        {
+          "key": "us-gaap:DeferredForeignIncomeTaxExpenseBenefit",
+          "label": "Deferred Foreign Income Tax Expense (Benefit)",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "DeferredForeignIncomeTaxExpenseBenefit",
+          "valuesByYear": {
+            "2022": -44000000,
+            "2023": -202000000,
+            "2024": -369000000,
+            "2025": 52000000,
+            "2026": 38000000
+          }
+        },
+        {
+          "key": "us-gaap:DeferredIncomeTaxExpenseBenefit",
+          "label": "Deferred Income Tax Expense (Benefit)",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "DeferredIncomeTaxExpenseBenefit",
+          "valuesByYear": {
+            "2022": -44000000,
+            "2023": -201000000,
+            "2024": -370000000,
+            "2025": 55000000,
+            "2026": 38000000
+          }
+        },
+        {
+          "key": "us-gaap:DeferredIncomeTaxesAndTaxCredits",
+          "label": "Deferred Income Taxes and Tax Credits",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "DeferredIncomeTaxesAndTaxCredits",
+          "valuesByYear": {
+            "2012": -32647000,
+            "2013": -36261000
+          }
+        },
+        {
+          "key": "us-gaap:DeferredRevenue",
+          "label": "Deferred Revenue",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "DeferredRevenue",
+          "valuesByYear": {
+            "2013": 296300000,
+            "2015": 272600000,
+            "2016": 332300000,
+            "2017": 280700000,
+            "2018": 329000000
+          }
+        },
+        {
+          "key": "us-gaap:DeferredTaxesBusinessCombinationValuationAllowanceAllocatedToContributedCapital",
+          "label": "Deferred Taxes, Business Combination, Valuation Allowance, Allocated to Contributed Capital",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "DeferredTaxesBusinessCombinationValuationAllowanceAllocatedToContributedCapital",
+          "valuesByYear": {
+            "2010": 34000000,
+            "2011": 34000000,
+            "2012": 34000000
+          }
+        },
+        {
+          "key": "us-gaap:Depreciation",
+          "label": "Depreciation",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "Depreciation",
+          "valuesByYear": {
+            "2022": 408900000,
+            "2023": 414000000,
+            "2024": 431000000,
+            "2025": 439000000,
+            "2026": 457000000
+          }
+        },
+        {
+          "key": "us-gaap:DepreciationDepletionAndAmortization",
+          "label": "Depreciation, Depletion and Amortization",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "DepreciationDepletionAndAmortization",
+          "valuesByYear": {
+            "2015": 540490000,
+            "2016": 515367000,
+            "2017": 609660000,
+            "2018": 555364000,
+            "2019": 433413000
+          }
+        },
+        {
+          "key": "us-gaap:DiscontinuedOperationIncomeLossFromDiscontinuedOperationBeforeIncomeTax",
+          "label": "Discontinued Operation, Income (Loss) from Discontinued Operation, before Income Tax",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "DiscontinuedOperationIncomeLossFromDiscontinuedOperationBeforeIncomeTax",
+          "valuesByYear": {
+            "2011": -23426000
+          }
+        },
+        {
+          "key": "us-gaap:DiscontinuedOperationTaxEffectOfDiscontinuedOperation",
+          "label": "Discontinued Operation, Tax Effect of Discontinued Operation",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "DiscontinuedOperationTaxEffectOfDiscontinuedOperation",
+          "valuesByYear": {
+            "2011": -1546000
+          }
+        },
+        {
+          "key": "us-gaap:DisposalGroupIncludingDiscontinuedOperationGrossProfitLoss",
+          "label": "Disposal Group, Including Discontinued Operation, Gross Profit (Loss)",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "DisposalGroupIncludingDiscontinuedOperationGrossProfitLoss",
+          "valuesByYear": {
+            "2011": -17535000
+          }
+        },
+        {
+          "key": "us-gaap:DisposalGroupIncludingDiscontinuedOperationOperatingExpense",
+          "label": "Disposal Group, Including Discontinued Operation, Operating Expense",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "DisposalGroupIncludingDiscontinuedOperationOperatingExpense",
+          "valuesByYear": {
+            "2011": 5859000
+          }
+        },
+        {
+          "key": "us-gaap:DisposalGroupIncludingDiscontinuedOperationRevenue",
+          "label": "Disposal Group, Including Discontinued Operation, Revenue",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "DisposalGroupIncludingDiscontinuedOperationRevenue",
+          "valuesByYear": {
+            "2011": 82632000
+          }
+        },
+        {
+          "key": "us-gaap:DisposalGroupNotDiscontinuedOperationGainLossOnDisposal",
+          "label": "Disposal Group, Not Discontinued Operation, Gain (Loss) on Disposal",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "DisposalGroupNotDiscontinuedOperationGainLossOnDisposal",
+          "valuesByYear": {
+            "2015": 11000000,
+            "2019": 0,
+            "2020": 0
+          }
+        },
+        {
+          "key": "us-gaap:DisposalGroupNotDiscontinuedOperationLossGainOnWriteDown",
+          "label": "Disposal Group, Not Discontinued Operation, Loss (Gain) on Write-down",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "DisposalGroupNotDiscontinuedOperationLossGainOnWriteDown",
+          "valuesByYear": {
+            "2025": 6000000,
+            "2026": 6000000
+          }
+        },
+        {
+          "key": "us-gaap:EarningsPerShareBasic",
+          "label": "Earnings Per Share, Basic",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "EarningsPerShareBasic",
+          "valuesByYear": {
+            "2022": 1.97,
+            "2023": 1.75,
+            "2024": 2.31,
+            "2025": 2.14,
+            "2026": 2.37
+          }
+        },
+        {
+          "key": "us-gaap:EarningsPerShareDiluted",
+          "label": "Earnings Per Share, Diluted",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "EarningsPerShareDiluted",
+          "valuesByYear": {
+            "2022": 1.94,
+            "2023": 1.72,
+            "2024": 2.28,
+            "2025": 2.11,
+            "2026": 2.33
+          }
+        },
+        {
+          "key": "us-gaap:IncomeTaxReconciliationIncomeTaxExpenseBenefitAtFederalStatutoryIncomeTaxRate",
+          "label": "Effective Income Tax Rate Reconciliation at Federal Statutory Income Tax Rate, Amount",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "IncomeTaxReconciliationIncomeTaxExpenseBenefitAtFederalStatutoryIncomeTaxRate",
+          "valuesByYear": {
+            "2022": 178000000,
+            "2023": 166000000,
+            "2024": 113000000,
+            "2025": 174000000,
+            "2026": 194000000
+          }
+        },
+        {
+          "key": "us-gaap:EffectiveIncomeTaxRateReconciliationAtFederalStatutoryIncomeTaxRate",
+          "label": "Effective Income Tax Rate Reconciliation, at Federal Statutory Income Tax Rate, Percent",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "EffectiveIncomeTaxRateReconciliationAtFederalStatutoryIncomeTaxRate",
+          "valuesByYear": {
+            "2019": 0.17,
+            "2020": 0.17,
+            "2021": 0.17,
+            "2022": 0.17,
+            "2026": 0.17
+          }
+        },
+        {
+          "key": "us-gaap:IncomeTaxReconciliationForeignIncomeTaxRateDifferential",
+          "label": "Effective Income Tax Rate Reconciliation, Foreign Income Tax Rate Differential, Amount",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "IncomeTaxReconciliationForeignIncomeTaxRateDifferential",
+          "valuesByYear": {
+            "2022": -114000000,
+            "2023": 5000000,
+            "2024": 68000000,
+            "2025": 13000000,
+            "2026": 13000000
+          }
+        },
+        {
+          "key": "us-gaap:IncomeTaxReconciliationNondeductibleExpenseAmortization",
+          "label": "Effective Income Tax Rate Reconciliation, Nondeductible Expense, Amortization, Amount",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "IncomeTaxReconciliationNondeductibleExpenseAmortization",
+          "valuesByYear": {
+            "2011": 9502000,
+            "2012": 4881000,
+            "2013": 4750000,
+            "2015": 5143000,
+            "2016": 11214000
+          }
+        },
+        {
+          "key": "us-gaap:IncomeTaxReconciliationNondeductibleExpense",
+          "label": "Effective Income Tax Rate Reconciliation, Nondeductible Expense, Amount",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "IncomeTaxReconciliationNondeductibleExpense",
+          "valuesByYear": {
+            "2026": 61000000
+          }
+        },
+        {
+          "key": "us-gaap:IncomeTaxReconciliationNondeductibleExpenseImpairmentLosses",
+          "label": "Effective Income Tax Rate Reconciliation, Nondeductible Expense, Impairment Losses, Amount",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "IncomeTaxReconciliationNondeductibleExpenseImpairmentLosses",
+          "valuesByYear": {
+            "2010": 1011496000
+          }
+        },
+        {
+          "key": "us-gaap:EffectiveIncomeTaxRateReconciliationNondeductibleExpense",
+          "label": "Effective Income Tax Rate Reconciliation, Nondeductible Expense, Percent",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "EffectiveIncomeTaxRateReconciliationNondeductibleExpense",
+          "valuesByYear": {
+            "2026": 0.05
+          }
+        },
+        {
+          "key": "us-gaap:IncomeTaxReconciliationOtherAdjustments",
+          "label": "Effective Income Tax Rate Reconciliation, Other Adjustments, Amount",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "IncomeTaxReconciliationOtherAdjustments",
+          "valuesByYear": {
+            "2022": 12000000,
+            "2023": -1000000,
+            "2024": -26000000,
+            "2025": 9000000,
+            "2026": 1000000
+          }
+        },
+        {
+          "key": "us-gaap:EffectiveIncomeTaxRateReconciliationOtherAdjustments",
+          "label": "Effective Income Tax Rate Reconciliation, Other Adjustments, Percent",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "EffectiveIncomeTaxRateReconciliationOtherAdjustments",
+          "valuesByYear": {
+            "2026": 0
+          }
+        },
+        {
+          "key": "us-gaap:IncomeTaxReconciliationOtherReconcilingItems",
+          "label": "Effective Income Tax Rate Reconciliation, Other Reconciling Items, Amount",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "IncomeTaxReconciliationOtherReconcilingItems",
+          "valuesByYear": {
+            "2010": -3952000
+          }
+        },
+        {
+          "key": "us-gaap:EffectiveIncomeTaxRateContinuingOperations",
+          "label": "Effective Income Tax Rate Reconciliation, Percent",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "EffectiveIncomeTaxRateContinuingOperations",
+          "valuesByYear": {
+            "2026": 0.23
+          }
+        },
+        {
+          "key": "us-gaap:IncomeTaxReconciliationPriorYearIncomeTaxes",
+          "label": "Effective Income Tax Rate Reconciliation, Prior Year Income Taxes, Amount",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "IncomeTaxReconciliationPriorYearIncomeTaxes",
+          "valuesByYear": {
+            "2018": -53757000,
+            "2019": 5439000,
+            "2020": 13305000
+          }
+        },
+        {
+          "key": "us-gaap:IncomeTaxReconciliationRepatriationOfForeignEarnings",
+          "label": "Effective Income Tax Rate Reconciliation, Repatriation of Foreign Earnings, Amount",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "IncomeTaxReconciliationRepatriationOfForeignEarnings",
+          "valuesByYear": {
+            "2021": 5000000
+          }
+        },
+        {
+          "key": "us-gaap:IncomeTaxReconciliationStateAndLocalIncomeTaxes",
+          "label": "Effective Income Tax Rate Reconciliation, State and Local Income Taxes, Amount",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "IncomeTaxReconciliationStateAndLocalIncomeTaxes",
+          "valuesByYear": {
+            "2010": 104652000,
+            "2011": 96014000,
+            "2024": 10000000,
+            "2025": 10000000,
+            "2026": 10000000
+          }
+        },
+        {
+          "key": "us-gaap:IncomeTaxReconciliationTaxContingencies",
+          "label": "Effective Income Tax Rate Reconciliation, Tax Contingency, Amount",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "IncomeTaxReconciliationTaxContingencies",
+          "valuesByYear": {
+            "2022": 12000000,
+            "2023": -7000000,
+            "2024": -10000000,
+            "2025": -19000000,
+            "2026": 33000000
+          }
+        },
+        {
+          "key": "us-gaap:EffectiveIncomeTaxRateReconciliationTaxContingencies",
+          "label": "Effective Income Tax Rate Reconciliation, Tax Contingency, Percent",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "EffectiveIncomeTaxRateReconciliationTaxContingencies",
+          "valuesByYear": {
+            "2026": 0.03
+          }
+        },
+        {
+          "key": "us-gaap:EffectiveIncomeTaxRateReconciliationShareBasedCompensationExcessTaxBenefitAmount",
+          "label": "Effective Income Tax Rate Reconciliation, Tax Expense (Benefit), Share-based Payment Arrangement, Amount",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "EffectiveIncomeTaxRateReconciliationShareBasedCompensationExcessTaxBenefitAmount",
+          "valuesByYear": {
+            "2025": -14000000
+          }
+        },
+        {
+          "key": "us-gaap:IncomeTaxReconciliationTaxHolidays",
+          "label": "Effective Income Tax Rate Reconciliation, Tax Holiday, Amount",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "IncomeTaxReconciliationTaxHolidays",
+          "valuesByYear": {
+            "2010": 66500000
+          }
+        },
+        {
+          "key": "us-gaap:EffectiveIncomeTaxRateReconciliationTaxSettlementsDomestic",
+          "label": "Effective Income Tax Rate Reconciliation, Tax Settlement, Domestic, Percent",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "EffectiveIncomeTaxRateReconciliationTaxSettlementsDomestic",
+          "valuesByYear": {
+            "2011": 0.17,
+            "2012": 0.17,
+            "2013": 0.17,
+            "2015": 0.17,
+            "2016": 0.17
+          }
+        },
+        {
+          "key": "us-gaap:EffectiveIncomeTaxRateReconciliationGiltiAmount",
+          "label": "EffectiveIncomeTaxRateReconciliationGiltiAmount",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "EffectiveIncomeTaxRateReconciliationGiltiAmount",
+          "valuesByYear": {
+            "2024": 13000000,
+            "2025": 9000000,
+            "2026": 9000000
+          }
+        },
+        {
+          "key": "us-gaap:ForeignCurrencyCashFlowHedgeGainLossToBeReclassifiedDuringNext12Months",
+          "label": "Foreign Currency Cash Flow Hedge Gain (Loss) to be Reclassified During Next 12 Months",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "ForeignCurrencyCashFlowHedgeGainLossToBeReclassifiedDuringNext12Months",
+          "valuesByYear": {
+            "2022": -40900000,
+            "2024": 19000000,
+            "2025": -8000000,
+            "2026": 700000
+          }
+        },
+        {
+          "key": "us-gaap:ForeignCurrencyTransactionGainLossBeforeTax",
+          "label": "Foreign Currency Transaction Gain (Loss), before Tax",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "ForeignCurrencyTransactionGainLossBeforeTax",
+          "valuesByYear": {
+            "2022": 32000000,
+            "2023": 7000000,
+            "2024": -24000000,
+            "2025": -10000000,
+            "2026": -17000000
+          }
+        },
+        {
+          "key": "us-gaap:ForeignCurrencyTransactionGainLossUnrealized",
+          "label": "Foreign Currency Transaction Gain (Loss), Unrealized",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "ForeignCurrencyTransactionGainLossUnrealized",
+          "valuesByYear": {
+            "2009": 0
+          }
+        },
+        {
+          "key": "us-gaap:ForeignCurrencyTransactionGainBeforeTax",
+          "label": "Foreign Currency Transaction Gain, before Tax",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "ForeignCurrencyTransactionGainBeforeTax",
+          "valuesByYear": {
+            "2016": 24400000,
+            "2017": 16500000,
+            "2018": 15200000,
+            "2019": 1175000,
+            "2020": 9677000
+          }
+        },
+        {
+          "key": "us-gaap:ForeignCurrencyTransactionLossBeforeTax",
+          "label": "Foreign Currency Transaction Loss, before Tax",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "ForeignCurrencyTransactionLossBeforeTax",
+          "valuesByYear": {
+            "2011": 11900000
+          }
+        },
+        {
+          "key": "us-gaap:FutureAmortizationExpenseAfterYearFive",
+          "label": "Future Amortization Expense, after Year Five (Deprecated 2012-01-31)",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "FutureAmortizationExpenseAfterYearFive",
+          "valuesByYear": {
+            "2011": 1400000
+          }
+        },
+        {
+          "key": "us-gaap:FutureAmortizationExpenseYearFive",
+          "label": "Future Amortization Expense, Year Five (Deprecated 2012-01-31)",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "FutureAmortizationExpenseYearFive",
+          "valuesByYear": {
+            "2010": 5669000,
+            "2011": 1961000
+          }
+        },
+        {
+          "key": "us-gaap:FutureAmortizationExpenseYearFour",
+          "label": "Future Amortization Expense, Year Four (Deprecated 2012-01-31)",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "FutureAmortizationExpenseYearFour",
+          "valuesByYear": {
+            "2010": 11400000,
+            "2011": 4809000
+          }
+        },
+        {
+          "key": "us-gaap:FutureAmortizationExpenseYearOne",
+          "label": "Future Amortization Expense, Year One (Deprecated 2012-01-31)",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "FutureAmortizationExpenseYearOne",
+          "valuesByYear": {
+            "2010": 44986000,
+            "2011": 30785000
+          }
+        },
+        {
+          "key": "us-gaap:FutureAmortizationExpenseYearThree",
+          "label": "Future Amortization Expense, Year Three (Deprecated 2012-01-31)",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "FutureAmortizationExpenseYearThree",
+          "valuesByYear": {
+            "2010": 21173000,
+            "2011": 10144000
+          }
+        },
+        {
+          "key": "us-gaap:FutureAmortizationExpenseYearTwo",
+          "label": "Future Amortization Expense, Year Two (Deprecated 2012-01-31)",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "FutureAmortizationExpenseYearTwo",
+          "valuesByYear": {
+            "2010": 31234000,
+            "2011": 20155000
+          }
+        },
+        {
+          "key": "us-gaap:GainLossOnSaleOfBusiness",
+          "label": "Gain (Loss) on Disposition of Business",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "GainLossOnSaleOfBusiness",
+          "valuesByYear": {
+            "2012": 20000000,
+            "2013": 20000000
+          }
+        },
+        {
+          "key": "us-gaap:GainLossOnSaleOfPropertyPlantEquipment",
+          "label": "Gain (Loss) on Disposition of Property Plant Equipment",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "GainLossOnSaleOfPropertyPlantEquipment",
+          "valuesByYear": {
+            "2013": 9200000,
+            "2015": 12100000,
+            "2016": 12100000
+          }
+        },
+        {
+          "key": "us-gaap:GainLossOnInvestments",
+          "label": "Gain (Loss) on Investments",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "GainLossOnInvestments",
+          "valuesByYear": {
+            "2021": 83500000,
+            "2022": 61000000
+          }
+        },
+        {
+          "key": "us-gaap:GainLossOnSaleOfInvestments",
+          "label": "Gain (Loss) on Sale of Investments",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "GainLossOnSaleOfInvestments",
+          "valuesByYear": {
+            "2012": -1300000,
+            "2013": 4600000,
+            "2015": 4600000,
+            "2016": 4600000
+          }
+        },
+        {
+          "key": "us-gaap:GrossProfit",
+          "label": "Gross Profit",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "GrossProfit",
+          "valuesByYear": {
+            "2022": 1932000000,
+            "2023": 2265000000,
+            "2024": 1865000000,
+            "2025": 2159000000,
+            "2026": 2567000000
+          }
+        },
+        {
+          "key": "us-gaap:IncomeLossFromContinuingOperationsBeforeIncomeTaxesDomestic",
+          "label": "Income (Loss) from Continuing Operations before Income Taxes, Domestic",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesDomestic",
+          "valuesByYear": {
+            "2022": 352000000,
+            "2023": 99000000,
+            "2024": -165000000,
+            "2025": 94000000,
+            "2026": -459000000
+          }
+        },
+        {
+          "key": "us-gaap:IncomeLossFromContinuingOperationsBeforeIncomeTaxesForeign",
+          "label": "Income (Loss) from Continuing Operations before Income Taxes, Foreign",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesForeign",
+          "valuesByYear": {
+            "2022": 693000000,
+            "2023": 875000000,
+            "2024": 831000000,
+            "2025": 929000000,
+            "2026": 1602000000
+          }
+        },
+        {
+          "key": "us-gaap:IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest",
+          "label": "Income (Loss) from Continuing Operations before Income Taxes, Noncontrolling Interest",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest",
+          "valuesByYear": {
+            "2022": 1045000000,
+            "2023": 974000000,
+            "2024": 666000000,
+            "2025": 1023000000,
+            "2026": 1143000000
+          }
+        },
+        {
+          "key": "us-gaap:IncomeLossFromContinuingOperationsAttributableToNoncontrollingEntity",
+          "label": "Income (Loss) from Continuing Operations, Net of Tax, Attributable to Noncontrolling Interest",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "IncomeLossFromContinuingOperationsAttributableToNoncontrollingEntity",
+          "valuesByYear": {
+            "2016": -6700000,
+            "2017": -8500000
+          }
+        },
+        {
+          "key": "us-gaap:IncomeLossFromContinuingOperations",
+          "label": "Income (Loss) from Continuing Operations, Net of Tax, Attributable to Parent",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "IncomeLossFromContinuingOperations",
+          "valuesByYear": {
+            "2012": 302502000,
+            "2013": 365594000,
+            "2015": 600801000,
+            "2016": 444081000,
+            "2017": 600801000
+          }
+        },
+        {
+          "key": "us-gaap:IncomeLossFromContinuingOperationsIncludingPortionAttributableToNoncontrollingInterest",
+          "label": "Income (Loss) from Continuing Operations, Net of Tax, Including Portion Attributable to Noncontrolling Interest",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "IncomeLossFromContinuingOperationsIncludingPortionAttributableToNoncontrollingInterest",
+          "valuesByYear": {
+            "2024": 872000000,
+            "2025": 838000000,
+            "2026": 880000000
+          }
+        },
+        {
+          "key": "us-gaap:IncomeLossFromContinuingOperationsPerBasicShare",
+          "label": "Income (Loss) from Continuing Operations, Per Basic Share",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "IncomeLossFromContinuingOperationsPerBasicShare",
+          "valuesByYear": {
+            "2013": 0.6,
+            "2015": 1.04,
+            "2024": 2,
+            "2025": 2.14,
+            "2026": 2.37
+          }
+        },
+        {
+          "key": "us-gaap:IncomeLossFromContinuingOperationsPerDilutedShare",
+          "label": "Income (Loss) from Continuing Operations, Per Diluted Share",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "IncomeLossFromContinuingOperationsPerDilutedShare",
+          "valuesByYear": {
+            "2022": 1.94,
+            "2023": 1.72,
+            "2024": 1.98,
+            "2025": 2.11,
+            "2026": 2.33
+          }
+        },
+        {
+          "key": "us-gaap:IncomeLossFromDiscontinuedOperationsNetOfTaxPerBasicShare",
+          "label": "Income (Loss) from Discontinued Operations and Disposal of Discontinued Operations, Net of Tax, Per Basic Share",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "IncomeLossFromDiscontinuedOperationsNetOfTaxPerBasicShare",
+          "valuesByYear": {
+            "2013": -0.04,
+            "2015": -0.04,
+            "2024": 0.31,
+            "2025": 0,
+            "2026": 0
+          }
+        },
+        {
+          "key": "us-gaap:IncomeLossFromDiscontinuedOperationsNetOfTaxPerDilutedShare",
+          "label": "Income (Loss) from Discontinued Operations and Disposal of Discontinued Operations, Net of Tax, Per Diluted Share",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "IncomeLossFromDiscontinuedOperationsNetOfTaxPerDilutedShare",
+          "valuesByYear": {
+            "2013": -0.04,
+            "2015": -0.04,
+            "2024": 0.3,
+            "2025": 0,
+            "2026": 0
+          }
+        },
+        {
+          "key": "us-gaap:IncomeLossFromDiscontinuedOperationsNetOfTaxAttributableToReportingEntity",
+          "label": "Income (Loss) from Discontinued Operations, Net of Tax, Attributable to Parent",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "IncomeLossFromDiscontinuedOperationsNetOfTaxAttributableToReportingEntity",
+          "valuesByYear": {
+            "2013": -25451000,
+            "2015": -25451000,
+            "2024": 134000000,
+            "2025": 0,
+            "2026": 0
+          }
+        },
+        {
+          "key": "us-gaap:IncomeLossFromDiscontinuedOperationsNetOfTax",
+          "label": "Income (Loss) from Discontinued Operations, Net of Tax, Including Portion Attributable to Noncontrolling Interest",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "IncomeLossFromDiscontinuedOperationsNetOfTax",
+          "valuesByYear": {
+            "2024": 373000000,
+            "2025": 0,
+            "2026": 0
+          }
+        },
+        {
+          "key": "us-gaap:IncomeTaxExaminationEstimateOfPossibleLoss",
+          "label": "Income Tax Examination, Estimate of Possible Loss",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "IncomeTaxExaminationEstimateOfPossibleLoss",
+          "valuesByYear": {
+            "2016": 13800000
+          }
+        },
+        {
+          "key": "us-gaap:IncomeTaxExaminationPenaltiesAndInterestAccrued",
+          "label": "Income Tax Examination, Penalties and Interest Accrued",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "IncomeTaxExaminationPenaltiesAndInterestAccrued",
+          "valuesByYear": {
+            "2022": 16400000,
+            "2023": 15000000,
+            "2024": 13000000,
+            "2025": 10000000,
+            "2026": 10000000
+          }
+        },
+        {
+          "key": "us-gaap:IncomeTaxExaminationPenaltiesAndInterestExpense",
+          "label": "Income Tax Examination, Penalties and Interest Expense",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "IncomeTaxExaminationPenaltiesAndInterestExpense",
+          "valuesByYear": {
+            "2022": 2100000,
+            "2023": 1000000,
+            "2024": -2000000,
+            "2025": -3000000,
+            "2026": 0
+          }
+        },
+        {
+          "key": "us-gaap:IncomeTaxExpenseBenefit",
+          "label": "Income Tax Expense (Benefit)",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "IncomeTaxExpenseBenefit",
+          "valuesByYear": {
+            "2022": 105000000,
+            "2023": -59000000,
+            "2024": -206000000,
+            "2025": 185000000,
+            "2026": 263000000
+          }
+        },
+        {
+          "key": "us-gaap:IncomeTaxHolidayAggregateDollarAmount",
+          "label": "Income Tax Holiday, Aggregate Dollar Amount",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "IncomeTaxHolidayAggregateDollarAmount",
+          "valuesByYear": {
+            "2022": 22500000,
+            "2023": 14000000,
+            "2024": 20000000,
+            "2025": 17000000,
+            "2026": 19000000
+          }
+        },
+        {
+          "key": "us-gaap:IncomeTaxHolidayIncomeTaxBenefitsPerShare",
+          "label": "Income Tax Holiday, Income Tax Benefits Per Share",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "IncomeTaxHolidayIncomeTaxBenefitsPerShare",
+          "valuesByYear": {
+            "2010": 0.08
+          }
+        },
+        {
+          "key": "us-gaap:IncomeTaxesPaidNet",
+          "label": "Income Taxes Paid, Net",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "IncomeTaxesPaidNet",
+          "valuesByYear": {
+            "2022": 122000000,
+            "2023": 124000000,
+            "2024": 243000000,
+            "2025": 184000000,
+            "2026": 323000000
+          }
+        },
+        {
+          "key": "us-gaap:IncreaseDecreaseInInterestsContinuedToBeHeldByTransferorCurrent",
+          "label": "Increase (Decrease) in Interests Continued to be Held by Transferor, Current",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "IncreaseDecreaseInInterestsContinuedToBeHeldByTransferorCurrent",
+          "valuesByYear": {
+            "2011": -4922541000
+          }
+        },
+        {
+          "key": "us-gaap:InterestAndOtherIncome",
+          "label": "Interest and Other Income",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "InterestAndOtherIncome",
+          "valuesByYear": {
+            "2011": 21900000,
+            "2024": 56000000,
+            "2025": 61000000,
+            "2026": 51000000
+          }
+        },
+        {
+          "key": "us-gaap:InterestExpense",
+          "label": "Interest Expense",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "InterestExpense",
+          "valuesByYear": {
+            "2018": 123100000,
+            "2020": 7200000,
+            "2021": 7200000,
+            "2022": 7200000,
+            "2024": 207000000
+          }
+        },
+        {
+          "key": "us-gaap:InterestIncomeExpenseNet",
+          "label": "Interest Income (Expense), Net",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "InterestIncomeExpenseNet",
+          "valuesByYear": {
+            "2023": -201000000
+          }
+        },
+        {
+          "key": "us-gaap:InterestPaidNet",
+          "label": "Interest Paid, Excluding Capitalized Interest, Operating Activities",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "InterestPaidNet",
+          "valuesByYear": {
+            "2022": 169000000,
+            "2023": 227000000,
+            "2024": 226000000,
+            "2025": 214000000,
+            "2026": 212000000
+          }
+        },
+        {
+          "key": "us-gaap:InterestPaid",
+          "label": "Interest Paid, Including Capitalized Interest, Operating and Investing Activities",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "InterestPaid",
+          "valuesByYear": {
+            "2013": 86406000,
+            "2015": 87179000,
+            "2016": 114578000,
+            "2017": 127346000,
+            "2018": 152750000
+          }
+        },
+        {
+          "key": "us-gaap:InterestExpenseNonoperating",
+          "label": "InterestExpenseNonoperating",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "InterestExpenseNonoperating",
+          "valuesByYear": {
+            "2025": 218000000,
+            "2026": 215000000
+          }
+        },
+        {
+          "key": "us-gaap:InvestmentIncomeInterest",
+          "label": "Investment Income, Interest",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "InvestmentIncomeInterest",
+          "valuesByYear": {
+            "2022": 14000000,
+            "2023": 30000000,
+            "2024": 56000000,
+            "2025": 61000000,
+            "2026": 51000000
+          }
+        },
+        {
+          "key": "us-gaap:LeaseholdImprovementsGross",
+          "label": "Leasehold Improvements, Gross",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "LeaseholdImprovementsGross",
+          "valuesByYear": {
+            "2010": 279981000
+          }
+        },
+        {
+          "key": "us-gaap:LossContingencyAccrualAtCarryingValue",
+          "label": "Loss Contingency Accrual",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "LossContingencyAccrualAtCarryingValue",
+          "valuesByYear": {
+            "2025": 50000000,
+            "2026": 50000000
+          }
+        },
+        {
+          "key": "us-gaap:LossContingencyAccrualProvision",
+          "label": "Loss Contingency Accrual, Provision",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "LossContingencyAccrualProvision",
+          "valuesByYear": {
+            "2024": 50000000
+          }
+        },
+        {
+          "key": "us-gaap:MachineryAndEquipmentGross",
+          "label": "Machinery and Equipment, Gross",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "MachineryAndEquipmentGross",
+          "valuesByYear": {
+            "2010": 2515669000
+          }
+        },
+        {
+          "key": "us-gaap:NetIncomeLossAttributableToNoncontrollingInterest",
+          "label": "Net Income (Loss) Attributable to Noncontrolling Interest",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "NetIncomeLossAttributableToNoncontrollingInterest",
+          "valuesByYear": {
+            "2022": 4000000,
+            "2023": 240000000,
+            "2024": 239000000,
+            "2025": 0,
+            "2026": 0
+          }
+        },
+        {
+          "key": "us-gaap:NetIncomeLoss",
+          "label": "Net Income (Loss) Attributable to Parent",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "NetIncomeLoss",
+          "valuesByYear": {
+            "2022": 936000000,
+            "2023": 793000000,
+            "2024": 1006000000,
+            "2025": 838000000,
+            "2026": 880000000
+          }
+        },
+        {
+          "key": "us-gaap:ProfitLoss",
+          "label": "Net Income (Loss), Including Portion Attributable to Noncontrolling Interest",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "ProfitLoss",
+          "valuesByYear": {
+            "2022": 940000000,
+            "2023": 1033000000,
+            "2024": 1245000000,
+            "2025": 838000000,
+            "2026": 880000000
+          }
+        },
+        {
+          "key": "us-gaap:NetIncomeLossIncludingPortionAttributableToNonredeemableNoncontrollingInterest",
+          "label": "Net Income (Loss), Including Portion Attributable to Nonredeemable Noncontrolling Interest",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "NetIncomeLossIncludingPortionAttributableToNonredeemableNoncontrollingInterest",
+          "valuesByYear": {
+            "2023": 990000000,
+            "2024": 1245000000,
+            "2025": 838000000
+          }
+        },
+        {
+          "key": "us-gaap:NoncontrollingInterestDecreaseFromDeconsolidation",
+          "label": "Noncontrolling Interest, Decrease from Deconsolidation",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "NoncontrollingInterestDecreaseFromDeconsolidation",
+          "valuesByYear": {
+            "2018": 90638000,
+            "2019": 90638000,
+            "2020": 90638000
+          }
+        },
+        {
+          "key": "us-gaap:MinorityInterestDecreaseFromDistributionsToNoncontrollingInterestHolders",
+          "label": "Noncontrolling Interest, Decrease from Distributions to Noncontrolling Interest Holders",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "MinorityInterestDecreaseFromDistributionsToNoncontrollingInterestHolders",
+          "valuesByYear": {
+            "2023": 22000000,
+            "2024": 22000000,
+            "2025": 22000000
+          }
+        },
+        {
+          "key": "us-gaap:MinorityInterestDecreaseFromRedemptions",
+          "label": "Noncontrolling Interest, Decrease from Redemptions or Purchase of Interests",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "MinorityInterestDecreaseFromRedemptions",
+          "valuesByYear": {
+            "2023": -74000000
+          }
+        },
+        {
+          "key": "us-gaap:NonredeemableNoncontrollingInterest",
+          "label": "Nonredeemable Noncontrolling Interest",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "NonredeemableNoncontrollingInterest",
+          "valuesByYear": {
+            "2023": 355000000
+          }
+        },
+        {
+          "key": "us-gaap:OciBeforeReclassificationsNetOfTaxAttributableToParent",
+          "label": "OCI, before Reclassifications, Net of Tax, Attributable to Parent",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "OciBeforeReclassificationsNetOfTaxAttributableToParent",
+          "valuesByYear": {
+            "2017": 5727000,
+            "2018": 61689000,
+            "2019": -107810000,
+            "2020": -64788000,
+            "2026": 150000000
+          }
+        },
+        {
+          "key": "us-gaap:OperatingIncomeLoss",
+          "label": "Operating Income (Loss)",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "OperatingIncomeLoss",
+          "valuesByYear": {
+            "2022": 972000000,
+            "2023": 1184000000,
+            "2024": 853000000,
+            "2025": 1169000000,
+            "2026": 1368000000
+          }
+        },
+        {
+          "key": "us-gaap:OperatingLeaseExpense",
+          "label": "Operating Lease, Expense",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "OperatingLeaseExpense",
+          "valuesByYear": {
+            "2022": 180300000,
+            "2023": 185000000,
+            "2024": 188000000,
+            "2025": 194000000,
+            "2026": 213000000
+          }
+        },
+        {
+          "key": "us-gaap:LeaseAndRentalExpense",
+          "label": "Operating Leases, Rent Expense",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "LeaseAndRentalExpense",
+          "valuesByYear": {
+            "2016": 124200000,
+            "2017": 124700000,
+            "2018": 140300000,
+            "2019": 176800000,
+            "2021": 176800000
+          }
+        },
+        {
+          "key": "us-gaap:OperatingLossCarryforwards",
+          "label": "Operating Loss Carryforwards",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "OperatingLossCarryforwards",
+          "valuesByYear": {
+            "2010": 7900000000,
+            "2011": 8400000000
+          }
+        },
+        {
+          "key": "us-gaap:OperatingLossCarryforwardsValuationAllowance",
+          "label": "Operating Loss Carryforwards, Valuation Allowance",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "OperatingLossCarryforwardsValuationAllowance",
+          "valuesByYear": {
+            "2018": 81300000,
+            "2019": 54700000,
+            "2020": 81900000,
+            "2021": 82900000,
+            "2022": 84200000
+          }
+        },
+        {
+          "key": "us-gaap:OtherComprehensiveIncomeLossBeforeReclassificationsNetOfTax",
+          "label": "Other Comprehensive Income (Loss), before Reclassifications, Net of Tax",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "OtherComprehensiveIncomeLossBeforeReclassificationsNetOfTax",
+          "valuesByYear": {
+            "2021": 104000000,
+            "2022": -93000000,
+            "2023": -92000000,
+            "2024": 76000000,
+            "2025": -83000000
+          }
+        },
+        {
+          "key": "us-gaap:OtherComprehensiveIncomeLossCashFlowHedgeGainLossAfterReclassificationAndTax",
+          "label": "Other Comprehensive Income (Loss), Cash Flow Hedge, Gain (Loss), after Reclassification and Tax",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "OtherComprehensiveIncomeLossCashFlowHedgeGainLossAfterReclassificationAndTax",
+          "valuesByYear": {
+            "2022": -24000000,
+            "2023": 52000000,
+            "2024": 18000000,
+            "2025": -23000000,
+            "2026": 4000000
+          }
+        },
+        {
+          "key": "us-gaap:OtherComprehensiveIncomeLossCashFlowHedgeGainLossAfterReclassificationAndTaxParent",
+          "label": "Other Comprehensive Income (Loss), Cash Flow Hedge, Gain (Loss), after Reclassification and Tax, Parent",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "OtherComprehensiveIncomeLossCashFlowHedgeGainLossAfterReclassificationAndTaxParent",
+          "valuesByYear": {
+            "2020": -40107000
+          }
+        },
+        {
+          "key": "us-gaap:OtherComprehensiveIncomeLossCashFlowHedgeGainLossAfterReclassificationBeforeTax",
+          "label": "Other Comprehensive Income (Loss), Cash Flow Hedge, Gain (Loss), after Reclassification, before Tax",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "OtherComprehensiveIncomeLossCashFlowHedgeGainLossAfterReclassificationBeforeTax",
+          "valuesByYear": {
+            "2020": 30800000
+          }
+        },
+        {
+          "key": "us-gaap:OtherComprehensiveIncomeLossCashFlowHedgeGainLossAfterReclassificationTaxParent",
+          "label": "Other Comprehensive Income (Loss), Cash Flow Hedge, Gain (Loss), after Reclassification, Tax, Parent",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "OtherComprehensiveIncomeLossCashFlowHedgeGainLossAfterReclassificationTaxParent",
+          "valuesByYear": {
+            "2020": 0
+          }
+        },
+        {
+          "key": "us-gaap:OtherComprehensiveIncomeDerivativesQualifyingAsHedgesNetOfTaxPortionAttributableToParent",
+          "label": "Other Comprehensive Income (Loss), Derivatives Qualifying as Hedges, Net of Tax, Portion Attributable to Parent",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "OtherComprehensiveIncomeDerivativesQualifyingAsHedgesNetOfTaxPortionAttributableToParent",
+          "valuesByYear": {
+            "2016": 26744000,
+            "2017": 9096000,
+            "2018": -3320000,
+            "2019": -5810000,
+            "2020": -5810000
+          }
+        },
+        {
+          "key": "us-gaap:OtherComprehensiveIncomeDerivativesQualifyingAsHedgesTaxPortionAttributableToParent",
+          "label": "Other Comprehensive Income (Loss), Derivatives Qualifying as Hedges, Tax, Portion Attributable to Parent",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "OtherComprehensiveIncomeDerivativesQualifyingAsHedgesTaxPortionAttributableToParent",
+          "valuesByYear": {
+            "2016": 0,
+            "2017": 0,
+            "2018": 0,
+            "2019": 0,
+            "2020": 0
+          }
+        },
+        {
+          "key": "us-gaap:OtherComprehensiveIncomeLossForeignCurrencyTransactionAndTranslationAdjustmentNetOfTax",
+          "label": "Other Comprehensive Income (Loss), Foreign Currency Transaction and Translation Adjustment, Net of Tax",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "OtherComprehensiveIncomeLossForeignCurrencyTransactionAndTranslationAdjustmentNetOfTax",
+          "valuesByYear": {
+            "2024": -19000000,
+            "2025": -6000000,
+            "2026": 53000000
+          }
+        },
+        {
+          "key": "us-gaap:OtherComprehensiveIncomeForeignCurrencyTransactionAndTranslationAdjustmentNetOfTaxPeriodIncreaseDecrease",
+          "label": "Other Comprehensive Income (Loss), Foreign Currency Transaction and Translation Adjustment, Net of Tax (Deprecated 2012-01-31)",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "OtherComprehensiveIncomeForeignCurrencyTransactionAndTranslationAdjustmentNetOfTaxPeriodIncreaseDecrease",
+          "valuesByYear": {
+            "2009": 16409000,
+            "2010": 12883000,
+            "2011": -53616000
+          }
+        },
+        {
+          "key": "us-gaap:OtherComprehensiveIncomeForeignCurrencyTransactionAndTranslationAdjustmentNetOfTaxPortionAttributableToParent",
+          "label": "Other Comprehensive Income (Loss), Foreign Currency Transaction and Translation Adjustment, Net of Tax, Portion Attributable to Parent",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "OtherComprehensiveIncomeForeignCurrencyTransactionAndTranslationAdjustmentNetOfTaxPortionAttributableToParent",
+          "valuesByYear": {
+            "2019": -59508000,
+            "2020": -23397000,
+            "2021": 56000000,
+            "2022": -39000000,
+            "2023": -64000000
+          }
+        },
+        {
+          "key": "us-gaap:OtherComprehensiveIncomeForeignCurrencyTranslationAdjustmentTaxPortionAttributableToParent",
+          "label": "Other Comprehensive Income (Loss), Foreign Currency Translation Adjustment, Tax, Portion Attributable to Parent",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "OtherComprehensiveIncomeForeignCurrencyTranslationAdjustmentTaxPortionAttributableToParent",
+          "valuesByYear": {
+            "2019": 0,
+            "2020": 0,
+            "2021": 0,
+            "2022": 0,
+            "2023": 0
+          }
+        },
+        {
+          "key": "us-gaap:OtherComprehensiveIncomeLossNetOfTax",
+          "label": "Other Comprehensive Income (Loss), Net of Tax",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "OtherComprehensiveIncomeLossNetOfTax",
+          "valuesByYear": {
+            "2022": -63000000,
+            "2023": -12000000,
+            "2024": -1000000,
+            "2025": -29000000,
+            "2026": 57000000
+          }
+        },
+        {
+          "key": "us-gaap:OtherComprehensiveIncomeLossNetOfTaxPortionAttributableToParent",
+          "label": "Other Comprehensive Income (Loss), Net of Tax, Portion Attributable to Parent",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "OtherComprehensiveIncomeLossNetOfTaxPortionAttributableToParent",
+          "valuesByYear": {
+            "2020": -63504000,
+            "2021": 96000000,
+            "2022": -63000000,
+            "2023": -12000000,
+            "2026": 57000000
+          }
+        },
+        {
+          "key": "us-gaap:OtherComprehensiveIncomeUnrealizedGainLossOnDerivativesArisingDuringPeriodBeforeTax",
+          "label": "Other Comprehensive Income (Loss), Unrealized Gain (Loss) on Derivatives Arising During Period, before Tax",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "OtherComprehensiveIncomeUnrealizedGainLossOnDerivativesArisingDuringPeriodBeforeTax",
+          "valuesByYear": {
+            "2015": 17300000,
+            "2016": 2700000,
+            "2017": 10600000,
+            "2018": 6600000,
+            "2019": 200000
+          }
+        },
+        {
+          "key": "us-gaap:OtherComprehensiveIncomeUnrealizedGainLossOnDerivativesArisingDuringPeriodNetOfTax",
+          "label": "Other Comprehensive Income (Loss), Unrealized Gain (Loss) on Derivatives Arising During Period, Net of Tax",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "OtherComprehensiveIncomeUnrealizedGainLossOnDerivativesArisingDuringPeriodNetOfTax",
+          "valuesByYear": {
+            "2011": -7575000
+          }
+        },
+        {
+          "key": "us-gaap:OtherDepreciationAndAmortization",
+          "label": "Other Depreciation and Amortization",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "OtherDepreciationAndAmortization",
+          "valuesByYear": {
+            "2022": 75000000,
+            "2023": 87000000,
+            "2024": 106000000,
+            "2025": 100000000,
+            "2026": 106000000
+          }
+        },
+        {
+          "key": "us-gaap:OtherExpenses",
+          "label": "Other Expenses",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "OtherExpenses",
+          "valuesByYear": {
+            "2022": 5000000,
+            "2023": 39000000,
+            "2024": 46000000,
+            "2025": 33000000,
+            "2026": 18000000
+          }
+        },
+        {
+          "key": "us-gaap:OtherGeneralExpense",
+          "label": "Other General Expense",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "OtherGeneralExpense",
+          "valuesByYear": {
+            "2012": -65190000,
+            "2013": 57512000,
+            "2015": -53233000,
+            "2016": 47738000
+          }
+        },
+        {
+          "key": "us-gaap:OtherNoncashIncome",
+          "label": "Other Noncash Income",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "OtherNoncashIncome",
+          "valuesByYear": {
+            "2009": 26146000,
+            "2010": 2831000
+          }
+        },
+        {
+          "key": "us-gaap:OtherNoncashIncomeExpense",
+          "label": "Other Noncash Income (Expense)",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "OtherNoncashIncomeExpense",
+          "valuesByYear": {
+            "2022": 54000000,
+            "2023": 44000000,
+            "2024": 25000000,
+            "2025": -3000000,
+            "2026": -80000000
+          }
+        },
+        {
+          "key": "us-gaap:OtherNoninterestExpense",
+          "label": "Other Noninterest Expense",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "OtherNoninterestExpense",
+          "valuesByYear": {
+            "2010": 6267000,
+            "2011": -19963000
+          }
+        },
+        {
+          "key": "us-gaap:OtherNonoperatingExpense",
+          "label": "Other Nonoperating Expense",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "OtherNonoperatingExpense",
+          "valuesByYear": {
+            "2012": 6300000
+          }
+        },
+        {
+          "key": "us-gaap:OtherNonoperatingIncomeExpense",
+          "label": "Other Nonoperating Income (Expense)",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "OtherNonoperatingIncomeExpense",
+          "valuesByYear": {
+            "2022": 225000000,
+            "2023": -5000000,
+            "2024": -44000000,
+            "2025": 14000000,
+            "2026": -30000000
+          }
+        },
+        {
+          "key": "us-gaap:OtherOperatingIncomeExpenseNet",
+          "label": "Other Operating Income (Expense), Net",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "OtherOperatingIncomeExpenseNet",
+          "valuesByYear": {
+            "2024": -20000000,
+            "2025": 5000000,
+            "2026": -13000000
+          }
+        },
+        {
+          "key": "us-gaap:PaymentsOfDividendsMinorityInterest",
+          "label": "Payments of Ordinary Dividends, Noncontrolling Interest",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "PaymentsOfDividendsMinorityInterest",
+          "valuesByYear": {
+            "2023": 22000000,
+            "2024": 0,
+            "2025": 0
+          }
+        },
+        {
+          "key": "us-gaap:ReclassificationFromAccumulatedOtherComprehensiveIncomeCurrentPeriodNetOfTax",
+          "label": "Reclassification from Accumulated Other Comprehensive Income, Current Period, Net of Tax",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "ReclassificationFromAccumulatedOtherComprehensiveIncomeCurrentPeriodNetOfTax",
+          "valuesByYear": {
+            "2013": -1859000,
+            "2015": -31439000,
+            "2016": -49934000,
+            "2024": 77000000,
+            "2025": -54000000
+          }
+        },
+        {
+          "key": "us-gaap:ReclassificationFromAociCurrentPeriodNetOfTaxAttributableToParent",
+          "label": "Reclassification from AOCI, Current Period, Net of Tax, Attributable to Parent",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "ReclassificationFromAociCurrentPeriodNetOfTaxAttributableToParent",
+          "valuesByYear": {
+            "2020": -1284000,
+            "2021": 8000000,
+            "2022": -30000000,
+            "2023": -80000000,
+            "2026": 93000000
+          }
+        },
+        {
+          "key": "us-gaap:ResearchAndDevelopmentExpense",
+          "label": "Research and Development Expense",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "ResearchAndDevelopmentExpense",
+          "valuesByYear": {
+            "2012": 78900000,
+            "2013": 78900000,
+            "2016": 75500000,
+            "2017": 65600000,
+            "2018": 78200000
+          }
+        },
+        {
+          "key": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+          "label": "Revenue from Contract with Customer, Excluding Assessed Tax",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "RevenueFromContractWithCustomerExcludingAssessedTax",
+          "valuesByYear": {
+            "2022": 26041000000,
+            "2023": 30346000000,
+            "2024": 26415000000,
+            "2025": 25813000000,
+            "2026": 27914000000
+          }
+        },
+        {
+          "key": "us-gaap:SalesRevenueNet",
+          "label": "Revenue, Net (Deprecated 2018-01-31)",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "SalesRevenueNet",
+          "valuesByYear": {
+            "2013": 26108607000,
+            "2015": 26147916000,
+            "2016": 24418885000,
+            "2017": 23862934000,
+            "2018": 25441131000
+          }
+        },
+        {
+          "key": "us-gaap:Revenues",
+          "label": "Revenues",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "Revenues",
+          "valuesByYear": {
+            "2009": 24110733000,
+            "2010": 28679925000
+          }
+        },
+        {
+          "key": "us-gaap:SaleAndLeasebackTransactionGainLossNet",
+          "label": "Sale and Leaseback Transaction, Gain (Loss), Net",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "SaleAndLeasebackTransactionGainLossNet",
+          "valuesByYear": {
+            "2020": 32700000,
+            "2021": 32700000
+          }
+        },
+        {
+          "key": "us-gaap:SellingGeneralAndAdministrativeExpense",
+          "label": "Selling, General and Administrative Expense",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "SellingGeneralAndAdministrativeExpense",
+          "valuesByYear": {
+            "2022": 892000000,
+            "2023": 995000000,
+            "2024": 922000000,
+            "2025": 904000000,
+            "2026": 1052000000
+          }
+        },
+        {
+          "key": "us-gaap:ShareBasedCompensationArrangementByShareBasedPaymentAwardFairValueAssumptionsRiskFreeInterestRate",
+          "label": "Share-based Compensation Arrangement by Share-based Payment Award, Fair Value Assumptions, Risk Free Interest Rate",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "ShareBasedCompensationArrangementByShareBasedPaymentAwardFairValueAssumptionsRiskFreeInterestRate",
+          "valuesByYear": {
+            "2010": 0.016,
+            "2011": 0.011,
+            "2012": 0.009
+          }
+        },
+        {
+          "key": "us-gaap:ShareBasedCompensationArrangementByShareBasedPaymentAwardOptionsGrantsInPeriodGross",
+          "label": "Share-based Compensation Arrangement by Share-based Payment Award, Options, Grants in Period, Gross",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "ShareBasedCompensationArrangementByShareBasedPaymentAwardOptionsGrantsInPeriodGross",
+          "valuesByYear": {
+            "2012": 19000,
+            "2013": 19000,
+            "2015": 15000,
+            "2018": 0,
+            "2019": 0
+          }
+        },
+        {
+          "key": "us-gaap:AllocatedShareBasedCompensationExpense",
+          "label": "Share-based Payment Arrangement, Expense",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "AllocatedShareBasedCompensationExpense",
+          "valuesByYear": {
+            "2022": 91000000,
+            "2023": 133000000,
+            "2024": 113000000,
+            "2025": 125000000,
+            "2026": 142000000
+          }
+        },
+        {
+          "key": "us-gaap:EmployeeServiceShareBasedCompensationTaxBenefitFromCompensationExpense",
+          "label": "Share-based Payment Arrangement, Expense, Tax Benefit",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "EmployeeServiceShareBasedCompensationTaxBenefitFromCompensationExpense",
+          "valuesByYear": {
+            "2026": 15000000
+          }
+        },
+        {
+          "key": "us-gaap:SignificantChangeInUnrecognizedTaxBenefitsIsReasonablyPossibleEstimatedRangeOfChangeLowerBound",
+          "label": "Significant (Increase) Decrease in Unrecognized Tax Benefits is Reasonably Possible, Estimated Range of Change, Lower Bound (Deprecated 2015-01-31)",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "SignificantChangeInUnrecognizedTaxBenefitsIsReasonablyPossibleEstimatedRangeOfChangeLowerBound",
+          "valuesByYear": {
+            "2012": -18000000,
+            "2013": 18000000,
+            "2015": 25000000
+          }
+        },
+        {
+          "key": "us-gaap:SignificantChangeInUnrecognizedTaxBenefitsIsReasonablyPossibleEstimatedRangeOfChangeUpperBound",
+          "label": "Significant (Increase) Decrease in Unrecognized Tax Benefits is Reasonably Possible, Estimated Range of Change, Upper Bound (Deprecated 2015-01-31)",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "SignificantChangeInUnrecognizedTaxBenefitsIsReasonablyPossibleEstimatedRangeOfChangeUpperBound",
+          "valuesByYear": {
+            "2012": -30800000,
+            "2013": 37000000,
+            "2015": 52000000
+          }
+        },
+        {
+          "key": "us-gaap:MinorityInterest",
+          "label": "Stockholders' Equity Attributable to Noncontrolling Interest",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "MinorityInterest",
+          "valuesByYear": {
+            "2016": 34658000,
+            "2017": 33743000,
+            "2018": 0,
+            "2023": 355000000,
+            "2024": 0
+          }
+        },
+        {
+          "key": "us-gaap:SubordinatedBorrowingInterestRate",
+          "label": "Subordinated Borrowing, Interest Rate",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "SubordinatedBorrowingInterestRate",
+          "valuesByYear": {
+            "2010": 0.0228
+          }
+        },
+        {
+          "key": "us-gaap:UndistributedEarnings",
+          "label": "Undistributed Earnings, Basic",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "UndistributedEarnings",
+          "valuesByYear": {
+            "2019": 1600000000,
+            "2020": 1400000000,
+            "2021": 1500000000,
+            "2022": 1600000000,
+            "2023": 1900000000
+          }
+        },
+        {
+          "key": "us-gaap:UnrealizedGainLossOnInvestments",
+          "label": "Unrealized Gain (Loss) on Investments",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "UnrealizedGainLossOnInvestments",
+          "valuesByYear": {
+            "2026": -25000000
+          }
+        },
+        {
+          "key": "us-gaap:UnrecognizedTaxBenefits",
+          "label": "Unrecognized Tax Benefits",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "UnrecognizedTaxBenefits",
+          "valuesByYear": {
+            "2022": 282200000,
+            "2023": 268000000,
+            "2024": 197000000,
+            "2025": 180000000,
+            "2026": 159000000
+          }
+        },
+        {
+          "key": "us-gaap:UnrecognizedTaxBenefitsThatWouldImpactEffectiveTaxRate",
+          "label": "Unrecognized Tax Benefits that Would Impact Effective Tax Rate",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "UnrecognizedTaxBenefitsThatWouldImpactEffectiveTaxRate",
+          "valuesByYear": {
+            "2022": 189800000,
+            "2023": 185000000,
+            "2024": 170000000,
+            "2025": 153000000,
+            "2026": 131000000
+          }
+        },
+        {
+          "key": "us-gaap:UnrecognizedTaxBenefitsDecreasesResultingFromForeignCurrencyTranslation",
+          "label": "Unrecognized Tax Benefits, Decrease Resulting from Foreign Currency Translation",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "UnrecognizedTaxBenefitsDecreasesResultingFromForeignCurrencyTranslation",
+          "valuesByYear": {
+            "2022": 3000000,
+            "2023": 12000000,
+            "2024": 4000000,
+            "2025": 0,
+            "2026": 7000000
+          }
+        },
+        {
+          "key": "us-gaap:UnrecognizedTaxBenefitsDecreasesResultingFromPriorPeriodTaxPositions",
+          "label": "Unrecognized Tax Benefits, Decrease Resulting from Prior Period Tax Positions",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "UnrecognizedTaxBenefitsDecreasesResultingFromPriorPeriodTaxPositions",
+          "valuesByYear": {
+            "2022": 7000000,
+            "2023": 5000000,
+            "2024": 82000000,
+            "2025": 5000000,
+            "2026": 5000000
+          }
+        },
+        {
+          "key": "us-gaap:UnrecognizedTaxBenefitsDecreasesResultingFromSettlementsWithTaxingAuthorities",
+          "label": "Unrecognized Tax Benefits, Decrease Resulting from Settlements with Taxing Authorities",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "UnrecognizedTaxBenefitsDecreasesResultingFromSettlementsWithTaxingAuthorities",
+          "valuesByYear": {
+            "2019": 22174000,
+            "2020": 0,
+            "2023": 7000000,
+            "2024": 0,
+            "2026": 52000000
+          }
+        },
+        {
+          "key": "us-gaap:UnrecognizedTaxBenefitsIncomeTaxPenaltiesAccrued",
+          "label": "Unrecognized Tax Benefits, Income Tax Penalties Accrued",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "UnrecognizedTaxBenefitsIncomeTaxPenaltiesAccrued",
+          "valuesByYear": {
+            "2010": 0
+          }
+        },
+        {
+          "key": "us-gaap:UnrecognizedTaxBenefitsIncomeTaxPenaltiesExpense",
+          "label": "Unrecognized Tax Benefits, Income Tax Penalties Expense",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "UnrecognizedTaxBenefitsIncomeTaxPenaltiesExpense",
+          "valuesByYear": {
+            "2010": 0,
+            "2011": 0,
+            "2012": 0
+          }
+        },
+        {
+          "key": "us-gaap:UnrecognizedTaxBenefitsIncreasesResultingFromCurrentPeriodTaxPositions",
+          "label": "Unrecognized Tax Benefits, Increase Resulting from Current Period Tax Positions",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "UnrecognizedTaxBenefitsIncreasesResultingFromCurrentPeriodTaxPositions",
+          "valuesByYear": {
+            "2022": 27000000,
+            "2023": 15000000,
+            "2024": 10000000,
+            "2025": 10000000,
+            "2026": 13000000
+          }
+        },
+        {
+          "key": "us-gaap:UnrecognizedTaxBenefitsIncreasesResultingFromForeignCurrencyTranslation",
+          "label": "Unrecognized Tax Benefits, Increase Resulting from Foreign Currency Translation",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "UnrecognizedTaxBenefitsIncreasesResultingFromForeignCurrencyTranslation",
+          "valuesByYear": {
+            "2018": 14891000,
+            "2019": 12017000,
+            "2020": 12386000,
+            "2021": 14000000,
+            "2022": 14000000
+          }
+        },
+        {
+          "key": "us-gaap:UnrecognizedTaxBenefitsIncreasesResultingFromPriorPeriodTaxPositions",
+          "label": "Unrecognized Tax Benefits, Increase Resulting from Prior Period Tax Positions",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "UnrecognizedTaxBenefitsIncreasesResultingFromPriorPeriodTaxPositions",
+          "valuesByYear": {
+            "2022": 15000000,
+            "2023": 8000000,
+            "2024": 22000000,
+            "2025": 1000000,
+            "2026": 29000000
+          }
+        },
+        {
+          "key": "us-gaap:UnrecognizedTaxBenefitsInterestOnIncomeTaxesAccrued",
+          "label": "Unrecognized Tax Benefits, Interest on Income Taxes Accrued",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "UnrecognizedTaxBenefitsInterestOnIncomeTaxesAccrued",
+          "valuesByYear": {
+            "2010": 5500000,
+            "2011": 10600000,
+            "2012": 11900000
+          }
+        },
+        {
+          "key": "us-gaap:UnrecognizedTaxBenefitsInterestOnIncomeTaxesExpense",
+          "label": "Unrecognized Tax Benefits, Interest on Income Taxes Expense",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "UnrecognizedTaxBenefitsInterestOnIncomeTaxesExpense",
+          "valuesByYear": {
+            "2010": 5000000,
+            "2011": 5400000,
+            "2012": 5100000
+          }
+        },
+        {
+          "key": "us-gaap:UnrecognizedTaxBenefitsReductionsResultingFromLapseOfApplicableStatuteOfLimitations",
+          "label": "Unrecognized Tax Benefits, Reduction Resulting from Lapse of Applicable Statute of Limitations",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "UnrecognizedTaxBenefitsReductionsResultingFromLapseOfApplicableStatuteOfLimitations",
+          "valuesByYear": {
+            "2022": 16000000,
+            "2023": 13000000,
+            "2024": 17000000,
+            "2025": 23000000,
+            "2026": 13000000
+          }
+        }
+      ]
+    },
+    "bs": {
+      "years": [
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "rows": [
+        {
+          "key": "us-gaap:AccountsPayableCurrent",
+          "label": "Accounts Payable, Current",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "AccountsPayableCurrent",
+          "valuesByYear": {
+            "2022": 6254000000,
+            "2023": 5930000000,
+            "2024": 4468000000,
+            "2025": 5147000000,
+            "2026": 8055000000
+          }
+        },
+        {
+          "key": "us-gaap:AccountsReceivableNetCurrent",
+          "label": "Accounts Receivable, after Allowance for Credit Loss, Current",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "AccountsReceivableNetCurrent",
+          "valuesByYear": {
+            "2022": 3371000000,
+            "2023": 3739000000,
+            "2024": 3033000000,
+            "2025": 3671000000,
+            "2026": 4679000000
+          }
+        },
+        {
+          "key": "us-gaap:AllowanceForDoubtfulAccountsReceivableCurrent",
+          "label": "Accounts Receivable, Allowance for Credit Loss, Current",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "AllowanceForDoubtfulAccountsReceivableCurrent",
+          "valuesByYear": {
+            "2019": 91396000,
+            "2020": 95930000,
+            "2021": 61000000,
+            "2022": 56000000,
+            "2023": 8000000
+          }
+        },
+        {
+          "key": "us-gaap:AllowanceForDoubtfulAccountsReceivableWriteOffs",
+          "label": "Accounts Receivable, Allowance for Credit Loss, Writeoff",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "AllowanceForDoubtfulAccountsReceivableWriteOffs",
+          "valuesByYear": {
+            "2019": 10632000,
+            "2020": 19198000,
+            "2021": 40000000,
+            "2022": 2000000,
+            "2023": 51000000
+          }
+        },
+        {
+          "key": "us-gaap:AccumulatedDepreciationDepletionAndAmortizationPropertyPlantAndEquipment",
+          "label": "Accumulated Depreciation, Depletion and Amortization, Property, Plant, and Equipment",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "AccumulatedDepreciationDepletionAndAmortizationPropertyPlantAndEquipment",
+          "valuesByYear": {
+            "2022": 3979000000,
+            "2023": 4217000000,
+            "2024": 4440000000,
+            "2025": 4620000000,
+            "2026": 4798000000
+          }
+        },
+        {
+          "key": "us-gaap:AccumulatedDepreciationDepletionAndAmortizationWritedownOfPropertyPlantAndEquipment",
+          "label": "Accumulated Depreciation, Depletion and Amortization, Write-down of Property, Plant and Equipment (Deprecated 2013-01-31)",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "AccumulatedDepreciationDepletionAndAmortizationWritedownOfPropertyPlantAndEquipment",
+          "valuesByYear": {
+            "2011": 43100000
+          }
+        },
+        {
+          "key": "us-gaap:AcquiredFiniteLivedIntangibleAssetResidualValue",
+          "label": "Acquired Finite-lived Intangible Asset, Residual Value",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "AcquiredFiniteLivedIntangibleAssetResidualValue",
+          "valuesByYear": {
+            "2022": 0,
+            "2023": 0,
+            "2024": 0,
+            "2025": 0,
+            "2026": 0
+          }
+        },
+        {
+          "key": "us-gaap:AmortizationOfIntangibleAssets",
+          "label": "Amortization of Intangible Assets",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "AmortizationOfIntangibleAssets",
+          "valuesByYear": {
+            "2022": 67900000,
+            "2023": 82000000,
+            "2024": 70000000,
+            "2025": 70000000,
+            "2026": 68000000
+          }
+        },
+        {
+          "key": "us-gaap:AssetImpairmentCharges",
+          "label": "Asset Impairment Charges",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "AssetImpairmentCharges",
+          "valuesByYear": {
+            "2010": 199400000,
+            "2011": 17000000,
+            "2025": 2000000,
+            "2026": 2000000
+          }
+        },
+        {
+          "key": "us-gaap:Assets",
+          "label": "Assets",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "Assets",
+          "valuesByYear": {
+            "2022": 19325000000,
+            "2023": 21395000000,
+            "2024": 18257000000,
+            "2025": 18381000000,
+            "2026": 22060000000
+          }
+        },
+        {
+          "key": "us-gaap:AssetsHeldForSaleCurrent",
+          "label": "Assets Held-for-sale, Current (Deprecated 2014-01-31)",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "AssetsHeldForSaleCurrent",
+          "valuesByYear": {
+            "2010": 27100000,
+            "2011": 16700000
+          }
+        },
+        {
+          "key": "us-gaap:AssetsHeldForSaleLongLived",
+          "label": "Assets Held-for-sale, Long Lived (Deprecated 2014-01-31)",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "AssetsHeldForSaleLongLived",
+          "valuesByYear": {
+            "2013": 59400000
+          }
+        },
+        {
+          "key": "us-gaap:AssetsHeldForSaleLongLivedFairValueDisclosure",
+          "label": "Assets Held-for-sale, Long Lived, Fair Value Disclosure",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "AssetsHeldForSaleLongLivedFairValueDisclosure",
+          "valuesByYear": {
+            "2016": 5600000
+          }
+        },
+        {
+          "key": "us-gaap:AssetsOfDisposalGroupIncludingDiscontinuedOperationNoncurrent",
+          "label": "Assets of Disposal Group, Including Discontinued Operation, Noncurrent (Deprecated 2014-01-31)",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "AssetsOfDisposalGroupIncludingDiscontinuedOperationNoncurrent",
+          "valuesByYear": {
+            "2011": 22671000,
+            "2012": 41417000
+          }
+        },
+        {
+          "key": "us-gaap:AssetsCurrent",
+          "label": "Assets, Current",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "AssetsCurrent",
+          "valuesByYear": {
+            "2022": 14337000000,
+            "2023": 16021000000,
+            "2024": 12992000000,
+            "2025": 12841000000,
+            "2026": 16332000000
+          }
+        },
+        {
+          "key": "us-gaap:AssetsFairValueAdjustment",
+          "label": "Assets, Fair Value Adjustment",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "AssetsFairValueAdjustment",
+          "valuesByYear": {
+            "2015": 74400000
+          }
+        },
+        {
+          "key": "us-gaap:BusinessAcquisitionEquityInterestIssuedOrIssuableValueAssigned",
+          "label": "Business Acquisition, Equity Interest Issued or Issuable, Value Assigned",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "BusinessAcquisitionEquityInterestIssuedOrIssuableValueAssigned",
+          "valuesByYear": {
+            "2010": 270000
+          }
+        },
+        {
+          "key": "us-gaap:BusinessAcquisitionPurchasePriceAllocationAmortizableIntangibleAssets",
+          "label": "Business Acquisition, Purchase Price Allocation, Amortizable Intangible Assets (Deprecated 2013-01-31)",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "BusinessAcquisitionPurchasePriceAllocationAmortizableIntangibleAssets",
+          "valuesByYear": {
+            "2011": 3900000
+          }
+        },
+        {
+          "key": "us-gaap:BusinessAcquisitionPurchasePriceAllocationGoodwillAmount",
+          "label": "Business Acquisition, Purchase Price Allocation, Goodwill Amount (Deprecated 2013-01-31)",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "BusinessAcquisitionPurchasePriceAllocationGoodwillAmount",
+          "valuesByYear": {
+            "2010": 118200000,
+            "2011": 8600000
+          }
+        },
+        {
+          "key": "us-gaap:BusinessCombinationConsiderationTransferredLiabilitiesIncurred",
+          "label": "Business Combination, Consideration Transferred, Liabilities Incurred",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "BusinessCombinationConsiderationTransferredLiabilitiesIncurred",
+          "valuesByYear": {
+            "2016": 84300000,
+            "2017": 40600000
+          }
+        },
+        {
+          "key": "us-gaap:BusinessCombinationContingentConsiderationArrangementsChangeInAmountOfContingentConsiderationAsset",
+          "label": "Business Combination, Contingent Consideration Arrangements, Change in Amount of Contingent Consideration, Asset (Deprecated 2013-01-31)",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "BusinessCombinationContingentConsiderationArrangementsChangeInAmountOfContingentConsiderationAsset",
+          "valuesByYear": {
+            "2010": 14800000
+          }
+        },
+        {
+          "key": "us-gaap:BusinessCombinationContingentConsiderationArrangementsChangeInAmountOfContingentConsiderationLiability1",
+          "label": "Business Combination, Contingent Consideration Arrangements, Change in Amount of Contingent Consideration, Liability",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "BusinessCombinationContingentConsiderationArrangementsChangeInAmountOfContingentConsiderationLiability1",
+          "valuesByYear": {
+            "2015": 11300000,
+            "2016": 19008000,
+            "2017": 44912000,
+            "2018": 17109000
+          }
+        },
+        {
+          "key": "us-gaap:BusinessCombinationContingentConsiderationLiability",
+          "label": "Business Combination, Contingent Consideration, Liability",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "BusinessCombinationContingentConsiderationLiability",
+          "valuesByYear": {
+            "2015": 4500000,
+            "2016": 73423000,
+            "2017": 22426000,
+            "2018": 0,
+            "2026": 2000000
+          }
+        },
+        {
+          "key": "us-gaap:ContractWithCustomerAssetNet",
+          "label": "Contract with Customer, Asset, after Allowance for Credit Loss",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "ContractWithCustomerAssetNet",
+          "valuesByYear": {
+            "2022": 519000000,
+            "2023": 541000000,
+            "2024": 249000000,
+            "2025": 616000000,
+            "2026": 1063000000
+          }
+        },
+        {
+          "key": "us-gaap:ContractWithCustomerAssetCumulativeCatchUpAdjustmentToRevenueChangeInMeasureOfProgress",
+          "label": "Contract with Customer, Asset, Cumulative Catch-up Adjustment to Revenue, Change in Measure of Progress",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "ContractWithCustomerAssetCumulativeCatchUpAdjustmentToRevenueChangeInMeasureOfProgress",
+          "valuesByYear": {
+            "2019": 451287000
+          }
+        },
+        {
+          "key": "us-gaap:ContractWithCustomerAssetReclassifiedToReceivable",
+          "label": "Contract with Customer, Asset, Reclassified to Receivable",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "ContractWithCustomerAssetReclassifiedToReceivable",
+          "valuesByYear": {
+            "2019": -7404723000
+          }
+        },
+        {
+          "key": "us-gaap:ContractWithCustomerLiability",
+          "label": "Contract with Customer, Liability",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "ContractWithCustomerLiability",
+          "valuesByYear": {
+            "2022": 704300000,
+            "2023": 885000000,
+            "2024": 490000000,
+            "2025": 377000000,
+            "2026": 431000000
+          }
+        },
+        {
+          "key": "us-gaap:ContractWithCustomerLiabilityCumulativeCatchUpAdjustmentToRevenueChangeInMeasureOfProgress",
+          "label": "Contract with Customer, Liability, Cumulative Catch-up Adjustment to Revenue, Change in Measure of Progress",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "ContractWithCustomerLiabilityCumulativeCatchUpAdjustmentToRevenueChangeInMeasureOfProgress",
+          "valuesByYear": {
+            "2019": 158400000
+          }
+        },
+        {
+          "key": "us-gaap:ContractWithCustomerLiabilityCumulativeCatchUpAdjustmentToRevenueModificationOfContract",
+          "label": "Contract with Customer, Liability, Cumulative Catch-up Adjustment to Revenue, Modification of Contract",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "ContractWithCustomerLiabilityCumulativeCatchUpAdjustmentToRevenueModificationOfContract",
+          "valuesByYear": {
+            "2019": 132700000
+          }
+        },
+        {
+          "key": "us-gaap:ContractWithCustomerLiabilityCurrent",
+          "label": "Contract with Customer, Liability, Current",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "ContractWithCustomerLiabilityCurrent",
+          "valuesByYear": {
+            "2019": 271800000,
+            "2020": 361500000,
+            "2021": 376500000,
+            "2022": 2002000000
+          }
+        },
+        {
+          "key": "us-gaap:ConvertibleSubordinatedDebtNoncurrent",
+          "label": "Convertible Subordinated Debt, Noncurrent",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "ConvertibleSubordinatedDebtNoncurrent",
+          "valuesByYear": {
+            "2010": 234240000
+          }
+        },
+        {
+          "key": "us-gaap:CustomerAdvancesAndDepositsCurrent",
+          "label": "Customer Advances and Deposits, Current",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "CustomerAdvancesAndDepositsCurrent",
+          "valuesByYear": {
+            "2015": 189600000,
+            "2016": 253700000,
+            "2017": 231300000,
+            "2018": 153600000,
+            "2019": 266300000
+          }
+        },
+        {
+          "key": "us-gaap:DebtInstrumentConvertibleConversionPrice1",
+          "label": "Debt Instrument, Convertible, Conversion Price",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "DebtInstrumentConvertibleConversionPrice1",
+          "valuesByYear": {
+            "2011": 15.525
+          }
+        },
+        {
+          "key": "us-gaap:DebtInstrumentConvertibleEffectiveInterestRate",
+          "label": "Debt Instrument, Convertible, Effective Interest Rate (Deprecated 2013-01-31)",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "DebtInstrumentConvertibleEffectiveInterestRate",
+          "valuesByYear": {
+            "2010": 0.01
+          }
+        },
+        {
+          "key": "us-gaap:DebtInstrumentFairValue",
+          "label": "Debt Instrument, Fair Value Disclosure",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "DebtInstrumentFairValue",
+          "valuesByYear": {
+            "2011": 2168978000
+          }
+        },
+        {
+          "key": "us-gaap:DebtInstrumentFeeAmount",
+          "label": "Debt Instrument, Fee Amount",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "DebtInstrumentFeeAmount",
+          "valuesByYear": {
+            "2010": 1000000,
+            "2011": 1000000
+          }
+        },
+        {
+          "key": "us-gaap:DebtInstrumentInterestRateStatedPercentage",
+          "label": "Debt Instrument, Interest Rate, Stated Percentage",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "DebtInstrumentInterestRateStatedPercentage",
+          "valuesByYear": {
+            "2011": 0.01
+          }
+        },
+        {
+          "key": "us-gaap:DebtInstrumentPrincipalOutstanding",
+          "label": "Debt Instrument, Principal Outstanding (Deprecated 2011-01-31)",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "DebtInstrumentPrincipalOutstanding",
+          "valuesByYear": {
+            "2010": 1700000000
+          }
+        },
+        {
+          "key": "us-gaap:DebtCurrent",
+          "label": "Debt, Current",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "DebtCurrent",
+          "valuesByYear": {
+            "2012": 416654000,
+            "2013": 32575000,
+            "2015": 46162000,
+            "2016": 65166000,
+            "2017": 61534000
+          }
+        },
+        {
+          "key": "us-gaap:DeferredIncomeTaxAssetsNet",
+          "label": "Deferred Income Tax Assets, Net",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "DeferredIncomeTaxAssetsNet",
+          "valuesByYear": {
+            "2022": 177000000,
+            "2023": 412000000,
+            "2024": 644000000,
+            "2025": 577000000,
+            "2026": 538000000
+          }
+        },
+        {
+          "key": "us-gaap:DeferredIncomeTaxLiabilitiesNet",
+          "label": "Deferred Income Tax Liabilities, Net",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "DeferredIncomeTaxLiabilitiesNet",
+          "valuesByYear": {
+            "2022": 86000000,
+            "2023": 77000000,
+            "2024": 178000000,
+            "2025": 149000000,
+            "2026": 111000000
+          }
+        },
+        {
+          "key": "us-gaap:DeferredIncomeTaxesAndOtherAssetsNoncurrent",
+          "label": "Deferred Income Taxes and Other Assets, Noncurrent",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "DeferredIncomeTaxesAndOtherAssetsNoncurrent",
+          "valuesByYear": {
+            "2024": 644000000,
+            "2025": 577000000,
+            "2026": 538000000
+          }
+        },
+        {
+          "key": "us-gaap:DeferredTaxAssetsGoodwillAndIntangibleAssets",
+          "label": "Deferred Tax Assets, Goodwill and Intangible Assets",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "DeferredTaxAssetsGoodwillAndIntangibleAssets",
+          "valuesByYear": {
+            "2022": 6000000,
+            "2023": 5000000,
+            "2024": 4000000,
+            "2025": 3000000,
+            "2026": 1000000
+          }
+        },
+        {
+          "key": "us-gaap:DeferredTaxAssetsGross",
+          "label": "Deferred Tax Assets, Gross",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "DeferredTaxAssetsGross",
+          "valuesByYear": {
+            "2022": 1874000000,
+            "2023": 1880000000,
+            "2024": 1568000000,
+            "2025": 1433000000,
+            "2026": 1400000000
+          }
+        },
+        {
+          "key": "us-gaap:DeferredTaxAssetsInventory",
+          "label": "Deferred Tax Assets, Inventory",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "DeferredTaxAssetsInventory",
+          "valuesByYear": {
+            "2022": 26000000,
+            "2023": 24000000,
+            "2024": 26000000,
+            "2025": 32000000,
+            "2026": 29000000
+          }
+        },
+        {
+          "key": "us-gaap:DeferredTaxAssetsInvestmentInSubsidiaries",
+          "label": "Deferred Tax Assets, Investment in Subsidiaries",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "DeferredTaxAssetsInvestmentInSubsidiaries",
+          "valuesByYear": {
+            "2023": 249000000,
+            "2024": 77000000,
+            "2025": 74000000,
+            "2026": 70000000
+          }
+        },
+        {
+          "key": "us-gaap:DeferredTaxAssetsLiabilitiesNet",
+          "label": "Deferred Tax Assets, Net",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "DeferredTaxAssetsLiabilitiesNet",
+          "valuesByYear": {
+            "2022": 91000000,
+            "2023": 335000000,
+            "2024": 466000000,
+            "2025": 428000000,
+            "2026": 427000000
+          }
+        },
+        {
+          "key": "us-gaap:DeferredTaxAssetsNet",
+          "label": "Deferred Tax Assets, Net of Valuation Allowance",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "DeferredTaxAssetsNet",
+          "valuesByYear": {
+            "2022": 243000000,
+            "2023": 507000000,
+            "2024": 730000000,
+            "2025": 652000000,
+            "2026": 603000000
+          }
+        },
+        {
+          "key": "us-gaap:DeferredTaxAssetsNetCurrent",
+          "label": "Deferred Tax Assets, Net of Valuation Allowance, Current",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "DeferredTaxAssetsNetCurrent",
+          "valuesByYear": {
+            "2012": 7881000,
+            "2013": 13522000,
+            "2015": 63910000,
+            "2016": 0,
+            "2017": 0
+          }
+        },
+        {
+          "key": "us-gaap:DeferredTaxAssetsNetNoncurrent",
+          "label": "Deferred Tax Assets, Net of Valuation Allowance, Noncurrent",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "DeferredTaxAssetsNetNoncurrent",
+          "valuesByYear": {
+            "2015": 211519000,
+            "2016": 222772000,
+            "2017": 223285000,
+            "2018": 165319000,
+            "2019": 164611000
+          }
+        },
+        {
+          "key": "us-gaap:DeferredTaxAssetsOperatingLossCarryforwards",
+          "label": "Deferred Tax Assets, Operating Loss Carryforwards",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "DeferredTaxAssetsOperatingLossCarryforwards",
+          "valuesByYear": {
+            "2022": 1542000000,
+            "2023": 1359000000,
+            "2024": 1168000000,
+            "2025": 1022000000,
+            "2026": 943000000
+          }
+        },
+        {
+          "key": "us-gaap:DeferredTaxAssetsOperatingLossCarryforwardsDomestic",
+          "label": "Deferred Tax Assets, Operating Loss Carryforwards, Domestic",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "DeferredTaxAssetsOperatingLossCarryforwardsDomestic",
+          "valuesByYear": {
+            "2024": 358000000
+          }
+        },
+        {
+          "key": "us-gaap:DeferredTaxAssetsOperatingLossCarryforwardsNotSubjectToExpiration",
+          "label": "Deferred Tax Assets, Operating Loss Carryforwards, Not Subject to Expiration",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "DeferredTaxAssetsOperatingLossCarryforwardsNotSubjectToExpiration",
+          "valuesByYear": {
+            "2017": 2400000000,
+            "2018": 2200000000,
+            "2019": 2000000000,
+            "2020": 1900000000,
+            "2021": 1800000000
+          }
+        },
+        {
+          "key": "us-gaap:DeferredTaxAssetsOther",
+          "label": "Deferred Tax Assets, Other",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "DeferredTaxAssetsOther",
+          "valuesByYear": {
+            "2022": 201000000,
+            "2023": 136000000,
+            "2024": 184000000,
+            "2025": 186000000,
+            "2026": 235000000
+          }
+        },
+        {
+          "key": "us-gaap:DeferredTaxAssetsPropertyPlantAndEquipment",
+          "label": "Deferred Tax Assets, Property, Plant and Equipment",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "DeferredTaxAssetsPropertyPlantAndEquipment",
+          "valuesByYear": {
+            "2022": 72000000,
+            "2023": 77000000,
+            "2024": 82000000,
+            "2025": 76000000,
+            "2026": 76000000
+          }
+        },
+        {
+          "key": "us-gaap:DeferredTaxAssetsTaxDeferredExpenseCompensationAndBenefits",
+          "label": "Deferred Tax Assets, Tax Deferred Expense, Compensation and Benefits",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "DeferredTaxAssetsTaxDeferredExpenseCompensationAndBenefits",
+          "valuesByYear": {
+            "2022": 22000000,
+            "2023": 27000000,
+            "2024": 25000000,
+            "2025": 37000000,
+            "2026": 44000000
+          }
+        },
+        {
+          "key": "us-gaap:DeferredTaxAssetsTaxDeferredExpenseReservesAndAccrualsAllowanceForDoubtfulAccounts",
+          "label": "Deferred Tax Assets, Tax Deferred Expense, Reserves and Accruals, Allowance for Doubtful Accounts",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "DeferredTaxAssetsTaxDeferredExpenseReservesAndAccrualsAllowanceForDoubtfulAccounts",
+          "valuesByYear": {
+            "2022": 5000000,
+            "2023": 3000000,
+            "2024": 2000000,
+            "2025": 3000000,
+            "2026": 2000000
+          }
+        },
+        {
+          "key": "us-gaap:DeferredTaxAssetsValuationAllowance",
+          "label": "Deferred Tax Assets, Valuation Allowance",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "DeferredTaxAssetsValuationAllowance",
+          "valuesByYear": {
+            "2022": 1631000000,
+            "2023": 1373000000,
+            "2024": 838000000,
+            "2025": 781000000,
+            "2026": 797000000
+          }
+        },
+        {
+          "key": "us-gaap:DeferredTaxLiabilitiesGrossNoncurrent",
+          "label": "Deferred Tax Liabilities, Gross, Noncurrent",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "DeferredTaxLiabilitiesGrossNoncurrent",
+          "valuesByYear": {
+            "2015": 117930000,
+            "2016": 100528000,
+            "2017": 75319000,
+            "2018": 81535000,
+            "2019": 66924000
+          }
+        },
+        {
+          "key": "us-gaap:DeferredTaxLiabilitiesGoodwillAndIntangibleAssetsIntangibleAssets",
+          "label": "Deferred Tax Liabilities, Intangible Assets",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "DeferredTaxLiabilitiesGoodwillAndIntangibleAssetsIntangibleAssets",
+          "valuesByYear": {
+            "2022": 89000000,
+            "2023": 71000000,
+            "2024": 56000000,
+            "2025": 52000000,
+            "2026": 45000000
+          }
+        },
+        {
+          "key": "us-gaap:DeferredTaxLiabilities",
+          "label": "Deferred Tax Liabilities, Net",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "DeferredTaxLiabilities",
+          "valuesByYear": {
+            "2022": 152000000,
+            "2023": 172000000,
+            "2024": 264000000,
+            "2025": 224000000,
+            "2026": 176000000
+          }
+        },
+        {
+          "key": "us-gaap:DeferredTaxLiabilitiesOther",
+          "label": "Deferred Tax Liabilities, Other",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "DeferredTaxLiabilitiesOther",
+          "valuesByYear": {
+            "2022": 14000000,
+            "2023": 38000000,
+            "2024": 149000000,
+            "2025": 128000000,
+            "2026": 92000000
+          }
+        },
+        {
+          "key": "us-gaap:DeferredTaxLiabilitiesPropertyPlantAndEquipment",
+          "label": "Deferred Tax Liabilities, Property, Plant and Equipment",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "DeferredTaxLiabilitiesPropertyPlantAndEquipment",
+          "valuesByYear": {
+            "2022": 49000000,
+            "2023": 63000000,
+            "2024": 59000000,
+            "2025": 44000000,
+            "2026": 39000000
+          }
+        },
+        {
+          "key": "us-gaap:DeferredTaxLiabilitiesUndistributedForeignEarnings",
+          "label": "Deferred Tax Liabilities, Undistributed Foreign Earnings",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "DeferredTaxLiabilitiesUndistributedForeignEarnings",
+          "valuesByYear": {
+            "2015": 12600000,
+            "2016": 11200000
+          }
+        },
+        {
+          "key": "us-gaap:DerivativeAssets",
+          "label": "Derivative Asset",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "DerivativeAssets",
+          "valuesByYear": {
+            "2026": 55000000
+          }
+        },
+        {
+          "key": "us-gaap:DerivativeLiabilities",
+          "label": "Derivative Liability",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "DerivativeLiabilities",
+          "valuesByYear": {
+            "2026": 73000000
+          }
+        },
+        {
+          "key": "us-gaap:DisposalGroupIncludingDiscontinuedOperationAccountsPayable",
+          "label": "Disposal Group, Including Discontinued Operation, Accounts Payable",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "DisposalGroupIncludingDiscontinuedOperationAccountsPayable",
+          "valuesByYear": {
+            "2011": 3593000
+          }
+        },
+        {
+          "key": "us-gaap:DisposalGroupIncludingDiscontinuedOperationAccountsNotesAndLoansReceivableNet",
+          "label": "Disposal Group, Including Discontinued Operation, Accounts, Notes and Loans Receivable, Net",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "DisposalGroupIncludingDiscontinuedOperationAccountsNotesAndLoansReceivableNet",
+          "valuesByYear": {
+            "2011": 892000
+          }
+        },
+        {
+          "key": "us-gaap:AssetsOfDisposalGroupIncludingDiscontinuedOperation",
+          "label": "Disposal Group, Including Discontinued Operation, Assets",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "AssetsOfDisposalGroupIncludingDiscontinuedOperation",
+          "valuesByYear": {
+            "2012": 0,
+            "2013": 0
+          }
+        },
+        {
+          "key": "us-gaap:AssetsOfDisposalGroupIncludingDiscontinuedOperationCurrent",
+          "label": "Disposal Group, Including Discontinued Operation, Assets, Current",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "AssetsOfDisposalGroupIncludingDiscontinuedOperationCurrent",
+          "valuesByYear": {
+            "2011": 5086000,
+            "2012": 21642000,
+            "2024": 0
+          }
+        },
+        {
+          "key": "us-gaap:DisposalGroupIncludingDiscontinuedOperationAssetsNoncurrent",
+          "label": "Disposal Group, Including Discontinued Operation, Assets, Noncurrent",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "DisposalGroupIncludingDiscontinuedOperationAssetsNoncurrent",
+          "valuesByYear": {
+            "2024": 0
+          }
+        },
+        {
+          "key": "us-gaap:DisposalGroupIncludingDiscontinuedOperationInventory",
+          "label": "Disposal Group, Including Discontinued Operation, Inventory (Deprecated 2014-01-31)",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "DisposalGroupIncludingDiscontinuedOperationInventory",
+          "valuesByYear": {
+            "2011": 3723000
+          }
+        },
+        {
+          "key": "us-gaap:LiabilitiesOfDisposalGroupIncludingDiscontinuedOperation",
+          "label": "Disposal Group, Including Discontinued Operation, Liabilities",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "LiabilitiesOfDisposalGroupIncludingDiscontinuedOperation",
+          "valuesByYear": {
+            "2012": 0,
+            "2013": 0
+          }
+        },
+        {
+          "key": "us-gaap:LiabilitiesOfDisposalGroupIncludingDiscontinuedOperationCurrent",
+          "label": "Disposal Group, Including Discontinued Operation, Liabilities, Current",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "LiabilitiesOfDisposalGroupIncludingDiscontinuedOperationCurrent",
+          "valuesByYear": {
+            "2011": 8244000,
+            "2012": 24854000,
+            "2024": 0
+          }
+        },
+        {
+          "key": "us-gaap:LiabilitiesOfDisposalGroupIncludingDiscontinuedOperationNoncurrent",
+          "label": "Disposal Group, Including Discontinued Operation, Liabilities, Noncurrent",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "LiabilitiesOfDisposalGroupIncludingDiscontinuedOperationNoncurrent",
+          "valuesByYear": {
+            "2024": 0
+          }
+        },
+        {
+          "key": "us-gaap:DisposalGroupIncludingDiscontinuedOperationLongLivedAssets",
+          "label": "Disposal Group, Including Discontinued Operation, Long Lived Assets (Deprecated 2015-01-31)",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "DisposalGroupIncludingDiscontinuedOperationLongLivedAssets",
+          "valuesByYear": {
+            "2015": 59400000
+          }
+        },
+        {
+          "key": "us-gaap:DisposalGroupIncludingDiscontinuedOperationOtherCurrentAssets",
+          "label": "Disposal Group, Including Discontinued Operation, Other Assets, Current",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "DisposalGroupIncludingDiscontinuedOperationOtherCurrentAssets",
+          "valuesByYear": {
+            "2011": 471000
+          }
+        },
+        {
+          "key": "us-gaap:DisposalGroupIncludingDiscontinuedOperationOtherCurrentLiabilities",
+          "label": "Disposal Group, Including Discontinued Operation, Other Liabilities, Current",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "DisposalGroupIncludingDiscontinuedOperationOtherCurrentLiabilities",
+          "valuesByYear": {
+            "2011": 4651000
+          }
+        },
+        {
+          "key": "us-gaap:DisposalGroupIncludingDiscontinuedOperationPropertyPlantAndEquipmentNet",
+          "label": "Disposal Group, Including Discontinued Operation, Property, Plant, and Equipment, Net (Deprecated 2014-01-31)",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "DisposalGroupIncludingDiscontinuedOperationPropertyPlantAndEquipmentNet",
+          "valuesByYear": {
+            "2011": 22671000
+          }
+        },
+        {
+          "key": "us-gaap:EarlyRepaymentOfSeniorDebt",
+          "label": "Early Repayment of Senior Debt",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "EarlyRepaymentOfSeniorDebt",
+          "valuesByYear": {
+            "2013": 544840000,
+            "2015": 544840000,
+            "2016": 0,
+            "2017": 0
+          }
+        },
+        {
+          "key": "us-gaap:IncomeTaxReconciliationChangeInDeferredTaxAssetsValuationAllowance",
+          "label": "Effective Income Tax Rate Reconciliation, Change in Deferred Tax Assets Valuation Allowance, Amount",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "IncomeTaxReconciliationChangeInDeferredTaxAssetsValuationAllowance",
+          "valuesByYear": {
+            "2022": 12000000,
+            "2023": -47000000,
+            "2024": -685000000,
+            "2025": -37000000,
+            "2026": -37000000
+          }
+        },
+        {
+          "key": "us-gaap:IncomeTaxReconciliationDispositionOfAssets",
+          "label": "Effective Income Tax Rate Reconciliation, Disposition of Asset, Amount",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "IncomeTaxReconciliationDispositionOfAssets",
+          "valuesByYear": {
+            "2022": 13000000,
+            "2023": 16000000,
+            "2024": 135000000,
+            "2025": 6000000,
+            "2026": 6000000
+          }
+        },
+        {
+          "key": "us-gaap:EmployeeRelatedLiabilitiesCurrent",
+          "label": "Employee-related Liabilities, Current",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "EmployeeRelatedLiabilitiesCurrent",
+          "valuesByYear": {
+            "2022": 470000000,
+            "2023": 522000000,
+            "2024": 488000000,
+            "2025": 560000000,
+            "2026": 671000000
+          }
+        },
+        {
+          "key": "us-gaap:EquityMethodInvestmentOtherThanTemporaryImpairment",
+          "label": "Equity Method Investment, Other than Temporary Impairment",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "EquityMethodInvestmentOtherThanTemporaryImpairment",
+          "valuesByYear": {
+            "2020": 98000000,
+            "2021": 36500000,
+            "2022": 36500000,
+            "2026": 21000000
+          }
+        },
+        {
+          "key": "us-gaap:EquityMethodInvestments",
+          "label": "Equity Method Investments",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "EquityMethodInvestments",
+          "valuesByYear": {
+            "2017": 200100000,
+            "2018": 411100000,
+            "2019": 294100000,
+            "2020": 128100000,
+            "2021": 102800000
+          }
+        },
+        {
+          "key": "us-gaap:EquitySecuritiesFvNiCurrentAndNoncurrent",
+          "label": "EquitySecuritiesFvNiCurrentAndNoncurrent",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "EquitySecuritiesFvNiCurrentAndNoncurrent",
+          "valuesByYear": {
+            "2022": 131300000,
+            "2023": 115000000,
+            "2024": 123000000,
+            "2025": 119000000,
+            "2026": 67000000
+          }
+        },
+        {
+          "key": "us-gaap:FairValueAssetsLevel1ToLevel2TransfersAmount",
+          "label": "Fair Value, Assets, Level 1 to Level 2 Transfers, Amount",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "FairValueAssetsLevel1ToLevel2TransfersAmount",
+          "valuesByYear": {
+            "2012": 0,
+            "2013": 0
+          }
+        },
+        {
+          "key": "us-gaap:FairValueAssetsLevel2ToLevel1TransfersAmount",
+          "label": "Fair Value, Assets, Level 2 to Level 1 Transfers, Amount",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "FairValueAssetsLevel2ToLevel1TransfersAmount",
+          "valuesByYear": {
+            "2012": 0,
+            "2013": 0,
+            "2015": 0,
+            "2016": 0,
+            "2017": 0
+          }
+        },
+        {
+          "key": "us-gaap:FairValueLiabilitiesLevel1ToLevel2TransfersAmount",
+          "label": "Fair Value, Liabilities, Level 1 to Level 2 Transfers, Amount",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "FairValueLiabilitiesLevel1ToLevel2TransfersAmount",
+          "valuesByYear": {
+            "2013": 0
+          }
+        },
+        {
+          "key": "us-gaap:FairValueLiabilitiesLevel2ToLevel1TransfersAmount",
+          "label": "Fair Value, Liabilities, Level 2 to Level 1 Transfers, Amount",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "FairValueLiabilitiesLevel2ToLevel1TransfersAmount",
+          "valuesByYear": {
+            "2013": 0
+          }
+        },
+        {
+          "key": "us-gaap:FairValueMeasurementWithUnobservableInputsReconciliationRecurringBasisAssetTransfersNet",
+          "label": "Fair Value, Measurement with Unobservable Inputs Reconciliation, Recurring Basis, Asset, Transfers, Net",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "FairValueMeasurementWithUnobservableInputsReconciliationRecurringBasisAssetTransfersNet",
+          "valuesByYear": {
+            "2010": 0
+          }
+        },
+        {
+          "key": "us-gaap:FinancingReceivableAllowanceForCreditLossesWriteOffs",
+          "label": "Financing Receivable, Allowance for Credit Loss, Writeoff",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "FinancingReceivableAllowanceForCreditLossesWriteOffs",
+          "valuesByYear": {
+            "2011": 4439000,
+            "2012": 34671000,
+            "2013": 7377000,
+            "2015": 1645000
+          }
+        },
+        {
+          "key": "us-gaap:FiniteLivedIntangibleAssetsForeignCurrencyTranslationGainLoss",
+          "label": "Finite Lived Intangible Assets, Foreign Currency Translation Gain (Loss)",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "FiniteLivedIntangibleAssetsForeignCurrencyTranslationGainLoss",
+          "valuesByYear": {
+            "2023": 15000000
+          }
+        },
+        {
+          "key": "us-gaap:FiniteLivedIntangibleAssetsAmortizationExpenseAfterYearFive",
+          "label": "Finite-Lived Intangible Asset, Expected Amortization, after Year Five",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "FiniteLivedIntangibleAssetsAmortizationExpenseAfterYearFive",
+          "valuesByYear": {
+            "2022": 106000000,
+            "2023": 77000000,
+            "2024": 53000000,
+            "2025": 101000000,
+            "2026": 72000000
+          }
+        },
+        {
+          "key": "us-gaap:FiniteLivedIntangibleAssetsAmortizationExpenseYearFive",
+          "label": "Finite-Lived Intangible Asset, Expected Amortization, Year Five",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "FiniteLivedIntangibleAssetsAmortizationExpenseYearFive",
+          "valuesByYear": {
+            "2022": 37000000,
+            "2023": 27000000,
+            "2024": 24000000,
+            "2025": 35000000,
+            "2026": 32000000
+          }
+        },
+        {
+          "key": "us-gaap:FiniteLivedIntangibleAssetsAmortizationExpenseYearFour",
+          "label": "Finite-Lived Intangible Asset, Expected Amortization, Year Four",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "FiniteLivedIntangibleAssetsAmortizationExpenseYearFour",
+          "valuesByYear": {
+            "2022": 44000000,
+            "2023": 36000000,
+            "2024": 27000000,
+            "2025": 40000000,
+            "2026": 36000000
+          }
+        },
+        {
+          "key": "us-gaap:FiniteLivedIntangibleAssetsAmortizationExpenseNextTwelveMonths",
+          "label": "Finite-Lived Intangible Asset, Expected Amortization, Year One",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "FiniteLivedIntangibleAssetsAmortizationExpenseNextTwelveMonths",
+          "valuesByYear": {
+            "2022": 87000000,
+            "2023": 70000000,
+            "2024": 63000000,
+            "2025": 67000000,
+            "2026": 58000000
+          }
+        },
+        {
+          "key": "us-gaap:FiniteLivedIntangibleAssetsAmortizationExpenseYearThree",
+          "label": "Finite-Lived Intangible Asset, Expected Amortization, Year Three",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "FiniteLivedIntangibleAssetsAmortizationExpenseYearThree",
+          "valuesByYear": {
+            "2022": 65000000,
+            "2023": 43000000,
+            "2024": 35000000,
+            "2025": 43000000,
+            "2026": 41000000
+          }
+        },
+        {
+          "key": "us-gaap:FiniteLivedIntangibleAssetsAmortizationExpenseYearTwo",
+          "label": "Finite-Lived Intangible Asset, Expected Amortization, Year Two",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "FiniteLivedIntangibleAssetsAmortizationExpenseYearTwo",
+          "valuesByYear": {
+            "2022": 72000000,
+            "2023": 63000000,
+            "2024": 43000000,
+            "2025": 57000000,
+            "2026": 44000000
+          }
+        },
+        {
+          "key": "us-gaap:FinitelivedIntangibleAssetsAcquired1",
+          "label": "Finite-lived Intangible Assets Acquired",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "FinitelivedIntangibleAssetsAcquired1",
+          "valuesByYear": {
+            "2025": 165000000,
+            "2026": 2000000
+          }
+        },
+        {
+          "key": "us-gaap:FiniteLivedIntangibleAssetsAccumulatedAmortization",
+          "label": "Finite-Lived Intangible Assets, Accumulated Amortization",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "FiniteLivedIntangibleAssetsAccumulatedAmortization",
+          "valuesByYear": {
+            "2022": 293000000,
+            "2023": 356000000,
+            "2024": 369000000,
+            "2025": 405000000,
+            "2026": 232000000
+          }
+        },
+        {
+          "key": "us-gaap:FiniteLivedIntangibleAssetsAmortizationExpense",
+          "label": "Finite-Lived Intangible Assets, Amortization Expense (Deprecated 2012-01-31)",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "FiniteLivedIntangibleAssetsAmortizationExpense",
+          "valuesByYear": {
+            "2010": 70900000
+          }
+        },
+        {
+          "key": "us-gaap:FiniteLivedIntangibleAssetsFutureAmortizationExpense",
+          "label": "Finite-Lived Intangible Assets, Future Amortization Expense (Deprecated 2012-01-31)",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "FiniteLivedIntangibleAssetsFutureAmortizationExpense",
+          "valuesByYear": {
+            "2010": 119876000,
+            "2011": 69254000
+          }
+        },
+        {
+          "key": "us-gaap:FiniteLivedIntangibleAssetsGross",
+          "label": "Finite-Lived Intangible Assets, Gross",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "FiniteLivedIntangibleAssetsGross",
+          "valuesByYear": {
+            "2022": 704000000,
+            "2023": 672000000,
+            "2024": 614000000,
+            "2025": 748000000,
+            "2026": 515000000
+          }
+        },
+        {
+          "key": "us-gaap:FiniteLivedIntangibleAssetsNet",
+          "label": "Finite-Lived Intangible Assets, Net",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "FiniteLivedIntangibleAssetsNet",
+          "valuesByYear": {
+            "2022": 411000000,
+            "2023": 316000000,
+            "2024": 245000000,
+            "2025": 343000000,
+            "2026": 283000000
+          }
+        },
+        {
+          "key": "us-gaap:ForeignCurrencyContractAssetFairValueDisclosure",
+          "label": "Foreign Currency Contract, Asset, Fair Value Disclosure",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "ForeignCurrencyContractAssetFairValueDisclosure",
+          "valuesByYear": {
+            "2010": 24071000
+          }
+        },
+        {
+          "key": "us-gaap:ForeignCurrencyContractsLiabilityFairValueDisclosure",
+          "label": "Foreign Currency Contracts, Liability, Fair Value Disclosure",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "ForeignCurrencyContractsLiabilityFairValueDisclosure",
+          "valuesByYear": {
+            "2010": 6900000
+          }
+        },
+        {
+          "key": "us-gaap:GainLossOnDispositionOfAssets",
+          "label": "Gain (Loss) on Disposition of Property Plant Equipment, Excluding Oil and Gas Property and Timber Property",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "GainLossOnDispositionOfAssets",
+          "valuesByYear": {
+            "2010": -11700000
+          }
+        },
+        {
+          "key": "us-gaap:GainsLossesOnExtinguishmentOfDebt",
+          "label": "Gain (Loss) on Extinguishment of Debt",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "GainsLossesOnExtinguishmentOfDebt",
+          "valuesByYear": {
+            "2010": 22300000
+          }
+        },
+        {
+          "key": "us-gaap:GainLossOnSaleOfEquityInvestments",
+          "label": "Gain (Loss) on Sale of Equity Investments",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "GainLossOnSaleOfEquityInvestments",
+          "valuesByYear": {
+            "2010": 18600000,
+            "2011": 18600000,
+            "2012": 18600000
+          }
+        },
+        {
+          "key": "us-gaap:GainsLossesOnRestructuringOfDebt",
+          "label": "Gains (Losses) on Restructuring of Debt",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "GainsLossesOnRestructuringOfDebt",
+          "valuesByYear": {
+            "2009": 10437000
+          }
+        },
+        {
+          "key": "us-gaap:Goodwill",
+          "label": "Goodwill",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "Goodwill",
+          "valuesByYear": {
+            "2022": 1342000000,
+            "2023": 1343000000,
+            "2024": 1135000000,
+            "2025": 1341000000,
+            "2026": 1369000000
+          }
+        },
+        {
+          "key": "us-gaap:GoodwillAcquiredDuringPeriod",
+          "label": "Goodwill, Acquired During Period",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "GoodwillAcquiredDuringPeriod",
+          "valuesByYear": {
+            "2015": 36467000,
+            "2022": 272000000,
+            "2023": 272000000,
+            "2025": 209000000,
+            "2026": 8000000
+          }
+        },
+        {
+          "key": "us-gaap:GoodwillFairValueDisclosure",
+          "label": "Goodwill, Fair Value Disclosure",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "GoodwillFairValueDisclosure",
+          "valuesByYear": {
+            "2010": 0
+          }
+        },
+        {
+          "key": "us-gaap:GoodwillForeignCurrencyTranslationGainLoss",
+          "label": "Goodwill, Foreign Currency Translation Gain (Loss)",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "GoodwillForeignCurrencyTranslationGainLoss",
+          "valuesByYear": {
+            "2022": 20000000,
+            "2023": 3000000,
+            "2024": -3000000,
+            "2025": -3000000,
+            "2026": 20000000
+          }
+        },
+        {
+          "key": "us-gaap:GoodwillImpairedAccumulatedImpairmentLoss",
+          "label": "Goodwill, Impaired, Accumulated Impairment Loss",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "GoodwillImpairedAccumulatedImpairmentLoss",
+          "valuesByYear": {
+            "2012": 5949977,
+            "2013": 5949977
+          }
+        },
+        {
+          "key": "us-gaap:GoodwillImpairmentLoss",
+          "label": "Goodwill, Impairment Loss",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "GoodwillImpairmentLoss",
+          "valuesByYear": {
+            "2017": 0,
+            "2018": 0,
+            "2019": 0,
+            "2020": 0,
+            "2021": 0
+          }
+        },
+        {
+          "key": "us-gaap:GoodwillPeriodIncreaseDecrease",
+          "label": "Goodwill, Period Increase (Decrease)",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "GoodwillPeriodIncreaseDecrease",
+          "valuesByYear": {
+            "2010": 27100000
+          }
+        },
+        {
+          "key": "us-gaap:GoodwillPurchaseAccountingAdjustments",
+          "label": "Goodwill, Purchase Accounting Adjustments",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "GoodwillPurchaseAccountingAdjustments",
+          "valuesByYear": {
+            "2012": 601000,
+            "2013": 4034000,
+            "2015": -656000,
+            "2023": -2000000,
+            "2024": -2000000
+          }
+        },
+        {
+          "key": "us-gaap:GoodwillTransfers",
+          "label": "Goodwill, Transfers",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "GoodwillTransfers",
+          "valuesByYear": {
+            "2022": 0,
+            "2023": 0
+          }
+        },
+        {
+          "key": "us-gaap:GoodwillTranslationAdjustments",
+          "label": "Goodwill, Translation Adjustments (Deprecated 2016-01-31)",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "GoodwillTranslationAdjustments",
+          "valuesByYear": {
+            "2011": -745000,
+            "2012": -274000,
+            "2013": 449000,
+            "2015": -196000
+          }
+        },
+        {
+          "key": "us-gaap:GoodwillWrittenOffRelatedToSaleOfBusinessUnit",
+          "label": "Goodwill, Written off Related to Sale of Business Unit",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "GoodwillWrittenOffRelatedToSaleOfBusinessUnit",
+          "valuesByYear": {
+            "2021": 1000000,
+            "2022": 1000000,
+            "2024": 1000000,
+            "2025": 1000000
+          }
+        },
+        {
+          "key": "us-gaap:ImpairmentOfLongLivedAssetsToBeDisposedOf",
+          "label": "Impairment of Long-Lived Assets to be Disposed of",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "ImpairmentOfLongLivedAssetsToBeDisposedOf",
+          "valuesByYear": {
+            "2013": 0,
+            "2015": 0,
+            "2016": 0,
+            "2017": 0
+          }
+        },
+        {
+          "key": "us-gaap:IncomeLossFromContinuingOperationsBeforeIncomeTaxesMinorityInterestAndIncomeLossFromEquityMethodInvestments",
+          "label": "Income (Loss) from Continuing Operations before Equity Method Investments, Income Taxes, Noncontrolling Interest",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesMinorityInterestAndIncomeLossFromEquityMethodInvestments",
+          "valuesByYear": {
+            "2009": -16775000,
+            "2010": 615597000,
+            "2011": 564761000
+          }
+        },
+        {
+          "key": "us-gaap:IncomeLossFromEquityMethodInvestments",
+          "label": "Income (Loss) from Equity Method Investments",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "IncomeLossFromEquityMethodInvestments",
+          "valuesByYear": {
+            "2023": -4000000,
+            "2024": 8000000,
+            "2025": -3000000,
+            "2026": -31000000
+          }
+        },
+        {
+          "key": "us-gaap:IncreaseDecreaseInAccountsPayable",
+          "label": "Increase (Decrease) in Accounts Payable",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "IncreaseDecreaseInAccountsPayable",
+          "valuesByYear": {
+            "2022": 969000000,
+            "2023": -341000000,
+            "2024": -986000000,
+            "2025": 630000000,
+            "2026": 2858000000
+          }
+        },
+        {
+          "key": "us-gaap:IncreaseDecreaseInAccountsReceivable",
+          "label": "Increase (Decrease) in Accounts Receivable",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "IncreaseDecreaseInAccountsReceivable",
+          "valuesByYear": {
+            "2022": -624000000,
+            "2023": 388000000,
+            "2024": -380000000,
+            "2025": 601000000,
+            "2026": 979000000
+          }
+        },
+        {
+          "key": "us-gaap:IncreaseDecreaseInCommodityContractAssetsAndLiabilities",
+          "label": "Increase (Decrease) in Commodity Contract Assets and Liabilities",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "IncreaseDecreaseInCommodityContractAssetsAndLiabilities",
+          "valuesByYear": {
+            "2022": 226000000,
+            "2023": 27000000,
+            "2024": 41000000,
+            "2025": 365000000,
+            "2026": 435000000
+          }
+        },
+        {
+          "key": "us-gaap:IncreaseDecreaseInOperatingLiabilities",
+          "label": "Increase (Decrease) in Operating Liabilities",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "IncreaseDecreaseInOperatingLiabilities",
+          "valuesByYear": {
+            "2009": -408861000,
+            "2010": 143952000
+          }
+        },
+        {
+          "key": "us-gaap:IncreaseDecreaseInOtherOperatingAssets",
+          "label": "Increase (Decrease) in Other Operating Assets",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "IncreaseDecreaseInOtherOperatingAssets",
+          "valuesByYear": {
+            "2022": 295000000,
+            "2023": 55000000,
+            "2024": 297000000,
+            "2025": 216000000,
+            "2026": 1169000000
+          }
+        },
+        {
+          "key": "us-gaap:IncreaseDecreaseInOtherOperatingLiabilities",
+          "label": "Increase (Decrease) in Other Operating Liabilities",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "IncreaseDecreaseInOtherOperatingLiabilities",
+          "valuesByYear": {
+            "2022": 1067000000,
+            "2023": 1170000000,
+            "2024": -412000000,
+            "2025": -789000000,
+            "2026": 338000000
+          }
+        },
+        {
+          "key": "us-gaap:IntangibleAssetsNetExcludingGoodwill",
+          "label": "Intangible Assets, Net (Excluding Goodwill)",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "IntangibleAssetsNetExcludingGoodwill",
+          "valuesByYear": {
+            "2022": 411000000,
+            "2023": 316000000,
+            "2024": 245000000,
+            "2025": 343000000,
+            "2026": 283000000
+          }
+        },
+        {
+          "key": "us-gaap:IntangibleAssetsNetIncludingGoodwill",
+          "label": "Intangible Assets, Net (Including Goodwill)",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "IntangibleAssetsNetIncludingGoodwill",
+          "valuesByYear": {
+            "2013": 377218000,
+            "2015": 415175000,
+            "2016": 1345820000,
+            "2017": 1347048000
+          }
+        },
+        {
+          "key": "us-gaap:InterestExpenseDebt",
+          "label": "Interest Expense, Debt",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "InterestExpenseDebt",
+          "valuesByYear": {
+            "2022": 153000000,
+            "2023": 187000000,
+            "2024": 161000000,
+            "2025": 185000000,
+            "2026": 197000000
+          }
+        },
+        {
+          "key": "us-gaap:InventoryWriteDown",
+          "label": "Inventory Write-down",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "InventoryWriteDown",
+          "valuesByYear": {
+            "2011": 4000000,
+            "2018": 60000000,
+            "2019": 60000000
+          }
+        },
+        {
+          "key": "us-gaap:InventoryFinishedGoods",
+          "label": "Inventory, Finished Goods, Gross",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "InventoryFinishedGoods",
+          "valuesByYear": {
+            "2010": 699295000
+          }
+        },
+        {
+          "key": "us-gaap:InventoryFinishedGoodsNetOfReserves",
+          "label": "Inventory, Finished Goods, Net of Reserves",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "InventoryFinishedGoodsNetOfReserves",
+          "valuesByYear": {
+            "2022": 688000000,
+            "2023": 681000000,
+            "2024": 537000000,
+            "2025": 494000000,
+            "2026": 537000000
+          }
+        },
+        {
+          "key": "us-gaap:InventoryNet",
+          "label": "Inventory, Net",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "InventoryNet",
+          "valuesByYear": {
+            "2022": 6580000000,
+            "2023": 7530000000,
+            "2024": 6205000000,
+            "2025": 5071000000,
+            "2026": 5845000000
+          }
+        },
+        {
+          "key": "us-gaap:InventoryRawMaterials",
+          "label": "Inventory, Raw Materials, Gross",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "InventoryRawMaterials",
+          "valuesByYear": {
+            "2010": 2271944000,
+            "2011": 1950181000
+          }
+        },
+        {
+          "key": "us-gaap:InventoryRawMaterialsNetOfReserves",
+          "label": "Inventory, Raw Materials, Net of Reserves",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "InventoryRawMaterialsNetOfReserves",
+          "valuesByYear": {
+            "2022": 5290000000,
+            "2023": 6140000000,
+            "2024": 5045000000,
+            "2025": 4092000000,
+            "2026": 4834000000
+          }
+        },
+        {
+          "key": "us-gaap:InventoryWorkInProcess",
+          "label": "Inventory, Work in Process, Gross",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "InventoryWorkInProcess",
+          "valuesByYear": {
+            "2010": 579047000
+          }
+        },
+        {
+          "key": "us-gaap:InventoryWorkInProcessNetOfReserves",
+          "label": "Inventory, Work in Process, Net of Reserves",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "InventoryWorkInProcessNetOfReserves",
+          "valuesByYear": {
+            "2022": 602000000,
+            "2023": 709000000,
+            "2024": 623000000,
+            "2025": 485000000,
+            "2026": 474000000
+          }
+        },
+        {
+          "key": "us-gaap:LesseeOperatingLeaseLiabilityPaymentsDue",
+          "label": "Lessee, Operating Lease, Liability, to be Paid",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "LesseeOperatingLeaseLiabilityPaymentsDue",
+          "valuesByYear": {
+            "2022": 771000000,
+            "2023": 722000000,
+            "2024": 713000000,
+            "2025": 670000000,
+            "2026": 814000000
+          }
+        },
+        {
+          "key": "us-gaap:LesseeOperatingLeaseLiabilityPaymentsDueAfterYearFive",
+          "label": "Lessee, Operating Lease, Liability, to be Paid, after Year Five",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "LesseeOperatingLeaseLiabilityPaymentsDueAfterYearFive",
+          "valuesByYear": {
+            "2022": 229000000,
+            "2023": 178000000,
+            "2024": 157000000,
+            "2025": 134000000,
+            "2026": 176000000
+          }
+        },
+        {
+          "key": "us-gaap:LesseeOperatingLeaseLiabilityPaymentsDueYearFive",
+          "label": "Lessee, Operating Lease, Liability, to be Paid, Year Five",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "LesseeOperatingLeaseLiabilityPaymentsDueYearFive",
+          "valuesByYear": {
+            "2022": 72000000,
+            "2023": 74000000,
+            "2024": 69000000,
+            "2025": 62000000,
+            "2026": 79000000
+          }
+        },
+        {
+          "key": "us-gaap:LesseeOperatingLeaseLiabilityPaymentsDueYearFour",
+          "label": "Lessee, Operating Lease, Liability, to be Paid, Year Four",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "LesseeOperatingLeaseLiabilityPaymentsDueYearFour",
+          "valuesByYear": {
+            "2022": 84000000,
+            "2023": 86000000,
+            "2024": 88000000,
+            "2025": 84000000,
+            "2026": 100000000
+          }
+        },
+        {
+          "key": "us-gaap:LesseeOperatingLeaseLiabilityPaymentsDueNextTwelveMonths",
+          "label": "Lessee, Operating Lease, Liability, to be Paid, Year One",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "LesseeOperatingLeaseLiabilityPaymentsDueNextTwelveMonths",
+          "valuesByYear": {
+            "2022": 151000000,
+            "2023": 150000000,
+            "2024": 160000000,
+            "2025": 158000000,
+            "2026": 176000000
+          }
+        },
+        {
+          "key": "us-gaap:LesseeOperatingLeaseLiabilityPaymentsDueYearThree",
+          "label": "Lessee, Operating Lease, Liability, to be Paid, Year Three",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "LesseeOperatingLeaseLiabilityPaymentsDueYearThree",
+          "valuesByYear": {
+            "2022": 107000000,
+            "2023": 104000000,
+            "2024": 104000000,
+            "2025": 106000000,
+            "2026": 127000000
+          }
+        },
+        {
+          "key": "us-gaap:LesseeOperatingLeaseLiabilityPaymentsDueYearTwo",
+          "label": "Lessee, Operating Lease, Liability, to be Paid, Year Two",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "LesseeOperatingLeaseLiabilityPaymentsDueYearTwo",
+          "valuesByYear": {
+            "2022": 128000000,
+            "2023": 130000000,
+            "2024": 135000000,
+            "2025": 126000000,
+            "2026": 156000000
+          }
+        },
+        {
+          "key": "us-gaap:LesseeOperatingLeaseLiabilityUndiscountedExcessAmount",
+          "label": "Lessee, Operating Lease, Liability, Undiscounted Excess Amount",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "LesseeOperatingLeaseLiabilityUndiscountedExcessAmount",
+          "valuesByYear": {
+            "2022": 88000000,
+            "2023": 90000000,
+            "2024": 87000000,
+            "2025": 79000000,
+            "2026": 100000000
+          }
+        },
+        {
+          "key": "us-gaap:Liabilities",
+          "label": "Liabilities",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "Liabilities",
+          "valuesByYear": {
+            "2022": 15118000000,
+            "2023": 15689000000,
+            "2024": 12932000000,
+            "2025": 13379000000,
+            "2026": 16916000000
+          }
+        },
+        {
+          "key": "us-gaap:LiabilitiesAndStockholdersEquity",
+          "label": "Liabilities and Equity",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "LiabilitiesAndStockholdersEquity",
+          "valuesByYear": {
+            "2022": 19325000000,
+            "2023": 21395000000,
+            "2024": 18257000000,
+            "2025": 18381000000,
+            "2026": 22060000000
+          }
+        },
+        {
+          "key": "us-gaap:LiabilitiesCurrent",
+          "label": "Liabilities, Current",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "LiabilitiesCurrent",
+          "valuesByYear": {
+            "2022": 10711000000,
+            "2023": 10855000000,
+            "2024": 8539000000,
+            "2025": 9850000000,
+            "2026": 12016000000
+          }
+        },
+        {
+          "key": "us-gaap:LoansPayable",
+          "label": "Loans Payable",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "LoansPayable",
+          "valuesByYear": {
+            "2010": 1674435000
+          }
+        },
+        {
+          "key": "us-gaap:LongTermLoansPayable",
+          "label": "Loans Payable, Noncurrent",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "LongTermLoansPayable",
+          "valuesByYear": {
+            "2010": 379000000,
+            "2011": 377000000
+          }
+        },
+        {
+          "key": "us-gaap:LongLivedAssetsHeldForSaleImpairmentCharge",
+          "label": "Long Lived Assets Held-for-sale, Impairment Charge (Deprecated 2013-01-31)",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "LongLivedAssetsHeldForSaleImpairmentCharge",
+          "valuesByYear": {
+            "2012": 0
+          }
+        },
+        {
+          "key": "us-gaap:LongTermDebt",
+          "label": "Long-term Debt",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "LongTermDebt",
+          "valuesByYear": {
+            "2022": 4215000000,
+            "2023": 3841000000,
+            "2024": 3261000000,
+            "2025": 3692000000,
+            "2026": 3751000000
+          }
+        },
+        {
+          "key": "us-gaap:LongTermDebtAndCapitalLeaseObligations",
+          "label": "Long-term Debt and Lease Obligation",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "LongTermDebtAndCapitalLeaseObligations",
+          "valuesByYear": {
+            "2012": 2172012000,
+            "2013": 2641784000,
+            "2015": 2513151000,
+            "2016": 3207246000,
+            "2017": 3410460000
+          }
+        },
+        {
+          "key": "us-gaap:LongTermDebtCurrent",
+          "label": "Long-term Debt, Current Maturities",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "LongTermDebtCurrent",
+          "valuesByYear": {
+            "2022": 949000000,
+            "2023": 150000000,
+            "2024": 0,
+            "2025": 1209000000,
+            "2026": 0
+          }
+        },
+        {
+          "key": "us-gaap:LongTermDebtNoncurrent",
+          "label": "Long-term Debt, Excluding Current Maturities",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "LongTermDebtNoncurrent",
+          "valuesByYear": {
+            "2022": 3248000000,
+            "2023": 3691000000,
+            "2024": 3261000000,
+            "2025": 2483000000,
+            "2026": 3751000000
+          }
+        },
+        {
+          "key": "us-gaap:DebtInstrumentCarryingAmount",
+          "label": "Long-term Debt, Gross",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "DebtInstrumentCarryingAmount",
+          "valuesByYear": {
+            "2023": 3862000000,
+            "2024": 3276000000,
+            "2025": 3706000000,
+            "2026": 3768000000
+          }
+        },
+        {
+          "key": "us-gaap:LongTermDebtMaturitiesRepaymentsOfPrincipalAfterYearFive",
+          "label": "Long-Term Debt, Maturity, after Year Five",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "LongTermDebtMaturitiesRepaymentsOfPrincipalAfterYearFive",
+          "valuesByYear": {
+            "2022": 1651000000,
+            "2023": 1628000000,
+            "2024": 1586000000,
+            "2025": 1390000000,
+            "2026": 1456000000
+          }
+        },
+        {
+          "key": "us-gaap:LongTermDebtMaturitiesRepaymentsOfPrincipalInYearFive",
+          "label": "Long-Term Debt, Maturity, Year Five",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "LongTermDebtMaturitiesRepaymentsOfPrincipalInYearFive",
+          "valuesByYear": {
+            "2022": 0,
+            "2023": 546000000,
+            "2024": 27000000,
+            "2025": 682000000,
+            "2026": 701000000
+          }
+        },
+        {
+          "key": "us-gaap:LongTermDebtMaturitiesRepaymentsOfPrincipalInYearFour",
+          "label": "Long-Term Debt, Maturity, Year Four",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "LongTermDebtMaturitiesRepaymentsOfPrincipalInYearFour",
+          "valuesByYear": {
+            "2022": 1288000000,
+            "2023": 0,
+            "2024": 397000000,
+            "2025": 27000000,
+            "2026": 683000000
+          }
+        },
+        {
+          "key": "us-gaap:LongTermDebtMaturitiesRepaymentsOfPrincipalInNextTwelveMonths",
+          "label": "Long-Term Debt, Maturity, Year One",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "LongTermDebtMaturitiesRepaymentsOfPrincipalInNextTwelveMonths",
+          "valuesByYear": {
+            "2022": 950000000,
+            "2023": 150000000,
+            "2024": 0,
+            "2025": 1209000000,
+            "2026": 0
+          }
+        },
+        {
+          "key": "us-gaap:LongTermDebtMaturitiesRepaymentsOfPrincipalInYearThree",
+          "label": "Long-Term Debt, Maturity, Year Three",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "LongTermDebtMaturitiesRepaymentsOfPrincipalInYearThree",
+          "valuesByYear": {
+            "2022": 273000000,
+            "2023": 1285000000,
+            "2024": 0,
+            "2025": 398000000,
+            "2026": 30000000
+          }
+        },
+        {
+          "key": "us-gaap:LongTermDebtMaturitiesRepaymentsOfPrincipalInYearTwo",
+          "label": "Long-Term Debt, Maturity, Year Two",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "LongTermDebtMaturitiesRepaymentsOfPrincipalInYearTwo",
+          "valuesByYear": {
+            "2022": 53000000,
+            "2023": 253000000,
+            "2024": 1266000000,
+            "2025": 0,
+            "2026": 898000000
+          }
+        },
+        {
+          "key": "us-gaap:LongtermDebtWeightedAverageInterestRate",
+          "label": "Long-term Debt, Weighted Average Interest Rate, at Point in Time",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "LongtermDebtWeightedAverageInterestRate",
+          "valuesByYear": {
+            "2022": 0.04,
+            "2023": 0.047,
+            "2024": 0.045,
+            "2025": 0.046,
+            "2026": 0.049
+          }
+        },
+        {
+          "key": "us-gaap:NoncashOrPartNoncashAcquisitionFixedAssetsAcquired1",
+          "label": "Noncash or Part Noncash Acquisition, Fixed Assets Acquired",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "NoncashOrPartNoncashAcquisitionFixedAssetsAcquired1",
+          "valuesByYear": {
+            "2011": 63671000
+          }
+        },
+        {
+          "key": "us-gaap:NoncontrollingInterestIncreaseFromSubsidiaryEquityIssuance",
+          "label": "Noncontrolling Interest, Increase from Subsidiary Equity Issuance",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "NoncontrollingInterestIncreaseFromSubsidiaryEquityIssuance",
+          "valuesByYear": {
+            "2016": 300000,
+            "2017": 9306000,
+            "2018": 63363000,
+            "2019": 63363000,
+            "2024": 74000000
+          }
+        },
+        {
+          "key": "us-gaap:OperatingLeaseLiability",
+          "label": "Operating Lease, Liability",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "OperatingLeaseLiability",
+          "valuesByYear": {
+            "2022": 683000000,
+            "2023": 632000000,
+            "2024": 626000000,
+            "2025": 591000000,
+            "2026": 714000000
+          }
+        },
+        {
+          "key": "us-gaap:OperatingLeaseLiabilityCurrent",
+          "label": "Operating Lease, Liability, Current",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "OperatingLeaseLiabilityCurrent",
+          "valuesByYear": {
+            "2020": 114100000,
+            "2023": 126000000,
+            "2024": 136000000,
+            "2025": 135000000,
+            "2026": 149000000
+          }
+        },
+        {
+          "key": "us-gaap:OperatingLeaseLiabilityNoncurrent",
+          "label": "Operating Lease, Liability, Noncurrent",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "OperatingLeaseLiabilityNoncurrent",
+          "valuesByYear": {
+            "2022": 551000000,
+            "2023": 506000000,
+            "2024": 490000000,
+            "2025": 456000000,
+            "2026": 565000000
+          }
+        },
+        {
+          "key": "us-gaap:OperatingLeaseRightOfUseAsset",
+          "label": "Operating Lease, Right-of-Use Asset",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "OperatingLeaseRightOfUseAsset",
+          "valuesByYear": {
+            "2022": 637000000,
+            "2023": 608000000,
+            "2024": 601000000,
+            "2025": 562000000,
+            "2026": 659000000
+          }
+        },
+        {
+          "key": "us-gaap:OtherAccruedLiabilitiesCurrent",
+          "label": "Other Accrued Liabilities, Current",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "OtherAccruedLiabilitiesCurrent",
+          "valuesByYear": {
+            "2022": 227400000
+          }
+        },
+        {
+          "key": "us-gaap:OtherAssetImpairmentCharges",
+          "label": "Other Asset Impairment Charges",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "OtherAssetImpairmentCharges",
+          "valuesByYear": {
+            "2010": 74100000
+          }
+        },
+        {
+          "key": "us-gaap:OtherAssetsCurrent",
+          "label": "Other Assets, Current",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "OtherAssetsCurrent",
+          "valuesByYear": {
+            "2022": 903000000,
+            "2023": 917000000,
+            "2024": 1031000000,
+            "2025": 1194000000,
+            "2026": 2356000000
+          }
+        },
+        {
+          "key": "us-gaap:OtherAssetsNoncurrent",
+          "label": "Other Assets, Noncurrent",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "OtherAssetsNoncurrent",
+          "valuesByYear": {
+            "2022": 473000000,
+            "2023": 758000000,
+            "2024": 1015000000,
+            "2025": 964000000,
+            "2026": 912000000
+          }
+        },
+        {
+          "key": "us-gaap:OtherInventoryMaterialsSuppliesAndMerchandiseUnderConsignment",
+          "label": "Other Inventory, Materials, Supplies and Merchandise under Consignment, Gross",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "OtherInventoryMaterialsSuppliesAndMerchandiseUnderConsignment",
+          "valuesByYear": {
+            "2026": 1300000000
+          }
+        },
+        {
+          "key": "us-gaap:OtherLiabilities",
+          "label": "Other Liabilities",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "OtherLiabilities",
+          "valuesByYear": {
+            "2019": 531587000
+          }
+        },
+        {
+          "key": "us-gaap:OtherLiabilitiesCurrent",
+          "label": "Other Liabilities, Current",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "OtherLiabilitiesCurrent",
+          "valuesByYear": {
+            "2022": 1036000000,
+            "2023": 1110000000,
+            "2024": 968000000,
+            "2025": 977000000,
+            "2026": 1134000000
+          }
+        },
+        {
+          "key": "us-gaap:OtherLiabilitiesNoncurrent",
+          "label": "Other Liabilities, Noncurrent",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "OtherLiabilitiesNoncurrent",
+          "valuesByYear": {
+            "2022": 608000000,
+            "2023": 637000000,
+            "2024": 642000000,
+            "2025": 590000000,
+            "2026": 584000000
+          }
+        },
+        {
+          "key": "us-gaap:OtherLongTermDebtNoncurrent",
+          "label": "Other Long-term Debt, Noncurrent",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "OtherLongTermDebtNoncurrent",
+          "valuesByYear": {
+            "2010": 6437000,
+            "2011": 4578000
+          }
+        },
+        {
+          "key": "us-gaap:PaymentsForProceedsFromProductiveAssets",
+          "label": "Payments for (Proceeds from) Productive Assets",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "PaymentsForProceedsFromProductiveAssets",
+          "valuesByYear": {
+            "2009": 176463000,
+            "2010": 470702000
+          }
+        },
+        {
+          "key": "us-gaap:PaymentsForRepurchaseOfEquity",
+          "label": "Payments for Repurchase of Equity",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "PaymentsForRepurchaseOfEquity",
+          "valuesByYear": {
+            "2010": 400400000
+          }
+        },
+        {
+          "key": "us-gaap:ProceedsContractWithCustomerAssetPreviouslyWrittenOffRecovery",
+          "label": "Proceeds, Contract with Customer, Asset, Previously Written Off, Recovery",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "ProceedsContractWithCustomerAssetPreviouslyWrittenOffRecovery",
+          "valuesByYear": {
+            "2026": 2000000
+          }
+        },
+        {
+          "key": "us-gaap:PropertyPlantAndEquipmentGross",
+          "label": "Property, Plant and Equipment, Gross",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "PropertyPlantAndEquipmentGross",
+          "valuesByYear": {
+            "2022": 6104000000,
+            "2023": 6566000000,
+            "2024": 6709000000,
+            "2025": 6950000000,
+            "2026": 7303000000
+          }
+        },
+        {
+          "key": "us-gaap:PropertyPlantAndEquipmentNet",
+          "label": "Property, Plant and Equipment, Net",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "PropertyPlantAndEquipmentNet",
+          "valuesByYear": {
+            "2022": 2125000000,
+            "2023": 2349000000,
+            "2024": 2269000000,
+            "2025": 2330000000,
+            "2026": 2505000000
+          }
+        },
+        {
+          "key": "us-gaap:PropertyPlantAndEquipmentTransfersAndChanges",
+          "label": "Property, Plant and Equipment, Transfers and Changes",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "PropertyPlantAndEquipmentTransfersAndChanges",
+          "valuesByYear": {
+            "2018": 16000000,
+            "2019": 16000000
+          }
+        },
+        {
+          "key": "us-gaap:RedeemableNoncontrollingInterestEquityCarryingAmount",
+          "label": "Redeemable Noncontrolling Interest, Equity, Carrying Amount",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "RedeemableNoncontrollingInterestEquityCarryingAmount",
+          "valuesByYear": {
+            "2023": 0
+          }
+        },
+        {
+          "key": "us-gaap:RedeemableNoncontrollingInterestEquityRedemptionValue",
+          "label": "Redeemable Noncontrolling Interest, Equity, Redemption Value",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "RedeemableNoncontrollingInterestEquityRedemptionValue",
+          "valuesByYear": {
+            "2022": 78000000,
+            "2023": 0
+          }
+        },
+        {
+          "key": "us-gaap:RepaymentsOfDebtAndCapitalLeaseObligations",
+          "label": "Repayments of Debt and Lease Obligation",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "RepaymentsOfDebtAndCapitalLeaseObligations",
+          "valuesByYear": {
+            "2022": 284000000,
+            "2023": 1024000000,
+            "2024": 409000000,
+            "2025": 58000000,
+            "2026": 1217000000
+          }
+        },
+        {
+          "key": "us-gaap:RepaymentsOfLongTermDebt",
+          "label": "Repayments of Long-term Debt",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "RepaymentsOfLongTermDebt",
+          "valuesByYear": {
+            "2009": 1002668000,
+            "2010": 3686731000,
+            "2011": 480000000
+          }
+        },
+        {
+          "key": "us-gaap:RetainedEarningsAccumulatedDeficit",
+          "label": "Retained Earnings (Accumulated Deficit)",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "RetainedEarningsAccumulatedDeficit",
+          "valuesByYear": {
+            "2022": -1353000000,
+            "2023": -560000000,
+            "2024": 446000000,
+            "2025": 1284000000,
+            "2026": 2164000000
+          }
+        },
+        {
+          "key": "us-gaap:RightOfUseAssetObtainedInExchangeForOperatingLeaseLiability",
+          "label": "Right-of-Use Asset Obtained in Exchange for Operating Lease Liability",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "RightOfUseAssetObtainedInExchangeForOperatingLeaseLiability",
+          "valuesByYear": {
+            "2022": 78000000,
+            "2023": 119000000,
+            "2024": 134000000,
+            "2025": 106000000,
+            "2026": 227000000
+          }
+        },
+        {
+          "key": "us-gaap:SegmentReportingSegmentAssets",
+          "label": "Segment Reporting, Segment Assets (Deprecated 2011-01-31)",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "SegmentReportingSegmentAssets",
+          "valuesByYear": {
+            "2010": 2141063000
+          }
+        },
+        {
+          "key": "us-gaap:ServicingAsset",
+          "label": "Servicing Asset",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "ServicingAsset",
+          "valuesByYear": {
+            "2017": 0,
+            "2018": 0,
+            "2019": 0,
+            "2020": 0,
+            "2022": 0
+          }
+        },
+        {
+          "key": "us-gaap:ServicingLiability",
+          "label": "Servicing Liability",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "ServicingLiability",
+          "valuesByYear": {
+            "2016": 0,
+            "2017": 0,
+            "2018": 0,
+            "2019": 0,
+            "2020": 0
+          }
+        },
+        {
+          "key": "us-gaap:SharebasedCompensationArrangementBySharebasedPaymentAwardEquityInstrumentsOtherThanOptionsAggregateIntrinsicValueOutstanding",
+          "label": "Share-based Compensation Arrangement by Share-based Payment Award, Equity Instruments Other than Options, Aggregate Intrinsic Value, Outstanding",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "SharebasedCompensationArrangementBySharebasedPaymentAwardEquityInstrumentsOtherThanOptionsAggregateIntrinsicValueOutstanding",
+          "valuesByYear": {
+            "2016": 9400000,
+            "2017": 1200000
+          }
+        },
+        {
+          "key": "us-gaap:ShareBasedCompensationArrangementByShareBasedPaymentAwardEquityInstrumentsOtherThanOptionsForfeitedInPeriod",
+          "label": "Share-based Compensation Arrangement by Share-based Payment Award, Equity Instruments Other than Options, Forfeited in Period",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "ShareBasedCompensationArrangementByShareBasedPaymentAwardEquityInstrumentsOtherThanOptionsForfeitedInPeriod",
+          "valuesByYear": {
+            "2010": 1980449,
+            "2011": 4494965
+          }
+        },
+        {
+          "key": "us-gaap:ShareBasedCompensationArrangementByShareBasedPaymentAwardEquityInstrumentsOtherThanOptionsForfeitedInPeriodWeightedAverageGrantDateFairValue",
+          "label": "Share-based Compensation Arrangement by Share-based Payment Award, Equity Instruments Other than Options, Forfeited in Period, Weighted Average Grant Date Fair Value (Deprecated 2012-01-31)",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "ShareBasedCompensationArrangementByShareBasedPaymentAwardEquityInstrumentsOtherThanOptionsForfeitedInPeriodWeightedAverageGrantDateFairValue",
+          "valuesByYear": {
+            "2010": 9.74,
+            "2011": 8.6
+          }
+        },
+        {
+          "key": "us-gaap:ShareBasedCompensationArrangementByShareBasedPaymentAwardEquityInstrumentsOtherThanOptionsGrantsInPeriod",
+          "label": "Share-based Compensation Arrangement by Share-based Payment Award, Equity Instruments Other than Options, Grants in Period",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "ShareBasedCompensationArrangementByShareBasedPaymentAwardEquityInstrumentsOtherThanOptionsGrantsInPeriod",
+          "valuesByYear": {
+            "2010": 9739375,
+            "2011": 9213456
+          }
+        },
+        {
+          "key": "us-gaap:ShareBasedCompensationArrangementByShareBasedPaymentAwardEquityInstrumentsOtherThanOptionsNonvestedNumber",
+          "label": "Share-based Compensation Arrangement by Share-based Payment Award, Equity Instruments Other than Options, Nonvested, Number",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "ShareBasedCompensationArrangementByShareBasedPaymentAwardEquityInstrumentsOtherThanOptionsNonvestedNumber",
+          "valuesByYear": {
+            "2010": 13801942,
+            "2011": 15965268
+          }
+        },
+        {
+          "key": "us-gaap:ShareBasedCompensationArrangementByShareBasedPaymentAwardEquityInstrumentsOtherThanOptionsVestedInPeriod",
+          "label": "Share-based Compensation Arrangement by Share-based Payment Award, Equity Instruments Other than Options, Vested in Period",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "ShareBasedCompensationArrangementByShareBasedPaymentAwardEquityInstrumentsOtherThanOptionsVestedInPeriod",
+          "valuesByYear": {
+            "2010": 2758593,
+            "2011": 2555165
+          }
+        },
+        {
+          "key": "us-gaap:StockholdersEquity",
+          "label": "Stockholders' Equity Attributable to Parent",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "StockholdersEquity",
+          "valuesByYear": {
+            "2018": 3018573000,
+            "2023": 5351000000,
+            "2024": 5325000000,
+            "2025": 5002000000,
+            "2026": 5144000000
+          }
+        },
+        {
+          "key": "us-gaap:StockholdersEquityNoteSpinoffTransaction",
+          "label": "Stockholders' Equity Note, Spinoff Transaction",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "StockholdersEquityNoteSpinoffTransaction",
+          "valuesByYear": {
+            "2024": -972000000,
+            "2025": -972000000,
+            "2026": -972000000
+          }
+        },
+        {
+          "key": "us-gaap:StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest",
+          "label": "Stockholders' Equity, Including Portion Attributable to Noncontrolling Interest",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest",
+          "valuesByYear": {
+            "2022": 4129000000,
+            "2023": 5706000000,
+            "2024": 5325000000,
+            "2025": 5002000000,
+            "2026": 5144000000
+          }
+        },
+        {
+          "key": "us-gaap:SubordinatedLongTermDebt",
+          "label": "Subordinated Long-term Debt, Noncurrent",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "SubordinatedLongTermDebt",
+          "valuesByYear": {
+            "2010": 302172000
+          }
+        },
+        {
+          "key": "us-gaap:SubsidiaryOrEquityMethodInvesteeCumulativePercentageOwnershipAfterAllTransactions",
+          "label": "Subsidiary or Equity Method Investee, Cumulative Percentage Ownership after All Transactions",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "SubsidiaryOrEquityMethodInvesteeCumulativePercentageOwnershipAfterAllTransactions",
+          "valuesByYear": {
+            "2017": 1,
+            "2018": 1,
+            "2019": 1,
+            "2020": 1,
+            "2021": 1
+          }
+        },
+        {
+          "key": "us-gaap:TemporaryEquityCarryingAmountIncludingPortionAttributableToNoncontrollingInterests",
+          "label": "Temporary Equity, Carrying Amount, Including Portion Attributable to Noncontrolling Interests",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "TemporaryEquityCarryingAmountIncludingPortionAttributableToNoncontrollingInterests",
+          "valuesByYear": {
+            "2022": 78000000,
+            "2023": 0,
+            "2024": 0,
+            "2025": 0
+          }
+        },
+        {
+          "key": "us-gaap:TemporaryEquityForeignCurrencyTranslationAdjustments",
+          "label": "Temporary Equity, Foreign Currency Translation Adjustments",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "TemporaryEquityForeignCurrencyTranslationAdjustments",
+          "valuesByYear": {
+            "2019": 21000000,
+            "2020": 5200000,
+            "2021": 11400000,
+            "2022": 7100000
+          }
+        },
+        {
+          "key": "us-gaap:TemporaryEquityNetIncome",
+          "label": "Temporary Equity, Net Income",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "TemporaryEquityNetIncome",
+          "valuesByYear": {
+            "2022": 4000000,
+            "2023": 43000000,
+            "2024": 43000000,
+            "2025": 43000000
+          }
+        },
+        {
+          "key": "us-gaap:TemporaryEquityStockIssuedDuringPeriodValueNewIssues",
+          "label": "Temporary Equity, Stock Issued During Period, Value, New Issues",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "TemporaryEquityStockIssuedDuringPeriodValueNewIssues",
+          "valuesByYear": {
+            "2022": 74000000,
+            "2023": 99000000
+          }
+        },
+        {
+          "key": "us-gaap:TreasuryStockCommonShares",
+          "label": "Treasury Stock, Common, Shares",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "TreasuryStockCommonShares",
+          "valuesByYear": {
+            "2023": 50239355,
+            "2024": 0,
+            "2025": 5551640,
+            "2026": 5551640
+          }
+        },
+        {
+          "key": "us-gaap:TreasuryStockCommonValue",
+          "label": "Treasury Stock, Common, Value",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "TreasuryStockCommonValue",
+          "valuesByYear": {
+            "2023": 388000000,
+            "2024": 0,
+            "2025": 200000000,
+            "2026": 200000000
+          }
+        },
+        {
+          "key": "us-gaap:TreasuryStockRetiredCostMethodAmount",
+          "label": "Treasury Stock, Retired, Cost Method, Amount",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "TreasuryStockRetiredCostMethodAmount",
+          "valuesByYear": {
+            "2024": 388000000
+          }
+        },
+        {
+          "key": "us-gaap:TreasuryStockShares",
+          "label": "Treasury Stock, Shares",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "TreasuryStockShares",
+          "valuesByYear": {
+            "2018": 50239355,
+            "2019": 50239355,
+            "2020": 50239355,
+            "2021": 50239355,
+            "2022": 50239355
+          }
+        },
+        {
+          "key": "us-gaap:TreasuryStockSharesRetired",
+          "label": "Treasury Stock, Shares, Retired",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "TreasuryStockSharesRetired",
+          "valuesByYear": {
+            "2011": 23500000,
+            "2024": 50200000
+          }
+        },
+        {
+          "key": "us-gaap:TreasuryStockValue",
+          "label": "Treasury Stock, Value",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "TreasuryStockValue",
+          "valuesByYear": {
+            "2018": 388215000,
+            "2019": 388215000,
+            "2020": 388215000,
+            "2021": 388000000,
+            "2022": 388000000
+          }
+        },
+        {
+          "key": "us-gaap:TreasuryStockValueAcquiredCostMethod",
+          "label": "Treasury Stock, Value, Acquired, Cost Method",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "TreasuryStockValueAcquiredCostMethod",
+          "valuesByYear": {
+            "2022": 686000000,
+            "2023": 337000000,
+            "2024": 1298000000,
+            "2025": 1257000000,
+            "2026": 944000000
+          }
+        },
+        {
+          "key": "us-gaap:UnamortizedDebtIssuanceExpense",
+          "label": "Unamortized Debt Issuance Expense",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "UnamortizedDebtIssuanceExpense",
+          "valuesByYear": {
+            "2022": 18000000,
+            "2023": 21000000,
+            "2024": 15000000,
+            "2025": 14000000,
+            "2026": 17000000
+          }
+        },
+        {
+          "key": "us-gaap:ValuationAllowanceDeferredTaxAssetChangeInAmount",
+          "label": "Valuation Allowance, Deferred Tax Asset, Increase (Decrease), Amount",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "ValuationAllowanceDeferredTaxAssetChangeInAmount",
+          "valuesByYear": {
+            "2022": 7700000,
+            "2023": -12000000,
+            "2024": -447000000,
+            "2025": -4000000,
+            "2026": -1000000
+          }
+        },
+        {
+          "key": "us-gaap:WarrantDownRoundFeatureIncreaseDecreaseInEquityAmount1",
+          "label": "WarrantDownRoundFeatureIncreaseDecreaseInEquityAmount1",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "WarrantDownRoundFeatureIncreaseDecreaseInEquityAmount1",
+          "valuesByYear": {
+            "2026": 7000000
+          }
+        }
+      ]
+    },
+    "cf": {
+      "years": [
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "rows": [
+        {
+          "key": "us-gaap:CapitalExpendituresIncurredButNotYetPaid",
+          "label": "Capital Expenditures Incurred but Not yet Paid",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "CapitalExpendituresIncurredButNotYetPaid",
+          "valuesByYear": {
+            "2022": 126000000,
+            "2023": 184000000,
+            "2024": 97000000,
+            "2025": 136000000,
+            "2026": 174000000
+          }
+        },
+        {
+          "key": "us-gaap:CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalentsPeriodIncreaseDecreaseIncludingExchangeRateEffect",
+          "label": "Cash, Cash Equivalents, Restricted Cash and Restricted Cash Equivalents, Period Increase (Decrease), Including Exchange Rate Effect",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalentsPeriodIncreaseDecreaseIncludingExchangeRateEffect",
+          "valuesByYear": {
+            "2022": 327000000,
+            "2023": 330000000,
+            "2024": -820000000,
+            "2025": -185000000,
+            "2026": 100000000
+          }
+        },
+        {
+          "key": "us-gaap:EffectOfExchangeRateOnCashAndCashEquivalents",
+          "label": "Effect of Exchange Rate on Cash and Cash Equivalents",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "EffectOfExchangeRateOnCashAndCashEquivalents",
+          "valuesByYear": {
+            "2015": -1121000,
+            "2016": -10549000,
+            "2017": 17490000,
+            "2018": -15079000,
+            "2019": -27968000
+          }
+        },
+        {
+          "key": "us-gaap:EffectOfExchangeRateOnCashCashEquivalentsRestrictedCashAndRestrictedCashEquivalents",
+          "label": "Effect of Exchange Rate on Cash, Cash Equivalents, Restricted Cash and Restricted Cash Equivalents",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "EffectOfExchangeRateOnCashCashEquivalentsRestrictedCashAndRestrictedCashEquivalents",
+          "valuesByYear": {
+            "2022": -26000000,
+            "2023": -18000000,
+            "2024": 2000000,
+            "2025": -31000000,
+            "2026": 11000000
+          }
+        },
+        {
+          "key": "us-gaap:ExcessTaxBenefitFromShareBasedCompensationFinancingActivities",
+          "label": "Excess Tax Benefit from Share-based Compensation, Financing Activities",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "ExcessTaxBenefitFromShareBasedCompensationFinancingActivities",
+          "valuesByYear": {
+            "2010": 0
+          }
+        },
+        {
+          "key": "us-gaap:NetCashProvidedByUsedInFinancingActivities",
+          "label": "Net Cash Provided by (Used in) Financing Activities",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "NetCashProvidedByUsedInFinancingActivities",
+          "valuesByYear": {
+            "2022": 280000000,
+            "2023": 2000000,
+            "2024": -1656000000,
+            "2025": -821000000,
+            "2026": -924000000
+          }
+        },
+        {
+          "key": "us-gaap:NetCashProvidedByUsedInInvestingActivities",
+          "label": "Net Cash Provided by (Used in) Investing Activities",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "NetCashProvidedByUsedInInvestingActivities",
+          "valuesByYear": {
+            "2022": -951000000,
+            "2023": -604000000,
+            "2024": -492000000,
+            "2025": -838000000,
+            "2026": -672000000
+          }
+        },
+        {
+          "key": "us-gaap:NetCashProvidedByUsedInOperatingActivities",
+          "label": "Net Cash Provided by (Used in) Operating Activities",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "NetCashProvidedByUsedInOperatingActivities",
+          "valuesByYear": {
+            "2022": 1024000000,
+            "2023": 950000000,
+            "2024": 1326000000,
+            "2025": 1505000000,
+            "2026": 1685000000
+          }
+        },
+        {
+          "key": "us-gaap:PaymentsForProceedsFromOtherInvestingActivities",
+          "label": "Payments for (Proceeds from) Other Investing Activities",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "PaymentsForProceedsFromOtherInvestingActivities",
+          "valuesByYear": {
+            "2022": -11000000,
+            "2023": -7000000,
+            "2024": -1000000,
+            "2025": -11000000,
+            "2026": 3000000
+          }
+        },
+        {
+          "key": "us-gaap:PaymentsToAcquireBusinessesNetOfCashAcquired",
+          "label": "Payments to Acquire Businesses, Net of Cash Acquired",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "PaymentsToAcquireBusinessesNetOfCashAcquired",
+          "valuesByYear": {
+            "2022": 539000000,
+            "2023": -2000000,
+            "2024": 0,
+            "2025": 405000000,
+            "2026": 40000000
+          }
+        },
+        {
+          "key": "us-gaap:PaymentsToAcquirePropertyPlantAndEquipment",
+          "label": "Payments to Acquire Property, Plant, and Equipment",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "PaymentsToAcquirePropertyPlantAndEquipment",
+          "valuesByYear": {
+            "2022": 443000000,
+            "2023": 635000000,
+            "2024": 530000000,
+            "2025": 438000000,
+            "2026": 633000000
+          }
+        },
+        {
+          "key": "us-gaap:ProceedsFromPaymentsForOtherFinancingActivities",
+          "label": "Proceeds from (Payments for) Other Financing Activities",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "ProceedsFromPaymentsForOtherFinancingActivities",
+          "valuesByYear": {
+            "2022": 3000000,
+            "2023": -27000000,
+            "2024": -78000000,
+            "2025": -5000000,
+            "2026": -14000000
+          }
+        },
+        {
+          "key": "us-gaap:ProceedsFromRepaymentsOfLongTermDebtAndCapitalSecurities",
+          "label": "Proceeds from (Repayments of) Long-term Debt and Capital Securities",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "ProceedsFromRepaymentsOfLongTermDebtAndCapitalSecurities",
+          "valuesByYear": {
+            "2009": -509486000,
+            "2010": -315495000
+          }
+        },
+        {
+          "key": "us-gaap:ProceedsFromCollectionOfRetainedInterestInSecuritizedReceivables",
+          "label": "Proceeds from Collection of Retained Interest in Securitized Receivables",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "ProceedsFromCollectionOfRetainedInterestInSecuritizedReceivables",
+          "valuesByYear": {
+            "2011": 4867640000
+          }
+        },
+        {
+          "key": "us-gaap:ProceedsFromDivestitureOfBusinesses",
+          "label": "Proceeds from Divestiture of Businesses",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "ProceedsFromDivestitureOfBusinesses",
+          "valuesByYear": {
+            "2019": 30700000,
+            "2023": 4000000,
+            "2024": 14000000,
+            "2025": 14000000,
+            "2026": 14000000
+          }
+        },
+        {
+          "key": "us-gaap:ProceedsFromDivestitureOfBusinessesNetOfCashDivested",
+          "label": "Proceeds from Divestiture of Businesses, Net of Cash Divested",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "ProceedsFromDivestitureOfBusinessesNetOfCashDivested",
+          "valuesByYear": {
+            "2022": 9000000,
+            "2023": 2000000,
+            "2024": 12000000,
+            "2025": -21000000,
+            "2026": -4000000
+          }
+        },
+        {
+          "key": "us-gaap:ProceedsFromIssuanceOfCommonStock",
+          "label": "Proceeds from Issuance of Common Stock",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "ProceedsFromIssuanceOfCommonStock",
+          "valuesByYear": {
+            "2013": 28140000,
+            "2023": 694000000,
+            "2024": 552000000,
+            "2025": 0,
+            "2026": 0
+          }
+        },
+        {
+          "key": "us-gaap:ProceedsFromIssuanceOfDebt",
+          "label": "Proceeds from Issuance of Debt",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "ProceedsFromIssuanceOfDebt",
+          "valuesByYear": {
+            "2022": 759000000,
+            "2023": 718000000,
+            "2024": 2000000,
+            "2025": 499000000,
+            "2026": 1251000000
+          }
+        },
+        {
+          "key": "us-gaap:ProceedsFromIssuanceOfLongTermDebt",
+          "label": "Proceeds from Issuance of Long-term Debt",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "ProceedsFromIssuanceOfLongTermDebt",
+          "valuesByYear": {
+            "2009": 792856000,
+            "2010": 3737631000
+          }
+        },
+        {
+          "key": "us-gaap:ProceedsFromIssuanceOfRedeemablePreferredStock",
+          "label": "Proceeds from Issuance of Redeemable Preferred Stock",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "ProceedsFromIssuanceOfRedeemablePreferredStock",
+          "valuesByYear": {
+            "2022": 488000000,
+            "2023": 0,
+            "2024": 0
+          }
+        },
+        {
+          "key": "us-gaap:ProceedsFromIssuanceOfWarrants",
+          "label": "Proceeds from Issuance of Warrants",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "ProceedsFromIssuanceOfWarrants",
+          "valuesByYear": {
+            "2015": 67300000,
+            "2016": 67300000
+          }
+        },
+        {
+          "key": "us-gaap:ProceedsFromSaleOfEquityMethodInvestments",
+          "label": "Proceeds from Sale of Equity Method Investments",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "ProceedsFromSaleOfEquityMethodInvestments",
+          "valuesByYear": {
+            "2021": 48000000,
+            "2022": 17000000
+          }
+        },
+        {
+          "key": "us-gaap:ProceedsFromSaleOfProductiveAssets",
+          "label": "Proceeds from Sale of Productive Assets",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "ProceedsFromSaleOfProductiveAssets",
+          "valuesByYear": {
+            "2010": 76833000
+          }
+        },
+        {
+          "key": "us-gaap:ProceedsFromSaleOfPropertyPlantAndEquipment",
+          "label": "Proceeds from Sale of Property, Plant, and Equipment",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "ProceedsFromSaleOfPropertyPlantAndEquipment",
+          "valuesByYear": {
+            "2022": 11000000,
+            "2023": 20000000,
+            "2024": 25000000,
+            "2025": 15000000,
+            "2026": 8000000
+          }
+        },
+        {
+          "key": "us-gaap:ProceedsFromStockOptionsExercised",
+          "label": "Proceeds from Stock Options Exercised",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "ProceedsFromStockOptionsExercised",
+          "valuesByYear": {
+            "2015": 23508000,
+            "2016": 61278000,
+            "2017": 12438000,
+            "2018": 2774000,
+            "2019": 245000
+          }
+        },
+        {
+          "key": "us-gaap:ProceedsFromIssuanceOfSharesUnderIncentiveAndShareBasedCompensationPlansIncludingStockOptions",
+          "label": "Proceeds, Issuance of Shares, Share-based Payment Arrangement, Including Option Exercised",
+          "unit": "usd",
+          "taxonomy": "us-gaap",
+          "concept": "ProceedsFromIssuanceOfSharesUnderIncentiveAndShareBasedCompensationPlansIncludingStockOptions",
+          "valuesByYear": {
+            "2012": 22300000,
+            "2013": 28100000,
+            "2015": 23500000,
+            "2019": 2800000,
+            "2020": 2800000
+          }
+        }
+      ]
+    }
+  }
+}

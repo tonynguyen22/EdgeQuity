@@ -1,0 +1,96 @@
+{
+  "ticker": "AEO",
+  "name": "American Eagle Outfitters Inc",
+  "sector": "Retail",
+  "industry": "Retail",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 2747404581,
+  "enterpriseValue": 2486.9373,
+  "valuation": {
+    "peTTM": 13.9093,
+    "forwardPE": 9.35822,
+    "psTTM": 0.4858,
+    "pb": 2.4679,
+    "evRevenue": 4.483200822896304e-7,
+    "evEbitda": null,
+    "pfcf": 14.061347894179244,
+    "fcfYield": 0.07111693754579206,
+    "earningsYield": 0.067526275992622
+  },
+  "profitability": {
+    "grossMargin": 0.36510453133776893,
+    "operatingMargin": 0.040781030408657576,
+    "netMargin": 0.03344404312345824,
+    "roe": 0.10957190519699046,
+    "roa": 0.04626853015702001,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 1.5148,
+    "quickRatio": 0.5982,
+    "debtToEquity": null,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 456182000,
+    "freeCashFlow": 195387000,
+    "fcfMargin": 0.03522240625781921,
+    "capexToRevenue": 0.04701350366200392,
+    "fcfConversion": 1.0531742866075182
+  },
+  "dividends": {
+    "dividendYield": 3.0487804878048785,
+    "payoutRatio": 44.41
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 5547236000,
+      "grossProfit": 2025321000,
+      "operatingIncome": 226222000,
+      "netIncome": 185522000,
+      "freeCashFlow": 195387000,
+      "totalAssets": 4009680000,
+      "totalDebt": null,
+      "totalEquity": 1693153000,
+      "sharesDiluted": 176141000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T17:21:46.075Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T17:21:46.075Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T17:21:46.075Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T17:21:46.075Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items"
+    }
+  }
+}

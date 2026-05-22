@@ -1,0 +1,96 @@
+{
+  "ticker": "STX",
+  "name": "Seagate Technology Holdings PLC",
+  "sector": "Technology",
+  "industry": "Technology",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 166120000000,
+  "enterpriseValue": 170224000000,
+  "valuation": {
+    "peTTM": 70.8207,
+    "forwardPE": 29.7751,
+    "psTTM": 15.2962,
+    "pb": 136.1795,
+    "evRevenue": 18.712102891062987,
+    "evEbitda": null,
+    "pfcf": 203.08068459657702,
+    "fcfYield": 0.004924151215988442,
+    "earningsYield": 0.0088430050565856
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": 0.20776080026382324,
+    "netMargin": 0.16148180718918326,
+    "roe": -3.2428256070640176,
+    "roa": 0.18309859154929578,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 1.3795,
+    "quickRatio": 0.8357,
+    "debtToEquity": -11.026490066225165,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 1083000000,
+    "freeCashFlow": 818000000,
+    "fcfMargin": 0.08991975376497746,
+    "capexToRevenue": 0.029130482576673628,
+    "fcfConversion": 0.5568413886997958
+  },
+  "dividends": {
+    "dividendYield": 0.39410441104024924,
+    "payoutRatio": 40.84
+  },
+  "history": [
+    {
+      "year": "2027",
+      "revenue": 9097000000,
+      "grossProfit": null,
+      "operatingIncome": 1890000000,
+      "netIncome": 1469000000,
+      "freeCashFlow": 818000000,
+      "totalAssets": 8023000000,
+      "totalDebt": 4995000000,
+      "totalEquity": -453000000,
+      "sharesDiluted": 217000000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T17:58:37.688Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T17:58:37.688Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T17:58:37.688Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T17:58:37.688Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

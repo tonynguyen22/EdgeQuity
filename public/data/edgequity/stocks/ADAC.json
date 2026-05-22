@@ -1,0 +1,98 @@
+{
+  "ticker": "ADAC",
+  "name": "American Drive Acquisition Co",
+  "sector": "N/A",
+  "industry": "N/A",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 285775000,
+  "enterpriseValue": null,
+  "valuation": {
+    "peTTM": 3017.6874,
+    "forwardPE": null,
+    "psTTM": null,
+    "pb": null,
+    "evRevenue": null,
+    "evEbitda": null,
+    "pfcf": null,
+    "fcfYield": null,
+    "earningsYield": 0.00033137958183885924
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": null,
+    "netMargin": null,
+    "roe": -0.011420267658754684,
+    "roa": 0.0004088123574504334,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 12.9242,
+    "quickRatio": 12.8937,
+    "debtToEquity": null,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": -92068,
+    "freeCashFlow": null,
+    "fcfMargin": null,
+    "capexToRevenue": null,
+    "fcfConversion": null
+  },
+  "dividends": {
+    "dividendYield": null,
+    "payoutRatio": null
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": null,
+      "grossProfit": null,
+      "operatingIncome": -134521,
+      "netIncome": 94700,
+      "freeCashFlow": null,
+      "totalAssets": 231646618,
+      "totalDebt": null,
+      "totalEquity": -8292275,
+      "sharesDiluted": 7036982
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items",
+    "Revenue unavailable from mapped line items",
+    "Free cash flow unavailable from mapped line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T17:24:47.881Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T17:24:47.881Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T17:24:47.881Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T17:24:47.881Z",
+      "status": "partial",
+      "message": "Thin summary mapped from Finnhub as-reported line items"
+    }
+  }
+}

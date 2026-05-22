@@ -1,0 +1,100 @@
+{
+  "ticker": "TSM",
+  "name": "Taiwan Semiconductor Manufacturing Co Ltd",
+  "sector": "Semiconductors",
+  "industry": "Semiconductors",
+  "currency": "TWD",
+  "price": null,
+  "marketCap": 1840000000000,
+  "enterpriseValue": 54643195,
+  "valuation": {
+    "peTTM": 29.3771,
+    "forwardPE": 20.26752,
+    "psTTM": 13.807,
+    "pb": 7.2731,
+    "evRevenue": null,
+    "evEbitda": null,
+    "pfcf": null,
+    "fcfYield": null,
+    "earningsYield": null
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": null,
+    "netMargin": null,
+    "roe": null,
+    "roa": null,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 2.618,
+    "quickRatio": 2.4204,
+    "debtToEquity": null,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": null,
+    "freeCashFlow": null,
+    "fcfMargin": null,
+    "capexToRevenue": null,
+    "fcfConversion": null
+  },
+  "dividends": {
+    "dividendYield": 1.0983981693363845,
+    "payoutRatio": 27.17
+  },
+  "history": [
+    {
+      "year": "",
+      "revenue": null,
+      "grossProfit": null,
+      "operatingIncome": null,
+      "netIncome": null,
+      "freeCashFlow": null,
+      "totalAssets": null,
+      "totalDebt": null,
+      "totalEquity": null,
+      "sharesDiluted": null
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items",
+    "Finnhub as-reported financial filing unavailable",
+    "Revenue unavailable from mapped line items",
+    "Free cash flow unavailable from mapped line items",
+    "Total assets unavailable from mapped line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T17:57:30.118Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T17:57:30.118Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T17:57:30.118Z",
+      "status": "missing"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T17:57:30.118Z",
+      "status": "partial",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

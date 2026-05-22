@@ -1,0 +1,96 @@
+{
+  "ticker": "PSA",
+  "name": "Public Storage",
+  "sector": "Real Estate",
+  "industry": "Real Estate",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 52130000000,
+  "enterpriseValue": 63065.197,
+  "valuation": {
+    "peTTM": 27.9413,
+    "forwardPE": 29.98982,
+    "psTTM": 10.9428,
+    "pb": 4.9544,
+    "evRevenue": 0.000013072910398243159,
+    "evEbitda": null,
+    "pfcf": 17.564104939883457,
+    "fcfYield": 0.05693429886821408,
+    "earningsYield": 0.03447212737387301
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": null,
+    "netMargin": 0.372510345425159,
+    "roe": 0.1943130544905953,
+    "roa": 5.918220020813848,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 0.1804,
+    "quickRatio": 0.1804,
+    "debtToEquity": null,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 3186449000,
+    "freeCashFlow": 2967985000,
+    "fcfMargin": 0.6152395269347961,
+    "capexToRevenue": 0.045285838039034326,
+    "fcfConversion": 1.6516038668204016
+  },
+  "dividends": {
+    "dividendYield": 3.962095948756892,
+    "payoutRatio": 129.09
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 4824113000,
+      "grossProfit": null,
+      "operatingIncome": null,
+      "netIncome": 1797032000,
+      "freeCashFlow": 2967985000,
+      "totalAssets": 303644000,
+      "totalDebt": null,
+      "totalEquity": 9248128000,
+      "sharesDiluted": 175902000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T20:20:28.976Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T20:20:28.976Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T20:20:28.976Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T20:20:28.976Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

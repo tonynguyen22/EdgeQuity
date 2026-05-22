@@ -1,0 +1,2518 @@
+{
+  "schemaVersion": 1,
+  "ticker": "VZ",
+  "source": "sec-edgar+finnhub",
+  "fetchedAt": "2026-05-22T11:52:06.484Z",
+  "status": "ok",
+  "sections": [
+    {
+      "id": "growth",
+      "title": "Growth",
+      "description": "Revenue, earnings, and EPS across recent reporting periods.",
+      "metrics": [
+        {
+          "id": "revenue",
+          "label": "Revenue",
+          "description": "Revenue shows business scale and demand momentum.",
+          "format": "money",
+          "annual": [
+            {
+              "period": "2025",
+              "value": 138191000000
+            },
+            {
+              "period": "2024",
+              "value": 134788000000
+            },
+            {
+              "period": "2023",
+              "value": 133974000000
+            },
+            {
+              "period": "2022",
+              "value": 136835000000
+            },
+            {
+              "period": "2021",
+              "value": 133613000000
+            }
+          ],
+          "quarterly": [
+            {
+              "period": "2019-Q3",
+              "value": 97093000000
+            },
+            {
+              "period": "2020-Q1",
+              "value": 31610000000
+            },
+            {
+              "period": "2020-Q2",
+              "value": 62057000000
+            },
+            {
+              "period": "2020-Q3",
+              "value": 93600000000
+            },
+            {
+              "period": "2021-Q1",
+              "value": 32867000000
+            },
+            {
+              "period": "2021-Q2",
+              "value": 66631000000
+            },
+            {
+              "period": "2021-Q3",
+              "value": 99546000000
+            },
+            {
+              "period": "2022-Q1",
+              "value": 33554000000
+            },
+            {
+              "period": "2022-Q2",
+              "value": 67343000000
+            },
+            {
+              "period": "2022-Q3",
+              "value": 101584000000
+            },
+            {
+              "period": "2023-Q1",
+              "value": 32912000000
+            },
+            {
+              "period": "2023-Q2",
+              "value": 65508000000
+            },
+            {
+              "period": "2023-Q3",
+              "value": 98844000000
+            },
+            {
+              "period": "2024-Q1",
+              "value": 32981000000
+            },
+            {
+              "period": "2024-Q2",
+              "value": 65777000000
+            },
+            {
+              "period": "2024-Q3",
+              "value": 99107000000
+            },
+            {
+              "period": "2025-Q1",
+              "value": 33485000000
+            },
+            {
+              "period": "2025-Q2",
+              "value": 67989000000
+            },
+            {
+              "period": "2025-Q3",
+              "value": 101810000000
+            },
+            {
+              "period": "2026-Q1",
+              "value": 34440000000
+            }
+          ]
+        },
+        {
+          "id": "operatingIncome",
+          "label": "Operating income",
+          "description": "Operating income reflects core profitability after operating expenses.",
+          "format": "money",
+          "annual": [
+            {
+              "period": "2025",
+              "value": 29259000000
+            },
+            {
+              "period": "2024",
+              "value": 28686000000
+            },
+            {
+              "period": "2023",
+              "value": 22877000000
+            },
+            {
+              "period": "2022",
+              "value": 30467000000
+            },
+            {
+              "period": "2021",
+              "value": 32448000000
+            }
+          ],
+          "quarterly": [
+            {
+              "period": "2019-Q3",
+              "value": 23739000000
+            },
+            {
+              "period": "2020-Q1",
+              "value": 6579000000
+            },
+            {
+              "period": "2020-Q2",
+              "value": 13940000000
+            },
+            {
+              "period": "2020-Q3",
+              "value": 21618000000
+            },
+            {
+              "period": "2021-Q1",
+              "value": 7770000000
+            },
+            {
+              "period": "2021-Q2",
+              "value": 15935000000
+            },
+            {
+              "period": "2021-Q3",
+              "value": 24840000000
+            },
+            {
+              "period": "2022-Q1",
+              "value": 7796000000
+            },
+            {
+              "period": "2022-Q2",
+              "value": 15348000000
+            },
+            {
+              "period": "2022-Q3",
+              "value": 23242000000
+            },
+            {
+              "period": "2023-Q1",
+              "value": 7584000000
+            },
+            {
+              "period": "2023-Q2",
+              "value": 14804000000
+            },
+            {
+              "period": "2023-Q3",
+              "value": 22277000000
+            },
+            {
+              "period": "2024-Q1",
+              "value": 7521000000
+            },
+            {
+              "period": "2024-Q2",
+              "value": 15339000000
+            },
+            {
+              "period": "2024-Q3",
+              "value": 21265000000
+            },
+            {
+              "period": "2025-Q1",
+              "value": 7978000000
+            },
+            {
+              "period": "2025-Q2",
+              "value": 16150000000
+            },
+            {
+              "period": "2025-Q3",
+              "value": 24255000000
+            },
+            {
+              "period": "2026-Q1",
+              "value": 8242000000
+            }
+          ]
+        },
+        {
+          "id": "pretaxIncome",
+          "label": "Pretax income",
+          "description": "Pretax income is earnings before income tax expense.",
+          "format": "money",
+          "annual": [
+            {
+              "period": "2025",
+              "value": 22672000000
+            },
+            {
+              "period": "2024",
+              "value": 22979000000
+            },
+            {
+              "period": "2023",
+              "value": 16987000000
+            },
+            {
+              "period": "2022",
+              "value": 28271000000
+            },
+            {
+              "period": "2021",
+              "value": 29420000000
+            }
+          ],
+          "quarterly": [
+            {
+              "period": "2019-Q3",
+              "value": 19021000000
+            },
+            {
+              "period": "2020-Q1",
+              "value": 5676000000
+            },
+            {
+              "period": "2020-Q2",
+              "value": 11863000000
+            },
+            {
+              "period": "2020-Q3",
+              "value": 17714000000
+            },
+            {
+              "period": "2021-Q1",
+              "value": 7078000000
+            },
+            {
+              "period": "2021-Q2",
+              "value": 14902000000
+            },
+            {
+              "period": "2021-Q3",
+              "value": 23276000000
+            },
+            {
+              "period": "2022-Q1",
+              "value": 6083000000
+            },
+            {
+              "period": "2022-Q2",
+              "value": 12940000000
+            },
+            {
+              "period": "2022-Q3",
+              "value": 19460000000
+            },
+            {
+              "period": "2023-Q1",
+              "value": 6500000000
+            },
+            {
+              "period": "2023-Q2",
+              "value": 12612000000
+            },
+            {
+              "period": "2023-Q3",
+              "value": 18804000000
+            },
+            {
+              "period": "2024-Q1",
+              "value": 6075000000
+            },
+            {
+              "period": "2024-Q2",
+              "value": 12109000000
+            },
+            {
+              "period": "2024-Q3",
+              "value": 16411000000
+            },
+            {
+              "period": "2025-Q1",
+              "value": 6473000000
+            },
+            {
+              "period": "2025-Q2",
+              "value": 13082000000
+            },
+            {
+              "period": "2025-Q3",
+              "value": 19609000000
+            },
+            {
+              "period": "2026-Q1",
+              "value": 6784000000
+            }
+          ]
+        },
+        {
+          "id": "netIncome",
+          "label": "Net income",
+          "description": "Net income is the profit remaining for shareholders.",
+          "format": "money",
+          "annual": [
+            {
+              "period": "2025",
+              "value": 17174000000
+            },
+            {
+              "period": "2024",
+              "value": 17506000000
+            },
+            {
+              "period": "2023",
+              "value": 11614000000
+            },
+            {
+              "period": "2022",
+              "value": 21256000000
+            },
+            {
+              "period": "2021",
+              "value": 22065000000
+            }
+          ],
+          "quarterly": [
+            {
+              "period": "2019-Q3",
+              "value": 14170000000
+            },
+            {
+              "period": "2020-Q1",
+              "value": 4156000000
+            },
+            {
+              "period": "2020-Q2",
+              "value": 8856000000
+            },
+            {
+              "period": "2020-Q3",
+              "value": 13213000000
+            },
+            {
+              "period": "2021-Q1",
+              "value": 5245000000
+            },
+            {
+              "period": "2021-Q2",
+              "value": 11045000000
+            },
+            {
+              "period": "2021-Q3",
+              "value": 17452000000
+            },
+            {
+              "period": "2022-Q1",
+              "value": 4580000000
+            },
+            {
+              "period": "2022-Q2",
+              "value": 9779000000
+            },
+            {
+              "period": "2022-Q3",
+              "value": 14679000000
+            },
+            {
+              "period": "2023-Q1",
+              "value": 4909000000
+            },
+            {
+              "period": "2023-Q2",
+              "value": 9557000000
+            },
+            {
+              "period": "2023-Q3",
+              "value": 14319000000
+            },
+            {
+              "period": "2024-Q1",
+              "value": 4602000000
+            },
+            {
+              "period": "2024-Q2",
+              "value": 9195000000
+            },
+            {
+              "period": "2024-Q3",
+              "value": 12501000000
+            },
+            {
+              "period": "2025-Q1",
+              "value": 4879000000
+            },
+            {
+              "period": "2025-Q2",
+              "value": 9882000000
+            },
+            {
+              "period": "2025-Q3",
+              "value": 14832000000
+            },
+            {
+              "period": "2026-Q1",
+              "value": 5045000000
+            }
+          ]
+        },
+        {
+          "id": "eps",
+          "label": "EPS (diluted)",
+          "description": "Earnings per share shows profit allocated to each share.",
+          "format": "perShare",
+          "annual": [
+            {
+              "period": "2025",
+              "value": 4.06
+            },
+            {
+              "period": "2024",
+              "value": 4.14
+            },
+            {
+              "period": "2023",
+              "value": 2.75
+            },
+            {
+              "period": "2022",
+              "value": 5.06
+            },
+            {
+              "period": "2021",
+              "value": 5.32
+            }
+          ],
+          "quarterly": [
+            {
+              "period": "2019-Q3",
+              "value": 3.42
+            },
+            {
+              "period": "2020-Q1",
+              "value": 1
+            },
+            {
+              "period": "2020-Q2",
+              "value": 2.14
+            },
+            {
+              "period": "2020-Q3",
+              "value": 3.19
+            },
+            {
+              "period": "2021-Q1",
+              "value": 1.27
+            },
+            {
+              "period": "2021-Q2",
+              "value": 2.67
+            },
+            {
+              "period": "2021-Q3",
+              "value": 4.21
+            },
+            {
+              "period": "2022-Q1",
+              "value": 1.09
+            },
+            {
+              "period": "2022-Q2",
+              "value": 2.33
+            },
+            {
+              "period": "2022-Q3",
+              "value": 3.49
+            },
+            {
+              "period": "2023-Q1",
+              "value": 1.17
+            },
+            {
+              "period": "2023-Q2",
+              "value": 2.27
+            },
+            {
+              "period": "2023-Q3",
+              "value": 3.4
+            },
+            {
+              "period": "2024-Q1",
+              "value": 1.09
+            },
+            {
+              "period": "2024-Q2",
+              "value": 2.18
+            },
+            {
+              "period": "2024-Q3",
+              "value": 2.96
+            },
+            {
+              "period": "2025-Q1",
+              "value": 1.15
+            },
+            {
+              "period": "2025-Q2",
+              "value": 2.34
+            },
+            {
+              "period": "2025-Q3",
+              "value": 3.51
+            },
+            {
+              "period": "2026-Q1",
+              "value": 1.2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "margins",
+      "title": "Margins & efficiency",
+      "description": "ROE, ROA, and margin trends help assess earnings quality.",
+      "metrics": [
+        {
+          "id": "grossMargin",
+          "label": "Gross margin",
+          "description": "Gross margin reflects pricing power and direct cost control.",
+          "format": "percent",
+          "annual": [
+            {
+              "period": "2021",
+              "value": 57.86
+            },
+            {
+              "period": "2022",
+              "value": 56.79
+            },
+            {
+              "period": "2023",
+              "value": 59.089999999999996
+            },
+            {
+              "period": "2024",
+              "value": 60.01
+            },
+            {
+              "period": "2025",
+              "value": 59.07
+            }
+          ],
+          "quarterly": [
+            {
+              "period": "2021-Q2",
+              "value": 57.78
+            },
+            {
+              "period": "2021-Q3",
+              "value": 58.9
+            },
+            {
+              "period": "2021-Q4",
+              "value": 55.98
+            },
+            {
+              "period": "2022-Q1",
+              "value": 57.230000000000004
+            },
+            {
+              "period": "2022-Q2",
+              "value": 57.32000000000001
+            },
+            {
+              "period": "2022-Q3",
+              "value": 57.36
+            },
+            {
+              "period": "2022-Q4",
+              "value": 55.28999999999999
+            },
+            {
+              "period": "2023-Q1",
+              "value": 58.97
+            },
+            {
+              "period": "2023-Q2",
+              "value": 60.88
+            },
+            {
+              "period": "2023-Q3",
+              "value": 59.870000000000005
+            },
+            {
+              "period": "2023-Q4",
+              "value": 56.81
+            },
+            {
+              "period": "2024-Q1",
+              "value": 60.97
+            },
+            {
+              "period": "2024-Q2",
+              "value": 61.970000000000006
+            },
+            {
+              "period": "2024-Q3",
+              "value": 60.84
+            },
+            {
+              "period": "2024-Q4",
+              "value": 56.52
+            },
+            {
+              "period": "2025-Q1",
+              "value": 61.01
+            },
+            {
+              "period": "2025-Q2",
+              "value": 59.760000000000005
+            },
+            {
+              "period": "2025-Q3",
+              "value": 60.540000000000006
+            },
+            {
+              "period": "2025-Q4",
+              "value": 55.269999999999996
+            },
+            {
+              "period": "2026-Q1",
+              "value": 60.3
+            }
+          ]
+        },
+        {
+          "id": "operatingMargin",
+          "label": "Operating margin",
+          "description": "Operating margin shows operating efficiency after core expenses.",
+          "format": "percent",
+          "annual": [
+            {
+              "period": "2021",
+              "value": 23.419999999999998
+            },
+            {
+              "period": "2022",
+              "value": 22.58
+            },
+            {
+              "period": "2023",
+              "value": 18.05
+            },
+            {
+              "period": "2024",
+              "value": 21.959999999999997
+            },
+            {
+              "period": "2025",
+              "value": 21.11
+            }
+          ],
+          "quarterly": [
+            {
+              "period": "2021-Q2",
+              "value": 24.72
+            },
+            {
+              "period": "2021-Q3",
+              "value": 26.619999999999997
+            },
+            {
+              "period": "2021-Q4",
+              "value": 18.81
+            },
+            {
+              "period": "2022-Q1",
+              "value": 19.54
+            },
+            {
+              "period": "2022-Q2",
+              "value": 21.759999999999998
+            },
+            {
+              "period": "2022-Q3",
+              "value": 21.17
+            },
+            {
+              "period": "2022-Q4",
+              "value": 27.639999999999997
+            },
+            {
+              "period": "2023-Q1",
+              "value": 23.26
+            },
+            {
+              "period": "2023-Q2",
+              "value": 22.36
+            },
+            {
+              "period": "2023-Q3",
+              "value": 22.67
+            },
+            {
+              "period": "2023-Q4",
+              "value": 1.95
+            },
+            {
+              "period": "2024-Q1",
+              "value": 23.14
+            },
+            {
+              "period": "2024-Q2",
+              "value": 23.69
+            },
+            {
+              "period": "2024-Q3",
+              "value": 18.05
+            },
+            {
+              "period": "2024-Q4",
+              "value": 22.939999999999998
+            },
+            {
+              "period": "2025-Q1",
+              "value": 24.09
+            },
+            {
+              "period": "2025-Q2",
+              "value": 23.94
+            },
+            {
+              "period": "2025-Q3",
+              "value": 24.240000000000002
+            },
+            {
+              "period": "2025-Q4",
+              "value": 12.75
+            },
+            {
+              "period": "2026-Q1",
+              "value": 23.93
+            }
+          ]
+        },
+        {
+          "id": "netMargin",
+          "label": "Net margin",
+          "description": "Net margin shows how much revenue converts to bottom-line profit.",
+          "format": "percent",
+          "annual": [
+            {
+              "period": "2021",
+              "value": 16.509999999999998
+            },
+            {
+              "period": "2022",
+              "value": 15.53
+            },
+            {
+              "period": "2023",
+              "value": 8.67
+            },
+            {
+              "period": "2024",
+              "value": 12.989999999999998
+            },
+            {
+              "period": "2025",
+              "value": 12.43
+            }
+          ],
+          "quarterly": [
+            {
+              "period": "2021-Q2",
+              "value": 17.18
+            },
+            {
+              "period": "2021-Q3",
+              "value": 19.470000000000002
+            },
+            {
+              "period": "2021-Q4",
+              "value": 13.54
+            },
+            {
+              "period": "2022-Q1",
+              "value": 13.65
+            },
+            {
+              "period": "2022-Q2",
+              "value": 15.39
+            },
+            {
+              "period": "2022-Q3",
+              "value": 14.31
+            },
+            {
+              "period": "2022-Q4",
+              "value": 18.66
+            },
+            {
+              "period": "2023-Q1",
+              "value": 14.92
+            },
+            {
+              "period": "2023-Q2",
+              "value": 14.26
+            },
+            {
+              "period": "2023-Q3",
+              "value": 14.280000000000001
+            },
+            {
+              "period": "2023-Q4",
+              "value": -7.7
+            },
+            {
+              "period": "2024-Q1",
+              "value": 13.950000000000001
+            },
+            {
+              "period": "2024-Q2",
+              "value": 14.000000000000002
+            },
+            {
+              "period": "2024-Q3",
+              "value": 9.92
+            },
+            {
+              "period": "2024-Q4",
+              "value": 14.030000000000001
+            },
+            {
+              "period": "2025-Q1",
+              "value": 14.57
+            },
+            {
+              "period": "2025-Q2",
+              "value": 14.499999999999998
+            },
+            {
+              "period": "2025-Q3",
+              "value": 14.64
+            },
+            {
+              "period": "2025-Q4",
+              "value": 6.4399999999999995
+            },
+            {
+              "period": "2026-Q1",
+              "value": 14.649999999999999
+            }
+          ]
+        },
+        {
+          "id": "opexToRevenue",
+          "label": "Operating expenses / revenue",
+          "description": "Operating expense ratio; lower can indicate leaner operations.",
+          "format": "percent",
+          "annual": [
+            {
+              "period": "2021",
+              "value": 42.14
+            },
+            {
+              "period": "2022",
+              "value": 43.21
+            },
+            {
+              "period": "2023",
+              "value": 40.910000000000004
+            },
+            {
+              "period": "2024",
+              "value": 39.989999999999995
+            },
+            {
+              "period": "2025",
+              "value": 40.93
+            }
+          ],
+          "quarterly": [
+            {
+              "period": "2021-Q2",
+              "value": 42.22
+            },
+            {
+              "period": "2021-Q3",
+              "value": 41.099999999999994
+            },
+            {
+              "period": "2021-Q4",
+              "value": 44.019999999999996
+            },
+            {
+              "period": "2022-Q1",
+              "value": 42.77
+            },
+            {
+              "period": "2022-Q2",
+              "value": 42.68
+            },
+            {
+              "period": "2022-Q3",
+              "value": 42.64
+            },
+            {
+              "period": "2022-Q4",
+              "value": 44.71
+            },
+            {
+              "period": "2023-Q1",
+              "value": 41.03
+            },
+            {
+              "period": "2023-Q2",
+              "value": 39.12
+            },
+            {
+              "period": "2023-Q3",
+              "value": 40.129999999999995
+            },
+            {
+              "period": "2023-Q4",
+              "value": 43.19
+            },
+            {
+              "period": "2024-Q1",
+              "value": 39.03
+            },
+            {
+              "period": "2024-Q2",
+              "value": 38.03
+            },
+            {
+              "period": "2024-Q3",
+              "value": 39.160000000000004
+            },
+            {
+              "period": "2024-Q4",
+              "value": 43.480000000000004
+            },
+            {
+              "period": "2025-Q1",
+              "value": 38.99
+            },
+            {
+              "period": "2025-Q2",
+              "value": 40.239999999999995
+            },
+            {
+              "period": "2025-Q3",
+              "value": 39.46
+            },
+            {
+              "period": "2025-Q4",
+              "value": 44.73
+            },
+            {
+              "period": "2026-Q1",
+              "value": 39.7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "balance",
+      "title": "Balance sheet",
+      "description": "Asset scale, equity cushion, and debt levels.",
+      "metrics": [
+        {
+          "id": "totalAssets",
+          "label": "Total assets",
+          "description": "Total assets measure balance sheet scale.",
+          "format": "money",
+          "annual": [
+            {
+              "period": "2025",
+              "value": 404258000000
+            },
+            {
+              "period": "2024",
+              "value": 384711000000
+            },
+            {
+              "period": "2023",
+              "value": 380255000000
+            },
+            {
+              "period": "2022",
+              "value": 379680000000
+            },
+            {
+              "period": "2021",
+              "value": 366596000000
+            }
+          ],
+          "quarterly": [
+            {
+              "period": "2021-Q2",
+              "value": 349190000000
+            },
+            {
+              "period": "2021-Q3",
+              "value": 353457000000
+            },
+            {
+              "period": "2022-Q1",
+              "value": 366596000000
+            },
+            {
+              "period": "2022-Q1",
+              "value": 365716000000
+            },
+            {
+              "period": "2022-Q2",
+              "value": 370147000000
+            },
+            {
+              "period": "2022-Q3",
+              "value": 375090000000
+            },
+            {
+              "period": "2023-Q1",
+              "value": 379680000000
+            },
+            {
+              "period": "2023-Q1",
+              "value": 377716000000
+            },
+            {
+              "period": "2023-Q2",
+              "value": 379955000000
+            },
+            {
+              "period": "2023-Q3",
+              "value": 384830000000
+            },
+            {
+              "period": "2024-Q1",
+              "value": 380255000000
+            },
+            {
+              "period": "2024-Q1",
+              "value": 380158000000
+            },
+            {
+              "period": "2024-Q2",
+              "value": 379146000000
+            },
+            {
+              "period": "2024-Q3",
+              "value": 381164000000
+            },
+            {
+              "period": "2025-Q1",
+              "value": 384711000000
+            },
+            {
+              "period": "2025-Q1",
+              "value": 380364000000
+            },
+            {
+              "period": "2025-Q2",
+              "value": 383285000000
+            },
+            {
+              "period": "2025-Q3",
+              "value": 388331000000
+            },
+            {
+              "period": "2026-Q1",
+              "value": 404258000000
+            },
+            {
+              "period": "2026-Q1",
+              "value": 417882000000
+            }
+          ]
+        },
+        {
+          "id": "cash",
+          "label": "Cash and equivalents",
+          "description": "Cash and equivalents support liquidity and flexibility.",
+          "format": "money",
+          "annual": [
+            {
+              "period": "2025",
+              "value": 19048000000
+            },
+            {
+              "period": "2024",
+              "value": 4194000000
+            },
+            {
+              "period": "2023",
+              "value": 2065000000
+            },
+            {
+              "period": "2022",
+              "value": 2605000000
+            },
+            {
+              "period": "2021",
+              "value": 2921000000
+            }
+          ],
+          "quarterly": [
+            {
+              "period": "2021-Q2",
+              "value": 4657000000
+            },
+            {
+              "period": "2021-Q3",
+              "value": 9936000000
+            },
+            {
+              "period": "2022-Q1",
+              "value": 2921000000
+            },
+            {
+              "period": "2022-Q1",
+              "value": 1661000000
+            },
+            {
+              "period": "2022-Q2",
+              "value": 1857000000
+            },
+            {
+              "period": "2022-Q3",
+              "value": 2082000000
+            },
+            {
+              "period": "2023-Q1",
+              "value": 2605000000
+            },
+            {
+              "period": "2023-Q1",
+              "value": 2234000000
+            },
+            {
+              "period": "2023-Q2",
+              "value": 4803000000
+            },
+            {
+              "period": "2023-Q3",
+              "value": 4210000000
+            },
+            {
+              "period": "2024-Q1",
+              "value": 2065000000
+            },
+            {
+              "period": "2024-Q1",
+              "value": 2365000000
+            },
+            {
+              "period": "2024-Q2",
+              "value": 2432000000
+            },
+            {
+              "period": "2024-Q3",
+              "value": 4987000000
+            },
+            {
+              "period": "2025-Q1",
+              "value": 4194000000
+            },
+            {
+              "period": "2025-Q1",
+              "value": 2257000000
+            },
+            {
+              "period": "2025-Q2",
+              "value": 3435000000
+            },
+            {
+              "period": "2025-Q3",
+              "value": 7706000000
+            },
+            {
+              "period": "2026-Q1",
+              "value": 19048000000
+            },
+            {
+              "period": "2026-Q1",
+              "value": 8366000000
+            }
+          ]
+        },
+        {
+          "id": "receivables",
+          "label": "Receivables",
+          "description": "Receivables reflect credit extended to customers.",
+          "format": "money",
+          "annual": [
+            {
+              "period": "2021",
+              "value": 23846000000
+            },
+            {
+              "period": "2020",
+              "value": 23917000000
+            },
+            {
+              "period": "2019",
+              "value": 25429000000
+            },
+            {
+              "period": "2018",
+              "value": 25102000000
+            },
+            {
+              "period": "2017",
+              "value": 23493000000
+            }
+          ],
+          "quarterly": [
+            {
+              "period": "2018-Q1",
+              "value": 23493000000
+            },
+            {
+              "period": "2018-Q1",
+              "value": 23546000000
+            },
+            {
+              "period": "2018-Q1",
+              "value": 22595000000
+            },
+            {
+              "period": "2018-Q2",
+              "value": 23099000000
+            },
+            {
+              "period": "2018-Q3",
+              "value": 24012000000
+            },
+            {
+              "period": "2019-Q1",
+              "value": 25102000000
+            },
+            {
+              "period": "2019-Q1",
+              "value": 24469000000
+            },
+            {
+              "period": "2019-Q2",
+              "value": 24926000000
+            },
+            {
+              "period": "2019-Q3",
+              "value": 24713000000
+            },
+            {
+              "period": "2020-Q1",
+              "value": 25429000000
+            },
+            {
+              "period": "2020-Q1",
+              "value": 23797000000
+            },
+            {
+              "period": "2020-Q2",
+              "value": 22672000000
+            },
+            {
+              "period": "2020-Q3",
+              "value": 22617000000
+            },
+            {
+              "period": "2021-Q1",
+              "value": 23917000000
+            },
+            {
+              "period": "2021-Q1",
+              "value": 22507000000
+            },
+            {
+              "period": "2021-Q2",
+              "value": 21257000000
+            },
+            {
+              "period": "2021-Q3",
+              "value": 22195000000
+            },
+            {
+              "period": "2022-Q1",
+              "value": 23846000000
+            },
+            {
+              "period": "2022-Q1",
+              "value": 23615000000
+            },
+            {
+              "period": "2022-Q2",
+              "value": 23909000000
+            }
+          ]
+        },
+        {
+          "id": "inventory",
+          "label": "Inventory",
+          "description": "Inventory is goods held for sale or production.",
+          "format": "money",
+          "annual": [
+            {
+              "period": "2025",
+              "value": 2441000000
+            },
+            {
+              "period": "2024",
+              "value": 2247000000
+            },
+            {
+              "period": "2023",
+              "value": 2057000000
+            },
+            {
+              "period": "2022",
+              "value": 2388000000
+            },
+            {
+              "period": "2021",
+              "value": 3055000000
+            }
+          ],
+          "quarterly": [
+            {
+              "period": "2021-Q2",
+              "value": 1421000000
+            },
+            {
+              "period": "2021-Q3",
+              "value": 2303000000
+            },
+            {
+              "period": "2022-Q1",
+              "value": 3055000000
+            },
+            {
+              "period": "2022-Q1",
+              "value": 3659000000
+            },
+            {
+              "period": "2022-Q2",
+              "value": 3646000000
+            },
+            {
+              "period": "2022-Q3",
+              "value": 3133000000
+            },
+            {
+              "period": "2023-Q1",
+              "value": 2388000000
+            },
+            {
+              "period": "2023-Q1",
+              "value": 2381000000
+            },
+            {
+              "period": "2023-Q2",
+              "value": 1896000000
+            },
+            {
+              "period": "2023-Q3",
+              "value": 2240000000
+            },
+            {
+              "period": "2024-Q1",
+              "value": 2057000000
+            },
+            {
+              "period": "2024-Q1",
+              "value": 2076000000
+            },
+            {
+              "period": "2024-Q2",
+              "value": 1841000000
+            },
+            {
+              "period": "2024-Q3",
+              "value": 2523000000
+            },
+            {
+              "period": "2025-Q1",
+              "value": 2247000000
+            },
+            {
+              "period": "2025-Q1",
+              "value": 2197000000
+            },
+            {
+              "period": "2025-Q2",
+              "value": 2137000000
+            },
+            {
+              "period": "2025-Q3",
+              "value": 2700000000
+            },
+            {
+              "period": "2026-Q1",
+              "value": 2441000000
+            },
+            {
+              "period": "2026-Q1",
+              "value": 2320000000
+            }
+          ]
+        },
+        {
+          "id": "equity",
+          "label": "Stockholders' equity",
+          "description": "Equity is the shareholder-owned capital cushion.",
+          "format": "money",
+          "annual": [
+            {
+              "period": "2025",
+              "value": 105741000000
+            },
+            {
+              "period": "2024",
+              "value": 100575000000
+            },
+            {
+              "period": "2023",
+              "value": 93799000000
+            },
+            {
+              "period": "2022",
+              "value": 92463000000
+            },
+            {
+              "period": "2021",
+              "value": 83200000000
+            }
+          ],
+          "quarterly": [
+            {
+              "period": "2021-Q2",
+              "value": 75112000000
+            },
+            {
+              "period": "2021-Q3",
+              "value": 78489000000
+            },
+            {
+              "period": "2022-Q1",
+              "value": 83200000000
+            },
+            {
+              "period": "2022-Q1",
+              "value": 85175000000
+            },
+            {
+              "period": "2022-Q2",
+              "value": 87357000000
+            },
+            {
+              "period": "2022-Q3",
+              "value": 88783000000
+            },
+            {
+              "period": "2023-Q1",
+              "value": 92463000000
+            },
+            {
+              "period": "2023-Q1",
+              "value": 94219000000
+            },
+            {
+              "period": "2023-Q2",
+              "value": 96502000000
+            },
+            {
+              "period": "2023-Q3",
+              "value": 99088000000
+            },
+            {
+              "period": "2024-Q1",
+              "value": 93799000000
+            },
+            {
+              "period": "2024-Q1",
+              "value": 95726000000
+            },
+            {
+              "period": "2024-Q2",
+              "value": 97539000000
+            },
+            {
+              "period": "2024-Q3",
+              "value": 97668000000
+            },
+            {
+              "period": "2025-Q1",
+              "value": 100575000000
+            },
+            {
+              "period": "2025-Q1",
+              "value": 102037000000
+            },
+            {
+              "period": "2025-Q2",
+              "value": 104361000000
+            },
+            {
+              "period": "2025-Q3",
+              "value": 106345000000
+            },
+            {
+              "period": "2026-Q1",
+              "value": 105741000000
+            },
+            {
+              "period": "2026-Q1",
+              "value": 104622000000
+            }
+          ]
+        },
+        {
+          "id": "shortTermDebt",
+          "label": "Short-term debt",
+          "description": "Short-term borrowings due within one year.",
+          "format": "money",
+          "annual": [
+            {
+              "period": "2025",
+              "value": 441000000
+            },
+            {
+              "period": "2024",
+              "value": 65000000
+            },
+            {
+              "period": "2023",
+              "value": 0
+            },
+            {
+              "period": "2022",
+              "value": 150000000
+            },
+            {
+              "period": "2021",
+              "value": 0
+            }
+          ],
+          "quarterly": []
+        },
+        {
+          "id": "longTermDebt",
+          "label": "Long-term debt",
+          "description": "Long-term debt funds the business beyond one year.",
+          "format": "money",
+          "annual": [
+            {
+              "period": "2013",
+              "value": 89658000000
+            },
+            {
+              "period": "2012",
+              "value": 47618000000
+            },
+            {
+              "period": "2011",
+              "value": 50303000000
+            },
+            {
+              "period": "2010",
+              "value": 45252000000
+            }
+          ],
+          "quarterly": []
+        }
+      ]
+    },
+    {
+      "id": "leverage",
+      "title": "Leverage",
+      "description": "Debt relative to equity and assets when data is available.",
+      "metrics": [
+        {
+          "id": "debtToEquity",
+          "label": "Debt / equity",
+          "description": "Debt-to-equity measures reliance on borrowing versus equity.",
+          "format": "percent",
+          "annual": [
+            {
+              "period": "2021",
+              "value": 1.8446
+            },
+            {
+              "period": "2022",
+              "value": 1.6528
+            },
+            {
+              "period": "2023",
+              "value": 1.6301
+            },
+            {
+              "period": "2024",
+              "value": 145.12
+            },
+            {
+              "period": "2025",
+              "value": 1.514
+            }
+          ],
+          "quarterly": [
+            {
+              "period": "2021-Q2",
+              "value": 2.0617
+            },
+            {
+              "period": "2021-Q3",
+              "value": 1.9596
+            },
+            {
+              "period": "2021-Q4",
+              "value": 1.8446
+            },
+            {
+              "period": "2022-Q1",
+              "value": 1.8312
+            },
+            {
+              "period": "2022-Q2",
+              "value": 1.7329
+            },
+            {
+              "period": "2022-Q3",
+              "value": 1.691
+            },
+            {
+              "period": "2022-Q4",
+              "value": 1.6528
+            },
+            {
+              "period": "2023-Q1",
+              "value": 1.6457
+            },
+            {
+              "period": "2023-Q2",
+              "value": 1.6041
+            },
+            {
+              "period": "2023-Q3",
+              "value": 1.508
+            },
+            {
+              "period": "2023-Q4",
+              "value": 1.6301
+            },
+            {
+              "period": "2024-Q1",
+              "value": 1.6081
+            },
+            {
+              "period": "2024-Q2",
+              "value": 1.5522
+            },
+            {
+              "period": "2024-Q3",
+              "value": 1.5639
+            },
+            {
+              "period": "2024-Q4",
+              "value": 145.12
+            },
+            {
+              "period": "2025-Q1",
+              "value": 142.62
+            },
+            {
+              "period": "2025-Q2",
+              "value": 141.66
+            },
+            {
+              "period": "2025-Q3",
+              "value": 139.73
+            },
+            {
+              "period": "2025-Q4",
+              "value": 1.514
+            },
+            {
+              "period": "2026-Q1",
+              "value": 1.6694
+            }
+          ]
+        },
+        {
+          "id": "debtToAssets",
+          "label": "Debt / assets",
+          "description": "Debt-to-assets shows how much of the balance sheet is debt-funded.",
+          "format": "percent",
+          "annual": [
+            {
+              "period": "2021",
+              "value": 41.15
+            },
+            {
+              "period": "2022",
+              "value": 39.68
+            },
+            {
+              "period": "2023",
+              "value": 39.62
+            },
+            {
+              "period": "2024",
+              "value": 37.43
+            },
+            {
+              "period": "2025",
+              "value": 39.12
+            }
+          ],
+          "quarterly": [
+            {
+              "period": "2021-Q2",
+              "value": 43.51
+            },
+            {
+              "period": "2021-Q3",
+              "value": 42.71
+            },
+            {
+              "period": "2021-Q4",
+              "value": 41.15
+            },
+            {
+              "period": "2022-Q1",
+              "value": 41.94
+            },
+            {
+              "period": "2022-Q2",
+              "value": 40.27
+            },
+            {
+              "period": "2022-Q3",
+              "value": 39.43
+            },
+            {
+              "period": "2022-Q4",
+              "value": 39.68
+            },
+            {
+              "period": "2023-Q1",
+              "value": 40.47
+            },
+            {
+              "period": "2023-Q2",
+              "value": 40.19
+            },
+            {
+              "period": "2023-Q3",
+              "value": 38.3
+            },
+            {
+              "period": "2023-Q4",
+              "value": 39.62
+            },
+            {
+              "period": "2024-Q1",
+              "value": 39.900000000000006
+            },
+            {
+              "period": "2024-Q2",
+              "value": 39.37
+            },
+            {
+              "period": "2024-Q3",
+              "value": 39.519999999999996
+            },
+            {
+              "period": "2024-Q4",
+              "value": 37.43
+            },
+            {
+              "period": "2025-Q1",
+              "value": 37.769999999999996
+            },
+            {
+              "period": "2025-Q2",
+              "value": 38.09
+            },
+            {
+              "period": "2025-Q3",
+              "value": 37.8
+            },
+            {
+              "period": "2025-Q4",
+              "value": 39.12
+            },
+            {
+              "period": "2026-Q1",
+              "value": 41.27
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "valuation",
+      "title": "Valuation",
+      "description": "Common market multiples and per-share valuation metrics.",
+      "metrics": [
+        {
+          "id": "pe",
+          "label": "P/E",
+          "description": "Price-to-earnings shows how many times earnings the market pays.",
+          "format": "multiple",
+          "annual": [
+            {
+              "period": "2021",
+              "value": 9.7495
+            },
+            {
+              "period": "2022",
+              "value": 7.7848
+            },
+            {
+              "period": "2023",
+              "value": 13.6469
+            },
+            {
+              "period": "2024",
+              "value": 9.6163
+            },
+            {
+              "period": "2025",
+              "value": 9.9997
+            }
+          ],
+          "quarterly": [
+            {
+              "period": "2021-Q2",
+              "value": 11.6044
+            },
+            {
+              "period": "2021-Q3",
+              "value": 10.1456
+            },
+            {
+              "period": "2021-Q4",
+              "value": 9.7495
+            },
+            {
+              "period": "2022-Q1",
+              "value": 9.9967
+            },
+            {
+              "period": "2022-Q2",
+              "value": 10.2474
+            },
+            {
+              "period": "2022-Q3",
+              "value": 8.266
+            },
+            {
+              "period": "2022-Q4",
+              "value": 7.7848
+            },
+            {
+              "period": "2023-Q1",
+              "value": 7.5744
+            },
+            {
+              "period": "2023-Q2",
+              "value": 7.4331
+            },
+            {
+              "period": "2023-Q3",
+              "value": 6.3898
+            },
+            {
+              "period": "2023-Q4",
+              "value": 13.6469
+            },
+            {
+              "period": "2024-Q1",
+              "value": 15.7396
+            },
+            {
+              "period": "2024-Q2",
+              "value": 15.6155
+            },
+            {
+              "period": "2024-Q3",
+              "value": 19.2991
+            },
+            {
+              "period": "2024-Q4",
+              "value": 9.6163
+            },
+            {
+              "period": "2025-Q1",
+              "value": 10.7546
+            },
+            {
+              "period": "2025-Q2",
+              "value": 10.0281
+            },
+            {
+              "period": "2025-Q3",
+              "value": 9.3417
+            },
+            {
+              "period": "2025-Q4",
+              "value": 9.9997
+            },
+            {
+              "period": "2026-Q1",
+              "value": 12.1013
+            }
+          ]
+        },
+        {
+          "id": "pb",
+          "label": "P/B",
+          "description": "Price-to-book compares market value to book equity.",
+          "format": "multiple",
+          "annual": [
+            {
+              "period": "2021",
+              "value": 2.6302
+            },
+            {
+              "period": "2022",
+              "value": 1.8155
+            },
+            {
+              "period": "2023",
+              "value": 1.7148
+            },
+            {
+              "period": "2024",
+              "value": 1.6964
+            },
+            {
+              "period": "2025",
+              "value": 1.644
+            }
+          ],
+          "quarterly": [
+            {
+              "period": "2021-Q2",
+              "value": 3.1482
+            },
+            {
+              "period": "2021-Q3",
+              "value": 2.9024
+            },
+            {
+              "period": "2021-Q4",
+              "value": 2.6302
+            },
+            {
+              "period": "2022-Q1",
+              "value": 2.554
+            },
+            {
+              "period": "2022-Q2",
+              "value": 2.4779
+            },
+            {
+              "period": "2022-Q3",
+              "value": 1.8231
+            },
+            {
+              "period": "2022-Q4",
+              "value": 1.8155
+            },
+            {
+              "period": "2023-Q1",
+              "value": 1.7602
+            },
+            {
+              "period": "2023-Q2",
+              "value": 1.6424
+            },
+            {
+              "period": "2023-Q3",
+              "value": 1.3661
+            },
+            {
+              "period": "2023-Q4",
+              "value": 1.7148
+            },
+            {
+              "period": "2024-Q1",
+              "value": 1.8866
+            },
+            {
+              "period": "2024-Q2",
+              "value": 1.827
+            },
+            {
+              "period": "2024-Q3",
+              "value": 1.9627
+            },
+            {
+              "period": "2024-Q4",
+              "value": 1.6964
+            },
+            {
+              "period": "2025-Q1",
+              "value": 1.8988
+            },
+            {
+              "period": "2025-Q2",
+              "value": 1.7702
+            },
+            {
+              "period": "2025-Q3",
+              "value": 1.7642
+            },
+            {
+              "period": "2025-Q4",
+              "value": 1.644
+            },
+            {
+              "period": "2026-Q1",
+              "value": 2.0311
+            }
+          ]
+        },
+        {
+          "id": "ps",
+          "label": "P/S",
+          "description": "Price-to-sales relates market cap to revenue.",
+          "format": "multiple",
+          "annual": [
+            {
+              "period": "2021",
+              "value": 1.61
+            },
+            {
+              "period": "2022",
+              "value": 1.2093
+            },
+            {
+              "period": "2023",
+              "value": 1.183
+            },
+            {
+              "period": "2024",
+              "value": 1.2489
+            },
+            {
+              "period": "2025",
+              "value": 1.2427
+            }
+          ],
+          "quarterly": [
+            {
+              "period": "2021-Q2",
+              "value": 1.7459
+            },
+            {
+              "period": "2021-Q3",
+              "value": 1.6658
+            },
+            {
+              "period": "2021-Q4",
+              "value": 1.61
+            },
+            {
+              "period": "2022-Q1",
+              "value": 1.5929
+            },
+            {
+              "period": "2022-Q2",
+              "value": 1.5867
+            },
+            {
+              "period": "2022-Q3",
+              "value": 1.1756
+            },
+            {
+              "period": "2022-Q4",
+              "value": 1.2093
+            },
+            {
+              "period": "2023-Q1",
+              "value": 1.2005
+            },
+            {
+              "period": "2023-Q2",
+              "value": 1.1581
+            },
+            {
+              "period": "2023-Q3",
+              "value": 0.9957
+            },
+            {
+              "period": "2023-Q4",
+              "value": 1.183
+            },
+            {
+              "period": "2024-Q1",
+              "value": 1.3277
+            },
+            {
+              "period": "2024-Q2",
+              "value": 1.3089
+            },
+            {
+              "period": "2024-Q3",
+              "value": 1.4084
+            },
+            {
+              "period": "2024-Q4",
+              "value": 1.2489
+            },
+            {
+              "period": "2025-Q1",
+              "value": 1.4136
+            },
+            {
+              "period": "2025-Q2",
+              "value": 1.3317
+            },
+            {
+              "period": "2025-Q3",
+              "value": 1.3478
+            },
+            {
+              "period": "2025-Q4",
+              "value": 1.2427
+            },
+            {
+              "period": "2026-Q1",
+              "value": 1.508
+            }
+          ]
+        },
+        {
+          "id": "epsValuation",
+          "label": "EPS",
+          "description": "Earnings per share used in valuation and growth analysis.",
+          "format": "perShare",
+          "annual": [
+            {
+              "period": "2021",
+              "value": 5.3169
+            },
+            {
+              "period": "2022",
+              "value": 5.0561
+            },
+            {
+              "period": "2023",
+              "value": 2.7554
+            },
+            {
+              "period": "2024",
+              "value": 4.1454
+            },
+            {
+              "period": "2025",
+              "value": 4.0591
+            }
+          ],
+          "quarterly": [
+            {
+              "period": "2021-Q2",
+              "value": 1.4
+            },
+            {
+              "period": "2021-Q3",
+              "value": 1.5461
+            },
+            {
+              "period": "2021-Q4",
+              "value": 1.106
+            },
+            {
+              "period": "2022-Q1",
+              "value": 1.09
+            },
+            {
+              "period": "2022-Q2",
+              "value": 1.2373
+            },
+            {
+              "period": "2022-Q3",
+              "value": 1.1656
+            },
+            {
+              "period": "2022-Q4",
+              "value": 1.5633
+            },
+            {
+              "period": "2023-Q1",
+              "value": 1.1658
+            },
+            {
+              "period": "2023-Q2",
+              "value": 1.1033
+            },
+            {
+              "period": "2023-Q3",
+              "value": 1.1295
+            },
+            {
+              "period": "2023-Q4",
+              "value": -0.6415
+            },
+            {
+              "period": "2024-Q1",
+              "value": 1.0908
+            },
+            {
+              "period": "2024-Q2",
+              "value": 1.0881
+            },
+            {
+              "period": "2024-Q3",
+              "value": 0.7825
+            },
+            {
+              "period": "2024-Q4",
+              "value": 1.1835
+            },
+            {
+              "period": "2025-Q1",
+              "value": 1.1545
+            },
+            {
+              "period": "2025-Q2",
+              "value": 1.1833
+            },
+            {
+              "period": "2025-Q3",
+              "value": 1.1694
+            },
+            {
+              "period": "2025-Q4",
+              "value": 0.5527
+            },
+            {
+              "period": "2026-Q1",
+              "value": 1.1983
+            }
+          ]
+        },
+        {
+          "id": "bookValuePerShare",
+          "label": "Book value per share",
+          "description": "Book value per share is equity per share on the balance sheet.",
+          "format": "perShare",
+          "annual": [
+            {
+              "period": "2021",
+              "value": 81790
+            },
+            {
+              "period": "2022",
+              "value": 91144
+            },
+            {
+              "period": "2023",
+              "value": 92430
+            },
+            {
+              "period": "2024",
+              "value": 99237
+            },
+            {
+              "period": "2025",
+              "value": 104460
+            }
+          ],
+          "quarterly": [
+            {
+              "period": "2021-Q2",
+              "value": 73684
+            },
+            {
+              "period": "2021-Q3",
+              "value": 77044
+            },
+            {
+              "period": "2021-Q4",
+              "value": 81790
+            },
+            {
+              "period": "2022-Q1",
+              "value": 83762
+            },
+            {
+              "period": "2022-Q2",
+              "value": 86016
+            },
+            {
+              "period": "2022-Q3",
+              "value": 87468
+            },
+            {
+              "period": "2022-Q4",
+              "value": 91144
+            },
+            {
+              "period": "2023-Q1",
+              "value": 92883
+            },
+            {
+              "period": "2023-Q2",
+              "value": 95193
+            },
+            {
+              "period": "2023-Q3",
+              "value": 97741
+            },
+            {
+              "period": "2023-Q4",
+              "value": 92430
+            },
+            {
+              "period": "2024-Q1",
+              "value": 94334
+            },
+            {
+              "period": "2024-Q2",
+              "value": 96172
+            },
+            {
+              "period": "2024-Q3",
+              "value": 96326
+            },
+            {
+              "period": "2024-Q4",
+              "value": 99237
+            },
+            {
+              "period": "2025-Q1",
+              "value": 100722
+            },
+            {
+              "period": "2025-Q2",
+              "value": 103063
+            },
+            {
+              "period": "2025-Q3",
+              "value": 105042
+            },
+            {
+              "period": "2025-Q4",
+              "value": 104460
+            },
+            {
+              "period": "2026-Q1",
+              "value": 103309
+            }
+          ]
+        },
+        {
+          "id": "evEbitda",
+          "label": "EV / EBITDA",
+          "description": "Enterprise value to EBITDA is a common capital-structure-aware multiple.",
+          "format": "multiple",
+          "annual": [
+            {
+              "period": "2021",
+              "value": 7.422
+            },
+            {
+              "period": "2022",
+              "value": 6.4252
+            },
+            {
+              "period": "2023",
+              "value": 7.885
+            },
+            {
+              "period": "2024",
+              "value": 6.6386
+            },
+            {
+              "period": "2025",
+              "value": 6.6693
+            }
+          ],
+          "quarterly": [
+            {
+              "period": "2021-Q2",
+              "value": 7.9647
+            },
+            {
+              "period": "2021-Q3",
+              "value": 7.3437
+            },
+            {
+              "period": "2021-Q4",
+              "value": 7.422
+            },
+            {
+              "period": "2022-Q1",
+              "value": 7.6679
+            },
+            {
+              "period": "2022-Q2",
+              "value": 7.6813
+            },
+            {
+              "period": "2022-Q3",
+              "value": 6.7047
+            },
+            {
+              "period": "2022-Q4",
+              "value": 6.4252
+            },
+            {
+              "period": "2023-Q1",
+              "value": 6.3283
+            },
+            {
+              "period": "2023-Q2",
+              "value": 6.1548
+            },
+            {
+              "period": "2023-Q3",
+              "value": 5.5742
+            },
+            {
+              "period": "2023-Q4",
+              "value": 7.7137
+            },
+            {
+              "period": "2024-Q1",
+              "value": 8.2367
+            },
+            {
+              "period": "2024-Q2",
+              "value": 8.0704
+            },
+            {
+              "period": "2024-Q3",
+              "value": 8.7654
+            },
+            {
+              "period": "2024-Q4",
+              "value": 6.6386
+            },
+            {
+              "period": "2025-Q1",
+              "value": 7.0808
+            },
+            {
+              "period": "2025-Q2",
+              "value": 6.8149
+            },
+            {
+              "period": "2025-Q3",
+              "value": 6.4779
+            },
+            {
+              "period": "2025-Q4",
+              "value": 6.6693
+            },
+            {
+              "period": "2026-Q1",
+              "value": 7.8671
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

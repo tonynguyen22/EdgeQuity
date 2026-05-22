@@ -1,0 +1,96 @@
+{
+  "ticker": "CP",
+  "name": "Canadian Pacific Kansas City Ltd",
+  "sector": "Road & Rail",
+  "industry": "Road & Rail",
+  "currency": "CAD",
+  "price": null,
+  "marketCap": 75470000000,
+  "enterpriseValue": 78526000000,
+  "valuation": {
+    "peTTM": 25.796,
+    "forwardPE": 21.73638,
+    "psTTM": 7.0188,
+    "pb": 1.9983,
+    "evRevenue": 5.207985143918291,
+    "evEbitda": null,
+    "pfcf": 34.195740824648844,
+    "fcfYield": 0.029243407976679476,
+    "earningsYield": 0.05481648337087584
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": 0.3719989388513065,
+    "netMargin": 0.2743732590529248,
+    "roe": 0.09017590513765067,
+    "roa": 0.048135435452905925,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 0.4906,
+    "quickRatio": 0.4068,
+    "debtToEquity": 0.07062362403818907,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 5309000000,
+    "freeCashFlow": 2207000000,
+    "fcfMargin": 0.14637219790423134,
+    "capexToRevenue": 0.20573020294468763,
+    "fcfConversion": 0.5334783659656757
+  },
+  "dividends": {
+    "dividendYield": 0.8023598820058996,
+    "payoutRatio": 19.22
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 15078000000,
+      "grossProfit": null,
+      "operatingIncome": 5609000000,
+      "netIncome": 4137000000,
+      "freeCashFlow": 2207000000,
+      "totalAssets": 85945000000,
+      "totalDebt": 3240000000,
+      "totalEquity": 45877000000,
+      "sharesDiluted": 917100000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T19:23:14.425Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T19:23:14.425Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T19:23:14.425Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T19:23:14.425Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

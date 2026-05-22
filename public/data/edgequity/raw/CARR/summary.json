@@ -1,0 +1,96 @@
+{
+  "ticker": "CARR",
+  "name": "Carrier Global Corp",
+  "sector": "Building",
+  "industry": "Building",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 53580000000,
+  "enterpriseValue": 63858000000,
+  "valuation": {
+    "peTTM": 40.318,
+    "forwardPE": 23.2154,
+    "psTTM": 2.415,
+    "pb": 3.2239,
+    "evRevenue": 2.9364050213822597,
+    "evEbitda": null,
+    "pfcf": 31.573364761343548,
+    "fcfYield": 0.031672265770810004,
+    "earningsYield": 0.02961926091825308
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": 0.09987584494413022,
+    "netMargin": 0.07297558283901227,
+    "roe": 0.11233012457531144,
+    "roa": 0.042672761495025545,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 1.1995,
+    "quickRatio": 0.8504,
+    "debtToEquity": 0.8375566251415628,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 2089000000,
+    "freeCashFlow": 1697000000,
+    "fcfMargin": 0.07803375178185497,
+    "capexToRevenue": 0.018025474778130317,
+    "fcfConversion": 1.0693131695022053
+  },
+  "dividends": {
+    "dividendYield": 1.5096713319704353,
+    "payoutRatio": 52.02
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 21747000000,
+      "grossProfit": null,
+      "operatingIncome": 2172000000,
+      "netIncome": 1587000000,
+      "freeCashFlow": 1697000000,
+      "totalAssets": 37190000000,
+      "totalDebt": 11833000000,
+      "totalEquity": 14128000000,
+      "sharesDiluted": 862400000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T20:17:10.978Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T20:17:10.978Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T20:17:10.978Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T20:17:10.978Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

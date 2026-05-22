@@ -1,0 +1,96 @@
+{
+  "ticker": "SE",
+  "name": "Sea Ltd",
+  "sector": "Retail",
+  "industry": "Retail",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 54080000000,
+  "enterpriseValue": 67564000000,
+  "valuation": {
+    "peTTM": 33.0688,
+    "forwardPE": 24.89394688649357,
+    "psTTM": 2.104,
+    "pb": 6.066,
+    "evRevenue": 153.55454545454546,
+    "evEbitda": null,
+    "pfcf": 651.566265060241,
+    "fcfYield": 0.0015347633136094674,
+    "earningsYield": 0.02143121301775148
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": 3.786363636363636,
+    "netMargin": 2.6340909090909093,
+    "roe": 0.13644925829997645,
+    "roa": 0.14068948773974266,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 1.5837,
+    "quickRatio": 1.5564,
+    "debtToEquity": 1.6111372733694374,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 2030000000,
+    "freeCashFlow": 83000000,
+    "fcfMargin": 0.18863636363636363,
+    "capexToRevenue": 4.425,
+    "fcfConversion": 0.07161345987920621
+  },
+  "dividends": {
+    "dividendYield": null,
+    "payoutRatio": null
+  },
+  "history": [
+    {
+      "year": "2013",
+      "revenue": 440000000,
+      "grossProfit": null,
+      "operatingIncome": 1666000000,
+      "netIncome": 1159000000,
+      "freeCashFlow": 83000000,
+      "totalAssets": 8238000000,
+      "totalDebt": 13685000000,
+      "totalEquity": 8494000000,
+      "sharesDiluted": 671000000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T20:16:31.490Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T20:16:31.490Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T20:16:31.490Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T20:16:31.490Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

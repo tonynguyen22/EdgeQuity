@@ -1,0 +1,96 @@
+{
+  "ticker": "APH",
+  "name": "Amphenol Corp",
+  "sector": "Electrical Equipment",
+  "industry": "Electrical Equipment",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 149740000000,
+  "enterpriseValue": 139546600000,
+  "valuation": {
+    "peTTM": 34.035,
+    "forwardPE": 32.0529,
+    "psTTM": 5.8672,
+    "pb": 12.3326,
+    "evRevenue": 6.042364698394004,
+    "evEbitda": null,
+    "pfcf": 34.202051118064915,
+    "fcfYield": 0.029238012555095498,
+    "earningsYield": 0.028751836516628822
+  },
+  "profitability": {
+    "grossMargin": 0.3688162219037268,
+    "operatingMargin": 0.2541102504037723,
+    "netMargin": 0.1864193949261086,
+    "roe": 0.3209772535804549,
+    "roa": 0.11880983196686251,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 2.9792,
+    "quickRatio": 2.3742,
+    "debtToEquity": 0.06987199081494956,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 5374700000,
+    "freeCashFlow": 4378100000,
+    "fcfMargin": 0.18957163331846702,
+    "capexToRevenue": 0.04315275799209342,
+    "fcfConversion": 1.016909390750935
+  },
+  "dividends": {
+    "dividendYield": 0.8126777732629012,
+    "payoutRatio": 18.79
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 23094700000,
+      "grossProfit": 8517700000,
+      "operatingIncome": 5868600000,
+      "netIncome": 4305300000,
+      "freeCashFlow": 4378100000,
+      "totalAssets": 36236900000,
+      "totalDebt": 937200000,
+      "totalEquity": 13413100000,
+      "sharesDiluted": 1277500000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T18:09:16.451Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T18:09:16.451Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T18:09:16.451Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T18:09:16.451Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

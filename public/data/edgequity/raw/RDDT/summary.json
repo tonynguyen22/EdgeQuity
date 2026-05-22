@@ -1,0 +1,96 @@
+{
+  "ticker": "RDDT",
+  "name": "Reddit Inc",
+  "sector": "Media",
+  "industry": "Media",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 30630000000,
+  "enterpriseValue": 26870.578,
+  "valuation": {
+    "peTTM": 39.9197,
+    "forwardPE": 30.890258590611932,
+    "psTTM": 11.4188,
+    "pb": 14.8716,
+    "evRevenue": 0.00001220000217933572,
+    "evEbitda": null,
+    "pfcf": 44.76964024970439,
+    "fcfYield": 0.022336565458700622,
+    "earningsYield": 0.01729418870388508
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": 0.20067323312626617,
+    "netMargin": 0.2405083118956316,
+    "roe": 0.18085152872717936,
+    "roa": 0.16353587783054502,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 11.5598,
+    "quickRatio": 11.3054,
+    "debtToEquity": null,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 690875000,
+    "freeCashFlow": 684169000,
+    "fcfMargin": 0.3106320709228488,
+    "capexToRevenue": 0.0030447136125849373,
+    "fcfConversion": 1.2915648048689783
+  },
+  "dividends": {
+    "dividendYield": null,
+    "payoutRatio": null
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 2202506000,
+      "grossProfit": null,
+      "operatingIncome": 441984000,
+      "netIncome": 529721000,
+      "freeCashFlow": 684169000,
+      "totalAssets": 3239173000,
+      "totalDebt": null,
+      "totalEquity": 2929038000,
+      "sharesDiluted": 202107978
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T21:53:21.382Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T21:53:21.382Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T21:53:21.382Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T21:53:21.382Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

@@ -1,0 +1,96 @@
+{
+  "ticker": "DVN",
+  "name": "Devon Energy Corp",
+  "sector": "Energy",
+  "industry": "Energy",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 57280000000,
+  "enterpriseValue": 64235000000,
+  "valuation": {
+    "peTTM": 24.3096,
+    "forwardPE": 9.44229,
+    "psTTM": 3.3328,
+    "pb": 1.4798,
+    "evRevenue": 3.8267008221136662,
+    "evEbitda": null,
+    "pfcf": 18.364860532221865,
+    "fcfYield": 0.0544518156424581,
+    "earningsYield": 0.04680516759776536
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": null,
+    "netMargin": 0.1597164303586322,
+    "roe": 0.17265584750128798,
+    "roa": 0.08484445710307288,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 0.9804,
+    "quickRatio": 0.8982,
+    "debtToEquity": 0.5402498712004121,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 6711000000,
+    "freeCashFlow": 3119000000,
+    "fcfMargin": 0.1858096032407959,
+    "capexToRevenue": 0.21398784701536996,
+    "fcfConversion": 1.1633718761656098
+  },
+  "dividends": {
+    "dividendYield": 2.146099876186546,
+    "payoutRatio": 23.43
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 16786000000,
+      "grossProfit": null,
+      "operatingIncome": null,
+      "netIncome": 2681000000,
+      "freeCashFlow": 3119000000,
+      "totalAssets": 31599000000,
+      "totalDebt": 8389000000,
+      "totalEquity": 15528000000,
+      "sharesDiluted": null
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T20:09:55.679Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T20:09:55.679Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T20:09:55.679Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T20:09:55.679Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

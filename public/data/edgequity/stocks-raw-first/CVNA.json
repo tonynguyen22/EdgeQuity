@@ -1,0 +1,96 @@
+{
+  "ticker": "CVNA",
+  "name": "Carvana Co",
+  "sector": "Retail",
+  "industry": "Retail",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 72870000000,
+  "enterpriseValue": 75600000000,
+  "valuation": {
+    "peTTM": 49.4071,
+    "forwardPE": 42.90645823806641,
+    "psTTM": 3.1612,
+    "pb": 26.6804,
+    "evRevenue": 3.7201062887511074,
+    "evEbitda": null,
+    "pfcf": 81.96850393700787,
+    "fcfYield": 0.012199807877041306,
+    "earningsYield": 0.026005214766021682
+  },
+  "profitability": {
+    "grossMargin": 0.20627890955614606,
+    "operatingMargin": 0.09255978742249779,
+    "netMargin": 0.09324869599448873,
+    "roe": 0.5507120023249056,
+    "roa": 0.1435497310809787,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 4.3114,
+    "quickRatio": 2.7261,
+    "debtToEquity": 1.4696309212438246,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 1036000000,
+    "freeCashFlow": 889000000,
+    "fcfMargin": 0.043745694321425055,
+    "capexToRevenue": 0.00723354000590493,
+    "fcfConversion": 0.46912928759894457
+  },
+  "dividends": {
+    "dividendYield": null,
+    "payoutRatio": null
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 20322000000,
+      "grossProfit": 4192000000,
+      "operatingIncome": 1881000000,
+      "netIncome": 1895000000,
+      "freeCashFlow": 889000000,
+      "totalAssets": 13201000000,
+      "totalDebt": 5057000000,
+      "totalEquity": 3441000000,
+      "sharesDiluted": 224277000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T19:29:49.646Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T19:29:49.646Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T19:29:49.646Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T19:29:49.646Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

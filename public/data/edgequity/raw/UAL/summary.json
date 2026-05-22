@@ -1,0 +1,96 @@
+{
+  "ticker": "UAL",
+  "name": "United Airlines Holdings Inc",
+  "sector": "Airlines",
+  "industry": "Airlines",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 30040000000,
+  "enterpriseValue": 32950000000,
+  "valuation": {
+    "peTTM": 7.974,
+    "forwardPE": 8.51233,
+    "psTTM": 0.4832,
+    "pb": 2.3688,
+    "evRevenue": 0.5578127645166752,
+    "evEbitda": null,
+    "pfcf": 11.748142354321471,
+    "fcfYield": 0.08511984021304926,
+    "earningsYield": 0.11161784287616511
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": 0.0797866937531742,
+    "netMargin": 0.05676316234975453,
+    "roe": 0.21940845439078654,
+    "roa": 0.04385987861029719,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 0.645,
+    "quickRatio": 0.5598,
+    "debtToEquity": 0.5792435545085721,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 8431000000,
+    "freeCashFlow": 2557000000,
+    "fcfMargin": 0.04328762485187066,
+    "capexToRevenue": 0.09944134078212291,
+    "fcfConversion": 0.7626006561288399
+  },
+  "dividends": {
+    "dividendYield": null,
+    "payoutRatio": null
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 59070000000,
+      "grossProfit": null,
+      "operatingIncome": 4713000000,
+      "netIncome": 3353000000,
+      "freeCashFlow": 2557000000,
+      "totalAssets": 76448000000,
+      "totalDebt": 8852000000,
+      "totalEquity": 15282000000,
+      "sharesDiluted": null
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T21:57:18.573Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T21:57:18.573Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T21:57:18.573Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T21:57:18.573Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

@@ -1,0 +1,97 @@
+{
+  "ticker": "EOG",
+  "name": "EOG Resources Inc",
+  "sector": "Energy",
+  "industry": "Energy",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 76160000000,
+  "enterpriseValue": 80700000000,
+  "valuation": {
+    "peTTM": 13.6863,
+    "forwardPE": 9.4736,
+    "psTTM": 3.1496,
+    "pb": 1.9099,
+    "evRevenue": 3.5736427242936855,
+    "evEbitda": null,
+    "pfcf": null,
+    "fcfYield": null,
+    "earningsYield": 0.06538865546218488
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": 0.28274732087503324,
+    "netMargin": 0.2205296253653352,
+    "roe": 0.16692923943284282,
+    "roa": 0.0961408521400027,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 1.6321,
+    "quickRatio": 1.4159,
+    "debtToEquity": 0.2660141454094459,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 10044000000,
+    "freeCashFlow": null,
+    "fcfMargin": null,
+    "capexToRevenue": null,
+    "fcfConversion": null
+  },
+  "dividends": {
+    "dividendYield": 2.8807456047447575,
+    "payoutRatio": 43.39
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 22582000000,
+      "grossProfit": null,
+      "operatingIncome": 6385000000,
+      "netIncome": 4980000000,
+      "freeCashFlow": null,
+      "totalAssets": 51799000000,
+      "totalDebt": 7936000000,
+      "totalEquity": 29833000000,
+      "sharesDiluted": 546000000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items",
+    "Free cash flow unavailable from mapped line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T19:19:56.743Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T19:19:56.743Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T19:19:56.743Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T19:19:56.743Z",
+      "status": "partial",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

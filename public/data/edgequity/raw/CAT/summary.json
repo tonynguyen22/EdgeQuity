@@ -1,0 +1,96 @@
+{
+  "ticker": "CAT",
+  "name": "Caterpillar Inc",
+  "sector": "Machinery",
+  "industry": "Machinery",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 397930000000,
+  "enterpriseValue": 400584000000,
+  "valuation": {
+    "peTTM": 42.7034,
+    "forwardPE": 35.0584,
+    "psTTM": 5.6914,
+    "pb": 12.5758,
+    "evRevenue": 5.926763230703221,
+    "evEbitda": null,
+    "pfcf": 44.62099125364431,
+    "fcfYield": 0.022410976804965697,
+    "earningsYield": 0.022320508632171488
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": 0.16498246756128956,
+    "netMargin": 0.13141191614020034,
+    "roe": 0.416643212308847,
+    "roa": 0.09009484201450525,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 1.4357,
+    "quickRatio": 0.863,
+    "debtToEquity": 0.5926447133877475,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 11739000000,
+    "freeCashFlow": 8918000000,
+    "fcfMargin": 0.13194454718963144,
+    "capexToRevenue": 0.041737560845699746,
+    "fcfConversion": 1.004053141184418
+  },
+  "dividends": {
+    "dividendYield": 0.6922160080682132,
+    "payoutRatio": 30.94
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 67589000000,
+      "grossProfit": null,
+      "operatingIncome": 11151000000,
+      "netIncome": 8882000000,
+      "freeCashFlow": 8918000000,
+      "totalAssets": 98585000000,
+      "totalDebt": 12634000000,
+      "totalEquity": 21318000000,
+      "sharesDiluted": 472300000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T17:57:30.440Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T17:57:30.440Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T17:57:30.440Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T17:57:30.440Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

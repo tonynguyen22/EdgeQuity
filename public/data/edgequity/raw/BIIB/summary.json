@@ -1,0 +1,96 @@
+{
+  "ticker": "BIIB",
+  "name": "Biogen Inc",
+  "sector": "Biotechnology",
+  "industry": "Biotechnology",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 28330000000,
+  "enterpriseValue": 30825.456,
+  "valuation": {
+    "peTTM": 20.3511,
+    "forwardPE": 12.43438,
+    "psTTM": 2.8096,
+    "pb": 1.4142,
+    "evRevenue": 0.0000031166416597577497,
+    "evEbitda": null,
+    "pfcf": 13.81412131850985,
+    "fcfYield": 0.07238969290504765,
+    "earningsYield": 0.010243558065654784
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": null,
+    "netMargin": 0.029340990435362868,
+    "roe": 0.01589544717584681,
+    "roa": 0.009857504373375906,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 2.6793,
+    "quickRatio": 1.8249,
+    "debtToEquity": null,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 2204600000,
+    "freeCashFlow": 2050800000,
+    "fcfMargin": 0.2073483914019372,
+    "capexToRevenue": 0.015550118294137869,
+    "fcfConversion": 7.066850447966919
+  },
+  "dividends": {
+    "dividendYield": null,
+    "payoutRatio": null
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 9890600000,
+      "grossProfit": null,
+      "operatingIncome": null,
+      "netIncome": 290200000,
+      "freeCashFlow": 2050800000,
+      "totalAssets": 29439500000,
+      "totalDebt": null,
+      "totalEquity": 18256800000,
+      "sharesDiluted": 147100000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T22:09:17.249Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T22:09:17.249Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T22:09:17.249Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T22:09:17.249Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

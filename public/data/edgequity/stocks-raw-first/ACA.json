@@ -1,0 +1,96 @@
+{
+  "ticker": "ACA",
+  "name": "Arcosa Inc",
+  "sector": "Construction",
+  "industry": "Construction",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 5903346590.000001,
+  "enterpriseValue": 5705746590.000001,
+  "valuation": {
+    "peTTM": 26.52,
+    "forwardPE": 26.36749,
+    "psTTM": 2.0911,
+    "pb": 1.9741,
+    "evRevenue": 1.9788258965110637,
+    "evEbitda": null,
+    "pfcf": 33.63730250712251,
+    "fcfYield": 0.029728899925559,
+    "earningsYield": 0.03530200994009399
+  },
+  "profitability": {
+    "grossMargin": 0.22445723798293682,
+    "operatingMargin": 0.11857529305680793,
+    "netMargin": 0.07227578553097039,
+    "roe": 0.0788975543272507,
+    "roa": 0.04180373906764021,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 2.1972,
+    "quickRatio": 1.3548,
+    "debtToEquity": 0.00643598091920951,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 341100000,
+    "freeCashFlow": 175500000,
+    "fcfMargin": 0.06086564472497746,
+    "capexToRevenue": 0.05743219809946591,
+    "fcfConversion": 0.8421305182341651
+  },
+  "dividends": {
+    "dividendYield": 0.16633399866932802,
+    "payoutRatio": 4.8
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 2883400000,
+      "grossProfit": 647200000,
+      "operatingIncome": 341900000,
+      "netIncome": 208400000,
+      "freeCashFlow": 175500000,
+      "totalAssets": 4985200000,
+      "totalDebt": 17000000,
+      "totalEquity": 2641400000,
+      "sharesDiluted": 49000000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T16:36:17.116Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T16:36:17.116Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T16:36:17.116Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T16:36:17.116Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items"
+    }
+  }
+}

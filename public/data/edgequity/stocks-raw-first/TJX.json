@@ -1,0 +1,96 @@
+{
+  "ticker": "TJX",
+  "name": "TJX Companies Inc",
+  "sector": "Retail",
+  "industry": "Retail",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 166150000000,
+  "enterpriseValue": 162789000000,
+  "valuation": {
+    "peTTM": 32.1064,
+    "forwardPE": 29.91539,
+    "psTTM": 2.9218,
+    "pb": 16.3649,
+    "evRevenue": 2.6964321208507256,
+    "evEbitda": null,
+    "pfcf": 33.79092942851332,
+    "fcfYield": 0.029593740595847125,
+    "earningsYield": 0.033066506169124286
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": null,
+    "netMargin": 0.09100245146756775,
+    "roe": 0.5391560353287537,
+    "roa": 0.15360527860877346,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 1.1378,
+    "quickRatio": 0.5119,
+    "debtToEquity": 0.2815505397448479,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 6874000000,
+    "freeCashFlow": 4917000000,
+    "fcfMargin": 0.08144504074736633,
+    "capexToRevenue": 0.032415689392433576,
+    "fcfConversion": 0.8949763378230797
+  },
+  "dividends": {
+    "dividendYield": 1.2059543998492557,
+    "payoutRatio": 33.53
+  },
+  "history": [
+    {
+      "year": "2026",
+      "revenue": 60372000000,
+      "grossProfit": null,
+      "operatingIncome": null,
+      "netIncome": 5494000000,
+      "freeCashFlow": 4917000000,
+      "totalAssets": 35767000000,
+      "totalDebt": 2869000000,
+      "totalEquity": 10190000000,
+      "sharesDiluted": 1128000000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T17:57:58.125Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T17:57:58.125Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T17:57:58.125Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T17:57:58.125Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

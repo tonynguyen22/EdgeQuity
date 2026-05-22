@@ -1,0 +1,96 @@
+{
+  "ticker": "MELI",
+  "name": "MercadoLibre Inc",
+  "sector": "Retail",
+  "industry": "Retail",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 80400000000,
+  "enterpriseValue": 88306.17,
+  "valuation": {
+    "peTTM": 42.7376,
+    "forwardPE": 33.76069,
+    "psTTM": 2.5801,
+    "pb": 15.133,
+    "evRevenue": 0.0000030563171010279304,
+    "evEbitda": null,
+    "pfcf": 7.463102199944305,
+    "fcfYield": 0.13399253731343283,
+    "earningsYield": 0.02483830845771144
+  },
+  "profitability": {
+    "grossMargin": 0.44502128543245767,
+    "operatingMargin": 0.1107880801578237,
+    "netMargin": 0.06911708718374693,
+    "roe": 0.29593953764078246,
+    "roa": 0.04680432184123562,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 1.1725,
+    "quickRatio": 1.1441,
+    "debtToEquity": null,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 12116000000,
+    "freeCashFlow": 10773000000,
+    "fcfMargin": 0.3728584778320008,
+    "capexToRevenue": 0.046481846814107226,
+    "fcfConversion": 5.394591887831748
+  },
+  "dividends": {
+    "dividendYield": null,
+    "payoutRatio": null
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 28893000000,
+      "grossProfit": 12858000000,
+      "operatingIncome": 3201000000,
+      "netIncome": 1997000000,
+      "freeCashFlow": 10773000000,
+      "totalAssets": 42667000000,
+      "totalDebt": null,
+      "totalEquity": 6748000000,
+      "sharesDiluted": 50697320
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T19:10:43.319Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T19:10:43.319Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T19:10:43.319Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T19:10:43.319Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

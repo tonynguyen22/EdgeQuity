@@ -1,0 +1,96 @@
+{
+  "ticker": "AAWH",
+  "name": "Ascend Wellness Holdings Inc",
+  "sector": "Consumer products",
+  "industry": "Consumer products",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 107575690,
+  "enterpriseValue": 323371690,
+  "valuation": {
+    "peTTM": null,
+    "forwardPE": null,
+    "psTTM": 0.1428,
+    "pb": 0.7945,
+    "evRevenue": 0.6459927364402565,
+    "evEbitda": null,
+    "pfcf": 8.931890567917636,
+    "fcfYield": 0.11195838018794023,
+    "earningsYield": -1.0986961831246447
+  },
+  "profitability": {
+    "grossMargin": 0.3389661213669716,
+    "operatingMargin": -0.03398450999938072,
+    "netMargin": -0.23611163827632292,
+    "roe": 2.491420741989882,
+    "roa": -0.1301786813726624,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 1.9168,
+    "quickRatio": 1.0731,
+    "debtToEquity": -6.3548060708263066,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 38053000,
+    "freeCashFlow": 12044000,
+    "fcfMargin": 0.024060042230927663,
+    "capexToRevenue": 0.051957625239471734,
+    "fcfConversion": -0.10190112781636815
+  },
+  "dividends": {
+    "dividendYield": null,
+    "payoutRatio": null
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 500581000,
+      "grossProfit": 169680000,
+      "operatingIncome": -17012000,
+      "netIncome": -118193000,
+      "freeCashFlow": 12044000,
+      "totalAssets": 907929000,
+      "totalDebt": 301472000,
+      "totalEquity": -47440000,
+      "sharesDiluted": 203477000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T16:02:54.077Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T16:02:54.077Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T16:02:54.077Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T16:02:54.077Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items"
+    }
+  }
+}

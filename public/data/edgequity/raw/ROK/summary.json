@@ -1,0 +1,96 @@
+{
+  "ticker": "ROK",
+  "name": "Rockwell Automation Inc",
+  "sector": "Electrical Equipment",
+  "industry": "Electrical Equipment",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 48560000000,
+  "enterpriseValue": 51314000000,
+  "valuation": {
+    "peTTM": 44.4349,
+    "forwardPE": 31.14349,
+    "psTTM": 5.4913,
+    "pb": 10.7551,
+    "evRevenue": 6.151282666027331,
+    "evEbitda": null,
+    "pfcf": 35.758468335787924,
+    "fcfYield": 0.02796540362438221,
+    "earningsYield": 0.015424217462932455
+  },
+  "profitability": {
+    "grossMargin": 0.48141932390314074,
+    "operatingMargin": null,
+    "netMargin": 0.08978662191321025,
+    "roe": 0.2049808429118774,
+    "roa": 0.06676174347089758,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 1.1353,
+    "quickRatio": 0.7733,
+    "debtToEquity": 0.8817733990147784,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 1544000000,
+    "freeCashFlow": 1358000000,
+    "fcfMargin": 0.16279069767441862,
+    "capexToRevenue": 0.02229681131623112,
+    "fcfConversion": 1.8130841121495327
+  },
+  "dividends": {
+    "dividendYield": 1.2653875249295095,
+    "payoutRatio": 68.01
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 8342000000,
+      "grossProfit": 4016000000,
+      "operatingIncome": null,
+      "netIncome": 749000000,
+      "freeCashFlow": 1358000000,
+      "totalAssets": 11219000000,
+      "totalDebt": 3222000000,
+      "totalEquity": 3654000000,
+      "sharesDiluted": 113100000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T20:31:02.502Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T20:31:02.502Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T20:31:02.502Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T20:31:02.502Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

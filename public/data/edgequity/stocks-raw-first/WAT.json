@@ -1,0 +1,96 @@
+{
+  "ticker": "WAT",
+  "name": "Waters Corp",
+  "sector": "Life Sciences Tools & Services",
+  "industry": "Life Sciences Tools & Services",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 32619999999.999996,
+  "enterpriseValue": 32979613999.999996,
+  "valuation": {
+    "peTTM": 72.836,
+    "forwardPE": 23.824347101394284,
+    "psTTM": 8.6781,
+    "pb": 8.8309,
+    "evRevenue": 10.419157700125675,
+    "evEbitda": null,
+    "pfcf": 60.42866934662195,
+    "fcfYield": 0.016548436541998775,
+    "earningsYield": 0.0197004598405886
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": 0.2535593940010476,
+    "netMargin": 0.20302399214478564,
+    "roe": 0.2509052248869884,
+    "roa": 0.12658774167495643,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 1.7327,
+    "quickRatio": 1.2709,
+    "debtToEquity": 0.3699162359511518,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 652555000,
+    "freeCashFlow": 539810000,
+    "fcfMargin": 0.17054067152225738,
+    "capexToRevenue": 0.035619214187912245,
+    "fcfConversion": 0.8400025520167935
+  },
+  "dividends": {
+    "dividendYield": null,
+    "payoutRatio": null
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 3165286000,
+      "grossProfit": null,
+      "operatingIncome": 802588000,
+      "netIncome": 642629000,
+      "freeCashFlow": 539810000,
+      "totalAssets": 5076550000,
+      "totalDebt": 947445000,
+      "totalEquity": 2561242000,
+      "sharesDiluted": 59706000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T21:40:50.043Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T21:40:50.043Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T21:40:50.043Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T21:40:50.043Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

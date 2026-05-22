@@ -1,0 +1,96 @@
+{
+  "ticker": "BDX",
+  "name": "Becton Dickinson and Co",
+  "sector": "Health Care",
+  "industry": "Health Care",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 39220000000,
+  "enterpriseValue": 57760000000,
+  "valuation": {
+    "peTTM": 36.0479,
+    "forwardPE": 11.45746,
+    "psTTM": 1.9201,
+    "pb": 2.1039,
+    "evRevenue": 2.6446886446886446,
+    "evEbitda": null,
+    "pfcf": 14.689138576779026,
+    "fcfYield": 0.06807751147373789,
+    "earningsYield": 0.04278429372768995
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": 0.11808608058608058,
+    "netMargin": 0.07683150183150184,
+    "roe": 0.06608901142181961,
+    "roa": 0.0303298689561681,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 1.1133,
+    "quickRatio": 0.4635,
+    "debtToEquity": 0.7554549035053171,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 3430000000,
+    "freeCashFlow": 2670000000,
+    "fcfMargin": 0.12225274725274725,
+    "capexToRevenue": 0.0347985347985348,
+    "fcfConversion": 1.5911799761620977
+  },
+  "dividends": {
+    "dividendYield": 2.858115005103777,
+    "payoutRatio": 71.28
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 21840000000,
+      "grossProfit": null,
+      "operatingIncome": 2579000000,
+      "netIncome": 1678000000,
+      "freeCashFlow": 2670000000,
+      "totalAssets": 55325000000,
+      "totalDebt": 19181000000,
+      "totalEquity": 25390000000,
+      "sharesDiluted": null
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T21:05:22.961Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T21:05:22.961Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T21:05:22.961Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T21:05:22.961Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

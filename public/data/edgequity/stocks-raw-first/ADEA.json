@@ -1,0 +1,96 @@
+{
+  "ticker": "ADEA",
+  "name": "Adeia Inc",
+  "sector": "Technology",
+  "industry": "Technology",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 2912857840,
+  "enterpriseValue": 3258175840,
+  "valuation": {
+    "peTTM": 23.8692,
+    "forwardPE": 22.77699,
+    "psTTM": 6.3256,
+    "pb": 3.9311,
+    "evRevenue": 7.348395844704163,
+    "evEbitda": null,
+    "pfcf": 18.63871154338367,
+    "fcfYield": 0.053651777252541784,
+    "earningsYield": 0.03813265394372971
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": 0.3946967202392498,
+    "netMargin": 0.2505153523115299,
+    "roe": 0.23114572950070858,
+    "roa": 0.10687451109060592,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 3.81,
+    "quickRatio": 3.7412,
+    "debtToEquity": 0.8707977050865587,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 158086000,
+    "freeCashFlow": 156280000,
+    "fcfMargin": 0.3524694058901273,
+    "capexToRevenue": 0.004073200326577745,
+    "fcfConversion": 1.4069772676119738
+  },
+  "dividends": {
+    "dividendYield": 0.7572889057175313,
+    "payoutRatio": 19.6
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 443386000,
+      "grossProfit": null,
+      "operatingIncome": 175003000,
+      "netIncome": 111075000,
+      "freeCashFlow": 156280000,
+      "totalAssets": 1039303000,
+      "totalDebt": 418454000,
+      "totalEquity": 480541000,
+      "sharesDiluted": 112747000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T17:02:37.597Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T17:02:37.597Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T17:02:37.597Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T17:02:37.597Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items"
+    }
+  }
+}

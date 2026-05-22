@@ -1,0 +1,96 @@
+{
+  "ticker": "COST",
+  "name": "Costco Wholesale Corp",
+  "sector": "Retail",
+  "industry": "Retail",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 477580000000,
+  "enterpriseValue": 469132000000,
+  "valuation": {
+    "peTTM": 54.0302,
+    "forwardPE": 46.34074,
+    "psTTM": 1.6136,
+    "pb": 14.3444,
+    "evRevenue": 1.704477991534507,
+    "evEbitda": null,
+    "pfcf": 60.93913487303815,
+    "fcfYield": 0.016409816156455464,
+    "earningsYield": 0.01695841534402613
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": 0.03772412665540356,
+    "netMargin": 0.029425763438516175,
+    "roe": 0.27770539020710466,
+    "roa": 0.10504675806430692,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 1.0343,
+    "quickRatio": 0.5461,
+    "debtToEquity": 0.19589219585790701,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 13335000000,
+    "freeCashFlow": 7837000000,
+    "fcfMargin": 0.028473849619416135,
+    "capexToRevenue": 0.01997565716569477,
+    "fcfConversion": 0.967650327200889
+  },
+  "dividends": {
+    "dividendYield": 0.5474809359316952,
+    "payoutRatio": 26.95
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 275235000000,
+      "grossProfit": null,
+      "operatingIncome": 10383000000,
+      "netIncome": 8099000000,
+      "freeCashFlow": 7837000000,
+      "totalAssets": 77099000000,
+      "totalDebt": 5713000000,
+      "totalEquity": 29164000000,
+      "sharesDiluted": 444803000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T17:57:30.386Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T17:57:30.386Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T17:57:30.386Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T17:57:30.386Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

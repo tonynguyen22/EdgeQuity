@@ -1,0 +1,96 @@
+{
+  "ticker": "TRGP",
+  "name": "Targa Resources Corp",
+  "sector": "Energy",
+  "industry": "Energy",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 58960000000,
+  "enterpriseValue": 76226400000,
+  "valuation": {
+    "peTTM": 27.8058,
+    "forwardPE": 23.96725,
+    "psTTM": 3.5797,
+    "pb": 12.9093,
+    "evRevenue": 4.4764539032081885,
+    "evEbitda": null,
+    "pfcf": 100.94161958568738,
+    "fcfYield": 0.009906716417910447,
+    "earningsYield": 0.03318690637720489
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": 0.19562727929388135,
+    "netMargin": 0.11490871079320895,
+    "roe": 0.6377978421721698,
+    "roa": 0.07759017225517875,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 0.6661,
+    "quickRatio": 0.5451,
+    "debtToEquity": 5.682225626650151,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 3917400000,
+    "freeCashFlow": 584100000,
+    "fcfMargin": 0.03430172125226828,
+    "capexToRevenue": 0.19575060340726907,
+    "fcfConversion": 0.29851280216691367
+  },
+  "dividends": {
+    "dividendYield": 1.8471314049281466,
+    "payoutRatio": 42.55
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 17028300000,
+      "grossProfit": null,
+      "operatingIncome": 3331200000,
+      "netIncome": 1956700000,
+      "freeCashFlow": 584100000,
+      "totalAssets": 25218400000,
+      "totalDebt": 17432500000,
+      "totalEquity": 3067900000,
+      "sharesDiluted": 216900000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T20:02:14.072Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T20:02:14.072Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T20:02:14.072Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T20:02:14.072Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

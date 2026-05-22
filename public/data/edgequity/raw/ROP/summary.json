@@ -1,0 +1,96 @@
+{
+  "ticker": "ROP",
+  "name": "Roper Technologies Inc",
+  "sector": "Technology",
+  "industry": "Technology",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 33400000000,
+  "enterpriseValue": 42403600000,
+  "valuation": {
+    "peTTM": 19.0407,
+    "forwardPE": 16.23138,
+    "psTTM": 4.0219,
+    "pb": 2.4099,
+    "evRevenue": 5.365846251186333,
+    "evEbitda": null,
+    "pfcf": 13.398050463315817,
+    "fcfYield": 0.0746377245508982,
+    "earningsYield": 0.045997005988023955
+  },
+  "profitability": {
+    "grossMargin": 0.6924391015501423,
+    "operatingMargin": 0.28287250869977854,
+    "netMargin": 0.1944068332806074,
+    "roe": 0.07727284158639941,
+    "roa": 0.044431269340891345,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 0.5175,
+    "quickRatio": 0.4795,
+    "debtToEquity": 0.4678218444282373,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 2540300000,
+    "freeCashFlow": 2492900000,
+    "fcfMargin": 0.3154571338184119,
+    "capexToRevenue": 0.005998101866497943,
+    "fcfConversion": 1.6226648441059688
+  },
+  "dividends": {
+    "dividendYield": 1.1265164644714039,
+    "payoutRatio": 23.11
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 7902500000,
+      "grossProfit": 5472000000,
+      "operatingIncome": 2235400000,
+      "netIncome": 1536300000,
+      "freeCashFlow": 2492900000,
+      "totalAssets": 34577000000,
+      "totalDebt": 9301000000,
+      "totalEquity": 19881500000,
+      "sharesDiluted": 108200000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T21:36:52.480Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T21:36:52.480Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T21:36:52.480Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T21:36:52.480Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

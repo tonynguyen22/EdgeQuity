@@ -1,0 +1,96 @@
+{
+  "ticker": "INTU",
+  "name": "Intuit Inc",
+  "sector": "Technology",
+  "industry": "Technology",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 111490000000,
+  "enterpriseValue": 114579000000,
+  "valuation": {
+    "peTTM": 18.4306,
+    "forwardPE": 15.52345,
+    "psTTM": 4.0376,
+    "pb": 11.1189,
+    "evRevenue": 6.084594551537359,
+    "evEbitda": null,
+    "pfcf": 18.20839457782133,
+    "fcfYield": 0.05491972374203964,
+    "earningsYield": 0.03470266391604628
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": 0.2614306197227975,
+    "netMargin": 0.2054590834262652,
+    "roe": 0.1962962962962963,
+    "roa": 0.10468640077926294,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 1.3604,
+    "quickRatio": 1.3125,
+    "debtToEquity": 0.3030441400304414,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 6207000000,
+    "freeCashFlow": 6123000000,
+    "fcfMargin": 0.32515532897881155,
+    "capexToRevenue": 0.004460729647920982,
+    "fcfConversion": 1.5825794779012665
+  },
+  "dividends": {
+    "dividendYield": 1.2502279061287214,
+    "payoutRatio": 30.73
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 18831000000,
+      "grossProfit": null,
+      "operatingIncome": 4923000000,
+      "netIncome": 3869000000,
+      "freeCashFlow": 6123000000,
+      "totalAssets": 36958000000,
+      "totalDebt": 5973000000,
+      "totalEquity": 19710000000,
+      "sharesDiluted": 283000000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T18:33:41.453Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T18:33:41.453Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T18:33:41.453Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T18:33:41.453Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

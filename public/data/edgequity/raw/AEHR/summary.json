@@ -1,0 +1,96 @@
+{
+  "ticker": "AEHR",
+  "name": "Aehr Test Systems",
+  "sector": "Semiconductors",
+  "industry": "Semiconductors",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 2589860877,
+  "enterpriseValue": 2559.2406,
+  "valuation": {
+    "peTTM": null,
+    "forwardPE": 731.80752,
+    "psTTM": 57.3672,
+    "pb": 2.3197,
+    "evRevenue": 0.00004340049857549858,
+    "evEbitda": null,
+    "pfcf": -208.9945833602324,
+    "fcfYield": -0.004784813002910967,
+    "earningsYield": -0.001509733605663483
+  },
+  "profitability": {
+    "grossMargin": 0.4058641975308642,
+    "operatingMargin": -0.09627255460588793,
+    "netMargin": -0.06630714964048297,
+    "roe": -0.03182199217065052,
+    "roa": -0.026328547957012418,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 5.6771,
+    "quickRatio": 2.476,
+    "debtToEquity": null,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": -7400000,
+    "freeCashFlow": -12392000,
+    "fcfMargin": -0.21014787681454347,
+    "capexToRevenue": 0.08465608465608465,
+    "fcfConversion": 3.169309462915601
+  },
+  "dividends": {
+    "dividendYield": null,
+    "payoutRatio": null
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 58968000,
+      "grossProfit": 23933000,
+      "operatingIncome": -5677000,
+      "netIncome": -3910000,
+      "freeCashFlow": -12392000,
+      "totalAssets": 148508000,
+      "totalDebt": null,
+      "totalEquity": 122871000,
+      "sharesDiluted": 29581000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T17:17:48.656Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T17:17:48.656Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T17:17:48.656Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T17:17:48.656Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items"
+    }
+  }
+}

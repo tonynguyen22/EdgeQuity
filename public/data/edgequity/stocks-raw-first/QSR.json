@@ -1,0 +1,96 @@
+{
+  "ticker": "QSR",
+  "name": "Restaurant Brands International Inc",
+  "sector": "Hotels, Restaurants & Leisure",
+  "industry": "Hotels, Restaurants & Leisure",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 34540000000,
+  "enterpriseValue": 46695000000,
+  "valuation": {
+    "peTTM": 35.8215,
+    "forwardPE": 19.25217,
+    "psTTM": 3.5676,
+    "pb": 8.539,
+    "evRevenue": 4.949650201399194,
+    "evEbitda": null,
+    "pfcf": 23.837129054520357,
+    "fcfYield": 0.04195136074116966,
+    "earningsYield": 0.031123335263462653
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": 0.23341106635573458,
+    "netMargin": 0.1139495442018232,
+    "roe": 0.2958172812328013,
+    "roa": 0.041967597111067734,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 0.9789,
+    "quickRatio": 0.8461,
+    "debtToEquity": 3.6648321408915794,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 1714000000,
+    "freeCashFlow": 1449000000,
+    "fcfMargin": 0.1535933856264575,
+    "capexToRevenue": 0.028089887640449437,
+    "fcfConversion": 1.347906976744186
+  },
+  "dividends": {
+    "dividendYield": 3.397360512217431,
+    "payoutRatio": 142.78
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 9434000000,
+      "grossProfit": null,
+      "operatingIncome": 2202000000,
+      "netIncome": 1075000000,
+      "freeCashFlow": 1449000000,
+      "totalAssets": 25615000000,
+      "totalDebt": 13318000000,
+      "totalEquity": 3634000000,
+      "sharesDiluted": 457000000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T21:30:56.427Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T21:30:56.427Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T21:30:56.427Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T21:30:56.427Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

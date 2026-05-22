@@ -1,0 +1,96 @@
+{
+  "ticker": "MSCI",
+  "name": "MSCI Inc",
+  "sector": "Financial Services",
+  "industry": "Financial Services",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 42520000000,
+  "enterpriseValue": 48206954000,
+  "valuation": {
+    "peTTM": 32.08,
+    "forwardPE": 28.72105,
+    "psTTM": 13.069,
+    "pb": 28.6774,
+    "evRevenue": 15.379672855826158,
+    "evEbitda": null,
+    "pfcf": 27.447717327243023,
+    "fcfYield": 0.03643290216368768,
+    "earningsYield": 0.028276222953904046
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": 0.5466866850068863,
+    "netMargin": 0.38357655978272487,
+    "roe": -0.45292404710420636,
+    "roa": 0.21083974474871278,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 0.8989,
+    "quickRatio": 0.8216,
+    "debtToEquity": -2.3364824037309666,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 1588446000,
+    "freeCashFlow": 1549127000,
+    "fcfMargin": 0.4942246811969785,
+    "capexToRevenue": 0.012544110482861635,
+    "fcfConversion": 1.2884642416025884
+  },
+  "dividends": {
+    "dividendYield": 1.4090073371479628,
+    "payoutRatio": 46.29
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 3134459000,
+      "grossProfit": null,
+      "operatingIncome": 1713567000,
+      "netIncome": 1202305000,
+      "freeCashFlow": 1549127000,
+      "totalAssets": 5702459000,
+      "totalDebt": 6202286000,
+      "totalEquity": -2654540000,
+      "sharesDiluted": 76636000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T20:51:28.277Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T20:51:28.277Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T20:51:28.277Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T20:51:28.277Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

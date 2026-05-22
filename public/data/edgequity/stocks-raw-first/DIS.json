@@ -1,0 +1,96 @@
+{
+  "ticker": "DIS",
+  "name": "Walt Disney Co",
+  "sector": "Media",
+  "industry": "Media",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 180440000000,
+  "enterpriseValue": 216771000000,
+  "valuation": {
+    "peTTM": 16.2048,
+    "forwardPE": 14.64561,
+    "psTTM": 1.87,
+    "pb": 1.9024,
+    "evRevenue": 2.295694996028594,
+    "evEbitda": null,
+    "pfcf": 17.906122854024016,
+    "fcfYield": 0.05584681888716471,
+    "earningsYield": 0.07443471514076701
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": null,
+    "netMargin": 0.14223987291501192,
+    "roe": 0.12224558337656664,
+    "roa": 0.06800024302074789,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 0.7104,
+    "quickRatio": 0.6479,
+    "debtToEquity": 0.3825100801864038,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 18101000000,
+    "freeCashFlow": 10077000000,
+    "fcfMargin": 0.10671961874503574,
+    "capexToRevenue": 0.08497749536669315,
+    "fcfConversion": 0.7502792048246594
+  },
+  "dividends": {
+    "dividendYield": 1.4411990776325905,
+    "payoutRatio": 14.54
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 94425000000,
+      "grossProfit": null,
+      "operatingIncome": null,
+      "netIncome": 13431000000,
+      "freeCashFlow": 10077000000,
+      "totalAssets": 197514000000,
+      "totalDebt": 42026000000,
+      "totalEquity": 109869000000,
+      "sharesDiluted": 1811000000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T17:57:31.309Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T17:57:31.309Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T17:57:31.309Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T17:57:31.309Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

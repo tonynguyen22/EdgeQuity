@@ -1,0 +1,96 @@
+{
+  "ticker": "OTIS",
+  "name": "Otis Worldwide Corp",
+  "sector": "Machinery",
+  "industry": "Machinery",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 27290000000,
+  "enterpriseValue": 34150000000,
+  "valuation": {
+    "peTTM": 18.4655,
+    "forwardPE": 17.6369,
+    "psTTM": 1.8671,
+    "pb": null,
+    "evRevenue": 2.3664333726006515,
+    "evEbitda": null,
+    "pfcf": 18.898891966759003,
+    "fcfYield": 0.05291315500183217,
+    "earningsYield": 0.053316233052400144
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": 0.14780680479523248,
+    "netMargin": 0.10082461367888573,
+    "roe": -0.2698442136498516,
+    "roa": 0.13658124471979724,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 0.8491,
+    "quickRatio": 0.7691,
+    "debtToEquity": -1.475519287833828,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 1596000000,
+    "freeCashFlow": 1444000000,
+    "fcfMargin": 0.10006236574041993,
+    "capexToRevenue": 0.01053288060425473,
+    "fcfConversion": 0.9924398625429554
+  },
+  "dividends": {
+    "dividendYield": 2.469482250596324,
+    "payoutRatio": 46.75
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 14431000000,
+      "grossProfit": null,
+      "operatingIncome": 2133000000,
+      "netIncome": 1455000000,
+      "freeCashFlow": 1444000000,
+      "totalAssets": 10653000000,
+      "totalDebt": 7956000000,
+      "totalEquity": -5392000000,
+      "sharesDiluted": 394900000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T22:18:46.299Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T22:18:46.299Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T22:18:46.299Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T22:18:46.299Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

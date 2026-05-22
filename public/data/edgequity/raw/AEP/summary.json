@@ -1,0 +1,97 @@
+{
+  "ticker": "AEP",
+  "name": "American Electric Power Company Inc",
+  "sector": "Utilities",
+  "industry": "Utilities",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 69470000000,
+  "enterpriseValue": 102521100000,
+  "valuation": {
+    "peTTM": 19.1907,
+    "forwardPE": 21.05993,
+    "psTTM": 3.2005,
+    "pb": 1.9754,
+    "evRevenue": 35.36307819668173,
+    "evEbitda": null,
+    "pfcf": null,
+    "fcfYield": null,
+    "earningsYield": 0.003650496617244854
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": 0.1328688213583526,
+    "netMargin": 0.08747542340726433,
+    "roe": 0.0111815592455093,
+    "roa": 1.311271975180972,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 0.4546,
+    "quickRatio": 0.3168,
+    "debtToEquity": 1.475053130042945,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 575600000,
+    "freeCashFlow": null,
+    "fcfMargin": null,
+    "capexToRevenue": null,
+    "fcfConversion": null
+  },
+  "dividends": {
+    "dividendYield": 2.9487080003103903,
+    "payoutRatio": 56.09
+  },
+  "history": [
+    {
+      "year": "2021",
+      "revenue": 2899100000,
+      "grossProfit": null,
+      "operatingIncome": 385200000,
+      "netIncome": 253600000,
+      "freeCashFlow": null,
+      "totalAssets": 193400000,
+      "totalDebt": 33454500000,
+      "totalEquity": 22680200000,
+      "sharesDiluted": null
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items",
+    "Free cash flow unavailable from mapped line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T19:41:02.498Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T19:41:02.498Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T19:41:02.498Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T19:41:02.498Z",
+      "status": "partial",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

@@ -1,0 +1,96 @@
+{
+  "ticker": "JNJ",
+  "name": "Johnson & Johnson",
+  "sector": "Pharmaceuticals",
+  "industry": "Pharmaceuticals",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 551060000000,
+  "enterpriseValue": 579284000000,
+  "valuation": {
+    "peTTM": 26.3123,
+    "forwardPE": 19.01285,
+    "psTTM": 5.7451,
+    "pb": 6.1326,
+    "evRevenue": 6.1499686813245145,
+    "evEbitda": null,
+    "pfcf": 27.975428977561172,
+    "fcfYield": 0.03574565383079882,
+    "earningsYield": 0.04864080136464269
+  },
+  "profitability": {
+    "grossMargin": 0.6787871710212011,
+    "operatingMargin": null,
+    "netMargin": 0.2845646704107524,
+    "roe": 0.3287059746885117,
+    "roa": 0.13455147833944078,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 1.0277,
+    "quickRatio": 0.6888,
+    "debtToEquity": 0.5878176199352497,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 24530000000,
+    "freeCashFlow": 19698000000,
+    "fcfMargin": 0.2091238202414192,
+    "capexToRevenue": 0.0512989287951334,
+    "fcfConversion": 0.7348903148783764
+  },
+  "dividends": {
+    "dividendYield": 2.337345194488052,
+    "payoutRatio": 46.19
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 94193000000,
+      "grossProfit": 63937000000,
+      "operatingIncome": null,
+      "netIncome": 26804000000,
+      "freeCashFlow": 19698000000,
+      "totalAssets": 199210000000,
+      "totalDebt": 47933000000,
+      "totalEquity": 81544000000,
+      "sharesDiluted": 2429400000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T17:57:30.335Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T17:57:30.335Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T17:57:30.335Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T17:57:30.335Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

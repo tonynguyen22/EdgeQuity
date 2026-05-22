@@ -1,0 +1,97 @@
+{
+  "ticker": "ACOG",
+  "name": "Alpha Cognition Inc",
+  "sector": "Biotechnology",
+  "industry": "Biotechnology",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 128249464.99999999,
+  "enterpriseValue": 62.2027,
+  "valuation": {
+    "peTTM": null,
+    "forwardPE": null,
+    "psTTM": 12.5485,
+    "pb": 2.2601,
+    "evRevenue": null,
+    "evEbitda": null,
+    "pfcf": -16.479518731797764,
+    "fcfYield": -0.060681383739105664,
+    "earningsYield": -0.11412807842902115
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": null,
+    "netMargin": null,
+    "roe": -0.35300989109699976,
+    "roa": -0.28848538317389194,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 8.6538,
+    "quickRatio": 7.7043,
+    "debtToEquity": null,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": -7755654,
+    "freeCashFlow": -7782355,
+    "fcfMargin": null,
+    "capexToRevenue": null,
+    "fcfConversion": 0.5316954826050524
+  },
+  "dividends": {
+    "dividendYield": null,
+    "payoutRatio": null
+  },
+  "history": [
+    {
+      "year": "2024",
+      "revenue": null,
+      "grossProfit": null,
+      "operatingIncome": -11860655,
+      "netIncome": -14636865,
+      "freeCashFlow": -7782355,
+      "totalAssets": 50736938,
+      "totalDebt": null,
+      "totalEquity": 41463045,
+      "sharesDiluted": 7247864
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items",
+    "Revenue unavailable from mapped line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T16:53:24.035Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T16:53:24.035Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T16:53:24.035Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T16:53:24.035Z",
+      "status": "partial",
+      "message": "Thin summary mapped from Finnhub as-reported line items"
+    }
+  }
+}

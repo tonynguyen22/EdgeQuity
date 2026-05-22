@@ -1,0 +1,96 @@
+{
+  "ticker": "TTWO",
+  "name": "Take-Two Interactive Software Inc",
+  "sector": "Media",
+  "industry": "Media",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 44840000000,
+  "enterpriseValue": 47045000000,
+  "valuation": {
+    "peTTM": null,
+    "forwardPE": 27.20109,
+    "psTTM": 6.6749,
+    "pb": 17.1698,
+    "evRevenue": 8.35078812837262,
+    "evEbitda": null,
+    "pfcf": -208.94687791239517,
+    "fcfYield": -0.004785905441570027,
+    "earningsYield": -0.09988626226583408
+  },
+  "profitability": {
+    "grossMargin": 0.5435600681624538,
+    "operatingMargin": -0.779448310139165,
+    "netMargin": -0.7950333712013633,
+    "roe": -2.095195771155915,
+    "roa": -0.4878604028015293,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 0.7788,
+    "quickRatio": 0.6674,
+    "debtToEquity": 1.7126350750806942,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": -45200000,
+    "freeCashFlow": -214600000,
+    "fcfMargin": -0.03809287134336836,
+    "capexToRevenue": 0.030069582504970178,
+    "fcfConversion": 0.04791355020205854
+  },
+  "dividends": {
+    "dividendYield": null,
+    "payoutRatio": null
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 5633600000,
+      "grossProfit": 3062200000,
+      "operatingIncome": -4391100000,
+      "netIncome": -4478900000,
+      "freeCashFlow": -214600000,
+      "totalAssets": 9180700000,
+      "totalDebt": 3661100000,
+      "totalEquity": 2137700000,
+      "sharesDiluted": null
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T20:41:35.137Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T20:41:35.137Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T20:41:35.137Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T20:41:35.137Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

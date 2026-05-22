@@ -1,0 +1,96 @@
+{
+  "ticker": "CRCL",
+  "name": "Circle Internet Group Inc",
+  "sector": "Technology",
+  "industry": "Technology",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 27690000000,
+  "enterpriseValue": 26228.793,
+  "valuation": {
+    "peTTM": null,
+    "forwardPE": 129.39622829168025,
+    "psTTM": 9.694,
+    "pb": 5.6087,
+    "evRevenue": 0.00023883439264250594,
+    "evEbitda": null,
+    "pfcf": 52.27516863414367,
+    "fcfYield": 0.019129541350668113,
+    "earningsYield": -0.0025105814373420007
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": -0.8781187397559643,
+    "netMargin": -0.6330176652704426,
+    "roe": -0.020880496268465068,
+    "roa": -0.000883180887293793,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 1.0328,
+    "quickRatio": 1.0325,
+    "debtToEquity": null,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 542129000,
+    "freeCashFlow": 529697000,
+    "fcfMargin": 4.823319978146057,
+    "capexToRevenue": 0.11320342378437442,
+    "fcfConversion": -7.619566155528065
+  },
+  "dividends": {
+    "dividendYield": null,
+    "payoutRatio": null
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 109820000,
+      "grossProfit": null,
+      "operatingIncome": -96435000,
+      "netIncome": -69518000,
+      "freeCashFlow": 529697000,
+      "totalAssets": 78713207000,
+      "totalDebt": null,
+      "totalEquity": 3329327000,
+      "sharesDiluted": 158699000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T22:14:34.524Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T22:14:34.524Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T22:14:34.524Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T22:14:34.524Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

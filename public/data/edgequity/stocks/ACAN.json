@@ -1,0 +1,97 @@
+{
+  "ticker": "ACAN",
+  "name": "Americann Inc",
+  "sector": "Pharmaceuticals",
+  "industry": "Pharmaceuticals",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 4878.400000000001,
+  "enterpriseValue": 4.9554,
+  "valuation": {
+    "peTTM": null,
+    "forwardPE": null,
+    "psTTM": 0.0038,
+    "pb": 0.1835,
+    "evRevenue": null,
+    "evEbitda": null,
+    "pfcf": -0.004169337456177686,
+    "fcfYield": -239.846261069203,
+    "earningsYield": -257.1189324368645
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": null,
+    "netMargin": null,
+    "roe": -0.2816800163843569,
+    "roa": -0.0891924983895875,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 0.0769,
+    "quickRatio": 0.0532,
+    "debtToEquity": null,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": -1170066,
+    "freeCashFlow": -1170066,
+    "fcfMargin": null,
+    "capexToRevenue": null,
+    "fcfConversion": 0.9328222499838559
+  },
+  "dividends": {
+    "dividendYield": null,
+    "payoutRatio": null
+  },
+  "history": [
+    {
+      "year": "2024",
+      "revenue": null,
+      "grossProfit": 1272456,
+      "operatingIncome": -745608,
+      "netIncome": -1254329,
+      "freeCashFlow": -1170066,
+      "totalAssets": 14063167,
+      "totalDebt": null,
+      "totalEquity": 4453028,
+      "sharesDiluted": null
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items",
+    "Revenue unavailable from mapped line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T16:41:05.445Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T16:41:05.445Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T16:41:05.445Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T16:41:05.445Z",
+      "status": "partial",
+      "message": "Thin summary mapped from Finnhub as-reported line items"
+    }
+  }
+}

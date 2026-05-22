@@ -1,0 +1,96 @@
+{
+  "ticker": "OKE",
+  "name": "ONEOK Inc",
+  "sector": "Energy",
+  "industry": "Energy",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 59070000000,
+  "enterpriseValue": 90988000000,
+  "valuation": {
+    "peTTM": 16.4904,
+    "forwardPE": 15.60904,
+    "psTTM": 4.6093,
+    "pb": 2.0569,
+    "evRevenue": 2.705640964643611,
+    "evEbitda": null,
+    "pfcf": 24.139762975071516,
+    "fcfYield": 0.04142542745894701,
+    "earningsYield": 0.05860843067546978
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": 0.17071575128609237,
+    "netMargin": 0.10294686133991496,
+    "roe": 0.15396931287525017,
+    "roa": 0.24223341729638959,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 0.7051,
+    "quickRatio": 0.5562,
+    "debtToEquity": 1.4229931065154549,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 5599000000,
+    "freeCashFlow": 2447000000,
+    "fcfMargin": 0.07276457819144191,
+    "capexToRevenue": 0.09372862707781975,
+    "fcfConversion": 0.7068168688619295
+  },
+  "dividends": {
+    "dividendYield": 4.644601193705914,
+    "payoutRatio": 76.13
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 33629000000,
+      "grossProfit": null,
+      "operatingIncome": 5741000000,
+      "netIncome": 3462000000,
+      "freeCashFlow": 2447000000,
+      "totalAssets": 14292000000,
+      "totalDebt": 31996000000,
+      "totalEquity": 22485000000,
+      "sharesDiluted": 625900000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T20:00:54.678Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T20:00:54.678Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T20:00:54.678Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T20:00:54.678Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

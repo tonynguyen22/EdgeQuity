@@ -1,0 +1,96 @@
+{
+  "ticker": "ABBV",
+  "name": "AbbVie Inc",
+  "sector": "Biotechnology",
+  "industry": "Biotechnology",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 369980000000,
+  "enterpriseValue": 373306000000,
+  "valuation": {
+    "peTTM": 89.2385,
+    "forwardPE": 13.89572,
+    "psTTM": 6.1662,
+    "pb": 94.4424,
+    "evRevenue": 6.103760627861347,
+    "evEbitda": null,
+    "pfcf": 20.766726537943423,
+    "fcfYield": 0.04815395426779826,
+    "earningsYield": 0.011441158981566571
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": 0.24648463047743624,
+    "netMargin": 0.06921190320470896,
+    "roe": -1.2944954128440367,
+    "roa": 0.675658419792498,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 0.6713,
+    "quickRatio": 0.4123,
+    "debtToEquity": -2.6162079510703364,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 19030000000,
+    "freeCashFlow": 17816000000,
+    "fcfMargin": 0.29130150425114454,
+    "capexToRevenue": 0.019849574885546107,
+    "fcfConversion": 4.208835341365462
+  },
+  "dividends": {
+    "dividendYield": 3.2595383890720675,
+    "payoutRatio": 275.84
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 61160000000,
+      "grossProfit": null,
+      "operatingIncome": 15075000000,
+      "netIncome": 4233000000,
+      "freeCashFlow": 17816000000,
+      "totalAssets": 6265000000,
+      "totalDebt": 8555000000,
+      "totalEquity": -3270000000,
+      "sharesDiluted": 1773000000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T17:57:30.489Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T17:57:30.489Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T17:57:30.489Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T17:57:30.489Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

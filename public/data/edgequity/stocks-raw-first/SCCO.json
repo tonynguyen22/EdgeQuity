@@ -1,0 +1,96 @@
+{
+  "ticker": "SCCO",
+  "name": "Southern Copper Corp",
+  "sector": "Metals & Mining",
+  "industry": "Metals & Mining",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 143420000000,
+  "enterpriseValue": 145866100000,
+  "valuation": {
+    "peTTM": 29.4502,
+    "forwardPE": 25.40171,
+    "psTTM": 10.0512,
+    "pb": 10.6464,
+    "evRevenue": 10.869307004470938,
+    "evEbitda": null,
+    "pfcf": 41.85245710283647,
+    "fcfYield": 0.023893459768512062,
+    "earningsYield": 0.030317947287686515
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": 0.521736214605067,
+    "netMargin": 0.32400894187779433,
+    "roe": 0.3939264909721782,
+    "roa": 0.20336367122826382,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 3.8938,
+    "quickRatio": 3.2461,
+    "debtToEquity": 0.6115817033728631,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 4752100000,
+    "freeCashFlow": 3426800000,
+    "fcfMargin": 0.25535022354694487,
+    "capexToRevenue": 0.09875558867362146,
+    "fcfConversion": 0.7880962237247596
+  },
+  "dividends": {
+    "dividendYield": 1.912723304038141,
+    "payoutRatio": 57.33
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 13420000000,
+      "grossProfit": null,
+      "operatingIncome": 7001700000,
+      "netIncome": 4348200000,
+      "freeCashFlow": 3426800000,
+      "totalAssets": 21381400000,
+      "totalDebt": 6750700000,
+      "totalEquity": 11038100000,
+      "sharesDiluted": 826600000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T18:13:13.501Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T18:13:13.501Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T18:13:13.501Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T18:13:13.501Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

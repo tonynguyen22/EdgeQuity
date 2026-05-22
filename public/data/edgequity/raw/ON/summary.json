@@ -1,0 +1,96 @@
+{
+  "ticker": "ON",
+  "name": "ON Semiconductor Corp",
+  "sector": "Semiconductors",
+  "industry": "Semiconductors",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 42890000000,
+  "enterpriseValue": 43722900000,
+  "valuation": {
+    "peTTM": 74.8728,
+    "forwardPE": 31.72057,
+    "psTTM": 7.0847,
+    "pb": 2.8396,
+    "evRevenue": 7.292741101511159,
+    "evEbitda": null,
+    "pfcf": 30.234033554208374,
+    "fcfYield": 0.03307530892982047,
+    "earningsYield": 0.002881790627185824
+  },
+  "profitability": {
+    "grossMargin": 0.33090369283117055,
+    "operatingMargin": 0.014044100477032391,
+    "netMargin": 0.02061580545084565,
+    "roe": 0.01610780237968019,
+    "roa": 0.009868972620787123,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 4.5221,
+    "quickRatio": 2.977,
+    "debtToEquity": 0.38842479767505506,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 1759800000,
+    "freeCashFlow": 1418600000,
+    "fcfMargin": 0.23661473796577376,
+    "capexToRevenue": 0.05691029789505287,
+    "fcfConversion": 11.477346278317151
+  },
+  "dividends": {
+    "dividendYield": null,
+    "payoutRatio": null
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 5995400000,
+      "grossProfit": 1983900000,
+      "operatingIncome": 84200000,
+      "netIncome": 123600000,
+      "freeCashFlow": 1418600000,
+      "totalAssets": 12524100000,
+      "totalDebt": 2980500000,
+      "totalEquity": 7673300000,
+      "sharesDiluted": 411800000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T20:48:50.316Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T20:48:50.316Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T20:48:50.316Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T20:48:50.316Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

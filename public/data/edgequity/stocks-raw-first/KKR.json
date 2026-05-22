@@ -1,0 +1,97 @@
+{
+  "ticker": "KKR",
+  "name": "KKR & Co Inc",
+  "sector": "Financial Services",
+  "industry": "Financial Services",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 86170000000,
+  "enterpriseValue": 121550.252,
+  "valuation": {
+    "peTTM": 35.7337,
+    "forwardPE": 15.60468,
+    "psTTM": 4.1413,
+    "pb": 3.677,
+    "evRevenue": 0.000029907009691524164,
+    "evEbitda": null,
+    "pfcf": null,
+    "fcfYield": null,
+    "earningsYield": 0.07131730300568644
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": null,
+    "netMargin": 1.5120568918475703,
+    "roe": 0.19886416533568205,
+    "roa": 0.47428212623440147,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 0.3135,
+    "quickRatio": 0.3119,
+    "debtToEquity": null,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 477760000,
+    "freeCashFlow": null,
+    "fcfMargin": null,
+    "capexToRevenue": null,
+    "fcfConversion": null
+  },
+  "dividends": {
+    "dividendYield": 0.8267966928132288,
+    "payoutRatio": 32.42
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 4064273000,
+      "grossProfit": null,
+      "operatingIncome": null,
+      "netIncome": 6145412000,
+      "freeCashFlow": null,
+      "totalAssets": 12957292000,
+      "totalDebt": null,
+      "totalEquity": 30902561000,
+      "sharesDiluted": 955756926
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items",
+    "Free cash flow unavailable from mapped line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T19:01:29.379Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T19:01:29.379Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T19:01:29.379Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T19:01:29.379Z",
+      "status": "partial",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

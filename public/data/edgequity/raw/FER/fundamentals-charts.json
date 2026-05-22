@@ -1,0 +1,474 @@
+{
+  "schemaVersion": 1,
+  "ticker": "FER",
+  "source": "sec-edgar+finnhub",
+  "fetchedAt": "2026-05-22T11:54:35.106Z",
+  "status": "ok",
+  "sections": [
+    {
+      "id": "growth",
+      "title": "Growth",
+      "description": "Revenue, earnings, and EPS across recent reporting periods.",
+      "metrics": [
+        {
+          "id": "revenue",
+          "label": "Revenue",
+          "description": "Revenue shows business scale and demand momentum.",
+          "format": "money",
+          "annual": [
+            {
+              "period": "2025",
+              "value": 9627000000
+            },
+            {
+              "period": "2024",
+              "value": 9147000000
+            }
+          ],
+          "quarterly": []
+        },
+        {
+          "id": "netIncome",
+          "label": "Net income",
+          "description": "Net income is the profit remaining for shareholders.",
+          "format": "money",
+          "annual": [
+            {
+              "period": "2025",
+              "value": 1150000000
+            },
+            {
+              "period": "2024",
+              "value": 3490000000
+            }
+          ],
+          "quarterly": []
+        },
+        {
+          "id": "eps",
+          "label": "EPS (diluted)",
+          "description": "Earnings per share shows profit allocated to each share.",
+          "format": "perShare",
+          "annual": [
+            {
+              "period": "2023",
+              "value": 0.6125
+            },
+            {
+              "period": "2024",
+              "value": 4.4061
+            },
+            {
+              "period": "2025",
+              "value": 1.2355
+            }
+          ],
+          "quarterly": [
+            {
+              "period": "2024-Q4",
+              "value": 3.8915
+            },
+            {
+              "period": "2025-Q2",
+              "value": 0.7435
+            },
+            {
+              "period": "2025-Q4",
+              "value": 0.4893
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "margins",
+      "title": "Margins & efficiency",
+      "description": "ROE, ROA, and margin trends help assess earnings quality.",
+      "metrics": [
+        {
+          "id": "grossMargin",
+          "label": "Gross margin",
+          "description": "Gross margin reflects pricing power and direct cost control.",
+          "format": "percent",
+          "annual": [
+            {
+              "period": "2025",
+              "value": 23.919999999999998
+            }
+          ],
+          "quarterly": [
+            {
+              "period": "2025-Q4",
+              "value": 70.8
+            }
+          ]
+        },
+        {
+          "id": "operatingMargin",
+          "label": "Operating margin",
+          "description": "Operating margin shows operating efficiency after core expenses.",
+          "format": "percent",
+          "annual": [
+            {
+              "period": "2025",
+              "value": 12.23
+            }
+          ],
+          "quarterly": [
+            {
+              "period": "2025-Q4",
+              "value": 9.13
+            }
+          ]
+        },
+        {
+          "id": "netMargin",
+          "label": "Net margin",
+          "description": "Net margin shows how much revenue converts to bottom-line profit.",
+          "format": "percent",
+          "annual": [
+            {
+              "period": "2025",
+              "value": 9.22
+            }
+          ],
+          "quarterly": [
+            {
+              "period": "2025-Q4",
+              "value": 6.75
+            }
+          ]
+        },
+        {
+          "id": "opexToRevenue",
+          "label": "Operating expenses / revenue",
+          "description": "Operating expense ratio; lower can indicate leaner operations.",
+          "format": "percent",
+          "annual": [
+            {
+              "period": "2025",
+              "value": 76.08
+            }
+          ],
+          "quarterly": [
+            {
+              "period": "2025-Q4",
+              "value": 29.2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "balance",
+      "title": "Balance sheet",
+      "description": "Asset scale, equity cushion, and debt levels.",
+      "metrics": [
+        {
+          "id": "totalAssets",
+          "label": "Total assets",
+          "description": "Total assets measure balance sheet scale.",
+          "format": "money",
+          "annual": [
+            {
+              "period": "2025",
+              "value": 27420000000
+            },
+            {
+              "period": "2024",
+              "value": 28999000000
+            }
+          ],
+          "quarterly": []
+        }
+      ]
+    },
+    {
+      "id": "leverage",
+      "title": "Leverage",
+      "description": "Debt relative to equity and assets when data is available.",
+      "metrics": [
+        {
+          "id": "debtToEquity",
+          "label": "Debt / equity",
+          "description": "Debt-to-equity measures reliance on borrowing versus equity.",
+          "format": "percent",
+          "annual": [
+            {
+              "period": "2023",
+              "value": 3.4187
+            },
+            {
+              "period": "2024",
+              "value": 2.109
+            },
+            {
+              "period": "2025",
+              "value": 2.0047
+            }
+          ],
+          "quarterly": [
+            {
+              "period": "2023-Q2",
+              "value": 3.3505
+            },
+            {
+              "period": "2023-Q4",
+              "value": 3.4187
+            },
+            {
+              "period": "2024-Q2",
+              "value": 3.5102
+            },
+            {
+              "period": "2024-Q4",
+              "value": 2.109
+            },
+            {
+              "period": "2025-Q2",
+              "value": 1.9508
+            },
+            {
+              "period": "2025-Q4",
+              "value": 2.0047
+            }
+          ]
+        },
+        {
+          "id": "debtToAssets",
+          "label": "Debt / assets",
+          "description": "Debt-to-assets shows how much of the balance sheet is debt-funded.",
+          "format": "percent",
+          "annual": [
+            {
+              "period": "2023",
+              "value": 48.92
+            },
+            {
+              "period": "2024",
+              "value": 44.18
+            },
+            {
+              "period": "2025",
+              "value": 43.19
+            }
+          ],
+          "quarterly": [
+            {
+              "period": "2023-Q2",
+              "value": 48.08
+            },
+            {
+              "period": "2023-Q4",
+              "value": 48.92
+            },
+            {
+              "period": "2024-Q2",
+              "value": 49.58
+            },
+            {
+              "period": "2024-Q4",
+              "value": 44.18
+            },
+            {
+              "period": "2025-Q2",
+              "value": 43.32
+            },
+            {
+              "period": "2025-Q4",
+              "value": 43.19
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "valuation",
+      "title": "Valuation",
+      "description": "Common market multiples and per-share valuation metrics.",
+      "metrics": [
+        {
+          "id": "pe",
+          "label": "P/E",
+          "description": "Price-to-earnings shows how many times earnings the market pays.",
+          "format": "multiple",
+          "annual": [
+            {
+              "period": "2023",
+              "value": 52.5839
+            },
+            {
+              "period": "2024",
+              "value": 9.2703
+            },
+            {
+              "period": "2025",
+              "value": 45.0028
+            }
+          ],
+          "quarterly": []
+        },
+        {
+          "id": "pb",
+          "label": "P/B",
+          "description": "Price-to-book compares market value to book equity.",
+          "format": "multiple",
+          "annual": [
+            {
+              "period": "2023",
+              "value": 6.4229
+            },
+            {
+              "period": "2024",
+              "value": 4.9426
+            },
+            {
+              "period": "2025",
+              "value": 6.7641
+            }
+          ],
+          "quarterly": [
+            {
+              "period": "2023-Q2",
+              "value": 5.7127
+            },
+            {
+              "period": "2023-Q4",
+              "value": 6.4229
+            },
+            {
+              "period": "2024-Q2",
+              "value": 7.2262
+            },
+            {
+              "period": "2024-Q4",
+              "value": 4.9426
+            },
+            {
+              "period": "2025-Q2",
+              "value": 5.6297
+            },
+            {
+              "period": "2025-Q4",
+              "value": 6.7641
+            }
+          ]
+        },
+        {
+          "id": "ps",
+          "label": "P/S",
+          "description": "Price-to-sales relates market cap to revenue.",
+          "format": "multiple",
+          "annual": [
+            {
+              "period": "2025",
+              "value": 4.1511
+            }
+          ],
+          "quarterly": []
+        },
+        {
+          "id": "epsValuation",
+          "label": "EPS",
+          "description": "Earnings per share used in valuation and growth analysis.",
+          "format": "perShare",
+          "annual": [
+            {
+              "period": "2023",
+              "value": 0.6125
+            },
+            {
+              "period": "2024",
+              "value": 4.4061
+            },
+            {
+              "period": "2025",
+              "value": 1.2355
+            }
+          ],
+          "quarterly": [
+            {
+              "period": "2024-Q4",
+              "value": 3.8915
+            },
+            {
+              "period": "2025-Q2",
+              "value": 0.7435
+            },
+            {
+              "period": "2025-Q4",
+              "value": 0.4893
+            }
+          ]
+        },
+        {
+          "id": "bookValuePerShare",
+          "label": "Book value per share",
+          "description": "Book value per share is equity per share on the balance sheet.",
+          "format": "perShare",
+          "annual": [
+            {
+              "period": "2023",
+              "value": 3766
+            },
+            {
+              "period": "2024",
+              "value": 6075
+            },
+            {
+              "period": "2025",
+              "value": 5908
+            }
+          ],
+          "quarterly": [
+            {
+              "period": "2023-Q2",
+              "value": 3689
+            },
+            {
+              "period": "2023-Q4",
+              "value": 3766
+            },
+            {
+              "period": "2024-Q2",
+              "value": 3761
+            },
+            {
+              "period": "2024-Q4",
+              "value": 6075
+            },
+            {
+              "period": "2025-Q2",
+              "value": 5899
+            },
+            {
+              "period": "2025-Q4",
+              "value": 5908
+            }
+          ]
+        },
+        {
+          "id": "evEbitda",
+          "label": "EV / EBITDA",
+          "description": "Enterprise value to EBITDA is a common capital-structure-aware multiple.",
+          "format": "multiple",
+          "annual": [
+            {
+              "period": "2023",
+              "value": 40.8189
+            },
+            {
+              "period": "2024",
+              "value": 12.4639
+            },
+            {
+              "period": "2025",
+              "value": 31.0271
+            }
+          ],
+          "quarterly": []
+        }
+      ]
+    }
+  ]
+}

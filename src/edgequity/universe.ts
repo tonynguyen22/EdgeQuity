@@ -9,7 +9,7 @@ export const EDGEQUITY_SUPPORTED_TICKERS = [
   'COIN', 'RIVN', 'RIOT', 'CPRX', 'NOK', 'ROKU',
   'VIAC', 'ATVI', 'BIDU', 'DOCU', 'ZM', 'PINS', 'TLRY', 'WBA',
   'MGM', 'NIO', 'C', 'GS', 'WFC', 'ADBE', 'PEP', 'UNH',
-  'CARR', 'HCA', 'TWTR', 'BILI', 'SIRI', 'FUBO', 'RKT',
+  'CARR', 'HCA', 'TWTR', 'BILI', 'SIRI',
 ] as const;
 
 export type EdgequityTicker = typeof EDGEQUITY_SUPPORTED_TICKERS[number];

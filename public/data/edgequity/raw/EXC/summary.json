@@ -1,0 +1,96 @@
+{
+  "ticker": "EXC",
+  "name": "Exelon Corp",
+  "sector": "Utilities",
+  "industry": "Utilities",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 44990000000,
+  "enterpriseValue": 94367000000,
+  "valuation": {
+    "peTTM": 16.5208,
+    "forwardPE": 15.93293,
+    "psTTM": 1.8523,
+    "pb": 1.5292,
+    "evRevenue": 54.99242424242424,
+    "evEbitda": null,
+    "pfcf": -19.775824175824177,
+    "fcfYield": -0.05056679262058235,
+    "earningsYield": 0.06152478328517448
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": 3,
+    "netMargin": 1.613053613053613,
+    "roe": 0.09611778595735815,
+    "roa": 0.1219061041134502,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 0.924,
+    "quickRatio": 0.7855,
+    "debtToEquity": 1.7363358566567122,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 6254000000,
+    "freeCashFlow": -2275000000,
+    "fcfMargin": -1.3257575757575757,
+    "capexToRevenue": 4.97027972027972,
+    "fcfConversion": -0.821893063583815
+  },
+  "dividends": {
+    "dividendYield": 3.74414976599064,
+    "payoutRatio": 58.42
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 1716000000,
+      "grossProfit": null,
+      "operatingIncome": 5148000000,
+      "netIncome": 2768000000,
+      "freeCashFlow": -2275000000,
+      "totalAssets": 22706000000,
+      "totalDebt": 50003000000,
+      "totalEquity": 28798000000,
+      "sharesDiluted": 1012000000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T20:40:55.620Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T20:40:55.620Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T20:40:55.620Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T20:40:55.620Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

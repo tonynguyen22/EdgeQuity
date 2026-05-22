@@ -1,0 +1,96 @@
+{
+  "ticker": "ADT",
+  "name": "ADT Inc",
+  "sector": "Diversified Consumer Services",
+  "industry": "Diversified Consumer Services",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 5129949821,
+  "enterpriseValue": 5669540821,
+  "valuation": {
+    "peTTM": 8.22,
+    "forwardPE": 8.06608,
+    "psTTM": 0.998,
+    "pb": 1.6339,
+    "evRevenue": 1.1054738296383404,
+    "evEbitda": null,
+    "pfcf": 3.002752152286094,
+    "fcfYield": 0.3330278189089522,
+    "earningsYield": 0.11617092189876997
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": 0.2552156950220596,
+    "netMargin": 0.11620133888207851,
+    "roe": 0.15771699116871019,
+    "roa": 0.03767427920364944,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 0.9335,
+    "quickRatio": 0.5879,
+    "debtToEquity": 0.16418947708284262,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 1884163000,
+    "freeCashFlow": 1708416000,
+    "fcfMargin": 0.3331150154418149,
+    "capexToRevenue": 0.034267979589779445,
+    "fcfConversion": 2.8667054841757125
+  },
+  "dividends": {
+    "dividendYield": 3.151862464183381,
+    "payoutRatio": 31.34
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 5128607000,
+      "grossProfit": null,
+      "operatingIncome": 1308901000,
+      "netIncome": 595951000,
+      "freeCashFlow": 1708416000,
+      "totalAssets": 15818511000,
+      "totalDebt": 620408000,
+      "totalEquity": 3778610000,
+      "sharesDiluted": 895921000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T17:09:54.184Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T17:09:54.184Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T17:09:54.184Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T17:09:54.184Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items"
+    }
+  }
+}

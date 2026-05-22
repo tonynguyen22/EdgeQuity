@@ -1,0 +1,96 @@
+{
+  "ticker": "ACCS",
+  "name": "ACCESS Newswire Inc",
+  "sector": "Technology",
+  "industry": "Technology",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 24671025,
+  "enterpriseValue": 24202025,
+  "valuation": {
+    "peTTM": 5.8354,
+    "forwardPE": 14.443181818181818,
+    "psTTM": 1.107,
+    "pb": 1.1857,
+    "evRevenue": 1.0699865157610857,
+    "evEbitda": null,
+    "pfcf": 45.856923791821565,
+    "fcfYield": 0.02180695775712602,
+    "earningsYield": 0.17392872813350885
+  },
+  "profitability": {
+    "grossMargin": 0.7654626641319245,
+    "operatingMargin": -0.082718068880145,
+    "netMargin": 0.18970776780582696,
+    "roe": 0.1414071510957324,
+    "roa": 0.1021861306915603,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 0.883,
+    "quickRatio": 0.883,
+    "debtToEquity": 0.08423133959466139,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 558000,
+    "freeCashFlow": 538000,
+    "fcfMargin": 0.023785313232238384,
+    "capexToRevenue": 0.0008842123878155533,
+    "fcfConversion": 0.12537869960382195
+  },
+  "dividends": {
+    "dividendYield": null,
+    "payoutRatio": null
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 22619000,
+      "grossProfit": 17314000,
+      "operatingIncome": -1871000,
+      "netIncome": 4291000,
+      "freeCashFlow": 538000,
+      "totalAssets": 41992000,
+      "totalDebt": 2556000,
+      "totalEquity": 30345000,
+      "sharesDiluted": 3859000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T16:47:00.857Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T16:47:00.857Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T16:47:00.857Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T16:47:00.857Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items"
+    }
+  }
+}

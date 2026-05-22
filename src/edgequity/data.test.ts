@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import test from 'node:test';
 
 import {
@@ -13,6 +13,21 @@ const stockFixture = JSON.parse(readFileSync(
   new URL('../../public/data/edgequity/stocks/AAPL.json', import.meta.url),
   'utf8',
 )) as unknown;
+const nvdaFixture = JSON.parse(readFileSync(
+  new URL('../../public/data/edgequity/stocks/NVDA.json', import.meta.url),
+  'utf8',
+)) as {
+  price: number;
+  marketCap: number;
+  history: Array<{ year: string; revenue: number }>;
+};
+const staticManifest = JSON.parse(readFileSync(
+  new URL('../../public/data/edgequity/manifest.raw-first.json', import.meta.url),
+  'utf8',
+)) as {
+  universe: string[];
+  stocks: Array<{ ticker: string; dataPath: string }>;
+};
 
 type MockFetchResponse = {
   ok: boolean;
@@ -86,6 +101,35 @@ test('assertEdgequityStockRecord accepts valid stock fixture', () => {
   assert.doesNotThrow(() => assertEdgequityStockRecord(stockFixture));
 });
 
+test('NVIDIA static quote and chart history reflect the Q1 FY2027 report context', () => {
+  assert.equal(nvdaFixture.price, 223.47);
+  assert.equal(nvdaFixture.marketCap, 5420000000000);
+  assert.equal(nvdaFixture.history.length, 5);
+  assert.deepEqual(nvdaFixture.history.map((year) => year.year), [
+    'FY2026',
+    'FY2025',
+    'FY2024',
+    'FY2023',
+    'FY2022',
+  ]);
+  assert.equal(nvdaFixture.history[0]?.revenue, 215938000000);
+});
+
+test('bundled raw-first dataset includes a broader screener universe with valid stock files', () => {
+  assertEdgequityManifest(staticManifest);
+  assert.ok(staticManifest.stocks.length >= 2);
+  assert.deepEqual(staticManifest.universe, staticManifest.stocks.map((stock) => stock.ticker));
+  assert.equal(staticManifest.stocks.some((stock) => stock.ticker === 'AAPL'), true);
+  assert.equal(staticManifest.stocks.some((stock) => stock.ticker === 'NVDA'), true);
+
+  for (const stock of staticManifest.stocks) {
+    const stockPath = new URL(`../../public${stock.dataPath}`, import.meta.url);
+
+    assert.ok(existsSync(stockPath), `${stock.ticker} stock file should exist`);
+    assert.doesNotThrow(() => assertEdgequityStockRecord(JSON.parse(readFileSync(stockPath, 'utf8'))));
+  }
+});
+
 test('assertEdgequityStockRecord rejects missing valuation', () => {
   assert.throws(
     () => assertEdgequityStockRecord({
@@ -132,7 +176,7 @@ test('loadEdgequityManifest uses manifest path and no-cache', async () => {
 
     assert.equal(manifest.app, 'Edgequity');
     assert.deepEqual(calls, [{
-      input: '/data/edgequity/manifest.json',
+      input: '/data/edgequity/manifest.raw-first.json',
       init: { cache: 'no-cache' },
     }]);
   });

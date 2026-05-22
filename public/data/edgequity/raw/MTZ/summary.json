@@ -1,0 +1,96 @@
+{
+  "ticker": "MTZ",
+  "name": "MasTec Inc",
+  "sector": "Construction",
+  "industry": "Construction",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 30070000000,
+  "enterpriseValue": 29982570000,
+  "valuation": {
+    "peTTM": 69.0496,
+    "forwardPE": 43.53592725315505,
+    "psTTM": 2.0334,
+    "pb": 5.2621,
+    "evRevenue": 2.096683216783217,
+    "evEbitda": null,
+    "pfcf": 105.24510524510525,
+    "fcfYield": 0.009501629531094114,
+    "earningsYield": 0.014034386431659461
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": null,
+    "netMargin": 0.02951146853146853,
+    "roe": 0.12947959214667895,
+    "roa": 0.04252672948052602,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 1.3235,
+    "quickRatio": 1.233,
+    "debtToEquity": 0.09468264592280143,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 545714000,
+    "freeCashFlow": 285714000,
+    "fcfMargin": 0.01998,
+    "capexToRevenue": 0.01818181818181818,
+    "fcfConversion": 0.6770249328221338
+  },
+  "dividends": {
+    "dividendYield": null,
+    "payoutRatio": null
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 14300000000,
+      "grossProfit": null,
+      "operatingIncome": null,
+      "netIncome": 422014000,
+      "freeCashFlow": 285714000,
+      "totalAssets": 9923500000,
+      "totalDebt": 308600000,
+      "totalEquity": 3259309000,
+      "sharesDiluted": 78694000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T21:56:39.038Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T21:56:39.038Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T21:56:39.038Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T21:56:39.038Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

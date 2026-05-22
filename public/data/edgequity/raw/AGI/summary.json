@@ -1,0 +1,96 @@
+{
+  "ticker": "AGI",
+  "name": "Alamos Gold Inc",
+  "sector": "Metals & Mining",
+  "industry": "Metals & Mining",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 22773730093,
+  "enterpriseValue": 22777530093,
+  "valuation": {
+    "peTTM": 15.2206,
+    "forwardPE": 12.82998,
+    "psTTM": 7.7994,
+    "pb": 3.6726,
+    "evRevenue": 17.06565527309508,
+    "evEbitda": null,
+    "pfcf": -4744.527102708334,
+    "fcfYield": -0.0002107691616787618,
+    "earningsYield": -0.003916793587863657
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": 0.06698134412227467,
+    "netMargin": -0.06683149771484229,
+    "roe": 0.0720458767466279,
+    "roa": -0.06442759118815457,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 2.0005,
+    "quickRatio": 1.6034,
+    "debtToEquity": -0.01889992730797189,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 41500000,
+    "freeCashFlow": -4800000,
+    "fcfMargin": -0.0035963137783771634,
+    "capexToRevenue": 0.03468944332059639,
+    "fcfConversion": 0.053811659192825115
+  },
+  "dividends": {
+    "dividendYield": 0.25003872395353127,
+    "payoutRatio": 4.46
+  },
+  "history": [
+    {
+      "year": "2013",
+      "revenue": 1334700000,
+      "grossProfit": null,
+      "operatingIncome": 89400000,
+      "netIncome": -89200000,
+      "freeCashFlow": -4800000,
+      "totalAssets": 1384500000,
+      "totalDebt": 23400000,
+      "totalEquity": -1238100000,
+      "sharesDiluted": null
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T17:37:35.443Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T17:37:35.443Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T17:37:35.443Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T17:37:35.443Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items"
+    }
+  }
+}

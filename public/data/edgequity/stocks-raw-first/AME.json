@@ -1,0 +1,96 @@
+{
+  "ticker": "AME",
+  "name": "AMETEK Inc",
+  "sector": "Electrical Equipment",
+  "industry": "Electrical Equipment",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 51720000000,
+  "enterpriseValue": 53545358000,
+  "valuation": {
+    "peTTM": 33.7127,
+    "forwardPE": 27.67875,
+    "psTTM": 6.779,
+    "pb": 4.4467,
+    "evRevenue": 7.234768107944801,
+    "evEbitda": null,
+    "pfcf": 30.941989751811978,
+    "fcfYield": 0.03231854215003867,
+    "earningsYield": 0.028618368136117556
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": 0.2581120198629504,
+    "netMargin": 0.19998902868162044,
+    "roe": 0.13925786068136098,
+    "roa": 2.3866329130252506,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 1.0623,
+    "quickRatio": 0.6731,
+    "debtToEquity": 0.21482312279125762,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 1801763000,
+    "freeCashFlow": 1671515000,
+    "fcfMargin": 0.2258463453349468,
+    "capexToRevenue": 0.017598427048028973,
+    "fcfConversion": 1.1292936758770442
+  },
+  "dividends": {
+    "dividendYield": 0.6052245115927195,
+    "payoutRatio": 19.28
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 7401116000,
+      "grossProfit": null,
+      "operatingIncome": 1910317000,
+      "netIncome": 1480142000,
+      "freeCashFlow": 1671515000,
+      "totalAssets": 620180000,
+      "totalDebt": 2283309000,
+      "totalEquity": 10628786000,
+      "sharesDiluted": 231259000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T20:22:27.728Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T20:22:27.728Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T20:22:27.728Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T20:22:27.728Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

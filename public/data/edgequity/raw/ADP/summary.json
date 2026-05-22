@@ -1,0 +1,96 @@
+{
+  "ticker": "ADP",
+  "name": "Automatic Data Processing Inc",
+  "sector": "Professional Services",
+  "industry": "Professional Services",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 89120000000,
+  "enterpriseValue": 89746900000,
+  "valuation": {
+    "peTTM": 20.1785,
+    "forwardPE": 17.92337,
+    "psTTM": 4.0594,
+    "pb": 20.1995,
+    "evRevenue": 4.364930523469304,
+    "evEbitda": null,
+    "pfcf": 18.67952211276462,
+    "fcfYield": 0.05353456014362657,
+    "earningsYield": 0.045777603231597845
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": null,
+    "netMargin": 0.19842030261321245,
+    "roe": 0.6592921784098255,
+    "roa": 0.07644282387065222,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 1.0478,
+    "quickRatio": 1.0478,
+    "debtToEquity": 0.6423238526179703,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 4939700000,
+    "freeCashFlow": 4771000000,
+    "fcfMargin": 0.2320423716860643,
+    "capexToRevenue": 0.008204893754650817,
+    "fcfConversion": 1.1694487339755375
+  },
+  "dividends": {
+    "dividendYield": 3.081245185554397,
+    "payoutRatio": 58.8
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 20560900000,
+      "grossProfit": null,
+      "operatingIncome": null,
+      "netIncome": 4079700000,
+      "freeCashFlow": 4771000000,
+      "totalAssets": 53369300000,
+      "totalDebt": 3974700000,
+      "totalEquity": 6188000000,
+      "sharesDiluted": 408700000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T18:56:51.156Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T18:56:51.156Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T18:56:51.156Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T18:56:51.156Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

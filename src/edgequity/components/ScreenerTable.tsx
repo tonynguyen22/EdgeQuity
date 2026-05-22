@@ -12,6 +12,12 @@ export interface ScreenerSort {
   direction: SortDirection;
 }
 
+interface ColumnGroupHeader {
+  id: EdgequityColumn['group'];
+  label: string;
+  columns: EdgequityColumn[];
+}
+
 interface ScreenerTableProps {
   stocks: EdgequityStockRecord[];
   onSelectStock: (ticker: string) => void;
@@ -94,6 +100,8 @@ function getNextSort(currentSort: ScreenerSort, columnId: string): ScreenerSort 
 
 const COMPACT_COLUMN_LABELS: Record<string, string> = {
   marketCap: 'MCap',
+  earningsCalendar: 'Earnings',
+  reportUpdatedAt: 'Updated',
   forwardPE: 'Fwd P/E',
   psTTM: 'P/S',
   pb: 'P/B',
@@ -112,8 +120,38 @@ const COMPACT_COLUMN_LABELS: Record<string, string> = {
   dividendYield: 'Div Yld',
 };
 
+const GROUP_LABELS: Record<EdgequityColumn['group'], string> = {
+  profile: 'Profile',
+  valuation: 'Valuation',
+  margin: 'Margin',
+  profitability: 'Profitability',
+  growth: 'Growth',
+  financialHealth: 'Financial Health',
+  cashFlow: 'Cash Flow',
+  dividends: 'Dividends',
+};
+
 function getCompactColumnLabel(column: EdgequityColumn): string {
   return COMPACT_COLUMN_LABELS[column.id] ?? column.label;
+}
+
+function getColumnGroups(columns: EdgequityColumn[]): ColumnGroupHeader[] {
+  return columns.reduce<ColumnGroupHeader[]>((groups, column) => {
+    const currentGroup = groups[groups.length - 1];
+
+    if (currentGroup?.id === column.group) {
+      currentGroup.columns.push(column);
+      return groups;
+    }
+
+    groups.push({
+      id: column.group,
+      label: GROUP_LABELS[column.group],
+      columns: [column],
+    });
+
+    return groups;
+  }, []);
 }
 
 function isGroupStart(index: number): boolean {
@@ -123,8 +161,10 @@ function isGroupStart(index: number): boolean {
 
 function getColumnWidthClass(column: EdgequityColumn): string {
   if (column.id === 'ticker') return 'w-[72px] min-w-[72px]';
-  if (column.id === 'name') return 'w-[168px] min-w-[168px]';
-  if (column.id === 'sector') return 'w-[118px] min-w-[118px]';
+  if (column.id === 'name') return 'w-[180px] min-w-[180px] max-w-[180px]';
+  if (column.id === 'sector') return 'w-[155px] min-w-[155px] max-w-[155px]';
+  if (column.id === 'earningsCalendar') return 'w-[230px] min-w-[230px] max-w-[230px]';
+  if (column.id === 'reportUpdatedAt') return 'w-[104px] min-w-[104px] max-w-[104px]';
   if (column.format === 'money') return 'w-[92px] min-w-[92px]';
   if (column.format === 'percent') return 'w-[74px] min-w-[74px]';
   return 'w-[82px] min-w-[82px]';
@@ -150,6 +190,7 @@ export default function ScreenerTable({ stocks, onSelectStock }: ScreenerTablePr
     () => getVisibleScreenerStocks(stocks, { query, sector, sort }),
     [query, sector, sort, stocks],
   );
+  const columnGroups = useMemo(() => getColumnGroups(EDGEQUITY_COLUMNS), []);
 
   return (
     <section className="vw-card eq-table-shell overflow-hidden">
@@ -165,11 +206,25 @@ export default function ScreenerTable({ stocks, onSelectStock }: ScreenerTablePr
         }}
       />
       <div className="eq-scrollbar overflow-x-auto">
-        <table className="min-w-[1900px] table-fixed border-collapse text-[12px]">
+        <table className="min-w-max table-auto border-collapse text-[13px]">
           <thead
             className="sticky top-0 z-10"
             style={{ background: 'var(--vw-bg-raised)', color: 'var(--vw-text-tertiary)' }}
           >
+            <tr className="eq-group-header border-b" style={{ borderColor: 'var(--vw-border-dim)' }}>
+              {columnGroups.map((group, index) => (
+                <th
+                  key={group.id}
+                  scope="colgroup"
+                  colSpan={group.columns.length}
+                  className={`eq-group-header-${group.id} px-2 py-1.5 text-center text-[11px] font-semibold uppercase ${
+                    index > 0 ? 'eq-group-start' : ''
+                  }`}
+                >
+                  {group.label}
+                </th>
+              ))}
+            </tr>
             <tr className="border-b" style={{ borderColor: 'var(--vw-border)' }}>
               {EDGEQUITY_COLUMNS.map((column, index) => {
                 const isActiveSort = sort.columnId === column.id;
@@ -178,13 +233,14 @@ export default function ScreenerTable({ stocks, onSelectStock }: ScreenerTablePr
                 const stickyClass = column.id === 'ticker' || column.id === 'name' ? 'eq-sticky-col' : '';
                 const stickyNameClass = column.id === 'name' ? 'eq-sticky-name' : '';
                 const groupClass = isGroupStart(index) ? 'eq-group-start' : '';
+                const groupShadeClass = `eq-group-shade-${column.group}`;
 
                 return (
                   <th
                     key={column.id}
                     scope="col"
                     aria-sort={ariaSort}
-                    className={`${getColumnWidthClass(column)} ${stickyClass} ${stickyNameClass} ${groupClass} px-2 py-1.5 text-[10px] font-semibold uppercase`}
+                    className={`${getColumnWidthClass(column)} ${stickyClass} ${stickyNameClass} ${groupClass} ${groupShadeClass} whitespace-nowrap px-2 py-1.5 text-[11px] font-semibold uppercase`}
                   >
                     <button
                       type="button"
@@ -204,7 +260,7 @@ export default function ScreenerTable({ stocks, onSelectStock }: ScreenerTablePr
               })}
             </tr>
           </thead>
-          <tbody className="divide-y" style={{ borderColor: 'var(--vw-border-dim)' }}>
+          <tbody className="eq-soft-row-dividers divide-y">
             {visibleStocks.map((stock) => (
               <tr
                 key={stock.ticker}

@@ -1,0 +1,96 @@
+{
+  "ticker": "TMO",
+  "name": "Thermo Fisher Scientific Inc",
+  "sector": "Life Sciences Tools & Services",
+  "industry": "Life Sciences Tools & Services",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 164260000000,
+  "enterpriseValue": 206034.8,
+  "valuation": {
+    "peTTM": 24.2664,
+    "forwardPE": 18.25176,
+    "psTTM": 3.6756,
+    "pb": 4.0762,
+    "evRevenue": 0.000004624176317443217,
+    "evEbitda": null,
+    "pfcf": 26.10201811536628,
+    "fcfYield": 0.038311213929136737,
+    "earningsYield": 0.04091683915743334
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": 0.17384863991381633,
+    "netMargin": 0.15084388185654007,
+    "roe": 0.12584492669500252,
+    "roa": 0.060910071323056286,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 1.89,
+    "quickRatio": 1.5328,
+    "debtToEquity": null,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 7818000000,
+    "freeCashFlow": 6293000000,
+    "fcfMargin": 0.14123799263847742,
+    "capexToRevenue": 0.03422659125594757,
+    "fcfConversion": 0.9363190001487873
+  },
+  "dividends": {
+    "dividendYield": 0.41612253480599387,
+    "payoutRatio": 9.49
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 44556000000,
+      "grossProfit": null,
+      "operatingIncome": 7746000000,
+      "netIncome": 6721000000,
+      "freeCashFlow": 6293000000,
+      "totalAssets": 110343000000,
+      "totalDebt": null,
+      "totalEquity": 53407000000,
+      "sharesDiluted": 378000000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T17:59:56.767Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T17:59:56.767Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T17:59:56.767Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T17:59:56.767Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

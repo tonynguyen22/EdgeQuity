@@ -1,0 +1,96 @@
+{
+  "ticker": "IRM",
+  "name": "Iron Mountain Inc",
+  "sector": "Real Estate",
+  "industry": "Real Estate",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 36880000000,
+  "enterpriseValue": 37153613000,
+  "valuation": {
+    "peTTM": 136.6976,
+    "forwardPE": 50.49653,
+    "psTTM": 5.1375,
+    "pb": 96.5444,
+    "evRevenue": 5.383226425463619,
+    "evEbitda": null,
+    "pfcf": -39.586573625337984,
+    "fcfYield": -0.025261090021691975,
+    "earningsYield": 0.004128362255965293
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": 0.16862740495617262,
+    "netMargin": 0.02206024367488938,
+    "roe": -0.15520174677652657,
+    "roa": 0.007207283458537954,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 0.7387,
+    "quickRatio": 0.6116,
+    "debtToEquity": -0.44051469561379275,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 1339999000,
+    "freeCashFlow": -931629000,
+    "fcfMargin": -0.13498471471746895,
+    "capexToRevenue": 0.32913859221236624,
+    "fcfConversion": -6.1189131320031
+  },
+  "dividends": {
+    "dividendYield": 2.7469994436054366,
+    "payoutRatio": 635.85
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 6901737000,
+      "grossProfit": null,
+      "operatingIncome": 1163822000,
+      "netIncome": 152254000,
+      "freeCashFlow": -931629000,
+      "totalAssets": 21125019000,
+      "totalDebt": 432148000,
+      "totalEquity": -981007000,
+      "sharesDiluted": 297816000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T21:17:57.190Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T21:17:57.190Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T21:17:57.190Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T21:17:57.190Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

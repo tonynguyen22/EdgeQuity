@@ -1,0 +1,97 @@
+{
+  "ticker": "AFG",
+  "name": "American Financial Group Inc",
+  "sector": "Insurance",
+  "industry": "Insurance",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 11377808334.999998,
+  "enterpriseValue": 11850.624,
+  "valuation": {
+    "peTTM": 12.9507,
+    "forwardPE": 11.54366,
+    "psTTM": 1.3973,
+    "pb": 2.3651,
+    "evRevenue": 0.000001449794959628089,
+    "evEbitda": null,
+    "pfcf": null,
+    "fcfYield": null,
+    "earningsYield": 0.07400370749873421
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": 0.13126988010765842,
+    "netMargin": 0.10300954245167604,
+    "roe": 0.17468879668049792,
+    "roa": 0.20790123456790124,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 5.6111,
+    "quickRatio": 5.6111,
+    "debtToEquity": null,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 1533000000,
+    "freeCashFlow": null,
+    "fcfMargin": null,
+    "capexToRevenue": null,
+    "fcfConversion": null
+  },
+  "dividends": {
+    "dividendYield": 2.5704688184606397,
+    "payoutRatio": 71.97
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 8174000000,
+      "grossProfit": null,
+      "operatingIncome": 1073000000,
+      "netIncome": 842000000,
+      "freeCashFlow": null,
+      "totalAssets": 4050000000,
+      "totalDebt": null,
+      "totalEquity": 4820000000,
+      "sharesDiluted": 83500000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items",
+    "Free cash flow unavailable from mapped line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T17:29:41.029Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T17:29:41.029Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T17:29:41.029Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T17:29:41.029Z",
+      "status": "partial",
+      "message": "Thin summary mapped from Finnhub as-reported line items"
+    }
+  }
+}

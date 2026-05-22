@@ -1,0 +1,96 @@
+{
+  "ticker": "AAON",
+  "name": "Aaon Inc",
+  "sector": "Building",
+  "industry": "Building",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 10956510234,
+  "enterpriseValue": 11165.336,
+  "valuation": {
+    "peTTM": 90.7911,
+    "forwardPE": 40.58163,
+    "psTTM": 6.6321,
+    "pb": 6.955,
+    "evRevenue": 0.00000774254338883665,
+    "evEbitda": null,
+    "pfcf": -57.65704305132375,
+    "fcfYield": -0.017343934879037144,
+    "earningsYield": 0.009820006343454122
+  },
+  "profitability": {
+    "grossMargin": 0.26747827437666255,
+    "operatingMargin": 0.10141490462361206,
+    "netMargin": 0.0746097986513887,
+    "roe": 0.12021765727917227,
+    "roa": 0.06379624194342162,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 2.6271,
+    "quickRatio": 1.7836,
+    "debtToEquity": null,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 534000,
+    "freeCashFlow": -190029000,
+    "fcfMargin": -0.131774608273073,
+    "capexToRevenue": 0.13214490775798224,
+    "fcfConversion": -1.766183673659067
+  },
+  "dividends": {
+    "dividendYield": 0.299043062200957,
+    "payoutRatio": 30.3
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 1442076000,
+      "grossProfit": 385724000,
+      "operatingIncome": 146248000,
+      "netIncome": 107593000,
+      "freeCashFlow": -190029000,
+      "totalAssets": 1686510000,
+      "totalDebt": null,
+      "totalEquity": 894985000,
+      "sharesDiluted": 83105538
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T16:31:00.889Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T16:31:00.889Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T16:31:00.889Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T16:31:00.889Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items"
+    }
+  }
+}

@@ -1,0 +1,96 @@
+{
+  "ticker": "ACN",
+  "name": "Accenture PLC",
+  "sector": "Technology",
+  "industry": "Technology",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 109000000000,
+  "enterpriseValue": 97750239000,
+  "valuation": {
+    "peTTM": 14.3116,
+    "forwardPE": 12.33307,
+    "psTTM": 1.5179,
+    "pb": 5.1906,
+    "evRevenue": 1.4029863974378474,
+    "evEbitda": null,
+    "pfcf": 10.023578399096591,
+    "fcfYield": 0.09976477064220184,
+    "earningsYield": 0.00006642201834862386
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": 0.14676657206710142,
+    "netMargin": 0.00010391403255239116,
+    "roe": 0.0002320851575579333,
+    "roa": 0.00048314746281182615,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 1.42,
+    "quickRatio": 1.42,
+    "debtToEquity": 0.007339789275652607,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 11474399000,
+    "freeCashFlow": 10874360000,
+    "fcfMargin": 0.15607715456166024,
+    "capexToRevenue": 0.008612219914185667,
+    "fcfConversion": 1501.9834254143645
+  },
+  "dividends": {
+    "dividendYield": 3.6379868318268045,
+    "payoutRatio": 48.19
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 69672977000,
+      "grossProfit": null,
+      "operatingIncome": 10225664000,
+      "netIncome": 7240000,
+      "freeCashFlow": 10874360000,
+      "totalAssets": 14985073000,
+      "totalDebt": 228968000,
+      "totalEquity": 31195446000,
+      "sharesDiluted": 632435108
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T18:35:05.236Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T18:35:05.236Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T18:35:05.236Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T18:35:05.236Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

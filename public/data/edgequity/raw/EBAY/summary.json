@@ -1,0 +1,96 @@
+{
+  "ticker": "EBAY",
+  "name": "eBay Inc",
+  "sector": "Retail",
+  "industry": "Retail",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 50810000000,
+  "enterpriseValue": 49693000000,
+  "valuation": {
+    "peTTM": 25.7716,
+    "forwardPE": 16.44061,
+    "psTTM": 4.5307,
+    "pb": 8.5307,
+    "evRevenue": 4.476846846846847,
+    "evEbitda": null,
+    "pfcf": 34.23854447439353,
+    "fcfYield": 0.02920684904546349,
+    "earningsYield": 0.039972446368825035
+  },
+  "profitability": {
+    "grossMargin": 0.7145045045045045,
+    "operatingMargin": 0.20513513513513512,
+    "netMargin": 0.18297297297297296,
+    "roe": 0.4400866738894908,
+    "roa": 0.11533219761499149,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 1.0968,
+    "quickRatio": 1.0697,
+    "debtToEquity": 0.16251354279523295,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 2009000000,
+    "freeCashFlow": 1484000000,
+    "fcfMargin": 0.1336936936936937,
+    "capexToRevenue": 0.0472972972972973,
+    "fcfConversion": 0.7306745445593303
+  },
+  "dividends": {
+    "dividendYield": 1.0423671822461333,
+    "payoutRatio": 26.14
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 11100000000,
+      "grossProfit": 7931000000,
+      "operatingIncome": 2277000000,
+      "netIncome": 2031000000,
+      "freeCashFlow": 1484000000,
+      "totalAssets": 17610000000,
+      "totalDebt": 750000000,
+      "totalEquity": 4615000000,
+      "sharesDiluted": 468000000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T20:25:05.996Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T20:25:05.996Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T20:25:05.996Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T20:25:05.996Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

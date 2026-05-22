@@ -1,0 +1,96 @@
+{
+  "ticker": "COHR",
+  "name": "Coherent Corp",
+  "sector": "Electrical Equipment",
+  "industry": "Electrical Equipment",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 70980000000,
+  "enterpriseValue": 73757721000,
+  "valuation": {
+    "peTTM": 153.3843,
+    "forwardPE": 69.70029496340771,
+    "psTTM": 10.8927,
+    "pb": 1.7061,
+    "evRevenue": 12.694709312982617,
+    "evEbitda": null,
+    "pfcf": 368.2222821688697,
+    "fcfYield": 0.002715750915750916,
+    "earningsYield": 0.00042345731191885036
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": null,
+    "netMargin": 0.005173219462953831,
+    "roe": 0.005324993436104508,
+    "roa": 0.002015768828999065,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 2.188,
+    "quickRatio": 1.0486,
+    "debtToEquity": 0.6531866162436659,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 633600000,
+    "freeCashFlow": 192764000,
+    "fcfMargin": 0.03317731232514331,
+    "capexToRevenue": 0.07587388545665619,
+    "fcfConversion": 6.413281431945969
+  },
+  "dividends": {
+    "dividendYield": 0.0318,
+    "payoutRatio": 23.17
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 5810115000,
+      "grossProfit": null,
+      "operatingIncome": null,
+      "netIncome": 30057000,
+      "freeCashFlow": 192764000,
+      "totalAssets": 14910936000,
+      "totalDebt": 3686921000,
+      "totalEquity": 5644514000,
+      "sharesDiluted": null
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T19:35:45.706Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T19:35:45.706Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T19:35:45.706Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T19:35:45.706Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

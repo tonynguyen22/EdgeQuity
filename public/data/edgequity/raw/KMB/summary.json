@@ -1,0 +1,96 @@
+{
+  "ticker": "KMB",
+  "name": "Kimberly-Clark Corp",
+  "sector": "Consumer products",
+  "industry": "Consumer products",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 32049999999.999996,
+  "enterpriseValue": 37836000000,
+  "valuation": {
+    "peTTM": 15.2514,
+    "forwardPE": 12.96008,
+    "psTTM": 1.952,
+    "pb": 22.2911,
+    "evRevenue": 2.300480330759409,
+    "evEbitda": null,
+    "pfcf": 19.55460646735814,
+    "fcfYield": 0.05113884555382216,
+    "earningsYield": 0.06393135725429018
+  },
+  "profitability": {
+    "grossMargin": 0.36012646683285704,
+    "operatingMargin": 0.14294400194564358,
+    "netMargin": 0.12458199063659026,
+    "roe": 1.3641810918774966,
+    "roa": 0.11983857761141654,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 0.7453,
+    "quickRatio": 0.4956,
+    "debtToEquity": 4.310252996005326,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 2777000000,
+    "freeCashFlow": 1639000000,
+    "fcfMargin": 0.09965343223688211,
+    "capexToRevenue": 0.06919194989967775,
+    "fcfConversion": 0.7999023914104442
+  },
+  "dividends": {
+    "dividendYield": 5.248590466427474,
+    "payoutRatio": 82.14
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 16447000000,
+      "grossProfit": 5923000000,
+      "operatingIncome": 2351000000,
+      "netIncome": 2049000000,
+      "freeCashFlow": 1639000000,
+      "totalAssets": 17098000000,
+      "totalDebt": 6474000000,
+      "totalEquity": 1502000000,
+      "sharesDiluted": null
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T21:44:47.424Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T21:44:47.424Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T21:44:47.424Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T21:44:47.424Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

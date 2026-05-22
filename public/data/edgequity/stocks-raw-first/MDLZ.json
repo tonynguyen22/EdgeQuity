@@ -1,0 +1,96 @@
+{
+  "ticker": "MDLZ",
+  "name": "Mondelez International Inc",
+  "sector": "Food Products",
+  "industry": "Food Products",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 79120000000,
+  "enterpriseValue": 80978000000,
+  "valuation": {
+    "peTTM": 30.0099,
+    "forwardPE": 19.38131,
+    "psTTM": 1.9966,
+    "pb": 2.6883,
+    "evRevenue": 2.101305239120845,
+    "evEbitda": null,
+    "pfcf": 24.617299315494712,
+    "fcfYield": 0.04062184024266936,
+    "earningsYield": 0.03116784630940344
+  },
+  "profitability": {
+    "grossMargin": 0.2837532760723461,
+    "operatingMargin": 0.0920673638321613,
+    "netMargin": 0.06399045073565664,
+    "roe": 0.09544082359315736,
+    "roa": 0.034495782449955936,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 0.5923,
+    "quickRatio": 0.3902,
+    "debtToEquity": 0.15415279820419536,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 4514000000,
+    "freeCashFlow": 3214000000,
+    "fcfMargin": 0.08340036847704803,
+    "capexToRevenue": 0.033733814256428886,
+    "fcfConversion": 1.3033252230332522
+  },
+  "dividends": {
+    "dividendYield": 3.2341526520051747,
+    "payoutRatio": 101.47
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 38537000000,
+      "grossProfit": 10935000000,
+      "operatingIncome": 3548000000,
+      "netIncome": 2466000000,
+      "freeCashFlow": 3214000000,
+      "totalAssets": 71487000000,
+      "totalDebt": 3983000000,
+      "totalEquity": 25838000000,
+      "sharesDiluted": null
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T19:14:01.126Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T19:14:01.126Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T19:14:01.126Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T19:14:01.126Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

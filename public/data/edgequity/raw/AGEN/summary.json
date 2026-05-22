@@ -1,0 +1,96 @@
+{
+  "ticker": "AGEN",
+  "name": "Agenus Inc",
+  "sector": "Biotechnology",
+  "industry": "Biotechnology",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 131173656,
+  "enterpriseValue": 172830656,
+  "valuation": {
+    "peTTM": 1151.5037,
+    "forwardPE": 3.24025,
+    "psTTM": 1.1596,
+    "pb": 24.0189,
+    "evRevenue": 1.5134563031980104,
+    "evEbitda": null,
+    "pfcf": -1.6991186124532065,
+    "fcfYield": -0.5885404307096541,
+    "earningsYield": -0.023503194879313266
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": -0.17661739465480403,
+    "netMargin": -0.02699744299274931,
+    "roe": 0.011371725972018841,
+    "roa": -0.013593594299773366,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 0.4125,
+    "quickRatio": 0.4101,
+    "debtToEquity": -0.16471113307833324,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": -77195000,
+    "freeCashFlow": -77201000,
+    "fcfMargin": -0.6760394409611545,
+    "capexToRevenue": 0.000052541244877228626,
+    "fcfConversion": 25.040869283165748
+  },
+  "dividends": {
+    "dividendYield": null,
+    "payoutRatio": null
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 114196000,
+      "grossProfit": null,
+      "operatingIncome": -20169000,
+      "netIncome": -3083000,
+      "freeCashFlow": -77201000,
+      "totalAssets": 226798000,
+      "totalDebt": 44655000,
+      "totalEquity": -271111000,
+      "sharesDiluted": 29734000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T17:36:55.977Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T17:36:55.977Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T17:36:55.977Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T17:36:55.977Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items"
+    }
+  }
+}

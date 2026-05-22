@@ -1,0 +1,96 @@
+{
+  "ticker": "MDT",
+  "name": "Medtronic PLC",
+  "sector": "Health Care",
+  "industry": "Health Care",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 99270000000,
+  "enterpriseValue": 125568000000,
+  "valuation": {
+    "peTTM": 21.5056,
+    "forwardPE": 13.19172,
+    "psTTM": 2.7977,
+    "pb": 2.2476,
+    "evRevenue": 3.7441631630736203,
+    "evEbitda": null,
+    "pfcf": 19.145612343297977,
+    "fcfYield": 0.05223128840535912,
+    "earningsYield": 0.047254961216883246
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": 0.17756507737722516,
+    "netMargin": 0.1398753615409846,
+    "roe": 0.09768032650341496,
+    "roa": 0.05116710296684119,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 1.8491,
+    "quickRatio": 1.4239,
+    "debtToEquity": 0.5937864401132767,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 7044000000,
+    "freeCashFlow": 5185000000,
+    "fcfMargin": 0.15460536124280647,
+    "capexToRevenue": 0.0554313146673823,
+    "fcfConversion": 1.105308036665956
+  },
+  "dividends": {
+    "dividendYield": 3.6340371081253995,
+    "payoutRatio": 76.97
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 33537000000,
+      "grossProfit": null,
+      "operatingIncome": 5955000000,
+      "netIncome": 4691000000,
+      "freeCashFlow": 5185000000,
+      "totalAssets": 91680000000,
+      "totalDebt": 28516000000,
+      "totalEquity": 48024000000,
+      "sharesDiluted": 1289900000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T18:45:38.656Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T18:45:38.656Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T18:45:38.656Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T18:45:38.656Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

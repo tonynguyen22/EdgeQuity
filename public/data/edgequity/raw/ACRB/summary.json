@@ -1,0 +1,96 @@
+{
+  "ticker": "ACRB",
+  "name": "Asia Carbon Industries Inc",
+  "sector": "Chemicals",
+  "industry": "Chemicals",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 10000,
+  "enterpriseValue": -3926416,
+  "valuation": {
+    "peTTM": 0.0015,
+    "forwardPE": null,
+    "psTTM": 0.0002,
+    "pb": 0.2841,
+    "evRevenue": -0.08547241712459369,
+    "evEbitda": null,
+    "pfcf": -0.009380326266508202,
+    "fcfYield": -106.6061,
+    "earningsYield": 645.3248
+  },
+  "profitability": {
+    "grossMargin": 0.2314077896697479,
+    "operatingMargin": 0.19736574752991076,
+    "netMargin": 0.14047790780815125,
+    "roe": 0.18141948473842287,
+    "roa": 0.1621096749756845,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 2.9942,
+    "quickRatio": 2.4279,
+    "debtToEquity": 0.07669276527292772,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 8282358,
+    "freeCashFlow": -1066061,
+    "fcfMargin": -0.02320661144215526,
+    "capexToRevenue": 0.20350160762982758,
+    "fcfConversion": -0.16519758732346873
+  },
+  "dividends": {
+    "dividendYield": null,
+    "payoutRatio": null
+  },
+  "history": [
+    {
+      "year": "2012",
+      "revenue": 45937814,
+      "grossProfit": 10630368,
+      "operatingIncome": 9066551,
+      "netIncome": 6453248,
+      "freeCashFlow": -1066061,
+      "totalAssets": 39807914,
+      "totalDebt": 2728028,
+      "totalEquity": 35570865,
+      "sharesDiluted": 52093867
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T17:12:17.553Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T17:12:17.553Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T17:12:17.553Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T17:12:17.553Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items"
+    }
+  }
+}

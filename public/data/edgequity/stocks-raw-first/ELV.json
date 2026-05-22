@@ -1,0 +1,96 @@
+{
+  "ticker": "ELV",
+  "name": "Elevance Health Inc",
+  "sector": "Health Care",
+  "industry": "Health Care",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 85580000000,
+  "enterpriseValue": 107036000000,
+  "valuation": {
+    "peTTM": 16.2549,
+    "forwardPE": 13.488,
+    "psTTM": 0.4252,
+    "pb": 1.7753,
+    "evRevenue": 3.2489300349066625,
+    "evEbitda": null,
+    "pfcf": 26.96282293635791,
+    "fcfYield": 0.037088104697359195,
+    "earningsYield": 0.06614863285814443
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": null,
+    "netMargin": 0.17183184094703294,
+    "roe": 0.12900505902192244,
+    "roa": 0.04659489357499136,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 0.1945,
+    "quickRatio": 0.1945,
+    "debtToEquity": 0.7052322136639169,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 4290000000,
+    "freeCashFlow": 3174000000,
+    "fcfMargin": 0.09634238882986797,
+    "capexToRevenue": 0.03387463955076643,
+    "fcfConversion": 0.5606783253842077
+  },
+  "dividends": {
+    "dividendYield": 1.7364528911435855,
+    "payoutRatio": 27
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 32945000000,
+      "grossProfit": null,
+      "operatingIncome": null,
+      "netIncome": 5661000000,
+      "freeCashFlow": 3174000000,
+      "totalAssets": 121494000000,
+      "totalDebt": 30947000000,
+      "totalEquity": 43882000000,
+      "sharesDiluted": null
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T19:03:28.051Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T19:03:28.051Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T19:03:28.051Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T19:03:28.051Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

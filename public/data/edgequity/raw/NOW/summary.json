@@ -1,0 +1,96 @@
+{
+  "ticker": "NOW",
+  "name": "ServiceNow Inc",
+  "sector": "Technology",
+  "industry": "Technology",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 106660000000,
+  "enterpriseValue": 104425000000,
+  "valuation": {
+    "peTTM": 60.6341,
+    "forwardPE": 24.117181867095503,
+    "psTTM": 7.6314,
+    "pb": 12.2702,
+    "evRevenue": 7.864512727820455,
+    "evEbitda": null,
+    "pfcf": 23.308566433566433,
+    "fcfYield": 0.0429026814175886,
+    "earningsYield": 0.016388524282767672
+  },
+  "profitability": {
+    "grossMargin": 0.7753426720891701,
+    "operatingMargin": 0.13737008585630367,
+    "netMargin": 0.13164633227895767,
+    "roe": 0.13483492749151496,
+    "roa": 0.06713265227744067,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 1.0027,
+    "quickRatio": 0.9104,
+    "debtToEquity": 0.11501079913606911,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 5444000000,
+    "freeCashFlow": 4576000000,
+    "fcfMargin": 0.3446302153938846,
+    "capexToRevenue": 0.06537129085705679,
+    "fcfConversion": 2.6178489702517163
+  },
+  "dividends": {
+    "dividendYield": null,
+    "payoutRatio": null
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 13278000000,
+      "grossProfit": 10295000000,
+      "operatingIncome": 1824000000,
+      "netIncome": 1748000000,
+      "freeCashFlow": 4576000000,
+      "totalAssets": 26038000000,
+      "totalDebt": 1491000000,
+      "totalEquity": 12964000000,
+      "sharesDiluted": 1046691000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T18:37:43.401Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T18:37:43.401Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T18:37:43.401Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T18:37:43.401Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

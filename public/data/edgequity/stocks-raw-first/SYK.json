@@ -1,0 +1,96 @@
+{
+  "ticker": "SYK",
+  "name": "Stryker Corp",
+  "sector": "Health Care",
+  "industry": "Health Care",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 120080000000,
+  "enterpriseValue": 131928000000,
+  "valuation": {
+    "peTTM": 36.884,
+    "forwardPE": 18.92617,
+    "psTTM": 4.8707,
+    "pb": 5.9951,
+    "evRevenue": 5.252747252747253,
+    "evEbitda": null,
+    "pfcf": 28.03642306794303,
+    "fcfYield": 0.035667888074616926,
+    "earningsYield": 0.027031978680879414
+  },
+  "profitability": {
+    "grossMargin": 0.6396321070234113,
+    "operatingMargin": 0.19465679248287943,
+    "netMargin": 0.12924032489249881,
+    "roe": 0.1447814451382694,
+    "roa": 0.06784549786807123,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 1.8931,
+    "quickRatio": 1.0443,
+    "debtToEquity": 0.7073595004460304,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 5044000000,
+    "freeCashFlow": 4283000000,
+    "fcfMargin": 0.17052874661570314,
+    "capexToRevenue": 0.030299410734193344,
+    "fcfConversion": 1.3194701170671597
+  },
+  "dividends": {
+    "dividendYield": 1.0949018631994774,
+    "payoutRatio": 39.56
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 25116000000,
+      "grossProfit": 16065000000,
+      "operatingIncome": 4889000000,
+      "netIncome": 3246000000,
+      "freeCashFlow": 4283000000,
+      "totalAssets": 47844000000,
+      "totalDebt": 15859000000,
+      "totalEquity": 22420000000,
+      "sharesDiluted": 386500000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T18:29:04.494Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T18:29:04.494Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T18:29:04.494Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T18:29:04.494Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

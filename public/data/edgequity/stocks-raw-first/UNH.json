@@ -1,0 +1,96 @@
+{
+  "ticker": "UNH",
+  "name": "UnitedHealth Group Inc",
+  "sector": "Health Care",
+  "industry": "Health Care",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 355200000000,
+  "enterpriseValue": 409224000000,
+  "valuation": {
+    "peTTM": 29.3496,
+    "forwardPE": 19.27591,
+    "psTTM": 0.786,
+    "pb": 3.1774,
+    "evRevenue": 4.476405084337877,
+    "evEbitda": null,
+    "pfcf": 22.09642301710731,
+    "fcfYield": 0.04525619369369369,
+    "earningsYield": 0.036055743243243246
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": 0.20744273556629986,
+    "netMargin": 0.14009276072545887,
+    "roe": 0.12795484064342091,
+    "roa": 0.04136881785380886,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 0.8944,
+    "quickRatio": 0.6734,
+    "debtToEquity": 0.783185133379958,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 19697000000,
+    "freeCashFlow": 16075000000,
+    "fcfMargin": 0.17584064407447111,
+    "capexToRevenue": 0.039620206086328734,
+    "fcfConversion": 1.2551729522917154
+  },
+  "dividends": {
+    "dividendYield": 2.2710923851608262,
+    "payoutRatio": 65.66
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 91418000000,
+      "grossProfit": null,
+      "operatingIncome": 18964000000,
+      "netIncome": 12807000000,
+      "freeCashFlow": 16075000000,
+      "totalAssets": 309581000000,
+      "totalDebt": 78389000000,
+      "totalEquity": 100090000000,
+      "sharesDiluted": 911000000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T17:57:30.525Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T17:57:30.525Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T17:57:30.525Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T17:57:30.525Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

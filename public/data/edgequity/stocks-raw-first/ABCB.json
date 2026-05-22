@@ -1,0 +1,97 @@
+{
+  "ticker": "ABCB",
+  "name": "Ameris Bancorp",
+  "sector": "Banking",
+  "industry": "Banking",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 5705058352,
+  "enterpriseValue": 5831.9106,
+  "valuation": {
+    "peTTM": 13.0828,
+    "forwardPE": 12.47751,
+    "psTTM": 2.70304,
+    "pb": 1.2448,
+    "evRevenue": null,
+    "evEbitda": null,
+    "pfcf": 15.43392656718356,
+    "fcfYield": 0.06479232589626631,
+    "earningsYield": 0.07224360814039926
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": null,
+    "netMargin": null,
+    "roe": 0.10111657721683953,
+    "roa": 0.9463926521239954,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": null,
+    "quickRatio": null,
+    "debtToEquity": null,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 390183000,
+    "freeCashFlow": 369644000,
+    "fcfMargin": null,
+    "capexToRevenue": null,
+    "fcfConversion": 0.8968589410754233
+  },
+  "dividends": {
+    "dividendYield": 0.9436187780136825,
+    "payoutRatio": 13.41
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": null,
+      "grossProfit": null,
+      "operatingIncome": null,
+      "netIncome": 412154000,
+      "freeCashFlow": 369644000,
+      "totalAssets": 435500000,
+      "totalDebt": null,
+      "totalEquity": 4076028000,
+      "sharesDiluted": 68705914
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items",
+    "Revenue unavailable from mapped line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T16:31:01.044Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T16:31:01.044Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T16:31:01.044Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T16:31:01.044Z",
+      "status": "partial",
+      "message": "Thin summary mapped from Finnhub as-reported line items"
+    }
+  }
+}

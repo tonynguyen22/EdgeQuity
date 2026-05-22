@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 
 import ErrorState from './edgequity/components/ErrorState';
+import EdgequityLogo from './edgequity/components/EdgequityLogo';
 import LoadingState from './edgequity/components/LoadingState';
 import ScreenerTable from './edgequity/components/ScreenerTable';
 import StockDetail from './edgequity/components/StockDetail';
@@ -67,7 +68,9 @@ export default function App() {
           style={{ borderColor: 'var(--vw-border)' }}
         >
           <div>
-            <h1 className="text-3xl font-semibold tracking-normal">Edgequity</h1>
+            <h1 className="text-3xl font-semibold tracking-normal">
+              <EdgequityLogo />
+            </h1>
             <p className="mt-1 text-sm" style={{ color: 'var(--vw-text-secondary)' }}>
               Fundamental stock screener for value investors
             </p>

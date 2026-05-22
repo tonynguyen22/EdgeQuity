@@ -1,0 +1,96 @@
+{
+  "ticker": "B",
+  "name": "Barrick Mining Corp",
+  "sector": "Metals & Mining",
+  "industry": "Metals & Mining",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 67959999999.99999,
+  "enterpriseValue": 67881056999.99999,
+  "valuation": {
+    "peTTM": 11.1801,
+    "forwardPE": 9.84102,
+    "psTTM": 3.5934,
+    "pb": 2.7967,
+    "evRevenue": 46.78548280377696,
+    "evEbitda": null,
+    "pfcf": 1199.0966193803372,
+    "fcfYield": 0.0008339611536197764,
+    "earningsYield": 0.00023537374926427314
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": 0.06134123647391274,
+    "netMargin": 0.011024881108277622,
+    "roe": 0.011742225987199241,
+    "roa": 0.0048355501813784766,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 2.9216,
+    "quickRatio": 2.2754,
+    "debtToEquity": 0.007989646639452147,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 112415000,
+    "freeCashFlow": 56676000,
+    "fcfMargin": 0.03906265076848853,
+    "capexToRevenue": 0.038416844717072164,
+    "fcfConversion": 3.5431357839459867
+  },
+  "dividends": {
+    "dividendYield": 2.0633291837097634,
+    "payoutRatio": 17.82
+  },
+  "history": [
+    {
+      "year": "2023",
+      "revenue": 1450900000,
+      "grossProfit": null,
+      "operatingIncome": 89000000,
+      "netIncome": 15996000,
+      "freeCashFlow": 56676000,
+      "totalAssets": 3308000000,
+      "totalDebt": 10884000,
+      "totalEquity": 1362263000,
+      "sharesDiluted": 51205888
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T19:43:40.538Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T19:43:40.538Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T19:43:40.538Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T19:43:40.538Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

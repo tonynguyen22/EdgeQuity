@@ -1,0 +1,96 @@
+{
+  "ticker": "AAGH",
+  "name": "America Great Health",
+  "sector": "N/A",
+  "industry": "N/A",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 21153.000000000004,
+  "enterpriseValue": 2461708,
+  "valuation": {
+    "peTTM": null,
+    "forwardPE": null,
+    "psTTM": 0.054,
+    "pb": null,
+    "evRevenue": 8.354118166084094,
+    "evEbitda": null,
+    "pfcf": -0.03436009141899235,
+    "fcfYield": -29.103531413983827,
+    "earningsYield": -57.975795395452174
+  },
+  "profitability": {
+    "grossMargin": 0.5760681440255201,
+    "operatingMargin": -2.6561916720399092,
+    "netMargin": -4.161814911596022,
+    "roe": 0.23443651006814048,
+    "roa": -103.61287597161203,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 0.062,
+    "quickRatio": 0.0115,
+    "debtToEquity": -0.4665467429921594,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": -615627,
+    "freeCashFlow": -615627,
+    "fcfMargin": -2.089208266874809,
+    "capexToRevenue": 0,
+    "fcfConversion": 0.5019945171164795
+  },
+  "dividends": {
+    "dividendYield": null,
+    "payoutRatio": null
+  },
+  "history": [
+    {
+      "year": "2024",
+      "revenue": 294670,
+      "grossProfit": 169750,
+      "operatingIncome": -782700,
+      "netIncome": -1226362,
+      "freeCashFlow": -615627,
+      "totalAssets": 11836,
+      "totalDebt": 2440555,
+      "totalEquity": -5231105,
+      "sharesDiluted": 21123253567
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T15:38:26.090Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T15:38:26.090Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T15:38:26.090Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T15:38:26.090Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items"
+    }
+  }
+}

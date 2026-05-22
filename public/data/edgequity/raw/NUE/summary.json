@@ -1,0 +1,96 @@
+{
+  "ticker": "NUE",
+  "name": "Nucor Corp",
+  "sector": "Metals & Mining",
+  "industry": "Metals & Mining",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 51580000000,
+  "enterpriseValue": 49564000000,
+  "valuation": {
+    "peTTM": 29.2694,
+    "forwardPE": 15.37143,
+    "psTTM": 1.5709,
+    "pb": 1.783,
+    "evRevenue": 1.5253277528159044,
+    "evEbitda": null,
+    "pfcf": -274.36170212765956,
+    "fcfYield": -0.003644823575029081,
+    "earningsYield": 0.03951143854207057
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": null,
+    "netMargin": 0.06271927125007694,
+    "roe": 0.0973442873519297,
+    "roa": 0.05805606198723792,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 2.9383,
+    "quickRatio": 1.5742,
+    "debtToEquity": 0.01165456629728697,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 3234000000,
+    "freeCashFlow": -188000000,
+    "fcfMargin": -0.005785683510801994,
+    "capexToRevenue": 0.1053117498615129,
+    "fcfConversion": -0.09224730127576054
+  },
+  "dividends": {
+    "dividendYield": 0.992599813887535,
+    "payoutRatio": 29.36
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 32494000000,
+      "grossProfit": null,
+      "operatingIncome": null,
+      "netIncome": 2038000000,
+      "freeCashFlow": -188000000,
+      "totalAssets": 35104000000,
+      "totalDebt": 244000000,
+      "totalEquity": 20936000000,
+      "sharesDiluted": null
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T20:23:07.209Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T20:23:07.209Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T20:23:07.209Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T20:23:07.209Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

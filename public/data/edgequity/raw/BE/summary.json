@@ -1,0 +1,96 @@
+{
+  "ticker": "BE",
+  "name": "Bloom Energy Corp",
+  "sector": "Electrical Equipment",
+  "industry": "Electrical Equipment",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 73590000000,
+  "enterpriseValue": 80633.586,
+  "valuation": {
+    "peTTM": 13310.3514,
+    "forwardPE": 147.20457445194072,
+    "psTTM": 32.7891,
+    "pb": 26.736,
+    "evRevenue": 0.00003983884636021648,
+    "evEbitda": null,
+    "pfcf": 1287.8668556728094,
+    "fcfYield": 0.0007764777823073787,
+    "earningsYield": -0.0011841282782986818
+  },
+  "profitability": {
+    "grossMargin": 0.2902182516351333,
+    "operatingMargin": 0.035969474217808946,
+    "netMargin": -0.04305348731270942,
+    "roe": -0.11336891995092638,
+    "roa": -0.019819360426464237,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 5.9801,
+    "quickRatio": 4.893,
+    "debtToEquity": null,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 113900000,
+    "freeCashFlow": 57141000,
+    "fcfMargin": 0.028231803058704718,
+    "capexToRevenue": 0.028043067321345816,
+    "fcfConversion": -0.6557378930456736
+  },
+  "dividends": {
+    "dividendYield": 0.0012,
+    "payoutRatio": null
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 2023994000,
+      "grossProfit": 587400000,
+      "operatingIncome": 72802000,
+      "netIncome": -87140000,
+      "freeCashFlow": 57141000,
+      "totalAssets": 4396711000,
+      "totalDebt": null,
+      "totalEquity": 768641000,
+      "sharesDiluted": 240402000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T19:27:51.165Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T19:27:51.165Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T19:27:51.165Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T19:27:51.165Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

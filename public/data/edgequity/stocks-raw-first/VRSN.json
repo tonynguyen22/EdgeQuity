@@ -1,0 +1,96 @@
+{
+  "ticker": "VRSN",
+  "name": "VeriSign, Inc",
+  "sector": "Technology",
+  "industry": "Technology",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 27820000000,
+  "enterpriseValue": 28851.43,
+  "valuation": {
+    "peTTM": 32.7498,
+    "forwardPE": 27.93226,
+    "psTTM": 16.3613,
+    "pb": 8.3119,
+    "evRevenue": 0.000017416050947724254,
+    "evEbitda": null,
+    "pfcf": 26.041374145839185,
+    "fcfYield": 0.03840043134435658,
+    "earningsYield": 0.029680086268871315
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": 0.6766871906314137,
+    "netMargin": 0.49843052034287094,
+    "roe": -0.38329774394206667,
+    "roa": 0.6227468134851799,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 0.4895,
+    "quickRatio": 0.4484,
+    "debtToEquity": null,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 1091100000,
+    "freeCashFlow": 1068300000,
+    "fcfMargin": 0.6448750452734516,
+    "capexToRevenue": 0.013763129300977906,
+    "fcfConversion": 1.293811311614388
+  },
+  "dividends": {
+    "dividendYield": 1.1459239918769946,
+    "payoutRatio": 26.06
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 1656600000,
+      "grossProfit": null,
+      "operatingIncome": 1121000000,
+      "netIncome": 825700000,
+      "freeCashFlow": 1068300000,
+      "totalAssets": 1325900000,
+      "totalDebt": null,
+      "totalEquity": -2154200000,
+      "sharesDiluted": 93800000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T22:13:15.579Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T22:13:15.579Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T22:13:15.579Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T22:13:15.579Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

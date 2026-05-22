@@ -1,0 +1,96 @@
+{
+  "ticker": "ACDC",
+  "name": "ProFrac Holding Corp",
+  "sector": "Energy",
+  "industry": "Energy",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 1402135780.0000002,
+  "enterpriseValue": 1668635780.0000002,
+  "valuation": {
+    "peTTM": null,
+    "forwardPE": null,
+    "psTTM": 0.7221,
+    "pb": 0.8948,
+    "evRevenue": 0.8593242249459265,
+    "evEbitda": null,
+    "pfcf": 71.53753979591838,
+    "fcfYield": 0.013978674732913525,
+    "earningsYield": -0.25354177895667135
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": -0.11628386033577093,
+    "netMargin": -0.18307755690596353,
+    "roe": -0.49547038327526133,
+    "roa": -0.13816019587268275,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 0.8093,
+    "quickRatio": 0.5182,
+    "debtToEquity": 0.40334494773519164,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 189500000,
+    "freeCashFlow": 19600000,
+    "fcfMargin": 0.010093727469358327,
+    "capexToRevenue": 0.08749613760428468,
+    "fcfConversion": -0.05513361462728551
+  },
+  "dividends": {
+    "dividendYield": null,
+    "payoutRatio": null
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 1941800000,
+      "grossProfit": null,
+      "operatingIncome": -225800000,
+      "netIncome": -355500000,
+      "freeCashFlow": 19600000,
+      "totalAssets": 2573100000,
+      "totalDebt": 289400000,
+      "totalEquity": 717500000,
+      "sharesDiluted": 168300000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T16:48:19.691Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T16:48:19.691Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T16:48:19.691Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T16:48:19.691Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items"
+    }
+  }
+}

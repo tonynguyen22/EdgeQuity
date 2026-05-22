@@ -1,0 +1,96 @@
+{
+  "ticker": "CQP",
+  "name": "Cheniere Energy Partners LP",
+  "sector": "Energy",
+  "industry": "Energy",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 31140000000,
+  "enterpriseValue": 45425000000,
+  "valuation": {
+    "peTTM": 12.3633,
+    "forwardPE": 15.73976,
+    "psTTM": 2.7534,
+    "pb": 62.5293,
+    "evRevenue": 4.222439115077152,
+    "evEbitda": null,
+    "pfcf": 12.121448034254573,
+    "fcfYield": 0.08249839434810533,
+    "earningsYield": 0.09592164418754014
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": 0.34448782301543035,
+    "netMargin": 0.27765383900353224,
+    "roe": 0.1713024029362849,
+    "roa": 0.1713024029362849,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 0.7834,
+    "quickRatio": 0.6534,
+    "debtToEquity": 0.8296725354132019,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 2768000000,
+    "freeCashFlow": 2569000000,
+    "fcfMargin": 0.23879903327756088,
+    "capexToRevenue": 0.018497862056144263,
+    "fcfConversion": 0.8600602611315702
+  },
+  "dividends": {
+    "dividendYield": 4.863151383949281,
+    "payoutRatio": 69.1
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 10758000000,
+      "grossProfit": null,
+      "operatingIncome": 3706000000,
+      "netIncome": 2987000000,
+      "freeCashFlow": 2569000000,
+      "totalAssets": 17437000000,
+      "totalDebt": 14467000000,
+      "totalEquity": 17437000000,
+      "sharesDiluted": null
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T21:48:44.912Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T21:48:44.912Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T21:48:44.912Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T21:48:44.912Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

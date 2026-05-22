@@ -1,0 +1,96 @@
+{
+  "ticker": "ALAB",
+  "name": "Astera Labs, Inc",
+  "sector": "Semiconductors",
+  "industry": "Semiconductors",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 36950000000,
+  "enterpriseValue": 49128.07,
+  "valuation": {
+    "peTTM": 184.1246,
+    "forwardPE": 71.64437,
+    "psTTM": 49.2053,
+    "pb": 20.6058,
+    "evRevenue": 0.0000576265446761092,
+    "evEbitda": null,
+    "pfcf": 131.1390464292559,
+    "fcfYield": 0.007625493910690122,
+    "earningsYield": 0.005930554803788904
+  },
+  "profitability": {
+    "grossMargin": 0.756882202867951,
+    "operatingMargin": 0.20342277352570307,
+    "netMargin": 0.2570411424884901,
+    "roe": 0.1606985452108117,
+    "roa": 0.14305438683189897,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 10.2376,
+    "quickRatio": 9.561,
+    "debtToEquity": null,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 319306000,
+    "freeCashFlow": 281762000,
+    "fcfMargin": 0.33050291780299695,
+    "capexToRevenue": 0.04403859124365855,
+    "fcfConversion": 1.2857977310686612
+  },
+  "dividends": {
+    "dividendYield": null,
+    "payoutRatio": null
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 852525000,
+      "grossProfit": 645261000,
+      "operatingIncome": 173423000,
+      "netIncome": 219134000,
+      "freeCashFlow": 281762000,
+      "totalAssets": 1531823000,
+      "totalDebt": null,
+      "totalEquity": 1363634000,
+      "sharesDiluted": 179551000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T21:16:38.165Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T21:16:38.165Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T21:16:38.165Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T21:16:38.165Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

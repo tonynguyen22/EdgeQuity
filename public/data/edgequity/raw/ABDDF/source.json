@@ -1,0 +1,14 @@
+{
+  "ticker": "ABDDF",
+  "provider": "finnhub",
+  "fetchedAt": "2026-05-21T16:12:07.302Z",
+  "endpoints": {
+    "profile": "stock/profile2",
+    "metrics": "stock/metric?metric=all",
+    "financialsReportedAnnual": "stock/financials-reported?freq=annual"
+  },
+  "status": "partial",
+  "warnings": [
+    "No annual as-reported filings returned by Finnhub"
+  ]
+}

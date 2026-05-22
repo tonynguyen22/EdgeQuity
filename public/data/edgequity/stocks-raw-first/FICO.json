@@ -1,0 +1,96 @@
+{
+  "ticker": "FICO",
+  "name": "Fair Isaac Corp",
+  "sector": "Technology",
+  "industry": "Technology",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 27410000000,
+  "enterpriseValue": 30331555000,
+  "valuation": {
+    "peTTM": 37.638,
+    "forwardPE": 28.565309925704373,
+    "psTTM": 12.6745,
+    "pb": 37.2683,
+    "evRevenue": 15.235334419291274,
+    "evEbitda": null,
+    "pfcf": 35.60271988673633,
+    "fcfYield": 0.02808774170010945,
+    "earningsYield": 0.02378496898941992
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": 0.46454588423447246,
+    "netMargin": 0.3274680554069605,
+    "roe": -0.3734402423209286,
+    "roa": 0.3489826473811019,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 0.8304,
+    "quickRatio": 0.7811,
+    "debtToEquity": -1.7503259280644112,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 778807000,
+    "freeCashFlow": 769885000,
+    "fcfMargin": 0.38670801544451194,
+    "capexToRevenue": 0.004481460106114466,
+    "fcfConversion": 1.1809030195752408
+  },
+  "dividends": {
+    "dividendYield": null,
+    "payoutRatio": null
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 1990869000,
+      "grossProfit": null,
+      "operatingIncome": 924850000,
+      "netIncome": 651946000,
+      "freeCashFlow": 769885000,
+      "totalAssets": 1868133000,
+      "totalDebt": 3055691000,
+      "totalEquity": -1745784000,
+      "sharesDiluted": 24561000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T22:17:13.025Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T22:17:13.025Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T22:17:13.025Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T22:17:13.025Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

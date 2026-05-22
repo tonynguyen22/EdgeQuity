@@ -1,0 +1,96 @@
+{
+  "ticker": "MLM",
+  "name": "Martin Marietta Materials Inc",
+  "sector": "Construction",
+  "industry": "Construction",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 33369999999.999996,
+  "enterpriseValue": 38626000000,
+  "valuation": {
+    "peTTM": 12.7242,
+    "forwardPE": 29.34653,
+    "psTTM": 4.9204,
+    "pb": 3.7431,
+    "evRevenue": 6.280650406504065,
+    "evEbitda": null,
+    "pfcf": 34.120654396728014,
+    "fcfYield": 0.029307761462391373,
+    "earningsYield": 0.03407252022774948
+  },
+  "profitability": {
+    "grossMargin": 0.3071544715447154,
+    "operatingMargin": 0.23365853658536587,
+    "netMargin": 0.1848780487804878,
+    "roe": 0.11333732057416268,
+    "roa": 0.060766394099727436,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 3.5676,
+    "quickRatio": 2.3631,
+    "debtToEquity": 0.5306020733652312,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 1785000000,
+    "freeCashFlow": 978000000,
+    "fcfMargin": 0.15902439024390244,
+    "capexToRevenue": 0.13121951219512196,
+    "fcfConversion": 0.8601583113456465
+  },
+  "dividends": {
+    "dividendYield": 0.6125687294734122,
+    "payoutRatio": 17.33
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 6150000000,
+      "grossProfit": 1889000000,
+      "operatingIncome": 1437000000,
+      "netIncome": 1137000000,
+      "freeCashFlow": 978000000,
+      "totalAssets": 18711000000,
+      "totalDebt": 5323000000,
+      "totalEquity": 10032000000,
+      "sharesDiluted": 60600000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T21:37:31.955Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T21:37:31.955Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T21:37:31.955Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T21:37:31.955Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

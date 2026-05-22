@@ -1,0 +1,96 @@
+{
+  "ticker": "NDAQ",
+  "name": "Nasdaq Inc",
+  "sector": "Financial Services",
+  "industry": "Financial Services",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 52370000000,
+  "enterpriseValue": 60339000000,
+  "valuation": {
+    "peTTM": 26.7005,
+    "forwardPE": 22.34074,
+    "psTTM": 6.1441,
+    "pb": 4.5359,
+    "evRevenue": 7.30319535221496,
+    "evEbitda": null,
+    "pfcf": 26.3298139768728,
+    "fcfYield": 0.03797975940423907,
+    "earningsYield": 0.034122589268665265
+  },
+  "profitability": {
+    "grossMargin": 0.6353183248608085,
+    "operatingMargin": 0.2821350762527233,
+    "netMargin": 0.21629145485354637,
+    "roe": 0.14615195877974974,
+    "roa": 0.30588839438548443,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 1.0053,
+    "quickRatio": 1.0053,
+    "debtToEquity": 0.7011531855729124,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 2255000000,
+    "freeCashFlow": 1989000000,
+    "fcfMargin": 0.24074074074074073,
+    "capexToRevenue": 0.032195594287097555,
+    "fcfConversion": 1.1130386121992166
+  },
+  "dividends": {
+    "dividendYield": 1.3776247083657371,
+    "payoutRatio": 33.61
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 8262000000,
+      "grossProfit": 5249000000,
+      "operatingIncome": 2331000000,
+      "netIncome": 1787000000,
+      "freeCashFlow": 1989000000,
+      "totalAssets": 5842000000,
+      "totalDebt": 8573000000,
+      "totalEquity": 12227000000,
+      "sharesDiluted": null
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T20:19:09.989Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T20:19:09.989Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T20:19:09.989Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T20:19:09.989Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

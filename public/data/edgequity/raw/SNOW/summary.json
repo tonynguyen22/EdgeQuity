@@ -1,0 +1,96 @@
+{
+  "ticker": "SNOW",
+  "name": "Snowflake Inc",
+  "sector": "Technology",
+  "industry": "Technology",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 56710000000,
+  "enterpriseValue": 57173.194,
+  "valuation": {
+    "peTTM": null,
+    "forwardPE": 91.83198099010963,
+    "psTTM": 12.3233,
+    "pb": 33.9123,
+    "evRevenue": 0.000012206202633420625,
+    "evEbitda": null,
+    "pfcf": 50.619736966600435,
+    "fcfYield": 0.019755140186915886,
+    "earningsYield": -0.02343563745371187
+  },
+  "profitability": {
+    "grossMargin": 0.6716860100436683,
+    "operatingMargin": -0.3064008423666712,
+    "netMargin": -0.2837425965201136,
+    "roe": -0.6907300132737245,
+    "roa": -0.14552813880544144,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 1.2987,
+    "quickRatio": 1.2628,
+    "debtToEquity": null,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 1221942000,
+    "freeCashFlow": 1120314000,
+    "fcfMargin": 0.2391816643488204,
+    "capexToRevenue": 0.021697090444680617,
+    "fcfConversion": -0.8429529696358636
+  },
+  "dividends": {
+    "dividendYield": null,
+    "payoutRatio": null
+  },
+  "history": [
+    {
+      "year": "2026",
+      "revenue": 4683946000,
+      "grossProfit": 3146141000,
+      "operatingIncome": -1435165000,
+      "netIncome": -1329035000,
+      "freeCashFlow": 1120314000,
+      "totalAssets": 9132495000,
+      "totalDebt": null,
+      "totalEquity": 1924102000,
+      "sharesDiluted": 337493000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T20:11:54.514Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T20:11:54.514Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T20:11:54.514Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T20:11:54.514Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

@@ -1,0 +1,96 @@
+{
+  "ticker": "ABEO",
+  "name": "Abeona Therapeutics Inc",
+  "sector": "Biotechnology",
+  "industry": "Biotechnology",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 303214175,
+  "enterpriseValue": 244812175,
+  "valuation": {
+    "peTTM": 4.2596,
+    "forwardPE": null,
+    "psTTM": 52.0987,
+    "pb": 1.7937,
+    "evRevenue": 42.06394759450172,
+    "evEbitda": null,
+    "pfcf": -3.5968040118148066,
+    "fcfYield": -0.2780246009277106,
+    "earningsYield": 0.23476145203303903
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": -15.369072164948454,
+    "netMargin": 12.230756013745705,
+    "roe": 0.44708446387297757,
+    "roa": 0.32419274035615064,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 6.9295,
+    "quickRatio": 6.7,
+    "debtToEquity": 0.1258353431815898,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": -76326000,
+    "freeCashFlow": -84301000,
+    "fcfMargin": -14.484707903780068,
+    "capexToRevenue": 1.370274914089347,
+    "fcfConversion": -1.1842855738027338
+  },
+  "dividends": {
+    "dividendYield": null,
+    "payoutRatio": null
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 5820000,
+      "grossProfit": null,
+      "operatingIncome": -89448000,
+      "netIncome": 71183000,
+      "freeCashFlow": -84301000,
+      "totalAssets": 219570000,
+      "totalDebt": 20035000,
+      "totalEquity": 159216000,
+      "sharesDiluted": 66135821
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T16:13:26.335Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T16:13:26.335Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T16:13:26.335Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T16:13:26.335Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items"
+    }
+  }
+}

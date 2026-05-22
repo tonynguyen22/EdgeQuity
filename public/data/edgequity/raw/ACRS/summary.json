@@ -1,0 +1,96 @@
+{
+  "ticker": "ACRS",
+  "name": "Aclaris Therapeutics Inc",
+  "sector": "Pharmaceuticals",
+  "industry": "Pharmaceuticals",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 632676504,
+  "enterpriseValue": 599.8265,
+  "valuation": {
+    "peTTM": null,
+    "forwardPE": null,
+    "psTTM": 75.1149,
+    "pb": 3.1637,
+    "evRevenue": 0.0000766453488372093,
+    "evEbitda": null,
+    "pfcf": -13.397351007962053,
+    "fcfYield": -0.07464162127316806,
+    "earningsYield": -0.10261642338467496
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": -9.759136212624584,
+    "netMargin": -8.29580884232047,
+    "roe": -0.6298189790652102,
+    "roa": -0.40460550916116167,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 3.3624,
+    "quickRatio": 3.3624,
+    "debtToEquity": null,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": -47113000,
+    "freeCashFlow": -47224000,
+    "fcfMargin": -6.034244824942499,
+    "capexToRevenue": 0.014183490927676973,
+    "fcfConversion": 0.7273847480861945
+  },
+  "dividends": {
+    "dividendYield": null,
+    "payoutRatio": null
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 7826000,
+      "grossProfit": null,
+      "operatingIncome": -76375000,
+      "netIncome": -64923000,
+      "freeCashFlow": -47224000,
+      "totalAssets": 160460000,
+      "totalDebt": null,
+      "totalEquity": 103082000,
+      "sharesDiluted": 122564741
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T17:14:16.114Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T17:14:16.114Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T17:14:16.114Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T17:14:16.114Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items"
+    }
+  }
+}

@@ -1,0 +1,96 @@
+{
+  "ticker": "ICE",
+  "name": "Intercontinental Exchange Inc",
+  "sector": "Financial Services",
+  "industry": "Financial Services",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 88360000000,
+  "enterpriseValue": 107167000000,
+  "valuation": {
+    "peTTM": 21.6293,
+    "forwardPE": 18.71383,
+    "psTTM": 6.5019,
+    "pb": 3.1937,
+    "evRevenue": 8.478401898734177,
+    "evEbitda": null,
+    "pfcf": 20.601538820237817,
+    "fcfYield": 0.048540063377093705,
+    "earningsYield": 0.038139429606156634
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": 0.38995253164556964,
+    "netMargin": 0.2666139240506329,
+    "roe": 0.11654850423655543,
+    "roa": 0.024618846201611547,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 1.0198,
+    "quickRatio": 1.0104,
+    "debtToEquity": 0.6793705689088708,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 4662000000,
+    "freeCashFlow": 4289000000,
+    "fcfMargin": 0.33931962025316453,
+    "capexToRevenue": 0.029509493670886077,
+    "fcfConversion": 1.2727002967359051
+  },
+  "dividends": {
+    "dividendYield": 1.3712176148724373,
+    "payoutRatio": 33.33
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 12640000000,
+      "grossProfit": null,
+      "operatingIncome": 4929000000,
+      "netIncome": 3370000000,
+      "freeCashFlow": 4289000000,
+      "totalAssets": 136887000000,
+      "totalDebt": 19644000000,
+      "totalEquity": 28915000000,
+      "sharesDiluted": 575000000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T18:58:10.159Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T18:58:10.159Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T18:58:10.159Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T18:58:10.159Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

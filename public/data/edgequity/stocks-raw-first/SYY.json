@@ -1,0 +1,96 @@
+{
+  "ticker": "SYY",
+  "name": "Sysco Corp",
+  "sector": "Retail",
+  "industry": "Retail",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 35160000000,
+  "enterpriseValue": 35987000000,
+  "valuation": {
+    "peTTM": 20.7828,
+    "forwardPE": 15.07803,
+    "psTTM": 0.4317,
+    "pb": 19.7626,
+    "evRevenue": 0.4422637335627381,
+    "evEbitda": null,
+    "pfcf": 21.920199501246884,
+    "fcfYield": 0.045620022753128556,
+    "earningsYield": 0.05199089874857793
+  },
+  "profitability": {
+    "grossMargin": 0.1839621482118717,
+    "operatingMargin": 0.0379501044611036,
+    "netMargin": 0.02246528204497972,
+    "roe": 0.9989071038251366,
+    "roa": 0.20958495757853704,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 1.2069,
+    "quickRatio": 0.6633,
+    "debtToEquity": 1.037158469945355,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 2510000000,
+    "freeCashFlow": 1604000000,
+    "fcfMargin": 0.0197124247265577,
+    "capexToRevenue": 0.011134324689689074,
+    "fcfConversion": 0.8774617067833698
+  },
+  "dividends": {
+    "dividendYield": 2.9154518950437325,
+    "payoutRatio": 54.7
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 81370000000,
+      "grossProfit": 14969000000,
+      "operatingIncome": 3088000000,
+      "netIncome": 1828000000,
+      "freeCashFlow": 1604000000,
+      "totalAssets": 8722000000,
+      "totalDebt": 1898000000,
+      "totalEquity": 1830000000,
+      "sharesDiluted": 489825648
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T21:26:31.363Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T21:26:31.363Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T21:26:31.363Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T21:26:31.363Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

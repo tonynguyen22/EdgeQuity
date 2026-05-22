@@ -1,0 +1,97 @@
+{
+  "ticker": "AFL",
+  "name": "Aflac Inc",
+  "sector": "Insurance",
+  "industry": "Insurance",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 60400000000,
+  "enterpriseValue": 62143.06,
+  "valuation": {
+    "peTTM": 12.9349,
+    "forwardPE": 15.20697,
+    "psTTM": 3.3108,
+    "pb": 1.9598,
+    "evRevenue": 0.000003620546492659054,
+    "evEbitda": null,
+    "pfcf": null,
+    "fcfYield": null,
+    "earningsYield": 0.06036423841059602
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": null,
+    "netMargin": 0.21242134700536006,
+    "roe": 0.12363513055272973,
+    "roa": 2.0575620767494356,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 0.0407,
+    "quickRatio": 0.0407,
+    "debtToEquity": null,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 2555000000,
+    "freeCashFlow": null,
+    "fcfMargin": null,
+    "capexToRevenue": null,
+    "fcfConversion": null
+  },
+  "dividends": {
+    "dividendYield": 2.081556048455895,
+    "payoutRatio": 32.86
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 17164000000,
+      "grossProfit": null,
+      "operatingIncome": null,
+      "netIncome": 3646000000,
+      "freeCashFlow": null,
+      "totalAssets": 1772000000,
+      "totalDebt": null,
+      "totalEquity": 29490000000,
+      "sharesDiluted": 534878000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items",
+    "Free cash flow unavailable from mapped line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T19:54:58.852Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T19:54:58.852Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T19:54:58.852Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T19:54:58.852Z",
+      "status": "partial",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

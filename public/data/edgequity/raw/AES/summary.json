@@ -1,0 +1,96 @@
+{
+  "ticker": "AES",
+  "name": "AES Corp",
+  "sector": "Utilities",
+  "industry": "Utilities",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 10504812813,
+  "enterpriseValue": 9122812813,
+  "valuation": {
+    "peTTM": 7.7756,
+    "forwardPE": 6.17763,
+    "psTTM": 0.8413,
+    "pb": 2.5134,
+    "evRevenue": 0.7457543376931252,
+    "evEbitda": null,
+    "pfcf": -6.472466304990758,
+    "fcfYield": -0.15450061118571215,
+    "earningsYield": 0.015421502780089566
+  },
+  "profitability": {
+    "grossMargin": 0.1807406196354124,
+    "operatingMargin": null,
+    "netMargin": 0.013242867653069566,
+    "roe": 0.03987201575190746,
+    "roa": 0.003129346314325452,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 0.7657,
+    "quickRatio": 0.671,
+    "debtToEquity": 0,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 4306000000,
+    "freeCashFlow": -1623000000,
+    "fcfMargin": -0.1326739148205673,
+    "capexToRevenue": 0.48467260688302133,
+    "fcfConversion": -10.018518518518519
+  },
+  "dividends": {
+    "dividendYield": 4.779361846571621,
+    "payoutRatio": 55.05
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 12233000000,
+      "grossProfit": 2211000000,
+      "operatingIncome": null,
+      "netIncome": 162000000,
+      "freeCashFlow": -1623000000,
+      "totalAssets": 51768000000,
+      "totalDebt": 0,
+      "totalEquity": 4063000000,
+      "sharesDiluted": null
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T17:25:04.573Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T17:25:04.573Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T17:25:04.573Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T17:25:04.573Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items"
+    }
+  }
+}

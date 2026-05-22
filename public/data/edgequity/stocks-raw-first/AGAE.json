@@ -1,0 +1,96 @@
+{
+  "ticker": "AGAE",
+  "name": "Allied Gaming & Entertainment Inc",
+  "sector": "Hotels, Restaurants & Leisure",
+  "industry": "Hotels, Restaurants & Leisure",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 18967983.000000004,
+  "enterpriseValue": 38.3856,
+  "valuation": {
+    "peTTM": null,
+    "forwardPE": null,
+    "psTTM": 2.3546,
+    "pb": 0.4788,
+    "evRevenue": 0.0000042278745242407565,
+    "evEbitda": null,
+    "pfcf": -1.9252277531857436,
+    "fcfYield": -0.5194190652743625,
+    "earningsYield": -1.1902170620882566
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": -2.566935178670478,
+    "netMargin": -2.4865722336794587,
+    "roe": -0.30921468800986024,
+    "roa": -0.20034223212404165,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 3.1086,
+    "quickRatio": 3.0932,
+    "debtToEquity": null,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": -9769381,
+    "freeCashFlow": -9852332,
+    "fcfMargin": -1.0851575452034612,
+    "capexToRevenue": 0.009136405830840081,
+    "fcfConversion": 0.43640700660351206
+  },
+  "dividends": {
+    "dividendYield": null,
+    "payoutRatio": null
+  },
+  "history": [
+    {
+      "year": "2024",
+      "revenue": 9079172,
+      "grossProfit": null,
+      "operatingIncome": -23305646,
+      "netIncome": -22576017,
+      "freeCashFlow": -9852332,
+      "totalAssets": 112687259,
+      "totalDebt": null,
+      "totalEquity": 73010817,
+      "sharesDiluted": 40374340
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T17:34:17.740Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T17:34:17.740Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T17:34:17.740Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T17:34:17.740Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items"
+    }
+  }
+}

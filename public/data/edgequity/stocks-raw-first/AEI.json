@@ -1,0 +1,96 @@
+{
+  "ticker": "AEI",
+  "name": "Alset Inc",
+  "sector": "Real Estate",
+  "industry": "Real Estate",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 63789157.99999999,
+  "enterpriseValue": 39.5754,
+  "valuation": {
+    "peTTM": null,
+    "forwardPE": null,
+    "psTTM": 14.2677,
+    "pb": 1.1054,
+    "evRevenue": 0.000008851824307322392,
+    "evEbitda": null,
+    "pfcf": -10.452105490483689,
+    "fcfYield": -0.09567450318124596,
+    "earningsYield": -0.773651315479035
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": -3.3887288282495036,
+    "netMargin": -11.038234350099254,
+    "roe": -0.40760202845221144,
+    "roa": -0.36131201952184155,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 7.6314,
+    "quickRatio": 7.5997,
+    "debtToEquity": null,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": -5927532,
+    "freeCashFlow": -6102996,
+    "fcfMargin": -1.3650562809293483,
+    "capexToRevenue": 0.039246008890877065,
+    "fcfConversion": 0.1236661804446174
+  },
+  "dividends": {
+    "dividendYield": null,
+    "payoutRatio": null
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 4470875,
+      "grossProfit": null,
+      "operatingIncome": -15150583,
+      "netIncome": -49350566,
+      "freeCashFlow": -6102996,
+      "totalAssets": 136587114,
+      "totalDebt": null,
+      "totalEquity": 121075369,
+      "sharesDiluted": 21359650
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T17:18:28.136Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T17:18:28.136Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T17:18:28.136Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T17:18:28.136Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items"
+    }
+  }
+}

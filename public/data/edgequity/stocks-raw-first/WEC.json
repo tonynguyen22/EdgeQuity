@@ -1,0 +1,96 @@
+{
+  "ticker": "WEC",
+  "name": "WEC Energy Group Inc",
+  "sector": "Utilities",
+  "industry": "Utilities",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 35680000000,
+  "enterpriseValue": 56075200000,
+  "valuation": {
+    "peTTM": 22.1583,
+    "forwardPE": 20.49544,
+    "psTTM": 3.7208,
+    "pb": 2.5143,
+    "evRevenue": 5.721900796930644,
+    "evEbitda": null,
+    "pfcf": -35.0250319034063,
+    "fcfYield": -0.028551008968609865,
+    "earningsYield": 0.04359585201793722
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": 0.22906909113172313,
+    "netMargin": 0.15872287017479414,
+    "roe": 0.030193154665429565,
+    "roa": 0.030193154665429565,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 0.5872,
+    "quickRatio": 0.3951,
+    "debtToEquity": 0.39641836007787523,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 3379400000,
+    "freeCashFlow": -1018700000,
+    "fcfMargin": -0.10394791889878675,
+    "capexToRevenue": 0.4487811348863787,
+    "fcfConversion": -0.6549019607843137
+  },
+  "dividends": {
+    "dividendYield": 3.2720714531088975,
+    "payoutRatio": 73.64
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 9800100000,
+      "grossProfit": null,
+      "operatingIncome": 2244900000,
+      "netIncome": 1555500000,
+      "freeCashFlow": -1018700000,
+      "totalAssets": 51518300000,
+      "totalDebt": 20422800000,
+      "totalEquity": 51518300000,
+      "sharesDiluted": 323800000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T21:24:32.753Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T21:24:32.753Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T21:24:32.753Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T21:24:32.753Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

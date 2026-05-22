@@ -1,0 +1,96 @@
+{
+  "ticker": "V",
+  "name": "Visa Inc",
+  "sector": "Financial Services",
+  "industry": "Financial Services",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 626660000000,
+  "enterpriseValue": 634667000000,
+  "valuation": {
+    "peTTM": 27.9543,
+    "forwardPE": 23.29907,
+    "psTTM": 14.4465,
+    "pb": 17.2671,
+    "evRevenue": 15.866675,
+    "evEbitda": null,
+    "pfcf": 29.042962413681234,
+    "fcfYield": 0.03443174927392845,
+    "earningsYield": 0.03200778731688635
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": 0.59985,
+    "netMargin": 0.50145,
+    "roe": 0.5291091825160252,
+    "roa": 5.533241379310345,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 1.0776,
+    "quickRatio": 1.0356,
+    "debtToEquity": 0.6639848057189586,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 23059000000,
+    "freeCashFlow": 21577000000,
+    "fcfMargin": 0.539425,
+    "capexToRevenue": 0.03705,
+    "fcfConversion": 1.0757303818925117
+  },
+  "dividends": {
+    "dividendYield": 0.8366894570884456,
+    "payoutRatio": 23.1
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 40000000000,
+      "grossProfit": null,
+      "operatingIncome": 23994000000,
+      "netIncome": 20058000000,
+      "freeCashFlow": 21577000000,
+      "totalAssets": 3625000000,
+      "totalDebt": 25171000000,
+      "totalEquity": 37909000000,
+      "sharesDiluted": 2100000000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T17:57:30.300Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T17:57:30.300Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T17:57:30.300Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T17:57:30.300Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

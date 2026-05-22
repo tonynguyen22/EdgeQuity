@@ -1,0 +1,96 @@
+{
+  "ticker": "NSC",
+  "name": "Norfolk Southern Corp",
+  "sector": "Road & Rail",
+  "industry": "Road & Rail",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 71890000000,
+  "enterpriseValue": 71574000000,
+  "valuation": {
+    "peTTM": 26.5088,
+    "forwardPE": 25.13828,
+    "psTTM": 5.8087,
+    "pb": 4.5444,
+    "evRevenue": 5.876354679802955,
+    "evEbitda": null,
+    "pfcf": 33.328697264719516,
+    "fcfYield": 0.030004173042147725,
+    "earningsYield": 0.03996383363471971
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": 0.35763546798029555,
+    "netMargin": 0.2358784893267652,
+    "roe": 0.18479449411462018,
+    "roa": 0.06351136263153241,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 0.8472,
+    "quickRatio": 0.7754,
+    "debtToEquity": 0.07808580433524152,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 4361000000,
+    "freeCashFlow": 2157000000,
+    "fcfMargin": 0.1770935960591133,
+    "capexToRevenue": 0.18095238095238095,
+    "fcfConversion": 0.7507831534980857
+  },
+  "dividends": {
+    "dividendYield": 1.731657260133402,
+    "payoutRatio": 42.29
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 12180000000,
+      "grossProfit": null,
+      "operatingIncome": 4356000000,
+      "netIncome": 2873000000,
+      "freeCashFlow": 2157000000,
+      "totalAssets": 45236000000,
+      "totalDebt": 1214000000,
+      "totalEquity": 15547000000,
+      "sharesDiluted": null
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T19:32:28.120Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T19:32:28.120Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T19:32:28.120Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T19:32:28.120Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

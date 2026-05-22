@@ -1,0 +1,96 @@
+{
+  "ticker": "TKO",
+  "name": "TKO Group Holdings Inc",
+  "sector": "Media",
+  "industry": "Media",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 37090000000,
+  "enterpriseValue": 40021024000,
+  "valuation": {
+    "peTTM": 162.3463,
+    "forwardPE": 32.66355,
+    "psTTM": 9.2248,
+    "pb": 10.9092,
+    "evRevenue": 8.451900266749677,
+    "evEbitda": null,
+    "pfcf": 32.00802228566103,
+    "fcfYield": 0.03124216770018873,
+    "earningsYield": 0.014728767861957402
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": 0.17634390117654114,
+    "netMargin": 0.11536907693123197,
+    "roe": 0.14616920244417148,
+    "roa": 0.03525402106800279,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 1.2609,
+    "quickRatio": 1.1762,
+    "debtToEquity": 1.0066204114592545,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 1285725000,
+    "freeCashFlow": 1158772000,
+    "fcfMargin": 0.24471701113649807,
+    "capexToRevenue": 0.026810760628330543,
+    "fcfConversion": 2.1211664134434094
+  },
+  "dividends": {
+    "dividendYield": 1.3897467572575664,
+    "payoutRatio": 94.76
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 4735151000,
+      "grossProfit": null,
+      "operatingIncome": 835015000,
+      "netIncome": 546290000,
+      "freeCashFlow": 1158772000,
+      "totalAssets": 15495821000,
+      "totalDebt": 3762124000,
+      "totalEquity": 3737381000,
+      "sharesDiluted": 194011072
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T21:15:55.639Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T21:15:55.639Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T21:15:55.639Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T21:15:55.639Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

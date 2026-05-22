@@ -1,7 +1,8 @@
 import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
 import test from 'node:test';
 
-import { formatEdgequityValue } from './metrics.ts';
+import { formatEdgequityValue, getEarningsCalendar } from './metrics.ts';
 
 test('formatEdgequityValue returns dash for missing and invalid values', () => {
   assert.equal(formatEdgequityValue(null, 'number'), '-');
@@ -29,4 +30,20 @@ test('formatEdgequityValue places negative money sign before the dollar symbol',
 test('formatEdgequityValue preserves cents for small money values', () => {
   assert.equal(formatEdgequityValue(0.49, 'money'), '$0.49');
   assert.equal(formatEdgequityValue(12.34, 'money'), '$12.34');
+});
+
+test('earnings calendar covers every stock in the screener universe', () => {
+  const manifest = JSON.parse(readFileSync('public/data/edgequity/manifest.json', 'utf8')) as { universe: string[] };
+
+  const missing = manifest.universe.filter((ticker) => {
+    const calendar = getEarningsCalendar(ticker);
+    return [
+      calendar.recentPeriod,
+      calendar.recentDate,
+      calendar.nextPeriod,
+      calendar.nextDate,
+    ].some((value) => value === '-' || value === 'Research queued' || value === 'Next report');
+  });
+
+  assert.deepEqual(missing, []);
 });

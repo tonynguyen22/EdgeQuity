@@ -1,0 +1,96 @@
+{
+  "ticker": "TXN",
+  "name": "Texas Instruments Inc",
+  "sector": "Semiconductors",
+  "industry": "Semiconductors",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 273570000000,
+  "enterpriseValue": 284393000000,
+  "valuation": {
+    "peTTM": 50.2781,
+    "forwardPE": 34.59761,
+    "psTTM": 14.6351,
+    "pb": 9.687,
+    "evRevenue": 16.08375749349621,
+    "evEbitda": null,
+    "pfcf": 105.09796388782175,
+    "fcfYield": 0.009514932192857404,
+    "earningsYield": 0.01828051321416822
+  },
+  "profitability": {
+    "grossMargin": 0.5702409229725144,
+    "operatingMargin": 0.3406288881348264,
+    "netMargin": 0.2828299966067187,
+    "roe": 0.3073188717507528,
+    "roa": 0.14460026022842273,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 4.3526,
+    "quickRatio": 2.1665,
+    "debtToEquity": 0.8632704479813188,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 7153000000,
+    "freeCashFlow": 2603000000,
+    "fcfMargin": 0.1472118538626852,
+    "capexToRevenue": 0.2573238321456849,
+    "fcfConversion": 0.520495900819836
+  },
+  "dividends": {
+    "dividendYield": 1.8630280766203096,
+    "payoutRatio": 99.96
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 17682000000,
+      "grossProfit": 10083000000,
+      "operatingIncome": 6023000000,
+      "netIncome": 5001000000,
+      "freeCashFlow": 2603000000,
+      "totalAssets": 34585000000,
+      "totalDebt": 14048000000,
+      "totalEquity": 16273000000,
+      "sharesDiluted": 913000000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T17:57:30.821Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T17:57:30.821Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T17:57:30.821Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T17:57:30.821Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

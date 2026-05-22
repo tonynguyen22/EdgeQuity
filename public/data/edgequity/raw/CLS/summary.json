@@ -1,0 +1,96 @@
+{
+  "ticker": "CLS",
+  "name": "Celestica Inc",
+  "sector": "Electrical Equipment",
+  "industry": "Electrical Equipment",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 41340000000,
+  "enterpriseValue": 40102.1321,
+  "valuation": {
+    "peTTM": 41.4226,
+    "forwardPE": 35.73013,
+    "psTTM": 2.8796,
+    "pb": 15.4606,
+    "evRevenue": 0.000003236418024517993,
+    "evEbitda": null,
+    "pfcf": 90.2029238490072,
+    "fcfYield": 0.011086115142718917,
+    "earningsYield": 0.02013788098693759
+  },
+  "profitability": {
+    "grossMargin": 0.12058042595775932,
+    "operatingMargin": 0.08398905648500109,
+    "netMargin": 0.06718640292472702,
+    "roe": 0.3756260434056761,
+    "roa": 0.1154150088034271,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 1.44,
+    "quickRatio": 0.8847,
+    "debtToEquity": null,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 659500000,
+    "freeCashFlow": 458300000,
+    "fcfMargin": 0.036986820973456326,
+    "capexToRevenue": 0.016237722844991084,
+    "fcfConversion": 0.5505105105105105
+  },
+  "dividends": {
+    "dividendYield": null,
+    "payoutRatio": null
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 12390900000,
+      "grossProfit": 1494100000,
+      "operatingIncome": 1040700000,
+      "netIncome": 832500000,
+      "freeCashFlow": 458300000,
+      "totalAssets": 7213100000,
+      "totalDebt": null,
+      "totalEquity": 2216300000,
+      "sharesDiluted": 116200000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T20:56:45.393Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T20:56:45.393Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T20:56:45.393Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T20:56:45.393Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

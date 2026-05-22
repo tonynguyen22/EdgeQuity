@@ -1,0 +1,96 @@
+{
+  "ticker": "GLW",
+  "name": "Corning Inc",
+  "sector": "Electrical Equipment",
+  "industry": "Electrical Equipment",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 153670000000,
+  "enterpriseValue": 153752000000,
+  "valuation": {
+    "peTTM": 89.3161,
+    "forwardPE": 46.05182,
+    "psTTM": 9.9052,
+    "pb": 6.3581,
+    "evRevenue": 9.837609571949582,
+    "evEbitda": null,
+    "pfcf": 108.75442321302194,
+    "fcfYield": 0.009195028307411987,
+    "earningsYield": 0.011335979696752782
+  },
+  "profitability": {
+    "grossMargin": 0.35965192910614885,
+    "operatingMargin": 0.1458186704203724,
+    "netMargin": 0.11145946637660759,
+    "roe": 0.1475395951554163,
+    "roa": 0.056237086776859506,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 1.5878,
+    "quickRatio": 1.041,
+    "debtToEquity": 0.13619039552807657,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 2695000000,
+    "freeCashFlow": 1413000000,
+    "fcfMargin": 0.09040885533303475,
+    "capexToRevenue": 0.08202700108772154,
+    "fcfConversion": 0.8111366245694603
+  },
+  "dividends": {
+    "dividendYield": 0.6198461453317838,
+    "payoutRatio": 62.59
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 15629000000,
+      "grossProfit": 5621000000,
+      "operatingIncome": 2279000000,
+      "netIncome": 1742000000,
+      "freeCashFlow": 1413000000,
+      "totalAssets": 30976000000,
+      "totalDebt": 1608000000,
+      "totalEquity": 11807000000,
+      "sharesDiluted": null
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T18:05:58.527Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T18:05:58.527Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T18:05:58.527Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T18:05:58.527Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

@@ -1,0 +1,97 @@
+{
+  "ticker": "AARD",
+  "name": "Aardvark Therapeutics Inc",
+  "sector": "Pharmaceuticals",
+  "industry": "Pharmaceuticals",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 93592292.00000001,
+  "enterpriseValue": 46.5413,
+  "valuation": {
+    "peTTM": null,
+    "forwardPE": null,
+    "psTTM": null,
+    "pb": 2.68,
+    "evRevenue": null,
+    "evEbitda": null,
+    "pfcf": -1.724663091750051,
+    "fcfYield": -0.5798233897295729,
+    "earningsYield": -0.6153391349791925
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": null,
+    "netMargin": null,
+    "roe": -0.5400860896720527,
+    "roa": -0.491470460228194,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 10.6073,
+    "quickRatio": 10.4311,
+    "debtToEquity": null,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": -54172000,
+    "freeCashFlow": -54267000,
+    "fcfMargin": null,
+    "capexToRevenue": null,
+    "fcfConversion": 0.9422826483304683
+  },
+  "dividends": {
+    "dividendYield": null,
+    "payoutRatio": null
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": null,
+      "grossProfit": null,
+      "operatingIncome": -62725000,
+      "netIncome": -57591000,
+      "freeCashFlow": -54267000,
+      "totalAssets": 117181000,
+      "totalDebt": null,
+      "totalEquity": 106633000,
+      "sharesDiluted": 19624626
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items",
+    "Revenue unavailable from mapped line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T15:54:13.292Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T15:54:13.292Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T15:54:13.292Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T15:54:13.292Z",
+      "status": "partial",
+      "message": "Thin summary mapped from Finnhub as-reported line items"
+    }
+  }
+}

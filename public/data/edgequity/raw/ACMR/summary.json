@@ -1,0 +1,96 @@
+{
+  "ticker": "ACMR",
+  "name": "ACM Research Inc",
+  "sector": "Semiconductors",
+  "industry": "Semiconductors",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 4741700643.999999,
+  "enterpriseValue": 4237298643.999999,
+  "valuation": {
+    "peTTM": 50.4018,
+    "forwardPE": 26.54234,
+    "psTTM": 5.2609,
+    "pb": 1.7478,
+    "evRevenue": 4.7012718656975565,
+    "evEbitda": null,
+    "pfcf": -71.1881552366082,
+    "fcfYield": -0.014047280712308083,
+    "earningsYield": 0.02570659962565111
+  },
+  "profitability": {
+    "grossMargin": 0.4438732998339082,
+    "operatingMargin": 0.12141119194416121,
+    "netMargin": 0.13523996764705556,
+    "roe": 0.0832396065729604,
+    "roa": 0.042439118650086954,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 3.2676,
+    "quickRatio": 2.3078,
+    "debtToEquity": 0.17275156501495872,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": -10325000,
+    "freeCashFlow": -66608000,
+    "fcfMargin": -0.07390140340327235,
+    "capexToRevenue": 0.06244584265773447,
+    "fcfConversion": -0.5464464735464711
+  },
+  "dividends": {
+    "dividendYield": null,
+    "payoutRatio": null
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 901309000,
+      "grossProfit": 400067000,
+      "operatingIncome": 109429000,
+      "netIncome": 121893000,
+      "freeCashFlow": -66608000,
+      "totalAssets": 2872185000,
+      "totalDebt": 252971000,
+      "totalEquity": 1464363000,
+      "sharesDiluted": 67311893
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T17:05:00.693Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T17:05:00.693Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T17:05:00.693Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T17:05:00.693Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items"
+    }
+  }
+}

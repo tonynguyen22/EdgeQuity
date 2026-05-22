@@ -1,0 +1,97 @@
+{
+  "ticker": "LYV",
+  "name": "Live Nation Entertainment Inc",
+  "sector": "Media",
+  "industry": "Media",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 38980000000,
+  "enterpriseValue": 32473430000,
+  "valuation": {
+    "peTTM": 454.55,
+    "forwardPE": null,
+    "psTTM": 1.4848,
+    "pb": 122.0995,
+    "evRevenue": null,
+    "evEbitda": null,
+    "pfcf": 116.84267005584348,
+    "fcfYield": 0.008558517188301694,
+    "earningsYield": 0.017720369420215494
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": null,
+    "netMargin": null,
+    "roe": 2.5487902526503006,
+    "roa": 0.03014681964669729,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 0.9951,
+    "quickRatio": 0.8581,
+    "debtToEquity": 2.168320375488456,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 1395316000,
+    "freeCashFlow": 333611000,
+    "fcfMargin": null,
+    "capexToRevenue": null,
+    "fcfConversion": 0.48297622839273824
+  },
+  "dividends": {
+    "dividendYield": null,
+    "payoutRatio": null
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": null,
+      "grossProfit": null,
+      "operatingIncome": 1251217000,
+      "netIncome": 690740000,
+      "freeCashFlow": 333611000,
+      "totalAssets": 22912533000,
+      "totalDebt": 587630000,
+      "totalEquity": 271007000,
+      "sharesDiluted": 231844300
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items",
+    "Revenue unavailable from mapped line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T21:08:00.916Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T21:08:00.916Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T21:08:00.916Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T21:08:00.916Z",
+      "status": "partial",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

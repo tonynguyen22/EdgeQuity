@@ -1,0 +1,96 @@
+{
+  "ticker": "CRWD",
+  "name": "CrowdStrike Holdings Inc",
+  "sector": "Technology",
+  "industry": "Technology",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 157510000000,
+  "enterpriseValue": 153025346000,
+  "valuation": {
+    "peTTM": null,
+    "forwardPE": 88.23908,
+    "psTTM": 34.3883,
+    "pb": 24.9828,
+    "evRevenue": 31.800745427321875,
+    "evEbitda": null,
+    "pfcf": 120.21452541936941,
+    "fcfYield": 0.008318462319852707,
+    "earningsYield": -0.0010232048758808965
+  },
+  "profitability": {
+    "grossMargin": 0.7466899972049074,
+    "operatingMargin": -0.06095006135696035,
+    "netMargin": -0.03349227608865743,
+    "roe": -0.03639358773730408,
+    "roa": -0.0145368083008409,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 1.7731,
+    "quickRatio": 1.6825,
+    "debtToEquity": 0.16833905776139862,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 1612349000,
+    "freeCashFlow": 1310241000,
+    "fcfMargin": 0.2722858766771855,
+    "capexToRevenue": 0.06278214590383842,
+    "fcfConversion": -8.129811063196103
+  },
+  "dividends": {
+    "dividendYield": null,
+    "payoutRatio": null
+  },
+  "history": [
+    {
+      "year": "2026",
+      "revenue": 4812005000,
+      "grossProfit": 3593076000,
+      "operatingIncome": -293292000,
+      "netIncome": -161165000,
+      "freeCashFlow": 1310241000,
+      "totalAssets": 11086684000,
+      "totalDebt": 745471000,
+      "totalEquity": 4428390000,
+      "sharesDiluted": 250576000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T18:03:59.342Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T18:03:59.342Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T18:03:59.342Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T18:03:59.342Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

@@ -1,0 +1,96 @@
+{
+  "ticker": "ISRG",
+  "name": "Intuitive Surgical Inc",
+  "sector": "Health Care",
+  "industry": "Health Care",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 155800000000,
+  "enterpriseValue": 152942800000,
+  "valuation": {
+    "peTTM": 51.8934,
+    "forwardPE": 42.17838,
+    "psTTM": 14.6092,
+    "pb": 11.2642,
+    "evRevenue": 15.19596212505092,
+    "evEbitda": null,
+    "pfcf": 62.552696029228734,
+    "fcfYield": 0.015986521181001283,
+    "earningsYield": 0.01846341463414634
+  },
+  "profitability": {
+    "grossMargin": 0.6599600584220096,
+    "operatingMargin": 0.29265651236499846,
+    "netMargin": 0.28581080409748927,
+    "roe": 0.16138913824057452,
+    "roa": 3.3894191115824204,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 4.8746,
+    "quickRatio": 3.7874,
+    "debtToEquity": 0.02865798922800718,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 3030500000,
+    "freeCashFlow": 2490700000,
+    "fcfMargin": 0.24746887636988682,
+    "capexToRevenue": 0.05363299452542053,
+    "fcfConversion": 0.8658485712299242
+  },
+  "dividends": {
+    "dividendYield": null,
+    "payoutRatio": null
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 10064700000,
+      "grossProfit": 6642300000,
+      "operatingIncome": 2945500000,
+      "netIncome": 2876600000,
+      "freeCashFlow": 2490700000,
+      "totalAssets": 848700000,
+      "totalDebt": 510800000,
+      "totalEquity": 17824000000,
+      "sharesDiluted": 362700000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T18:04:38.932Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T18:04:38.932Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T18:04:38.932Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T18:04:38.932Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

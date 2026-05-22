@@ -1,0 +1,96 @@
+{
+  "ticker": "PANW",
+  "name": "Palo Alto Networks Inc",
+  "sector": "Technology",
+  "industry": "Technology",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 200760000000,
+  "enterpriseValue": 197116.56,
+  "valuation": {
+    "peTTM": 157.0127,
+    "forwardPE": 46.48865,
+    "psTTM": 20.3445,
+    "pb": 14.8195,
+    "evRevenue": 0.000021375758824486256,
+    "evEbitda": null,
+    "pfcf": 57.85924260764309,
+    "fcfYield": 0.01728332337118948,
+    "earningsYield": 0.005648037457660888
+  },
+  "profitability": {
+    "grossMargin": 0.734143035297945,
+    "operatingMargin": 0.1347828444396248,
+    "netMargin": 0.12296264165265955,
+    "roe": 0.14491846020142118,
+    "roa": 0.04809511286806186,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 0.9418,
+    "quickRatio": 0.8779,
+    "debtToEquity": null,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 3716000000,
+    "freeCashFlow": 3469800000,
+    "fcfMargin": 0.37627284064414684,
+    "capexToRevenue": 0.026698476386704983,
+    "fcfConversion": 3.060058206191022
+  },
+  "dividends": {
+    "dividendYield": null,
+    "payoutRatio": null
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 9221500000,
+      "grossProfit": 6769900000,
+      "operatingIncome": 1242900000,
+      "netIncome": 1133900000,
+      "freeCashFlow": 3469800000,
+      "totalAssets": 23576200000,
+      "totalDebt": null,
+      "totalEquity": 7824400000,
+      "sharesDiluted": 709300000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T17:57:31.210Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T17:57:31.210Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T17:57:31.210Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T17:57:31.210Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

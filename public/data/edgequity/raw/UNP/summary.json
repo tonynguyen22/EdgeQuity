@@ -1,0 +1,96 @@
+{
+  "ticker": "UNP",
+  "name": "Union Pacific Corp",
+  "sector": "Road & Rail",
+  "industry": "Road & Rail",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 163350000000,
+  "enterpriseValue": 191144.77,
+  "valuation": {
+    "peTTM": 22.3525,
+    "forwardPE": 20.56651,
+    "psTTM": 6.5275,
+    "pb": 7.43,
+    "evRevenue": 0.000007798644226846185,
+    "evEbitda": null,
+    "pfcf": 29.70540098199673,
+    "fcfYield": 0.033663911845730025,
+    "earningsYield": 0.04369758187940006
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": 0.40171358629130965,
+    "netMargin": 0.2912280701754386,
+    "roe": 0.3865273190014621,
+    "roa": 0.10241326867341961,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 0.9085,
+    "quickRatio": 0.9085,
+    "debtToEquity": null,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 9290000000,
+    "freeCashFlow": 5499000000,
+    "fcfMargin": 0.2243574051407589,
+    "capexToRevenue": 0.15467156262749898,
+    "fcfConversion": 0.7703838610254974
+  },
+  "dividends": {
+    "dividendYield": 2.0063242830661867,
+    "payoutRatio": 45.33
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 24510000000,
+      "grossProfit": null,
+      "operatingIncome": 9846000000,
+      "netIncome": 7138000000,
+      "freeCashFlow": 5499000000,
+      "totalAssets": 69698000000,
+      "totalDebt": null,
+      "totalEquity": 18467000000,
+      "sharesDiluted": 595900000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T18:00:36.623Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T18:00:36.623Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T18:00:36.623Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T18:00:36.623Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

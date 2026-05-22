@@ -1,0 +1,96 @@
+{
+  "ticker": "SPGI",
+  "name": "S&P Global Inc",
+  "sector": "Financial Services",
+  "industry": "Financial Services",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 123540000000,
+  "enterpriseValue": 134210000000,
+  "valuation": {
+    "peTTM": 25.8301,
+    "forwardPE": 20.81643,
+    "psTTM": 7.8443,
+    "pb": 5.0837,
+    "evRevenue": 8.75130412102243,
+    "evEbitda": null,
+    "pfcf": 22.642961876832846,
+    "fcfYield": 0.04416383357616966,
+    "earningsYield": 0.03901570341589768
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": 0.42240479916536255,
+    "netMargin": 0.3142931664058425,
+    "roe": 0.1548494875831272,
+    "roa": 0.07875816993464052,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 0.8244,
+    "quickRatio": 0.7121,
+    "debtToEquity": 0.39740418286375173,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 5651000000,
+    "freeCashFlow": 5456000000,
+    "fcfMargin": 0.3557642149191445,
+    "capexToRevenue": 0.012715179968701095,
+    "fcfConversion": 1.1319502074688796
+  },
+  "dividends": {
+    "dividendYield": 0.930433322941896,
+    "payoutRatio": 26.17
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 15336000000,
+      "grossProfit": null,
+      "operatingIncome": 6478000000,
+      "netIncome": 4820000000,
+      "freeCashFlow": 5456000000,
+      "totalAssets": 61200000000,
+      "totalDebt": 12370000000,
+      "totalEquity": 31127000000,
+      "sharesDiluted": 305100000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T18:21:09.948Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T18:21:09.948Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T18:21:09.948Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T18:21:09.948Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

@@ -1,0 +1,96 @@
+{
+  "ticker": "IDXX",
+  "name": "IDEXX Laboratories Inc",
+  "sector": "Health Care",
+  "industry": "Health Care",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 43050000000,
+  "enterpriseValue": 43319767000,
+  "valuation": {
+    "peTTM": 39.6585,
+    "forwardPE": 37.56325,
+    "psTTM": 9.7693,
+    "pb": 33.6504,
+    "evRevenue": 10.065698554407344,
+    "evEbitda": null,
+    "pfcf": 40.7235067811024,
+    "fcfYield": 0.02455584204413473,
+    "earningsYield": 0.02461008130081301
+  },
+  "profitability": {
+    "grossMargin": 0.6179747110743262,
+    "operatingMargin": 0.316014212879981,
+    "netMargin": 0.24617503721214898,
+    "roe": 0.6599446985547996,
+    "roa": 0.3161862730205306,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 1.2307,
+    "quickRatio": 0.8515,
+    "debtToEquity": 0.2802054089273401,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 1181805000,
+    "freeCashFlow": 1057129000,
+    "fcfMargin": 0.24563248105932986,
+    "capexToRevenue": 0.028969477905301064,
+    "fcfConversion": 0.9977960553638444
+  },
+  "dividends": {
+    "dividendYield": null,
+    "payoutRatio": null
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 4303702000,
+      "grossProfit": 2659579000,
+      "operatingIncome": 1360031000,
+      "netIncome": 1059464000,
+      "freeCashFlow": 1057129000,
+      "totalAssets": 3350759000,
+      "totalDebt": 449837000,
+      "totalEquity": 1605383000,
+      "sharesDiluted": 81025000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T20:48:10.664Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T20:48:10.664Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T20:48:10.664Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T20:48:10.664Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

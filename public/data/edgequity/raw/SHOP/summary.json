@@ -1,0 +1,96 @@
+{
+  "ticker": "SHOP",
+  "name": "Shopify Inc",
+  "sector": "Technology",
+  "industry": "Technology",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 133210000000.00002,
+  "enterpriseValue": 134340.84,
+  "valuation": {
+    "peTTM": 102.2439,
+    "forwardPE": 64.5002,
+    "psTTM": 11.0132,
+    "pb": 15.5539,
+    "evRevenue": 0.000011625202492211837,
+    "evEbitda": null,
+    "pfcf": 66.37269556552069,
+    "fcfYield": 0.01506643645371969,
+    "earningsYield": 0.009241047969371669
+  },
+  "profitability": {
+    "grossMargin": 0.48070266528210454,
+    "operatingMargin": 0.12703357563170647,
+    "netMargin": 0.10652474904811353,
+    "roe": 0.09136792102723966,
+    "roa": 0.08104549344920667,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 5.9598,
+    "quickRatio": 5.9203,
+    "debtToEquity": null,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 2033000000,
+    "freeCashFlow": 2007000000,
+    "fcfMargin": 0.17367601246105918,
+    "capexToRevenue": 0.002249913464866736,
+    "fcfConversion": 1.6303818034118602
+  },
+  "dividends": {
+    "dividendYield": null,
+    "payoutRatio": null
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 11556000000,
+      "grossProfit": 5555000000,
+      "operatingIncome": 1468000000,
+      "netIncome": 1231000000,
+      "freeCashFlow": 2007000000,
+      "totalAssets": 15189000000,
+      "totalDebt": null,
+      "totalEquity": 13473000000,
+      "sharesDiluted": 1304953255
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T18:18:31.661Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T18:18:31.661Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T18:18:31.661Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T18:18:31.661Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

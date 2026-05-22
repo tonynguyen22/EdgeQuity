@@ -1,0 +1,96 @@
+{
+  "ticker": "SYM",
+  "name": "Symbotic Inc",
+  "sector": "Machinery",
+  "industry": "Machinery",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 28360000000,
+  "enterpriseValue": 28101.955,
+  "valuation": {
+    "peTTM": null,
+    "forwardPE": 70.56265,
+    "psTTM": 11.963,
+    "pb": 143.3557,
+    "evRevenue": 0.00001250686717206917,
+    "evEbitda": null,
+    "pfcf": 35.99400438375498,
+    "fcfYield": 0.0277824047954866,
+    "earningsYield": -0.0032098730606488013
+  },
+  "profitability": {
+    "grossMargin": 0.18808396553151377,
+    "operatingMargin": -0.05118379721236429,
+    "netMargin": -0.040514089941706924,
+    "roe": -0.41131765152405136,
+    "roa": -0.037911091842943334,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 1.093,
+    "quickRatio": 0.9448,
+    "debtToEquity": null,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 866939000,
+    "freeCashFlow": 787909000,
+    "fcfMargin": 0.3506614826860924,
+    "capexToRevenue": 0.03517256050721832,
+    "fcfConversion": -8.655297038404077
+  },
+  "dividends": {
+    "dividendYield": null,
+    "payoutRatio": null
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 2246922000,
+      "grossProfit": 422610000,
+      "operatingIncome": -115006000,
+      "netIncome": -91032000,
+      "freeCashFlow": 787909000,
+      "totalAssets": 2401197000,
+      "totalDebt": null,
+      "totalEquity": 221318000,
+      "sharesDiluted": 108670159
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T22:08:37.719Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T22:08:37.719Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T22:08:37.719Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T22:08:37.719Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

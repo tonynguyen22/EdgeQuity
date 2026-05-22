@@ -1,0 +1,96 @@
+{
+  "ticker": "BKNG",
+  "name": "Booking Holdings Inc",
+  "sector": "Hotels, Restaurants & Leisure",
+  "industry": "Hotels, Restaurants & Leisure",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 120160000000,
+  "enterpriseValue": 121693000000,
+  "valuation": {
+    "peTTM": 19.7623,
+    "forwardPE": 15.23679,
+    "psTTM": 4.3926,
+    "pb": 28.099,
+    "evRevenue": 4.521046178994688,
+    "evEbitda": null,
+    "pfcf": 13.223286012985584,
+    "fcfYield": 0.07562416777629827,
+    "earningsYield": 0.044973368841544605
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": 0.3278597169075306,
+    "netMargin": 0.20076531559980682,
+    "roe": -0.9688060236643958,
+    "roa": 0.18466375068343358,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 1.3333,
+    "quickRatio": 1.2967,
+    "debtToEquity": -3.3589100035855144,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 9409000000,
+    "freeCashFlow": 9087000000,
+    "fcfMargin": 0.33759334249730655,
+    "capexToRevenue": 0.011962700152320095,
+    "fcfConversion": 1.6815321983715765
+  },
+  "dividends": {
+    "dividendYield": 1.070404587448232,
+    "payoutRatio": 23.09
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 26917000000,
+      "grossProfit": null,
+      "operatingIncome": 8825000000,
+      "netIncome": 5404000000,
+      "freeCashFlow": 9087000000,
+      "totalAssets": 29264000000,
+      "totalDebt": 18736000000,
+      "totalEquity": -5578000000,
+      "sharesDiluted": 32639000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T18:28:25.035Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T18:28:25.035Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T18:28:25.035Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T18:28:25.035Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

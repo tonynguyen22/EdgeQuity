@@ -1,0 +1,96 @@
+{
+  "ticker": "XYZ",
+  "name": "Block Inc",
+  "sector": "Financial Services",
+  "industry": "Financial Services",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 42040000000,
+  "enterpriseValue": 42764926000,
+  "valuation": {
+    "peTTM": 51.0092,
+    "forwardPE": 17.120472089331944,
+    "psTTM": 1.6818,
+    "pb": 1.7813,
+    "evRevenue": 1.7676071063673935,
+    "evEbitda": null,
+    "pfcf": 17.33839902733396,
+    "fcfYield": 0.05767545195052331,
+    "earningsYield": 0.031023073263558517
+  },
+  "profitability": {
+    "grossMargin": 0.428208016117265,
+    "operatingMargin": 0.07061372177191873,
+    "netMargin": 0.053907046727858676,
+    "roe": 0.058736879442781255,
+    "roa": 0.03297632683501725,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 2.2011,
+    "quickRatio": 2.158,
+    "debtToEquity": 0.32827088545729793,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 2579714000,
+    "freeCashFlow": 2424676000,
+    "fcfMargin": 0.10021938371268235,
+    "capexToRevenue": 0.006408201678099196,
+    "fcfConversion": 1.8591147131213532
+  },
+  "dividends": {
+    "dividendYield": null,
+    "payoutRatio": null
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 24193683000,
+      "grossProfit": 10359929000,
+      "operatingIncome": 1708406000,
+      "netIncome": 1304210000,
+      "freeCashFlow": 2424676000,
+      "totalAssets": 39549887000,
+      "totalDebt": 7289018000,
+      "totalEquity": 22204278000,
+      "sharesDiluted": 622838000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T20:54:06.499Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T20:54:06.499Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T20:54:06.499Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T20:54:06.499Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

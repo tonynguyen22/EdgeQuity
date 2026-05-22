@@ -1,0 +1,96 @@
+{
+  "ticker": "ADV",
+  "name": "Advantage Solutions Inc",
+  "sector": "Media",
+  "industry": "Media",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 477167606.99999994,
+  "enterpriseValue": 1910178607,
+  "valuation": {
+    "peTTM": null,
+    "forwardPE": 5.51755,
+    "psTTM": 0.1329,
+    "pb": 0.5183,
+    "evRevenue": 0.5391960596074907,
+    "evEbitda": null,
+    "pfcf": 8.667107565162109,
+    "fcfYield": 0.1153787457328385,
+    "earningsYield": -0.47726416600613886
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": -0.0356982161900638,
+    "netMargin": -0.06428394401692296,
+    "roe": -0.411105174038465,
+    "roa": -0.0815256594526771,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 2.2481,
+    "quickRatio": 2.0543,
+    "debtToEquity": 3.0216388246040315,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 61532000,
+    "freeCashFlow": 55055000,
+    "fcfMargin": 0.015540661461135502,
+    "capexToRevenue": 0.0018282965086508882,
+    "fcfConversion": -0.24175027993062112
+  },
+  "dividends": {
+    "dividendYield": null,
+    "payoutRatio": null
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 3542642000,
+      "grossProfit": null,
+      "operatingIncome": -126466000,
+      "netIncome": -227735000,
+      "freeCashFlow": 55055000,
+      "totalAssets": 2793415000,
+      "totalDebt": 1673861000,
+      "totalEquity": 553958000,
+      "sharesDiluted": 324564046
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T17:13:12.168Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T17:13:12.168Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T17:13:12.168Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T17:13:12.168Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items"
+    }
+  }
+}

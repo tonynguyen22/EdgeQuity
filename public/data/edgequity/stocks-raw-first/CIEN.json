@@ -1,0 +1,96 @@
+{
+  "ticker": "CIEN",
+  "name": "Ciena Corp",
+  "sector": "Communications",
+  "industry": "Communications",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 74170000000,
+  "enterpriseValue": 74613786000,
+  "valuation": {
+    "peTTM": 351.2629,
+    "forwardPE": 94.90411621843494,
+    "psTTM": 15.701,
+    "pb": 9.794,
+    "evRevenue": 15.643920011020008,
+    "evEbitda": null,
+    "pfcf": 111.48488182632589,
+    "fcfYield": 0.008969826075232574,
+    "earningsYield": 0.0016629095321558582
+  },
+  "profitability": {
+    "grossMargin": 0.42036147551518427,
+    "operatingMargin": 0.04141539156982053,
+    "netMargin": 0.025859695771491685,
+    "roe": 0.04518996102696529,
+    "roa": 0.021030691086126457,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 2.7251,
+    "quickRatio": 2.0133,
+    "debtToEquity": 0.5626809285672674,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 806093000,
+    "freeCashFlow": 665292000,
+    "fcfMargin": 0.13948863058592847,
+    "capexToRevenue": 0.029521080480645064,
+    "fcfConversion": 5.394055360067457
+  },
+  "dividends": {
+    "dividendYield": null,
+    "payoutRatio": null
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 4769507000,
+      "grossProfit": 2004917000,
+      "operatingIncome": 197531000,
+      "netIncome": 123338000,
+      "freeCashFlow": 665292000,
+      "totalAssets": 5864667000,
+      "totalDebt": 1535738000,
+      "totalEquity": 2729323000,
+      "sharesDiluted": 145248000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T19:25:52.754Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T19:25:52.754Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T19:25:52.754Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T19:25:52.754Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

@@ -1,0 +1,96 @@
+{
+  "ticker": "AEBI",
+  "name": "Aebi Schmidt Holding AG",
+  "sector": "Machinery",
+  "industry": "Machinery",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 950225127,
+  "enterpriseValue": 945529127,
+  "valuation": {
+    "peTTM": 113.6769,
+    "forwardPE": 13.12616,
+    "psTTM": 0.5483,
+    "pb": 1.2006,
+    "evRevenue": 0.6193591268320642,
+    "evEbitda": null,
+    "pfcf": -181.58324613032678,
+    "fcfYield": -0.005507115999469882,
+    "earningsYield": 0.010214421534655967
+  },
+  "profitability": {
+    "grossMargin": 0.1991674445263244,
+    "operatingMargin": 0.047861131581102105,
+    "netMargin": 0.006357815442561205,
+    "roe": 0.011910649269052314,
+    "roa": 0.004832993822073526,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 1.9029,
+    "quickRatio": 1.0658,
+    "debtToEquity": 0.11512564102878754,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 8972000,
+    "freeCashFlow": -5233000,
+    "fcfMargin": -0.003427822811757963,
+    "capexToRevenue": 0.009304839105870794,
+    "fcfConversion": -0.5391510405934473
+  },
+  "dividends": {
+    "dividendYield": 0.8156606851549756,
+    "payoutRatio": null
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 1526625000,
+      "grossProfit": 304054000,
+      "operatingIncome": 73066000,
+      "netIncome": 9706000,
+      "freeCashFlow": -5233000,
+      "totalAssets": 2008279000,
+      "totalDebt": 93816000,
+      "totalEquity": 814901000,
+      "sharesDiluted": 58784000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T17:15:10.433Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T17:15:10.433Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T17:15:10.433Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T17:15:10.433Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items"
+    }
+  }
+}

@@ -1,0 +1,96 @@
+{
+  "ticker": "ADPT",
+  "name": "Adaptive Biotechnologies Corp",
+  "sector": "Life Sciences Tools & Services",
+  "industry": "Life Sciences Tools & Services",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 2234219660,
+  "enterpriseValue": 2294932660,
+  "valuation": {
+    "peTTM": null,
+    "forwardPE": null,
+    "psTTM": 7.5632,
+    "pb": 11.3316,
+    "evRevenue": 8.28567334353879,
+    "evEbitda": null,
+    "pfcf": -45.64755664521402,
+    "fcfYield": -0.021906977579814153,
+    "earningsYield": -0.0266119760131374
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": -0.2062380856103056,
+    "netMargin": -0.21466480850326383,
+    "roe": -0.2717500102836928,
+    "roa": -0.11596026025088935,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 3.3385,
+    "quickRatio": 3.1012,
+    "debtToEquity": 0.5996901180567934,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": -45986000,
+    "freeCashFlow": -48945000,
+    "fcfMargin": -0.17671206169487608,
+    "capexToRevenue": 0.010683236092657847,
+    "fcfConversion": 0.823199959634694
+  },
+  "dividends": {
+    "dividendYield": null,
+    "payoutRatio": null
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 276976000,
+      "grossProfit": null,
+      "operatingIncome": -57123000,
+      "netIncome": -59457000,
+      "freeCashFlow": -48945000,
+      "totalAssets": 512736000,
+      "totalDebt": 131208000,
+      "totalEquity": 218793000,
+      "sharesDiluted": 151721939
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T17:07:55.654Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T17:07:55.654Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T17:07:55.654Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T17:07:55.654Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items"
+    }
+  }
+}

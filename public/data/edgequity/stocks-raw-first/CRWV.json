@@ -1,0 +1,96 @@
+{
+  "ticker": "CRWV",
+  "name": "CoreWeave Inc",
+  "sector": "Technology",
+  "industry": "Technology",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 56610000000,
+  "enterpriseValue": 74856000000,
+  "valuation": {
+    "peTTM": null,
+    "forwardPE": null,
+    "psTTM": 8.873,
+    "pb": 10.7,
+    "evRevenue": 14.588969011888521,
+    "evEbitda": null,
+    "pfcf": -7.807199007033512,
+    "fcfYield": -0.12808691043985163,
+    "earningsYield": -0.020614732379438262
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": -0.00896511401286299,
+    "netMargin": -0.22744104463067627,
+    "roe": -0.34992503748125936,
+    "roa": -0.023670439333089936,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 0.4555,
+    "quickRatio": 0.4474,
+    "debtToEquity": 6.408695652173913,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 3058000000,
+    "freeCashFlow": -7251000000,
+    "fcfMargin": -1.4131748197232508,
+    "capexToRevenue": 2.009160007795751,
+    "fcfConversion": 6.213367609254499
+  },
+  "dividends": {
+    "dividendYield": null,
+    "payoutRatio": null
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 5131000000,
+      "grossProfit": null,
+      "operatingIncome": -46000000,
+      "netIncome": -1167000000,
+      "freeCashFlow": -7251000000,
+      "totalAssets": 49302000000,
+      "totalDebt": 21373000000,
+      "totalEquity": 3335000000,
+      "sharesDiluted": 436000000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T20:12:34.017Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T20:12:34.017Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T20:12:34.017Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T20:12:34.017Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

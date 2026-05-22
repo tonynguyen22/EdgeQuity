@@ -1,0 +1,96 @@
+{
+  "ticker": "AAOI",
+  "name": "Applied Optoelectronics Inc",
+  "sector": "Communications",
+  "industry": "Communications",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 13260919288.999998,
+  "enterpriseValue": 13122729288.999998,
+  "valuation": {
+    "peTTM": null,
+    "forwardPE": 103.37409,
+    "psTTM": 27.3094,
+    "pb": 3.2432,
+    "evRevenue": 28.79591255280164,
+    "evEbitda": null,
+    "pfcf": -37.50514539731203,
+    "fcfYield": -0.02666300821944472,
+    "earningsYield": -0.0028827564037517614
+  },
+  "profitability": {
+    "grossMargin": 0.300435579254578,
+    "operatingMargin": -0.1198161131408885,
+    "netMargin": -0.08388576193454242,
+    "roe": -0.05208756291574808,
+    "roa": -0.03271760312831911,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 2.6264,
+    "quickRatio": 1.7896,
+    "debtToEquity": 0.09258527519423151,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": -174428000,
+    "freeCashFlow": -353576000,
+    "fcfMargin": -0.775870884214915,
+    "capexToRevenue": 0.39311411737599156,
+    "fcfConversion": 9.249136758396986
+  },
+  "dividends": {
+    "dividendYield": null,
+    "payoutRatio": null
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 455715000,
+      "grossProfit": 136913000,
+      "operatingIncome": -54602000,
+      "netIncome": -38228000,
+      "freeCashFlow": -353576000,
+      "totalAssets": 1168423000,
+      "totalDebt": 67950000,
+      "totalEquity": 733918000,
+      "sharesDiluted": 60184000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T15:49:36.991Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T15:49:36.991Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T15:49:36.991Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T15:49:36.991Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items"
+    }
+  }
+}

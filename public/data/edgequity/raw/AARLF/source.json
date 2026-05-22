@@ -1,0 +1,14 @@
+{
+  "ticker": "AARLF",
+  "provider": "finnhub",
+  "fetchedAt": "2026-05-21T15:54:52.723Z",
+  "endpoints": {
+    "profile": "stock/profile2",
+    "metrics": "stock/metric?metric=all",
+    "financialsReportedAnnual": "stock/financials-reported?freq=annual"
+  },
+  "status": "partial",
+  "warnings": [
+    "No annual as-reported filings returned by Finnhub"
+  ]
+}

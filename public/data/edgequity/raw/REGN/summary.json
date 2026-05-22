@@ -1,0 +1,96 @@
+{
+  "ticker": "REGN",
+  "name": "Regeneron Pharmaceuticals Inc",
+  "sector": "Biotechnology",
+  "industry": "Biotechnology",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 64060000000,
+  "enterpriseValue": 62927800000,
+  "valuation": {
+    "peTTM": 15.2658,
+    "forwardPE": 14.33346,
+    "psTTM": 4.526,
+    "pb": 2.5954,
+    "evRevenue": 4.38738330463156,
+    "evEbitda": null,
+    "pfcf": 15.699056488175469,
+    "fcfYield": 0.06369809553543553,
+    "earningsYield": 0.07032313456134874
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": 0.24945443390109392,
+    "netMargin": 0.31408571488332204,
+    "roe": 0.14412497720503312,
+    "roa": 0.11107111421224053,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 4.1255,
+    "quickRatio": 3.4519,
+    "debtToEquity": 0.06353477152244784,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 4978900000,
+    "freeCashFlow": 4080500000,
+    "fcfMargin": 0.2844961618640582,
+    "capexToRevenue": 0.06263726303606662,
+    "fcfConversion": 0.9057914715088016
+  },
+  "dividends": {
+    "dividendYield": 0.578675203151933,
+    "payoutRatio": 8.22
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 14342900000,
+      "grossProfit": null,
+      "operatingIncome": 3577900000,
+      "netIncome": 4504900000,
+      "freeCashFlow": 4080500000,
+      "totalAssets": 40558700000,
+      "totalDebt": 1985900000,
+      "totalEquity": 31256900000,
+      "sharesDiluted": 108600000
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T19:52:20.886Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T19:52:20.886Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T19:52:20.886Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T19:52:20.886Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

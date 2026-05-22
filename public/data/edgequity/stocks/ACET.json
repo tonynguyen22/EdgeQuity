@@ -1,0 +1,97 @@
+{
+  "ticker": "ACET",
+  "name": "Adicet Bio Inc",
+  "sector": "Biotechnology",
+  "industry": "Biotechnology",
+  "currency": "USD",
+  "price": null,
+  "marketCap": 72542314.00000001,
+  "enterpriseValue": 34.6153,
+  "valuation": {
+    "peTTM": null,
+    "forwardPE": null,
+    "psTTM": 1.8745,
+    "pb": 0.5066,
+    "evRevenue": null,
+    "evEbitda": null,
+    "pfcf": -0.7479822857378539,
+    "fcfYield": -1.336930057125004,
+    "earningsYield": -1.6101361200030093
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": null,
+    "netMargin": null,
+    "roe": -0.7336411029457949,
+    "roa": -0.6072262223493021,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 7.4742,
+    "quickRatio": 7.3788,
+    "debtToEquity": null,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": -95246000,
+    "freeCashFlow": -96984000,
+    "fcfMargin": null,
+    "capexToRevenue": null,
+    "fcfConversion": 0.8303211390118405
+  },
+  "dividends": {
+    "dividendYield": null,
+    "payoutRatio": null
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": null,
+      "grossProfit": null,
+      "operatingIncome": -122114000,
+      "netIncome": -116803000,
+      "freeCashFlow": -96984000,
+      "totalAssets": 192355000,
+      "totalDebt": null,
+      "totalEquity": 159210000,
+      "sharesDiluted": 6891336
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items",
+    "Revenue unavailable from mapped line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T16:50:57.756Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T16:50:57.756Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T16:50:57.756Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T16:50:57.756Z",
+      "status": "partial",
+      "message": "Thin summary mapped from Finnhub as-reported line items"
+    }
+  }
+}

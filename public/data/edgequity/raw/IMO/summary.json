@@ -1,0 +1,96 @@
+{
+  "ticker": "IMO",
+  "name": "Imperial Oil Ltd",
+  "sector": "Energy",
+  "industry": "Energy",
+  "currency": "CAD",
+  "price": null,
+  "marketCap": 65099999999.99999,
+  "enterpriseValue": 67936000000,
+  "valuation": {
+    "peTTM": 30.4481,
+    "forwardPE": 15.65361,
+    "psTTM": 1.897,
+    "pb": 1.9381,
+    "evRevenue": 1.4430519563277964,
+    "evEbitda": null,
+    "pfcf": 13.842228364873483,
+    "fcfYield": 0.07224270353302613,
+    "earningsYield": 0.050199692780337944
+  },
+  "profitability": {
+    "grossMargin": null,
+    "operatingMargin": null,
+    "netMargin": 0.069416712689579,
+    "roe": 0.1468500044935742,
+    "roa": 0.07724124890685197,
+    "roic": null
+  },
+  "growth": {
+    "revenueCagr3y": null,
+    "revenueCagr5y": null,
+    "epsCagr3y": null,
+    "fcfCagr3y": null
+  },
+  "financialHealth": {
+    "currentRatio": 1.335,
+    "quickRatio": 1.1006,
+    "debtToEquity": 0.1787543812348342,
+    "netDebtToEbitda": null,
+    "interestCoverage": null
+  },
+  "cashFlow": {
+    "operatingCashFlow": 6708000000,
+    "freeCashFlow": 4703000000,
+    "fcfMargin": 0.09989804154806917,
+    "capexToRevenue": 0.0425888950252772,
+    "fcfConversion": 1.4391064871481027
+  },
+  "dividends": {
+    "dividendYield": 1.8928474299700844,
+    "payoutRatio": 42.87
+  },
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 47078000000,
+      "grossProfit": null,
+      "operatingIncome": null,
+      "netIncome": 3268000000,
+      "freeCashFlow": 4703000000,
+      "totalAssets": 42309000000,
+      "totalDebt": 3978000000,
+      "totalEquity": 22254000000,
+      "sharesDiluted": null
+    }
+  ],
+  "warnings": [
+    "Thin summary mapped from Finnhub as-reported line items"
+  ],
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-21T19:51:01.789Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-21T19:51:01.789Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "finnhub",
+      "endpoint": "stock/financials-reported",
+      "fetchedAt": "2026-05-21T19:51:01.789Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-21T19:51:01.789Z",
+      "status": "ok",
+      "message": "Thin summary mapped from Finnhub as-reported line items; market cap sourced from USD market-cap ranked universe"
+    }
+  }
+}

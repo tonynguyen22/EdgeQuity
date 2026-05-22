@@ -1,6 +1,6 @@
 import type { EdgequityHistoryYear, EdgequityManifest, EdgequityManifestStock, EdgequityStockRecord } from './types.ts';
 
-const EDGEQUITY_MANIFEST_PATH = '/data/edgequity/manifest.json';
+const EDGEQUITY_MANIFEST_PATH = '/data/edgequity/manifest.raw-first.json';
 const INVALID_MANIFEST_ERROR = 'Invalid Edgequity manifest';
 const INVALID_STOCK_ERROR = 'Invalid Edgequity stock record';
 
