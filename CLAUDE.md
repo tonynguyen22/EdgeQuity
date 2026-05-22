@@ -14,9 +14,9 @@ Edgequity is a static-data fundamental stock screener for value investors. It us
 
 ## Deploy
 
-- **Cloudflare Pages:** `npm run build`, output `dist`, `NODE_VERSION=22`. Do not commit `wrangler.toml` (can cause HTTP 500).
-- **GitHub Pages:** workflow `deploy-github-pages.yml`, `npm run build:full`, URL `https://tonynguyen22.github.io/EdgeQuity/`.
-- See `docs/deploy-cloudflare-pages.md`.
+- **Vercel (preferred):** `npm run build` (full data), output `dist`. See `docs/deploy-vercel.md`.
+- **GitHub Pages:** workflow `deploy-github-pages.yml`, `npm run build`, URL `https://tonynguyen22.github.io/EdgeQuity/`.
+- **Cloudflare Pages:** `npm run build:cf` (slim only); no `wrangler.toml`. See `docs/deploy-cloudflare-pages.md`.
 
 ## Commands
 

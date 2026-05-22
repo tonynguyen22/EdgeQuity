@@ -34,7 +34,7 @@ jobs:
         run: npm ci
 
       - name: Build (full static data)
-        run: npm run build:full
+        run: npm run build
         env:
           GITHUB_PAGES: "true"
 

@@ -18,7 +18,7 @@ Edgequity là static site: build ra thư mục `dist/` (gồm cả `data/edgequi
 
 1. **Xóa / không dùng `wrangler.toml`** trong repo — file BETA có thể làm edge serve lỗi 500 dù build OK.
 2. Trong Pages → **Deployments** → thử **Rollback** deployment cũ, hoặc tạo **project Pages mới** (tên khác, vd. `edgequity-app`).
-3. Build command: `npm run build` (slim ~617 files). Output: `dist`.
+3. Build command: `npm run build:cf` (slim ~617 files). Output: `dist`.
 4. **Dự phòng:** bật **GitHub Pages** (workflow `deploy-github-pages.yml`) → URL: `https://tonynguyen22.github.io/EdgeQuity/` (full data).
 
 ---
@@ -40,7 +40,7 @@ Repo phải có **`public/data/edgequity/`** (JSON ~500 mã). Cloudflare build `
    |-------|--------|
    | Production branch | `main` (hoặc nhánh chính của anh) |
    | Framework preset | **Vite** (hoặc None) |
-   | Build command | `npm run build:cf` |
+   | Build command | `npm run build:cf` (not `npm run build`) |
    | Build output directory | `dist` |
    | Root directory | `/` (để trống nếu app ở root) |
 
