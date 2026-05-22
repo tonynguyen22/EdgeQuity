@@ -29,7 +29,7 @@ function toSerializableInit(init?: RequestInit): SerializableInit {
 }
 
 export function proxyFetch(url: string, init?: RequestInit): Promise<Response> {
-  return fetch('/.netlify/functions/http-proxy', {
+  return fetch('/api/http-proxy', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({

@@ -1,6 +1,6 @@
 # Deploy Edgequity lên Cloudflare Pages (free)
 
-Edgequity là static site: build ra thư mục `dist/` (gồm cả `data/edgequity/` từ `public/`). Không cần Netlify Functions.
+Edgequity là static site: build ra thư mục `dist/` (gồm cả `data/edgequity/` từ `public/`). Với Cloudflare Pages, các API proxy serverless của Vercel không chạy; chỉ dùng static data đã generate sẵn.
 
 ## URL sẽ trông như thế nào?
 
@@ -92,7 +92,8 @@ Deploy log **Success** nhưng `edgequity.pages.dev` báo **HTTP ERROR 500** thư
 
 ---
 
-## So với Netlify
+## So với Vercel
 
-- Không dùng credits kiểu Netlify commercial.
-- Redirect SEC trong `netlify.toml` **không cần** cho Edgequity runtime (data đã generate sẵn).
+- Vercel là deployment chính của project.
+- Cloudflare Pages chỉ nên dùng như static fallback nếu không cần `/api/http-proxy`.
+- SEC rewrites trong `vercel.json` không áp dụng trên Cloudflare Pages; runtime Edgequity vẫn dùng static data đã generate sẵn.

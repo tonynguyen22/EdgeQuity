@@ -19,14 +19,16 @@ export default function MetricTrendChart({
   xAxisLabel = 'Reporting period',
   yAxisLabel = 'Value',
 }: MetricTrendChartProps) {
-  const layout = useMemo(() => buildChartLayout(points), [points]);
+  const chartPoints = useMemo(() => normalizeChartPoints(points), [points]);
+  const periodLabel = cadence === 'Annual' ? '5Y' : '5Q';
+  const layout = useMemo(() => buildChartLayout(chartPoints), [chartPoints]);
 
-  if (points.length === 0) {
+  if (chartPoints.length === 0) {
     return (
       <article className="eq-fundamentals-chart">
         <header className="eq-fundamentals-chart-head">
           <h5>{title}</h5>
-          <span>{cadence}</span>
+          <span>{periodLabel}</span>
         </header>
         <p className="eq-fundamentals-chart-empty">No data</p>
       </article>
@@ -37,7 +39,7 @@ export default function MetricTrendChart({
     <article className="eq-fundamentals-chart">
       <header className="eq-fundamentals-chart-head">
         <h5>{title}</h5>
-        <span>{cadence}</span>
+        <span>{periodLabel}</span>
       </header>
       <div className="eq-fundamentals-chart-axis-strip">
         <span>Y: {yAxisLabel}</span>
@@ -73,8 +75,7 @@ export default function MetricTrendChart({
             key={label.period}
             x={label.x}
             y={layout.xLabelY}
-            textAnchor="end"
-            transform={`rotate(-38 ${label.x} ${layout.xLabelY})`}
+            textAnchor="middle"
           >
             {formatPeriodLabel(label.period)}
           </text>
@@ -106,14 +107,38 @@ function formatPeriodLabel(period: string): string {
   return period.length > 6 ? period.slice(0, 6) : period;
 }
 
+function normalizeChartPoints(points: FundamentalsChartPoint[]) {
+  return points
+    .filter((point) => Number.isFinite(point.value))
+    .slice()
+    .sort((left, right) => comparePeriods(left.period, right.period))
+    .slice(-5);
+}
+
+function comparePeriods(left: string, right: string) {
+  const leftRank = periodRank(left);
+  const rightRank = periodRank(right);
+  return leftRank - rightRank;
+}
+
+function periodRank(period: string) {
+  const quarter = period.match(/^(\d{4})-Q([1-4])$/);
+  if (quarter) return Number(quarter[1]) * 4 + Number(quarter[2]);
+
+  const year = period.match(/^(\d{4})$/);
+  if (year) return Number(year[1]) * 4;
+
+  return Number.MAX_SAFE_INTEGER;
+}
+
 function buildChartLayout(points: FundamentalsChartPoint[]) {
   const width = 360;
-  const height = 132;
+  const height = 140;
   const left = 52;
   const right = width - 12;
   const top = 12;
-  const bottom = 78;
-  const xLabelY = height - 6;
+  const bottom = 86;
+  const xLabelY = height - 14;
   const yAxisX = left - 6;
   const values = points.map((point) => point.value);
   const max = Math.max(...values);

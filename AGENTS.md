@@ -13,7 +13,7 @@ Professional equity research and stock analysis platform. Features DCF valuation
 - CSS: Tailwind CSS v4 + custom design system (`--vw-*` tokens)
 - Animation: motion library
 - Charts: Recharts
-- Deployment: Netlify (with serverless functions for API proxying)
+- Deployment: Vercel (Vite static build plus `/api/http-proxy` serverless API proxy)
 
 ## Directory Structure
 ```
@@ -36,10 +36,10 @@ ValuWise/
 │   ├── dividend-analysis/        # Dividend history & sustainability
 │   ├── market-cycle/             # Wyckoff market cycle detection (SPY)
 │   └── utils/                    # Shared utilities
-├── netlify/
-│   └── functions/                # Netlify serverless functions (API proxy)
+├── api/
+│   └── http-proxy.js             # Vercel serverless API proxy
 ├── vite.config.ts                # Vite config with proxies for SEC EDGAR
-├── netlify.toml                  # Netlify deploy config + CORS redirects
+├── vercel.json                   # Vercel deploy config, headers, and SEC rewrites
 ├── tsconfig.json                 # TypeScript config (ES2022, bundler resolution)
 └── package.json                  # Dependencies and scripts
 ```
@@ -49,7 +49,7 @@ ValuWise/
 - Import style: named imports (`import { useState } from 'react'`), type imports with `import type`
 - Error handling: try/catch around localStorage JSON.parse, graceful fallbacks on API failure
 - State management: React useState/useMemo/useCallback (no external state library)
-- API pattern: REST calls to FMP, Finnhub, API Ninjas, Massive API, TAAPI.io, Gemini; proxied via Vite dev server + Netlify redirects
+- API pattern: REST calls to FMP, Finnhub, API Ninjas, Massive API, TAAPI.io, Gemini; proxied via Vite dev server + Vercel rewrites/API routes
 - Test structure: none — no test files or test framework configured
 - Module structure: each tab is a self-contained directory with `index.tsx`, `types.ts`, `calculations.ts`, `hooks/`, `components/`, `utils/`
 - Design system: CSS custom properties (`--vw-*`) in `src/index.css`, utility classes (`.vw-card`, `.vw-glow`, `.vw-stat-up/.vw-stat-down`)
@@ -58,7 +58,7 @@ ValuWise/
 
 ## Commands
 - Install: `npm install`
-- Dev: `netlify dev` (full stack with API proxy, port 8888) or `npm run dev` (Vite only, port 3000)
+- Dev: `npm run dev` (Vite, port 3000)
 - Build: `npm run build` (vite build)
 - Test: none configured
 - Lint: `npm run lint` (tsc --noEmit)
@@ -67,7 +67,7 @@ ValuWise/
 - Entry point: `src/main.tsx`
 - App shell: `src/dcf/index.tsx` (contains Sidebar, routing, and main layout)
 - Design system: `src/index.css`
-- Config: `vite.config.ts`, `tsconfig.json`, `netlify.toml`, `package.json`
+- Config: `vite.config.ts`, `tsconfig.json`, `vercel.json`, `package.json`
 - Shared components: `src/components/TickerSearch.tsx`, `src/components/TabLanding.tsx`
 - Supported tickers: `src/dcf/types.ts` (SUPPORTED_TICKERS constant)
 - Project docs: `PROJECT.md` (detailed feature/API docs)

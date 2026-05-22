@@ -7,6 +7,7 @@ import ErrorState from './ErrorState.tsx';
 import EdgequityLogo from './EdgequityLogo.tsx';
 import LoadingState from './LoadingState.tsx';
 import MetricCell from './MetricCell.tsx';
+import MetricTrendChart from './MetricTrendChart.tsx';
 import ScreenerTable, { getScreenerSectors, getVisibleScreenerStocks } from './ScreenerTable.tsx';
 import ScreenerToolbar from './ScreenerToolbar.tsx';
 import StockDetail from './StockDetail.tsx';
@@ -408,6 +409,55 @@ test('StockDetail renders the analyst sheet layout sections', () => {
   assert.match(html, /eq-metric-panel/);
   assert.match(html, /Investment notes/);
   assert.match(html, /Historical fundamentals/);
+});
+
+test('MetricTrendChart normalizes annual charts to the latest five years in chronological order', () => {
+  const html = renderToStaticMarkup(
+    <MetricTrendChart
+      title="Revenue"
+      cadence="Annual"
+      format="money"
+      points={[
+        { period: '2026', value: 600 },
+        { period: '2025', value: 500 },
+        { period: '2024', value: 400 },
+        { period: '2023', value: 300 },
+        { period: '2022', value: 200 },
+        { period: '2021', value: 100 },
+      ]}
+    />,
+  );
+
+  assert.match(html, /5Y/);
+  assert.doesNotMatch(html, />2021</);
+  assert.match(html, />2022</);
+  assert.match(html, />2026</);
+  assert.ok(html.indexOf('>2022<') < html.indexOf('>2026<'));
+});
+
+test('MetricTrendChart normalizes quarterly charts to the latest five quarters', () => {
+  const html = renderToStaticMarkup(
+    <MetricTrendChart
+      title="Revenue"
+      cadence="Quarterly"
+      format="money"
+      points={[
+        { period: '2027-Q1', value: 600 },
+        { period: '2026-Q4', value: 500 },
+        { period: '2026-Q3', value: 400 },
+        { period: '2026-Q2', value: 300 },
+        { period: '2026-Q1', value: 200 },
+        { period: '2025-Q4', value: 100 },
+      ]}
+    />,
+  );
+
+  assert.match(html, /5Q/);
+  assert.doesNotMatch(html, /25 Q4/);
+  assert.match(html, /26 Q1/);
+  assert.match(html, /27 Q1/);
+  assert.ok(html.indexOf('26 Q1') < html.indexOf('27 Q1'));
+  assert.doesNotMatch(html, /rotate\(/);
 });
 
 test('MetricCell renders text values left-aligned without mono numeric styling', () => {

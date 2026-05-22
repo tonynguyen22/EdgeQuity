@@ -34,7 +34,7 @@ type RawFirstUniverseStock = EdgequityUniverseStock & {
 function requiredEnv(name: string): string {
   const value = process.env[name];
   if (!value) {
-    throw new Error(`${name} is required. Set it locally or in Netlify/GitHub secrets.`);
+    throw new Error(`${name} is required. Set it locally or in Vercel/GitHub secrets.`);
   }
 
   return value;

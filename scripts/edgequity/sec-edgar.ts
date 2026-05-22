@@ -121,7 +121,7 @@ export function classifySecConcept(concept: string, label: string | null | undef
   return null;
 }
 
-interface GaapFactSeries {
+export interface GaapFactSeries {
   label?: string | null;
   units: Record<string, Array<{ end: string; val: number; fy?: number; fp?: string; form?: string }>>;
 }
