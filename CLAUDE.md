@@ -12,10 +12,10 @@ Edgequity is a static-data fundamental stock screener for value investors. It us
 - `public/data/edgequity` contains generated JSON consumed by the app.
 - `.github/workflows/edgequity-data.yml` refreshes static data on demand or weekly.
 
-## Deploy (Cloudflare Pages, free)
+## Deploy
 
-- Git connect: build `npm run build:cf`, output `dist`, `NODE_VERSION=22` (slim data; avoids Pages HTTP 500).
-- Production URL: `https://<project-name>.pages.dev` (e.g. `edgequity.pages.dev`).
+- **Cloudflare Pages:** `npm run build`, output `dist`, `NODE_VERSION=22`. Do not commit `wrangler.toml` (can cause HTTP 500).
+- **GitHub Pages:** workflow `deploy-github-pages.yml`, `npm run build:full`, URL `https://tonynguyen22.github.io/EdgeQuity/`.
 - See `docs/deploy-cloudflare-pages.md`.
 
 ## Commands

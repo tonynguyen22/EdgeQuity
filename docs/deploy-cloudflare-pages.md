@@ -14,6 +14,15 @@ Edgequity là static site: build ra thư mục `dist/` (gồm cả `data/edgequi
 
 ---
 
+## Nếu Cloudflare vẫn HTTP 500 (sau deploy Success)
+
+1. **Xóa / không dùng `wrangler.toml`** trong repo — file BETA có thể làm edge serve lỗi 500 dù build OK.
+2. Trong Pages → **Deployments** → thử **Rollback** deployment cũ, hoặc tạo **project Pages mới** (tên khác, vd. `edgequity-app`).
+3. Build command: `npm run build` (slim ~617 files). Output: `dist`.
+4. **Dự phòng:** bật **GitHub Pages** (workflow `deploy-github-pages.yml`) → URL: `https://tonynguyen22.github.io/EdgeQuity/` (full data).
+
+---
+
 ## Cách 1 — Connect GitHub (khuyên dùng, ~5 phút)
 
 ### 1. Đẩy code lên GitHub
@@ -51,16 +60,13 @@ Mỗi lần push lên nhánh production → tự deploy lại.
 
 ---
 
-## Cách 2 — Deploy bằng Wrangler CLI (không bắt buộc)
+## GitHub Pages (full data, khuyên dùng nếu Cloudflare 500)
 
-Cần [Wrangler](https://developers.cloudflare.com/workers/wrangler/) và API token (Account → API Tokens → **Edit Cloudflare Workers** template).
+1. Repo **EdgeQuity** → **Settings → Pages → Build and deployment → Source: GitHub Actions**.
+2. Push `main` — workflow `Deploy GitHub Pages` chạy `build:full` (đủ `raw/` SEC + fundamentals).
+3. URL: **https://tonynguyen22.github.io/EdgeQuity/**
 
-```bash
-npm run build
-npx wrangler pages deploy dist --project-name=edgequity
-```
-
-URL giống Cách 1: `https://edgequity.pages.dev`.
+Lần build CI có thể ~10–20 phút (data lớn).
 
 ---
 
