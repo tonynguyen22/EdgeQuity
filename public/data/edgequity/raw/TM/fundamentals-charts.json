@@ -1,8 +1,8 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "ticker": "TM",
   "source": "sec-edgar+finnhub",
-  "fetchedAt": "2026-05-22T11:51:53.523Z",
+  "fetchedAt": "2026-05-22T18:55:52.126Z",
   "status": "ok",
   "sections": [
     {
@@ -17,20 +17,24 @@
           "format": "money",
           "annual": [
             {
-              "period": "2012",
-              "value": 234601000000
+              "period": "2025",
+              "value": 48036704000000
             },
             {
-              "period": "2011",
-              "value": 226106000000
+              "period": "2024",
+              "value": 45095325000000
             },
             {
-              "period": "2010",
-              "value": 228427000000
+              "period": "2023",
+              "value": 37154298000000
             },
             {
-              "period": "2009",
-              "value": 203687000000
+              "period": "2022",
+              "value": 31379507000000
+            },
+            {
+              "period": "2021",
+              "value": 27214594000000
             }
           ],
           "quarterly": []
@@ -61,26 +65,51 @@
           "quarterly": []
         },
         {
+          "id": "pretaxIncome",
+          "label": "Pretax income",
+          "description": "Pretax income is earnings before income tax expense.",
+          "format": "money",
+          "annual": [
+            {
+              "period": "2012",
+              "value": 6931000000
+            },
+            {
+              "period": "2011",
+              "value": -2164000000
+            },
+            {
+              "period": "2010",
+              "value": -3346000000
+            }
+          ],
+          "quarterly": []
+        },
+        {
           "id": "netIncome",
           "label": "Net income",
           "description": "Net income is the profit remaining for shareholders.",
           "format": "money",
           "annual": [
             {
-              "period": "2012",
-              "value": 10230000000
+              "period": "2025",
+              "value": 4789755000000
             },
             {
-              "period": "2011",
-              "value": 3450000000
+              "period": "2024",
+              "value": 5071421000000
             },
             {
-              "period": "2010",
-              "value": 4909000000
+              "period": "2023",
+              "value": 2492967000000
             },
             {
-              "period": "2009",
-              "value": 2251000000
+              "period": "2022",
+              "value": 2874614000000
+            },
+            {
+              "period": "2021",
+              "value": 2282378000000
             }
           ],
           "quarterly": []
@@ -656,45 +685,24 @@
           "format": "money",
           "annual": [
             {
-              "period": "2012",
-              "value": 377281000000
+              "period": "2025",
+              "value": 93601350000000
             },
             {
-              "period": "2011",
-              "value": 372928000000
+              "period": "2024",
+              "value": 90114296000000
             },
             {
-              "period": "2010",
-              "value": 358607000000
+              "period": "2023",
+              "value": 74303180000000
             },
             {
-              "period": "2009",
-              "value": 326196000000
-            }
-          ],
-          "quarterly": []
-        },
-        {
-          "id": "cash",
-          "label": "Cash and equivalents",
-          "description": "Cash and equivalents support liquidity and flexibility.",
-          "format": "money",
-          "annual": [
-            {
-              "period": "2012",
-              "value": 18270000000
+              "period": "2022",
+              "value": 67688771000000
             },
             {
-              "period": "2011",
-              "value": 20431000000
-            },
-            {
-              "period": "2010",
-              "value": 25024000000
-            },
-            {
-              "period": "2009",
-              "value": 20053000000
+              "period": "2021",
+              "value": 62267140000000
             }
           ],
           "quarterly": []

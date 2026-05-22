@@ -1,8 +1,8 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "ticker": "Q",
   "source": "sec-edgar+finnhub",
-  "fetchedAt": "2026-05-22T11:55:42.595Z",
+  "fetchedAt": "2026-05-22T19:00:44.616Z",
   "status": "ok",
   "sections": [
     {
@@ -24,11 +24,11 @@
           "quarterly": [
             {
               "period": "2025-Q3",
-              "value": 3234000000
+              "value": 1148000000
             },
             {
               "period": "2025-Q3",
-              "value": 3564000000
+              "value": 1276000000
             },
             {
               "period": "2026-Q1",
@@ -54,11 +54,11 @@
           "quarterly": [
             {
               "period": "2025-Q3",
-              "value": 648000000
+              "value": 250000000
             },
             {
               "period": "2025-Q3",
-              "value": 773000000
+              "value": 272000000
             },
             {
               "period": "2026-Q1",
@@ -84,11 +84,11 @@
           "quarterly": [
             {
               "period": "2025-Q3",
-              "value": 648000000
+              "value": 250000000
             },
             {
               "period": "2025-Q3",
-              "value": 773000000
+              "value": 272000000
             },
             {
               "period": "2026-Q1",
@@ -114,11 +114,19 @@
           "quarterly": [
             {
               "period": "2025-Q3",
-              "value": 480000000
+              "value": 207000000
             },
             {
               "period": "2025-Q3",
-              "value": 592000000
+              "value": 223000000
+            },
+            {
+              "period": "2026-Q1",
+              "value": 199000000
+            },
+            {
+              "period": "2026-Q1",
+              "value": 162000000
             }
           ]
         },
@@ -136,11 +144,11 @@
           "quarterly": [
             {
               "period": "2025-Q3",
-              "value": 2.3
+              "value": 0.95
             },
             {
               "period": "2025-Q3",
-              "value": 2.83
+              "value": 1.01
             },
             {
               "period": "2026-Q1",
@@ -381,36 +389,6 @@
           ]
         },
         {
-          "id": "cash",
-          "label": "Cash and equivalents",
-          "description": "Cash and equivalents support liquidity and flexibility.",
-          "format": "money",
-          "annual": [
-            {
-              "period": "2025",
-              "value": 915000000
-            }
-          ],
-          "quarterly": [
-            {
-              "period": "2025-Q3",
-              "value": 166000000
-            },
-            {
-              "period": "2025-Q3",
-              "value": 128000000
-            },
-            {
-              "period": "2026-Q1",
-              "value": 915000000
-            },
-            {
-              "period": "2026-Q1",
-              "value": 857000000
-            }
-          ]
-        },
-        {
           "id": "receivables",
           "label": "Receivables",
           "description": "Receivables reflect credit extended to customers.",
@@ -418,10 +396,27 @@
           "annual": [
             {
               "period": "2025",
-              "value": 656000000
+              "value": 992000000
             }
           ],
-          "quarterly": []
+          "quarterly": [
+            {
+              "period": "2025-Q3",
+              "value": 682000000
+            },
+            {
+              "period": "2025-Q3",
+              "value": 802000000
+            },
+            {
+              "period": "2026-Q1",
+              "value": 992000000
+            },
+            {
+              "period": "2026-Q1",
+              "value": 1039000000
+            }
+          ]
         },
         {
           "id": "inventory",

@@ -2,7 +2,20 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import test from 'node:test';
 
-import { buildFundamentalsChartsDocument } from './fundamentals-charts.ts';
+import { buildFundamentalsChartsDocument, type FundamentalsChartPoint } from './fundamentals-charts.ts';
+
+function periodSortKey(period: string): number {
+  const quarter = period.match(/^(\d{4})-Q([1-4])$/);
+  if (quarter) return Number(quarter[1]) * 10 + Number(quarter[2]);
+  return Number.parseInt(period.slice(0, 4), 10) * 10;
+}
+
+function isAscending(points: FundamentalsChartPoint[]): boolean {
+  for (let i = 1; i < points.length; i++) {
+    if (periodSortKey(points[i]!.period) < periodSortKey(points[i - 1]!.period)) return false;
+  }
+  return true;
+}
 
 test('buildFundamentalsChartsDocument merges SEC and Finnhub series', () => {
   const metrics = JSON.parse(
@@ -17,4 +30,11 @@ test('buildFundamentalsChartsDocument merges SEC and Finnhub series', () => {
   assert.ok(growth);
   assert.ok(valuation);
   assert.ok(valuation!.metrics.some((metric) => metric.id === 'pe' && metric.quarterly.length > 0));
+
+  for (const section of document.sections) {
+    for (const metric of section.metrics) {
+      assert.ok(isAscending(metric.annual), `${metric.id} annual should be oldest→newest`);
+      assert.ok(isAscending(metric.quarterly), `${metric.id} quarterly should be oldest→newest`);
+    }
+  }
 });

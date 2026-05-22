@@ -1,8 +1,8 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "ticker": "VIK",
   "source": "sec-edgar+finnhub",
-  "fetchedAt": "2026-05-22T11:55:07.764Z",
+  "fetchedAt": "2026-05-22T19:00:06.343Z",
   "status": "ok",
   "sections": [
     {
@@ -10,6 +10,48 @@
       "title": "Growth",
       "description": "Revenue, earnings, and EPS across recent reporting periods.",
       "metrics": [
+        {
+          "id": "revenue",
+          "label": "Revenue",
+          "description": "Revenue shows business scale and demand momentum.",
+          "format": "money",
+          "annual": [
+            {
+              "period": "2025",
+              "value": 6501419000
+            },
+            {
+              "period": "2024",
+              "value": 5333882000
+            }
+          ],
+          "quarterly": [
+            {
+              "period": "2025-Q1",
+              "value": 718155000
+            },
+            {
+              "period": "2025-Q1",
+              "value": 897056000
+            },
+            {
+              "period": "2025-Q2",
+              "value": 1587261000
+            },
+            {
+              "period": "2025-Q2",
+              "value": 1880367000
+            },
+            {
+              "period": "2025-Q3",
+              "value": 1678737000
+            },
+            {
+              "period": "2025-Q3",
+              "value": 1999638000
+            }
+          ]
+        },
         {
           "id": "netIncome",
           "label": "Net income",
@@ -36,19 +78,19 @@
             },
             {
               "period": "2025-Q2",
-              "value": -330934000
+              "value": 159768000
             },
             {
               "period": "2025-Q2",
-              "value": 333785000
+              "value": 439237000
             },
             {
               "period": "2025-Q3",
-              "value": 48802000
+              "value": 379736000
             },
             {
               "period": "2025-Q3",
-              "value": 847794000
+              "value": 514009000
             }
           ]
         },

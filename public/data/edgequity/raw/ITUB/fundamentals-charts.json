@@ -1,8 +1,8 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "ticker": "ITUB",
   "source": "sec-edgar+finnhub",
-  "fetchedAt": "2026-05-22T11:53:10.195Z",
+  "fetchedAt": "2026-05-22T18:57:33.394Z",
   "status": "ok",
   "sections": [
     {
@@ -72,24 +72,27 @@
           "format": "money",
           "annual": [
             {
-              "period": "2010",
-              "value": 11067000000
+              "period": "2024",
+              "value": 42128000000
             },
             {
-              "period": "2009",
-              "value": 14085000000
+              "period": "2023",
+              "value": 33877000000
+            },
+            {
+              "period": "2022",
+              "value": 30737000000
+            },
+            {
+              "period": "2021",
+              "value": 28384000000
+            },
+            {
+              "period": "2020",
+              "value": 15064000000
             }
           ],
-          "quarterly": [
-            {
-              "period": "2010-Q2",
-              "value": 8085000000
-            },
-            {
-              "period": "2010-Q2",
-              "value": 5406000000
-            }
-          ]
+          "quarterly": []
         },
         {
           "id": "eps",
@@ -122,58 +125,27 @@
           "format": "money",
           "annual": [
             {
-              "period": "2010",
-              "value": 746580000000
+              "period": "2024",
+              "value": 2854475000000
             },
             {
-              "period": "2009",
-              "value": 599088000000
+              "period": "2023",
+              "value": 2543100000000
+            },
+            {
+              "period": "2022",
+              "value": 2323440000000
+            },
+            {
+              "period": "2021",
+              "value": 2069206000000
+            },
+            {
+              "period": "2020",
+              "value": 2019251000000
             }
           ],
-          "quarterly": [
-            {
-              "period": "2010-Q2",
-              "value": 599088000000
-            },
-            {
-              "period": "2010-Q2",
-              "value": 646951000000
-            }
-          ]
-        },
-        {
-          "id": "cash",
-          "label": "Cash and equivalents",
-          "description": "Cash and equivalents support liquidity and flexibility.",
-          "format": "money",
-          "annual": [
-            {
-              "period": "2010",
-              "value": 37933000000
-            },
-            {
-              "period": "2009",
-              "value": 65456000000
-            }
-          ],
-          "quarterly": [
-            {
-              "period": "2010-Q2",
-              "value": 28036000000
-            },
-            {
-              "period": "2010-Q2",
-              "value": 51131000000
-            },
-            {
-              "period": "2010-Q2",
-              "value": 65456000000
-            },
-            {
-              "period": "2010-Q2",
-              "value": 54743000000
-            }
-          ]
+          "quarterly": []
         },
         {
           "id": "equity",

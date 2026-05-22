@@ -1,8 +1,8 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "ticker": "AU",
   "source": "sec-edgar+finnhub",
-  "fetchedAt": "2026-05-22T11:54:37.870Z",
+  "fetchedAt": "2026-05-22T18:59:30.107Z",
   "status": "ok",
   "sections": [
     {
@@ -10,6 +10,48 @@
       "title": "Growth",
       "description": "Revenue, earnings, and EPS across recent reporting periods.",
       "metrics": [
+        {
+          "id": "revenue",
+          "label": "Revenue",
+          "description": "Revenue shows business scale and demand momentum.",
+          "format": "money",
+          "annual": [
+            {
+              "period": "2025",
+              "value": 9893000000
+            },
+            {
+              "period": "2024",
+              "value": 5793000000
+            },
+            {
+              "period": "2023",
+              "value": 4582000000
+            }
+          ],
+          "quarterly": [
+            {
+              "period": "2023-Q2",
+              "value": 2155000000
+            },
+            {
+              "period": "2023-Q2",
+              "value": 4501000000
+            },
+            {
+              "period": "2023-Q2",
+              "value": 2186000000
+            },
+            {
+              "period": "2024-Q2",
+              "value": 2552000000
+            },
+            {
+              "period": "2025-Q2",
+              "value": 4408000000
+            }
+          ]
+        },
         {
           "id": "grossProfit",
           "label": "Gross profit",

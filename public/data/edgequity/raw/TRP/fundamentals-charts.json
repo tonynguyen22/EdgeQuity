@@ -1,8 +1,8 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "ticker": "TRP",
   "source": "sec-edgar+finnhub",
-  "fetchedAt": "2026-05-22T11:53:40.355Z",
+  "fetchedAt": "2026-05-22T18:58:16.099Z",
   "status": "ok",
   "sections": [
     {
@@ -720,35 +720,6 @@
           "quarterly": []
         },
         {
-          "id": "cash",
-          "label": "Cash and equivalents",
-          "description": "Cash and equivalents support liquidity and flexibility.",
-          "format": "money",
-          "annual": [
-            {
-              "period": "2025",
-              "value": 168000000
-            },
-            {
-              "period": "2024",
-              "value": 801000000
-            },
-            {
-              "period": "2023",
-              "value": 3678000000
-            },
-            {
-              "period": "2022",
-              "value": 620000000
-            },
-            {
-              "period": "2021",
-              "value": 673000000
-            }
-          ],
-          "quarterly": []
-        },
-        {
           "id": "receivables",
           "label": "Receivables",
           "description": "Receivables reflect credit extended to customers.",
@@ -871,24 +842,24 @@
           "format": "money",
           "annual": [
             {
+              "period": "2024",
+              "value": 2800000000
+            },
+            {
+              "period": "2023",
+              "value": 2000000000
+            },
+            {
+              "period": "2020",
+              "value": 200000000
+            },
+            {
+              "period": "2019",
+              "value": 200000000
+            },
+            {
               "period": "2018",
-              "value": 36509000000
-            },
-            {
-              "period": "2017",
-              "value": 31875000000
-            },
-            {
-              "period": "2016",
-              "value": 38312000000
-            },
-            {
-              "period": "2015",
-              "value": 29037000000
-            },
-            {
-              "period": "2014",
-              "value": 22960000000
+              "value": 750000000
             }
           ],
           "quarterly": []

@@ -1,8 +1,8 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "ticker": "NTR",
   "source": "sec-edgar+finnhub",
-  "fetchedAt": "2026-05-22T11:55:27.638Z",
+  "fetchedAt": "2026-05-22T19:00:28.561Z",
   "status": "ok",
   "sections": [
     {
@@ -10,6 +10,35 @@
       "title": "Growth",
       "description": "Revenue, earnings, and EPS across recent reporting periods.",
       "metrics": [
+        {
+          "id": "revenue",
+          "label": "Revenue",
+          "description": "Revenue shows business scale and demand momentum.",
+          "format": "money",
+          "annual": [
+            {
+              "period": "2025",
+              "value": 26885000000
+            },
+            {
+              "period": "2024",
+              "value": 25972000000
+            },
+            {
+              "period": "2023",
+              "value": 29056000000
+            },
+            {
+              "period": "2022",
+              "value": 37884000000
+            },
+            {
+              "period": "2021",
+              "value": 27712000000
+            }
+          ],
+          "quarterly": []
+        },
         {
           "id": "grossProfit",
           "label": "Gross profit",

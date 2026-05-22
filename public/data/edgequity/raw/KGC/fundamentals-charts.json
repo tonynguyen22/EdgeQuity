@@ -1,8 +1,8 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "ticker": "KGC",
   "source": "sec-edgar+finnhub",
-  "fetchedAt": "2026-05-22T11:55:28.670Z",
+  "fetchedAt": "2026-05-22T19:00:29.648Z",
   "status": "ok",
   "sections": [
     {
@@ -10,6 +10,35 @@
       "title": "Growth",
       "description": "Revenue, earnings, and EPS across recent reporting periods.",
       "metrics": [
+        {
+          "id": "revenue",
+          "label": "Revenue",
+          "description": "Revenue shows business scale and demand momentum.",
+          "format": "money",
+          "annual": [
+            {
+              "period": "2025",
+              "value": 7051100000
+            },
+            {
+              "period": "2024",
+              "value": 5148800000
+            },
+            {
+              "period": "2023",
+              "value": 4239700000
+            },
+            {
+              "period": "2022",
+              "value": 3455100000
+            },
+            {
+              "period": "2021",
+              "value": 3729400000
+            }
+          ],
+          "quarterly": []
+        },
         {
           "id": "grossProfit",
           "label": "Gross profit",

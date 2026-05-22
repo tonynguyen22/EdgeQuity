@@ -219,7 +219,60 @@ export function pickAnnualUsdValues(
     }
   }
 
-  return [...byFy.values()].sort((a, b) => b.fy - a.fy).slice(0, maxYears);
+  return [...byFy.values()].sort((a, b) => a.fy - b.fy).slice(-maxYears);
+}
+
+export type SecQuarterlyUsdRow = {
+  end: string;
+  start?: string;
+  val: number;
+  fy?: number;
+  fp?: string;
+  form?: string;
+};
+
+function quarterDurationDays(row: { start?: string; end: string }): number | null {
+  if (!row.start) return null;
+  const startMs = Date.parse(row.start);
+  const endMs = Date.parse(row.end);
+  if (!Number.isFinite(startMs) || !Number.isFinite(endMs) || endMs <= startMs) return null;
+  return (endMs - startMs) / 86_400_000;
+}
+
+/** Prefer ~3-month fiscal quarter facts over YTD cumulative duplicates at the same period end. */
+export function pickBetterQuarterFact<T extends SecQuarterlyUsdRow>(left: T, right: T): T {
+  const score = (row: T): number => {
+    const days = quarterDurationDays(row);
+    if (days === null) return 900;
+    if (days >= 70 && days <= 120) return Math.abs(days - 91);
+    if (days < 70) return 400 + (70 - days);
+    return 400 + (days - 120);
+  };
+  return score(left) <= score(right) ? left : right;
+}
+
+export function pickQuarterlyUsdRows(
+  series: GaapFactSeries | undefined,
+  maxQuarters = 20,
+): SecQuarterlyUsdRow[] {
+  if (!series?.units) return [];
+  const usd = series.units.USD ?? series.units.usd ?? Object.values(series.units)[0];
+  if (!usd) return [];
+
+  const quarterly = usd
+    .filter((row) => row.fp === "Q1" || row.fp === "Q2" || row.fp === "Q3" || row.fp === "Q4")
+    .filter((row) => typeof row.val === "number" && Number.isFinite(row.val)) as SecQuarterlyUsdRow[];
+
+  const byPeriod = new Map<string, SecQuarterlyUsdRow>();
+  for (const row of quarterly) {
+    const key = row.fy && row.fp ? `${row.fy}-${row.fp}` : row.end;
+    const existing = byPeriod.get(key);
+    byPeriod.set(key, existing ? pickBetterQuarterFact(existing, row) : row);
+  }
+
+  return [...byPeriod.values()]
+    .sort((left, right) => left.end.localeCompare(right.end))
+    .slice(-maxQuarters);
 }
 
 function valuesToMap(years: Array<{ fy: number; value: number }>): Record<number, number | null> {

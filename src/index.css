@@ -507,6 +507,7 @@ thead .eq-sticky-col {
   border: 1px solid var(--vw-border-dim);
   border-radius: 6px;
   padding: 8px;
+  overflow: hidden;
   background: var(--vw-bg-raised);
 }
 
@@ -537,9 +538,16 @@ thead .eq-sticky-col {
   margin-bottom: 4px;
 }
 
+.eq-fundamentals-chart svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 150px;
+}
+
 .eq-fundamentals-chart-y,
 .eq-fundamentals-chart-x {
-  font-size: 9px;
+  font-size: 8px;
   fill: var(--vw-text-tertiary);
 }
 

@@ -1,8 +1,8 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "ticker": "VLO",
   "source": "sec-edgar+finnhub",
-  "fetchedAt": "2026-05-22T11:53:26.025Z",
+  "fetchedAt": "2026-05-22T18:57:57.346Z",
   "status": "ok",
   "sections": [
     {
@@ -10,6 +10,116 @@
       "title": "Growth",
       "description": "Revenue, earnings, and EPS across recent reporting periods.",
       "metrics": [
+        {
+          "id": "revenue",
+          "label": "Revenue",
+          "description": "Revenue shows business scale and demand momentum.",
+          "format": "money",
+          "annual": [
+            {
+              "period": "2025",
+              "value": 122687000000
+            },
+            {
+              "period": "2024",
+              "value": 129881000000
+            },
+            {
+              "period": "2023",
+              "value": 144766000000
+            },
+            {
+              "period": "2022",
+              "value": 176383000000
+            },
+            {
+              "period": "2021",
+              "value": 113977000000
+            }
+          ],
+          "quarterly": [
+            {
+              "period": "2019-Q3",
+              "value": 27249000000
+            },
+            {
+              "period": "2020-Q1",
+              "value": 22102000000
+            },
+            {
+              "period": "2020-Q2",
+              "value": 10397000000
+            },
+            {
+              "period": "2020-Q3",
+              "value": 15809000000
+            },
+            {
+              "period": "2021-Q1",
+              "value": 20806000000
+            },
+            {
+              "period": "2021-Q2",
+              "value": 27748000000
+            },
+            {
+              "period": "2021-Q3",
+              "value": 29520000000
+            },
+            {
+              "period": "2022-Q1",
+              "value": 38542000000
+            },
+            {
+              "period": "2022-Q2",
+              "value": 51641000000
+            },
+            {
+              "period": "2022-Q3",
+              "value": 44454000000
+            },
+            {
+              "period": "2023-Q1",
+              "value": 36439000000
+            },
+            {
+              "period": "2023-Q2",
+              "value": 34509000000
+            },
+            {
+              "period": "2023-Q3",
+              "value": 38404000000
+            },
+            {
+              "period": "2024-Q1",
+              "value": 31759000000
+            },
+            {
+              "period": "2024-Q2",
+              "value": 34490000000
+            },
+            {
+              "period": "2024-Q3",
+              "value": 32876000000
+            },
+            {
+              "period": "2025-Q1",
+              "value": 30258000000
+            },
+            {
+              "period": "2025-Q2",
+              "value": 29889000000
+            },
+            {
+              "period": "2025-Q3",
+              "value": 32168000000
+            },
+            {
+              "period": "2026-Q1",
+              "value": 32381000000
+            }
+          ]
+        },
         {
           "id": "grossProfit",
           "label": "Gross profit",
@@ -65,7 +175,7 @@
           "quarterly": [
             {
               "period": "2019-Q3",
-              "value": 2097000000
+              "value": 881000000
             },
             {
               "period": "2020-Q1",
@@ -73,11 +183,11 @@
             },
             {
               "period": "2020-Q2",
-              "value": -488000000
+              "value": 1789000000
             },
             {
               "period": "2020-Q3",
-              "value": -1109000000
+              "value": -621000000
             },
             {
               "period": "2021-Q1",
@@ -85,11 +195,11 @@
             },
             {
               "period": "2021-Q2",
-              "value": -157000000
+              "value": 509000000
             },
             {
               "period": "2021-Q3",
-              "value": 536000000
+              "value": 693000000
             },
             {
               "period": "2022-Q1",
@@ -97,11 +207,11 @@
             },
             {
               "period": "2022-Q2",
-              "value": 7603000000
+              "value": 6219000000
             },
             {
               "period": "2022-Q3",
-              "value": 11395000000
+              "value": 3792000000
             },
             {
               "period": "2023-Q1",
@@ -109,11 +219,11 @@
             },
             {
               "period": "2023-Q2",
-              "value": 6802000000
+              "value": 2759000000
             },
             {
               "period": "2023-Q3",
-              "value": 10305000000
+              "value": 3503000000
             },
             {
               "period": "2024-Q1",
@@ -121,11 +231,11 @@
             },
             {
               "period": "2024-Q2",
-              "value": 2900000000
+              "value": 1221000000
             },
             {
               "period": "2024-Q3",
-              "value": 3407000000
+              "value": 507000000
             },
             {
               "period": "2025-Q1",
@@ -133,11 +243,11 @@
             },
             {
               "period": "2025-Q2",
-              "value": 97000000
+              "value": 997000000
             },
             {
               "period": "2025-Q3",
-              "value": 1606000000
+              "value": 1509000000
             },
             {
               "period": "2026-Q1",
@@ -175,7 +285,7 @@
           "quarterly": [
             {
               "period": "2019-Q3",
-              "value": 1830000000
+              "value": 804000000
             },
             {
               "period": "2020-Q1",
@@ -183,11 +293,11 @@
             },
             {
               "period": "2020-Q2",
-              "value": -696000000
+              "value": 1674000000
             },
             {
               "period": "2020-Q3",
-              "value": -1412000000
+              "value": -716000000
             },
             {
               "period": "2021-Q1",
@@ -195,11 +305,11 @@
             },
             {
               "period": "2021-Q2",
-              "value": -309000000
+              "value": 461000000
             },
             {
               "period": "2021-Q3",
-              "value": 264000000
+              "value": 573000000
             },
             {
               "period": "2022-Q1",
@@ -207,11 +317,11 @@
             },
             {
               "period": "2022-Q2",
-              "value": 7329000000
+              "value": 6110000000
             },
             {
               "period": "2022-Q3",
-              "value": 11057000000
+              "value": 3728000000
             },
             {
               "period": "2023-Q1",
@@ -219,11 +329,11 @@
             },
             {
               "period": "2023-Q2",
-              "value": 6743000000
+              "value": 2717000000
             },
             {
               "period": "2023-Q3",
-              "value": 10219000000
+              "value": 3476000000
             },
             {
               "period": "2024-Q1",
@@ -231,11 +341,11 @@
             },
             {
               "period": "2024-Q2",
-              "value": 2886000000
+              "value": 1203000000
             },
             {
               "period": "2024-Q3",
-              "value": 3375000000
+              "value": 489000000
             },
             {
               "period": "2025-Q1",
@@ -243,11 +353,11 @@
             },
             {
               "period": "2025-Q2",
-              "value": 25000000
+              "value": 942000000
             },
             {
               "period": "2025-Q3",
-              "value": 1481000000
+              "value": 1456000000
             },
             {
               "period": "2026-Q1",
@@ -285,7 +395,7 @@
           "quarterly": [
             {
               "period": "2019-Q3",
-              "value": 1362000000
+              "value": 609000000
             },
             {
               "period": "2020-Q1",
@@ -293,11 +403,11 @@
             },
             {
               "period": "2020-Q2",
-              "value": -598000000
+              "value": 1253000000
             },
             {
               "period": "2020-Q3",
-              "value": -1062000000
+              "value": -464000000
             },
             {
               "period": "2021-Q1",
@@ -305,11 +415,11 @@
             },
             {
               "period": "2021-Q2",
-              "value": -542000000
+              "value": 162000000
             },
             {
               "period": "2021-Q3",
-              "value": -79000000
+              "value": 463000000
             },
             {
               "period": "2022-Q1",
@@ -317,11 +427,11 @@
             },
             {
               "period": "2022-Q2",
-              "value": 5598000000
+              "value": 4693000000
             },
             {
               "period": "2022-Q3",
-              "value": 8415000000
+              "value": 2817000000
             },
             {
               "period": "2023-Q1",
@@ -329,11 +439,11 @@
             },
             {
               "period": "2023-Q2",
-              "value": 5011000000
+              "value": 1944000000
             },
             {
               "period": "2023-Q3",
-              "value": 7633000000
+              "value": 2622000000
             },
             {
               "period": "2024-Q1",
@@ -341,11 +451,11 @@
             },
             {
               "period": "2024-Q2",
-              "value": 2125000000
+              "value": 880000000
             },
             {
               "period": "2024-Q3",
-              "value": 2489000000
+              "value": 364000000
             },
             {
               "period": "2025-Q1",
@@ -353,11 +463,11 @@
             },
             {
               "period": "2025-Q2",
-              "value": 119000000
+              "value": 714000000
             },
             {
               "period": "2025-Q3",
-              "value": 1214000000
+              "value": 1095000000
             },
             {
               "period": "2026-Q1",
@@ -395,7 +505,7 @@
           "quarterly": [
             {
               "period": "2019-Q3",
-              "value": 3.28
+              "value": 1.48
             },
             {
               "period": "2020-Q1",
@@ -403,11 +513,11 @@
             },
             {
               "period": "2020-Q2",
-              "value": -1.48
+              "value": 3.07
             },
             {
               "period": "2020-Q3",
-              "value": -2.62
+              "value": -1.14
             },
             {
               "period": "2021-Q1",
@@ -415,11 +525,11 @@
             },
             {
               "period": "2021-Q2",
-              "value": -1.34
+              "value": 0.39
             },
             {
               "period": "2021-Q3",
-              "value": -0.2
+              "value": 1.13
             },
             {
               "period": "2022-Q1",
@@ -427,11 +537,11 @@
             },
             {
               "period": "2022-Q2",
-              "value": 13.74
+              "value": 11.57
             },
             {
               "period": "2022-Q3",
-              "value": 20.93
+              "value": 7.19
             },
             {
               "period": "2023-Q1",
@@ -439,11 +549,11 @@
             },
             {
               "period": "2023-Q2",
-              "value": 13.74
+              "value": 5.4
             },
             {
               "period": "2023-Q3",
-              "value": 21.21
+              "value": 7.49
             },
             {
               "period": "2024-Q1",
@@ -451,11 +561,11 @@
             },
             {
               "period": "2024-Q2",
-              "value": 6.47
+              "value": 2.71
             },
             {
               "period": "2024-Q3",
-              "value": 7.66
+              "value": 1.14
             },
             {
               "period": "2025-Q1",
@@ -463,11 +573,11 @@
             },
             {
               "period": "2025-Q2",
-              "value": 0.37
+              "value": 2.28
             },
             {
               "period": "2025-Q3",
-              "value": 3.89
+              "value": 3.53
             },
             {
               "period": "2026-Q1",
@@ -1040,116 +1150,6 @@
           ]
         },
         {
-          "id": "cash",
-          "label": "Cash and equivalents",
-          "description": "Cash and equivalents support liquidity and flexibility.",
-          "format": "money",
-          "annual": [
-            {
-              "period": "2025",
-              "value": 4688000000
-            },
-            {
-              "period": "2024",
-              "value": 4657000000
-            },
-            {
-              "period": "2023",
-              "value": 5424000000
-            },
-            {
-              "period": "2022",
-              "value": 4862000000
-            },
-            {
-              "period": "2021",
-              "value": 4122000000
-            }
-          ],
-          "quarterly": [
-            {
-              "period": "2021-Q2",
-              "value": 3572000000
-            },
-            {
-              "period": "2021-Q3",
-              "value": 3498000000
-            },
-            {
-              "period": "2022-Q1",
-              "value": 4122000000
-            },
-            {
-              "period": "2022-Q1",
-              "value": 2638000000
-            },
-            {
-              "period": "2022-Q2",
-              "value": 5392000000
-            },
-            {
-              "period": "2022-Q3",
-              "value": 3969000000
-            },
-            {
-              "period": "2023-Q1",
-              "value": 4862000000
-            },
-            {
-              "period": "2023-Q1",
-              "value": 5521000000
-            },
-            {
-              "period": "2023-Q2",
-              "value": 5075000000
-            },
-            {
-              "period": "2023-Q3",
-              "value": 5831000000
-            },
-            {
-              "period": "2024-Q1",
-              "value": 5424000000
-            },
-            {
-              "period": "2024-Q1",
-              "value": 4917000000
-            },
-            {
-              "period": "2024-Q2",
-              "value": 5246000000
-            },
-            {
-              "period": "2024-Q3",
-              "value": 5184000000
-            },
-            {
-              "period": "2025-Q1",
-              "value": 4657000000
-            },
-            {
-              "period": "2025-Q1",
-              "value": 4634000000
-            },
-            {
-              "period": "2025-Q2",
-              "value": 4537000000
-            },
-            {
-              "period": "2025-Q3",
-              "value": 4764000000
-            },
-            {
-              "period": "2026-Q1",
-              "value": 4688000000
-            },
-            {
-              "period": "2026-Q1",
-              "value": 5733000000
-            }
-          ]
-        },
-        {
           "id": "receivables",
           "label": "Receivables",
           "description": "Receivables reflect credit extended to customers.",
@@ -1157,26 +1157,107 @@
           "annual": [
             {
               "period": "2025",
-              "value": 9207000000
+              "value": 9877000000
             },
             {
               "period": "2024",
-              "value": 9731000000
+              "value": 10708000000
             },
             {
               "period": "2023",
-              "value": 11038000000
+              "value": 12525000000
             },
             {
               "period": "2022",
-              "value": 10761000000
+              "value": 11919000000
             },
             {
               "period": "2021",
-              "value": 9968000000
+              "value": 10378000000
             }
           ],
-          "quarterly": []
+          "quarterly": [
+            {
+              "period": "2021-Q2",
+              "value": 9132000000
+            },
+            {
+              "period": "2021-Q3",
+              "value": 8627000000
+            },
+            {
+              "period": "2022-Q1",
+              "value": 10378000000
+            },
+            {
+              "period": "2022-Q1",
+              "value": 13080000000
+            },
+            {
+              "period": "2022-Q2",
+              "value": 14439000000
+            },
+            {
+              "period": "2022-Q3",
+              "value": 11581000000
+            },
+            {
+              "period": "2023-Q1",
+              "value": 11919000000
+            },
+            {
+              "period": "2023-Q1",
+              "value": 9688000000
+            },
+            {
+              "period": "2023-Q2",
+              "value": 10888000000
+            },
+            {
+              "period": "2023-Q3",
+              "value": 12566000000
+            },
+            {
+              "period": "2024-Q1",
+              "value": 12525000000
+            },
+            {
+              "period": "2024-Q1",
+              "value": 12150000000
+            },
+            {
+              "period": "2024-Q2",
+              "value": 13145000000
+            },
+            {
+              "period": "2024-Q3",
+              "value": 11073000000
+            },
+            {
+              "period": "2025-Q1",
+              "value": 10708000000
+            },
+            {
+              "period": "2025-Q1",
+              "value": 11238000000
+            },
+            {
+              "period": "2025-Q2",
+              "value": 11073000000
+            },
+            {
+              "period": "2025-Q3",
+              "value": 10333000000
+            },
+            {
+              "period": "2026-Q1",
+              "value": 9877000000
+            },
+            {
+              "period": "2026-Q1",
+              "value": 13410000000
+            }
+          ]
         },
         {
           "id": "inventory",

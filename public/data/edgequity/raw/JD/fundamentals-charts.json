@@ -1,8 +1,8 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "ticker": "JD",
   "source": "sec-edgar+finnhub",
-  "fetchedAt": "2026-05-22T11:54:49.515Z",
+  "fetchedAt": "2026-05-22T18:59:44.836Z",
   "status": "ok",
   "sections": [
     {
@@ -119,19 +119,32 @@
           "format": "money",
           "annual": [
             {
-              "period": "2016",
-              "value": -548291000
+              "period": "2025",
+              "value": 3309000000
             },
             {
-              "period": "2015",
-              "value": -1447715000
+              "period": "2024",
+              "value": 6118000000
             },
             {
-              "period": "2014",
-              "value": -805266000
+              "period": "2023",
+              "value": 3275000000
+            },
+            {
+              "period": "2022",
+              "value": 1407000000
+            },
+            {
+              "period": "2021",
+              "value": -701000000
             }
           ],
-          "quarterly": []
+          "quarterly": [
+            {
+              "period": "2019-Q3",
+              "value": 1166286000
+            }
+          ]
         },
         {
           "id": "eps",
@@ -660,40 +673,6 @@
           ]
         },
         {
-          "id": "cash",
-          "label": "Cash and equivalents",
-          "description": "Cash and equivalents support liquidity and flexibility.",
-          "format": "money",
-          "annual": [
-            {
-              "period": "2025",
-              "value": 19660000000
-            },
-            {
-              "period": "2024",
-              "value": 14844000000
-            },
-            {
-              "period": "2023",
-              "value": 10126000000
-            },
-            {
-              "period": "2022",
-              "value": 11434000000
-            },
-            {
-              "period": "2021",
-              "value": 11105000000
-            }
-          ],
-          "quarterly": [
-            {
-              "period": "2019-Q3",
-              "value": 4494402000
-            }
-          ]
-        },
-        {
           "id": "receivables",
           "label": "Receivables",
           "description": "Receivables reflect credit extended to customers.",
@@ -831,8 +810,16 @@
           "format": "money",
           "annual": [
             {
-              "period": "2018",
-              "value": 449195000
+              "period": "2025",
+              "value": 41675000000
+            },
+            {
+              "period": "2021",
+              "value": 9487000000
+            },
+            {
+              "period": "2020",
+              "value": 12971501000
             }
           ],
           "quarterly": []

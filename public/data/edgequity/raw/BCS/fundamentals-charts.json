@@ -1,8 +1,8 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "ticker": "BCS",
   "source": "sec-edgar+finnhub",
-  "fetchedAt": "2026-05-22T11:53:24.339Z",
+  "fetchedAt": "2026-05-22T18:57:54.754Z",
   "status": "ok",
   "sections": [
     {
@@ -10,6 +10,68 @@
       "title": "Growth",
       "description": "Revenue, earnings, and EPS across recent reporting periods.",
       "metrics": [
+        {
+          "id": "revenue",
+          "label": "Revenue",
+          "description": "Revenue shows business scale and demand momentum.",
+          "format": "money",
+          "annual": [
+            {
+              "period": "2025",
+              "value": 11110000000
+            },
+            {
+              "period": "2024",
+              "value": 10710000000
+            },
+            {
+              "period": "2023",
+              "value": 9982000000
+            },
+            {
+              "period": "2022",
+              "value": 9494000000
+            },
+            {
+              "period": "2021",
+              "value": 9759000000
+            }
+          ],
+          "quarterly": [
+            {
+              "period": "2018-Q2",
+              "value": 4468000000
+            },
+            {
+              "period": "2019-Q2",
+              "value": 4430000000
+            },
+            {
+              "period": "2020-Q2",
+              "value": 4339000000
+            },
+            {
+              "period": "2021-Q2",
+              "value": 4620000000
+            },
+            {
+              "period": "2022-Q2",
+              "value": 4657000000
+            },
+            {
+              "period": "2023-Q2",
+              "value": 5183000000
+            },
+            {
+              "period": "2024-Q2",
+              "value": 5360000000
+            },
+            {
+              "period": "2025-Q2",
+              "value": 5577000000
+            }
+          ]
+        },
         {
           "id": "netIncome",
           "label": "Net income",
@@ -76,7 +138,7 @@
             },
             {
               "period": "2022-Q2",
-              "value": 7056000000
+              "value": 2896000000
             },
             {
               "period": "2022-Q2",

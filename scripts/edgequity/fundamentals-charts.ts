@@ -5,12 +5,13 @@ import { FUNDAMENTALS_CATALOG, type FundamentalsFormat, type FundamentalsMetricD
 import {
   type CompanyFactsPayload,
   EDGEQUITY_RAW_DIR,
-  findConceptSeries,
   pickAnnualUsdValues,
+  pickQuarterlyUsdRows,
   type SecStatementsDocument,
 } from "./sec-edgar.ts";
+import { resolveSecMetricSeries } from "./sec-metric-resolver.ts";
 
-export const FUNDAMENTALS_CHARTS_SCHEMA_VERSION = 1;
+export const FUNDAMENTALS_CHARTS_SCHEMA_VERSION = 2;
 export const FUNDAMENTALS_ANNUAL_LIMIT = 5;
 export const FUNDAMENTALS_QUARTERLY_LIMIT = 20;
 
@@ -51,29 +52,16 @@ export function fundamentalsChartsPath(ticker: string): string {
 }
 
 export function pickQuarterlyUsdValues(
-  series: { units: Record<string, Array<{ end: string; val: number; fy?: number; fp?: string }>> } | undefined,
+  series: { units: Record<string, Array<{ end: string; val: number; fy?: number; fp?: string; start?: string }>> } | undefined,
   maxQuarters = FUNDAMENTALS_QUARTERLY_LIMIT,
 ): FundamentalsChartPoint[] {
-  if (!series?.units) return [];
-  const usd = series.units.USD ?? series.units.usd ?? Object.values(series.units)[0];
-  if (!usd) return [];
-
-  const quarterly = usd
-    .filter((row) => row.fp === "Q1" || row.fp === "Q2" || row.fp === "Q3" || row.fp === "Q4")
-    .filter((row) => typeof row.val === "number" && Number.isFinite(row.val));
-
-  const byEnd = new Map<string, FundamentalsChartPoint>();
-  for (const row of quarterly) {
-    const existing = byEnd.get(row.end);
-    if (!existing) {
-      byEnd.set(row.end, {
-        period: formatQuarterPeriod(row.end, row.fy, row.fp),
-        value: row.val,
-      });
-    }
-  }
-
-  return sortPeriods([...byEnd.values()]).slice(-maxQuarters);
+  const rows = pickQuarterlyUsdRows(series, maxQuarters);
+  return sortPeriods(
+    rows.map((row) => ({
+      period: formatQuarterPeriod(row.end, row.fy, row.fp),
+      value: row.val,
+    })),
+  );
 }
 
 function formatQuarterPeriod(end: string, fy?: number, fp?: string): string {
@@ -86,33 +74,44 @@ function formatQuarterPeriod(end: string, fy?: number, fp?: string): string {
 
 function annualFromSec(
   facts: CompanyFactsPayload["facts"],
-  concepts: string[],
+  def: FundamentalsMetricDef,
   maxYears = FUNDAMENTALS_ANNUAL_LIMIT,
 ): FundamentalsChartPoint[] {
-  const hit = findConceptSeries(facts, concepts);
+  if (!def.secConcepts?.length) return [];
+  const hit = resolveSecMetricSeries(facts, {
+    metricId: def.id,
+    preferredConcepts: def.secConcepts,
+  });
   if (!hit) return [];
-  return pickAnnualUsdValues(hit.series, maxYears).map((row) => ({
-    period: String(row.fy),
-    value: row.value,
-  }));
+  return sortPeriods(
+    pickAnnualUsdValues(hit.series, maxYears).map((row) => ({
+      period: String(row.fy),
+      value: row.value,
+    })),
+  );
 }
 
 function quarterlyFromSec(
   facts: CompanyFactsPayload["facts"],
-  concepts: string[],
+  def: FundamentalsMetricDef,
 ): FundamentalsChartPoint[] {
-  const hit = findConceptSeries(facts, concepts);
+  if (!def.secConcepts?.length) return [];
+  const hit = resolveSecMetricSeries(facts, {
+    metricId: def.id,
+    preferredConcepts: def.secConcepts,
+  });
   if (!hit) return [];
   return pickQuarterlyUsdValues(hit.series);
 }
 
 function annualFromStatements(
   statements: SecStatementsDocument | null,
-  concepts: string[],
+  def: FundamentalsMetricDef,
 ): FundamentalsChartPoint[] {
-  if (!statements || statements.status !== "ok") return [];
+  if (!statements || statements.status !== "ok" || !def.secConcepts?.length) return [];
   const rows = [...statements.statements.ic.rows, ...statements.statements.bs.rows, ...statements.statements.cf.rows];
-  const row = rows.find((candidate) => concepts.includes(candidate.concept));
+  const preferred = new Set(def.secConcepts);
+  const row = rows.find((candidate) => preferred.has(candidate.concept));
   if (!row) return [];
   return sortPeriods(
     Object.entries(row.valuesByYear).map(([period, value]) => ({
@@ -156,7 +155,12 @@ function formatFinnhubPeriod(period: string, bucket: "annual" | "quarterly"): st
 }
 
 function sortPeriods(points: FundamentalsChartPoint[]): FundamentalsChartPoint[] {
-  return points.slice().sort((left, right) => periodSortKey(left.period) - periodSortKey(right.period));
+  const byPeriod = new Map<string, FundamentalsChartPoint>();
+  for (const point of points) {
+    if (!Number.isFinite(point.value)) continue;
+    byPeriod.set(point.period, point);
+  }
+  return [...byPeriod.values()].sort((left, right) => periodSortKey(left.period) - periodSortKey(right.period));
 }
 
 function periodSortKey(period: string): number {
@@ -176,12 +180,12 @@ function buildMetric(
   let quarterly: FundamentalsChartPoint[] = [];
 
   if (def.secConcepts?.length && facts?.facts) {
-    annual = annualFromSec(facts.facts, def.secConcepts);
-    quarterly = quarterlyFromSec(facts.facts, def.secConcepts);
+    annual = annualFromSec(facts.facts, def);
+    quarterly = quarterlyFromSec(facts.facts, def);
   }
 
   if (annual.length === 0 && def.secConcepts?.length) {
-    annual = annualFromStatements(statements, def.secConcepts);
+    annual = annualFromStatements(statements, def);
   }
 
   if (metricsPayload) {

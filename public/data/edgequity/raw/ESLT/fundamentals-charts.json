@@ -1,8 +1,8 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "ticker": "ESLT",
   "source": "sec-edgar+finnhub",
-  "fetchedAt": "2026-05-22T11:55:22.327Z",
+  "fetchedAt": "2026-05-22T19:00:22.683Z",
   "status": "ok",
   "sections": [
     {
@@ -93,6 +93,35 @@
             {
               "period": "2021",
               "value": 418508000
+            }
+          ],
+          "quarterly": []
+        },
+        {
+          "id": "pretaxIncome",
+          "label": "Pretax income",
+          "description": "Pretax income is earnings before income tax expense.",
+          "format": "money",
+          "annual": [
+            {
+              "period": "2024",
+              "value": 326544000
+            },
+            {
+              "period": "2023",
+              "value": 250831000
+            },
+            {
+              "period": "2022",
+              "value": 268446000
+            },
+            {
+              "period": "2021",
+              "value": 310134000
+            },
+            {
+              "period": "2020",
+              "value": 185908000
             }
           ],
           "quarterly": []
@@ -720,35 +749,6 @@
           "quarterly": []
         },
         {
-          "id": "cash",
-          "label": "Cash and equivalents",
-          "description": "Cash and equivalents support liquidity and flexibility.",
-          "format": "money",
-          "annual": [
-            {
-              "period": "2025",
-              "value": 635141000
-            },
-            {
-              "period": "2024",
-              "value": 265351000
-            },
-            {
-              "period": "2023",
-              "value": 197429000
-            },
-            {
-              "period": "2022",
-              "value": 211108000
-            },
-            {
-              "period": "2021",
-              "value": 258993000
-            }
-          ],
-          "quarterly": []
-        },
-        {
           "id": "receivables",
           "label": "Receivables",
           "description": "Receivables reflect credit extended to customers.",
@@ -871,24 +871,24 @@
           "format": "money",
           "annual": [
             {
-              "period": "2025",
-              "value": 18000000
-            },
-            {
-              "period": "2024",
-              "value": 27395000
-            },
-            {
-              "period": "2023",
-              "value": 41227000
-            },
-            {
               "period": "2022",
-              "value": 264541000
+              "value": 275703000
             },
             {
               "period": "2021",
-              "value": 356624000
+              "value": 363036000
+            },
+            {
+              "period": "2020",
+              "value": 426792000
+            },
+            {
+              "period": "2019",
+              "value": 578029000
+            },
+            {
+              "period": "2018",
+              "value": 470458000
             }
           ],
           "quarterly": []

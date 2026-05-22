@@ -1,8 +1,8 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "ticker": "FMX",
   "source": "sec-edgar+finnhub",
-  "fetchedAt": "2026-05-22T11:55:12.258Z",
+  "fetchedAt": "2026-05-22T19:00:11.043Z",
   "status": "ok",
   "sections": [
     {
@@ -17,24 +17,27 @@
           "format": "money",
           "annual": [
             {
-              "period": "2019",
-              "value": 26867000000
+              "period": "2024",
+              "value": 37476000000
             },
             {
-              "period": "2018",
-              "value": 23924000000
+              "period": "2023",
+              "value": 41580000000
             },
             {
-              "period": "2017",
-              "value": 23445000000
+              "period": "2022",
+              "value": 34531000000
+            },
+            {
+              "period": "2021",
+              "value": 27116000000
+            },
+            {
+              "period": "2020",
+              "value": 24782000000
             }
           ],
-          "quarterly": [
-            {
-              "period": "2019-Q2",
-              "value": 12722000000
-            }
-          ]
+          "quarterly": []
         },
         {
           "id": "grossProfit",

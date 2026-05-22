@@ -1,8 +1,8 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "ticker": "ARGX",
   "source": "sec-edgar+finnhub",
-  "fetchedAt": "2026-05-22T11:54:32.634Z",
+  "fetchedAt": "2026-05-22T18:59:25.174Z",
   "status": "ok",
   "sections": [
     {
@@ -17,11 +17,36 @@
           "format": "money",
           "annual": [
             {
-              "period": "2017",
-              "value": 36415000
+              "period": "2023",
+              "value": 35533000
+            },
+            {
+              "period": "2022",
+              "value": 10026000
+            },
+            {
+              "period": "2021",
+              "value": 497277000
+            },
+            {
+              "period": "2018",
+              "value": 21482000
             }
           ],
-          "quarterly": []
+          "quarterly": [
+            {
+              "period": "2021-Q2",
+              "value": 24683000
+            },
+            {
+              "period": "2021-Q2",
+              "value": 470398000
+            },
+            {
+              "period": "2022-Q2",
+              "value": 95996000
+            }
+          ]
         },
         {
           "id": "netIncome",
@@ -30,11 +55,52 @@
           "format": "money",
           "annual": [
             {
-              "period": "2019",
-              "value": -162965000
+              "period": "2025",
+              "value": 1292035000
+            },
+            {
+              "period": "2024",
+              "value": 833040000
+            },
+            {
+              "period": "2023",
+              "value": -295053000
+            },
+            {
+              "period": "2022",
+              "value": -709594000
+            },
+            {
+              "period": "2021",
+              "value": -408265000
             }
           ],
-          "quarterly": []
+          "quarterly": [
+            {
+              "period": "2021-Q2",
+              "value": -226590000
+            },
+            {
+              "period": "2021-Q2",
+              "value": 63167000
+            },
+            {
+              "period": "2022-Q2",
+              "value": -435936000
+            },
+            {
+              "period": "2023-Q2",
+              "value": -123239000
+            },
+            {
+              "period": "2024-Q2",
+              "value": -32531000
+            },
+            {
+              "period": "2025-Q2",
+              "value": 414827000
+            }
+          ]
         },
         {
           "id": "eps",

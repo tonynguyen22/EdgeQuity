@@ -1,8 +1,8 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "ticker": "MDLN",
   "source": "sec-edgar+finnhub",
-  "fetchedAt": "2026-05-22T11:54:37.369Z",
+  "fetchedAt": "2026-05-22T18:59:29.579Z",
   "status": "ok",
   "sections": [
     {
@@ -355,28 +355,6 @@
           ]
         },
         {
-          "id": "cash",
-          "label": "Cash and equivalents",
-          "description": "Cash and equivalents support liquidity and flexibility.",
-          "format": "money",
-          "annual": [
-            {
-              "period": "2025",
-              "value": 1939000000
-            }
-          ],
-          "quarterly": [
-            {
-              "period": "2026-Q1",
-              "value": 1939000000
-            },
-            {
-              "period": "2026-Q1",
-              "value": 2236000000
-            }
-          ]
-        },
-        {
           "id": "receivables",
           "label": "Receivables",
           "description": "Receivables reflect credit extended to customers.",
@@ -475,16 +453,7 @@
               "value": 12484000000
             }
           ],
-          "quarterly": [
-            {
-              "period": "2026-Q1",
-              "value": 12484000000
-            },
-            {
-              "period": "2026-Q1",
-              "value": 12495000000
-            }
-          ]
+          "quarterly": []
         }
       ]
     },
