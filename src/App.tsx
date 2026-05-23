@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 
 import ErrorState from './edgequity/components/ErrorState';
 import EdgequityLogo from './edgequity/components/EdgequityLogo';
@@ -13,6 +13,7 @@ export default function App() {
   const [selectedTicker, setSelectedTicker] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const refreshedQuoteTickers = useRef(new Set<string>());
 
   useEffect(() => {
     let isMounted = true;
@@ -28,15 +29,6 @@ export default function App() {
           setLoading(false);
         }
 
-        try {
-          const refreshedRecords = await refreshEdgequityRealtimeQuotes(records);
-
-          if (isMounted) {
-            setStocks(refreshedRecords);
-          }
-        } catch {
-          // Static fundamentals should remain usable when realtime quote APIs are unavailable.
-        }
       } catch (err) {
         if (isMounted) {
           setError(err instanceof Error ? err.message : 'Unknown error');
@@ -54,6 +46,40 @@ export default function App() {
       isMounted = false;
     };
   }, []);
+
+  useEffect(() => {
+    if (selectedTicker === null) {
+      return undefined;
+    }
+
+    const normalizedTicker = selectedTicker.toUpperCase();
+    const selectedStock = stocks.find((stock) => stock.ticker.toUpperCase() === normalizedTicker);
+
+    if (!selectedStock || refreshedQuoteTickers.current.has(normalizedTicker)) {
+      return undefined;
+    }
+
+    let isCancelled = false;
+    refreshedQuoteTickers.current.add(normalizedTicker);
+
+    refreshEdgequityRealtimeQuotes([selectedStock])
+      .then(([refreshedStock]) => {
+        if (isCancelled || !refreshedStock) {
+          return;
+        }
+
+        setStocks((currentStocks) => currentStocks.map((stock) => (
+          stock.ticker.toUpperCase() === normalizedTicker ? refreshedStock : stock
+        )));
+      })
+      .catch(() => {
+        refreshedQuoteTickers.current.delete(normalizedTicker);
+      });
+
+    return () => {
+      isCancelled = true;
+    };
+  }, [selectedTicker, stocks]);
 
   const selectedStock = useMemo(
     () => stocks.find((stock) => stock.ticker === selectedTicker) ?? null,

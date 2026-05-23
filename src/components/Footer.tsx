@@ -2,7 +2,6 @@ import React from 'react';
 import { TrendingUp, Linkedin, Mail, ExternalLink } from 'lucide-react';
 
 const DATA_SOURCES = [
-    { name: 'Financial Modeling Prep', url: 'https://financialmodelingprep.com' },
     { name: 'Finnhub', url: 'https://finnhub.io' },
     { name: 'API Ninjas', url: 'https://api-ninjas.com' },
     { name: 'TAAPI.io', url: 'https://taapi.io' },

@@ -51,8 +51,7 @@ Add a **Fundamentals** tab with annual (5Y) and quarterly (20Q) trend charts for
 
 ## Out of Scope
 
-- Runtime API in browser
-- FMP dependency
+- Broad runtime API polling in browser
 - Full 10-K line order in Fundamentals (that stays in Statements)
 
 ## Success Criteria

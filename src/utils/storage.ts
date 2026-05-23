@@ -3,7 +3,7 @@
 // All cache prefixes MUST be listed here — add new ones to CACHE_PREFIXES only.
 
 const CACHE_PREFIXES = [
-  'finnhub_', 'fmp_', 'edgequity_', 'vw_', 'tech_', 'earnings_',
+  'finnhub_', 'edgequity_', 'vw_', 'tech_', 'earnings_',
   'insider_', 'news_', 'dividend_', 'edgar_', 'multiples_',
   'market_cycle_', 'ddm_', 'stmt_',
 ] as const;

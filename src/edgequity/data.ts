@@ -4,7 +4,6 @@ import { proxyFetch } from '../utils/proxyFetch.ts';
 const EDGEQUITY_MANIFEST_PATH = '/data/edgequity/manifest.raw-first.json';
 const INVALID_MANIFEST_ERROR = 'Invalid Edgequity manifest';
 const INVALID_STOCK_ERROR = 'Invalid Edgequity stock record';
-const FMP_QUOTE_BATCH_SIZE = 50;
 
 const valuationKeys = [
   'peTTM',
@@ -172,25 +171,12 @@ export async function loadAllEdgequityStocks(): Promise<EdgequityStockRecord[]> 
   return await Promise.all(manifest.stocks.map((stock) => loadEdgequityStock(stock.dataPath)));
 }
 
-type FmpQuote = {
-  symbol?: unknown;
-  price?: unknown;
-  marketCap?: unknown;
+type FinnhubQuote = {
+  c?: unknown;
 };
 
-function tickerBatches(stocks: EdgequityStockRecord[]): string[][] {
-  const tickers = stocks.map((stock) => stock.ticker.toUpperCase());
-  const batches: string[][] = [];
-
-  for (let index = 0; index < tickers.length; index += FMP_QUOTE_BATCH_SIZE) {
-    batches.push(tickers.slice(index, index + FMP_QUOTE_BATCH_SIZE));
-  }
-
-  return batches;
-}
-
-async function fetchFmpQuoteBatch(tickers: string[]): Promise<FmpQuote[]> {
-  const url = `https://financialmodelingprep.com/api/v3/quote/${tickers.join(',')}`;
+async function fetchFinnhubQuote(ticker: string): Promise<FinnhubQuote> {
+  const url = `https://finnhub.io/api/v1/quote?symbol=${encodeURIComponent(ticker)}`;
   const response = await proxyFetch(url);
 
   if (!response.ok) {
@@ -198,7 +184,7 @@ async function fetchFmpQuoteBatch(tickers: string[]): Promise<FmpQuote[]> {
   }
 
   const payload = await response.json();
-  return Array.isArray(payload) ? payload as FmpQuote[] : [];
+  return isRecord(payload) ? payload as FinnhubQuote : {};
 }
 
 export async function refreshEdgequityRealtimeQuotes(stocks: EdgequityStockRecord[]): Promise<EdgequityStockRecord[]> {
@@ -206,14 +192,11 @@ export async function refreshEdgequityRealtimeQuotes(stocks: EdgequityStockRecor
     return stocks;
   }
 
-  const quoteResults = await Promise.all(tickerBatches(stocks).map(fetchFmpQuoteBatch));
-  const quotesByTicker = new Map<string, FmpQuote>();
-
-  for (const quote of quoteResults.flat()) {
-    if (typeof quote.symbol === 'string') {
-      quotesByTicker.set(quote.symbol.toUpperCase(), quote);
-    }
-  }
+  const quoteResults = await Promise.all(stocks.map(async (stock) => ({
+    ticker: stock.ticker.toUpperCase(),
+    quote: await fetchFinnhubQuote(stock.ticker.toUpperCase()),
+  })));
+  const quotesByTicker = new Map(quoteResults.map((result) => [result.ticker, result.quote]));
 
   return stocks.map((stock) => {
     const quote = quotesByTicker.get(stock.ticker.toUpperCase());
@@ -224,8 +207,7 @@ export async function refreshEdgequityRealtimeQuotes(stocks: EdgequityStockRecor
 
     return {
       ...stock,
-      price: isFiniteNumber(quote.price) ? quote.price : stock.price,
-      marketCap: isFiniteNumber(quote.marketCap) ? quote.marketCap : stock.marketCap,
+      price: isFiniteNumber(quote.c) ? quote.c : stock.price,
     };
   });
 }

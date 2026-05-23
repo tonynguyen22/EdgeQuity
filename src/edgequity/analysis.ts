@@ -58,7 +58,7 @@ const RESEARCH_REPORTS: Record<string, EdgequityResearchReportNote> = {
     finalVerdict: 'I rate NVIDIA a BUY, but not a buy-at-any-price stock. In my view, it remains the cleanest public-market way to own the AI infrastructure buildout. The three metrics I would monitor from here are Data Center networking growth, non-hyperscale customer growth, and whether supply commitments keep converting into real revenue and free cash flow.',
   },
   MSFT: {
-    sourceLabel: 'Microsoft FY2026 Q2 transcript, earnings release, and FMP statements',
+    sourceLabel: 'Microsoft FY2026 Q2 transcript, earnings release, and financial statements',
     sourceUrl: 'https://www.microsoft.com/en-us/investor/events/fy-2026/earnings-fy-2026-q2',
     earningsTitle: 'FY2026 Q2: Azure and AI keep compounding, capex remains the watch item',
     earningsDate: 'Jan 28, 2026',
@@ -99,7 +99,7 @@ const RESEARCH_REPORTS: Record<string, EdgequityResearchReportNote> = {
     finalVerdict: 'Microsoft is still one of the cleanest AI compounders because it owns both cloud infrastructure and enterprise distribution. I would frame it as a BUY at the right price, with AI capex ROI as the metric to monitor.',
   },
   AAPL: {
-    sourceLabel: 'Apple Q1 FY2026 transcript sources and FMP statements',
+    sourceLabel: 'Apple Q1 FY2026 transcript sources and financial statements',
     sourceUrl: 'https://stockanalysis.com/stocks/aapl/transcripts/',
     earningsTitle: 'Q1 FY2026: iPhone strength stabilizes the story while AI remains the open question',
     earningsDate: 'Jan 29, 2026',
@@ -140,7 +140,7 @@ const RESEARCH_REPORTS: Record<string, EdgequityResearchReportNote> = {
     finalVerdict: 'Apple is a quality holding, not the most obvious upside setup. I would call it a HOLD-to-BUY depending on entry price, with AI-driven upgrade evidence as the key catalyst.',
   },
   GOOGL: {
-    sourceLabel: 'Alphabet Q4 2025 transcript sources, earnings coverage, and FMP statements',
+    sourceLabel: 'Alphabet Q4 2025 transcript sources, earnings coverage, and financial statements',
     sourceUrl: 'https://stockanalysis.com/stocks/googl/transcripts/',
     earningsTitle: 'Q4 2025: Search, Cloud, and Gemini keep Alphabet in the AI race',
     earningsDate: 'Feb 4, 2026',
@@ -181,7 +181,7 @@ const RESEARCH_REPORTS: Record<string, EdgequityResearchReportNote> = {
     finalVerdict: 'Alphabet is one of the better risk/reward setups in mega-cap tech because the business quality is high and the valuation is not stretched. I would rate it BUY if Search monetization remains intact.',
   },
   AMZN: {
-    sourceLabel: 'Amazon Q1 2026 transcript and FMP statements',
+    sourceLabel: 'Amazon Q1 2026 transcript and financial statements',
     sourceUrl: 'https://www.fool.com/earnings/call-transcripts/2026/04/29/amazon-amzn-q1-2026-earnings-call-transcript/',
     earningsTitle: 'Q1 2026: AWS re-accelerates while retail operating leverage keeps improving',
     earningsDate: 'Apr 29, 2026',
@@ -222,7 +222,7 @@ const RESEARCH_REPORTS: Record<string, EdgequityResearchReportNote> = {
     finalVerdict: 'Amazon is a BUY if AWS acceleration and retail operating leverage remain visible. The business has multiple compounding engines, but free cash flow discipline must stay front and center.',
   },
   META: {
-    sourceLabel: 'Meta Q1 2026 official transcript and FMP statements',
+    sourceLabel: 'Meta Q1 2026 official transcript and financial statements',
     sourceUrl: 'https://s21.q4cdn.com/399680738/files/doc_financials/2026/q1/META-Q1-2026-Earnings-Call-Transcript.pdf',
     earningsTitle: 'Q1 2026: AI improves ads, but infrastructure spending becomes the debate',
     earningsDate: 'Apr 29, 2026',
@@ -263,7 +263,7 @@ const RESEARCH_REPORTS: Record<string, EdgequityResearchReportNote> = {
     finalVerdict: 'Meta is a BUY if management keeps spending discipline while AI continues improving the ad engine. The core business is excellent, but the capex ramp needs proof.',
   },
   TSLA: {
-    sourceLabel: 'Tesla Q1 2026 transcript sources and FMP statements',
+    sourceLabel: 'Tesla Q1 2026 transcript sources and financial statements',
     sourceUrl: 'https://tickertrends.io/transcripts/TSLA/Q1-earnings-transcript-2026',
     earningsTitle: 'Q1 2026: Margin stabilization matters more than the long-term robotaxi story',
     earningsDate: 'Apr 2026',
@@ -304,7 +304,7 @@ const RESEARCH_REPORTS: Record<string, EdgequityResearchReportNote> = {
     finalVerdict: 'Tesla is a HOLD for fundamentals and a speculative BUY only for investors underwriting autonomy. The report should separate current auto economics from future option value.',
   },
   JPM: {
-    sourceLabel: 'JPMorgan Q1 2026 transcript sources and FMP statements',
+    sourceLabel: 'JPMorgan Q1 2026 transcript sources and financial statements',
     sourceUrl: 'https://www.fool.com/earnings/call-transcripts/2026/04/21/jpmorgan-jpm-q1-2026-earnings-call-transcript/',
     earningsTitle: 'Q1 2026: Premium bank quality, but macro and credit cycle still matter',
     earningsDate: 'Apr 21, 2026',
@@ -345,7 +345,7 @@ const RESEARCH_REPORTS: Record<string, EdgequityResearchReportNote> = {
     finalVerdict: 'JPMorgan is the quality anchor in U.S. banking. I would rate it BUY for investors who want financial exposure, while watching credit costs and NII trajectory.',
   },
   V: {
-    sourceLabel: 'Visa Q2 FY2026 corrected transcript and FMP statements',
+    sourceLabel: 'Visa Q2 FY2026 corrected transcript and financial statements',
     sourceUrl: 'https://s1.q4cdn.com/050606653/files/doc_financials/2026/q2/CORRECTED-TRANSCRIPT_-Visa-Inc-V-US-Q2-2026-Earnings-Call-28-April-2026-5_00-PM-ET-4.pdf',
     earningsTitle: 'Q2 FY2026: Payment volume, transactions, and cross-border keep compounding',
     earningsDate: 'Apr 28, 2026',
@@ -386,7 +386,7 @@ const RESEARCH_REPORTS: Record<string, EdgequityResearchReportNote> = {
     finalVerdict: 'Visa is one of the cleanest quality compounders in the market. I would rate it BUY on pullbacks, with regulation and valuation as the main watch items.',
   },
   COST: {
-    sourceLabel: 'Costco Q2 FY2026 transcript and FMP statements',
+    sourceLabel: 'Costco Q2 FY2026 transcript and financial statements',
     sourceUrl: 'https://www.fool.com/earnings/call-transcripts/2026/03/05/costco-cost-q2-2026-earnings-call-transcript/',
     earningsTitle: 'Q2 FY2026: Membership flywheel stays strong, valuation remains the debate',
     earningsDate: 'Mar 5, 2026',
@@ -429,7 +429,7 @@ const RESEARCH_REPORTS: Record<string, EdgequityResearchReportNote> = {
 };
 
 RESEARCH_REPORTS.GOOGL = {
-  sourceLabel: 'Alphabet Q1 2026 earnings release, Q1 2026 earnings call transcript, FY2025 Form 10-K, and FMP statements',
+  sourceLabel: 'Alphabet Q1 2026 earnings release, Q1 2026 earnings call transcript, FY2025 Form 10-K, and financial statements',
   sourceUrl: 'https://s206.q4cdn.com/479360582/files/doc_financials/2026/q1/2026q1-alphabet-earnings-release.pdf',
   earningsTitle: 'Q1 2026: Search monetization stays resilient while Cloud and AI infrastructure scale',
   earningsDate: 'Apr 30, 2026',
@@ -467,7 +467,7 @@ RESEARCH_REPORTS.GOOGL = {
     { title: 'Balance Sheet and Cash Flow Capacity', body: 'Alphabet generated $164.7B of operating cash flow and $73.3B of free cash flow in FY2025, even while capex rose sharply. That financial capacity gives management room to fund AI infrastructure, buybacks, dividends, and long-term bets.' },
   ],
   forecastSummary: 'The forecast should be built around three operating drivers rather than one headline growth rate. First, Google Services needs to keep growing because it funds the entire company. Even modest Search growth matters when the revenue base is over $200B. Second, Google Cloud needs to keep converting AI demand into revenue, backlog, and operating profit. Cloud does not need to be larger than Search to matter; it only needs to become a durable second profit pool. Third, capex must eventually show up as higher revenue capacity, lower unit cost, or stronger AI product engagement. In the base case, Search remains resilient, YouTube continues monetizing attention, Cloud grows faster than consolidated revenue, and free cash flow stays strong despite elevated infrastructure spending. In the bear case, AI search lowers monetization, regulators reduce default distribution economics, and capex pushes depreciation higher before revenue catches up. In the bull case, Gemini increases query frequency, Cloud backlog converts cleanly, TPUs improve cost structure, and Waymo becomes a more visible option value.',
-  valuationNarrative: 'Alphabet should not be valued like a simple ad company, but it also should not be valued as if every AI investment will automatically create high-return growth. The useful valuation question is what investors are paying for each layer. The mature Search and YouTube layer deserves a high multiple if revenue remains resilient and margins stay strong. The Cloud layer deserves a growth multiple if backlog converts into durable operating income. The Other Bets layer should be treated as option value until losses narrow or revenue becomes material. FMP financials show FY2025 revenue of $403.0B, operating income of $129.2B, net income of $132.2B, operating cash flow of $164.7B, and free cash flow of $73.3B. The stock therefore screens as a highly profitable compounder, but not a low-capex one. The main valuation adjustment is that free cash flow yield can look less impressive while Alphabet is building AI capacity; the investor has to decide whether that capex is defensive spending or productive growth investment.',
+  valuationNarrative: 'Alphabet should not be valued like a simple ad company, but it also should not be valued as if every AI investment will automatically create high-return growth. The useful valuation question is what investors are paying for each layer. The mature Search and YouTube layer deserves a high multiple if revenue remains resilient and margins stay strong. The Cloud layer deserves a growth multiple if backlog converts into durable operating income. The Other Bets layer should be treated as option value until losses narrow or revenue becomes material. financial statements show FY2025 revenue of $403.0B, operating income of $129.2B, net income of $132.2B, operating cash flow of $164.7B, and free cash flow of $73.3B. The stock therefore screens as a highly profitable compounder, but not a low-capex one. The main valuation adjustment is that free cash flow yield can look less impressive while Alphabet is building AI capacity; the investor has to decide whether that capex is defensive spending or productive growth investment.',
   valuationModel: {
     targetYears: 3,
     basePriceTarget: 480,

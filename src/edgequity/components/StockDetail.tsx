@@ -288,7 +288,7 @@ function TonivestResearchReport({ stock, note }: { stock: EdgequityStockRecord; 
                 <p>
                   The simple way to read {stock.ticker} is through three lenses: the main product or platform that
                   drives revenue, the profit pool that carries margins, and the capital allocation pattern that decides
-                  how much of that profit becomes shareholder value. Current FMP financials show latest revenue of{' '}
+                  how much of that profit becomes shareholder value. Current financial statements show latest revenue of{' '}
                   {formatEdgequityValue(latestYear?.revenue ?? null, 'money')} and latest free cash flow of{' '}
                   {formatEdgequityValue(latestYear?.freeCashFlow ?? null, 'money')}.
                 </p>
@@ -468,7 +468,7 @@ function TonivestResearchReport({ stock, note }: { stock: EdgequityStockRecord; 
           <p>
             EPS is where operating performance meets share count. A company can grow net income and still disappoint
             shareholders if dilution is heavy or if investors were already paying for perfection. For this first pass,
-            Edgequity uses available valuation multiples and FMP financial statements; the next upgrade should connect
+            Edgequity uses available valuation multiples and financial statements; the next upgrade should connect
             consensus EPS estimates so this section can separate GAAP, adjusted EPS, and forecast EPS the way the
             Tonivest standalone reports do.
           </p>

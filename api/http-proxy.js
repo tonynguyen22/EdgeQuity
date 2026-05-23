@@ -1,5 +1,4 @@
 const ALLOWED_HOSTS = new Set([
-  'financialmodelingprep.com',
   'finnhub.io',
   'api.massive.com',
   'api.polygon.io',
@@ -35,10 +34,6 @@ function setHeader(headers, key, value) {
 function applyProviderAuth(url, headers, body) {
   const host = url.hostname.toLowerCase();
 
-  if (host === 'financialmodelingprep.com') {
-    setQueryKey(url, 'apikey', process.env.FMP_API_KEY);
-    return body;
-  }
   if (host === 'finnhub.io') {
     setQueryKey(url, 'token', process.env.FINNHUB_API_KEY);
     return body;

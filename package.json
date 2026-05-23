@@ -13,7 +13,7 @@
     "lint": "tsc --noEmit",
     "test:edgequity": "tsx --test scripts/edgequity/*.test.ts",
     "test:edgequity:ui": "tsx --test src/edgequity/*.test.ts src/edgequity/components/*.test.tsx",
-    "edgequity:data": "tsx scripts/edgequity/build-static-data.ts",
+    "edgequity:data": "npm run edgequity:finnhub-raw",
     "edgequity:finnhub-raw": "tsx scripts/edgequity/build-finnhub-raw-data.ts",
     "edgequity:sec-statements": "tsx scripts/edgequity/build-sec-statements.ts",
     "edgequity:fundamentals-charts": "tsx scripts/edgequity/build-fundamentals-charts.ts",

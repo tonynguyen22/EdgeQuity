@@ -2,7 +2,7 @@
 
 ## Overview
 
-Edgequity is a static-data fundamental stock screener for value investors. It uses a generated JSON cache instead of public runtime API calls, so the hosted app avoids free-tier API limits.
+Edgequity is a static-data fundamental stock screener for value investors. It uses a generated JSON cache for financial statements and ratios, then refreshes selected-ticker quotes through Finnhub at runtime.
 
 ## Current Architecture
 
@@ -31,11 +31,10 @@ Edgequity is a static-data fundamental stock screener for value investors. It us
 
 ## Notes
 
-- Runtime UI should not call finance APIs directly.
+- Runtime UI should not call finance APIs directly; selected-ticker quotes go through `/api/http-proxy` and Finnhub.
 - Data generation requires `FINNHUB_API_KEY` for screener raw cache (`metrics.json` includes historical ratio series).
 - **Statements** tab: SEC EDGAR (`edgequity:sec-statements`, no API key).
 - **Fundamentals** tab: `fundamentals-charts.json` from `edgequity:fundamentals-charts` (SEC facts + Finnhub series).
-- Optional: `FMP_API_KEY` for legacy `edgequity:data` pipeline only.
-- The generator defaults to a safe FMP call budget. Use `EDGEQUITY_MAX_TICKERS`, `EDGEQUITY_TICKERS`, or `EDGEQUITY_FMP_CALL_BUDGET` to control refresh scope.
+- Use `EDGEQUITY_MAX_TICKERS` or `EDGEQUITY_TICKERS` to control refresh scope.
 - Keep the UI table-first, compact, and value-investor focused.
 - The old multi-module app has been removed.

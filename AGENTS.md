@@ -49,7 +49,7 @@ ValuWise/
 - Import style: named imports (`import { useState } from 'react'`), type imports with `import type`
 - Error handling: try/catch around localStorage JSON.parse, graceful fallbacks on API failure
 - State management: React useState/useMemo/useCallback (no external state library)
-- API pattern: REST calls to FMP, Finnhub, API Ninjas, Massive API, TAAPI.io, Gemini; proxied via Vite dev server + Vercel rewrites/API routes
+- API pattern: REST calls to Finnhub, API Ninjas, Massive API, TAAPI.io, Gemini; proxied via Vite dev server + Vercel rewrites/API routes
 - Test structure: none — no test files or test framework configured
 - Module structure: each tab is a self-contained directory with `index.tsx`, `types.ts`, `calculations.ts`, `hooks/`, `components/`, `utils/`
 - Design system: CSS custom properties (`--vw-*`) in `src/index.css`, utility classes (`.vw-card`, `.vw-glow`, `.vw-stat-up/.vw-stat-down`)
