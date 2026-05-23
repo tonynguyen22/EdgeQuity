@@ -1,8 +1,10 @@
 import type { EdgequityHistoryYear, EdgequityManifest, EdgequityManifestStock, EdgequityStockRecord } from './types.ts';
+import { proxyFetch } from '../utils/proxyFetch.ts';
 
 const EDGEQUITY_MANIFEST_PATH = '/data/edgequity/manifest.raw-first.json';
 const INVALID_MANIFEST_ERROR = 'Invalid Edgequity manifest';
 const INVALID_STOCK_ERROR = 'Invalid Edgequity stock record';
+const FMP_QUOTE_BATCH_SIZE = 50;
 
 const valuationKeys = [
   'peTTM',
@@ -75,6 +77,10 @@ function isNullableString(value: unknown): value is string | null {
 
 function isNullableNumber(value: unknown): value is number | null {
   return typeof value === 'number' || value === null;
+}
+
+function isFiniteNumber(value: unknown): value is number {
+  return typeof value === 'number' && Number.isFinite(value);
 }
 
 function isManifestStock(value: unknown): value is EdgequityManifestStock {
@@ -164,4 +170,62 @@ export async function loadEdgequityStock(path: string): Promise<EdgequityStockRe
 export async function loadAllEdgequityStocks(): Promise<EdgequityStockRecord[]> {
   const manifest = await loadEdgequityManifest();
   return await Promise.all(manifest.stocks.map((stock) => loadEdgequityStock(stock.dataPath)));
+}
+
+type FmpQuote = {
+  symbol?: unknown;
+  price?: unknown;
+  marketCap?: unknown;
+};
+
+function tickerBatches(stocks: EdgequityStockRecord[]): string[][] {
+  const tickers = stocks.map((stock) => stock.ticker.toUpperCase());
+  const batches: string[][] = [];
+
+  for (let index = 0; index < tickers.length; index += FMP_QUOTE_BATCH_SIZE) {
+    batches.push(tickers.slice(index, index + FMP_QUOTE_BATCH_SIZE));
+  }
+
+  return batches;
+}
+
+async function fetchFmpQuoteBatch(tickers: string[]): Promise<FmpQuote[]> {
+  const url = `https://financialmodelingprep.com/api/v3/quote/${tickers.join(',')}`;
+  const response = await proxyFetch(url);
+
+  if (!response.ok) {
+    throw new Error(`Failed to refresh realtime quotes: ${response.status}`);
+  }
+
+  const payload = await response.json();
+  return Array.isArray(payload) ? payload as FmpQuote[] : [];
+}
+
+export async function refreshEdgequityRealtimeQuotes(stocks: EdgequityStockRecord[]): Promise<EdgequityStockRecord[]> {
+  if (stocks.length === 0) {
+    return stocks;
+  }
+
+  const quoteResults = await Promise.all(tickerBatches(stocks).map(fetchFmpQuoteBatch));
+  const quotesByTicker = new Map<string, FmpQuote>();
+
+  for (const quote of quoteResults.flat()) {
+    if (typeof quote.symbol === 'string') {
+      quotesByTicker.set(quote.symbol.toUpperCase(), quote);
+    }
+  }
+
+  return stocks.map((stock) => {
+    const quote = quotesByTicker.get(stock.ticker.toUpperCase());
+
+    if (!quote) {
+      return stock;
+    }
+
+    return {
+      ...stock,
+      price: isFiniteNumber(quote.price) ? quote.price : stock.price,
+      marketCap: isFiniteNumber(quote.marketCap) ? quote.marketCap : stock.marketCap,
+    };
+  });
 }

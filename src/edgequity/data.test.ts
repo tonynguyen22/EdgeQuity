@@ -7,7 +7,9 @@ import {
   assertEdgequityStockRecord,
   loadEdgequityManifest,
   loadEdgequityStock,
+  refreshEdgequityRealtimeQuotes,
 } from './data.ts';
+import type { EdgequityStockRecord } from './types.ts';
 
 const stockFixture = JSON.parse(readFileSync(
   new URL('../../public/data/edgequity/stocks/AAPL.json', import.meta.url),
@@ -221,5 +223,42 @@ test('loadEdgequityStock throws status on failure', async () => {
       () => loadEdgequityStock('/data/edgequity/stocks/MISSING.json'),
       /Failed to load stock data: 404/,
     );
+  });
+});
+
+test('refreshEdgequityRealtimeQuotes pulls FMP quotes at runtime and merges live price fields', async () => {
+  const apple = stockFixture as EdgequityStockRecord;
+  const staticStocks: EdgequityStockRecord[] = [
+    {
+      ...apple,
+      ticker: 'AAPL',
+      price: 190,
+      marketCap: 3_000_000_000_000,
+      enterpriseValue: 3_100_000_000_000,
+    },
+  ];
+
+  await withMockFetch({
+    ok: true,
+    status: 200,
+    json: async () => ([
+      {
+        symbol: 'AAPL',
+        price: 201.25,
+        marketCap: 3_180_000_000_000,
+      },
+    ]),
+  }, async (calls) => {
+    const refreshed = await refreshEdgequityRealtimeQuotes(staticStocks);
+
+    assert.equal(refreshed[0]?.price, 201.25);
+    assert.equal(refreshed[0]?.marketCap, 3_180_000_000_000);
+    assert.equal(refreshed[0]?.enterpriseValue, 3_100_000_000_000);
+    assert.equal(calls.length, 1);
+    assert.equal(calls[0]?.input, '/api/http-proxy');
+    assert.equal(calls[0]?.init?.method, 'POST');
+
+    const body = JSON.parse(String(calls[0]?.init?.body)) as { url: string };
+    assert.equal(body.url, 'https://financialmodelingprep.com/api/v3/quote/AAPL');
   });
 });

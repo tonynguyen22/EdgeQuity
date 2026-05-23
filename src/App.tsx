@@ -5,7 +5,7 @@ import EdgequityLogo from './edgequity/components/EdgequityLogo';
 import LoadingState from './edgequity/components/LoadingState';
 import ScreenerTable from './edgequity/components/ScreenerTable';
 import StockDetail from './edgequity/components/StockDetail';
-import { loadAllEdgequityStocks } from './edgequity/data';
+import { loadAllEdgequityStocks, refreshEdgequityRealtimeQuotes } from './edgequity/data';
 import type { EdgequityStockRecord } from './edgequity/types';
 
 export default function App() {
@@ -25,6 +25,17 @@ export default function App() {
 
         if (isMounted) {
           setStocks(records);
+          setLoading(false);
+        }
+
+        try {
+          const refreshedRecords = await refreshEdgequityRealtimeQuotes(records);
+
+          if (isMounted) {
+            setStocks(refreshedRecords);
+          }
+        } catch {
+          // Static fundamentals should remain usable when realtime quote APIs are unavailable.
         }
       } catch (err) {
         if (isMounted) {
