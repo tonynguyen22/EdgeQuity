@@ -493,7 +493,7 @@ thead .eq-sticky-col {
 
 .eq-fundamentals-chart-grid {
   display: grid;
-  gap: 8px;
+  gap: 14px;
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
@@ -506,7 +506,7 @@ thead .eq-sticky-col {
 .eq-fundamentals-chart {
   border: 1px solid var(--vw-border-dim);
   border-radius: 6px;
-  padding: 8px;
+  padding: 14px;
   overflow: hidden;
   background: var(--vw-bg-raised);
 }
@@ -515,11 +515,11 @@ thead .eq-sticky-col {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  margin-bottom: 6px;
+  margin-bottom: 8px;
 }
 
 .eq-fundamentals-chart-head h5 {
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
   text-transform: uppercase;
 }
@@ -533,21 +533,21 @@ thead .eq-sticky-col {
   display: flex;
   justify-content: space-between;
   gap: 8px;
-  font-size: 10px;
+  font-size: 11px;
   color: var(--vw-text-tertiary);
-  margin-bottom: 4px;
+  margin-bottom: 8px;
 }
 
 .eq-fundamentals-chart svg {
   display: block;
   width: 100%;
   height: auto;
-  max-height: 150px;
+  min-height: 220px;
 }
 
 .eq-fundamentals-chart-y,
 .eq-fundamentals-chart-x {
-  font-size: 8px;
+  font-size: 10px;
   fill: var(--vw-text-tertiary);
 }
 
@@ -558,7 +558,7 @@ thead .eq-sticky-col {
 .eq-fundamentals-chart-line {
   fill: none;
   stroke: var(--vw-accent);
-  stroke-width: 2;
+  stroke-width: 3;
 }
 
 .eq-fundamentals-chart-point {

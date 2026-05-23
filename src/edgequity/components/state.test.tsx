@@ -429,6 +429,7 @@ test('MetricTrendChart normalizes annual charts to the latest five years in chro
   );
 
   assert.match(html, /5Y/);
+  assert.match(html, /viewBox="0 0 520 260"/);
   assert.doesNotMatch(html, />2021</);
   assert.match(html, />2022</);
   assert.match(html, />2026</);
@@ -453,6 +454,7 @@ test('MetricTrendChart normalizes quarterly charts to the latest five quarters',
   );
 
   assert.match(html, /5Q/);
+  assert.match(html, /viewBox="0 0 520 260"/);
   assert.doesNotMatch(html, /25 Q4/);
   assert.match(html, /26 Q1/);
   assert.match(html, /27 Q1/);

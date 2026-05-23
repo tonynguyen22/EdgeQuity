@@ -132,14 +132,14 @@ function periodRank(period: string) {
 }
 
 function buildChartLayout(points: FundamentalsChartPoint[]) {
-  const width = 360;
-  const height = 140;
-  const left = 52;
-  const right = width - 12;
-  const top = 12;
-  const bottom = 86;
-  const xLabelY = height - 14;
-  const yAxisX = left - 6;
+  const width = 520;
+  const height = 260;
+  const left = 76;
+  const right = width - 20;
+  const top = 22;
+  const bottom = 196;
+  const xLabelY = height - 26;
+  const yAxisX = left - 10;
   const values = points.map((point) => point.value);
   const max = Math.max(...values);
   const min = Math.min(...values);
