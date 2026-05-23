@@ -350,7 +350,7 @@ test('StockDetail renders an analysis pending state for uncovered tickers', () =
   assert.doesNotMatch(html, /Apple pairs fortress-like cash generation/);
 });
 
-test('StockDetail keeps metric groups, investment notes, and historical fundamentals in the financials tab', () => {
+test('StockDetail renders a financial snapshot dashboard without the old historical table', () => {
   const detailStock: EdgequityStockRecord = {
     ...stock,
     warnings: ['Missing forward estimates'],
@@ -383,6 +383,16 @@ test('StockDetail keeps metric groups, investment notes, and historical fundamen
   assert.match(html, />Fundamentals</);
   assert.match(html, /id="edgequity-fundamentals-panel"/);
   assert.match(html, /hidden=""/);
+  assert.match(html, /eq-financials-overview/);
+  assert.match(html, /Financial snapshot/);
+  assert.match(html, /Latest reported year/);
+  assert.match(html, /Revenue/);
+  assert.match(html, /Operating Income/);
+  assert.match(html, /Net Income/);
+  assert.match(html, /Free Cash Flow/);
+  assert.match(html, /Total Debt/);
+  assert.match(html, /Total Equity/);
+  assert.match(html, /Shares Diluted/);
   assert.match(html, /Valuation/);
   assert.match(html, /P\/E TTM/);
   assert.match(html, /28\.0x/);
@@ -391,10 +401,11 @@ test('StockDetail keeps metric groups, investment notes, and historical fundamen
   assert.match(html, /Profitability/);
   assert.match(html, /ROE/);
   assert.match(html, /46\.0%/);
-  assert.match(html, /Historical fundamentals/);
   assert.match(html, /Gross Profit/);
   assert.match(html, /\$391\.0B/);
   assert.match(html, /\$106\.0B/);
+  assert.doesNotMatch(html, /eq-history-panel/);
+  assert.doesNotMatch(html, /Historical fundamentals/);
 });
 
 test('StockDetail renders the analyst sheet layout sections', () => {
@@ -406,9 +417,10 @@ test('StockDetail renders the analyst sheet layout sections', () => {
 
   assert.match(html, /eq-detail-hero/);
   assert.match(html, /eq-kpi-strip/);
+  assert.match(html, /eq-financials-summary/);
   assert.match(html, /eq-metric-panel/);
   assert.match(html, /Investment notes/);
-  assert.match(html, /Historical fundamentals/);
+  assert.doesNotMatch(html, /eq-history-panel/);
 });
 
 test('MetricTrendChart normalizes annual charts to the latest five years in chronological order', () => {

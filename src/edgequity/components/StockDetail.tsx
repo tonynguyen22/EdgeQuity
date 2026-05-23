@@ -28,24 +28,18 @@ const METRIC_GROUPS: MetricGroupDefinition[] = [
   { id: 'dividends', label: 'Dividends' },
 ];
 
-const HISTORY_MONEY_FIELDS = [
+const REPORT_HISTORY_FIELDS = [
   { id: 'revenue', label: 'Revenue' },
   { id: 'grossProfit', label: 'Gross Profit' },
   { id: 'operatingIncome', label: 'Operating Income' },
   { id: 'netIncome', label: 'Net Income' },
   { id: 'freeCashFlow', label: 'Free Cash Flow' },
-  { id: 'totalDebt', label: 'Total Debt' },
-  { id: 'totalEquity', label: 'Equity' },
 ] as const;
 
-type HistoryMoneyField = (typeof HISTORY_MONEY_FIELDS)[number]['id'];
+type ReportHistoryField = (typeof REPORT_HISTORY_FIELDS)[number]['id'];
 
 function getGroupColumns(group: EdgequityMetricGroup): EdgequityColumn[] {
   return EDGEQUITY_COLUMNS.filter((column) => column.group === group);
-}
-
-function formatHistoryMoney(value: number | null): string {
-  return formatEdgequityValue(value, 'money');
 }
 
 export default function StockDetail({ stock, onBack }: StockDetailProps) {
@@ -145,15 +139,8 @@ export default function StockDetail({ stock, onBack }: StockDetailProps) {
         role="tabpanel"
         aria-labelledby="edgequity-financials-tab"
         hidden={activeTab !== 'financials'}
-        className="space-y-3"
       >
-        <section className="grid gap-3 lg:grid-cols-2 2xl:grid-cols-3">
-          {METRIC_GROUPS.map((group) => (
-            <MetricGroupCard key={group.id} stock={stock} group={group} />
-          ))}
-        </section>
-
-        <HistoryTable stock={stock} />
+        <FinancialsOverview stock={stock} />
       </section>
 
       <section
@@ -1121,17 +1108,11 @@ function ReportHistoryTable({ stock }: { stock: EdgequityStockRecord }) {
           </tr>
         </thead>
         <tbody>
-          {[
-            ['Revenue', 'revenue'],
-            ['Gross Profit', 'grossProfit'],
-            ['Operating Income', 'operatingIncome'],
-            ['Net Income', 'netIncome'],
-            ['Free Cash Flow', 'freeCashFlow'],
-          ].map(([label, key]) => (
-            <tr key={key}>
-              <th>{label}</th>
+          {REPORT_HISTORY_FIELDS.map((field) => (
+            <tr key={field.id}>
+              <th>{field.label}</th>
               {stock.history.map((year) => (
-                <td key={`${year.year}-${key}`}>{formatEdgequityValue(year[key as HistoryMoneyField], 'money')}</td>
+                <td key={`${year.year}-${field.id}`}>{formatEdgequityValue(year[field.id as ReportHistoryField], 'money')}</td>
               ))}
             </tr>
           ))}
@@ -1300,6 +1281,140 @@ function HeaderMetric({ label, value, highlight = false }: { label: string; valu
   );
 }
 
+function FinancialsOverview({ stock }: { stock: EdgequityStockRecord }) {
+  const latestYear = stock.history[0];
+  const latestYearLabel = latestYear?.year ?? 'Latest period';
+  const summaryMetrics = [
+    { label: 'Latest reported year', value: latestYear?.year ?? '-', caption: 'Statement period' },
+    { label: 'Revenue', value: formatEdgequityValue(latestYear?.revenue ?? null, 'money'), caption: 'Business scale' },
+    { label: 'Gross Profit', value: formatEdgequityValue(latestYear?.grossProfit ?? null, 'money'), caption: 'After direct costs' },
+    { label: 'Operating Income', value: formatEdgequityValue(latestYear?.operatingIncome ?? null, 'money'), caption: 'Core profit' },
+    { label: 'Net Income', value: formatEdgequityValue(latestYear?.netIncome ?? null, 'money'), caption: 'Bottom-line earnings' },
+    { label: 'Free Cash Flow', value: formatEdgequityValue(latestYear?.freeCashFlow ?? null, 'money'), caption: 'Cash after capex' },
+  ];
+  const financialSections = [
+    {
+      title: 'Profitability',
+      metrics: [
+        { label: 'Gross Margin', value: formatEdgequityValue(stock.profitability.grossMargin, 'percent') },
+        { label: 'Operating Margin', value: formatEdgequityValue(stock.profitability.operatingMargin, 'percent') },
+        { label: 'Net Margin', value: formatEdgequityValue(stock.profitability.netMargin, 'percent') },
+        { label: 'ROE', value: formatEdgequityValue(stock.profitability.roe, 'percent') },
+        { label: 'ROIC', value: formatEdgequityValue(stock.profitability.roic, 'percent') },
+      ],
+    },
+    {
+      title: 'Cash generation',
+      metrics: [
+        { label: 'Operating Cash Flow', value: formatEdgequityValue(stock.cashFlow.operatingCashFlow, 'money') },
+        { label: 'Free Cash Flow', value: formatEdgequityValue(stock.cashFlow.freeCashFlow, 'money') },
+        { label: 'FCF Margin', value: formatEdgequityValue(stock.cashFlow.fcfMargin, 'percent') },
+        { label: 'FCF Conversion', value: formatEdgequityValue(stock.cashFlow.fcfConversion, 'percent') },
+        { label: 'Capex / Revenue', value: formatEdgequityValue(stock.cashFlow.capexToRevenue, 'percent') },
+      ],
+    },
+    {
+      title: 'Capital structure',
+      metrics: [
+        { label: 'Market Cap', value: formatEdgequityValue(stock.marketCap, 'money') },
+        { label: 'Enterprise Value', value: formatEdgequityValue(stock.enterpriseValue, 'money') },
+        { label: 'Total Debt', value: formatEdgequityValue(latestYear?.totalDebt ?? null, 'money') },
+        { label: 'Total Equity', value: formatEdgequityValue(latestYear?.totalEquity ?? null, 'money') },
+        { label: 'Shares Diluted', value: formatShareCount(latestYear?.sharesDiluted ?? null) },
+      ],
+    },
+    {
+      title: 'Growth and balance sheet',
+      metrics: [
+        { label: 'Revenue CAGR 3Y', value: formatEdgequityValue(stock.growth.revenueCagr3y, 'percent') },
+        { label: 'Revenue CAGR 5Y', value: formatEdgequityValue(stock.growth.revenueCagr5y, 'percent') },
+        { label: 'FCF CAGR 3Y', value: formatEdgequityValue(stock.growth.fcfCagr3y, 'percent') },
+        { label: 'Current Ratio', value: formatEdgequityValue(stock.financialHealth.currentRatio, 'number') },
+        { label: 'Net Debt / EBITDA', value: formatEdgequityValue(stock.financialHealth.netDebtToEbitda, 'multiple') },
+      ],
+    },
+  ];
+
+  return (
+    <div className="eq-financials-overview">
+      <section className="eq-financials-summary">
+        <div className="eq-financials-summary-head">
+          <div>
+            <p>Financial snapshot</p>
+            <h3>{stock.ticker} operating profile</h3>
+          </div>
+          <span>{latestYearLabel}</span>
+        </div>
+
+        <div className="eq-financials-kpi-grid">
+          {summaryMetrics.map((metric) => (
+            <FinancialMetricCard key={metric.label} label={metric.label} value={metric.value} caption={metric.caption} />
+          ))}
+        </div>
+      </section>
+
+      <section className="eq-financials-section-grid">
+        {financialSections.map((section) => (
+          <article className="eq-financials-section" key={section.title}>
+            <h3>{section.title}</h3>
+            <dl>
+              {section.metrics.map((metric) => (
+                <div key={metric.label}>
+                  <dt>{metric.label}</dt>
+                  <dd>{metric.value}</dd>
+                </div>
+              ))}
+            </dl>
+          </article>
+        ))}
+      </section>
+
+      <section className="eq-financials-metric-groups">
+        <div className="eq-financials-subhead">
+          <p>Screener metrics</p>
+          <span>Same fields used in the main comparison table.</span>
+        </div>
+        <div className="grid gap-3 lg:grid-cols-2 2xl:grid-cols-3">
+          {METRIC_GROUPS.map((group) => (
+            <MetricGroupCard key={group.id} stock={stock} group={group} />
+          ))}
+        </div>
+      </section>
+    </div>
+  );
+}
+
+function FinancialMetricCard({ label, value, caption }: { label: string; value: string; caption: string }) {
+  const isMissing = value === '-';
+
+  return (
+    <article className="eq-financials-kpi">
+      <p>{label}</p>
+      <strong className={isMissing ? 'is-missing' : ''}>{value}</strong>
+      <span>{caption}</span>
+    </article>
+  );
+}
+
+function formatShareCount(value: number | null): string {
+  if (value === null || !Number.isFinite(value)) {
+    return '-';
+  }
+
+  const absValue = Math.abs(value);
+  const sign = value < 0 ? '-' : '';
+
+  if (absValue >= 1_000_000_000) {
+    return `${sign}${(absValue / 1_000_000_000).toFixed(2)}B`;
+  }
+
+  if (absValue >= 1_000_000) {
+    return `${sign}${(absValue / 1_000_000).toFixed(1)}M`;
+  }
+
+  return `${sign}${absValue.toLocaleString('en-US', { maximumFractionDigits: 0 })}`;
+}
+
 function MetricGroupCard({ stock, group }: { stock: EdgequityStockRecord; group: MetricGroupDefinition }) {
   const columns = getGroupColumns(group.id);
 
@@ -1332,55 +1447,5 @@ function MetricGroupCard({ stock, group }: { stock: EdgequityStockRecord; group:
         })}
       </dl>
     </article>
-  );
-}
-
-function HistoryTable({ stock }: { stock: EdgequityStockRecord }) {
-  return (
-    <section className="vw-card eq-history-panel overflow-hidden">
-      <div className="border-b px-3 py-2" style={{ borderColor: 'var(--vw-border)' }}>
-        <h3 className="text-xs font-semibold uppercase text-[var(--vw-text-tertiary)]">Historical fundamentals</h3>
-      </div>
-      <div className="overflow-x-auto">
-        <table className="min-w-[900px] table-fixed border-collapse text-[12px]">
-          <thead style={{ background: 'var(--vw-bg-raised)', color: 'var(--vw-text-tertiary)' }}>
-            <tr className="border-b" style={{ borderColor: 'var(--vw-border)' }}>
-              <th scope="col" className="w-[72px] px-3 py-1.5 text-left text-[10px] font-semibold uppercase">
-                Year
-              </th>
-              {HISTORY_MONEY_FIELDS.map((field) => (
-                <th key={field.id} scope="col" className="w-[118px] px-2 py-1.5 text-right text-[10px] font-semibold uppercase">
-                  {field.label}
-                </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody className="divide-y" style={{ borderColor: 'var(--vw-border-dim)' }}>
-            {stock.history.map((year) => (
-              <tr key={year.year}>
-                <th scope="row" className="px-3 py-1.5 text-left font-mono text-[12px] font-semibold">
-                  {year.year}
-                </th>
-                {HISTORY_MONEY_FIELDS.map((field) => (
-                  <td key={field.id} className="px-2 py-1.5 text-right font-mono tabular-nums">
-                    {formatHistoryMoney(year[field.id as HistoryMoneyField])}
-                  </td>
-                ))}
-              </tr>
-            ))}
-            {stock.history.length === 0 && (
-              <tr>
-                <td
-                  colSpan={HISTORY_MONEY_FIELDS.length + 1}
-                  className="px-3 py-8 text-center text-sm text-[var(--vw-text-tertiary)]"
-                >
-                  No historical fundamentals available
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </table>
-      </div>
-    </section>
   );
 }
