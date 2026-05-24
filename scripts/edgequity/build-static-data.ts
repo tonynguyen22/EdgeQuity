@@ -1,4 +1,4 @@
-import { access, mkdir, rename, rm, writeFile } from "node:fs/promises";
+import { access, mkdir, readFile, rename, rm, writeFile } from "node:fs/promises";
 import path from "node:path";
 
 import { EDGEQUITY_SUPPORTED_TICKERS } from "../../src/edgequity/universe.ts";
@@ -15,10 +15,10 @@ const EDGEQUITY_DATA_DIR = path.join("public", "data", "edgequity");
 const EDGEQUITY_STOCKS_DIR = path.join(EDGEQUITY_DATA_DIR, "stocks");
 const EDGEQUITY_TMP_DIR = path.join(EDGEQUITY_DATA_DIR, ".tmp");
 const FMP_BASE_URL = "https://financialmodelingprep.com/stable";
-const FINNHUB_BASE_URL = "https://finnhub.io/api/v1";
-const FMP_STATEMENT_LIMIT = "6";
+const FMP_STATEMENT_LIMIT = "5";
 export const FMP_CALLS_PER_TICKER = 3;
 export const DEFAULT_FMP_DAILY_CALL_BUDGET = 246;
+const DEFAULT_FMP_REQUEST_DELAY_MS = 350;
 
 type BuiltStock = {
   record: EdgequityStockRecord;
@@ -112,6 +112,10 @@ function optionalPositiveIntegerEnv(name: string): number | null {
   return parsed;
 }
 
+function sleep(ms: number): Promise<void> {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
 function selectedEdgequityTickers(): string[] {
   const supportedTickers: string[] = [...EDGEQUITY_SUPPORTED_TICKERS].sort();
   const supportedTickerSet = new Set<string>(supportedTickers);
@@ -164,13 +168,18 @@ function enforceFmpBudget(selectedTickers: string[]): void {
 async function fetchJson<T>(url: URL): Promise<T> {
   const response = await fetch(url);
   if (!response.ok) {
-    throw new Error(`Request failed ${response.status} ${response.statusText}: ${url.origin}${url.pathname}`);
+    const body = await response.text();
+    const detail = body.trim().length > 0 ? ` - ${body.trim().slice(0, 240)}` : "";
+    throw new Error(`Request failed ${response.status} ${response.statusText}: ${url.origin}${url.pathname}${detail}`);
   }
 
   return response.json() as Promise<T>;
 }
 
 async function fetchFmpStatement(endpoint: string, ticker: string, apiKey: string): Promise<Record<string, unknown>[]> {
+  const delayMs = optionalPositiveIntegerEnv("EDGEQUITY_FMP_REQUEST_DELAY_MS") ?? DEFAULT_FMP_REQUEST_DELAY_MS;
+  await sleep(delayMs);
+
   const url = new URL(`${FMP_BASE_URL}/${endpoint}`);
   url.searchParams.set("symbol", ticker);
   url.searchParams.set("limit", FMP_STATEMENT_LIMIT);
@@ -179,38 +188,57 @@ async function fetchFmpStatement(endpoint: string, ticker: string, apiKey: strin
   return fetchJson<Record<string, unknown>[]>(url);
 }
 
-async function fetchFinnhub(endpoint: string, ticker: string, apiKey: string): Promise<Record<string, unknown>> {
-  const url = new URL(`${FINNHUB_BASE_URL}/${endpoint}`);
-  url.searchParams.set("symbol", ticker);
-  url.searchParams.set("token", apiKey);
-  if (endpoint === "stock/metric") {
-    url.searchParams.set("metric", "all");
+async function readExistingStock(ticker: string): Promise<EdgequityStockRecord | null> {
+  try {
+    const payload = await readFile(path.join(EDGEQUITY_STOCKS_DIR, `${ticker}.json`), "utf8");
+    return JSON.parse(payload) as EdgequityStockRecord;
+  } catch {
+    return null;
   }
-
-  return fetchJson<Record<string, unknown>>(url);
 }
 
-async function buildStock(ticker: string, fmpApiKey: string, finnhubApiKey: string): Promise<BuiltStock> {
-  const [incomeStatements, balanceSheets, cashFlows, profile, metrics] = await Promise.all([
-    fetchFmpStatement("income-statement", ticker, fmpApiKey),
-    fetchFmpStatement("balance-sheet-statement", ticker, fmpApiKey),
-    fetchFmpStatement("cash-flow-statement", ticker, fmpApiKey),
-    fetchFinnhub("stock/profile2", ticker, finnhubApiKey),
-    fetchFinnhub("stock/metric", ticker, finnhubApiKey),
-  ]);
+function profileFromExistingStock(ticker: string, existing: EdgequityStockRecord | null): RawObject {
+  return {
+    companyName: existing?.name ?? ticker,
+    name: existing?.name ?? ticker,
+    currency: existing?.currency ?? "USD",
+    price: existing?.price,
+    mktCap: existing?.marketCap,
+    sector: existing?.sector,
+    industry: existing?.industry,
+  };
+}
+
+async function buildStock(ticker: string, fmpApiKey: string): Promise<BuiltStock> {
+  const existingStock = await readExistingStock(ticker);
+  const incomeStatements = await fetchFmpStatement("income-statement", ticker, fmpApiKey);
+  const balanceSheets = await fetchFmpStatement("balance-sheet-statement", ticker, fmpApiKey);
+  const cashFlows = await fetchFmpStatement("cash-flow-statement", ticker, fmpApiKey);
 
   const record = normalizeEdgequityRecord({
     ticker,
-    profile,
-    metrics,
+    profile: profileFromExistingStock(ticker, existingStock),
+    metrics: {},
     incomeStatements,
     balanceSheets,
     cashFlows,
   });
+  record.price = null;
   record.financialStatements = buildFinancialStatements(incomeStatements, balanceSheets, cashFlows);
   record.sources = {
-    ...record.sources,
+    profile: {
+      provider: existingStock ? "manual" : "derived",
+      fetchedAt: record.financialStatements.source.fetchedAt,
+      status: existingStock ? "ok" : "partial",
+      message: existingStock ? "Reused from previous static stock record" : "Fallback ticker metadata",
+    },
     financialsReported: record.financialStatements.source,
+    summary: {
+      provider: "derived",
+      fetchedAt: record.financialStatements.source.fetchedAt,
+      status: "ok",
+      message: "Summary metrics derived from FMP three-statement data",
+    },
   };
   const dataPath = `/data/edgequity/stocks/${ticker}.json`;
 
@@ -292,11 +320,10 @@ async function main() {
   enforceFmpBudget(universe);
 
   const fmpApiKey = requiredEnv("FMP_API_KEY");
-  const finnhubApiKey = requiredEnv("FINNHUB_API_KEY");
 
   const builtStocks: BuiltStock[] = [];
   for (const ticker of universe) {
-    builtStocks.push(await buildStock(ticker, fmpApiKey, finnhubApiKey));
+    builtStocks.push(await buildStock(ticker, fmpApiKey));
   }
 
   const manifest: EdgequityManifest = {

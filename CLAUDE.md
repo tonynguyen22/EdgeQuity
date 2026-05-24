@@ -33,7 +33,7 @@ Edgequity is a static-data fundamental stock screener for value investors. It us
 
 - Runtime UI should not call finance APIs directly; selected-ticker quotes go through `/api/http-proxy` and Finnhub.
 - Data generation requires `FMP_API_KEY` for income statement, balance sheet, and cash flow data.
-- Data generation also requires `FINNHUB_API_KEY` for profile/metrics and runtime selected-ticker quote refreshes.
+- Runtime selected-ticker quote refreshes use `FINNHUB_API_KEY`; static data generation does not require it.
 - **Statements** tab: selected stock record `financialStatements.annual` from FMP, with a static summary fallback.
 - **Fundamentals** tab: chart sections derived from the same FMP statement data on the selected stock record.
 - Use `EDGEQUITY_MAX_TICKERS`, `EDGEQUITY_TICKERS`, or `EDGEQUITY_FMP_CALL_BUDGET` to control refresh scope.
