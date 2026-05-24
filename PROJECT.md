@@ -2,7 +2,7 @@
 
 ## Overview
 
-Edgequity is a static-data fundamental stock screener for value investors. A local or GitHub Actions data job fetches the supported stock universe, normalizes the records, writes JSON files under `public/data/edgequity`, and the React app renders those files as a table-first screener with a stock detail page. Runtime finance calls are limited to Finnhub quote refreshes for selected tickers.
+Edgequity is a static-data fundamental stock screener for value investors. A local or GitHub Actions data job fetches the FMP free-tier three-statement universe, normalizes the records, writes JSON files under `public/data/edgequity`, and the React app renders those files as a table-first screener with a stock detail page. Runtime finance calls are limited to Finnhub quote refreshes for selected tickers.
 
 ## Tech Stack
 
@@ -20,9 +20,9 @@ Edgequity is a static-data fundamental stock screener for value investors. A loc
 - `src/edgequity/metrics.ts` defines table columns and formatting.
 - `src/edgequity/components/ScreenerTable.tsx` renders the sortable/filterable table.
 - `src/edgequity/components/StockDetail.tsx` renders the drilldown page.
-- `scripts/edgequity/build-finnhub-raw-data.ts` fetches raw Finnhub data and writes static JSON.
+- `scripts/edgequity/build-static-data.ts` fetches FMP income statement, balance sheet, and cash flow data, then writes static JSON.
 - `scripts/edgequity/normalize.ts` converts raw provider payloads into Edgequity records.
-- `public/data/edgequity/manifest.raw-first.json` lists available static records.
+- `public/data/edgequity/manifest.json` lists available FMP-supported static records.
 - `public/data/edgequity/stocks/*.json` contains one normalized stock record per ticker.
 
 ## Commands
@@ -32,15 +32,16 @@ Edgequity is a static-data fundamental stock screener for value investors. A loc
 - `npm run lint` - TypeScript check with `tsc --noEmit`.
 - `npm run test:edgequity` - data normalization tests.
 - `npm run test:edgequity:ui` - loader, formatter, and component tests.
-- `npm run edgequity:data` - generate static stock data through the Finnhub raw-first pipeline. Requires API keys.
+- `npm run edgequity:data` - generate static stock data from FMP three statements plus Finnhub profile/metrics. Requires API keys.
 
 ## Static Data Refresh
 
 Edgequity reads static JSON from `public/data/edgequity` at runtime. To refresh data in GitHub Actions, configure repository secrets:
 
 - `FINNHUB_API_KEY`
+- `FMP_API_KEY`
 
-The `Refresh Edgequity static data` workflow can be run manually and also runs weekly on Monday at 09:00 UTC. To change the refresh universe, set `EDGEQUITY_MAX_TICKERS` or set `EDGEQUITY_TICKERS` to a comma-separated subset.
+The `Refresh Edgequity static data` workflow can be run manually and also runs weekly on Monday at 09:00 UTC. The main screener universe is the 82 FMP-confirmed tickers with all three statements available on the free tier. To change the refresh universe, set `EDGEQUITY_MAX_TICKERS`, set `EDGEQUITY_TICKERS` to a comma-separated subset, or intentionally raise `EDGEQUITY_FMP_CALL_BUDGET`.
 
 ## Data Rules
 

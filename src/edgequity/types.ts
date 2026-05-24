@@ -91,7 +91,7 @@ export interface EdgequityStockRecord {
 }
 
 export interface EdgequityDataSource {
-  provider: 'finnhub' | 'sec' | 'manual' | 'derived';
+  provider: 'fmp' | 'finnhub' | 'sec' | 'manual' | 'derived';
   endpoint?: string;
   fetchedAt?: string;
   status: 'ok' | 'partial' | 'missing' | 'error';

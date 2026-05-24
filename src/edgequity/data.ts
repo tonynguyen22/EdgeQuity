@@ -1,7 +1,7 @@
 import type { EdgequityHistoryYear, EdgequityManifest, EdgequityManifestStock, EdgequityStockRecord } from './types.ts';
 import { proxyFetch } from '../utils/proxyFetch.ts';
 
-const EDGEQUITY_MANIFEST_PATH = '/data/edgequity/manifest.raw-first.json';
+const EDGEQUITY_MANIFEST_PATH = '/data/edgequity/manifest.json';
 const INVALID_MANIFEST_ERROR = 'Invalid Edgequity manifest';
 const INVALID_STOCK_ERROR = 'Invalid Edgequity stock record';
 

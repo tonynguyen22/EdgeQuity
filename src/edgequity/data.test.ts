@@ -24,7 +24,7 @@ const nvdaFixture = JSON.parse(readFileSync(
   history: Array<{ year: string; revenue: number }>;
 };
 const staticManifest = JSON.parse(readFileSync(
-  new URL('../../public/data/edgequity/manifest.raw-first.json', import.meta.url),
+  new URL('../../public/data/edgequity/manifest.json', import.meta.url),
   'utf8',
 )) as {
   universe: string[];
@@ -117,12 +117,16 @@ test('NVIDIA static quote and chart history reflect the Q1 FY2027 report context
   assert.equal(nvdaFixture.history[0]?.revenue, 215938000000);
 });
 
-test('bundled raw-first dataset includes a broader screener universe with valid stock files', () => {
+test('bundled FMP three-statement dataset includes only the confirmed free-tier universe', () => {
   assertEdgequityManifest(staticManifest);
-  assert.ok(staticManifest.stocks.length >= 2);
+  assert.equal(staticManifest.stocks.length, 82);
+  assert.equal(staticManifest.universe.length, 82);
   assert.deepEqual(staticManifest.universe, staticManifest.stocks.map((stock) => stock.ticker));
   assert.equal(staticManifest.stocks.some((stock) => stock.ticker === 'AAPL'), true);
   assert.equal(staticManifest.stocks.some((stock) => stock.ticker === 'NVDA'), true);
+  assert.equal(staticManifest.stocks.some((stock) => stock.ticker === 'FUBO'), false);
+  assert.equal(staticManifest.stocks.some((stock) => stock.ticker === 'RKT'), false);
+  assert.equal(staticManifest.stocks.every((stock) => stock.dataPath.startsWith('/data/edgequity/stocks/')), true);
 
   for (const stock of staticManifest.stocks) {
     const stockPath = new URL(`../../public${stock.dataPath}`, import.meta.url);
@@ -178,7 +182,7 @@ test('loadEdgequityManifest uses manifest path and no-cache', async () => {
 
     assert.equal(manifest.app, 'Edgequity');
     assert.deepEqual(calls, [{
-      input: '/data/edgequity/manifest.raw-first.json',
+      input: '/data/edgequity/manifest.json',
       init: { cache: 'no-cache' },
     }]);
   });
