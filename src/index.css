@@ -497,6 +497,10 @@ thead .eq-sticky-col {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
+.eq-fundamentals-chart-grid.is-single {
+  grid-template-columns: 1fr;
+}
+
 @media (max-width: 900px) {
   .eq-fundamentals-chart-grid {
     grid-template-columns: 1fr;

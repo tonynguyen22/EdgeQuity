@@ -36,6 +36,9 @@ export default function FundamentalsPanel({ stock }: FundamentalsPanelProps) {
               const latest = latestPoint(metric);
               const yLabel =
                 metric.format === 'percent' ? '%' : metric.format === 'multiple' ? 'Multiple' : 'USD';
+              const hasAnnual = metric.annual.length > 0;
+              const hasQuarterly = metric.quarterly.length > 0;
+              const chartCount = Number(hasAnnual) + Number(hasQuarterly);
 
               return (
                 <article key={metric.id} className="eq-fundamentals-metric-card">
@@ -53,21 +56,25 @@ export default function FundamentalsPanel({ stock }: FundamentalsPanelProps) {
                     )}
                   </div>
 
-                  <div className="eq-fundamentals-chart-grid">
-                    <MetricTrendChart
-                      title={metric.label}
-                      cadence="Annual"
-                      points={metric.annual}
-                      format={metric.format}
-                      yAxisLabel={yLabel}
-                    />
-                    <MetricTrendChart
-                      title={metric.label}
-                      cadence="Quarterly"
-                      points={metric.quarterly}
-                      format={metric.format}
-                      yAxisLabel={yLabel}
-                    />
+                  <div className={`eq-fundamentals-chart-grid${chartCount <= 1 ? ' is-single' : ''}`}>
+                    {hasAnnual && (
+                      <MetricTrendChart
+                        title={metric.label}
+                        cadence="Annual"
+                        points={metric.annual}
+                        format={metric.format}
+                        yAxisLabel={yLabel}
+                      />
+                    )}
+                    {hasQuarterly && (
+                      <MetricTrendChart
+                        title={metric.label}
+                        cadence="Quarterly"
+                        points={metric.quarterly}
+                        format={metric.format}
+                        yAxisLabel={yLabel}
+                      />
+                    )}
                   </div>
                 </article>
               );

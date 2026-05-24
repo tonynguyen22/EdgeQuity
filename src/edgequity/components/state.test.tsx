@@ -532,6 +532,15 @@ test('FundamentalsPanel renders charts directly from FMP statements on the selec
   assert.doesNotMatch(html, /edgequity:fundamentals-charts/);
 });
 
+test('FundamentalsPanel does not leave a blank quarterly chart column when only annual FMP data exists', () => {
+  const html = renderToStaticMarkup(<FundamentalsPanel stock={fmpStatementStock} />);
+
+  assert.match(html, /eq-fundamentals-chart-grid is-single/);
+  assert.match(html, /Revenue Annual chart/);
+  assert.doesNotMatch(html, /Quarterly chart/);
+  assert.doesNotMatch(html, /No data/);
+});
+
 test('StockDetail renders the analyst sheet layout sections', () => {
   const detailStock: EdgequityStockRecord = {
     ...stock,
