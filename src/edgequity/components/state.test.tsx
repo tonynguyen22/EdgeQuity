@@ -8,6 +8,8 @@ import EdgequityLogo from './EdgequityLogo.tsx';
 import LoadingState from './LoadingState.tsx';
 import MetricCell from './MetricCell.tsx';
 import MetricTrendChart from './MetricTrendChart.tsx';
+import FundamentalsPanel from './FundamentalsPanel.tsx';
+import ReportedFinancialsPanel from './ReportedFinancialsPanel.tsx';
 import ScreenerTable, { getScreenerSectors, getVisibleScreenerStocks } from './ScreenerTable.tsx';
 import ScreenerToolbar from './ScreenerToolbar.tsx';
 import StockDetail from './StockDetail.tsx';
@@ -67,6 +69,98 @@ const stock: EdgequityStockRecord = {
   },
   history: [],
   warnings: [],
+};
+
+const fmpStatementStock: EdgequityStockRecord = {
+  ...stock,
+  financialStatements: {
+    source: {
+      provider: 'fmp',
+      endpoint: 'income-statement,balance-sheet-statement,cash-flow-statement',
+      fetchedAt: '2026-05-24T00:00:00.000Z',
+      status: 'ok',
+    },
+    annual: {
+      incomeStatement: [
+        {
+          fiscalYear: '2025',
+          period: 'FY',
+          date: '2025-12-31',
+          reportedCurrency: 'USD',
+          values: {
+            revenue: 600000000000,
+            grossProfit: 300000000000,
+            operatingIncome: 200000000000,
+            netIncome: 180000000000,
+            epsdiluted: 12,
+          },
+        },
+        {
+          fiscalYear: '2024',
+          period: 'FY',
+          date: '2024-12-31',
+          reportedCurrency: 'USD',
+          values: {
+            revenue: 500000000000,
+            grossProfit: 240000000000,
+            operatingIncome: 160000000000,
+            netIncome: 140000000000,
+            epsdiluted: 10,
+          },
+        },
+      ],
+      balanceSheet: [
+        {
+          fiscalYear: '2025',
+          period: 'FY',
+          date: '2025-12-31',
+          reportedCurrency: 'USD',
+          values: {
+            cashAndCashEquivalents: 90000000000,
+            totalAssets: 700000000000,
+            totalDebt: 20000000000,
+            totalStockholdersEquity: 500000000000,
+          },
+        },
+        {
+          fiscalYear: '2024',
+          period: 'FY',
+          date: '2024-12-31',
+          reportedCurrency: 'USD',
+          values: {
+            cashAndCashEquivalents: 80000000000,
+            totalAssets: 650000000000,
+            totalDebt: 22000000000,
+            totalStockholdersEquity: 470000000000,
+          },
+        },
+      ],
+      cashFlow: [
+        {
+          fiscalYear: '2025',
+          period: 'FY',
+          date: '2025-12-31',
+          reportedCurrency: 'USD',
+          values: {
+            operatingCashFlow: 170000000000,
+            capitalExpenditure: -20000000000,
+            freeCashFlow: 150000000000,
+          },
+        },
+        {
+          fiscalYear: '2024',
+          period: 'FY',
+          date: '2024-12-31',
+          reportedCurrency: 'USD',
+          values: {
+            operatingCashFlow: 145000000000,
+            capitalExpenditure: -15000000000,
+            freeCashFlow: 130000000000,
+          },
+        },
+      ],
+    },
+  },
 };
 
 test('LoadingState renders the Edgequity loading message', () => {
@@ -406,6 +500,36 @@ test('StockDetail renders a financial snapshot dashboard without the old histori
   assert.match(html, /\$106\.0B/);
   assert.doesNotMatch(html, /eq-history-panel/);
   assert.doesNotMatch(html, /Historical fundamentals/);
+});
+
+test('ReportedFinancialsPanel renders FMP statement data from the selected stock record', () => {
+  const html = renderToStaticMarkup(<ReportedFinancialsPanel stock={fmpStatementStock} />);
+
+  assert.match(html, /Statements \(FMP\)/);
+  assert.match(html, /Source: Financial Modeling Prep/);
+  assert.match(html, />Income Statement</);
+  assert.match(html, />Balance Sheet</);
+  assert.match(html, />Cash Flow</);
+  assert.match(html, /Revenue/);
+  assert.match(html, /Gross Profit/);
+  assert.match(html, /\$600\.00B/);
+  assert.doesNotMatch(html, /SEC EDGAR/);
+  assert.doesNotMatch(html, /edgequity:sec-statements/);
+});
+
+test('FundamentalsPanel renders charts directly from FMP statements on the selected stock record', () => {
+  const html = renderToStaticMarkup(<FundamentalsPanel stock={fmpStatementStock} />);
+
+  assert.match(html, /Growth/);
+  assert.match(html, /Revenue/);
+  assert.match(html, /Gross profit/);
+  assert.match(html, /Free cash flow/);
+  assert.match(html, /5Y/);
+  assert.match(html, /2024/);
+  assert.match(html, /2025/);
+  assert.match(html, /\$600\.00B/);
+  assert.doesNotMatch(html, /fundamentals chart cache/);
+  assert.doesNotMatch(html, /edgequity:fundamentals-charts/);
 });
 
 test('StockDetail renders the analyst sheet layout sections', () => {

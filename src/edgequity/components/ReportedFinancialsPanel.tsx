@@ -1,86 +1,33 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 
 import {
-  fetchReportedFinancials,
+  buildReportedFinancialsFromStock,
   formatReportedMoney,
   formatSecSourceLine,
   getAvailableStatements,
   getReportedStatementLabel,
   getStatementPivot,
   type ReportedStatementId,
-  type SecStatementsDocument,
 } from '../reported-financials';
+import type { EdgequityStockRecord } from '../types';
 
 interface ReportedFinancialsPanelProps {
-  ticker: string;
+  stock: EdgequityStockRecord;
 }
 
-export default function ReportedFinancialsPanel({ ticker }: ReportedFinancialsPanelProps) {
-  const [document, setDocument] = useState<SecStatementsDocument | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+export default function ReportedFinancialsPanel({ stock }: ReportedFinancialsPanelProps) {
+  const document = useMemo(() => buildReportedFinancialsFromStock(stock), [stock]);
+  const availableStatements = useMemo(() => getAvailableStatements(document), [document]);
   const [statementId, setStatementId] = useState<ReportedStatementId>('ic');
+  const activeStatementId = availableStatements.includes(statementId) ? statementId : availableStatements[0] ?? 'ic';
+  const pivot = getStatementPivot(document, activeStatementId);
+  const sourceTitle = document.source === 'fmp' ? 'Statements (FMP)' : 'Statements';
+  const sourceName = document.source === 'fmp' ? 'Financial Modeling Prep' : 'Static summary';
 
-  useEffect(() => {
-    let cancelled = false;
-    setLoading(true);
-    setError(null);
-    setDocument(null);
-
-    fetchReportedFinancials(ticker)
-      .then((payload) => {
-        if (cancelled) return;
-        setDocument(payload);
-        const available = getAvailableStatements(payload);
-        setStatementId((current) => (available.includes(current) ? current : available[0] ?? 'ic'));
-      })
-      .catch((fetchError: unknown) => {
-        if (cancelled) return;
-        setError(fetchError instanceof Error ? fetchError.message : 'Unable to load SEC financial statements');
-      })
-      .finally(() => {
-        if (!cancelled) setLoading(false);
-      });
-
-    return () => {
-      cancelled = true;
-    };
-  }, [ticker]);
-
-  const availableStatements = useMemo(
-    () => (document ? getAvailableStatements(document) : []),
-    [document],
-  );
-
-  const pivot = useMemo(() => {
-    if (!document || availableStatements.length === 0) return null;
-    return getStatementPivot(document, statementId);
-  }, [document, statementId, availableStatements.length]);
-
-  if (loading) {
+  if (document.status !== 'ok' || pivot.years.length === 0) {
     return (
       <section className="vw-card eq-reported-panel px-4 py-8 text-center text-sm text-[var(--vw-text-secondary)]">
-        Loading SEC financial statements…
-      </section>
-    );
-  }
-
-  if (error) {
-    return (
-      <section className="vw-card eq-reported-panel px-4 py-8 text-center text-sm text-[var(--vw-text-secondary)]">
-        {error}
-      </section>
-    );
-  }
-
-  if (!document || document.status !== 'ok' || !pivot || pivot.years.length === 0) {
-    const hint =
-      document?.status === 'no_cik'
-        ? `${ticker} is not registered with the SEC (no CIK). BCTC may only exist on the home exchange (e.g. TSX for Canadian banks).`
-        : `No SEC XBRL data cached for ${ticker}. Run: npm run edgequity:sec-statements`;
-    return (
-      <section className="vw-card eq-reported-panel px-4 py-8 text-center text-sm text-[var(--vw-text-secondary)]">
-        {hint}
+        No statement data is available for {stock.ticker}.
       </section>
     );
   }
@@ -88,9 +35,9 @@ export default function ReportedFinancialsPanel({ ticker }: ReportedFinancialsPa
   return (
     <section className="vw-card eq-reported-panel overflow-hidden">
       <header className="border-b px-3 py-2" style={{ borderColor: 'var(--vw-border)' }}>
-        <h3 className="text-xs font-semibold uppercase text-[var(--vw-text-tertiary)]">Statements (SEC)</h3>
+        <h3 className="text-xs font-semibold uppercase text-[var(--vw-text-tertiary)]">{sourceTitle}</h3>
         <p className="mt-1 text-sm text-[var(--vw-text-secondary)]">
-          {document.entityName ?? ticker} · Source: SEC EDGAR · {formatSecSourceLine(document)}
+          {document.entityName ?? stock.ticker} - Source: {sourceName} - {formatSecSourceLine(document)}
         </p>
       </header>
 
@@ -99,7 +46,7 @@ export default function ReportedFinancialsPanel({ ticker }: ReportedFinancialsPa
           <button
             key={id}
             type="button"
-            className={statementId === id ? 'is-active' : ''}
+            className={activeStatementId === id ? 'is-active' : ''}
             onClick={() => setStatementId(id)}
           >
             {getReportedStatementLabel(id)}

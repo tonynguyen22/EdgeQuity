@@ -28,6 +28,26 @@ export interface EdgequityHistoryYear {
   sharesDiluted: number | null;
 }
 
+export interface EdgequityFinancialStatementPeriod {
+  fiscalYear: string;
+  period: string;
+  date: string | null;
+  reportedCurrency: string | null;
+  values: Record<string, number | string | null>;
+}
+
+export interface EdgequityFinancialStatementSet {
+  incomeStatement: EdgequityFinancialStatementPeriod[];
+  balanceSheet: EdgequityFinancialStatementPeriod[];
+  cashFlow: EdgequityFinancialStatementPeriod[];
+}
+
+export interface EdgequityFinancialStatements {
+  source: EdgequityDataSource;
+  annual: EdgequityFinancialStatementSet;
+  quarterly?: EdgequityFinancialStatementSet;
+}
+
 export interface EdgequityStockRecord {
   ticker: string;
   name: string;
@@ -81,6 +101,7 @@ export interface EdgequityStockRecord {
     payoutRatio: number | null;
   };
   history: EdgequityHistoryYear[];
+  financialStatements?: EdgequityFinancialStatements;
   warnings: string[];
   sources?: {
     profile?: EdgequityDataSource;

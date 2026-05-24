@@ -1,67 +1,23 @@
-import { useEffect, useState } from 'react';
-
 import {
-  fetchFundamentalsCharts,
+  buildFundamentalsChartsFromStock,
   formatFundamentalsValue,
   latestPoint,
-  type FundamentalsChartsDocument,
 } from '../fundamentals-charts';
+import type { EdgequityStockRecord } from '../types';
 
 import MetricTrendChart from './MetricTrendChart';
 
 interface FundamentalsPanelProps {
-  ticker: string;
+  stock: EdgequityStockRecord;
 }
 
-export default function FundamentalsPanel({ ticker }: FundamentalsPanelProps) {
-  const [document, setDocument] = useState<FundamentalsChartsDocument | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+export default function FundamentalsPanel({ stock }: FundamentalsPanelProps) {
+  const document = buildFundamentalsChartsFromStock(stock);
 
-  useEffect(() => {
-    let cancelled = false;
-    setLoading(true);
-    setError(null);
-    setDocument(null);
-
-    fetchFundamentalsCharts(ticker)
-      .then((payload) => {
-        if (!cancelled) setDocument(payload);
-      })
-      .catch((fetchError: unknown) => {
-        if (!cancelled) {
-          setError(fetchError instanceof Error ? fetchError.message : 'Unable to load fundamentals charts');
-        }
-      })
-      .finally(() => {
-        if (!cancelled) setLoading(false);
-      });
-
-    return () => {
-      cancelled = true;
-    };
-  }, [ticker]);
-
-  if (loading) {
+  if (document.sections.length === 0) {
     return (
       <section className="vw-card eq-fundamentals-panel px-4 py-8 text-center text-sm text-[var(--vw-text-secondary)]">
-        Loading fundamentals charts…
-      </section>
-    );
-  }
-
-  if (error) {
-    return (
-      <section className="vw-card eq-fundamentals-panel px-4 py-8 text-center text-sm text-[var(--vw-text-secondary)]">
-        {error}
-      </section>
-    );
-  }
-
-  if (!document || document.sections.length === 0) {
-    return (
-      <section className="vw-card eq-fundamentals-panel px-4 py-8 text-center text-sm text-[var(--vw-text-secondary)]">
-        No fundamentals chart cache for {ticker}. Run: npm run edgequity:fundamentals-charts
+        No fundamentals data is available for {stock.ticker}.
       </section>
     );
   }

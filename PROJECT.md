@@ -23,7 +23,7 @@ Edgequity is a static-data fundamental stock screener for value investors. A loc
 - `scripts/edgequity/build-static-data.ts` fetches FMP income statement, balance sheet, and cash flow data, then writes static JSON.
 - `scripts/edgequity/normalize.ts` converts raw provider payloads into Edgequity records.
 - `public/data/edgequity/manifest.json` lists available FMP-supported static records.
-- `public/data/edgequity/stocks/*.json` contains one normalized stock record per ticker.
+- `public/data/edgequity/stocks/*.json` contains one normalized stock record per ticker, including embedded FMP annual income statement, balance sheet, and cash flow periods for the detail tabs.
 
 ## Commands
 

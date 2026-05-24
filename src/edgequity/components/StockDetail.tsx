@@ -149,7 +149,7 @@ export default function StockDetail({ stock, onBack }: StockDetailProps) {
         aria-labelledby="edgequity-statements-tab"
         hidden={activeTab !== 'statements'}
       >
-        <ReportedFinancialsPanel ticker={stock.ticker} />
+        <ReportedFinancialsPanel stock={stock} />
       </section>
 
       <section
@@ -158,7 +158,7 @@ export default function StockDetail({ stock, onBack }: StockDetailProps) {
         aria-labelledby="edgequity-fundamentals-tab"
         hidden={activeTab !== 'fundamentals'}
       >
-        <FundamentalsPanel ticker={stock.ticker} />
+        <FundamentalsPanel stock={stock} />
       </section>
     </div>
   );

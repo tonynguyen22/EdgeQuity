@@ -26,16 +26,16 @@ Edgequity is a static-data fundamental stock screener for value investors. It us
 - `npm run test:edgequity`
 - `npm run test:edgequity:ui`
 - `npm run edgequity:data`
-- `npm run edgequity:sec-statements`
-- `npm run edgequity:fundamentals-charts`
+- `npm run edgequity:sec-statements` - legacy SEC cache utility, not used by the main Edgequity detail tabs.
+- `npm run edgequity:fundamentals-charts` - legacy SEC/Finnhub chart cache utility, not used by the main Edgequity detail tabs.
 
 ## Notes
 
 - Runtime UI should not call finance APIs directly; selected-ticker quotes go through `/api/http-proxy` and Finnhub.
 - Data generation requires `FMP_API_KEY` for income statement, balance sheet, and cash flow data.
 - Data generation also requires `FINNHUB_API_KEY` for profile/metrics and runtime selected-ticker quote refreshes.
-- **Statements** tab: SEC EDGAR (`edgequity:sec-statements`, no API key).
-- **Fundamentals** tab: `fundamentals-charts.json` from `edgequity:fundamentals-charts` (SEC facts + Finnhub series).
+- **Statements** tab: selected stock record `financialStatements.annual` from FMP, with a static summary fallback.
+- **Fundamentals** tab: chart sections derived from the same FMP statement data on the selected stock record.
 - Use `EDGEQUITY_MAX_TICKERS`, `EDGEQUITY_TICKERS`, or `EDGEQUITY_FMP_CALL_BUDGET` to control refresh scope.
 - Keep the UI table-first, compact, and value-investor focused.
 - The old multi-module app has been removed.

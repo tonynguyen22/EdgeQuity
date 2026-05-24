@@ -2,7 +2,13 @@ import { access, mkdir, rename, rm, writeFile } from "node:fs/promises";
 import path from "node:path";
 
 import { EDGEQUITY_SUPPORTED_TICKERS } from "../../src/edgequity/universe.ts";
-import type { EdgequityManifest, EdgequityManifestStock, EdgequityStockRecord } from "../../src/edgequity/types.ts";
+import type {
+  EdgequityFinancialStatementPeriod,
+  EdgequityFinancialStatements,
+  EdgequityManifest,
+  EdgequityManifestStock,
+  EdgequityStockRecord,
+} from "../../src/edgequity/types.ts";
 import { normalizeEdgequityRecord } from "./normalize.ts";
 
 const EDGEQUITY_DATA_DIR = path.join("public", "data", "edgequity");
@@ -19,6 +25,8 @@ type BuiltStock = {
   manifestStock: EdgequityManifestStock;
 };
 
+type RawObject = Record<string, unknown>;
+
 function requiredEnv(name: string): string {
   const value = process.env[name];
   if (!value) {
@@ -30,6 +38,66 @@ function requiredEnv(name: string): string {
 
 function stringifyJson(value: unknown): string {
   return `${JSON.stringify(value, null, 2)}\n`;
+}
+
+function normalizeNumber(value: unknown): number | null {
+  return typeof value === "number" && Number.isFinite(value) ? value : null;
+}
+
+function normalizeString(value: unknown): string | null {
+  return typeof value === "string" && value.trim().length > 0 ? value : null;
+}
+
+function firstString(...values: unknown[]): string | null {
+  for (const value of values) {
+    const normalized = normalizeString(value);
+    if (normalized !== null) return normalized;
+  }
+
+  return null;
+}
+
+function normalizeFmpStatementPeriod(statement: RawObject): EdgequityFinancialStatementPeriod {
+  const values: EdgequityFinancialStatementPeriod["values"] = {};
+
+  for (const [key, value] of Object.entries(statement)) {
+    const normalized = normalizeNumber(value);
+    if (normalized !== null) values[key] = normalized;
+  }
+
+  return {
+    fiscalYear: firstString(statement.fiscalYear, statement.calendarYear, normalizeString(statement.date)?.slice(0, 4)) ?? "",
+    period: firstString(statement.period) ?? "FY",
+    date: firstString(statement.date),
+    reportedCurrency: firstString(statement.reportedCurrency, statement.currency),
+    values,
+  };
+}
+
+function normalizeFmpStatementPeriods(statements: RawObject[]): EdgequityFinancialStatementPeriod[] {
+  return statements
+    .map(normalizeFmpStatementPeriod)
+    .filter((statement) => statement.fiscalYear.length > 0 && Object.keys(statement.values).length > 0);
+}
+
+function buildFinancialStatements(
+  incomeStatements: RawObject[],
+  balanceSheets: RawObject[],
+  cashFlows: RawObject[],
+): EdgequityFinancialStatements {
+  return {
+    source: {
+      provider: "fmp",
+      endpoint: "income-statement,balance-sheet-statement,cash-flow-statement",
+      fetchedAt: new Date().toISOString(),
+      status: "ok",
+    },
+    annual: {
+      incomeStatement: normalizeFmpStatementPeriods(incomeStatements),
+      balanceSheet: normalizeFmpStatementPeriods(balanceSheets),
+      cashFlow: normalizeFmpStatementPeriods(cashFlows),
+    },
+  };
 }
 
 function optionalPositiveIntegerEnv(name: string): number | null {
@@ -139,6 +207,11 @@ async function buildStock(ticker: string, fmpApiKey: string, finnhubApiKey: stri
     balanceSheets,
     cashFlows,
   });
+  record.financialStatements = buildFinancialStatements(incomeStatements, balanceSheets, cashFlows);
+  record.sources = {
+    ...record.sources,
+    financialsReported: record.financialStatements.source,
+  };
   const dataPath = `/data/edgequity/stocks/${ticker}.json`;
 
   return {
