@@ -23,7 +23,7 @@ Edgequity is a static-data fundamental stock screener for value investors. A loc
 - `scripts/edgequity/build-static-data.ts` fetches FMP income statement, balance sheet, and cash flow data, then writes static JSON.
 - `scripts/edgequity/normalize.ts` converts raw provider payloads into Edgequity records.
 - `public/data/edgequity/manifest.json` lists available FMP-supported static records.
-- `public/data/edgequity/stocks/*.json` contains one normalized stock record per ticker, including embedded FMP annual income statement, balance sheet, and cash flow periods for the detail tabs.
+- `public/data/edgequity/stocks/*.json` contains one normalized stock record per ticker, including embedded FMP annual and quarterly income statement, balance sheet, and cash flow periods for the detail tabs.
 
 ## Commands
 
@@ -40,7 +40,7 @@ Edgequity reads static JSON from `public/data/edgequity` at runtime. To refresh 
 
 - `FMP_API_KEY`
 
-The `Refresh Edgequity static data` workflow can be run manually and also runs weekly on Monday at 09:00 UTC. The main screener universe is the 82 FMP-confirmed tickers with all three statements available on the free tier. To change the refresh universe, set `EDGEQUITY_MAX_TICKERS`, set `EDGEQUITY_TICKERS` to a comma-separated subset, or intentionally raise `EDGEQUITY_FMP_CALL_BUDGET`.
+The `Refresh Edgequity static data` workflow can be run manually and also runs weekly on Monday at 09:00 UTC. The main screener universe is the 82 FMP-confirmed tickers with all three statements available on the free tier. The refresh uses six FMP calls per ticker: annual and quarterly income statement, balance sheet, and cash flow. To change the refresh universe, set `EDGEQUITY_MAX_TICKERS`, set `EDGEQUITY_TICKERS` to a comma-separated subset, or intentionally raise `EDGEQUITY_FMP_CALL_BUDGET`.
 
 ## Data Rules
 

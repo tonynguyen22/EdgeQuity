@@ -160,7 +160,67 @@ const fmpStatementStock: EdgequityStockRecord = {
         },
       ],
     },
+    quarterly: {
+      incomeStatement: [
+        {
+          fiscalYear: '2026',
+          period: 'Q2',
+          date: '2026-06-30',
+          reportedCurrency: 'USD',
+          values: { revenue: 180000000000, grossProfit: 92000000000, operatingIncome: 61000000000, netIncome: 52000000000 },
+        },
+        {
+          fiscalYear: '2026',
+          period: 'Q1',
+          date: '2026-03-31',
+          reportedCurrency: 'USD',
+          values: { revenue: 170000000000, grossProfit: 86000000000, operatingIncome: 56000000000, netIncome: 48000000000 },
+        },
+      ],
+      balanceSheet: [
+        {
+          fiscalYear: '2026',
+          period: 'Q2',
+          date: '2026-06-30',
+          reportedCurrency: 'USD',
+          values: { totalAssets: 720000000000, totalDebt: 21000000000, totalStockholdersEquity: 510000000000 },
+        },
+        {
+          fiscalYear: '2026',
+          period: 'Q1',
+          date: '2026-03-31',
+          reportedCurrency: 'USD',
+          values: { totalAssets: 710000000000, totalDebt: 20500000000, totalStockholdersEquity: 505000000000 },
+        },
+      ],
+      cashFlow: [
+        {
+          fiscalYear: '2026',
+          period: 'Q2',
+          date: '2026-06-30',
+          reportedCurrency: 'USD',
+          values: { operatingCashFlow: 50000000000, capitalExpenditure: -6000000000, freeCashFlow: 44000000000 },
+        },
+        {
+          fiscalYear: '2026',
+          period: 'Q1',
+          date: '2026-03-31',
+          reportedCurrency: 'USD',
+          values: { operatingCashFlow: 47000000000, capitalExpenditure: -5500000000, freeCashFlow: 41500000000 },
+        },
+      ],
+    },
   },
+};
+
+const annualOnlyFmpStatementStock: EdgequityStockRecord = {
+  ...fmpStatementStock,
+  financialStatements: fmpStatementStock.financialStatements
+    ? {
+      ...fmpStatementStock.financialStatements,
+      quarterly: undefined,
+    }
+    : undefined,
 };
 
 test('LoadingState renders the Edgequity loading message', () => {
@@ -525,15 +585,19 @@ test('FundamentalsPanel renders charts directly from FMP statements on the selec
   assert.match(html, /Gross profit/);
   assert.match(html, /Free cash flow/);
   assert.match(html, /5Y/);
+  assert.match(html, /5Q/);
   assert.match(html, /2024/);
   assert.match(html, /2025/);
-  assert.match(html, /\$600\.00B/);
+  assert.match(html, /26 Q1/);
+  assert.match(html, /26 Q2/);
+  assert.match(html, /\$180\.00B/);
+  assert.match(html, /\$600\.0B/);
   assert.doesNotMatch(html, /fundamentals chart cache/);
   assert.doesNotMatch(html, /edgequity:fundamentals-charts/);
 });
 
 test('FundamentalsPanel does not leave a blank quarterly chart column when only annual FMP data exists', () => {
-  const html = renderToStaticMarkup(<FundamentalsPanel stock={fmpStatementStock} />);
+  const html = renderToStaticMarkup(<FundamentalsPanel stock={annualOnlyFmpStatementStock} />);
 
   assert.match(html, /eq-fundamentals-chart-grid is-single/);
   assert.match(html, /Revenue Annual chart/);

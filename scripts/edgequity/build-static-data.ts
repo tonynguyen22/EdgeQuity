@@ -16,8 +16,8 @@ const EDGEQUITY_STOCKS_DIR = path.join(EDGEQUITY_DATA_DIR, "stocks");
 const EDGEQUITY_TMP_DIR = path.join(EDGEQUITY_DATA_DIR, ".tmp");
 const FMP_BASE_URL = "https://financialmodelingprep.com/stable";
 const FMP_STATEMENT_LIMIT = "5";
-export const FMP_CALLS_PER_TICKER = 3;
-export const DEFAULT_FMP_DAILY_CALL_BUDGET = 246;
+export const FMP_CALLS_PER_TICKER = 6;
+export const DEFAULT_FMP_DAILY_CALL_BUDGET = 492;
 const DEFAULT_FMP_REQUEST_DELAY_MS = 350;
 
 type BuiltStock = {
@@ -84,11 +84,14 @@ function buildFinancialStatements(
   incomeStatements: RawObject[],
   balanceSheets: RawObject[],
   cashFlows: RawObject[],
+  quarterlyIncomeStatements: RawObject[],
+  quarterlyBalanceSheets: RawObject[],
+  quarterlyCashFlows: RawObject[],
 ): EdgequityFinancialStatements {
   return {
     source: {
       provider: "fmp",
-      endpoint: "income-statement,balance-sheet-statement,cash-flow-statement",
+      endpoint: "income-statement,balance-sheet-statement,cash-flow-statement?period=annual,quarter",
       fetchedAt: new Date().toISOString(),
       status: "ok",
     },
@@ -96,6 +99,11 @@ function buildFinancialStatements(
       incomeStatement: normalizeFmpStatementPeriods(incomeStatements),
       balanceSheet: normalizeFmpStatementPeriods(balanceSheets),
       cashFlow: normalizeFmpStatementPeriods(cashFlows),
+    },
+    quarterly: {
+      incomeStatement: normalizeFmpStatementPeriods(quarterlyIncomeStatements),
+      balanceSheet: normalizeFmpStatementPeriods(quarterlyBalanceSheets),
+      cashFlow: normalizeFmpStatementPeriods(quarterlyCashFlows),
     },
   };
 }
@@ -176,12 +184,18 @@ async function fetchJson<T>(url: URL): Promise<T> {
   return response.json() as Promise<T>;
 }
 
-async function fetchFmpStatement(endpoint: string, ticker: string, apiKey: string): Promise<Record<string, unknown>[]> {
+async function fetchFmpStatement(
+  endpoint: string,
+  ticker: string,
+  apiKey: string,
+  period: "annual" | "quarter",
+): Promise<Record<string, unknown>[]> {
   const delayMs = optionalPositiveIntegerEnv("EDGEQUITY_FMP_REQUEST_DELAY_MS") ?? DEFAULT_FMP_REQUEST_DELAY_MS;
   await sleep(delayMs);
 
   const url = new URL(`${FMP_BASE_URL}/${endpoint}`);
   url.searchParams.set("symbol", ticker);
+  url.searchParams.set("period", period);
   url.searchParams.set("limit", FMP_STATEMENT_LIMIT);
   url.searchParams.set("apikey", apiKey);
 
@@ -211,9 +225,12 @@ function profileFromExistingStock(ticker: string, existing: EdgequityStockRecord
 
 async function buildStock(ticker: string, fmpApiKey: string): Promise<BuiltStock> {
   const existingStock = await readExistingStock(ticker);
-  const incomeStatements = await fetchFmpStatement("income-statement", ticker, fmpApiKey);
-  const balanceSheets = await fetchFmpStatement("balance-sheet-statement", ticker, fmpApiKey);
-  const cashFlows = await fetchFmpStatement("cash-flow-statement", ticker, fmpApiKey);
+  const incomeStatements = await fetchFmpStatement("income-statement", ticker, fmpApiKey, "annual");
+  const balanceSheets = await fetchFmpStatement("balance-sheet-statement", ticker, fmpApiKey, "annual");
+  const cashFlows = await fetchFmpStatement("cash-flow-statement", ticker, fmpApiKey, "annual");
+  const quarterlyIncomeStatements = await fetchFmpStatement("income-statement", ticker, fmpApiKey, "quarter");
+  const quarterlyBalanceSheets = await fetchFmpStatement("balance-sheet-statement", ticker, fmpApiKey, "quarter");
+  const quarterlyCashFlows = await fetchFmpStatement("cash-flow-statement", ticker, fmpApiKey, "quarter");
 
   const record = normalizeEdgequityRecord({
     ticker,
@@ -224,7 +241,14 @@ async function buildStock(ticker: string, fmpApiKey: string): Promise<BuiltStock
     cashFlows,
   });
   record.price = null;
-  record.financialStatements = buildFinancialStatements(incomeStatements, balanceSheets, cashFlows);
+  record.financialStatements = buildFinancialStatements(
+    incomeStatements,
+    balanceSheets,
+    cashFlows,
+    quarterlyIncomeStatements,
+    quarterlyBalanceSheets,
+    quarterlyCashFlows,
+  );
   record.sources = {
     profile: {
       provider: existingStock ? "manual" : "derived",
