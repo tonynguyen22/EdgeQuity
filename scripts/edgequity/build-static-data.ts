@@ -16,8 +16,12 @@ const EDGEQUITY_STOCKS_DIR = path.join(EDGEQUITY_DATA_DIR, "stocks");
 const EDGEQUITY_TMP_DIR = path.join(EDGEQUITY_DATA_DIR, ".tmp");
 const FMP_BASE_URL = "https://financialmodelingprep.com/stable";
 const FMP_STATEMENT_LIMIT = "5";
-export const FMP_CALLS_PER_TICKER = 6;
-export const DEFAULT_FMP_DAILY_CALL_BUDGET = 492;
+const FMP_BULK_ANNUAL_YEAR_COUNT = 7;
+const FMP_BULK_QUARTER_YEAR_COUNT = 3;
+const FMP_BULK_STATEMENT_COUNT = 3;
+const FMP_BULK_QUARTERS_PER_YEAR = 4;
+export const DEFAULT_FMP_DAILY_CALL_BUDGET =
+  FMP_BULK_STATEMENT_COUNT * (FMP_BULK_ANNUAL_YEAR_COUNT + FMP_BULK_QUARTER_YEAR_COUNT * FMP_BULK_QUARTERS_PER_YEAR);
 const DEFAULT_FMP_REQUEST_DELAY_MS = 350;
 
 type BuiltStock = {
@@ -26,6 +30,29 @@ type BuiltStock = {
 };
 
 type RawObject = Record<string, unknown>;
+
+type StatementPayloads = {
+  incomeStatements: RawObject[];
+  balanceSheets: RawObject[];
+  cashFlows: RawObject[];
+  quarterlyIncomeStatements: RawObject[];
+  quarterlyBalanceSheets: RawObject[];
+  quarterlyCashFlows: RawObject[];
+};
+
+type StatementPayloadKey = keyof StatementPayloads;
+
+type BulkStatementDefinition = {
+  endpoint: string;
+  annualKey: StatementPayloadKey;
+  quarterlyKey: StatementPayloadKey;
+};
+
+const BULK_STATEMENTS: BulkStatementDefinition[] = [
+  { endpoint: "income-statement-bulk", annualKey: "incomeStatements", quarterlyKey: "quarterlyIncomeStatements" },
+  { endpoint: "balance-sheet-statement-bulk", annualKey: "balanceSheets", quarterlyKey: "quarterlyBalanceSheets" },
+  { endpoint: "cash-flow-statement-bulk", annualKey: "cashFlows", quarterlyKey: "quarterlyCashFlows" },
+];
 
 function requiredEnv(name: string): string {
   const value = process.env[name];
@@ -55,6 +82,58 @@ function firstString(...values: unknown[]): string | null {
   }
 
   return null;
+}
+
+function currentFiscalDataYear(): number {
+  return Number(process.env.EDGEQUITY_FMP_CURRENT_YEAR ?? new Date().getUTCFullYear());
+}
+
+function recentYears(count: number): number[] {
+  const currentYear = currentFiscalDataYear();
+  return Array.from({ length: count }, (_, index) => currentYear - index);
+}
+
+function emptyStatementPayloads(): StatementPayloads {
+  return {
+    incomeStatements: [],
+    balanceSheets: [],
+    cashFlows: [],
+    quarterlyIncomeStatements: [],
+    quarterlyBalanceSheets: [],
+    quarterlyCashFlows: [],
+  };
+}
+
+function getPayload(map: Map<string, StatementPayloads>, ticker: string): StatementPayloads {
+  const existing = map.get(ticker);
+  if (existing) return existing;
+
+  const payload = emptyStatementPayloads();
+  map.set(ticker, payload);
+  return payload;
+}
+
+function statementSymbol(statement: RawObject): string | null {
+  return firstString(statement.symbol, statement.ticker)?.toUpperCase() ?? null;
+}
+
+function statementYear(statement: RawObject): number {
+  const parsed = Number(firstString(statement.fiscalYear, statement.calendarYear, normalizeString(statement.date)?.slice(0, 4)));
+  return Number.isFinite(parsed) ? parsed : 0;
+}
+
+function statementPeriodRank(statement: RawObject): number {
+  const period = firstString(statement.period)?.toUpperCase() ?? "FY";
+  const quarter = period.match(/^Q([1-4])$/);
+  return statementYear(statement) * 4 + (quarter ? Number(quarter[1]) : 4);
+}
+
+function sortAnnualStatements(statements: RawObject[]): RawObject[] {
+  return statements.slice().sort((left, right) => statementYear(right) - statementYear(left)).slice(0, Number(FMP_STATEMENT_LIMIT));
+}
+
+function sortQuarterlyStatements(statements: RawObject[]): RawObject[] {
+  return statements.slice().sort((left, right) => statementPeriodRank(right) - statementPeriodRank(left)).slice(0, Number(FMP_STATEMENT_LIMIT));
 }
 
 function normalizeFmpStatementPeriod(statement: RawObject): EdgequityFinancialStatementPeriod {
@@ -91,7 +170,7 @@ function buildFinancialStatements(
   return {
     source: {
       provider: "fmp",
-      endpoint: "income-statement,balance-sheet-statement,cash-flow-statement?period=annual,quarter",
+      endpoint: "income-statement-bulk,balance-sheet-statement-bulk,cash-flow-statement-bulk?period=FY,Q1-Q4",
       fetchedAt: new Date().toISOString(),
       status: "ok",
     },
@@ -161,13 +240,12 @@ function selectedEdgequityTickers(): string[] {
 
 function enforceFmpBudget(selectedTickers: string[]): void {
   const budget = optionalPositiveIntegerEnv("EDGEQUITY_FMP_CALL_BUDGET") ?? DEFAULT_FMP_DAILY_CALL_BUDGET;
-  const plannedCalls = selectedTickers.length * FMP_CALLS_PER_TICKER;
+  const plannedCalls = DEFAULT_FMP_DAILY_CALL_BUDGET;
 
   if (plannedCalls > budget) {
     throw new Error(
-      `Edgequity FMP request budget exceeded: ${selectedTickers.length} tickers would make ${plannedCalls} FMP calls ` +
-        `(${FMP_CALLS_PER_TICKER} per ticker), over the configured budget of ${budget}. ` +
-        "Set EDGEQUITY_TICKERS to a comma-separated subset or EDGEQUITY_MAX_TICKERS to cap the run. " +
+      `Edgequity FMP request budget exceeded: the bulk annual + quarterly refresh would make ${plannedCalls} FMP calls ` +
+        `for ${selectedTickers.length} tickers, over the configured budget of ${budget}. ` +
         "Set EDGEQUITY_FMP_CALL_BUDGET only when you intentionally want a higher budget.",
     );
   }
@@ -184,22 +262,56 @@ async function fetchJson<T>(url: URL): Promise<T> {
   return response.json() as Promise<T>;
 }
 
-async function fetchFmpStatement(
-  endpoint: string,
-  ticker: string,
-  apiKey: string,
-  period: "annual" | "quarter",
-): Promise<Record<string, unknown>[]> {
+async function fetchFmpBulkStatement(endpoint: string, year: number, period: string, apiKey: string): Promise<RawObject[]> {
   const delayMs = optionalPositiveIntegerEnv("EDGEQUITY_FMP_REQUEST_DELAY_MS") ?? DEFAULT_FMP_REQUEST_DELAY_MS;
   await sleep(delayMs);
 
   const url = new URL(`${FMP_BASE_URL}/${endpoint}`);
-  url.searchParams.set("symbol", ticker);
+  url.searchParams.set("year", String(year));
   url.searchParams.set("period", period);
-  url.searchParams.set("limit", FMP_STATEMENT_LIMIT);
   url.searchParams.set("apikey", apiKey);
 
-  return fetchJson<Record<string, unknown>[]>(url);
+  const payload = await fetchJson<unknown>(url);
+  return Array.isArray(payload) ? payload.filter((item): item is RawObject => typeof item === "object" && item !== null) : [];
+}
+
+async function fetchBulkFinancialStatements(tickers: string[], apiKey: string): Promise<Map<string, StatementPayloads>> {
+  const tickerSet = new Set(tickers.map((ticker) => ticker.toUpperCase()));
+  const byTicker = new Map<string, StatementPayloads>();
+  const annualYears = recentYears(FMP_BULK_ANNUAL_YEAR_COUNT);
+  const quarterlyYears = recentYears(FMP_BULK_QUARTER_YEAR_COUNT);
+
+  for (const statement of BULK_STATEMENTS) {
+    for (const year of annualYears) {
+      const rows = await fetchFmpBulkStatement(statement.endpoint, year, "FY", apiKey);
+      for (const row of rows) {
+        const symbol = statementSymbol(row);
+        if (symbol && tickerSet.has(symbol)) getPayload(byTicker, symbol)[statement.annualKey].push(row);
+      }
+    }
+
+    for (const year of quarterlyYears) {
+      for (const quarter of ["Q1", "Q2", "Q3", "Q4"]) {
+        const rows = await fetchFmpBulkStatement(statement.endpoint, year, quarter, apiKey);
+        for (const row of rows) {
+          const symbol = statementSymbol(row);
+          if (symbol && tickerSet.has(symbol)) getPayload(byTicker, symbol)[statement.quarterlyKey].push(row);
+        }
+      }
+    }
+  }
+
+  for (const ticker of tickers) {
+    const payload = getPayload(byTicker, ticker);
+    payload.incomeStatements = sortAnnualStatements(payload.incomeStatements);
+    payload.balanceSheets = sortAnnualStatements(payload.balanceSheets);
+    payload.cashFlows = sortAnnualStatements(payload.cashFlows);
+    payload.quarterlyIncomeStatements = sortQuarterlyStatements(payload.quarterlyIncomeStatements);
+    payload.quarterlyBalanceSheets = sortQuarterlyStatements(payload.quarterlyBalanceSheets);
+    payload.quarterlyCashFlows = sortQuarterlyStatements(payload.quarterlyCashFlows);
+  }
+
+  return byTicker;
 }
 
 async function readExistingStock(ticker: string): Promise<EdgequityStockRecord | null> {
@@ -223,31 +335,25 @@ function profileFromExistingStock(ticker: string, existing: EdgequityStockRecord
   };
 }
 
-async function buildStock(ticker: string, fmpApiKey: string): Promise<BuiltStock> {
+async function buildStock(ticker: string, payload: StatementPayloads): Promise<BuiltStock> {
   const existingStock = await readExistingStock(ticker);
-  const incomeStatements = await fetchFmpStatement("income-statement", ticker, fmpApiKey, "annual");
-  const balanceSheets = await fetchFmpStatement("balance-sheet-statement", ticker, fmpApiKey, "annual");
-  const cashFlows = await fetchFmpStatement("cash-flow-statement", ticker, fmpApiKey, "annual");
-  const quarterlyIncomeStatements = await fetchFmpStatement("income-statement", ticker, fmpApiKey, "quarter");
-  const quarterlyBalanceSheets = await fetchFmpStatement("balance-sheet-statement", ticker, fmpApiKey, "quarter");
-  const quarterlyCashFlows = await fetchFmpStatement("cash-flow-statement", ticker, fmpApiKey, "quarter");
 
   const record = normalizeEdgequityRecord({
     ticker,
     profile: profileFromExistingStock(ticker, existingStock),
     metrics: {},
-    incomeStatements,
-    balanceSheets,
-    cashFlows,
+    incomeStatements: payload.incomeStatements,
+    balanceSheets: payload.balanceSheets,
+    cashFlows: payload.cashFlows,
   });
   record.price = null;
   record.financialStatements = buildFinancialStatements(
-    incomeStatements,
-    balanceSheets,
-    cashFlows,
-    quarterlyIncomeStatements,
-    quarterlyBalanceSheets,
-    quarterlyCashFlows,
+    payload.incomeStatements,
+    payload.balanceSheets,
+    payload.cashFlows,
+    payload.quarterlyIncomeStatements,
+    payload.quarterlyBalanceSheets,
+    payload.quarterlyCashFlows,
   );
   record.sources = {
     profile: {
@@ -344,10 +450,11 @@ async function main() {
   enforceFmpBudget(universe);
 
   const fmpApiKey = requiredEnv("FMP_API_KEY");
+  const statementsByTicker = await fetchBulkFinancialStatements(universe, fmpApiKey);
 
   const builtStocks: BuiltStock[] = [];
   for (const ticker of universe) {
-    builtStocks.push(await buildStock(ticker, fmpApiKey));
+    builtStocks.push(await buildStock(ticker, getPayload(statementsByTicker, ticker)));
   }
 
   const manifest: EdgequityManifest = {

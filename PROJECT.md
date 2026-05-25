@@ -40,7 +40,7 @@ Edgequity reads static JSON from `public/data/edgequity` at runtime. To refresh 
 
 - `FMP_API_KEY`
 
-The `Refresh Edgequity static data` workflow can be run manually and also runs weekly on Monday at 09:00 UTC. The main screener universe is the 82 FMP-confirmed tickers with all three statements available on the free tier. The refresh uses six FMP calls per ticker: annual and quarterly income statement, balance sheet, and cash flow. To change the refresh universe, set `EDGEQUITY_MAX_TICKERS`, set `EDGEQUITY_TICKERS` to a comma-separated subset, or intentionally raise `EDGEQUITY_FMP_CALL_BUDGET`.
+The `Refresh Edgequity static data` workflow can be run manually and also runs weekly on Monday at 09:00 UTC. The main screener universe is the 82 FMP-confirmed tickers with all three statements available on the free tier. The refresh uses FMP bulk endpoints for annual FY and recent quarterly periods, then filters the response to the supported universe. To change the refresh universe, set `EDGEQUITY_MAX_TICKERS`, set `EDGEQUITY_TICKERS` to a comma-separated subset, or intentionally raise `EDGEQUITY_FMP_CALL_BUDGET`.
 
 ## Data Rules
 
