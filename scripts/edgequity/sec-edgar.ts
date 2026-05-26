@@ -123,7 +123,7 @@ export function classifySecConcept(concept: string, label: string | null | undef
 
 export interface GaapFactSeries {
   label?: string | null;
-  units: Record<string, Array<{ end: string; val: number; fy?: number; fp?: string; form?: string }>>;
+  units: Record<string, Array<{ end: string; val: number; fy?: number; fp?: string; form?: string; start?: string; frame?: string }>>;
 }
 
 export interface CompanyFactsPayload {
@@ -210,16 +210,55 @@ export function pickAnnualUsdValues(
     .filter((row) => row.fp === "FY" || row.form === "10-K" || row.form === "20-F" || row.form === "40-F")
     .filter((row) => typeof row.val === "number" && Number.isFinite(row.val));
 
-  const byFy = new Map<number, { fy: number; end: string; value: number; form?: string }>();
+  const byFy = new Map<number, { fy: number; end: string; value: number; form?: string; source: (typeof annual)[number] }>();
   for (const row of annual) {
-    const fy = row.fy ?? Number.parseInt(row.end.slice(0, 4), 10);
+    const fy = annualPeriodYear(row);
     const existing = byFy.get(fy);
-    if (!existing || row.end > existing.end) {
-      byFy.set(fy, { fy, end: row.end, value: row.val, form: row.form });
+    if (!existing || pickBetterAnnualFact(existing.source, row) === row) {
+      byFy.set(fy, { fy, end: row.end, value: row.val, form: row.form, source: row });
     }
   }
 
-  return [...byFy.values()].sort((a, b) => a.fy - b.fy).slice(-maxYears);
+  return [...byFy.values()]
+    .map(({ source: _source, ...row }) => row)
+    .sort((a, b) => a.fy - b.fy)
+    .slice(-maxYears);
+}
+
+function annualPeriodYear(row: { end: string; frame?: string; fy?: number }): number {
+  if (!row.end.endsWith("-12-31") && typeof row.fy === "number") {
+    return row.fy;
+  }
+
+  const frameYear = /^CY(\d{4})$/.exec(row.frame ?? "")?.[1];
+  return Number.parseInt(frameYear ?? row.end.slice(0, 4), 10);
+}
+
+function annualDurationDays(row: { start?: string; end: string }): number | null {
+  if (!row.start) return null;
+  const startMs = Date.parse(row.start);
+  const endMs = Date.parse(row.end);
+  if (!Number.isFinite(startMs) || !Number.isFinite(endMs) || endMs <= startMs) return null;
+  return (endMs - startMs) / 86_400_000;
+}
+
+function pickBetterAnnualFact<T extends { start?: string; end: string; form?: string; fp?: string }>(left: T, right: T): T {
+  const isFullYear = (row: T): boolean => {
+    const days = annualDurationDays(row);
+    return days === null || (days >= 300 && days <= 430);
+  };
+  const leftIsFullYear = isFullYear(left);
+  const rightIsFullYear = isFullYear(right);
+  if (leftIsFullYear !== rightIsFullYear) return leftIsFullYear ? left : right;
+  if (left.end !== right.end) return left.end > right.end ? left : right;
+
+  const score = (row: T): number => {
+    const formScore = row.form === "10-K" || row.form === "20-F" || row.form === "40-F" ? 0 : 50;
+    const periodScore = row.fp === "FY" ? 0 : 25;
+    return formScore + periodScore;
+  };
+  if (score(left) !== score(right)) return score(left) <= score(right) ? left : right;
+  return left.end >= right.end ? left : right;
 }
 
 export type SecQuarterlyUsdRow = {
@@ -229,7 +268,39 @@ export type SecQuarterlyUsdRow = {
   fy?: number;
   fp?: string;
   form?: string;
+  frame?: string;
 };
+
+function calendarQuarter(end: string): string | null {
+  const month = end.slice(5, 7);
+  if (month === "03") return "Q1";
+  if (month === "06") return "Q2";
+  if (month === "09") return "Q3";
+  if (month === "12") return "Q4";
+  return null;
+}
+
+export function secQuarterPeriod(row: { end: string; fy?: number; fp?: string; frame?: string }): { fiscalYear: string; period: string } {
+  const frame = /^CY(\d{4})Q([1-4])$/.exec(row.frame ?? "");
+  if (frame && row.fp === `Q${frame[2]}`) {
+    return { fiscalYear: frame[1] ?? row.end.slice(0, 4), period: `Q${frame[2]}` };
+  }
+
+  const calendarPeriod = calendarQuarter(row.end);
+  if (calendarPeriod && row.fp === calendarPeriod) {
+    return { fiscalYear: row.end.slice(0, 4), period: calendarPeriod };
+  }
+
+  return {
+    fiscalYear: String(row.fy ?? Number.parseInt(row.end.slice(0, 4), 10)),
+    period: row.fp ?? "Q",
+  };
+}
+
+function secQuarterKey(row: SecQuarterlyUsdRow): string {
+  const period = secQuarterPeriod(row);
+  return `${period.fiscalYear}-${period.period}`;
+}
 
 function quarterDurationDays(row: { start?: string; end: string }): number | null {
   if (!row.start) return null;
@@ -265,7 +336,7 @@ export function pickQuarterlyUsdRows(
 
   const byPeriod = new Map<string, SecQuarterlyUsdRow>();
   for (const row of quarterly) {
-    const key = row.fy && row.fp ? `${row.fy}-${row.fp}` : row.end;
+    const key = secQuarterKey(row);
     const existing = byPeriod.get(key);
     byPeriod.set(key, existing ? pickBetterQuarterFact(existing, row) : row);
   }

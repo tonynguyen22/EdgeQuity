@@ -336,3 +336,174 @@ test("buildNormalizedSecStatements maps SEC facts into summary statement rows", 
   assert.equal(statements.annual.balanceSheets[0]?.totalDebt, 88_834_000_000);
   assert.equal(statements.annual.cashFlows[0]?.freeCashFlow, 98_767_000_000);
 });
+
+test("buildNormalizedSecStatements chooses the freshest concept when SEC labels change", () => {
+  const statements = buildNormalizedSecStatements({
+    cik: 1_652_044,
+    entityName: "Alphabet Inc.",
+    facts: {
+      "us-gaap": {
+        RevenueFromContractWithCustomerExcludingAssessedTax: {
+          label: "Revenue from Contract with Customer, Excluding Assessed Tax",
+          units: {
+            USD: [
+              { fy: 2021, fp: "FY", form: "10-K", end: "2021-01-31", val: 16_675_000_000 },
+              { fy: 2022, fp: "FY", form: "10-K", start: "2022-01-01", end: "2022-12-31", val: 282_836_000_000 },
+              { fy: 2024, fp: "FY", form: "10-K", start: "2024-01-01", end: "2024-12-31", val: 350_018_000_000 },
+            ],
+          },
+        },
+        Revenues: {
+          label: "Revenues",
+          units: {
+            USD: [
+              { fy: 2021, fp: "FY", form: "10-K", start: "2021-01-01", end: "2021-12-31", val: 257_637_000_000 },
+              { fy: 2025, fp: "FY", form: "10-K", start: "2023-01-01", end: "2023-12-31", val: 307_394_000_000 },
+              { fy: 2025, fp: "FY", form: "10-K", start: "2024-01-01", end: "2024-12-31", val: 350_018_000_000 },
+              { fy: 2025, fp: "FY", form: "10-K", start: "2025-01-01", end: "2025-12-31", val: 402_836_000_000 },
+            ],
+          },
+        },
+        NetCashProvidedByUsedInOperatingActivities: {
+          label: "Operating Cash Flow",
+          units: { USD: [{ fy: 2025, fp: "FY", form: "10-K", start: "2025-01-01", end: "2025-12-31", val: 100_000_000_000 }] },
+        },
+        PaymentsToAcquirePropertyPlantAndEquipment: {
+          label: "Old Capital Expenditures",
+          units: { USD: [{ fy: 2011, fp: "FY", form: "10-K", end: "2011-01-30", val: 98_000_000 }] },
+        },
+        PaymentsToAcquireProductiveAssets: {
+          label: "Payments to Acquire Productive Assets",
+          units: { USD: [{ fy: 2025, fp: "FY", form: "10-K", start: "2025-01-01", end: "2025-12-31", val: 6_042_000_000 }] },
+        },
+      },
+    },
+  });
+
+  assert.equal(statements.annual.incomeStatements[0]?.fiscalYear, "2025");
+  assert.equal(statements.annual.incomeStatements[0]?.revenue, 402_836_000_000);
+  assert.equal(statements.annual.incomeStatements[1]?.fiscalYear, "2024");
+  assert.equal(statements.annual.incomeStatements[1]?.revenue, 350_018_000_000);
+  assert.equal(statements.annual.incomeStatements[2]?.fiscalYear, "2023");
+  assert.equal(statements.annual.incomeStatements[2]?.revenue, 307_394_000_000);
+  assert.equal(statements.annual.incomeStatements[3]?.fiscalYear, "2022");
+  assert.equal(statements.annual.incomeStatements[3]?.revenue, 282_836_000_000);
+  assert.equal(statements.annual.cashFlows[0]?.capitalExpenditure, 6_042_000_000);
+  assert.equal(statements.annual.cashFlows[0]?.freeCashFlow, 93_958_000_000);
+});
+
+test("buildNormalizedSecStatements preserves non-calendar fiscal year labels", () => {
+  const statements = buildNormalizedSecStatements({
+    cik: 1_045_810,
+    entityName: "NVIDIA Corporation",
+    facts: {
+      "us-gaap": {
+        Revenues: {
+          label: "Revenues",
+          units: {
+            USD: [
+              {
+                fy: 2026,
+                fp: "FY",
+                form: "10-K",
+                start: "2025-01-27",
+                end: "2026-01-25",
+                val: 215_938_000_000,
+                frame: "CY2025",
+              },
+              {
+                fy: 2026,
+                fp: "FY",
+                form: "10-K",
+                start: "2026-01-26",
+                end: "2026-04-27",
+                val: 44_062_000_000,
+              },
+            ],
+          },
+        },
+      },
+    },
+  });
+
+  assert.equal(statements.annual.incomeStatements[0]?.fiscalYear, "2026");
+  assert.equal(statements.annual.incomeStatements[0]?.revenue, 215_938_000_000);
+});
+
+test("buildNormalizedSecStatements prefers the latest full annual fact inside repeated fiscal-year buckets", () => {
+  const statements = buildNormalizedSecStatements({
+    cik: 789_019,
+    entityName: "Microsoft Corporation",
+    facts: {
+      "us-gaap": {
+        RevenueFromContractWithCustomerExcludingAssessedTax: {
+          label: "Revenue from Contract with Customer, Excluding Assessed Tax",
+          units: {
+            USD: [
+              { fy: 2025, fp: "FY", form: "10-K", start: "2022-07-01", end: "2023-06-30", val: 211_915_000_000, frame: "CY2023" },
+              { fy: 2025, fp: "FY", form: "10-K", start: "2023-07-01", end: "2024-06-30", val: 245_122_000_000, frame: "CY2024" },
+              { fy: 2025, fp: "FY", form: "10-K", start: "2024-07-01", end: "2025-06-30", val: 281_724_000_000, frame: "CY2025" },
+              { fy: 2025, fp: "FY", form: "10-K", start: "2025-01-01", end: "2025-03-31", val: 70_066_000_000 },
+            ],
+          },
+        },
+      },
+    },
+  });
+
+  assert.equal(statements.annual.incomeStatements[0]?.fiscalYear, "2025");
+  assert.equal(statements.annual.incomeStatements[0]?.revenue, 281_724_000_000);
+});
+
+test("buildNormalizedSecStatements dedupes calendar quarterly facts by reporting period", () => {
+  const statements = buildNormalizedSecStatements({
+    cik: 1_652_044,
+    entityName: "Alphabet Inc.",
+    facts: {
+      "us-gaap": {
+        Revenues: {
+          label: "Revenues",
+          units: {
+            USD: [
+              { fy: 2026, fp: "Q1", form: "10-Q", start: "2025-01-01", end: "2025-03-31", val: 90_234_000_000, frame: "CY2025Q1" },
+              { fy: 2025, fp: "Q3", form: "10-Q", start: "2025-01-01", end: "2025-09-30", val: 289_007_000_000 },
+              { fy: 2025, fp: "Q3", form: "10-Q", start: "2025-07-01", end: "2025-09-30", val: 102_346_000_000, frame: "CY2025Q3" },
+              { fy: 2026, fp: "Q1", form: "10-Q", start: "2026-01-01", end: "2026-03-31", val: 109_896_000_000, frame: "CY2026Q1" },
+            ],
+          },
+        },
+      },
+    },
+  });
+
+  assert.equal(statements.quarterly.incomeStatements[0]?.fiscalYear, "2026");
+  assert.equal(statements.quarterly.incomeStatements[0]?.period, "Q1");
+  assert.equal(statements.quarterly.incomeStatements[0]?.revenue, 109_896_000_000);
+  assert.equal(statements.quarterly.incomeStatements[1]?.fiscalYear, "2025");
+  assert.equal(statements.quarterly.incomeStatements[1]?.period, "Q3");
+  assert.equal(statements.quarterly.incomeStatements[1]?.revenue, 102_346_000_000);
+});
+
+test("buildNormalizedSecStatements preserves fiscal quarter labels for non-calendar filers", () => {
+  const statements = buildNormalizedSecStatements({
+    cik: 789_019,
+    entityName: "Microsoft Corporation",
+    facts: {
+      "us-gaap": {
+        RevenueFromContractWithCustomerExcludingAssessedTax: {
+          label: "Revenue from Contract with Customer, Excluding Assessed Tax",
+          units: {
+            USD: [
+              { fy: 2026, fp: "Q3", form: "10-Q", start: "2025-07-01", end: "2026-03-31", val: 205_283_000_000 },
+              { fy: 2026, fp: "Q3", form: "10-Q", start: "2026-01-01", end: "2026-03-31", val: 70_066_000_000, frame: "CY2026Q1" },
+            ],
+          },
+        },
+      },
+    },
+  });
+
+  assert.equal(statements.quarterly.incomeStatements[0]?.fiscalYear, "2026");
+  assert.equal(statements.quarterly.incomeStatements[0]?.period, "Q3");
+  assert.equal(statements.quarterly.incomeStatements[0]?.revenue, 70_066_000_000);
+});

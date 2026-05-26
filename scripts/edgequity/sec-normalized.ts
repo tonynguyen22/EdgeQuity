@@ -6,6 +6,7 @@ import {
   pickAnnualUsdValues,
   pickQuarterlyUsdRows,
   resolveCik,
+  secQuarterPeriod,
   type CompanyFactsPayload,
 } from "./sec-edgar.ts";
 
@@ -37,7 +38,12 @@ const CONCEPTS = {
     "CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalents",
   ],
   operatingCashFlow: ["NetCashProvidedByUsedInOperatingActivities"],
-  capitalExpenditure: ["PaymentsToAcquirePropertyPlantAndEquipment"],
+  capitalExpenditure: [
+    "PaymentsToAcquirePropertyPlantAndEquipment",
+    "PaymentsToAcquireProductiveAssets",
+    "PaymentsToAcquireOtherPropertyPlantAndEquipment",
+    "CapitalExpenditures",
+  ],
 } as const;
 
 export interface NormalizedStatementPayload {
@@ -62,10 +68,6 @@ function emptyResult(status: "missing"): NormalizedStatementPayload {
     annual: { incomeStatements: [], balanceSheets: [], cashFlows: [] },
     quarterly: { incomeStatements: [], balanceSheets: [], cashFlows: [] },
   };
-}
-
-function rowKey(row: { fy?: number; end: string; fp?: string }): string {
-  return row.fy && row.fp ? `${row.fy}-${row.fp}` : row.end;
 }
 
 function mergeByFiscalYear(rows: RawObject[], fiscalYear: string, key: string, value: number, date?: string): void {
@@ -93,34 +95,59 @@ function annualValuesByConcept(
   facts: CompanyFactsPayload,
   concepts: readonly string[],
 ): Map<string, { value: number; end: string }> {
+  const candidates: Array<{ values: ReturnType<typeof pickAnnualUsdValues>; score: string }> = [];
+
   for (const concept of concepts) {
     const series = findConceptSeries(facts.facts, [concept])?.series;
     const values = pickAnnualUsdValues(series, 5);
     if (values.length === 0) continue;
 
-    return new Map(values.map((row) => [String(row.fy), { value: row.value, end: row.end }]));
+    const latest = values.at(-1);
+    const score = `${latest?.end ?? ""}|${String(values.length).padStart(2, "0")}`;
+    candidates.push({ values, score });
   }
 
-  return new Map();
+  const byYear = new Map<string, { value: number; end: string }>();
+  for (const candidate of candidates.sort((left, right) => right.score.localeCompare(left.score))) {
+    for (const row of candidate.values) {
+      const fiscalYear = String(row.fy);
+      if (!byYear.has(fiscalYear)) {
+        byYear.set(fiscalYear, { value: row.value, end: row.end });
+      }
+    }
+  }
+
+  return new Map([...byYear.entries()].sort(([left], [right]) => left.localeCompare(right)).slice(-5));
 }
 
 function quarterlyValuesByConcept(
   facts: CompanyFactsPayload,
   concepts: readonly string[],
 ): Map<string, { fiscalYear: string; period: string; date: string; value: number }> {
+  const candidates: Array<{ values: ReturnType<typeof pickQuarterlyUsdRows>; score: string }> = [];
+
   for (const concept of concepts) {
     const series = findConceptSeries(facts.facts, [concept])?.series;
     const values = pickQuarterlyUsdRows(series, 5);
     if (values.length === 0) continue;
 
-    return new Map(values.map((row) => {
-      const fiscalYear = String(row.fy ?? Number.parseInt(row.end.slice(0, 4), 10));
-      const period = row.fp ?? "Q";
-      return [rowKey(row), { fiscalYear, period, date: row.end, value: row.val }];
-    }));
+    const latest = values.at(-1);
+    const score = `${latest?.end ?? ""}|${String(values.length).padStart(2, "0")}`;
+    candidates.push({ values, score });
   }
 
-  return new Map();
+  const byQuarter = new Map<string, { fiscalYear: string; period: string; date: string; value: number }>();
+  for (const candidate of candidates.sort((left, right) => right.score.localeCompare(left.score))) {
+    for (const row of candidate.values) {
+      const { fiscalYear, period } = secQuarterPeriod(row);
+      const key = `${fiscalYear}-${period}`;
+      if (!byQuarter.has(key)) {
+        byQuarter.set(key, { fiscalYear, period, date: row.end, value: row.val });
+      }
+    }
+  }
+
+  return new Map([...byQuarter.entries()].sort(([, left], [, right]) => left.date.localeCompare(right.date)).slice(-5));
 }
 
 function addAnnualConcept(rows: RawObject[], facts: CompanyFactsPayload, targetKey: string, concepts: readonly string[]): void {
