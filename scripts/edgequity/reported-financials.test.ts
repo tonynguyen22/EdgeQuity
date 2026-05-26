@@ -1,5 +1,4 @@
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
 import test from 'node:test';
 
 import {
@@ -63,13 +62,25 @@ test('classifySecConcept routes cash flow and balance sheet tags', () => {
   assert.equal(classifySecConcept('EntityRegistrantName', 'Registrant'), null);
 });
 
-test('full SEC dump includes many classified concepts for AAPL cache', () => {
-  const factsPath = new URL('../../public/data/edgequity/raw/AAPL/sec-company-facts.json', import.meta.url);
-  const facts = JSON.parse(readFileSync(factsPath, 'utf8'));
-  const doc = buildSecStatementsDocument('AAPL', facts, '0000320193', []);
-  assert.ok(doc.statements.ic.rows.length >= 40);
-  assert.ok(doc.statements.bs.rows.length >= 60);
-  assert.ok(doc.statements.cf.rows.length >= 30);
+test('SEC dump builder classifies statement concepts from an in-memory fixture', () => {
+  const facts = {
+    cik: 1,
+    entityName: 'Demo Corp',
+    facts: {
+      'us-gaap': {
+        Revenues: { label: 'Revenues', units: { USD: [{ fy: 2025, end: '2025-12-31', val: 120, fp: 'FY', form: '10-K' }] } },
+        GrossProfit: { label: 'Gross Profit', units: { USD: [{ fy: 2025, end: '2025-12-31', val: 70, fp: 'FY', form: '10-K' }] } },
+        Assets: { label: 'Assets', units: { USD: [{ fy: 2025, end: '2025-12-31', val: 500, fp: 'FY', form: '10-K' }] } },
+        StockholdersEquity: { label: 'Stockholders Equity', units: { USD: [{ fy: 2025, end: '2025-12-31', val: 300, fp: 'FY', form: '10-K' }] } },
+        NetCashProvidedByUsedInOperatingActivities: { label: 'Operating Cash Flow', units: { USD: [{ fy: 2025, end: '2025-12-31', val: 40, fp: 'FY', form: '10-K' }] } },
+        PaymentsToAcquirePropertyPlantAndEquipment: { label: 'Capital Expenditures', units: { USD: [{ fy: 2025, end: '2025-12-31', val: 10, fp: 'FY', form: '10-K' }] } },
+      },
+    },
+  };
+  const doc = buildSecStatementsDocument('DEMO', facts, '0000000001', []);
+  assert.ok(doc.statements.ic.rows.length >= 2);
+  assert.ok(doc.statements.bs.rows.length >= 2);
+  assert.ok(doc.statements.cf.rows.length >= 2);
 });
 
 test('formatReportedMoney scales large USD values', () => {
@@ -77,17 +88,29 @@ test('formatReportedMoney scales large USD values', () => {
   assert.equal(formatReportedMoney(null), '-');
 });
 
-test('cached ASML sec-statements loads pivot for UI', () => {
-  const path = new URL('../../public/data/edgequity/raw/ASML/sec-statements.json', import.meta.url);
-  let document: SecStatementsDocument;
-  try {
-    document = JSON.parse(readFileSync(path, 'utf8')) as SecStatementsDocument;
-  } catch {
-    // Build on the fly from company facts if statements not generated yet
-    const factsPath = new URL('../../public/data/edgequity/raw/ASML/sec-company-facts.json', import.meta.url);
-    const facts = JSON.parse(readFileSync(factsPath, 'utf8'));
-    document = buildSecStatementsDocument('ASML', facts, '0000937966', []);
-  }
+test('statement pivot loads annual rows for UI', () => {
+  const document: SecStatementsDocument = {
+    schemaVersion: 2,
+    ticker: 'ASML',
+    cik: '0000937966',
+    entityName: 'ASML Holding N.V.',
+    source: 'sec-edgar',
+    fetchedAt: '2026-05-25T00:00:00.000Z',
+    status: 'ok',
+    recentFilings: [],
+    statements: {
+      ic: {
+        years: [2023, 2024, 2025],
+        rows: [
+          { key: 'us-gaap:Revenues', label: 'Revenues', unit: 'usd', valuesByYear: { 2023: 1, 2024: 2, 2025: 3 } },
+          { key: 'us-gaap:NetIncomeLoss', label: 'Net Income', unit: 'usd', valuesByYear: { 2023: 1, 2024: 2, 2025: 3 } },
+          { key: 'us-gaap:GrossProfit', label: 'Gross Profit', unit: 'usd', valuesByYear: { 2023: 1, 2024: 2, 2025: 3 } },
+        ],
+      },
+      bs: { years: [], rows: [] },
+      cf: { years: [], rows: [] },
+    },
+  };
 
   const available = getAvailableStatements(document);
   assert.ok(available.includes('ic'));

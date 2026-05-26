@@ -22,7 +22,11 @@ export default function ReportedFinancialsPanel({ stock }: ReportedFinancialsPan
   const activeStatementId = availableStatements.includes(statementId) ? statementId : availableStatements[0] ?? 'ic';
   const pivot = getStatementPivot(document, activeStatementId);
   const sourceTitle = document.source === 'fmp' ? 'Statements (FMP)' : 'Statements';
-  const sourceName = document.source === 'fmp' ? 'Financial Modeling Prep' : 'Static summary';
+  const sourceName = document.source === 'fmp'
+    ? 'Financial Modeling Prep'
+    : document.source === 'sec-edgar'
+      ? 'SEC Company Facts'
+      : 'Static summary';
 
   if (document.status !== 'ok' || pivot.years.length === 0) {
     return (

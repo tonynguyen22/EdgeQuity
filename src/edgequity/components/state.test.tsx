@@ -75,8 +75,8 @@ const fmpStatementStock: EdgequityStockRecord = {
   ...stock,
   financialStatements: {
     source: {
-      provider: 'fmp',
-      endpoint: 'income-statement,balance-sheet-statement,cash-flow-statement',
+      provider: 'sec',
+      endpoint: 'SEC Company Facts',
       fetchedAt: '2026-05-24T00:00:00.000Z',
       status: 'ok',
     },
@@ -476,22 +476,22 @@ test('StockDetail renders a financial snapshot dashboard without the old histori
   assert.doesNotMatch(html, /Historical fundamentals/);
 });
 
-test('ReportedFinancialsPanel renders FMP statement data from the selected stock record', () => {
+test('ReportedFinancialsPanel renders normalized statement data from the selected stock record', () => {
   const html = renderToStaticMarkup(<ReportedFinancialsPanel stock={fmpStatementStock} />);
 
-  assert.match(html, /Statements \(FMP\)/);
-  assert.match(html, /Source: Financial Modeling Prep/);
+  assert.match(html, /Statements/);
+  assert.match(html, /Source: SEC Company Facts/);
   assert.match(html, />Income Statement</);
   assert.match(html, />Balance Sheet</);
   assert.match(html, />Cash Flow</);
   assert.match(html, /Revenue/);
   assert.match(html, /Gross Profit/);
   assert.match(html, /\$600\.00B/);
-  assert.doesNotMatch(html, /SEC EDGAR/);
+  assert.doesNotMatch(html, /Financial Modeling Prep/);
   assert.doesNotMatch(html, /edgequity:sec-statements/);
 });
 
-test('FundamentalsPanel renders charts directly from FMP statements on the selected stock record', () => {
+test('FundamentalsPanel renders annual and quarterly sections from normalized statements', () => {
   const html = renderToStaticMarkup(<FundamentalsPanel stock={fmpStatementStock} />);
 
   assert.match(html, /Growth/);
@@ -510,7 +510,7 @@ test('FundamentalsPanel renders charts directly from FMP statements on the selec
   assert.doesNotMatch(html, /edgequity:fundamentals-charts/);
 });
 
-test('FundamentalsPanel does not leave a blank quarterly chart column when only annual FMP data exists', () => {
+test('FundamentalsPanel does not leave a blank quarterly chart column when only annual data exists', () => {
   const html = renderToStaticMarkup(<FundamentalsPanel stock={annualOnlyFmpStatementStock} />);
 
   assert.match(html, /eq-fundamentals-chart-grid is-single/);

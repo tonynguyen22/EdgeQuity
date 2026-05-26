@@ -72,7 +72,12 @@ export function latestPoint(metric: FundamentalsChartMetric): FundamentalsChartP
 }
 
 export function buildFundamentalsChartsFromStock(stock: EdgequityStockRecord): FundamentalsChartsDocument {
-  const source = stock.financialStatements?.annual ? 'fmp' : 'static-summary';
+  const provider = stock.financialStatements?.source.provider;
+  const source = provider === 'sec'
+    ? 'sec-edgar+finnhub'
+    : provider === 'fmp'
+      ? 'fmp'
+      : 'static-summary';
   const sections: FundamentalsChartsSection[] = [
     {
       id: 'growth',
@@ -88,7 +93,7 @@ export function buildFundamentalsChartsFromStock(stock: EdgequityStockRecord): F
     {
       id: 'margin',
       title: 'Margins',
-      description: 'Profitability ratios derived from the same FMP statement periods.',
+      description: 'Profitability ratios derived from the same normalized statement periods.',
       metrics: [
         buildMarginMetric(stock, 'grossMargin', 'Gross margin', 'Gross profit divided by revenue.'),
         buildMarginMetric(stock, 'operatingMargin', 'Operating margin', 'Operating income divided by revenue.'),
