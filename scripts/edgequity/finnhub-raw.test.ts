@@ -121,6 +121,9 @@ test("buildThinStockRecordFromFinnhub preserves raw source metadata and thin sum
         peTTM: 28,
         forwardPE: 24,
         psTTM: 7,
+        returnOnInvestedCapitalAnnual: 35,
+        dividendYieldIndicatedAnnual: 0.5,
+        payoutRatioAnnual: 15,
       },
     },
     reported: reportedFixture,
@@ -132,6 +135,9 @@ test("buildThinStockRecordFromFinnhub preserves raw source metadata and thin sum
   assert.equal(record.history.length, 1);
   assert.equal(record.history[0]?.revenue, 416_161_000_000);
   assert.equal(record.cashFlow.freeCashFlow, 98_767_000_000);
+  assert.equal(record.profitability.roic, 0.35);
+  assert.equal(record.dividends.dividendYield, 0.005);
+  assert.equal(record.dividends.payoutRatio, 0.15);
   assert.equal(record.sources?.financialsReported.provider, "finnhub");
   assert.equal(record.sources?.financialsReported.status, "ok");
   assert.equal(record.warnings.includes("Thin summary mapped from Finnhub as-reported line items"), true);

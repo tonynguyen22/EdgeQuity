@@ -185,6 +185,9 @@ test("normalizeEdgequityRecord converts provider percentage-point ratio fields t
         grossMarginTTM: 45,
         operatingMarginTTM: 30,
         netProfitMarginTTM: 25,
+        returnOnEquityAnnual: 140,
+        returnOnAssetsAnnual: 28,
+        returnOnInvestedCapitalAnnual: 35,
         dividendYieldIndicatedAnnual: 0.5,
         payoutRatioAnnual: 15,
       },
@@ -197,7 +200,10 @@ test("normalizeEdgequityRecord converts provider percentage-point ratio fields t
   assert.equal(record.profitability.grossMargin, 0.45);
   assert.equal(record.profitability.operatingMargin, 0.3);
   assert.equal(record.profitability.netMargin, 0.25);
-  assert.equal(record.dividends.dividendYield, 0.5);
+  assert.equal(record.profitability.roe, 1.4);
+  assert.equal(record.profitability.roa, 0.28);
+  assert.equal(record.profitability.roic, 0.35);
+  assert.equal(record.dividends.dividendYield, 0.005);
   assert.equal(record.dividends.payoutRatio, 0.15);
 });
 
@@ -226,7 +232,7 @@ test("normalizeEdgequityRecord preserves provider ratio fields that are already 
   assert.equal(record.dividends.payoutRatio, 0.15);
 });
 
-test("normalizeEdgequityRecord preserves valid decimal ratios above generic thresholds", () => {
+test("normalizeEdgequityRecord normalizes Finnhub return and yield metrics from percentage points", () => {
   const record = normalizeEdgequityRecord({
     ticker: "HIGH",
     profile: { companyName: "High Return Co", mktCap: 100000000 },
@@ -242,9 +248,9 @@ test("normalizeEdgequityRecord preserves valid decimal ratios above generic thre
     cashFlows: [{}],
   });
 
-  assert.equal(record.profitability.roe, 1.4);
-  assert.equal(record.profitability.roic, 1.2);
-  assert.equal(record.dividends.dividendYield, 0.12);
+  assert.ok(Math.abs((record.profitability.roe ?? 0) - 0.014) < 0.000001);
+  assert.ok(Math.abs((record.profitability.roic ?? 0) - 0.012) < 0.000001);
+  assert.equal(record.dividends.dividendYield, 0.0012);
 });
 
 test("normalizeEdgequityRecord returns null CAGR values when required history points are missing", () => {

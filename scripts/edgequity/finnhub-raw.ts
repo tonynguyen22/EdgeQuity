@@ -96,9 +96,39 @@ function normalizeNumber(value: unknown): number | null {
   return typeof value === "number" && Number.isFinite(value) ? value : null;
 }
 
+function normalizeProviderPercentPoints(value: unknown): number | null {
+  const normalized = normalizeNumber(value);
+  if (normalized === null) return null;
+  return Math.abs(normalized) > 1 ? normalized / 100 : normalized;
+}
+
+function normalizeProviderYieldPercentPoints(value: unknown): number | null {
+  const normalized = normalizeNumber(value);
+  if (normalized === null) return null;
+  return Math.abs(normalized) > 0.05 ? normalized / 100 : normalized;
+}
+
 function firstNumber(...values: unknown[]): number | null {
   for (const value of values) {
     const normalized = normalizeNumber(value);
+    if (normalized !== null) return normalized;
+  }
+
+  return null;
+}
+
+function firstProviderPercentPoints(...values: unknown[]): number | null {
+  for (const value of values) {
+    const normalized = normalizeProviderPercentPoints(value);
+    if (normalized !== null) return normalized;
+  }
+
+  return null;
+}
+
+function firstProviderYieldPercentPoints(...values: unknown[]): number | null {
+  for (const value of values) {
+    const normalized = normalizeProviderYieldPercentPoints(value);
     if (normalized !== null) return normalized;
   }
 
@@ -298,7 +328,7 @@ export function buildThinStockRecordFromFinnhub(input: FinnhubThinInput): Edgequ
       netMargin: ratio(mapped.netIncome, mapped.revenue),
       roe: ratio(mapped.netIncome, mapped.totalEquity),
       roa: ratio(mapped.netIncome, mapped.totalAssets),
-      roic: firstNumber(metric.returnOnInvestedCapitalAnnual, metric.roicTTM),
+      roic: firstProviderPercentPoints(metric.returnOnInvestedCapitalAnnual, metric.roicTTM),
     },
     growth: {
       revenueCagr3y: null,
@@ -321,8 +351,8 @@ export function buildThinStockRecordFromFinnhub(input: FinnhubThinInput): Edgequ
       fcfConversion: ratio(mapped.freeCashFlow, mapped.netIncome),
     },
     dividends: {
-      dividendYield: firstNumber(metric.dividendYieldIndicatedAnnual, metric.currentDividendYieldTTM, metric.dividendYieldTTM),
-      payoutRatio: firstNumber(metric.payoutRatioAnnual, metric.payoutRatioTTM),
+      dividendYield: firstProviderYieldPercentPoints(metric.dividendYieldIndicatedAnnual, metric.currentDividendYieldTTM, metric.dividendYieldTTM),
+      payoutRatio: firstProviderPercentPoints(metric.payoutRatioAnnual, metric.payoutRatioTTM),
     },
     history: [{
       year: yearLabel(latestFiling),

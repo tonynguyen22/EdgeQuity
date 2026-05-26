@@ -59,6 +59,14 @@ function normalizeProviderPercentPoints(value: unknown): number | null {
   return Math.abs(normalizedValue) > 1 ? normalizedValue / 100 : normalizedValue;
 }
 
+function normalizeProviderYieldPercentPoints(value: unknown): number | null {
+  const normalizedValue = normalizeNumber(value);
+
+  if (normalizedValue === null) return null;
+
+  return Math.abs(normalizedValue) > 0.05 ? normalizedValue / 100 : normalizedValue;
+}
+
 function normalizeString(value: unknown): string | null {
   return typeof value === "string" && value.trim().length > 0 ? value : null;
 }
@@ -84,6 +92,15 @@ function firstString(...values: unknown[]): string | null {
 function firstProviderPercentPoints(...values: unknown[]): number | null {
   for (const value of values) {
     const normalizedValue = normalizeProviderPercentPoints(value);
+    if (normalizedValue !== null) return normalizedValue;
+  }
+
+  return null;
+}
+
+function firstProviderYieldPercentPoints(...values: unknown[]): number | null {
+  for (const value of values) {
+    const normalizedValue = normalizeProviderYieldPercentPoints(value);
     if (normalizedValue !== null) return normalizedValue;
   }
 
@@ -205,9 +222,9 @@ export function normalizeEdgequityRecord(raw: RawEdgequityPayload): EdgequitySto
       grossMargin: firstNumber(firstProviderPercentPoints(metric.grossMarginAnnual, metric.grossMarginTTM), ratio(grossProfit, revenue)),
       operatingMargin: firstNumber(firstProviderPercentPoints(metric.operatingMarginAnnual, metric.operatingMarginTTM), ratio(operatingIncome, revenue)),
       netMargin: firstNumber(firstProviderPercentPoints(metric.netProfitMarginAnnual, metric.netProfitMarginTTM), ratio(netIncome, revenue)),
-      roe: firstNumber(metric.returnOnEquityAnnual, metric.roeTTM, ratio(netIncome, totalEquity)),
-      roa: firstNumber(metric.returnOnAssetsAnnual, metric.roaTTM, ratio(netIncome, totalAssets)),
-      roic: firstNumber(metric.returnOnInvestedCapitalAnnual, metric.roicTTM),
+      roe: firstNumber(firstProviderPercentPoints(metric.returnOnEquityAnnual, metric.roeTTM), ratio(netIncome, totalEquity)),
+      roa: firstNumber(firstProviderPercentPoints(metric.returnOnAssetsAnnual, metric.roaTTM), ratio(netIncome, totalAssets)),
+      roic: firstProviderPercentPoints(metric.returnOnInvestedCapitalAnnual, metric.roicTTM),
     },
     growth: {
       revenueCagr3y: growthFromHistory(history, "revenue", 3),
@@ -234,7 +251,7 @@ export function normalizeEdgequityRecord(raw: RawEdgequityPayload): EdgequitySto
       fcfConversion: ratio(freeCashFlow, netIncome),
     },
     dividends: {
-      dividendYield: firstNumber(metric.dividendYieldIndicatedAnnual, metric.currentDividendYieldTTM, metric.dividendYieldTTM),
+      dividendYield: firstProviderYieldPercentPoints(metric.dividendYieldIndicatedAnnual, metric.currentDividendYieldTTM, metric.dividendYieldTTM),
       payoutRatio: firstProviderPercentPoints(metric.payoutRatioAnnual, metric.payoutRatioTTM),
     },
     history,
