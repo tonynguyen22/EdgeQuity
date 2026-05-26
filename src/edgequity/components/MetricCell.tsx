@@ -27,7 +27,7 @@ export default function MetricCell({ stock, column, groupStart = false }: Metric
       : undefined;
 
   if (column.id === 'earningsCalendar') {
-    const calendar = getEarningsCalendar(stock.ticker);
+    const calendar = getEarningsCalendar(stock);
 
     return (
       <td

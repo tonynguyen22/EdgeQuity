@@ -1,8 +1,8 @@
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
 import test from 'node:test';
 
 import { formatEdgequityValue, getEarningsCalendar } from './metrics.ts';
+import type { EdgequityStockRecord } from './types.ts';
 
 test('formatEdgequityValue returns dash for missing and invalid values', () => {
   assert.equal(formatEdgequityValue(null, 'number'), '-');
@@ -32,18 +32,50 @@ test('formatEdgequityValue preserves cents for small money values', () => {
   assert.equal(formatEdgequityValue(12.34, 'money'), '$12.34');
 });
 
-test('earnings calendar covers every stock in the screener universe', () => {
-  const manifest = JSON.parse(readFileSync('public/data/edgequity/manifest.json', 'utf8')) as { universe: string[] };
-
-  const missing = manifest.universe.filter((ticker) => {
-    const calendar = getEarningsCalendar(ticker);
-    return [
-      calendar.recentPeriod,
-      calendar.recentDate,
-      calendar.nextPeriod,
-      calendar.nextDate,
-    ].some((value) => value === '-' || value === 'Research queued' || value === 'Next report');
+test('getEarningsCalendar reads stock record earnings metadata', () => {
+  const calendar = getEarningsCalendar({
+    ...baseStock,
+    earnings: {
+      recent: { period: 'Q1 FY2027', date: '2026-05-20', source: 'Finnhub', sourceUrl: 'https://finnhub.io' },
+      next: { period: 'Q2 FY2027', date: '2026-08-26', isEstimated: true, source: 'DoltHub', sourceUrl: 'https://www.dolthub.com/repositories/post-no-preference/earnings' },
+      updatedAt: '2026-05-25T00:00:00.000Z',
+    },
   });
 
-  assert.deepEqual(missing, []);
+  assert.deepEqual(calendar, {
+    recentPeriod: 'Q1 FY2027',
+    recentDate: '2026-05-20',
+    nextPeriod: 'Q2 FY2027',
+    nextDate: '2026-08-26',
+    updatedAt: '2026-05-25',
+  });
 });
+
+test('getEarningsCalendar returns queued labels when earnings metadata is missing', () => {
+  assert.deepEqual(getEarningsCalendar(baseStock), {
+    recentPeriod: 'Research queued',
+    recentDate: '-',
+    nextPeriod: 'Next report',
+    nextDate: '-',
+    updatedAt: '-',
+  });
+});
+
+const baseStock: EdgequityStockRecord = {
+  ticker: 'NVDA',
+  name: 'NVIDIA Corp',
+  sector: 'AI Infrastructure',
+  industry: 'AI Semiconductors',
+  currency: 'USD',
+  price: null,
+  marketCap: 100,
+  enterpriseValue: 110,
+  valuation: { peTTM: null, forwardPE: null, psTTM: null, pb: null, evRevenue: null, evEbitda: null, pfcf: null, fcfYield: null, earningsYield: null },
+  profitability: { grossMargin: null, operatingMargin: null, netMargin: null, roe: null, roa: null, roic: null },
+  growth: { revenueCagr3y: null, revenueCagr5y: null, epsCagr3y: null, fcfCagr3y: null },
+  financialHealth: { currentRatio: null, quickRatio: null, debtToEquity: null, netDebtToEbitda: null, interestCoverage: null },
+  cashFlow: { operatingCashFlow: null, freeCashFlow: null, fcfMargin: null, capexToRevenue: null, fcfConversion: null },
+  dividends: { dividendYield: null, payoutRatio: null },
+  history: [],
+  warnings: [],
+};

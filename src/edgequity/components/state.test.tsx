@@ -293,6 +293,19 @@ test('ScreenerTable keeps compact rows and shows earnings context after sector',
     ticker: 'NVDA',
     name: 'NVIDIA Corp',
     sector: 'Communication Services',
+    earnings: {
+      recent: { period: 'Q1 FY2027', date: '2026-05-20', source: 'Finnhub', sourceUrl: 'https://finnhub.io' },
+      next: { period: 'Q2 FY2027', date: '2026-08-26', isEstimated: true, source: 'DoltHub', sourceUrl: 'https://www.dolthub.com/repositories/post-no-preference/earnings' },
+      updatedAt: '2026-05-25T00:00:00.000Z',
+    },
+    transcript: {
+      status: 'found',
+      title: 'NVIDIA Q1 FY2027 earnings call transcript',
+      date: '2026-05-20',
+      source: 'Company IR',
+      sourceUrl: 'https://investor.nvidia.com',
+      fetchedAt: '2026-05-25T00:00:00.000Z',
+    },
   };
   const html = renderToStaticMarkup(<ScreenerTable stocks={[nvdaStock]} onSelectStock={() => undefined} />);
 
@@ -302,8 +315,8 @@ test('ScreenerTable keeps compact rows and shows earnings context after sector',
   assert.ok(html.indexOf('>Sector<') < html.indexOf('>Earnings<'));
   assert.ok(html.indexOf('>Earnings<') < html.indexOf('>Updated<'));
   assert.match(html, /eq-earnings-cell/);
-  assert.match(html, /Recent[\s\S]*Q1 FY2027[\s\S]*May 20, 2026/);
-  assert.match(html, /Next[\s\S]*Q2 FY2027[\s\S]*Aug 26, 2026 est\./);
+  assert.match(html, /Recent[\s\S]*Q1 FY2027[\s\S]*2026-05-20/);
+  assert.match(html, /Next[\s\S]*Q2 FY2027[\s\S]*2026-08-26/);
   assert.match(html, /2026-05-20/);
 });
 
