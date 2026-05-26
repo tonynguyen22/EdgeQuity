@@ -6,6 +6,8 @@ import {
   buildUniverseFromFinnhubSymbols,
   lineItemsToObject,
 } from "./finnhub-raw.ts";
+import { buildDolthubSqlUrl, normalizeDolthubStatementValue } from "./dolthub.ts";
+import { buildFinnhubUrl, normalizeFinnhubMarketCap } from "./finnhub.ts";
 
 const symbolFixture = [
   { symbol: "AAPL", displaySymbol: "AAPL", description: "Apple Inc", type: "Common Stock", currency: "USD", mic: "XNAS" },
@@ -63,6 +65,29 @@ test("buildUniverseFromFinnhubSymbols keeps clean unique common stocks", () => {
   assert.deepEqual(universe.map((stock) => stock.ticker), ["AAPL", "BRK.B", "MSFT"]);
   assert.equal(universe[0]?.name, "Apple Inc");
   assert.equal(universe[0]?.source, "finnhub:stock/symbol");
+});
+
+test("buildFinnhubUrl appends token and query params", () => {
+  const url = buildFinnhubUrl("/stock/profile2", { symbol: "NVDA" }, "token123");
+
+  assert.equal(url.toString(), "https://finnhub.io/api/v1/stock/profile2?symbol=NVDA&token=token123");
+});
+
+test("normalizeFinnhubMarketCap converts Finnhub million-dollar value to dollars", () => {
+  assert.equal(normalizeFinnhubMarketCap(5210986.044312), 5_210_986_044_312);
+  assert.equal(normalizeFinnhubMarketCap(null), null);
+});
+
+test("buildDolthubSqlUrl encodes the SQL query", () => {
+  const url = buildDolthubSqlUrl("SELECT * FROM earnings_calendar WHERE act_symbol='NVDA'");
+
+  assert.equal(url.origin, "https://www.dolthub.com");
+  assert.equal(url.searchParams.get("q"), "SELECT * FROM earnings_calendar WHERE act_symbol='NVDA'");
+});
+
+test("normalizeDolthubStatementValue parses decimal strings", () => {
+  assert.equal(normalizeDolthubStatementValue("416161000000"), 416_161_000_000);
+  assert.equal(normalizeDolthubStatementValue(null), null);
 });
 
 test("lineItemsToObject maps common financial concepts from Finnhub as-reported filings", () => {
