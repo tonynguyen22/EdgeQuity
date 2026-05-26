@@ -60,15 +60,38 @@ export default function MetricTrendChart({
         <line x1={layout.left} y1={layout.bottom} x2={layout.right} y2={layout.bottom} stroke="var(--vw-border)" />
         <line x1={layout.left} y1={layout.top} x2={layout.left} y2={layout.bottom} stroke="var(--vw-border)" />
         {layout.polyline && <polyline className="eq-fundamentals-chart-line" points={layout.polyline} />}
-        {layout.plotPoints.map((point) => (
-          <circle
-            className="eq-fundamentals-chart-point"
-            key={point.period}
-            cx={point.x}
-            cy={point.y}
-            r="3"
-          />
-        ))}
+        {layout.plotPoints.map((point) => {
+          const label = `${title} ${point.period}: ${formatFundamentalsValue(point.value, format)}`;
+          return (
+            <g className="eq-fundamentals-chart-hover" key={point.period}>
+              <circle
+                className="eq-fundamentals-chart-hit"
+                cx={point.x}
+                cy={point.y}
+                r="11"
+                tabIndex={0}
+                aria-label={label}
+              >
+                <title>{label}</title>
+              </circle>
+              <circle
+                className="eq-fundamentals-chart-point"
+                cx={point.x}
+                cy={point.y}
+                r="3"
+                aria-hidden="true"
+              />
+              <text
+                className="eq-fundamentals-chart-hover-label"
+                x={point.tooltipX}
+                y={point.tooltipY}
+                textAnchor={point.tooltipAnchor}
+              >
+                {formatFundamentalsValue(point.value, format)}
+              </text>
+            </g>
+          );
+        })}
         {layout.xLabels.map((label) => (
           <text
             className="eq-fundamentals-chart-x"
@@ -150,7 +173,10 @@ function buildChartLayout(points: FundamentalsChartPoint[]) {
   const plotPoints = points.map((point, index) => {
     const x = points.length <= 1 ? left : left + (index / (points.length - 1)) * (right - left);
     const y = bottom - ((point.value - min) / range) * (bottom - top);
-    return { period: point.period, x, y };
+    const tooltipAnchor: 'start' | 'middle' | 'end' = x > right - 70 ? 'end' : x < left + 70 ? 'start' : 'middle';
+    const tooltipY = Math.max(top + 12, y - 12);
+    const tooltipX = tooltipAnchor === 'end' ? x - 8 : tooltipAnchor === 'start' ? x + 8 : x;
+    return { ...point, x, y, tooltipX, tooltipY, tooltipAnchor };
   });
 
   const labelBudget = points.length <= 8 ? points.length : 6;

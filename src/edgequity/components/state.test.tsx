@@ -585,6 +585,24 @@ test('MetricTrendChart normalizes quarterly charts to the latest five quarters',
   assert.doesNotMatch(html, /rotate\(/);
 });
 
+test('MetricTrendChart exposes hover labels for each plotted point', () => {
+  const html = renderToStaticMarkup(
+    <MetricTrendChart
+      title="Revenue"
+      cadence="Annual"
+      format="money"
+      points={[
+        { period: '2025', value: 1_200_000_000 },
+        { period: '2026', value: 1_500_000_000 },
+      ]}
+    />,
+  );
+
+  assert.match(html, /eq-fundamentals-chart-hit/);
+  assert.match(html, /Revenue 2025: \$1.20B/);
+  assert.match(html, /Revenue 2026: \$1.50B/);
+});
+
 test('MetricCell renders text values left-aligned without mono numeric styling', () => {
   const column: EdgequityColumn = {
     id: 'name',

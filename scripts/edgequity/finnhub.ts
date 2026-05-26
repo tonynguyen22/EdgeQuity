@@ -12,8 +12,16 @@ export type FinnhubProfile = {
   logo?: string;
 };
 
+export type FinnhubQuote = {
+  c?: number;
+};
+
 export type FinnhubMetricPayload = {
   metric?: Record<string, number | string | null>;
+};
+
+const ADR_RATIO_BY_TICKER: Record<string, number> = {
+  TSM: 5,
 };
 
 export function buildFinnhubUrl(pathname: string, params: Record<string, string>, token: string): URL {
@@ -29,6 +37,26 @@ export function buildFinnhubUrl(pathname: string, params: Record<string, string>
 
 export function normalizeFinnhubMarketCap(value: unknown): number | null {
   return typeof value === "number" && Number.isFinite(value) ? value * 1_000_000 : null;
+}
+
+export function normalizeFinnhubMarketCapUsd({
+  ticker,
+  profile,
+  quotePrice,
+}: {
+  ticker: string;
+  profile: FinnhubProfile;
+  quotePrice?: number | null;
+}): number | null {
+  const marketCap = normalizeFinnhubMarketCap(profile.marketCapitalization);
+  const currency = profile.currency?.toUpperCase();
+
+  if (!currency || currency === "USD") return marketCap;
+  if (typeof quotePrice !== "number" || !Number.isFinite(quotePrice)) return marketCap;
+  if (typeof profile.shareOutstanding !== "number" || !Number.isFinite(profile.shareOutstanding)) return marketCap;
+
+  const adrRatio = ADR_RATIO_BY_TICKER[ticker.toUpperCase()] ?? 1;
+  return Math.round(quotePrice * profile.shareOutstanding * 1_000_000 / adrRatio);
 }
 
 export async function fetchFinnhubJson<T>(url: URL): Promise<T> {

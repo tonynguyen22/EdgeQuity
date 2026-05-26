@@ -9,7 +9,14 @@ import type {
   EdgequityStockRecord,
 } from "../../src/edgequity/types.ts";
 import { AI_INFRASTRUCTURE_THEME_BY_TICKER, AI_INFRASTRUCTURE_UNIVERSE } from "./ai-universe.ts";
-import { buildFinnhubUrl, fetchFinnhubJson, normalizeFinnhubMarketCap, type FinnhubMetricPayload, type FinnhubProfile } from "./finnhub.ts";
+import {
+  buildFinnhubUrl,
+  fetchFinnhubJson,
+  normalizeFinnhubMarketCapUsd,
+  type FinnhubMetricPayload,
+  type FinnhubProfile,
+  type FinnhubQuote,
+} from "./finnhub.ts";
 import { normalizeEdgequityRecord } from "./normalize.ts";
 import { buildEarningsMetadata, buildTranscriptMetadata } from "./research-metadata.ts";
 import { pullNormalizedSecStatements, type NormalizedStatementPayload } from "./sec-normalized.ts";
@@ -106,6 +113,16 @@ async function safeFinnhubMetrics(ticker: string, token: string): Promise<Finnhu
   }
 }
 
+async function safeFinnhubQuote(ticker: string, token: string): Promise<FinnhubQuote> {
+  try {
+    return await fetchFinnhubJson<FinnhubQuote>(buildFinnhubUrl("/quote", { symbol: ticker }, token));
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
+    console.warn(`WARN ${ticker} quote: ${message}`);
+    return {};
+  }
+}
+
 async function safeStatements(ticker: string): Promise<NormalizedStatementPayload> {
   try {
     return await pullNormalizedSecStatements(ticker);
@@ -153,14 +170,16 @@ async function buildStock(ticker: string, token: string): Promise<{ record: Edge
     } : result),
     buildTranscriptMetadata(ticker, token),
   ]);
+  const quote = await safeFinnhubQuote(ticker, token);
 
   const theme = AI_INFRASTRUCTURE_THEME_BY_TICKER[ticker];
+  const marketCapUsd = normalizeFinnhubMarketCapUsd({ ticker, profile, quotePrice: quote.c });
   const profileForNormalize: RawObject = {
     ...profile,
     name: profile.name ?? ticker,
     companyName: profile.name ?? ticker,
     marketCapitalization: undefined,
-    mktCap: normalizeFinnhubMarketCap(profile.marketCapitalization),
+    mktCap: marketCapUsd,
     sector: "AI Infrastructure",
     industry: theme,
     finnhubIndustry: profile.finnhubIndustry,

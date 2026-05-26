@@ -29,3 +29,11 @@ test("generated Edgequity stock files validate against the app record schema", (
     assert.doesNotThrow(() => assertEdgequityStockRecord(record), `${stock.ticker} should be a valid stock record`);
   }
 });
+
+test("generated foreign listing market caps are normalized to USD scale", () => {
+  const tsm = JSON.parse(readFileSync("public/data/edgequity/stocks/TSM.json", "utf8")) as { marketCap: number };
+  const asml = JSON.parse(readFileSync("public/data/edgequity/stocks/ASML.json", "utf8")) as { marketCap: number };
+
+  assert.ok(tsm.marketCap > 1_000_000_000_000 && tsm.marketCap < 4_000_000_000_000);
+  assert.ok(asml.marketCap > 400_000_000_000 && asml.marketCap < 900_000_000_000);
+});

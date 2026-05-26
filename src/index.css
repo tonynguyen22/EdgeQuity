@@ -567,6 +567,38 @@ thead .eq-sticky-col {
 
 .eq-fundamentals-chart-point {
   fill: var(--vw-accent);
+  pointer-events: none;
+}
+
+.eq-fundamentals-chart-hit {
+  cursor: crosshair;
+  fill: transparent;
+  outline: none;
+  pointer-events: all;
+}
+
+.eq-fundamentals-chart-hover-label {
+  fill: var(--vw-text-primary);
+  font-size: 11px;
+  font-weight: 800;
+  opacity: 0;
+  paint-order: stroke;
+  pointer-events: none;
+  stroke: #ffffff;
+  stroke-linejoin: round;
+  stroke-width: 4px;
+  transition: opacity 0.14s ease;
+}
+
+.eq-fundamentals-chart-hover:hover .eq-fundamentals-chart-point,
+.eq-fundamentals-chart-hover:focus-within .eq-fundamentals-chart-point {
+  fill: var(--vw-green);
+  r: 4.5;
+}
+
+.eq-fundamentals-chart-hover:hover .eq-fundamentals-chart-hover-label,
+.eq-fundamentals-chart-hover:focus-within .eq-fundamentals-chart-hover-label {
+  opacity: 1;
 }
 
 .eq-fundamentals-chart-empty {

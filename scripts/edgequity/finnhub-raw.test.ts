@@ -7,7 +7,7 @@ import {
   lineItemsToObject,
 } from "./finnhub-raw.ts";
 import { buildDolthubSqlUrl, normalizeDolthubStatementValue } from "./dolthub.ts";
-import { buildFinnhubUrl, normalizeFinnhubMarketCap } from "./finnhub.ts";
+import { buildFinnhubUrl, normalizeFinnhubMarketCap, normalizeFinnhubMarketCapUsd } from "./finnhub.ts";
 
 const symbolFixture = [
   { symbol: "AAPL", displaySymbol: "AAPL", description: "Apple Inc", type: "Common Stock", currency: "USD", mic: "XNAS" },
@@ -76,6 +76,25 @@ test("buildFinnhubUrl appends token and query params", () => {
 test("normalizeFinnhubMarketCap converts Finnhub million-dollar value to dollars", () => {
   assert.equal(normalizeFinnhubMarketCap(5210986.044312), 5_210_986_044_312);
   assert.equal(normalizeFinnhubMarketCap(null), null);
+});
+
+test("normalizeFinnhubMarketCapUsd uses US quote and ADR ratio for foreign profiles", () => {
+  assert.equal(
+    normalizeFinnhubMarketCapUsd({
+      ticker: "TSM",
+      profile: { currency: "TWD", marketCapitalization: 59_904_129.140625, shareOutstanding: 25_932.52 },
+      quotePrice: 414.06,
+    }),
+    2_147_523_846_240,
+  );
+  assert.equal(
+    normalizeFinnhubMarketCapUsd({
+      ticker: "ASML",
+      profile: { currency: "EUR", marketCapitalization: 546_467.448767, shareOutstanding: 388.15 },
+      quotePrice: 1635.74,
+    }),
+    634_912_481_000,
+  );
 });
 
 test("buildDolthubSqlUrl encodes the SQL query", () => {
