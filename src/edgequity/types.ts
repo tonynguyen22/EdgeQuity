@@ -48,6 +48,38 @@ export interface EdgequityFinancialStatements {
   quarterly?: EdgequityFinancialStatementSet;
 }
 
+export interface EdgequityEarningsEvent {
+  period: string;
+  date: string;
+  isEstimated?: boolean;
+  source: string;
+  sourceUrl: string;
+}
+
+export interface EdgequityEarningsMetadata {
+  recent: EdgequityEarningsEvent | null;
+  next: EdgequityEarningsEvent | null;
+  updatedAt: string;
+}
+
+export interface EdgequityTranscriptMetadata {
+  status: 'found' | 'missing' | 'error';
+  title: string | null;
+  date: string | null;
+  source: string | null;
+  sourceUrl: string | null;
+  fetchedAt: string;
+  message?: string;
+}
+
+export interface EdgequityStatementQuality {
+  annualPeriods: number;
+  quarterlyPeriods: number;
+  source: 'sec' | 'dolthub' | 'mixed' | 'missing';
+  status: 'ok' | 'partial' | 'missing' | 'error';
+  message: string;
+}
+
 export interface EdgequityStockRecord {
   ticker: string;
   name: string;
@@ -102,6 +134,10 @@ export interface EdgequityStockRecord {
   };
   history: EdgequityHistoryYear[];
   financialStatements?: EdgequityFinancialStatements;
+  aiTheme?: string;
+  earnings?: EdgequityEarningsMetadata;
+  transcript?: EdgequityTranscriptMetadata;
+  statementQuality?: EdgequityStatementQuality;
   warnings: string[];
   sources?: {
     profile?: EdgequityDataSource;

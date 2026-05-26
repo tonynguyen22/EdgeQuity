@@ -103,6 +103,65 @@ test('assertEdgequityStockRecord accepts valid stock fixture', () => {
   assert.doesNotThrow(() => assertEdgequityStockRecord(stockFixture));
 });
 
+test('assertEdgequityStockRecord accepts earnings and transcript metadata', () => {
+  const record = {
+    ...(stockFixture as Record<string, unknown>),
+    aiTheme: 'AI Semiconductors',
+    earnings: {
+      recent: {
+        period: 'Q1 FY2027',
+        date: '2026-05-20',
+        source: 'Finnhub',
+        sourceUrl: 'https://finnhub.io',
+      },
+      next: {
+        period: 'Q2 FY2027',
+        date: '2026-08-26',
+        isEstimated: true,
+        source: 'DoltHub',
+        sourceUrl: 'https://www.dolthub.com/repositories/post-no-preference/earnings',
+      },
+      updatedAt: '2026-05-25T00:00:00.000Z',
+    },
+    transcript: {
+      status: 'found',
+      title: 'NVIDIA Q1 FY2027 earnings call transcript',
+      date: '2026-05-20',
+      source: 'Company IR',
+      sourceUrl: 'https://investor.nvidia.com',
+      fetchedAt: '2026-05-25T00:00:00.000Z',
+    },
+    statementQuality: {
+      annualPeriods: 5,
+      quarterlyPeriods: 5,
+      source: 'sec',
+      status: 'ok',
+      message: 'SEC Company Facts normalized successfully',
+    },
+  };
+
+  assert.doesNotThrow(() => assertEdgequityStockRecord(record));
+});
+
+test('assertEdgequityStockRecord rejects malformed earnings metadata', () => {
+  assert.throws(
+    () => assertEdgequityStockRecord({
+      ...(stockFixture as Record<string, unknown>),
+      earnings: {
+        recent: {
+          period: 'Q1 FY2027',
+          date: 20260520,
+          source: 'Finnhub',
+          sourceUrl: 'https://finnhub.io',
+        },
+        next: null,
+        updatedAt: '2026-05-25T00:00:00.000Z',
+      },
+    }),
+    /Invalid Edgequity stock record/,
+  );
+});
+
 test('NVIDIA static quote and chart history reflect the Q1 FY2027 report context', () => {
   assert.equal(nvdaFixture.price, 223.47);
   assert.equal(nvdaFixture.marketCap, 5420000000000);
