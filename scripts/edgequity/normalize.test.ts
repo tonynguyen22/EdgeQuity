@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 
 import { buildWarnings, cagr, normalizeEdgequityRecord, normalizeNumber, ratio } from "./normalize.ts";
+import { buildNormalizedSecStatements } from "./sec-normalized.ts";
 
 test("ratio returns null when denominator is zero or missing", () => {
   assert.equal(ratio(10, 0), null);
@@ -148,6 +149,33 @@ test("normalizeEdgequityRecord builds a stock record with full-unit money values
   assert.equal(record.warnings.length, 0);
 });
 
+test("normalizeEdgequityRecord builds annual history from five statement periods", () => {
+  const stock = normalizeEdgequityRecord({
+    ticker: "WMT",
+    profile: { name: "Walmart Inc", currency: "USD", marketCapitalization: 700000 },
+    metrics: { metric: { peTTM: 38, forwardPE: 30 } },
+    incomeStatements: [
+      { fiscalYear: "2026", revenue: 713200000000, grossProfit: 177500000000, operatingIncome: 29900000000, netIncome: 21900000000, epsdiluted: 2.4 },
+      { fiscalYear: "2025", revenue: 681000000000, grossProfit: 169000000000, operatingIncome: 27600000000, netIncome: 19400000000, epsdiluted: 2.1 },
+      { fiscalYear: "2024", revenue: 648000000000, grossProfit: 157000000000, operatingIncome: 27000000000, netIncome: 15500000000, epsdiluted: 1.9 },
+      { fiscalYear: "2023", revenue: 611000000000, grossProfit: 147000000000, operatingIncome: 20400000000, netIncome: 11600000000, epsdiluted: 1.4 },
+      { fiscalYear: "2022", revenue: 573000000000, grossProfit: 143000000000, operatingIncome: 25900000000, netIncome: 13600000000, epsdiluted: 1.5 },
+    ],
+    balanceSheets: [
+      { fiscalYear: "2026", totalAssets: 284700000000, totalDebt: 62000000000, totalStockholdersEquity: 105900000000, cashAndCashEquivalents: 9700000000 },
+    ],
+    cashFlows: [
+      { fiscalYear: "2026", operatingCashFlow: 41600000000, capitalExpenditure: -23000000000, freeCashFlow: 18600000000 },
+    ],
+  });
+
+  assert.equal(stock.history.length, 5);
+  assert.equal(stock.history[0]?.year, "2026");
+  assert.equal(stock.history[0]?.revenue, 713200000000);
+  assert.equal(stock.profitability.grossMargin, 177500000000 / 713200000000);
+  assert.equal(stock.cashFlow.freeCashFlow, 18600000000);
+});
+
 test("normalizeEdgequityRecord converts provider percentage-point ratio fields to decimals", () => {
   const record = normalizeEdgequityRecord({
     ticker: "PCT",
@@ -266,4 +294,45 @@ test("buildWarnings reports missing valuation, market cap, and short history", (
     "Market cap unavailable",
     "Less than three years of financial history",
   ]);
+});
+
+test("buildNormalizedSecStatements maps SEC facts into summary statement rows", () => {
+  const statements = buildNormalizedSecStatements({
+    cik: 320193,
+    entityName: "Apple Inc.",
+    facts: {
+      "us-gaap": {
+        RevenueFromContractWithCustomerExcludingAssessedTax: {
+          label: "Revenue",
+          units: { USD: [{ fy: 2025, fp: "FY", form: "10-K", end: "2025-09-27", val: 416_161_000_000 }] },
+        },
+        GrossProfit: {
+          label: "Gross Profit",
+          units: { USD: [{ fy: 2025, fp: "FY", form: "10-K", end: "2025-09-27", val: 195_201_000_000 }] },
+        },
+        LongTermDebtCurrent: {
+          label: "Current Debt",
+          units: { USD: [{ fy: 2025, fp: "FY", form: "10-K", end: "2025-09-27", val: 9_982_000_000 }] },
+        },
+        LongTermDebtNoncurrent: {
+          label: "Long-Term Debt",
+          units: { USD: [{ fy: 2025, fp: "FY", form: "10-K", end: "2025-09-27", val: 78_852_000_000 }] },
+        },
+        NetCashProvidedByUsedInOperatingActivities: {
+          label: "Operating Cash Flow",
+          units: { USD: [{ fy: 2025, fp: "FY", form: "10-K", end: "2025-09-27", val: 111_482_000_000 }] },
+        },
+        PaymentsToAcquirePropertyPlantAndEquipment: {
+          label: "Capital Expenditures",
+          units: { USD: [{ fy: 2025, fp: "FY", form: "10-K", end: "2025-09-27", val: 12_715_000_000 }] },
+        },
+      },
+    },
+  });
+
+  assert.equal(statements.status, "ok");
+  assert.equal(statements.annual.incomeStatements[0]?.revenue, 416_161_000_000);
+  assert.equal(statements.annual.incomeStatements[0]?.grossProfit, 195_201_000_000);
+  assert.equal(statements.annual.balanceSheets[0]?.totalDebt, 88_834_000_000);
+  assert.equal(statements.annual.cashFlows[0]?.freeCashFlow, 98_767_000_000);
 });
