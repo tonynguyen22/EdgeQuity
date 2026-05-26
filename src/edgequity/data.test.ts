@@ -12,7 +12,7 @@ import {
 import type { EdgequityStockRecord } from './types.ts';
 
 const stockFixture = JSON.parse(readFileSync(
-  new URL('../../public/data/edgequity/stocks/AAPL.json', import.meta.url),
+  new URL('../../public/data/edgequity/stocks/NVDA.json', import.meta.url),
   'utf8',
 )) as unknown;
 const nvdaFixture = JSON.parse(readFileSync(
@@ -162,29 +162,28 @@ test('assertEdgequityStockRecord rejects malformed earnings metadata', () => {
   );
 });
 
-test('NVIDIA static quote and chart history reflect the Q1 FY2027 report context', () => {
-  assert.equal(nvdaFixture.price, 223.47);
-  assert.equal(nvdaFixture.marketCap, 5420000000000);
+test('NVIDIA static financial history uses SEC statements while price remains realtime-only', () => {
+  assert.equal(nvdaFixture.price, null);
+  assert.ok(nvdaFixture.marketCap > 5_000_000_000_000);
   assert.equal(nvdaFixture.history.length, 5);
   assert.deepEqual(nvdaFixture.history.map((year) => year.year), [
-    'FY2026',
-    'FY2025',
-    'FY2024',
-    'FY2023',
-    'FY2022',
+    '2026',
+    '2025',
+    '2024',
+    '2023',
+    '2022',
   ]);
   assert.equal(nvdaFixture.history[0]?.revenue, 215938000000);
 });
 
-test('bundled FMP three-statement dataset includes only the confirmed free-tier universe', () => {
+test('bundled dataset includes the 50-stock AI infrastructure universe', () => {
   assertEdgequityManifest(staticManifest);
-  assert.equal(staticManifest.stocks.length, 82);
-  assert.equal(staticManifest.universe.length, 82);
+  assert.equal(staticManifest.stocks.length, 50);
+  assert.equal(staticManifest.universe.length, 50);
   assert.deepEqual(staticManifest.universe, staticManifest.stocks.map((stock) => stock.ticker));
-  assert.equal(staticManifest.stocks.some((stock) => stock.ticker === 'AAPL'), true);
   assert.equal(staticManifest.stocks.some((stock) => stock.ticker === 'NVDA'), true);
-  assert.equal(staticManifest.stocks.some((stock) => stock.ticker === 'FUBO'), false);
-  assert.equal(staticManifest.stocks.some((stock) => stock.ticker === 'RKT'), false);
+  assert.equal(staticManifest.stocks.some((stock) => stock.ticker === 'GOOG'), true);
+  assert.equal(staticManifest.stocks.some((stock) => stock.ticker === 'AAPL'), false);
   assert.equal(staticManifest.stocks.every((stock) => stock.dataPath.startsWith('/data/edgequity/stocks/')), true);
 
   for (const stock of staticManifest.stocks) {
@@ -266,11 +265,11 @@ test('loadEdgequityStock validates stock data on success', async () => {
     status: 200,
     json: async () => stockFixture,
   }, async (calls) => {
-    const stock = await loadEdgequityStock('/data/edgequity/stocks/AAPL.json');
+    const stock = await loadEdgequityStock('/data/edgequity/stocks/NVDA.json');
 
-    assert.equal(stock.ticker, 'AAPL');
+    assert.equal(stock.ticker, 'NVDA');
     assert.deepEqual(calls, [{
-      input: '/data/edgequity/stocks/AAPL.json',
+      input: '/data/edgequity/stocks/NVDA.json',
       init: { cache: 'no-cache' },
     }]);
   });
@@ -290,14 +289,14 @@ test('loadEdgequityStock throws status on failure', async () => {
 });
 
 test('refreshEdgequityRealtimeQuotes pulls Finnhub quotes at runtime and merges live price fields', async () => {
-  const apple = stockFixture as EdgequityStockRecord;
+  const nvidia = stockFixture as EdgequityStockRecord;
   const staticStocks: EdgequityStockRecord[] = [
     {
-      ...apple,
-      ticker: 'AAPL',
-      price: 190,
-      marketCap: 3_000_000_000_000,
-      enterpriseValue: 3_100_000_000_000,
+      ...nvidia,
+      ticker: 'NVDA',
+      price: null,
+      marketCap: 5_210_986_044_312,
+      enterpriseValue: 5_205_000_000_000,
     },
   ];
 
@@ -311,13 +310,13 @@ test('refreshEdgequityRealtimeQuotes pulls Finnhub quotes at runtime and merges 
     const refreshed = await refreshEdgequityRealtimeQuotes(staticStocks);
 
     assert.equal(refreshed[0]?.price, 201.25);
-    assert.equal(refreshed[0]?.marketCap, 3_000_000_000_000);
-    assert.equal(refreshed[0]?.enterpriseValue, 3_100_000_000_000);
+    assert.equal(refreshed[0]?.marketCap, 5_210_986_044_312);
+    assert.equal(refreshed[0]?.enterpriseValue, 5_205_000_000_000);
     assert.equal(calls.length, 1);
     assert.equal(calls[0]?.input, '/api/http-proxy');
     assert.equal(calls[0]?.init?.method, 'POST');
 
     const body = JSON.parse(String(calls[0]?.init?.body)) as { url: string };
-    assert.equal(body.url, 'https://finnhub.io/api/v1/quote?symbol=AAPL');
+    assert.equal(body.url, 'https://finnhub.io/api/v1/quote?symbol=NVDA');
   });
 });
