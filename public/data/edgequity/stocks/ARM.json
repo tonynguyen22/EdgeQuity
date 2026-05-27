@@ -5,18 +5,18 @@
   "industry": "AI Semiconductors",
   "currency": "USD",
   "price": null,
-  "marketCap": 326126650391,
-  "enterpriseValue": 314565.72,
+  "marketCap": 341778081299,
+  "enterpriseValue": 339027.1,
   "valuation": {
-    "peTTM": 351.0141,
+    "peTTM": 378.0731,
     "forwardPE": 99.47619,
-    "psTTM": 64.4953,
+    "psTTM": 69.4671,
     "pb": 19.3893,
-    "evRevenue": 0.00007850404791614674,
+    "evRevenue": 0.00006890794715447154,
     "evEbitda": null,
-    "pfcf": 1832.1721932078651,
-    "fcfYield": 0.0005458002275698478,
-    "earningsYield": 0.0024285043833444913
+    "pfcf": 349.1093782420838,
+    "fcfYield": 0.0028644317864946257,
+    "earningsYield": 0.0026449911491227187
   },
   "profitability": {
     "grossMargin": 0.9754,
@@ -40,17 +40,29 @@
     "interestCoverage": null
   },
   "cashFlow": {
-    "operatingCashFlow": 397000000,
-    "freeCashFlow": 178000000,
-    "fcfMargin": 0.04442226104317445,
-    "capexToRevenue": 0.054654354878961815,
-    "fcfConversion": 0.22474747474747475
+    "operatingCashFlow": 1524000000,
+    "freeCashFlow": 979000000,
+    "fcfMargin": 0.19898373983739837,
+    "capexToRevenue": 0.11077235772357724,
+    "fcfConversion": 1.0829646017699115
   },
   "dividends": {
     "dividendYield": null,
     "payoutRatio": null
   },
   "history": [
+    {
+      "year": "2026",
+      "revenue": 4920000000,
+      "grossProfit": 4799000000,
+      "operatingIncome": 900000000,
+      "netIncome": 904000000,
+      "freeCashFlow": 979000000,
+      "totalAssets": 10703000000,
+      "totalDebt": null,
+      "totalEquity": 8286000000,
+      "sharesDiluted": 1068000000
+    },
     {
       "year": "2025",
       "revenue": 4007000000,
@@ -76,9 +88,7 @@
       "sharesDiluted": 1044497032
     }
   ],
-  "warnings": [
-    "Less than three years of financial history"
-  ],
+  "warnings": [],
   "aiTheme": "AI Semiconductors",
   "earnings": {
     "recent": {
@@ -88,7 +98,7 @@
       "sourceUrl": "https://finnhub.io"
     },
     "next": null,
-    "updatedAt": "2026-05-26T02:11:26.058Z"
+    "updatedAt": "2026-05-27T17:07:14.202Z"
   },
   "transcript": {
     "status": "error",
@@ -96,18 +106,35 @@
     "date": null,
     "source": "Finnhub",
     "sourceUrl": "https://finnhub.io",
-    "fetchedAt": "2026-05-26T02:11:26.059Z",
+    "fetchedAt": "2026-05-27T17:07:14.204Z",
     "message": "Finnhub request failed 403: {\"error\":\"You don't have access to this resource.\"}"
   },
   "financialStatements": {
     "source": {
       "provider": "sec",
       "endpoint": "SEC Company Facts",
-      "fetchedAt": "2026-05-26T02:11:26.584Z",
+      "fetchedAt": "2026-05-27T17:07:14.670Z",
       "status": "ok"
     },
     "annual": {
       "incomeStatement": [
+        {
+          "fiscalYear": "2026",
+          "period": "FY",
+          "date": "2026-03-31",
+          "reportedCurrency": null,
+          "values": {
+            "fiscalYear": "2026",
+            "date": "2026-03-31",
+            "period": "FY",
+            "revenue": 4920000000,
+            "grossProfit": 4799000000,
+            "operatingIncome": 900000000,
+            "netIncome": 904000000,
+            "epsdiluted": 0.85,
+            "weightedAverageShsOutDil": 1068000000
+          }
+        },
         {
           "fiscalYear": "2025",
           "period": "FY",
@@ -145,6 +172,20 @@
       ],
       "balanceSheet": [
         {
+          "fiscalYear": "2026",
+          "period": "FY",
+          "date": "2026-03-31",
+          "reportedCurrency": null,
+          "values": {
+            "fiscalYear": "2026",
+            "date": "2026-03-31",
+            "period": "FY",
+            "totalAssets": 10703000000,
+            "totalStockholdersEquity": 8286000000,
+            "cashAndCashEquivalents": 2751000000
+          }
+        },
+        {
           "fiscalYear": "2025",
           "period": "FY",
           "date": "2025-03-31",
@@ -174,6 +215,20 @@
         }
       ],
       "cashFlow": [
+        {
+          "fiscalYear": "2026",
+          "period": "FY",
+          "date": "2026-03-31",
+          "reportedCurrency": null,
+          "values": {
+            "fiscalYear": "2026",
+            "date": "2026-03-31",
+            "period": "FY",
+            "operatingCashFlow": 1524000000,
+            "capitalExpenditure": 545000000,
+            "freeCashFlow": 979000000
+          }
+        },
         {
           "fiscalYear": "2025",
           "period": "FY",
@@ -290,6 +345,57 @@
             "epsdiluted": -0.11,
             "weightedAverageShsOutDil": 1025000000
           }
+        },
+        {
+          "fiscalYear": "2024",
+          "period": "Q3",
+          "date": "2022-12-31",
+          "reportedCurrency": null,
+          "values": {
+            "fiscalYear": "2024",
+            "date": "2022-12-31",
+            "period": "Q3",
+            "revenue": 724000000,
+            "grossProfit": 695000000,
+            "operatingIncome": 244000000,
+            "netIncome": 182000000,
+            "epsdiluted": 0.18,
+            "weightedAverageShsOutDil": 1027918937
+          }
+        },
+        {
+          "fiscalYear": "2024",
+          "period": "Q2",
+          "date": "2022-09-30",
+          "reportedCurrency": null,
+          "values": {
+            "fiscalYear": "2024",
+            "date": "2022-09-30",
+            "period": "Q2",
+            "revenue": 630000000,
+            "grossProfit": 605000000,
+            "operatingIncome": 183000000,
+            "netIncome": 114000000,
+            "epsdiluted": 0.11,
+            "weightedAverageShsOutDil": 1027048150
+          }
+        },
+        {
+          "fiscalYear": "2024",
+          "period": "Q1",
+          "date": "2023-06-30",
+          "reportedCurrency": null,
+          "values": {
+            "fiscalYear": "2024",
+            "date": "2023-06-30",
+            "period": "Q1",
+            "revenue": 675000000,
+            "grossProfit": 644000000,
+            "operatingIncome": 111000000,
+            "netIncome": 105000000,
+            "epsdiluted": 0.1,
+            "weightedAverageShsOutDil": 1029000000
+          }
         }
       ],
       "balanceSheet": [
@@ -345,6 +451,21 @@
             "date": "2024-03-31",
             "period": "Q3",
             "totalAssets": 7927000000,
+            "totalStockholdersEquity": 4051000000,
+            "cashAndCashEquivalents": 1923000000
+          }
+        },
+        {
+          "fiscalYear": "2025",
+          "period": "Q2",
+          "date": "2024-03-31",
+          "reportedCurrency": null,
+          "values": {
+            "fiscalYear": "2025",
+            "date": "2024-03-31",
+            "period": "Q2",
+            "totalAssets": 7927000000,
+            "totalStockholdersEquity": 4051000000,
             "cashAndCashEquivalents": 1923000000
           }
         },
@@ -360,6 +481,109 @@
             "totalAssets": 8932000000,
             "totalStockholdersEquity": 6839000000,
             "cashAndCashEquivalents": 2085000000
+          }
+        },
+        {
+          "fiscalYear": "2024",
+          "period": "Q3",
+          "date": "2023-03-31",
+          "reportedCurrency": null,
+          "values": {
+            "fiscalYear": "2024",
+            "date": "2023-03-31",
+            "period": "Q3",
+            "totalAssets": 6866000000,
+            "totalStockholdersEquity": 3548000000,
+            "cashAndCashEquivalents": 1554000000
+          }
+        },
+        {
+          "fiscalYear": "2024",
+          "period": "Q2",
+          "date": "2023-03-31",
+          "reportedCurrency": null,
+          "values": {
+            "fiscalYear": "2024",
+            "date": "2023-03-31",
+            "period": "Q2",
+            "totalAssets": 6866000000,
+            "totalStockholdersEquity": 3548000000,
+            "cashAndCashEquivalents": 1554000000
+          }
+        },
+        {
+          "fiscalYear": "2024",
+          "period": "Q1",
+          "date": "2024-03-31",
+          "reportedCurrency": null,
+          "values": {
+            "fiscalYear": "2024",
+            "date": "2024-03-31",
+            "period": "Q1",
+            "totalAssets": 7927000000,
+            "totalStockholdersEquity": 4221000000,
+            "cashAndCashEquivalents": 1923000000
+          }
+        },
+        {
+          "fiscalYear": "2023",
+          "period": "Q3",
+          "date": "2023-09-30",
+          "reportedCurrency": null,
+          "values": {
+            "fiscalYear": "2023",
+            "date": "2023-09-30",
+            "period": "Q3",
+            "totalStockholdersEquity": 4773000000
+          }
+        },
+        {
+          "fiscalYear": "2023",
+          "period": "Q2",
+          "date": "2023-06-30",
+          "reportedCurrency": null,
+          "values": {
+            "fiscalYear": "2023",
+            "date": "2023-06-30",
+            "period": "Q2",
+            "totalStockholdersEquity": 4221000000
+          }
+        },
+        {
+          "fiscalYear": "2023",
+          "period": "Q1",
+          "date": "2023-03-31",
+          "reportedCurrency": null,
+          "values": {
+            "fiscalYear": "2023",
+            "date": "2023-03-31",
+            "period": "Q1",
+            "totalStockholdersEquity": 4051000000,
+            "cashAndCashEquivalents": 1554000000
+          }
+        },
+        {
+          "fiscalYear": "2022",
+          "period": "Q3",
+          "date": "2022-09-30",
+          "reportedCurrency": null,
+          "values": {
+            "fiscalYear": "2022",
+            "date": "2022-09-30",
+            "period": "Q3",
+            "totalStockholdersEquity": 3852000000
+          }
+        },
+        {
+          "fiscalYear": "2022",
+          "period": "Q2",
+          "date": "2022-06-30",
+          "reportedCurrency": null,
+          "values": {
+            "fiscalYear": "2022",
+            "date": "2022-06-30",
+            "period": "Q2",
+            "totalStockholdersEquity": 3748000000
           }
         }
       ],
@@ -433,13 +657,55 @@
             "capitalExpenditure": 60000000,
             "freeCashFlow": 53000000
           }
+        },
+        {
+          "fiscalYear": "2024",
+          "period": "Q3",
+          "date": "2022-12-31",
+          "reportedCurrency": null,
+          "values": {
+            "fiscalYear": "2024",
+            "date": "2022-12-31",
+            "period": "Q3",
+            "operatingCashFlow": 256000000,
+            "capitalExpenditure": 48000000,
+            "freeCashFlow": 208000000
+          }
+        },
+        {
+          "fiscalYear": "2024",
+          "period": "Q2",
+          "date": "2022-09-30",
+          "reportedCurrency": null,
+          "values": {
+            "fiscalYear": "2024",
+            "date": "2022-09-30",
+            "period": "Q2",
+            "operatingCashFlow": -155000000,
+            "capitalExpenditure": 38000000,
+            "freeCashFlow": -193000000
+          }
+        },
+        {
+          "fiscalYear": "2024",
+          "period": "Q1",
+          "date": "2023-06-30",
+          "reportedCurrency": null,
+          "values": {
+            "fiscalYear": "2024",
+            "date": "2023-06-30",
+            "period": "Q1",
+            "operatingCashFlow": -114000000,
+            "capitalExpenditure": 26000000,
+            "freeCashFlow": -140000000
+          }
         }
       ]
     }
   },
   "statementQuality": {
-    "annualPeriods": 2,
-    "quarterlyPeriods": 5,
+    "annualPeriods": 3,
+    "quarterlyPeriods": 8,
     "source": "sec",
     "status": "partial",
     "message": "Financials normalized from SEC Company Facts."
@@ -448,24 +714,24 @@
     "profile": {
       "provider": "finnhub",
       "endpoint": "stock/profile2",
-      "fetchedAt": "2026-05-26T02:11:26.584Z",
+      "fetchedAt": "2026-05-27T17:07:14.670Z",
       "status": "ok"
     },
     "metrics": {
       "provider": "finnhub",
       "endpoint": "stock/metric",
-      "fetchedAt": "2026-05-26T02:11:26.584Z",
+      "fetchedAt": "2026-05-27T17:07:14.670Z",
       "status": "ok"
     },
     "financialsReported": {
       "provider": "sec",
       "endpoint": "SEC Company Facts",
-      "fetchedAt": "2026-05-26T02:11:26.584Z",
+      "fetchedAt": "2026-05-27T17:07:14.670Z",
       "status": "ok"
     },
     "summary": {
       "provider": "derived",
-      "fetchedAt": "2026-05-26T02:11:26.584Z",
+      "fetchedAt": "2026-05-27T17:07:14.670Z",
       "status": "ok",
       "message": "Summary metrics derived from normalized statements."
     }

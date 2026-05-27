@@ -24,7 +24,7 @@ export default function MetricTrendChart({
   variant = 'line',
 }: MetricTrendChartProps) {
   const chartPoints = useMemo(() => normalizeChartPoints(points, maxPoints), [points, maxPoints]);
-  const periodLabel = `${maxPoints}${cadence === 'Annual' ? 'Y' : 'Q'}`;
+  const periodLabel = `${chartPoints.length}${cadence === 'Annual' ? 'Y' : 'Q'}`;
   const layout = useMemo(() => buildChartLayout(chartPoints), [chartPoints]);
 
   if (chartPoints.length === 0) {
@@ -180,6 +180,8 @@ function buildChartLayout(points: FundamentalsChartPoint[]) {
   const height = 260;
   const left = 76;
   const right = width - 20;
+  const plotLeft = left + 42;
+  const plotRight = right - 12;
   const top = 22;
   const bottom = 196;
   const xLabelY = height - 26;
@@ -192,7 +194,7 @@ function buildChartLayout(points: FundamentalsChartPoint[]) {
   const mid = top + (bottom - top) / 2;
 
   const plotPoints = points.map((point, index) => {
-    const x = points.length <= 1 ? left : left + (index / (points.length - 1)) * (right - left);
+    const x = points.length <= 1 ? plotLeft : plotLeft + (index / (points.length - 1)) * (plotRight - plotLeft);
     const y = bottom - ((point.value - min) / range) * (bottom - top);
     const tooltipAnchor: 'start' | 'middle' | 'end' = x > right - 70 ? 'end' : x < left + 70 ? 'start' : 'middle';
     const tooltipY = Math.max(top + 12, y - 12);

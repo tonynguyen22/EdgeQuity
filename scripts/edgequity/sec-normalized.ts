@@ -12,6 +12,9 @@ import {
 
 type RawObject = Record<string, unknown>;
 
+const ANNUAL_PERIOD_LIMIT = 5;
+const QUARTERLY_PERIOD_LIMIT = 20;
+
 const CONCEPTS = {
   revenue: ["RevenueFromContractWithCustomerExcludingAssessedTax", "Revenues", "SalesRevenueNet"],
   grossProfit: ["GrossProfit"],
@@ -99,7 +102,7 @@ function annualValuesByConcept(
 
   for (const concept of concepts) {
     const series = findConceptSeries(facts.facts, [concept])?.series;
-    const values = pickAnnualUsdValues(series, 5);
+    const values = pickAnnualUsdValues(series, ANNUAL_PERIOD_LIMIT);
     if (values.length === 0) continue;
 
     const latest = values.at(-1);
@@ -117,7 +120,7 @@ function annualValuesByConcept(
     }
   }
 
-  return new Map([...byYear.entries()].sort(([left], [right]) => left.localeCompare(right)).slice(-5));
+  return new Map([...byYear.entries()].sort(([left], [right]) => left.localeCompare(right)).slice(-ANNUAL_PERIOD_LIMIT));
 }
 
 function quarterlyValuesByConcept(
@@ -128,7 +131,7 @@ function quarterlyValuesByConcept(
 
   for (const concept of concepts) {
     const series = findConceptSeries(facts.facts, [concept])?.series;
-    const values = pickQuarterlyUsdRows(series, 5);
+    const values = pickQuarterlyUsdRows(series, QUARTERLY_PERIOD_LIMIT);
     if (values.length === 0) continue;
 
     const latest = values.at(-1);
@@ -147,7 +150,7 @@ function quarterlyValuesByConcept(
     }
   }
 
-  return new Map([...byQuarter.entries()].sort(([, left], [, right]) => left.date.localeCompare(right.date)).slice(-5));
+  return new Map([...byQuarter.entries()].sort(([, left], [, right]) => left.date.localeCompare(right.date)).slice(-QUARTERLY_PERIOD_LIMIT));
 }
 
 function addAnnualConcept(rows: RawObject[], facts: CompanyFactsPayload, targetKey: string, concepts: readonly string[]): void {
@@ -199,13 +202,13 @@ function addQuarterlySummedConcept(rows: RawObject[], facts: CompanyFactsPayload
 }
 
 function sortAnnualDesc(rows: RawObject[]): RawObject[] {
-  return rows.sort((left, right) => String(right.fiscalYear).localeCompare(String(left.fiscalYear))).slice(0, 5);
+  return rows.sort((left, right) => String(right.fiscalYear).localeCompare(String(left.fiscalYear))).slice(0, ANNUAL_PERIOD_LIMIT);
 }
 
 function sortQuarterDesc(rows: RawObject[]): RawObject[] {
   return rows
     .sort((left, right) => `${right.fiscalYear}-${right.period}`.localeCompare(`${left.fiscalYear}-${left.period}`))
-    .slice(0, 5);
+    .slice(0, QUARTERLY_PERIOD_LIMIT);
 }
 
 function finishCashFlows(rows: RawObject[]): void {

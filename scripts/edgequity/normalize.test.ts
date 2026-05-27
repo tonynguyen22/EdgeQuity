@@ -490,6 +490,38 @@ test("buildNormalizedSecStatements dedupes calendar quarterly facts by reporting
   assert.equal(statements.quarterly.incomeStatements[1]?.revenue, 102_346_000_000);
 });
 
+test("buildNormalizedSecStatements keeps up to twenty quarterly facts for charts", () => {
+  const quarters = Array.from({ length: 8 }, (_, index) => {
+    const year = 2024 + Math.floor(index / 4);
+    const quarter = (index % 4) + 1;
+    return {
+      fy: year,
+      fp: `Q${quarter}`,
+      form: "10-Q",
+      start: `${year}-${String((quarter - 1) * 3 + 1).padStart(2, "0")}-01`,
+      end: `${year}-${String(quarter * 3).padStart(2, "0")}-30`,
+      val: 10_000_000_000 + index,
+      frame: `CY${year}Q${quarter}`,
+    };
+  });
+  const statements = buildNormalizedSecStatements({
+    cik: 1,
+    entityName: "Twenty Quarter Test Inc.",
+    facts: {
+      "us-gaap": {
+        Revenues: {
+          label: "Revenues",
+          units: { USD: quarters },
+        },
+      },
+    },
+  });
+
+  assert.equal(statements.quarterly.incomeStatements.length, 8);
+  assert.equal(statements.quarterly.incomeStatements.at(0)?.fiscalYear, "2025");
+  assert.equal(statements.quarterly.incomeStatements.at(-1)?.fiscalYear, "2024");
+});
+
 test("buildNormalizedSecStatements preserves fiscal quarter labels for non-calendar filers", () => {
   const statements = buildNormalizedSecStatements({
     cik: 789_019,

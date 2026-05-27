@@ -1,8 +1,10 @@
 import { useEffect, useMemo, useState } from 'react';
 
 import {
+  buildAnalysisChartSeries,
   buildCompanyDescriptionFallback,
   fetchFinnhubSnapshot,
+  type FinnhubAnalysisCadence,
 } from '../finnhub-analysis';
 import {
   buildFundamentalsChartsFromStock,
@@ -10,10 +12,9 @@ import {
   latestPoint,
   type FundamentalsChartMetric,
 } from '../fundamentals-charts';
-import { EDGEQUITY_COLUMNS, formatEdgequityValue, getColumnValue } from '../metrics';
-import type { EdgequityColumn, EdgequityFinnhubSnapshot, EdgequityMetricGroup, EdgequityStockRecord } from '../types';
+import { formatEdgequityValue } from '../metrics';
+import type { EdgequityFinnhubSnapshot, EdgequityStockRecord } from '../types';
 
-import FundamentalsPanel from './FundamentalsPanel';
 import MetricTrendChart from './MetricTrendChart';
 
 interface StockDetailProps {
@@ -22,27 +23,7 @@ interface StockDetailProps {
   initialFinnhubSnapshot?: EdgequityFinnhubSnapshot | null;
 }
 
-interface MetricGroupDefinition {
-  id: Exclude<EdgequityMetricGroup, 'profile'>;
-  label: string;
-}
-
-const METRIC_GROUPS: MetricGroupDefinition[] = [
-  { id: 'valuation', label: 'Valuation' },
-  { id: 'margin', label: 'Margin' },
-  { id: 'profitability', label: 'Profitability' },
-  { id: 'growth', label: 'Growth' },
-  { id: 'financialHealth', label: 'Financial health' },
-  { id: 'cashFlow', label: 'Cash flow' },
-  { id: 'dividends', label: 'Dividends' },
-];
-
-function getGroupColumns(group: EdgequityMetricGroup): EdgequityColumn[] {
-  return EDGEQUITY_COLUMNS.filter((column) => column.group === group);
-}
-
 export default function StockDetail({ stock, onBack, initialFinnhubSnapshot = null }: StockDetailProps) {
-  const [activeTab, setActiveTab] = useState<'analysis' | 'financials' | 'fundamentals'>('analysis');
   const [snapshot, setSnapshot] = useState<EdgequityFinnhubSnapshot | null>(initialFinnhubSnapshot);
   const [snapshotStatus, setSnapshotStatus] = useState<'idle' | 'loading' | 'ready' | 'error'>(
     initialFinnhubSnapshot ? 'ready' : 'idle',
@@ -101,68 +82,7 @@ export default function StockDetail({ stock, onBack, initialFinnhubSnapshot = nu
         </section>
       )}
 
-      <div className="eq-detail-tabs" role="tablist" aria-label={`${stock.ticker} detail views`}>
-        <button
-          type="button"
-          role="tab"
-          id="edgequity-analysis-tab"
-          aria-controls="edgequity-analysis-panel"
-          aria-selected={activeTab === 'analysis'}
-          className={activeTab === 'analysis' ? 'is-active' : ''}
-          onClick={() => setActiveTab('analysis')}
-        >
-          AI Analysis
-        </button>
-        <button
-          type="button"
-          role="tab"
-          id="edgequity-financials-tab"
-          aria-controls="edgequity-financials-panel"
-          aria-selected={activeTab === 'financials'}
-          className={activeTab === 'financials' ? 'is-active' : ''}
-          onClick={() => setActiveTab('financials')}
-        >
-          Financials
-        </button>
-        <button
-          type="button"
-          role="tab"
-          id="edgequity-fundamentals-tab"
-          aria-controls="edgequity-fundamentals-panel"
-          aria-selected={activeTab === 'fundamentals'}
-          className={activeTab === 'fundamentals' ? 'is-active' : ''}
-          onClick={() => setActiveTab('fundamentals')}
-        >
-          Fundamentals
-        </button>
-      </div>
-
-      <section
-        id="edgequity-analysis-panel"
-        role="tabpanel"
-        aria-labelledby="edgequity-analysis-tab"
-        hidden={activeTab !== 'analysis'}
-      >
-        <AnalysisPanel stock={stock} snapshot={snapshot} snapshotStatus={snapshotStatus} />
-      </section>
-
-      <section
-        id="edgequity-financials-panel"
-        role="tabpanel"
-        aria-labelledby="edgequity-financials-tab"
-        hidden={activeTab !== 'financials'}
-      >
-        <FinancialsOverview stock={stock} />
-      </section>
-
-      <section
-        id="edgequity-fundamentals-panel"
-        role="tabpanel"
-        aria-labelledby="edgequity-fundamentals-tab"
-        hidden={activeTab !== 'fundamentals'}
-      >
-        <FundamentalsPanel stock={stock} />
-      </section>
+      <AnalysisPanel stock={stock} snapshot={snapshot} snapshotStatus={snapshotStatus} />
     </div>
   );
 }
@@ -232,14 +152,19 @@ function AnalysisPanel({
         <PriceHeroMetric label="Data Status" value={dataStatus} textValue />
       </dl>
 
-      <AnalysisFundamentals stock={stock} />
+      <AnalysisFundamentals stock={stock} snapshot={snapshot} />
     </article>
   );
 }
 
-function AnalysisFundamentals({ stock }: { stock: EdgequityStockRecord }) {
+const FINNHUB_RATIO_METRIC_IDS = new Set(['grossMargin', 'operatingMargin', 'netMargin', 'fcfMargin']);
+
+function AnalysisFundamentals({ stock, snapshot }: { stock: EdgequityStockRecord; snapshot: EdgequityFinnhubSnapshot | null }) {
   const document = useMemo(() => buildFundamentalsChartsFromStock(stock), [stock]);
-  const metrics = document.sections.flatMap((section) => section.metrics);
+  const metrics = useMemo(
+    () => document.sections.flatMap((section) => section.metrics).map((metric) => enrichMetricWithFinnhubSnapshot(metric, snapshot)),
+    [document.sections, snapshot],
+  );
   const metricNames = metrics.map((metric) => metric.label).slice(0, 8).join(' · ');
 
   if (metrics.length === 0) {
@@ -275,6 +200,47 @@ function AnalysisFundamentals({ stock }: { stock: EdgequityStockRecord }) {
       </div>
     </section>
   );
+}
+
+function enrichMetricWithFinnhubSnapshot(
+  metric: FundamentalsChartMetric,
+  snapshot: EdgequityFinnhubSnapshot | null,
+): FundamentalsChartMetric {
+  if (!snapshot || !FINNHUB_RATIO_METRIC_IDS.has(metric.id)) return metric;
+
+  const annual = buildFinnhubRatioPoints(snapshot, metric.id, 'annual', 5);
+  const quarterly = buildFinnhubRatioPoints(snapshot, metric.id, 'quarterly', 20);
+
+  return {
+    ...metric,
+    annual: annual.length > 0 ? annual : metric.annual,
+    quarterly: quarterly.length > 0 ? quarterly : metric.quarterly,
+  };
+}
+
+function buildFinnhubRatioPoints(
+  snapshot: EdgequityFinnhubSnapshot,
+  ratioId: string,
+  cadence: FinnhubAnalysisCadence,
+  limit: number,
+) {
+  return buildAnalysisChartSeries(snapshot, ratioId, cadence, limit).map((point) => ({
+    ...point,
+    period: cadence === 'quarterly' ? finnHubDateToQuarter(point.period) : point.period.slice(0, 4),
+    value: normalizeFinnhubPercent(point.value),
+  }));
+}
+
+function finnHubDateToQuarter(period: string): string {
+  const year = Number.parseInt(period.slice(0, 4), 10);
+  const month = Number.parseInt(period.slice(5, 7), 10);
+  if (!Number.isFinite(year) || !Number.isFinite(month)) return period;
+  const quarter = month <= 3 ? 'Q1' : month <= 6 ? 'Q2' : month <= 9 ? 'Q3' : 'Q4';
+  return `${year}-${quarter}`;
+}
+
+function normalizeFinnhubPercent(value: number): number {
+  return Math.abs(value) <= 1.5 ? value * 100 : value;
 }
 
 function AnalysisMetricPair({ metric, index }: { metric: FundamentalsChartMetric; index: number }) {
@@ -371,174 +337,5 @@ function HeaderMetric({ label, value, highlight = false }: { label: string; valu
         {value}
       </p>
     </div>
-  );
-}
-
-function FinancialsOverview({ stock }: { stock: EdgequityStockRecord }) {
-  const latestYear = stock.history[0];
-  const latestYearLabel = latestYear?.year ?? 'Latest period';
-  const summaryMetrics = [
-    { label: 'Latest reported year', value: latestYear?.year ?? '-', caption: 'Statement period' },
-    { label: 'Revenue', value: formatEdgequityValue(latestYear?.revenue ?? null, 'money'), caption: 'Business scale' },
-    { label: 'Gross Profit', value: formatEdgequityValue(latestYear?.grossProfit ?? null, 'money'), caption: 'After direct costs' },
-    { label: 'Operating Income', value: formatEdgequityValue(latestYear?.operatingIncome ?? null, 'money'), caption: 'Core profit' },
-    { label: 'Net Income', value: formatEdgequityValue(latestYear?.netIncome ?? null, 'money'), caption: 'Bottom-line earnings' },
-    { label: 'Free Cash Flow', value: formatEdgequityValue(latestYear?.freeCashFlow ?? null, 'money'), caption: 'Cash after capex' },
-  ];
-  const financialSections = [
-    {
-      title: 'Profitability',
-      metrics: [
-        { label: 'Gross Margin', value: formatEdgequityValue(stock.profitability.grossMargin, 'percent') },
-        { label: 'Operating Margin', value: formatEdgequityValue(stock.profitability.operatingMargin, 'percent') },
-        { label: 'Net Margin', value: formatEdgequityValue(stock.profitability.netMargin, 'percent') },
-        { label: 'ROE', value: formatEdgequityValue(stock.profitability.roe, 'percent') },
-        { label: 'ROIC', value: formatEdgequityValue(stock.profitability.roic, 'percent') },
-      ],
-    },
-    {
-      title: 'Cash generation',
-      metrics: [
-        { label: 'Operating Cash Flow', value: formatEdgequityValue(stock.cashFlow.operatingCashFlow, 'money') },
-        { label: 'Free Cash Flow', value: formatEdgequityValue(stock.cashFlow.freeCashFlow, 'money') },
-        { label: 'FCF Margin', value: formatEdgequityValue(stock.cashFlow.fcfMargin, 'percent') },
-        { label: 'FCF Conversion', value: formatEdgequityValue(stock.cashFlow.fcfConversion, 'percent') },
-        { label: 'Capex / Revenue', value: formatEdgequityValue(stock.cashFlow.capexToRevenue, 'percent') },
-      ],
-    },
-    {
-      title: 'Capital structure',
-      metrics: [
-        { label: 'Market Cap', value: formatEdgequityValue(stock.marketCap, 'money') },
-        { label: 'Enterprise Value', value: formatEdgequityValue(stock.enterpriseValue, 'money') },
-        { label: 'Total Debt', value: formatEdgequityValue(latestYear?.totalDebt ?? null, 'money') },
-        { label: 'Total Equity', value: formatEdgequityValue(latestYear?.totalEquity ?? null, 'money') },
-        { label: 'Shares Diluted', value: formatShareCount(latestYear?.sharesDiluted ?? null) },
-      ],
-    },
-    {
-      title: 'Growth and balance sheet',
-      metrics: [
-        { label: 'Revenue CAGR 3Y', value: formatEdgequityValue(stock.growth.revenueCagr3y, 'percent') },
-        { label: 'Revenue CAGR 5Y', value: formatEdgequityValue(stock.growth.revenueCagr5y, 'percent') },
-        { label: 'FCF CAGR 3Y', value: formatEdgequityValue(stock.growth.fcfCagr3y, 'percent') },
-        { label: 'Current Ratio', value: formatEdgequityValue(stock.financialHealth.currentRatio, 'number') },
-        { label: 'Net Debt / EBITDA', value: formatEdgequityValue(stock.financialHealth.netDebtToEbitda, 'multiple') },
-      ],
-    },
-  ];
-
-  return (
-    <div className="eq-financials-overview">
-      <section className="eq-financials-summary">
-        <div className="eq-financials-summary-head">
-          <div>
-            <p>Financial snapshot</p>
-            <h3>{stock.ticker} operating profile</h3>
-          </div>
-          <span>{latestYearLabel}</span>
-        </div>
-
-        <div className="eq-financials-kpi-grid">
-          {summaryMetrics.map((metric) => (
-            <FinancialMetricCard key={metric.label} label={metric.label} value={metric.value} caption={metric.caption} />
-          ))}
-        </div>
-      </section>
-
-      <section className="eq-financials-section-grid">
-        {financialSections.map((section) => (
-          <article className="eq-financials-section" key={section.title}>
-            <h3>{section.title}</h3>
-            <dl>
-              {section.metrics.map((metric) => (
-                <div key={metric.label}>
-                  <dt>{metric.label}</dt>
-                  <dd>{metric.value}</dd>
-                </div>
-              ))}
-            </dl>
-          </article>
-        ))}
-      </section>
-
-      <section className="eq-financials-metric-groups">
-        <div className="eq-financials-subhead">
-          <p>Screener metrics</p>
-          <span>Same fields used in the main comparison table.</span>
-        </div>
-        <div className="grid gap-3 lg:grid-cols-2 2xl:grid-cols-3">
-          {METRIC_GROUPS.map((group) => (
-            <MetricGroupCard key={group.id} stock={stock} group={group} />
-          ))}
-        </div>
-      </section>
-    </div>
-  );
-}
-
-function FinancialMetricCard({ label, value, caption }: { label: string; value: string; caption: string }) {
-  const isMissing = value === '-';
-
-  return (
-    <article className="eq-financials-kpi">
-      <p>{label}</p>
-      <strong className={isMissing ? 'is-missing' : ''}>{value}</strong>
-      <span>{caption}</span>
-    </article>
-  );
-}
-
-function formatShareCount(value: number | null): string {
-  if (value === null || !Number.isFinite(value)) {
-    return '-';
-  }
-
-  const absValue = Math.abs(value);
-  const sign = value < 0 ? '-' : '';
-
-  if (absValue >= 1_000_000_000) {
-    return `${sign}${(absValue / 1_000_000_000).toFixed(2)}B`;
-  }
-
-  if (absValue >= 1_000_000) {
-    return `${sign}${(absValue / 1_000_000).toFixed(1)}M`;
-  }
-
-  return `${sign}${absValue.toLocaleString('en-US', { maximumFractionDigits: 0 })}`;
-}
-
-function MetricGroupCard({ stock, group }: { stock: EdgequityStockRecord; group: MetricGroupDefinition }) {
-  const columns = getGroupColumns(group.id);
-
-  return (
-    <article className="eq-metric-panel">
-      <h3 className="text-sm font-semibold uppercase" style={{ color: 'var(--vw-text-tertiary)' }}>
-        {group.label}
-      </h3>
-      <dl className="mt-3">
-        {columns.map((column) => {
-          const formattedValue = formatEdgequityValue(getColumnValue(stock, column), column.format);
-          const isMissing = formattedValue === '-';
-
-          return (
-            <div
-              key={column.id}
-              className="flex min-h-8 items-center justify-between gap-4 border-t border-[var(--vw-border-dim)] py-1.5 first:border-t-0"
-            >
-              <dt className="min-w-0 truncate text-sm" style={{ color: 'var(--vw-text-secondary)' }}>
-                {column.label}
-              </dt>
-              <dd
-                className="shrink-0 font-mono text-sm tabular-nums"
-                style={{ color: isMissing ? 'var(--vw-text-tertiary)' : 'var(--vw-text-primary)' }}
-              >
-                {formattedValue}
-              </dd>
-            </div>
-          );
-        })}
-      </dl>
-    </article>
   );
 }
