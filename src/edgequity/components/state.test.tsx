@@ -404,18 +404,32 @@ test('ScreenerTable renders an empty state when no stocks are visible', () => {
   assert.match(html, /No stocks match the current filters/);
 });
 
-test('StockDetail defaults to AI Analysis Coming Soon and keeps financial tabs', () => {
+test('StockDetail defaults to the AI Analysis company and price shell while keeping financial tabs', () => {
   const html = renderToStaticMarkup(<StockDetail stock={stock} onBack={() => undefined} />);
 
   assert.match(html, /AI Analysis/);
   assert.match(html, /aria-selected="true"[\s\S]*AI Analysis/);
-  assert.match(html, /Coming Soon/);
+  assert.match(html, /eq-analysis-company-header/);
+  assert.match(html, /eq-analysis-price-hero/);
+  assert.match(html, /Company Profile/);
+  assert.match(html, /Current Price/);
+  assert.match(html, /Previous Close/);
+  assert.match(html, /Market Cap/);
+  assert.match(html, /Data Status/);
   assert.match(html, /Financials/);
   assert.match(html, /Fundamentals/);
+  assert.doesNotMatch(html, /Coming Soon/);
   assert.doesNotMatch(html, />Statements</);
   assert.doesNotMatch(html, /Equity Research: Apple Inc\. \(AAPL\)/);
   assert.doesNotMatch(html, /analysis-detail-container/);
   assert.doesNotMatch(html, /Apple pairs fortress-like cash generation/);
+});
+
+test('StockDetail no longer renders the AI Analysis Coming Soon placeholder', () => {
+  const html = renderToStaticMarkup(<StockDetail stock={stock} onBack={() => undefined} />);
+
+  assert.doesNotMatch(html, /Coming Soon/);
+  assert.doesNotMatch(html, /eq-coming-soon-panel/);
 });
 
 test('StockDetail renders a financial snapshot dashboard without the old historical table', () => {

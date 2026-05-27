@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
+import { buildCompanyDescriptionFallback, fetchFinnhubSnapshot } from '../finnhub-analysis';
 import { EDGEQUITY_COLUMNS, formatEdgequityValue, getColumnValue } from '../metrics';
-import type { EdgequityColumn, EdgequityMetricGroup, EdgequityStockRecord } from '../types';
+import type { EdgequityColumn, EdgequityFinnhubSnapshot, EdgequityMetricGroup, EdgequityStockRecord } from '../types';
 
 import FundamentalsPanel from './FundamentalsPanel';
 
@@ -31,7 +32,30 @@ function getGroupColumns(group: EdgequityMetricGroup): EdgequityColumn[] {
 
 export default function StockDetail({ stock, onBack }: StockDetailProps) {
   const [activeTab, setActiveTab] = useState<'analysis' | 'financials' | 'fundamentals'>('analysis');
+  const [snapshot, setSnapshot] = useState<EdgequityFinnhubSnapshot | null>(null);
+  const [snapshotStatus, setSnapshotStatus] = useState<'idle' | 'loading' | 'ready' | 'error'>('idle');
   const sectorLine = [stock.sector, stock.industry].filter(Boolean).join(' / ') || 'Classification unavailable';
+
+  useEffect(() => {
+    let cancelled = false;
+    setSnapshotStatus('loading');
+    setSnapshot(null);
+
+    fetchFinnhubSnapshot(stock.ticker)
+      .then((nextSnapshot) => {
+        if (cancelled) return;
+        setSnapshot(nextSnapshot);
+        setSnapshotStatus('ready');
+      })
+      .catch(() => {
+        if (cancelled) return;
+        setSnapshotStatus('error');
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [stock.ticker]);
 
   return (
     <div className="space-y-3">
@@ -106,7 +130,7 @@ export default function StockDetail({ stock, onBack }: StockDetailProps) {
         aria-labelledby="edgequity-analysis-tab"
         hidden={activeTab !== 'analysis'}
       >
-        <AnalysisPanel stock={stock} />
+        <AnalysisPanel stock={stock} snapshot={snapshot} snapshotStatus={snapshotStatus} />
       </section>
 
       <section
@@ -130,22 +154,113 @@ export default function StockDetail({ stock, onBack }: StockDetailProps) {
   );
 }
 
-function AnalysisPanel({ stock }: { stock: EdgequityStockRecord }) {
+function AnalysisPanel({
+  stock,
+  snapshot,
+  snapshotStatus,
+}: {
+  stock: EdgequityStockRecord;
+  snapshot: EdgequityFinnhubSnapshot | null;
+  snapshotStatus: 'idle' | 'loading' | 'ready' | 'error';
+}) {
+  const profile = snapshot?.profile;
+  const quote = snapshot?.quote;
+  const companyName = profile?.name ?? stock.name;
+  const exchange = profile?.exchange ?? 'Exchange loading';
+  const industry = profile?.finnhubIndustry ?? stock.industry ?? 'Industry loading';
+  const country = profile?.country ?? 'Country loading';
+  const currency = profile?.currency ?? stock.currency ?? 'USD';
+  const currentPrice = quote?.c ?? stock.price;
+  const previousClose = quote?.pc ?? null;
+  const marketCap =
+    typeof profile?.marketCapitalization === 'number'
+      ? profile.marketCapitalization * 1_000_000
+      : stock.marketCap;
+  const description = profile
+    ? buildCompanyDescriptionFallback(profile)
+    : `${stock.name} profile is loading from Finnhub.`;
+  const dataStatus =
+    snapshotStatus === 'ready' ? 'Finnhub cached' : snapshotStatus === 'error' ? 'Static fallback' : 'Loading';
+  const dailyChange = formatDailyChange(quote?.d, quote?.dp);
+  const dailyChangeClass =
+    typeof quote?.d === 'number' && quote.d < 0 ? 'is-down' : typeof quote?.d === 'number' && quote.d > 0 ? 'is-up' : '';
+
   return (
-    <article className="eq-analysis-panel">
-      <div>
-        <p className="text-xs font-semibold uppercase text-[var(--vw-accent)]">AI Analysis</p>
-        <h3 className="mt-1 text-lg font-semibold">{stock.ticker} research workflow</h3>
-      </div>
-      <div className="eq-coming-soon-panel">
-        <strong>Coming Soon</strong>
-        <p>
-          Full research reports are paused while the new earnings transcript and financial statement workflow is rebuilt.
-          Financials and Fundamentals are available now.
-        </p>
-      </div>
+    <article className="eq-analysis-stack">
+      <section className="eq-analysis-company-header">
+        <div className="eq-analysis-company-kicker">
+          <span>Company Profile</span>
+          <strong>{stock.ticker}</strong>
+        </div>
+        <div className="eq-analysis-company-body">
+          <div>
+            <h3>{companyName}</h3>
+            <p>{description}</p>
+          </div>
+          <dl className="eq-analysis-company-meta" aria-label={`${stock.ticker} company identity`}>
+            <div>
+              <dt>Exchange</dt>
+              <dd>{exchange}</dd>
+            </div>
+            <div>
+              <dt>Industry</dt>
+              <dd>{industry}</dd>
+            </div>
+            <div>
+              <dt>Country</dt>
+              <dd>{country}</dd>
+            </div>
+          </dl>
+        </div>
+      </section>
+
+      <dl className="eq-analysis-price-hero" aria-label={`${stock.ticker} price summary`}>
+        <PriceHeroMetric
+          label="Current Price"
+          value={`${currency} ${formatEdgequityValue(currentPrice, 'number')}`}
+          detail={dailyChange}
+          detailClassName={dailyChangeClass}
+          prominent
+        />
+        <PriceHeroMetric label="Previous Close" value={formatEdgequityValue(previousClose, 'number')} />
+        <PriceHeroMetric label="Market Cap" value={formatEdgequityValue(marketCap, 'money')} />
+        <PriceHeroMetric label="Data Status" value={dataStatus} textValue />
+      </dl>
     </article>
   );
+}
+
+function PriceHeroMetric({
+  label,
+  value,
+  detail,
+  detailClassName = '',
+  prominent = false,
+  textValue = false,
+}: {
+  label: string;
+  value: string;
+  detail?: string;
+  detailClassName?: string;
+  prominent?: boolean;
+  textValue?: boolean;
+}) {
+  return (
+    <div className={prominent ? 'is-prominent' : ''}>
+      <dt>{label}</dt>
+      <dd className={textValue ? 'is-text' : ''}>{value}</dd>
+      {detail ? <span className={detailClassName}>{detail}</span> : null}
+    </div>
+  );
+}
+
+function formatDailyChange(change: number | undefined, changePercent: number | undefined): string | undefined {
+  if (typeof change !== 'number' || typeof changePercent !== 'number') {
+    return undefined;
+  }
+
+  const sign = change > 0 ? '+' : '';
+  return `${sign}${change.toFixed(2)} (${sign}${changePercent.toFixed(2)}%)`;
 }
 
 function HeaderMetric({ label, value, highlight = false }: { label: string; value: string; highlight?: boolean }) {

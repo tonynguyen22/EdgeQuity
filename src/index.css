@@ -615,6 +615,153 @@ thead .eq-sticky-col {
   padding: 16px;
 }
 
+.eq-analysis-stack {
+  display: grid;
+  gap: 0.85rem;
+}
+
+.eq-analysis-company-header {
+  border: 1px solid var(--vw-border);
+  border-radius: 8px;
+  background:
+    linear-gradient(135deg, rgba(30, 58, 95, 0.055), rgba(255, 255, 255, 0) 50%),
+    #ffffff;
+  box-shadow: 0 12px 34px rgba(31, 41, 51, 0.07);
+  padding: 1rem;
+}
+
+.eq-analysis-company-kicker {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.6rem;
+  border-bottom: 1px solid rgba(30, 58, 95, 0.1);
+  padding-bottom: 0.7rem;
+}
+
+.eq-analysis-company-kicker span {
+  color: var(--vw-accent);
+  font-size: 0.72rem;
+  font-weight: 750;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.eq-analysis-company-kicker strong {
+  border: 1px solid rgba(30, 58, 95, 0.13);
+  border-radius: 999px;
+  background: #ffffff;
+  color: var(--vw-text-primary);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-size: 0.78rem;
+  font-weight: 760;
+  padding: 0.28rem 0.58rem;
+}
+
+.eq-analysis-company-body {
+  display: grid;
+  gap: 0.9rem;
+  padding-top: 0.85rem;
+}
+
+.eq-analysis-company-body h3 {
+  color: var(--vw-text-primary);
+  font-size: 1.3rem;
+  font-weight: 760;
+  line-height: 1.15;
+}
+
+.eq-analysis-company-body p {
+  max-width: 72ch;
+  margin-top: 0.4rem;
+  color: var(--vw-text-secondary);
+  font-size: 0.92rem;
+  line-height: 1.55;
+}
+
+.eq-analysis-company-meta {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.eq-analysis-company-meta>div {
+  min-height: 64px;
+  border: 1px solid rgba(30, 58, 95, 0.1);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.78);
+  padding: 0.7rem;
+}
+
+.eq-analysis-company-meta dt,
+.eq-analysis-price-hero dt {
+  color: var(--vw-text-tertiary);
+  font-size: 0.72rem;
+  font-weight: 750;
+  text-transform: uppercase;
+}
+
+.eq-analysis-company-meta dd {
+  margin-top: 0.28rem;
+  color: var(--vw-text-primary);
+  font-size: 0.9rem;
+  font-weight: 680;
+  line-height: 1.25;
+}
+
+.eq-analysis-price-hero {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.55rem;
+  margin: 0;
+}
+
+.eq-analysis-price-hero>div {
+  min-height: 94px;
+  border: 1px solid rgba(30, 58, 95, 0.12);
+  border-radius: 8px;
+  background: #ffffff;
+  box-shadow: 0 8px 24px rgba(31, 41, 51, 0.055);
+  padding: 0.78rem;
+}
+
+.eq-analysis-price-hero>div.is-prominent {
+  background:
+    linear-gradient(135deg, rgba(14, 116, 144, 0.08), rgba(255, 255, 255, 0) 58%),
+    #ffffff;
+}
+
+.eq-analysis-price-hero dd {
+  margin-top: 0.35rem;
+  color: var(--vw-text-primary);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-size: 1.22rem;
+  font-weight: 780;
+  line-height: 1.05;
+}
+
+.eq-analysis-price-hero dd.is-text {
+  font-family: inherit;
+  font-size: 1rem;
+}
+
+.eq-analysis-price-hero span {
+  display: block;
+  margin-top: 0.42rem;
+  color: var(--vw-text-secondary);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-size: 0.82rem;
+  font-weight: 720;
+}
+
+.eq-analysis-price-hero span.is-up {
+  color: var(--vw-green);
+}
+
+.eq-analysis-price-hero span.is-down {
+  color: var(--vw-red);
+}
+
 .eq-analysis-section {
   border: 1px solid var(--vw-border-dim);
   border-radius: 8px;
@@ -1265,6 +1412,19 @@ thead .eq-sticky-col {
 
   .eq-financials-section-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .eq-analysis-company-body {
+    grid-template-columns: minmax(0, 1fr) minmax(300px, 0.58fr);
+    align-items: start;
+  }
+
+  .eq-analysis-company-meta {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .eq-analysis-price-hero {
+    grid-template-columns: 1.3fr repeat(3, minmax(0, 1fr));
   }
 }
 
