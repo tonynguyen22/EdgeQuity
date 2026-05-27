@@ -11,6 +11,7 @@ interface MetricTrendChartProps {
   yAxisLabel?: string;
   maxPoints?: number;
   variant?: 'line' | 'bar';
+  currentDate?: Date;
 }
 
 export default function MetricTrendChart({
@@ -22,8 +23,12 @@ export default function MetricTrendChart({
   yAxisLabel = 'Value',
   maxPoints = 5,
   variant = 'line',
+  currentDate,
 }: MetricTrendChartProps) {
-  const chartPoints = useMemo(() => normalizeChartPoints(points, maxPoints), [points, maxPoints]);
+  const chartPoints = useMemo(
+    () => normalizeChartPoints(points, maxPoints, cadence, currentDate ?? new Date()),
+    [points, maxPoints, cadence, currentDate],
+  );
   const periodLabel = `${chartPoints.length}${cadence === 'Annual' ? 'Y' : 'Q'}`;
   const layout = useMemo(() => buildChartLayout(chartPoints), [chartPoints]);
 
@@ -81,6 +86,7 @@ export default function MetricTrendChart({
         {layout.plotPoints.map((point) => {
           const pointPeriodLabel = point.inProgress ? `${point.period} in progress` : point.period;
           const label = `${title} ${pointPeriodLabel}: ${formatFundamentalsValue(point.value, format)}`;
+          const visibleLabel = `${point.inProgress ? `${point.period} (in progress)` : point.period} · ${formatFundamentalsValue(point.value, format)}`;
           return (
             <g className="eq-fundamentals-chart-hover" key={point.period}>
               <circle
@@ -106,7 +112,7 @@ export default function MetricTrendChart({
                 y={point.tooltipY}
                 textAnchor={point.tooltipAnchor}
               >
-                {formatFundamentalsValue(point.value, format)}
+                {visibleLabel}
               </text>
             </g>
           );
@@ -151,12 +157,38 @@ function formatPeriodLabel(period: string): string {
   return period.length > 6 ? period.slice(0, 6) : period;
 }
 
-function normalizeChartPoints(points: FundamentalsChartPoint[], maxPoints: number) {
+function normalizeChartPoints(
+  points: FundamentalsChartPoint[],
+  maxPoints: number,
+  cadence: 'Annual' | 'Quarterly',
+  currentDate: Date,
+) {
   return points
     .filter((point) => Number.isFinite(point.value))
+    .map((point) => ({
+      ...point,
+      inProgress: point.inProgress ?? (cadence === 'Annual' && isAnnualPeriodInProgress(point.periodEnd ?? point.period, currentDate)),
+    }))
     .slice()
     .sort((left, right) => comparePeriods(left.period, right.period))
     .slice(-Math.max(0, maxPoints));
+}
+
+function isAnnualPeriodInProgress(period: string, currentDate: Date): boolean {
+  const annualDate = period.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+  if (annualDate) {
+    const endOfPeriod = Date.UTC(Number(annualDate[1]), Number(annualDate[2]) - 1, Number(annualDate[3]), 23, 59, 59, 999);
+    return Number.isFinite(endOfPeriod) && endOfPeriod > currentDate.getTime();
+  }
+
+  const annualYear = period.match(/^(\d{4})$/);
+  if (!annualYear) return false;
+
+  const year = Number(annualYear[1]);
+  const currentYear = currentDate.getUTCFullYear();
+  if (year !== currentYear) return year > currentYear;
+
+  return Date.UTC(year, 11, 31, 23, 59, 59, 999) > currentDate.getTime();
 }
 
 function comparePeriods(left: string, right: string) {

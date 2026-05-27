@@ -4,6 +4,7 @@ export type FundamentalsFormat = 'money' | 'percent' | 'multiple' | 'perShare';
 
 export interface FundamentalsChartPoint {
   period: string;
+  periodEnd?: string;
   value: number;
   inProgress?: boolean;
 }
@@ -169,8 +170,13 @@ function pointsForMetric(
   const periods = getStatementPeriods(stock, cadence, key);
   if (periods.length > 0) {
     return periods
-      .map((period) => ({ period: periodLabel(period), value: metricValueFromPeriod(period, key) }))
-      .filter((point): point is FundamentalsChartPoint => point.value !== null)
+      .map((period): FundamentalsChartPoint | null => {
+        const value = metricValueFromPeriod(period, key);
+        return value === null
+          ? null
+          : { period: periodLabel(period), periodEnd: period.date ?? undefined, value };
+      })
+      .filter((point): point is FundamentalsChartPoint => point !== null)
       .sort(comparePeriods);
   }
 
@@ -196,10 +202,10 @@ function marginPoints(
   const numeratorByPeriod = new Map(pointsForMetric(stock, cadence, numeratorKey).map((point) => [point.period, point.value]));
 
   return revenuePoints
-    .map((point) => {
+    .map((point): FundamentalsChartPoint | null => {
       const numerator = numeratorByPeriod.get(point.period);
       return numerator !== undefined && point.value !== 0
-        ? { period: point.period, value: (numerator / point.value) * 100 }
+        ? { period: point.period, periodEnd: point.periodEnd, value: (numerator / point.value) * 100 }
         : null;
     })
     .filter((point): point is FundamentalsChartPoint => point !== null);

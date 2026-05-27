@@ -698,6 +698,7 @@ test('MetricTrendChart exposes hover labels for each plotted point', () => {
       title="Revenue"
       cadence="Annual"
       format="money"
+      currentDate={new Date('2026-05-27T12:00:00Z')}
       points={[
         { period: '2025', value: 1_200_000_000 },
         { period: '2026', value: 1_500_000_000 },
@@ -707,7 +708,9 @@ test('MetricTrendChart exposes hover labels for each plotted point', () => {
 
   assert.match(html, /eq-fundamentals-chart-hit/);
   assert.match(html, /Revenue 2025: \$1.20B/);
-  assert.match(html, /Revenue 2026: \$1.50B/);
+  assert.match(html, /Revenue 2026 in progress: \$1.50B/);
+  assert.match(html, />2025 · \$1\.20B</);
+  assert.match(html, />2026 \(in progress\) · \$1\.50B</);
 });
 
 test('MetricTrendChart can render annual charts as bars', () => {
@@ -736,9 +739,10 @@ test('MetricTrendChart marks in-progress annual bars', () => {
       cadence="Annual"
       format="money"
       variant="bar"
+      currentDate={new Date('2026-05-27T12:00:00Z')}
       points={[
         { period: '2025-12-31', value: 100 },
-        { period: '2026-12-31', value: 60, inProgress: true },
+        { period: '2026-12-31', value: 60 },
       ]}
     />,
   );
@@ -746,6 +750,27 @@ test('MetricTrendChart marks in-progress annual bars', () => {
   assert.match(html, /eq-fundamentals-chart-bar is-in-progress/);
   assert.match(html, /2026-12-31 in progress/);
   assert.match(html, /aria-label="Revenue 2026-12-31 in progress: \$60"/);
+  assert.match(html, />2026-12-31 \(in progress\) · \$60</);
+});
+
+test('MetricTrendChart does not fade completed fiscal years with current-year labels', () => {
+  const html = renderToStaticMarkup(
+    <MetricTrendChart
+      title="Revenue"
+      cadence="Annual"
+      format="money"
+      variant="bar"
+      currentDate={new Date('2026-05-27T12:00:00Z')}
+      points={[
+        { period: '2025', value: 100 },
+        { period: '2026', periodEnd: '2026-01-31', value: 120 },
+      ]}
+    />,
+  );
+
+  assert.doesNotMatch(html, /eq-fundamentals-chart-bar is-in-progress/);
+  assert.match(html, /Revenue 2026: \$120/);
+  assert.doesNotMatch(html, /2026 \(in progress\)/);
 });
 
 test('MetricTrendChart maxPoints can render the latest twenty quarterly points', () => {
