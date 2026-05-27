@@ -638,20 +638,10 @@ thead .eq-sticky-col {
     linear-gradient(135deg, rgba(30, 58, 95, 0.055), rgba(255, 255, 255, 0) 50%),
     #ffffff;
   box-shadow: 0 12px 34px rgba(31, 41, 51, 0.07);
-  padding: 1rem;
+  padding: 1.1rem;
 }
 
 .eq-analysis-company-kicker {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.6rem;
-  border-bottom: 1px solid rgba(30, 58, 95, 0.1);
-  padding-bottom: 0.7rem;
-}
-
-.eq-analysis-company-kicker span {
   color: var(--vw-accent);
   font-size: 0.72rem;
   font-weight: 750;
@@ -659,65 +649,56 @@ thead .eq-sticky-col {
   text-transform: uppercase;
 }
 
-.eq-analysis-company-kicker strong {
-  border: 1px solid rgba(30, 58, 95, 0.13);
-  border-radius: 999px;
-  background: #ffffff;
+.eq-analysis-symbol-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.75rem;
+  margin-top: 0.35rem;
+}
+
+.eq-analysis-symbol-row strong {
   color: var(--vw-text-primary);
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
-  font-size: 0.78rem;
-  font-weight: 760;
-  padding: 0.28rem 0.58rem;
+  font-size: clamp(2rem, 5vw, 3.6rem);
+  font-weight: 900;
+  line-height: 0.95;
 }
 
-.eq-analysis-company-body {
-  display: grid;
-  gap: 0.9rem;
-  padding-top: 0.85rem;
-}
-
-.eq-analysis-company-body h3 {
+.eq-analysis-symbol-row span {
   color: var(--vw-text-primary);
-  font-size: 1.3rem;
+  font-size: clamp(1rem, 2vw, 1.35rem);
   font-weight: 760;
-  line-height: 1.15;
+  line-height: 1.2;
 }
 
-.eq-analysis-company-body p {
-  max-width: 72ch;
-  margin-top: 0.4rem;
+.eq-analysis-listing-line {
+  margin-top: 0.35rem;
   color: var(--vw-text-secondary);
   font-size: 0.92rem;
-  line-height: 1.55;
+  font-weight: 650;
 }
 
-.eq-analysis-company-meta {
-  display: grid;
-  gap: 0.5rem;
+.eq-analysis-listing-line a {
+  color: var(--vw-accent);
+  text-decoration: none;
 }
 
-.eq-analysis-company-meta>div {
-  min-height: 64px;
-  border: 1px solid rgba(30, 58, 95, 0.1);
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.78);
-  padding: 0.7rem;
+.eq-analysis-company-description {
+  max-width: 100ch;
+  margin-top: 0.95rem;
+  border-top: 1px solid rgba(30, 58, 95, 0.1);
+  padding-top: 0.9rem;
+  color: var(--vw-text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.65;
 }
 
-.eq-analysis-company-meta dt,
 .eq-analysis-price-hero dt {
   color: var(--vw-text-tertiary);
   font-size: 0.72rem;
   font-weight: 750;
   text-transform: uppercase;
-}
-
-.eq-analysis-company-meta dd {
-  margin-top: 0.28rem;
-  color: var(--vw-text-primary);
-  font-size: 0.9rem;
-  font-weight: 680;
-  line-height: 1.25;
 }
 
 .eq-analysis-price-hero {
@@ -775,68 +756,129 @@ thead .eq-sticky-col {
 
 .eq-analysis-fundamentals {
   display: grid;
+  gap: 0.9rem;
+}
+
+.eq-analysis-fundamentals-title {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  border-bottom: 1px solid rgba(30, 58, 95, 0.1);
+  padding: 0.2rem 0 0.7rem;
+}
+
+.eq-analysis-fundamentals-title>span {
+  display: grid;
+  width: 1.75rem;
+  height: 1.75rem;
+  place-items: center;
+  border-left: 3px solid var(--vw-accent);
+  color: var(--vw-accent);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-size: 1rem;
+  font-weight: 900;
+}
+
+.eq-analysis-fundamentals-title h4 {
+  color: var(--vw-text-primary);
+  font-size: 1.15rem;
+  font-weight: 820;
+}
+
+.eq-analysis-fundamentals-title p {
+  margin-top: 0.22rem;
+  color: var(--vw-text-secondary);
+  font-size: 0.84rem;
+  line-height: 1.45;
+}
+
+.eq-analysis-metric-pair-stack {
+  display: grid;
   gap: 0.85rem;
 }
 
-.eq-analysis-fundamentals-group {
+.eq-analysis-metric-pair-card {
   display: grid;
-  gap: 0.7rem;
-}
-
-.eq-analysis-fundamentals-head {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 0.6rem;
-  border-bottom: 1px solid rgba(30, 58, 95, 0.1);
-  padding-bottom: 0.45rem;
-}
-
-.eq-analysis-fundamentals-head h4 {
-  color: var(--vw-text-primary);
-  font-size: 0.88rem;
-  font-weight: 780;
-  text-transform: uppercase;
-}
-
-.eq-analysis-fundamentals-head span {
-  color: var(--vw-text-tertiary);
-  font-size: 0.76rem;
-  font-weight: 720;
-}
-
-.eq-analysis-ratio-grid {
-  display: grid;
-  gap: 0.7rem;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-}
-
-.eq-analysis-ratio-card {
-  display: grid;
-  gap: 0.55rem;
+  gap: 0.8rem;
   border: 1px solid rgba(30, 58, 95, 0.12);
   border-radius: 8px;
   background: #ffffff;
-  box-shadow: 0 8px 24px rgba(31, 41, 51, 0.045);
-  padding: 0.7rem;
+  box-shadow: 0 8px 24px rgba(31, 41, 51, 0.05);
+  padding: 0.9rem;
 }
 
-.eq-analysis-ratio-card .eq-fundamentals-chart {
-  padding: 10px;
+.eq-analysis-metric-pair-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  border-bottom: 1px solid rgba(30, 58, 95, 0.08);
+  padding-bottom: 0.65rem;
 }
 
-.eq-analysis-ratio-card-head h5 {
+.eq-analysis-metric-pair-head h5 {
   color: var(--vw-text-primary);
-  font-size: 0.82rem;
-  font-weight: 760;
+  font-size: 0.95rem;
+  font-weight: 800;
 }
 
-.eq-analysis-ratio-card-head p {
-  margin-top: 0.16rem;
+.eq-analysis-metric-pair-head p {
+  margin-top: 0.22rem;
   color: var(--vw-text-tertiary);
-  font-size: 0.72rem;
-  line-height: 1.35;
+  font-size: 0.78rem;
+  line-height: 1.4;
+}
+
+.eq-analysis-latest-pill {
+  min-width: 116px;
+  border: 1px solid rgba(30, 58, 95, 0.1);
+  border-radius: 8px;
+  background: rgba(30, 58, 95, 0.035);
+  padding: 0.5rem 0.6rem;
+  text-align: right;
+}
+
+.eq-analysis-latest-pill span,
+.eq-analysis-latest-pill em {
+  display: block;
+  color: var(--vw-text-tertiary);
+  font-size: 0.68rem;
+  font-style: normal;
+  font-weight: 750;
+  text-transform: uppercase;
+}
+
+.eq-analysis-latest-pill strong {
+  display: block;
+  margin: 0.18rem 0;
+  color: var(--vw-text-primary);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-size: 0.92rem;
+}
+
+.eq-analysis-chart-pair {
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.eq-analysis-chart-pair .eq-fundamentals-chart {
+  min-width: 0;
+  padding: 12px;
+}
+
+@media (max-width: 980px) {
+  .eq-analysis-chart-pair {
+    grid-template-columns: 1fr;
+  }
+
+  .eq-analysis-metric-pair-head {
+    display: grid;
+  }
+
+  .eq-analysis-latest-pill {
+    text-align: left;
+  }
 }
 
 .eq-analysis-section {

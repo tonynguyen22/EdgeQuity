@@ -1,14 +1,15 @@
 import { useEffect, useMemo, useState } from 'react';
 
 import {
-  buildAnalysisChartSeries,
   buildCompanyDescriptionFallback,
   fetchFinnhubSnapshot,
-  getFinnhubRatioCatalog,
-  type FinnhubAnalysisCadence,
-  type FinnhubRatioDefinition,
 } from '../finnhub-analysis';
-import type { FundamentalsFormat } from '../fundamentals-charts';
+import {
+  buildFundamentalsChartsFromStock,
+  formatFundamentalsValue,
+  latestPoint,
+  type FundamentalsChartMetric,
+} from '../fundamentals-charts';
 import { EDGEQUITY_COLUMNS, formatEdgequityValue, getColumnValue } from '../metrics';
 import type { EdgequityColumn, EdgequityFinnhubSnapshot, EdgequityMetricGroup, EdgequityStockRecord } from '../types';
 
@@ -35,38 +36,6 @@ const METRIC_GROUPS: MetricGroupDefinition[] = [
   { id: 'cashFlow', label: 'Cash flow' },
   { id: 'dividends', label: 'Dividends' },
 ];
-
-const ANNUAL_ANALYSIS_RATIO_IDS = new Set([
-  'eps',
-  'ebitda',
-  'grossMargin',
-  'operatingMargin',
-  'netMargin',
-  'fcfMargin',
-  'roa',
-  'roe',
-  'roic',
-  'currentRatio',
-  'totalDebtToEquity',
-  'bookValue',
-]);
-
-const QUARTERLY_ANALYSIS_RATIO_IDS = new Set([
-  'eps',
-  'grossMargin',
-  'operatingMargin',
-  'netMargin',
-  'fcfMargin',
-  'currentRatio',
-  'quickRatio',
-  'cashRatio',
-  'totalDebtToEquity',
-  'peTTM',
-  'pb',
-  'salesPerShare',
-]);
-
-const PER_SHARE_ANALYSIS_RATIO_IDS = new Set(['eps', 'bookValue', 'salesPerShare']);
 
 function getGroupColumns(group: EdgequityMetricGroup): EdgequityColumn[] {
   return EDGEQUITY_COLUMNS.filter((column) => column.group === group);
@@ -214,6 +183,7 @@ function AnalysisPanel({
   const industry = profile?.finnhubIndustry ?? stock.industry ?? 'Industry loading';
   const country = profile?.country ?? 'Country loading';
   const currency = profile?.currency ?? stock.currency ?? 'USD';
+  const website = profile?.weburl ?? null;
   const currentPrice = quote?.c ?? stock.price;
   const previousClose = quote?.pc ?? null;
   const marketCap =
@@ -232,30 +202,21 @@ function AnalysisPanel({
   return (
     <article className="eq-analysis-stack">
       <section className="eq-analysis-company-header">
-        <div className="eq-analysis-company-kicker">
-          <span>Company Profile</span>
+        <div className="eq-analysis-company-kicker">Company Profile</div>
+        <div className="eq-analysis-symbol-row">
           <strong>{stock.ticker}</strong>
+          <span>- {companyName}</span>
         </div>
-        <div className="eq-analysis-company-body">
-          <div>
-            <h3>{companyName}</h3>
-            <p>{description}</p>
-          </div>
-          <dl className="eq-analysis-company-meta" aria-label={`${stock.ticker} company identity`}>
-            <div>
-              <dt>Exchange</dt>
-              <dd>{exchange}</dd>
-            </div>
-            <div>
-              <dt>Industry</dt>
-              <dd>{industry}</dd>
-            </div>
-            <div>
-              <dt>Country</dt>
-              <dd>{country}</dd>
-            </div>
-          </dl>
-        </div>
+        <p className="eq-analysis-listing-line">
+          {exchange} · {industry} · {country}
+          {website ? (
+            <>
+              {' · '}
+              <a href={website} target="_blank" rel="noreferrer">Company website -&gt;</a>
+            </>
+          ) : null}
+        </p>
+        <p className="eq-analysis-company-description">{description}</p>
       </section>
 
       <dl className="eq-analysis-price-hero" aria-label={`${stock.ticker} price summary`}>
@@ -271,108 +232,96 @@ function AnalysisPanel({
         <PriceHeroMetric label="Data Status" value={dataStatus} textValue />
       </dl>
 
-      <AnalysisFundamentals snapshot={snapshot} />
+      <AnalysisFundamentals stock={stock} />
     </article>
   );
 }
 
-function AnalysisFundamentals({ snapshot }: { snapshot: EdgequityFinnhubSnapshot | null }) {
-  const annualRatios = useMemo(
-    () => getFinnhubRatioCatalog().filter((ratio) => ANNUAL_ANALYSIS_RATIO_IDS.has(ratio.id)).slice(0, 12),
-    [],
-  );
-  const quarterlyRatios = useMemo(
-    () => getFinnhubRatioCatalog().filter((ratio) => QUARTERLY_ANALYSIS_RATIO_IDS.has(ratio.id)).slice(0, 12),
-    [],
-  );
+function AnalysisFundamentals({ stock }: { stock: EdgequityStockRecord }) {
+  const document = useMemo(() => buildFundamentalsChartsFromStock(stock), [stock]);
+  const metrics = document.sections.flatMap((section) => section.metrics);
+  const metricNames = metrics.map((metric) => metric.label).slice(0, 8).join(' · ');
+
+  if (metrics.length === 0) {
+    return (
+      <section className="eq-analysis-fundamentals" aria-label="Fundamental analysis">
+        <header className="eq-analysis-fundamentals-title">
+          <span>1</span>
+          <div>
+            <h4>Fundamentals</h4>
+            <p>Normalized annual and quarterly statement charts are not available for this ticker yet.</p>
+          </div>
+        </header>
+      </section>
+    );
+  }
 
   return (
-    <section className="eq-analysis-fundamentals" aria-label="Finnhub fundamentals analysis">
-      <AnalysisFundamentalsGroup
-        title="Annual Fundamentals"
-        viewLabel="5-year view"
-        cadence="annual"
-        chartCadence="Annual"
-        limit={5}
-        ratios={annualRatios}
-        snapshot={snapshot}
-        variant="bar"
-      />
-      <AnalysisFundamentalsGroup
-        title="Quarterly Fundamentals"
-        viewLabel="20-quarter view"
-        cadence="quarterly"
-        chartCadence="Quarterly"
-        limit={20}
-        ratios={quarterlyRatios}
-        snapshot={snapshot}
-        variant="line"
-      />
-    </section>
-  );
-}
-
-function AnalysisFundamentalsGroup({
-  title,
-  viewLabel,
-  cadence,
-  chartCadence,
-  limit,
-  ratios,
-  snapshot,
-  variant,
-}: {
-  title: string;
-  viewLabel: string;
-  cadence: FinnhubAnalysisCadence;
-  chartCadence: 'Annual' | 'Quarterly';
-  limit: number;
-  ratios: FinnhubRatioDefinition[];
-  snapshot: EdgequityFinnhubSnapshot | null;
-  variant: 'line' | 'bar';
-}) {
-  return (
-    <section className="eq-analysis-fundamentals-group">
-      <header className="eq-analysis-fundamentals-head">
-        <h4>{title}</h4>
-        <span>{viewLabel}</span>
+    <section className="eq-analysis-fundamentals" aria-label="Fundamental analysis">
+      <header className="eq-analysis-fundamentals-title">
+        <span>1</span>
+        <div>
+          <h4>Fundamentals</h4>
+          <p>
+            Sector: {stock.sector ?? 'Unclassified'} · Metrics: {metricNames}
+          </p>
+        </div>
       </header>
-      <div className="eq-analysis-ratio-grid">
-        {ratios.map((ratio) => {
-          const points = snapshot ? buildAnalysisChartSeries(snapshot, ratio.id, cadence, limit) : [];
-          return (
-            <article className="eq-analysis-ratio-card" key={`${cadence}-${ratio.id}`}>
-              <div className="eq-analysis-ratio-card-head">
-                <h5>{ratio.label}</h5>
-                <p>{getRatioDescription(ratio)}</p>
-              </div>
-              <MetricTrendChart
-                title={ratio.label}
-                cadence={chartCadence}
-                format={toFundamentalsFormat(ratio)}
-                points={points}
-                variant={variant}
-                maxPoints={limit}
-              />
-            </article>
-          );
-        })}
+
+      <div className="eq-analysis-metric-pair-stack">
+        {metrics.map((metric, index) => (
+          <AnalysisMetricPair key={metric.id} metric={metric} index={index} />
+        ))}
       </div>
     </section>
   );
 }
 
-function toFundamentalsFormat(ratio: FinnhubRatioDefinition): FundamentalsFormat {
-  if (PER_SHARE_ANALYSIS_RATIO_IDS.has(ratio.id)) return 'perShare';
-  if (ratio.format === 'currency') return 'money';
-  if (ratio.format === 'percent') return 'percent';
-  return 'multiple';
+function AnalysisMetricPair({ metric, index }: { metric: FundamentalsChartMetric; index: number }) {
+  const latest = latestPoint(metric);
+  const yAxisLabel = metric.format === 'percent' ? '%' : metric.format === 'multiple' ? 'Multiple' : 'USD';
+
+  return (
+    <article className="eq-analysis-metric-pair-card">
+      <header className="eq-analysis-metric-pair-head">
+        <div>
+          <h5>{metricPrefix(index)}. {metric.label}</h5>
+          <p>{metric.description}</p>
+        </div>
+        {latest ? (
+          <div className="eq-analysis-latest-pill">
+            <span>Latest</span>
+            <strong>{formatFundamentalsValue(latest.value, metric.format)}</strong>
+            <em>{latest.period}</em>
+          </div>
+        ) : null}
+      </header>
+
+      <div className="eq-analysis-chart-pair">
+        <MetricTrendChart
+          title={`${metric.label} Annual`}
+          cadence="Annual"
+          format={metric.format}
+          points={metric.annual}
+          yAxisLabel={yAxisLabel}
+          variant="bar"
+          maxPoints={5}
+        />
+        <MetricTrendChart
+          title={`${metric.label} Quarterly`}
+          cadence="Quarterly"
+          format={metric.format}
+          points={metric.quarterly}
+          yAxisLabel={yAxisLabel}
+          maxPoints={20}
+        />
+      </div>
+    </article>
+  );
 }
 
-function getRatioDescription(ratio: FinnhubRatioDefinition): string {
-  if (ratio.format === 'percent') return `${ratio.label} trend across reported periods.`;
-  if (ratio.format === 'currency') return `${ratio.label} in reported company currency.`;
-  return `${ratio.label} ratio across reported periods.`;
+function metricPrefix(index: number): string {
+  return String.fromCharCode(65 + index);
 }
 
 function PriceHeroMetric({

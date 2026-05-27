@@ -425,32 +425,53 @@ test('StockDetail defaults to the AI Analysis company and price shell while keep
   assert.doesNotMatch(html, /Apple pairs fortress-like cash generation/);
 });
 
-test('StockDetail AI Analysis renders annual and quarterly Finnhub fundamentals cards', () => {
-  const html = renderToStaticMarkup(<StockDetail stock={stock} onBack={() => undefined} />);
+test('StockDetail AI Analysis renders statement fundamentals inside paired chart cards', () => {
+  const html = renderToStaticMarkup(<StockDetail stock={fmpStatementStock} onBack={() => undefined} />);
 
-  assert.match(html, /Annual Fundamentals/);
-  assert.match(html, /5-year view/);
-  assert.match(html, /Quarterly Fundamentals/);
-  assert.match(html, /20-quarter view/);
-  assert.match(html, /eq-analysis-ratio-card/);
-  assert.match(html, /No data/);
+  assert.match(html, /<span>1<\/span>[\s\S]*<h4>Fundamentals<\/h4>/);
+  assert.match(html, /A\. Revenue/);
+  assert.match(html, /Revenue Annual/);
+  assert.match(html, /Revenue Quarterly/);
+  assert.match(html, /eq-analysis-metric-pair-card/);
+  assert.match(html, /eq-analysis-chart-pair/);
+  assert.match(html, /5Y/);
+  assert.match(html, /20Q/);
 });
 
-test('StockDetail AI Analysis formats per-share Finnhub currency ratios with cents', () => {
-  const snapshot = buildFinnhubSnapshot({
-    annual: {
-      eps: [
-        { period: '2024-12-31', v: 1.01 },
-        { period: '2025-12-31', v: 1.23 },
-      ],
-    },
-  });
+test('StockDetail AI Analysis uses paired annual and quarterly fundamental metric cards', () => {
+  const snapshot = buildFinnhubSnapshot({});
   const html = renderToStaticMarkup(
-    <StockDetail stock={stock} onBack={() => undefined} initialFinnhubSnapshot={snapshot} />,
+    <StockDetail stock={fmpStatementStock} onBack={() => undefined} initialFinnhubSnapshot={snapshot} />,
   );
 
-  assert.match(html, /EPS 2025-12-31: \$1\.23/);
-  assert.doesNotMatch(html, /EPS 2025-12-31: \$1(?:[^.])/);
+  assert.match(html, /eq-analysis-symbol-row/);
+  assert.match(html, /AAPL[\s\S]*Apple Inc\./);
+  assert.match(html, /Apple Inc\. is a Technology company listed on NASDAQ/);
+  assert.match(html, /<span>1<\/span>[\s\S]*<h4>Fundamentals<\/h4>/);
+  assert.match(html, /Sector: Technology/);
+  assert.match(html, /A\. Revenue/);
+  assert.match(html, /eq-analysis-metric-pair-card/);
+  assert.match(html, /eq-analysis-chart-pair/);
+  assert.ok(html.indexOf('A. Revenue') < html.indexOf('Annual'));
+  assert.ok(html.indexOf('Annual') < html.indexOf('Quarterly'));
+  assert.match(html, /20Q/);
+});
+
+test('MetricTrendChart formats per-share currency values with cents', () => {
+  const html = renderToStaticMarkup(
+    <MetricTrendChart
+      title="EPS"
+      cadence="Annual"
+      format="perShare"
+      points={[
+        { period: '2024', value: 1.01 },
+        { period: '2025', value: 1.23 },
+      ]}
+    />,
+  );
+
+  assert.match(html, /EPS 2025: \$1\.23/);
+  assert.doesNotMatch(html, /EPS 2025: \$1(?:[^.])/);
 });
 
 test('StockDetail no longer renders the AI Analysis Coming Soon placeholder', () => {
@@ -779,7 +800,15 @@ function buildFinnhubSnapshot(series: NonNullable<EdgequityFinnhubSnapshot['metr
   return {
     ticker: stock.ticker,
     fetchedAt: '2026-05-27T12:00:00.000Z',
-    profile: { ticker: stock.ticker, name: stock.name },
+    profile: {
+      ticker: stock.ticker,
+      name: stock.name,
+      exchange: 'NASDAQ',
+      finnhubIndustry: 'Technology',
+      country: 'US',
+      currency: 'USD',
+      weburl: 'https://www.apple.com',
+    },
     quote: { c: stock.price ?? undefined, pc: 188 },
     metrics: { series },
     cache: { profile: 'hit', quote: 'hit', metrics: 'hit' },
