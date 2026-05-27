@@ -5,6 +5,7 @@ export type FundamentalsFormat = 'money' | 'percent' | 'multiple' | 'perShare';
 export interface FundamentalsChartPoint {
   period: string;
   value: number;
+  inProgress?: boolean;
 }
 
 export interface FundamentalsChartMetric {

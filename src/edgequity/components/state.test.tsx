@@ -682,6 +682,25 @@ test('MetricTrendChart can render annual charts as bars', () => {
   assert.match(html, /EPS 2025: \$7\.00/);
 });
 
+test('MetricTrendChart marks in-progress annual bars', () => {
+  const html = renderToStaticMarkup(
+    <MetricTrendChart
+      title="Revenue"
+      cadence="Annual"
+      format="money"
+      variant="bar"
+      points={[
+        { period: '2025-12-31', value: 100 },
+        { period: '2026-12-31', value: 60, inProgress: true },
+      ]}
+    />,
+  );
+
+  assert.match(html, /eq-fundamentals-chart-bar is-in-progress/);
+  assert.match(html, /2026-12-31 in progress/);
+  assert.match(html, /aria-label="Revenue 2026-12-31 in progress: \$60"/);
+});
+
 test('MetricTrendChart maxPoints can render the latest twenty quarterly points', () => {
   const points = Array.from({ length: 24 }, (_, index) => ({
     period: `202${Math.floor(index / 4)}-Q${(index % 4) + 1}`,

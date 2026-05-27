@@ -66,18 +66,21 @@ export default function MetricTrendChart({
         {variant === 'bar'
           ? layout.plotPoints.map((point) => (
             <rect
-              className="eq-fundamentals-chart-bar"
+              className={point.inProgress ? 'eq-fundamentals-chart-bar is-in-progress' : 'eq-fundamentals-chart-bar'}
               key={`bar-${point.period}`}
               x={point.x - layout.barWidth / 2}
               y={Math.min(point.y, layout.bottom - 2)}
               width={layout.barWidth}
               height={Math.max(2, layout.bottom - point.y)}
               rx="3"
-            />
+            >
+              {point.inProgress ? <title>{`${point.period} in progress`}</title> : null}
+            </rect>
           ))
           : layout.polyline && <polyline className="eq-fundamentals-chart-line" points={layout.polyline} />}
         {layout.plotPoints.map((point) => {
-          const label = `${title} ${point.period}: ${formatFundamentalsValue(point.value, format)}`;
+          const pointPeriodLabel = point.inProgress ? `${point.period} in progress` : point.period;
+          const label = `${title} ${pointPeriodLabel}: ${formatFundamentalsValue(point.value, format)}`;
           return (
             <g className="eq-fundamentals-chart-hover" key={point.period}>
               <circle

@@ -569,6 +569,13 @@ thead .eq-sticky-col {
   fill: rgba(14, 116, 144, 0.72);
 }
 
+.eq-fundamentals-chart-bar.is-in-progress {
+  fill: rgba(14, 116, 144, 0.32);
+  stroke: rgba(14, 116, 144, 0.88);
+  stroke-dasharray: 5 4;
+  stroke-width: 2;
+}
+
 .eq-fundamentals-chart-point {
   fill: var(--vw-accent);
   pointer-events: none;
