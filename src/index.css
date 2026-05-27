@@ -565,6 +565,10 @@ thead .eq-sticky-col {
   stroke-width: 3;
 }
 
+.eq-fundamentals-chart-bar {
+  fill: rgba(14, 116, 144, 0.72);
+}
+
 .eq-fundamentals-chart-point {
   fill: var(--vw-accent);
   pointer-events: none;
@@ -760,6 +764,72 @@ thead .eq-sticky-col {
 
 .eq-analysis-price-hero span.is-down {
   color: var(--vw-red);
+}
+
+.eq-analysis-fundamentals {
+  display: grid;
+  gap: 0.85rem;
+}
+
+.eq-analysis-fundamentals-group {
+  display: grid;
+  gap: 0.7rem;
+}
+
+.eq-analysis-fundamentals-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.6rem;
+  border-bottom: 1px solid rgba(30, 58, 95, 0.1);
+  padding-bottom: 0.45rem;
+}
+
+.eq-analysis-fundamentals-head h4 {
+  color: var(--vw-text-primary);
+  font-size: 0.88rem;
+  font-weight: 780;
+  text-transform: uppercase;
+}
+
+.eq-analysis-fundamentals-head span {
+  color: var(--vw-text-tertiary);
+  font-size: 0.76rem;
+  font-weight: 720;
+}
+
+.eq-analysis-ratio-grid {
+  display: grid;
+  gap: 0.7rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.eq-analysis-ratio-card {
+  display: grid;
+  gap: 0.55rem;
+  border: 1px solid rgba(30, 58, 95, 0.12);
+  border-radius: 8px;
+  background: #ffffff;
+  box-shadow: 0 8px 24px rgba(31, 41, 51, 0.045);
+  padding: 0.7rem;
+}
+
+.eq-analysis-ratio-card .eq-fundamentals-chart {
+  padding: 10px;
+}
+
+.eq-analysis-ratio-card-head h5 {
+  color: var(--vw-text-primary);
+  font-size: 0.82rem;
+  font-weight: 760;
+}
+
+.eq-analysis-ratio-card-head p {
+  margin-top: 0.16rem;
+  color: var(--vw-text-tertiary);
+  font-size: 0.72rem;
+  line-height: 1.35;
 }
 
 .eq-analysis-section {
@@ -1425,6 +1495,16 @@ thead .eq-sticky-col {
 
   .eq-analysis-price-hero {
     grid-template-columns: 1.3fr repeat(3, minmax(0, 1fr));
+  }
+
+  .eq-analysis-ratio-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 899px) {
+  .eq-analysis-ratio-grid {
+    grid-template-columns: 1fr;
   }
 }
 

@@ -13,7 +13,7 @@ import ReportedFinancialsPanel from './ReportedFinancialsPanel.tsx';
 import ScreenerTable, { getScreenerSectors, getVisibleScreenerStocks } from './ScreenerTable.tsx';
 import ScreenerToolbar from './ScreenerToolbar.tsx';
 import StockDetail from './StockDetail.tsx';
-import type { EdgequityColumn, EdgequityStockRecord } from '../types.ts';
+import type { EdgequityColumn, EdgequityFinnhubSnapshot, EdgequityStockRecord } from '../types.ts';
 
 const stock: EdgequityStockRecord = {
   ticker: 'AAPL',
@@ -425,6 +425,34 @@ test('StockDetail defaults to the AI Analysis company and price shell while keep
   assert.doesNotMatch(html, /Apple pairs fortress-like cash generation/);
 });
 
+test('StockDetail AI Analysis renders annual and quarterly Finnhub fundamentals cards', () => {
+  const html = renderToStaticMarkup(<StockDetail stock={stock} onBack={() => undefined} />);
+
+  assert.match(html, /Annual Fundamentals/);
+  assert.match(html, /5-year view/);
+  assert.match(html, /Quarterly Fundamentals/);
+  assert.match(html, /20-quarter view/);
+  assert.match(html, /eq-analysis-ratio-card/);
+  assert.match(html, /No data/);
+});
+
+test('StockDetail AI Analysis formats per-share Finnhub currency ratios with cents', () => {
+  const snapshot = buildFinnhubSnapshot({
+    annual: {
+      eps: [
+        { period: '2024-12-31', v: 1.01 },
+        { period: '2025-12-31', v: 1.23 },
+      ],
+    },
+  });
+  const html = renderToStaticMarkup(
+    <StockDetail stock={stock} onBack={() => undefined} initialFinnhubSnapshot={snapshot} />,
+  );
+
+  assert.match(html, /EPS 2025-12-31: \$1\.23/);
+  assert.doesNotMatch(html, /EPS 2025-12-31: \$1(?:[^.])/);
+});
+
 test('StockDetail no longer renders the AI Analysis Coming Soon placeholder', () => {
   const html = renderToStaticMarkup(<StockDetail stock={stock} onBack={() => undefined} />);
 
@@ -573,6 +601,24 @@ test('MetricTrendChart normalizes annual charts to the latest five years in chro
   assert.ok(html.indexOf('>2022<') < html.indexOf('>2026<'));
 });
 
+test('MetricTrendChart labels ISO annual date periods by year', () => {
+  const html = renderToStaticMarkup(
+    <MetricTrendChart
+      title="EPS"
+      cadence="Annual"
+      format="perShare"
+      points={[
+        { period: '2024-12-31', value: 1.01 },
+        { period: '2025-12-31', value: 1.23 },
+      ]}
+    />,
+  );
+
+  assert.match(html, />2024</);
+  assert.match(html, />2025</);
+  assert.doesNotMatch(html, />2025-1</);
+});
+
 test('MetricTrendChart normalizes quarterly charts to the latest five quarters', () => {
   const html = renderToStaticMarkup(
     <MetricTrendChart
@@ -615,6 +661,47 @@ test('MetricTrendChart exposes hover labels for each plotted point', () => {
   assert.match(html, /eq-fundamentals-chart-hit/);
   assert.match(html, /Revenue 2025: \$1.20B/);
   assert.match(html, /Revenue 2026: \$1.50B/);
+});
+
+test('MetricTrendChart can render annual charts as bars', () => {
+  const html = renderToStaticMarkup(
+    <MetricTrendChart
+      title="EPS"
+      cadence="Annual"
+      format="perShare"
+      variant="bar"
+      points={[
+        { period: '2024', value: 6 },
+        { period: '2025', value: 7 },
+      ]}
+    />,
+  );
+
+  assert.match(html, /eq-fundamentals-chart-bar/);
+  assert.doesNotMatch(html, /eq-fundamentals-chart-line/);
+  assert.match(html, /EPS 2025: \$7\.00/);
+});
+
+test('MetricTrendChart maxPoints can render the latest twenty quarterly points', () => {
+  const points = Array.from({ length: 24 }, (_, index) => ({
+    period: `202${Math.floor(index / 4)}-Q${(index % 4) + 1}`,
+    value: index + 1,
+  }));
+  const html = renderToStaticMarkup(
+    <MetricTrendChart
+      title="Gross Margin"
+      cadence="Quarterly"
+      format="percent"
+      maxPoints={20}
+      points={points}
+    />,
+  );
+
+  assert.match(html, /20Q/);
+  assert.doesNotMatch(html, /Gross Margin 2020-Q1/);
+  assert.doesNotMatch(html, /Gross Margin 2020-Q4/);
+  assert.match(html, /Gross Margin 2021-Q1: 5\.00%/);
+  assert.match(html, /Gross Margin 2025-Q4: 24\.00%/);
 });
 
 test('MetricCell renders text values left-aligned without mono numeric styling', () => {
@@ -668,3 +755,14 @@ test('MetricCell keeps missing text values tertiary', () => {
   assert.match(html, />-</);
   assert.match(html, /--vw-text-tertiary/);
 });
+
+function buildFinnhubSnapshot(series: NonNullable<EdgequityFinnhubSnapshot['metrics']['series']>): EdgequityFinnhubSnapshot {
+  return {
+    ticker: stock.ticker,
+    fetchedAt: '2026-05-27T12:00:00.000Z',
+    profile: { ticker: stock.ticker, name: stock.name },
+    quote: { c: stock.price ?? undefined, pc: 188 },
+    metrics: { series },
+    cache: { profile: 'hit', quote: 'hit', metrics: 'hit' },
+  };
+}

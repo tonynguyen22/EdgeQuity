@@ -9,6 +9,8 @@ interface MetricTrendChartProps {
   format: FundamentalsFormat;
   xAxisLabel?: string;
   yAxisLabel?: string;
+  maxPoints?: number;
+  variant?: 'line' | 'bar';
 }
 
 export default function MetricTrendChart({
@@ -18,9 +20,11 @@ export default function MetricTrendChart({
   format,
   xAxisLabel = 'Reporting period',
   yAxisLabel = 'Value',
+  maxPoints = 5,
+  variant = 'line',
 }: MetricTrendChartProps) {
-  const chartPoints = useMemo(() => normalizeChartPoints(points), [points]);
-  const periodLabel = cadence === 'Annual' ? '5Y' : '5Q';
+  const chartPoints = useMemo(() => normalizeChartPoints(points, maxPoints), [points, maxPoints]);
+  const periodLabel = `${maxPoints}${cadence === 'Annual' ? 'Y' : 'Q'}`;
   const layout = useMemo(() => buildChartLayout(chartPoints), [chartPoints]);
 
   if (chartPoints.length === 0) {
@@ -59,7 +63,19 @@ export default function MetricTrendChart({
         <line className="eq-fundamentals-chart-grid" x1={layout.left} y1={layout.mid} x2={layout.right} y2={layout.mid} />
         <line x1={layout.left} y1={layout.bottom} x2={layout.right} y2={layout.bottom} stroke="var(--vw-border)" />
         <line x1={layout.left} y1={layout.top} x2={layout.left} y2={layout.bottom} stroke="var(--vw-border)" />
-        {layout.polyline && <polyline className="eq-fundamentals-chart-line" points={layout.polyline} />}
+        {variant === 'bar'
+          ? layout.plotPoints.map((point) => (
+            <rect
+              className="eq-fundamentals-chart-bar"
+              key={`bar-${point.period}`}
+              x={point.x - layout.barWidth / 2}
+              y={Math.min(point.y, layout.bottom - 2)}
+              width={layout.barWidth}
+              height={Math.max(2, layout.bottom - point.y)}
+              rx="3"
+            />
+          ))
+          : layout.polyline && <polyline className="eq-fundamentals-chart-line" points={layout.polyline} />}
         {layout.plotPoints.map((point) => {
           const label = `${title} ${point.period}: ${formatFundamentalsValue(point.value, format)}`;
           return (
@@ -127,15 +143,17 @@ function formatAxisValue(value: number, format: FundamentalsFormat): string {
 function formatPeriodLabel(period: string): string {
   const quarter = period.match(/^(\d{4})-Q([1-4])$/);
   if (quarter) return `'${quarter[1]!.slice(-2)} Q${quarter[2]}`;
+  const annualDate = period.match(/^(\d{4})-\d{2}-\d{2}$/);
+  if (annualDate) return annualDate[1]!;
   return period.length > 6 ? period.slice(0, 6) : period;
 }
 
-function normalizeChartPoints(points: FundamentalsChartPoint[]) {
+function normalizeChartPoints(points: FundamentalsChartPoint[], maxPoints: number) {
   return points
     .filter((point) => Number.isFinite(point.value))
     .slice()
     .sort((left, right) => comparePeriods(left.period, right.period))
-    .slice(-5);
+    .slice(-Math.max(0, maxPoints));
 }
 
 function comparePeriods(left: string, right: string) {
@@ -178,6 +196,7 @@ function buildChartLayout(points: FundamentalsChartPoint[]) {
     const tooltipX = tooltipAnchor === 'end' ? x - 8 : tooltipAnchor === 'start' ? x + 8 : x;
     return { ...point, x, y, tooltipX, tooltipY, tooltipAnchor };
   });
+  const barWidth = Math.max(8, Math.min(34, (right - left) / Math.max(points.length, 1) * 0.58));
 
   const labelBudget = points.length <= 8 ? points.length : 6;
   const xLabels = plotPoints.filter((_, index) => {
@@ -199,6 +218,7 @@ function buildChartLayout(points: FundamentalsChartPoint[]) {
     min,
     max,
     midValue,
+    barWidth,
     polyline: plotPoints.map((point) => `${point.x},${point.y}`).join(' '),
     plotPoints,
     xLabels,
