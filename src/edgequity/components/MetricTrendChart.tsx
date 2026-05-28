@@ -236,8 +236,8 @@ function buildChartLayout(points: FundamentalsChartPoint[]) {
   const xLabelY = height - 26;
   const yAxisX = left - 10;
   const values = points.map((point) => point.value);
-  const max = Math.max(...values);
-  const min = Math.min(...values);
+  const max = Math.max(...values, 0);
+  const min = 0;
   const range = max - min || 1;
   const midValue = min + range / 2;
   const mid = top + (bottom - top) / 2;

@@ -530,6 +530,24 @@ test('MetricTrendChart leaves horizontal gutter between y-axis labels and plotte
   assert.doesNotMatch(html, /cx="86"/);
 });
 
+test('MetricTrendChart always starts the y-axis at zero', () => {
+  const html = renderToStaticMarkup(
+    <MetricTrendChart
+      title="Revenue"
+      cadence="Annual"
+      format="money"
+      points={[
+        { period: '2024', value: 100 },
+        { period: '2025', value: 200 },
+      ]}
+    />,
+  );
+
+  assert.match(html, /<text class="eq-fundamentals-chart-y" x="66" y="200" text-anchor="end">\$0<\/text>/);
+  assert.match(html, /cx="118" cy="109"/);
+  assert.match(html, /cx="488" cy="22"/);
+});
+
 test('StockDetail no longer renders the AI Analysis Coming Soon placeholder', () => {
   const html = renderToStaticMarkup(<StockDetail stock={stock} onBack={() => undefined} />);
 
