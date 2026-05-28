@@ -13,6 +13,7 @@ import ReportedFinancialsPanel from './ReportedFinancialsPanel.tsx';
 import ScreenerTable, { getScreenerSectors, getVisibleScreenerStocks } from './ScreenerTable.tsx';
 import ScreenerToolbar from './ScreenerToolbar.tsx';
 import StockDetail from './StockDetail.tsx';
+import { buildFundamentalsChartsFromStock } from '../fundamentals-charts.ts';
 import type { EdgequityColumn, EdgequityFinnhubSnapshot, EdgequityStockRecord } from '../types.ts';
 
 const stock: EdgequityStockRecord = {
@@ -435,8 +436,26 @@ test('StockDetail AI Analysis renders statement fundamentals inside paired chart
   assert.match(html, /Revenue Quarterly/);
   assert.match(html, /eq-analysis-metric-pair-card/);
   assert.match(html, /eq-analysis-chart-pair/);
-  assert.match(html, /2Y/);
+  assert.match(html, /3Y/);
   assert.match(html, /2Q/);
+  assert.match(html, /Revenue Annual 2026 in progress: \$350\.00B/);
+  assert.match(html, /eq-fundamentals-chart-bar is-in-progress/);
+});
+
+test('buildFundamentalsChartsFromStock adds partial annual points from current-year quarters', () => {
+  const document = buildFundamentalsChartsFromStock(fmpStatementStock);
+  const metrics = document.sections.flatMap((section) => section.metrics);
+  const revenue = metrics.find((metric) => metric.id === 'revenue');
+  const totalAssets = metrics.find((metric) => metric.id === 'totalAssets');
+  const fcfMargin = metrics.find((metric) => metric.id === 'fcfMargin');
+
+  assert.equal(revenue?.annual.at(-1)?.period, '2026');
+  assert.equal(revenue?.annual.at(-1)?.value, 350000000000);
+  assert.equal(revenue?.annual.at(-1)?.inProgress, true);
+  assert.equal(totalAssets?.annual.at(-1)?.value, 720000000000);
+  assert.equal(totalAssets?.annual.at(-1)?.inProgress, true);
+  assert.equal(fcfMargin?.annual.at(-1)?.period, '2026');
+  assert.equal(fcfMargin?.annual.at(-1)?.value, (85500000000 / 350000000000) * 100);
 });
 
 test('StockDetail AI Analysis uses paired annual and quarterly fundamental metric cards', () => {
@@ -585,7 +604,7 @@ test('FundamentalsPanel renders annual and quarterly sections from normalized st
   assert.match(html, /Revenue/);
   assert.match(html, /Gross profit/);
   assert.match(html, /Free cash flow/);
-  assert.match(html, /2Y/);
+  assert.match(html, /3Y/);
   assert.match(html, /2Q/);
   assert.match(html, /2024/);
   assert.match(html, /2025/);
@@ -707,10 +726,11 @@ test('MetricTrendChart exposes hover labels for each plotted point', () => {
   );
 
   assert.match(html, /eq-fundamentals-chart-hit/);
+  assert.match(html, /eq-fundamentals-chart-tooltip-bg/);
   assert.match(html, /Revenue 2025: \$1.20B/);
   assert.match(html, /Revenue 2026 in progress: \$1.50B/);
-  assert.match(html, />2025 · \$1\.20B</);
-  assert.match(html, />2026 \(in progress\) · \$1\.50B</);
+  assert.match(html, />2025 - \$1\.20B</);
+  assert.match(html, />2026 \(in progress\) - \$1\.50B</);
 });
 
 test('MetricTrendChart can render annual charts as bars', () => {
@@ -750,7 +770,7 @@ test('MetricTrendChart marks in-progress annual bars', () => {
   assert.match(html, /eq-fundamentals-chart-bar is-in-progress/);
   assert.match(html, /2026-12-31 in progress/);
   assert.match(html, /aria-label="Revenue 2026-12-31 in progress: \$60"/);
-  assert.match(html, />2026-12-31 \(in progress\) · \$60</);
+  assert.match(html, />2026-12-31 \(in progress\) - \$60</);
 });
 
 test('MetricTrendChart does not fade completed fiscal years with current-year labels', () => {

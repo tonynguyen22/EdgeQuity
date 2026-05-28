@@ -169,7 +169,7 @@ function pointsForMetric(
 ): FundamentalsChartPoint[] {
   const periods = getStatementPeriods(stock, cadence, key);
   if (periods.length > 0) {
-    return periods
+    const points = periods
       .map((period): FundamentalsChartPoint | null => {
         const value = metricValueFromPeriod(period, key);
         return value === null
@@ -178,6 +178,13 @@ function pointsForMetric(
       })
       .filter((point): point is FundamentalsChartPoint => point !== null)
       .sort(comparePeriods);
+
+    if (cadence === 'annual') {
+      const partial = partialAnnualPointFromQuarters(stock, key, points.at(-1)?.period ?? null);
+      return partial ? [...points, partial].sort(comparePeriods) : points;
+    }
+
+    return points;
   }
 
   if (cadence === 'quarterly') return [];
@@ -186,6 +193,37 @@ function pointsForMetric(
     .map((period) => ({ period: period.year, value: numeric(period[key]) }))
     .filter((point): point is FundamentalsChartPoint => point.value !== null)
     .sort(comparePeriods);
+}
+
+function partialAnnualPointFromQuarters(
+  stock: EdgequityStockRecord,
+  key: StatementMetricKey,
+  latestAnnualPeriod: string | null,
+): FundamentalsChartPoint | null {
+  const quarters = getStatementPeriods(stock, 'quarterly', key)
+    .map((period) => ({ statement: period, label: periodLabel(period), value: metricValueFromPeriod(period, key) }))
+    .filter((period): period is { statement: EdgequityFinancialStatementPeriod; label: string; value: number } => period.value !== null)
+    .sort((left, right) => comparePeriods({ period: left.label, value: left.value }, { period: right.label, value: right.value }));
+  const latestQuarter = quarters.at(-1);
+  if (!latestQuarter) return null;
+
+  const latestQuarterYear = latestQuarter.statement.fiscalYear;
+  if (latestAnnualPeriod !== null && Number(latestQuarterYear) <= Number(latestAnnualPeriod)) return null;
+
+  const currentYearQuarters = quarters.filter((period) => period.statement.fiscalYear === latestQuarterYear);
+  if (currentYearQuarters.length === 0) return null;
+
+  const isPointInTimeMetric = key === 'totalAssets' || key === 'totalDebt' || key === 'totalEquity';
+  const value = isPointInTimeMetric
+    ? latestQuarter.value
+    : currentYearQuarters.reduce((sum, period) => sum + period.value, 0);
+
+  return {
+    period: latestQuarterYear,
+    periodEnd: latestQuarter.statement.date ?? undefined,
+    value,
+    inProgress: true,
+  };
 }
 
 function marginPoints(

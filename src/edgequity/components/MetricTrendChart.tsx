@@ -86,7 +86,15 @@ export default function MetricTrendChart({
         {layout.plotPoints.map((point) => {
           const pointPeriodLabel = point.inProgress ? `${point.period} in progress` : point.period;
           const label = `${title} ${pointPeriodLabel}: ${formatFundamentalsValue(point.value, format)}`;
-          const visibleLabel = `${point.inProgress ? `${point.period} (in progress)` : point.period} · ${formatFundamentalsValue(point.value, format)}`;
+          const visibleLabel = `${point.inProgress ? `${point.period} (in progress)` : point.period} - ${formatFundamentalsValue(point.value, format)}`;
+          const tooltipWidth = Math.max(92, visibleLabel.length * 6.2 + 18);
+          const tooltipHeight = 22;
+          const tooltipRectX = point.tooltipAnchor === 'end'
+            ? point.tooltipX - tooltipWidth - 6
+            : point.tooltipAnchor === 'middle'
+              ? point.tooltipX - tooltipWidth / 2
+              : point.tooltipX - 6;
+          const tooltipRectY = point.tooltipY - 16;
           return (
             <g className="eq-fundamentals-chart-hover" key={point.period}>
               <circle
@@ -104,6 +112,15 @@ export default function MetricTrendChart({
                 cx={point.x}
                 cy={point.y}
                 r="3"
+                aria-hidden="true"
+              />
+              <rect
+                className="eq-fundamentals-chart-tooltip-bg"
+                x={tooltipRectX}
+                y={tooltipRectY}
+                width={tooltipWidth}
+                height={tooltipHeight}
+                rx="5"
                 aria-hidden="true"
               />
               <text

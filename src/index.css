@@ -563,6 +563,15 @@ thead .eq-sticky-col {
   pointer-events: all;
 }
 
+.eq-fundamentals-chart-tooltip-bg {
+  fill: rgba(255, 255, 255, 0.96);
+  opacity: 0;
+  pointer-events: none;
+  stroke: rgba(30, 58, 95, 0.2);
+  stroke-width: 1;
+  transition: opacity 0.14s ease;
+}
+
 .eq-fundamentals-chart-hover-label {
   fill: var(--vw-text-primary);
   font-size: 11px;
@@ -583,6 +592,8 @@ thead .eq-sticky-col {
 }
 
 .eq-fundamentals-chart-hover:hover .eq-fundamentals-chart-hover-label,
+.eq-fundamentals-chart-hover:hover .eq-fundamentals-chart-tooltip-bg,
+.eq-fundamentals-chart-hover:focus-within .eq-fundamentals-chart-tooltip-bg,
 .eq-fundamentals-chart-hover:focus-within .eq-fundamentals-chart-hover-label {
   opacity: 1;
 }
