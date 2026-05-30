@@ -13,6 +13,7 @@
     "lint": "tsc --noEmit",
     "test:edgequity": "tsx --test scripts/edgequity/*.test.ts",
     "test:edgequity:ui": "tsx --test src/edgequity/*.test.ts src/edgequity/components/*.test.tsx",
+    "edgequity:reset-data": "tsx scripts/edgequity/reset-static-data.ts",
     "edgequity:data": "tsx scripts/edgequity/build-static-data.ts",
     "edgequity:finnhub-raw": "tsx scripts/edgequity/build-finnhub-raw-data.ts",
     "edgequity:sec-statements": "tsx scripts/edgequity/build-sec-statements.ts",

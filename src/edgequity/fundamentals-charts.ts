@@ -4,7 +4,9 @@ export type FundamentalsFormat = 'money' | 'percent' | 'multiple' | 'perShare';
 
 export interface FundamentalsChartPoint {
   period: string;
+  periodEnd?: string;
   value: number;
+  inProgress?: boolean;
 }
 
 export interface FundamentalsChartMetric {
@@ -26,7 +28,7 @@ export interface FundamentalsChartsSection {
 export interface FundamentalsChartsDocument {
   schemaVersion: number;
   ticker: string;
-  source: 'sec-edgar+finnhub' | 'fmp' | 'static-summary' | 'sec';
+  source: 'sec-edgar+finnhub' | 'fmp' | 'static-summary';
   fetchedAt: string;
   status: 'ok' | 'partial' | 'missing';
   sections: FundamentalsChartsSection[];
@@ -72,7 +74,12 @@ export function latestPoint(metric: FundamentalsChartMetric): FundamentalsChartP
 }
 
 export function buildFundamentalsChartsFromStock(stock: EdgequityStockRecord): FundamentalsChartsDocument {
-  const source = stock.financialStatements?.annual ? 'fmp' : 'static-summary';
+  const provider = stock.financialStatements?.source.provider;
+  const source = provider === 'sec'
+    ? 'sec-edgar+finnhub'
+    : provider === 'fmp'
+      ? 'fmp'
+      : 'static-summary';
   const sections: FundamentalsChartsSection[] = [
     {
       id: 'growth',
@@ -88,7 +95,7 @@ export function buildFundamentalsChartsFromStock(stock: EdgequityStockRecord): F
     {
       id: 'margin',
       title: 'Margins',
-      description: 'Profitability ratios derived from the same FMP statement periods.',
+      description: 'Profitability ratios derived from the same normalized statement periods.',
       metrics: [
         buildMarginMetric(stock, 'grossMargin', 'Gross margin', 'Gross profit divided by revenue.'),
         buildMarginMetric(stock, 'operatingMargin', 'Operating margin', 'Operating income divided by revenue.'),
@@ -162,10 +169,22 @@ function pointsForMetric(
 ): FundamentalsChartPoint[] {
   const periods = getStatementPeriods(stock, cadence, key);
   if (periods.length > 0) {
-    return periods
-      .map((period) => ({ period: periodLabel(period), value: metricValueFromPeriod(period, key) }))
-      .filter((point): point is FundamentalsChartPoint => point.value !== null)
+    const points = periods
+      .map((period): FundamentalsChartPoint | null => {
+        const value = metricValueFromPeriod(period, key);
+        return value === null
+          ? null
+          : { period: periodLabel(period), periodEnd: period.date ?? undefined, value };
+      })
+      .filter((point): point is FundamentalsChartPoint => point !== null)
       .sort(comparePeriods);
+
+    if (cadence === 'annual') {
+      const partial = partialAnnualPointFromQuarters(stock, key, points.at(-1)?.period ?? null);
+      return partial ? [...points, partial].sort(comparePeriods) : points;
+    }
+
+    return points;
   }
 
   if (cadence === 'quarterly') return [];
@@ -174,6 +193,37 @@ function pointsForMetric(
     .map((period) => ({ period: period.year, value: numeric(period[key]) }))
     .filter((point): point is FundamentalsChartPoint => point.value !== null)
     .sort(comparePeriods);
+}
+
+function partialAnnualPointFromQuarters(
+  stock: EdgequityStockRecord,
+  key: StatementMetricKey,
+  latestAnnualPeriod: string | null,
+): FundamentalsChartPoint | null {
+  const quarters = getStatementPeriods(stock, 'quarterly', key)
+    .map((period) => ({ statement: period, label: periodLabel(period), value: metricValueFromPeriod(period, key) }))
+    .filter((period): period is { statement: EdgequityFinancialStatementPeriod; label: string; value: number } => period.value !== null)
+    .sort((left, right) => comparePeriods({ period: left.label, value: left.value }, { period: right.label, value: right.value }));
+  const latestQuarter = quarters.at(-1);
+  if (!latestQuarter) return null;
+
+  const latestQuarterYear = latestQuarter.statement.fiscalYear;
+  if (latestAnnualPeriod !== null && Number(latestQuarterYear) <= Number(latestAnnualPeriod)) return null;
+
+  const currentYearQuarters = quarters.filter((period) => period.statement.fiscalYear === latestQuarterYear);
+  if (currentYearQuarters.length === 0) return null;
+
+  const isPointInTimeMetric = key === 'totalAssets' || key === 'totalDebt' || key === 'totalEquity';
+  const value = isPointInTimeMetric
+    ? latestQuarter.value
+    : currentYearQuarters.reduce((sum, period) => sum + period.value, 0);
+
+  return {
+    period: latestQuarterYear,
+    periodEnd: latestQuarter.statement.date ?? undefined,
+    value,
+    inProgress: true,
+  };
 }
 
 function marginPoints(
@@ -190,10 +240,10 @@ function marginPoints(
   const numeratorByPeriod = new Map(pointsForMetric(stock, cadence, numeratorKey).map((point) => [point.period, point.value]));
 
   return revenuePoints
-    .map((point) => {
+    .map((point): FundamentalsChartPoint | null => {
       const numerator = numeratorByPeriod.get(point.period);
       return numerator !== undefined && point.value !== 0
-        ? { period: point.period, value: (numerator / point.value) * 100 }
+        ? { period: point.period, periodEnd: point.periodEnd, value: (numerator / point.value) * 100 }
         : null;
     })
     .filter((point): point is FundamentalsChartPoint => point !== null);

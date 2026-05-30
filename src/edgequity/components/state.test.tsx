@@ -13,7 +13,8 @@ import ReportedFinancialsPanel from './ReportedFinancialsPanel.tsx';
 import ScreenerTable, { getScreenerSectors, getVisibleScreenerStocks } from './ScreenerTable.tsx';
 import ScreenerToolbar from './ScreenerToolbar.tsx';
 import StockDetail from './StockDetail.tsx';
-import type { EdgequityColumn, EdgequityStockRecord } from '../types.ts';
+import { buildFundamentalsChartsFromStock } from '../fundamentals-charts.ts';
+import type { EdgequityColumn, EdgequityFinnhubSnapshot, EdgequityStockRecord } from '../types.ts';
 
 const stock: EdgequityStockRecord = {
   ticker: 'AAPL',
@@ -75,8 +76,8 @@ const fmpStatementStock: EdgequityStockRecord = {
   ...stock,
   financialStatements: {
     source: {
-      provider: 'fmp',
-      endpoint: 'income-statement,balance-sheet-statement,cash-flow-statement',
+      provider: 'sec',
+      endpoint: 'SEC Company Facts',
       fetchedAt: '2026-05-24T00:00:00.000Z',
       status: 'ok',
     },
@@ -293,6 +294,19 @@ test('ScreenerTable keeps compact rows and shows earnings context after sector',
     ticker: 'NVDA',
     name: 'NVIDIA Corp',
     sector: 'Communication Services',
+    earnings: {
+      recent: { period: 'Q1 FY2027', date: '2026-05-20', source: 'Finnhub', sourceUrl: 'https://finnhub.io' },
+      next: { period: 'Q2 FY2027', date: '2026-08-26', isEstimated: true, source: 'DoltHub', sourceUrl: 'https://www.dolthub.com/repositories/post-no-preference/earnings' },
+      updatedAt: '2026-05-25T00:00:00.000Z',
+    },
+    transcript: {
+      status: 'found',
+      title: 'NVIDIA Q1 FY2027 earnings call transcript',
+      date: '2026-05-20',
+      source: 'Company IR',
+      sourceUrl: 'https://investor.nvidia.com',
+      fetchedAt: '2026-05-25T00:00:00.000Z',
+    },
   };
   const html = renderToStaticMarkup(<ScreenerTable stocks={[nvdaStock]} onSelectStock={() => undefined} />);
 
@@ -302,8 +316,8 @@ test('ScreenerTable keeps compact rows and shows earnings context after sector',
   assert.ok(html.indexOf('>Sector<') < html.indexOf('>Earnings<'));
   assert.ok(html.indexOf('>Earnings<') < html.indexOf('>Updated<'));
   assert.match(html, /eq-earnings-cell/);
-  assert.match(html, /Recent[\s\S]*Q1 FY2027[\s\S]*May 20, 2026/);
-  assert.match(html, /Next[\s\S]*Q2 FY2027[\s\S]*Aug 26, 2026 est\./);
+  assert.match(html, /Recent[\s\S]*Q1 FY2027[\s\S]*2026-05-20/);
+  assert.match(html, /Next[\s\S]*Q2 FY2027[\s\S]*2026-08-26/);
   assert.match(html, /2026-05-20/);
 });
 
@@ -391,120 +405,157 @@ test('ScreenerTable renders an empty state when no stocks are visible', () => {
   assert.match(html, /No stocks match the current filters/);
 });
 
-test('StockDetail defaults to a full equity research report for covered tickers', () => {
+test('StockDetail renders only the AI Analysis company and price shell', () => {
   const html = renderToStaticMarkup(<StockDetail stock={stock} onBack={() => undefined} />);
 
-  assert.match(html, /AI Analysis/);
-  assert.match(html, /aria-selected="true"[\s\S]*AI Analysis/);
-  assert.match(html, /Financials/);
-  assert.match(html, /Equity Research: Apple Inc\. \(AAPL\)/);
-  assert.match(html, /analysis-detail-container/);
-  assert.match(html, /analysis-detail-header/);
-  assert.match(html, /detail-content/);
-  assert.match(html, /stock-overview-card/);
-  assert.match(html, /quick-stats-grid/);
-  assert.match(html, /detail-section/);
-  assert.match(html, /metric-pair-grid/);
-  assert.match(html, /scenario-comparison-grid/);
-  assert.match(html, /forecast-table/);
-  assert.match(html, /sensitivity-table/);
-  assert.match(html, /final-verdict-box/);
-  assert.match(html, /02 — Recent News &amp; Earnings/);
-  assert.match(html, /03 — Business Summary/);
-  assert.match(html, /04 — Core Segment Deep Dive/);
-  assert.match(html, /05 — Industry Context/);
-  assert.match(html, /06 — Competitive Advantages &amp; Moat/);
-  assert.match(html, /07 — Revenue Growth &amp; Profitability/);
-  assert.match(html, /08 — Earnings Per Share/);
-  assert.match(html, /09 — Balance Sheet/);
-  assert.match(html, /10 — 3-Year Forecast/);
-  assert.match(html, /11 — Valuation/);
-  assert.match(html, /12 — Sensitivity Analysis/);
-  assert.match(html, /13 — Key Risks/);
-  assert.match(html, /14 — Final Verdict/);
-  assert.match(html, /eq-report-chart/);
-  assert.match(html, /Bear Case/);
-  assert.match(html, /Base Case/);
-  assert.match(html, /Bull Case/);
-  assert.match(html, /Apple pairs fortress-like cash generation/);
-});
-
-test('StockDetail charts use the latest five years and render revenue plus FCF and margin lines', () => {
-  const chartStock: EdgequityStockRecord = {
-    ...stock,
-    history: [
-      { year: '2025', revenue: 600, grossProfit: 300, operatingIncome: 200, netIncome: 180, freeCashFlow: 150, totalAssets: 700, totalDebt: 20, totalEquity: 500, sharesDiluted: 10 },
-      { year: '2024', revenue: 540, grossProfit: 260, operatingIncome: 170, netIncome: 150, freeCashFlow: 130, totalAssets: 650, totalDebt: 22, totalEquity: 470, sharesDiluted: 10 },
-      { year: '2023', revenue: 500, grossProfit: 240, operatingIncome: 160, netIncome: 140, freeCashFlow: 110, totalAssets: 620, totalDebt: 24, totalEquity: 440, sharesDiluted: 11 },
-      { year: '2022', revenue: 460, grossProfit: 220, operatingIncome: 140, netIncome: 120, freeCashFlow: 90, totalAssets: 590, totalDebt: 26, totalEquity: 410, sharesDiluted: 11 },
-      { year: '2021', revenue: 430, grossProfit: 210, operatingIncome: 130, netIncome: 110, freeCashFlow: 80, totalAssets: 560, totalDebt: 28, totalEquity: 390, sharesDiluted: 12 },
-      { year: '2020', revenue: 400, grossProfit: 190, operatingIncome: 115, netIncome: 100, freeCashFlow: 70, totalAssets: 530, totalDebt: 30, totalEquity: 360, sharesDiluted: 12 },
-    ],
-  };
-  const html = renderToStaticMarkup(<StockDetail stock={chartStock} onBack={() => undefined} />);
-
-  assert.match(html, /eq-chart-line-primary/);
-  assert.match(html, /eq-chart-line-secondary/);
-  assert.match(html, /Revenue and Free Cash Flow/);
-  assert.match(html, /5Y Revenue and FCF/);
-  assert.match(html, /Y-axis: USD in billions/);
-  assert.match(html, /X-axis: Fiscal year/);
-  assert.match(html, /eq-chart-latest-row/);
-  assert.match(html, /eq-chart-data-table/);
-  assert.match(html, /Latest: \$600\.0/);
-  assert.match(html, /Latest: \$150\.0/);
-  assert.match(html, /Gross and Operating Margin/);
-  assert.match(html, /5Y Gross and Operating Margin/);
-  assert.match(html, /Y-axis: Margin percentage/);
-  assert.match(html, /Latest: 50\.0%/);
-  assert.doesNotMatch(html, /eq-chart-labels"><span>2020</);
-  assert.match(html, />2021</);
-  assert.match(html, />2025</);
-});
-
-test('StockDetail renders Alphabet base-case price prediction and valuation method', () => {
-  const googleStock: EdgequityStockRecord = {
-    ...stock,
-    ticker: 'GOOGL',
-    name: 'Alphabet Inc.',
-    sector: 'Communication Services',
-    industry: 'Internet Content & Information',
-    price: 390.28,
-    valuation: {
-      ...stock.valuation,
-      peTTM: 29.8,
-      forwardPE: 24.5,
-      fcfYield: 0.0154,
-    },
-    history: [
-      { year: '2025', revenue: 402963000000, grossProfit: 240428000000, operatingIncome: 129166000000, netIncome: 132170000000, freeCashFlow: 73266000000, totalAssets: 595281000000, totalDebt: 59291000000, totalEquity: 415265000000, sharesDiluted: 12230000000 },
-      { year: '2024', revenue: 350018000000, grossProfit: 203712000000, operatingIncome: 112390000000, netIncome: 100118000000, freeCashFlow: 72764000000, totalAssets: 450256000000, totalDebt: 25461000000, totalEquity: 325084000000, sharesDiluted: 12447000000 },
-      { year: '2023', revenue: 307394000000, grossProfit: 174062000000, operatingIncome: 84293000000, netIncome: 73795000000, freeCashFlow: 69495000000, totalAssets: 402392000000, totalDebt: 27121000000, totalEquity: 283379000000, sharesDiluted: 12722000000 },
-      { year: '2022', revenue: 282836000000, grossProfit: 156633000000, operatingIncome: 74842000000, netIncome: 59972000000, freeCashFlow: 60010000000, totalAssets: 365264000000, totalDebt: 29679000000, totalEquity: 256144000000, sharesDiluted: 13159000000 },
-      { year: '2021', revenue: 257637000000, grossProfit: 146698000000, operatingIncome: 78714000000, netIncome: 76033000000, freeCashFlow: 67012000000, totalAssets: 359268000000, totalDebt: 28395000000, totalEquity: 251635000000, sharesDiluted: 13553480000 },
-    ],
-  };
-  const html = renderToStaticMarkup(<StockDetail stock={googleStock} onBack={() => undefined} />);
-
-  assert.match(html, /\$480/);
-  assert.match(html, /Base-case price target/);
-  assert.match(html, /26x FY2028E EPS/);
-  assert.match(html, /\+23\.0%/);
-});
-
-test('StockDetail renders an analysis pending state for uncovered tickers', () => {
-  const uncoveredStock: EdgequityStockRecord = {
-    ...stock,
-    ticker: 'NFLX',
-    name: 'Netflix Inc.',
-  };
-  const html = renderToStaticMarkup(<StockDetail stock={uncoveredStock} onBack={() => undefined} />);
-
-  assert.match(html, /AI analysis is queued for this ticker\. Financial data is available below\./);
+  assert.match(html, /eq-analysis-company-header/);
+  assert.match(html, /eq-analysis-price-hero/);
+  assert.match(html, /Company Profile/);
+  assert.match(html, /Current Price/);
+  assert.match(html, /Previous Close/);
+  assert.match(html, /Market Cap/);
+  assert.match(html, /Data Status/);
+  assert.doesNotMatch(html, /role="tablist"/);
+  assert.doesNotMatch(html, /Financials/);
+  assert.match(html, /<h4>Fundamentals<\/h4>/);
+  assert.doesNotMatch(html, /edgequity-fundamentals-tab/);
+  assert.doesNotMatch(html, /edgequity-financials-panel/);
+  assert.doesNotMatch(html, /Coming Soon/);
+  assert.doesNotMatch(html, />Statements</);
+  assert.doesNotMatch(html, /Equity Research: Apple Inc\. \(AAPL\)/);
+  assert.doesNotMatch(html, /analysis-detail-container/);
   assert.doesNotMatch(html, /Apple pairs fortress-like cash generation/);
 });
 
-test('StockDetail renders a financial snapshot dashboard without the old historical table', () => {
+test('StockDetail AI Analysis renders statement fundamentals inside paired chart cards', () => {
+  const html = renderToStaticMarkup(<StockDetail stock={fmpStatementStock} onBack={() => undefined} />);
+
+  assert.match(html, /<span>1<\/span>[\s\S]*<h4>Fundamentals<\/h4>/);
+  assert.match(html, /A\. Revenue/);
+  assert.match(html, /Revenue Annual/);
+  assert.match(html, /Revenue Quarterly/);
+  assert.match(html, /eq-analysis-metric-pair-card/);
+  assert.match(html, /eq-analysis-chart-pair/);
+  assert.match(html, /3Y/);
+  assert.match(html, /2Q/);
+  assert.match(html, /Revenue Annual 2026 in progress: \$350\.00B/);
+  assert.match(html, /eq-fundamentals-chart-bar is-in-progress/);
+});
+
+test('buildFundamentalsChartsFromStock adds partial annual points from current-year quarters', () => {
+  const document = buildFundamentalsChartsFromStock(fmpStatementStock);
+  const metrics = document.sections.flatMap((section) => section.metrics);
+  const revenue = metrics.find((metric) => metric.id === 'revenue');
+  const totalAssets = metrics.find((metric) => metric.id === 'totalAssets');
+  const fcfMargin = metrics.find((metric) => metric.id === 'fcfMargin');
+
+  assert.equal(revenue?.annual.at(-1)?.period, '2026');
+  assert.equal(revenue?.annual.at(-1)?.value, 350000000000);
+  assert.equal(revenue?.annual.at(-1)?.inProgress, true);
+  assert.equal(totalAssets?.annual.at(-1)?.value, 720000000000);
+  assert.equal(totalAssets?.annual.at(-1)?.inProgress, true);
+  assert.equal(fcfMargin?.annual.at(-1)?.period, '2026');
+  assert.equal(fcfMargin?.annual.at(-1)?.value, (85500000000 / 350000000000) * 100);
+});
+
+test('StockDetail AI Analysis uses paired annual and quarterly fundamental metric cards', () => {
+  const snapshot = buildFinnhubSnapshot({
+    annual: {
+      fcfMargin: [
+        { period: '2021-12-31', v: 0.18 },
+        { period: '2022-12-31', v: 0.19 },
+        { period: '2023-12-31', v: 0.2 },
+        { period: '2024-12-31', v: 0.21 },
+        { period: '2025-12-31', v: 0.22 },
+      ],
+    },
+    quarterly: {
+      fcfMargin: Array.from({ length: 20 }, (_, index) => ({
+        period: `${2021 + Math.floor(index / 4)}-${String(((index % 4) + 1) * 3).padStart(2, '0')}-30`,
+        v: 0.1 + index / 100,
+      })),
+    },
+  });
+  const html = renderToStaticMarkup(
+    <StockDetail stock={fmpStatementStock} onBack={() => undefined} initialFinnhubSnapshot={snapshot} />,
+  );
+
+  assert.match(html, /eq-analysis-symbol-row/);
+  assert.match(html, /AAPL[\s\S]*Apple Inc\./);
+  assert.match(html, /Apple Inc\. is a Technology company listed on NASDAQ/);
+  assert.match(html, /<span>1<\/span>[\s\S]*<h4>Fundamentals<\/h4>/);
+  assert.match(html, /Sector: Technology/);
+  assert.match(html, /A\. Revenue/);
+  assert.match(html, /eq-analysis-metric-pair-card/);
+  assert.match(html, /eq-analysis-chart-pair/);
+  assert.ok(html.indexOf('A. Revenue') < html.indexOf('Annual'));
+  assert.ok(html.indexOf('Annual') < html.indexOf('Quarterly'));
+  assert.match(html, /20Q/);
+  assert.match(html, /FCF margin Annual 2025: 22\.00%/);
+  assert.match(html, /FCF margin Quarterly 2025-Q4: 29\.00%/);
+});
+
+test('MetricTrendChart formats per-share currency values with cents', () => {
+  const html = renderToStaticMarkup(
+    <MetricTrendChart
+      title="EPS"
+      cadence="Annual"
+      format="perShare"
+      points={[
+        { period: '2024', value: 1.01 },
+        { period: '2025', value: 1.23 },
+      ]}
+    />,
+  );
+
+  assert.match(html, /EPS 2025: \$1\.23/);
+  assert.doesNotMatch(html, /EPS 2025: \$1(?:[^.])/);
+});
+
+test('MetricTrendChart leaves horizontal gutter between y-axis labels and plotted data', () => {
+  const html = renderToStaticMarkup(
+    <MetricTrendChart
+      title="Revenue"
+      cadence="Annual"
+      format="money"
+      points={[
+        { period: '2024', value: 100 },
+        { period: '2025', value: 200 },
+      ]}
+    />,
+  );
+
+  assert.match(html, /x="66" y="200" text-anchor="end"/);
+  assert.match(html, /cx="118"/);
+  assert.doesNotMatch(html, /cx="86"/);
+});
+
+test('MetricTrendChart always starts the y-axis at zero', () => {
+  const html = renderToStaticMarkup(
+    <MetricTrendChart
+      title="Revenue"
+      cadence="Annual"
+      format="money"
+      points={[
+        { period: '2024', value: 100 },
+        { period: '2025', value: 200 },
+      ]}
+    />,
+  );
+
+  assert.match(html, /<text class="eq-fundamentals-chart-y" x="66" y="200" text-anchor="end">\$0<\/text>/);
+  assert.match(html, /cx="118" cy="109"/);
+  assert.match(html, /cx="488" cy="22"/);
+});
+
+test('StockDetail no longer renders the AI Analysis Coming Soon placeholder', () => {
+  const html = renderToStaticMarkup(<StockDetail stock={stock} onBack={() => undefined} />);
+
+  assert.doesNotMatch(html, /Coming Soon/);
+  assert.doesNotMatch(html, /eq-coming-soon-panel/);
+});
+
+test('StockDetail renders the single AI analysis view without old detail tabs', () => {
   const detailStock: EdgequityStockRecord = {
     ...stock,
     warnings: ['Missing forward estimates'],
@@ -531,61 +582,48 @@ test('StockDetail renders a financial snapshot dashboard without the old histori
   assert.match(html, /Technology \/ Consumer Electronics/);
   assert.match(html, /Investment notes/);
   assert.match(html, /Missing forward estimates/);
-  assert.match(html, /id="edgequity-financials-panel"/);
-  assert.match(html, /id="edgequity-statements-panel"/);
-  assert.match(html, />Statements</);
-  assert.match(html, />Fundamentals</);
-  assert.match(html, /id="edgequity-fundamentals-panel"/);
-  assert.match(html, /hidden=""/);
-  assert.match(html, /eq-financials-overview/);
-  assert.match(html, /Financial snapshot/);
-  assert.match(html, /Latest reported year/);
-  assert.match(html, /Revenue/);
-  assert.match(html, /Operating Income/);
-  assert.match(html, /Net Income/);
-  assert.match(html, /Free Cash Flow/);
-  assert.match(html, /Total Debt/);
-  assert.match(html, /Total Equity/);
-  assert.match(html, /Shares Diluted/);
-  assert.match(html, /Valuation/);
-  assert.match(html, /P\/E TTM/);
-  assert.match(html, /28\.0x/);
-  assert.match(html, /Margin/);
-  assert.match(html, /Gross Margin/);
-  assert.match(html, /Profitability/);
-  assert.match(html, /ROE/);
-  assert.match(html, /46\.0%/);
-  assert.match(html, /Gross Profit/);
+  assert.match(html, /Company Profile/);
+  assert.match(html, /eq-analysis-company-header/);
+  assert.match(html, /eq-analysis-price-hero/);
+  assert.match(html, /<span>1<\/span>[\s\S]*<h4>Fundamentals<\/h4>/);
+  assert.match(html, /A\. Revenue/);
+  assert.match(html, /Revenue Annual/);
+  assert.doesNotMatch(html, /id="edgequity-statements-panel"/);
+  assert.doesNotMatch(html, />Statements</);
+  assert.doesNotMatch(html, /edgequity-fundamentals-tab/);
+  assert.doesNotMatch(html, /id="edgequity-fundamentals-panel"/);
+  assert.doesNotMatch(html, /hidden=""/);
+  assert.doesNotMatch(html, /eq-financials-overview/);
+  assert.doesNotMatch(html, /Financial snapshot/);
   assert.match(html, /\$391\.0B/);
-  assert.match(html, /\$106\.0B/);
   assert.doesNotMatch(html, /eq-history-panel/);
   assert.doesNotMatch(html, /Historical fundamentals/);
 });
 
-test('ReportedFinancialsPanel renders FMP statement data from the selected stock record', () => {
+test('ReportedFinancialsPanel renders normalized statement data from the selected stock record', () => {
   const html = renderToStaticMarkup(<ReportedFinancialsPanel stock={fmpStatementStock} />);
 
-  assert.match(html, /Statements \(FMP\)/);
-  assert.match(html, /Source: Financial Modeling Prep/);
+  assert.match(html, /Statements/);
+  assert.match(html, /Source: SEC Company Facts/);
   assert.match(html, />Income Statement</);
   assert.match(html, />Balance Sheet</);
   assert.match(html, />Cash Flow</);
   assert.match(html, /Revenue/);
   assert.match(html, /Gross Profit/);
   assert.match(html, /\$600\.00B/);
-  assert.doesNotMatch(html, /SEC EDGAR/);
+  assert.doesNotMatch(html, /Financial Modeling Prep/);
   assert.doesNotMatch(html, /edgequity:sec-statements/);
 });
 
-test('FundamentalsPanel renders charts directly from FMP statements on the selected stock record', () => {
+test('FundamentalsPanel renders annual and quarterly sections from normalized statements', () => {
   const html = renderToStaticMarkup(<FundamentalsPanel stock={fmpStatementStock} />);
 
   assert.match(html, /Growth/);
   assert.match(html, /Revenue/);
   assert.match(html, /Gross profit/);
   assert.match(html, /Free cash flow/);
-  assert.match(html, /5Y/);
-  assert.match(html, /5Q/);
+  assert.match(html, /3Y/);
+  assert.match(html, /2Q/);
   assert.match(html, /2024/);
   assert.match(html, /2025/);
   assert.match(html, /26 Q1/);
@@ -596,7 +634,7 @@ test('FundamentalsPanel renders charts directly from FMP statements on the selec
   assert.doesNotMatch(html, /edgequity:fundamentals-charts/);
 });
 
-test('FundamentalsPanel does not leave a blank quarterly chart column when only annual FMP data exists', () => {
+test('FundamentalsPanel does not leave a blank quarterly chart column when only annual data exists', () => {
   const html = renderToStaticMarkup(<FundamentalsPanel stock={annualOnlyFmpStatementStock} />);
 
   assert.match(html, /eq-fundamentals-chart-grid is-single/);
@@ -614,9 +652,11 @@ test('StockDetail renders the analyst sheet layout sections', () => {
 
   assert.match(html, /eq-detail-hero/);
   assert.match(html, /eq-kpi-strip/);
-  assert.match(html, /eq-financials-summary/);
-  assert.match(html, /eq-metric-panel/);
+  assert.match(html, /eq-analysis-company-header/);
+  assert.match(html, /eq-analysis-price-hero/);
   assert.match(html, /Investment notes/);
+  assert.doesNotMatch(html, /eq-financials-summary/);
+  assert.doesNotMatch(html, /eq-metric-panel/);
   assert.doesNotMatch(html, /eq-history-panel/);
 });
 
@@ -645,6 +685,24 @@ test('MetricTrendChart normalizes annual charts to the latest five years in chro
   assert.ok(html.indexOf('>2022<') < html.indexOf('>2026<'));
 });
 
+test('MetricTrendChart labels ISO annual date periods by year', () => {
+  const html = renderToStaticMarkup(
+    <MetricTrendChart
+      title="EPS"
+      cadence="Annual"
+      format="perShare"
+      points={[
+        { period: '2024-12-31', value: 1.01 },
+        { period: '2025-12-31', value: 1.23 },
+      ]}
+    />,
+  );
+
+  assert.match(html, />2024</);
+  assert.match(html, />2025</);
+  assert.doesNotMatch(html, />2025-1</);
+});
+
 test('MetricTrendChart normalizes quarterly charts to the latest five quarters', () => {
   const html = renderToStaticMarkup(
     <MetricTrendChart
@@ -669,6 +727,131 @@ test('MetricTrendChart normalizes quarterly charts to the latest five quarters',
   assert.match(html, /27 Q1/);
   assert.ok(html.indexOf('26 Q1') < html.indexOf('27 Q1'));
   assert.doesNotMatch(html, /rotate\(/);
+});
+
+test('MetricTrendChart exposes hover labels for each plotted point', () => {
+  const html = renderToStaticMarkup(
+    <MetricTrendChart
+      title="Revenue"
+      cadence="Annual"
+      format="money"
+      currentDate={new Date('2026-05-27T12:00:00Z')}
+      points={[
+        { period: '2025', value: 1_200_000_000 },
+        { period: '2026', value: 1_500_000_000 },
+      ]}
+    />,
+  );
+
+  assert.match(html, /eq-fundamentals-chart-hit/);
+  assert.match(html, /eq-fundamentals-chart-tooltip-bg/);
+  assert.match(html, /Revenue 2025: \$1.20B/);
+  assert.match(html, /Revenue 2026 in progress: \$1.50B/);
+  assert.match(html, />2025 - \$1\.20B</);
+  assert.match(html, />2026 \(in progress\) - \$1\.50B</);
+});
+
+test('MetricTrendChart can render annual charts as bars', () => {
+  const html = renderToStaticMarkup(
+    <MetricTrendChart
+      title="EPS"
+      cadence="Annual"
+      format="perShare"
+      variant="bar"
+      points={[
+        { period: '2024', value: 6 },
+        { period: '2025', value: 7 },
+      ]}
+    />,
+  );
+
+  assert.match(html, /eq-fundamentals-chart-bar/);
+  assert.doesNotMatch(html, /eq-fundamentals-chart-line/);
+  assert.match(html, /EPS 2025: \$7\.00/);
+});
+
+test('MetricTrendChart marks in-progress annual bars', () => {
+  const html = renderToStaticMarkup(
+    <MetricTrendChart
+      title="Revenue"
+      cadence="Annual"
+      format="money"
+      variant="bar"
+      currentDate={new Date('2026-05-27T12:00:00Z')}
+      points={[
+        { period: '2025-12-31', value: 100 },
+        { period: '2026-12-31', value: 60 },
+      ]}
+    />,
+  );
+
+  assert.match(html, /eq-fundamentals-chart-bar is-in-progress/);
+  assert.match(html, /2026-12-31 in progress/);
+  assert.match(html, /aria-label="Revenue 2026-12-31 in progress: \$60"/);
+  assert.match(html, />2026-12-31 \(in progress\) - \$60</);
+});
+
+test('MetricTrendChart does not fade completed fiscal years with current-year labels', () => {
+  const html = renderToStaticMarkup(
+    <MetricTrendChart
+      title="Revenue"
+      cadence="Annual"
+      format="money"
+      variant="bar"
+      currentDate={new Date('2026-05-27T12:00:00Z')}
+      points={[
+        { period: '2025', value: 100 },
+        { period: '2026', periodEnd: '2026-01-31', value: 120 },
+      ]}
+    />,
+  );
+
+  assert.doesNotMatch(html, /eq-fundamentals-chart-bar is-in-progress/);
+  assert.match(html, /Revenue 2026: \$120/);
+  assert.doesNotMatch(html, /2026 \(in progress\)/);
+});
+
+test('MetricTrendChart maxPoints can render the latest twenty quarterly points', () => {
+  const points = Array.from({ length: 24 }, (_, index) => ({
+    period: `202${Math.floor(index / 4)}-Q${(index % 4) + 1}`,
+    value: index + 1,
+  }));
+  const html = renderToStaticMarkup(
+    <MetricTrendChart
+      title="Gross Margin"
+      cadence="Quarterly"
+      format="percent"
+      maxPoints={20}
+      points={points}
+    />,
+  );
+
+  assert.match(html, /20Q/);
+  assert.doesNotMatch(html, /Gross Margin 2020-Q1/);
+  assert.doesNotMatch(html, /Gross Margin 2020-Q4/);
+  assert.match(html, /Gross Margin 2021-Q1: 5\.00%/);
+  assert.match(html, /Gross Margin 2025-Q4: 24\.00%/);
+});
+
+test('MetricTrendChart labels partial quarterly coverage by actual point count', () => {
+  const html = renderToStaticMarkup(
+    <MetricTrendChart
+      title="Revenue"
+      cadence="Quarterly"
+      format="money"
+      maxPoints={20}
+      points={[
+        { period: '2024-Q4', value: 100 },
+        { period: '2025-Q1', value: 110 },
+        { period: '2025-Q2', value: 120 },
+        { period: '2025-Q3', value: 130 },
+        { period: '2025-Q4', value: 140 },
+      ]}
+    />,
+  );
+
+  assert.match(html, /5Q/);
+  assert.doesNotMatch(html, /20Q/);
 });
 
 test('MetricCell renders text values left-aligned without mono numeric styling', () => {
@@ -722,3 +905,22 @@ test('MetricCell keeps missing text values tertiary', () => {
   assert.match(html, />-</);
   assert.match(html, /--vw-text-tertiary/);
 });
+
+function buildFinnhubSnapshot(series: NonNullable<EdgequityFinnhubSnapshot['metrics']['series']>): EdgequityFinnhubSnapshot {
+  return {
+    ticker: stock.ticker,
+    fetchedAt: '2026-05-27T12:00:00.000Z',
+    profile: {
+      ticker: stock.ticker,
+      name: stock.name,
+      exchange: 'NASDAQ',
+      finnhubIndustry: 'Technology',
+      country: 'US',
+      currency: 'USD',
+      weburl: 'https://www.apple.com',
+    },
+    quote: { c: stock.price ?? undefined, pc: 188 },
+    metrics: { series },
+    cache: { profile: 'hit', quote: 'hit', metrics: 'hit' },
+  };
+}

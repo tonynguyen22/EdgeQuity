@@ -1,57 +1,1317 @@
 {
   "ticker": "CSCO",
-  "name": "Cisco Systems, Inc.",
-  "sector": "Technology",
-  "industry": "Communication Equipment",
+  "name": "Cisco Systems Inc",
+  "sector": "AI Infrastructure",
+  "industry": "Data Center Networking",
   "currency": "USD",
   "price": null,
-  "marketCap": null,
-  "enterpriseValue": null,
+  "marketCap": 466389988811,
+  "enterpriseValue": 487886988811,
   "valuation": {
-    "peTTM": null,
-    "forwardPE": null,
-    "psTTM": null,
-    "pb": null,
-    "evRevenue": null,
+    "peTTM": 39.0023,
+    "forwardPE": 20.77067,
+    "psTTM": 7.6777,
+    "pb": 5.7418,
+    "evRevenue": 8.61169535798002,
     "evEbitda": null,
-    "pfcf": null,
-    "fcfYield": null,
-    "earningsYield": null
+    "pfcf": 35.09858434760687,
+    "fcfYield": 0.028491177595548332,
+    "earningsYield": 0.02182722666486168
   },
   "profitability": {
-    "grossMargin": null,
-    "operatingMargin": null,
-    "netMargin": null,
-    "roe": null,
-    "roa": null,
+    "grossMargin": 0.6494,
+    "operatingMargin": 0.2076,
+    "netMargin": 0.1797,
+    "roe": 0.2514,
+    "roa": 0.0972,
     "roic": null
   },
   "growth": {
-    "revenueCagr3y": null,
+    "revenueCagr3y": 0.03192384157728467,
     "revenueCagr5y": null,
-    "epsCagr3y": null,
-    "fcfCagr3y": null
+    "epsCagr3y": -0.0332,
+    "fcfCagr3y": 0.013898544116964118
   },
   "financialHealth": {
-    "currentRatio": null,
-    "quickRatio": null,
-    "debtToEquity": null,
+    "currentRatio": 0.9978,
+    "quickRatio": 0.9075,
+    "debtToEquity": 0.6370855837585124,
     "netDebtToEbitda": null,
     "interestCoverage": null
   },
   "cashFlow": {
-    "operatingCashFlow": null,
-    "freeCashFlow": null,
-    "fcfMargin": null,
-    "capexToRevenue": null,
-    "fcfConversion": null
+    "operatingCashFlow": 14193000000,
+    "freeCashFlow": 13288000000,
+    "fcfMargin": 0.23454654569845024,
+    "capexToRevenue": 0.015974158929643097,
+    "fcfConversion": 1.305304518664047
   },
   "dividends": {
-    "dividendYield": null,
-    "payoutRatio": null
+    "dividendYield": 0.014197583030507901,
+    "payoutRatio": 0.6323
   },
-  "history": [],
-  "warnings": [
-    "Financial statement data is queued for the next FMP refresh."
-  ]
+  "history": [
+    {
+      "year": "2025",
+      "revenue": 56654000000,
+      "grossProfit": 36790000000,
+      "operatingIncome": 11760000000,
+      "netIncome": 10180000000,
+      "freeCashFlow": 13288000000,
+      "totalAssets": 122291000000,
+      "totalDebt": 29843000000,
+      "totalEquity": 46843000000,
+      "sharesDiluted": 3998000000
+    },
+    {
+      "year": "2024",
+      "revenue": 53803000000,
+      "grossProfit": 34828000000,
+      "operatingIncome": 12181000000,
+      "netIncome": 10320000000,
+      "freeCashFlow": 10210000000,
+      "totalAssets": 124413000000,
+      "totalDebt": 31450000000,
+      "totalEquity": 45457000000,
+      "sharesDiluted": 4062000000
+    },
+    {
+      "year": "2023",
+      "revenue": 56998000000,
+      "grossProfit": 35753000000,
+      "operatingIncome": 15031000000,
+      "netIncome": 12613000000,
+      "freeCashFlow": 19037000000,
+      "totalAssets": 101852000000,
+      "totalDebt": 10124000000,
+      "totalEquity": 44353000000,
+      "sharesDiluted": 4105000000
+    },
+    {
+      "year": "2022",
+      "revenue": 51557000000,
+      "grossProfit": 32248000000,
+      "operatingIncome": 13969000000,
+      "netIncome": 11812000000,
+      "freeCashFlow": 12749000000,
+      "totalAssets": 94002000000,
+      "totalDebt": 10014000000,
+      "totalEquity": 39773000000,
+      "sharesDiluted": 4192000000
+    },
+    {
+      "year": "2021",
+      "revenue": 49818000000,
+      "grossProfit": 31894000000,
+      "operatingIncome": 12833000000,
+      "netIncome": 10591000000,
+      "freeCashFlow": 14762000000,
+      "totalAssets": 97497000000,
+      "totalDebt": 11526000000,
+      "totalEquity": 41275000000,
+      "sharesDiluted": 4236000000
+    }
+  ],
+  "warnings": [],
+  "aiTheme": "Data Center Networking",
+  "earnings": {
+    "recent": {
+      "period": "Q3 2026",
+      "date": "2026-05-13",
+      "source": "Finnhub",
+      "sourceUrl": "https://finnhub.io"
+    },
+    "next": null,
+    "updatedAt": "2026-05-27T17:09:22.998Z"
+  },
+  "transcript": {
+    "status": "error",
+    "title": null,
+    "date": null,
+    "source": "Finnhub",
+    "sourceUrl": "https://finnhub.io",
+    "fetchedAt": "2026-05-27T17:09:23.001Z",
+    "message": "Finnhub request failed 403: {\"error\":\"You don't have access to this resource.\"}"
+  },
+  "financialStatements": {
+    "source": {
+      "provider": "sec",
+      "endpoint": "SEC Company Facts",
+      "fetchedAt": "2026-05-27T17:09:23.966Z",
+      "status": "ok"
+    },
+    "annual": {
+      "incomeStatement": [
+        {
+          "fiscalYear": "2025",
+          "period": "FY",
+          "date": "2025-07-26",
+          "reportedCurrency": null,
+          "values": {
+            "fiscalYear": "2025",
+            "date": "2025-07-26",
+            "period": "FY",
+            "revenue": 56654000000,
+            "grossProfit": 36790000000,
+            "operatingIncome": 11760000000,
+            "netIncome": 10180000000,
+            "weightedAverageShsOutDil": 3998000000
+          }
+        },
+        {
+          "fiscalYear": "2024",
+          "period": "FY",
+          "date": "2024-07-27",
+          "reportedCurrency": null,
+          "values": {
+            "fiscalYear": "2024",
+            "date": "2024-07-27",
+            "period": "FY",
+            "revenue": 53803000000,
+            "grossProfit": 34828000000,
+            "operatingIncome": 12181000000,
+            "netIncome": 10320000000,
+            "weightedAverageShsOutDil": 4062000000
+          }
+        },
+        {
+          "fiscalYear": "2023",
+          "period": "FY",
+          "date": "2023-07-29",
+          "reportedCurrency": null,
+          "values": {
+            "fiscalYear": "2023",
+            "date": "2023-07-29",
+            "period": "FY",
+            "revenue": 56998000000,
+            "grossProfit": 35753000000,
+            "operatingIncome": 15031000000,
+            "netIncome": 12613000000,
+            "weightedAverageShsOutDil": 4105000000
+          }
+        },
+        {
+          "fiscalYear": "2022",
+          "period": "FY",
+          "date": "2022-07-30",
+          "reportedCurrency": null,
+          "values": {
+            "fiscalYear": "2022",
+            "date": "2022-07-30",
+            "period": "FY",
+            "revenue": 51557000000,
+            "grossProfit": 32248000000,
+            "operatingIncome": 13969000000,
+            "netIncome": 11812000000,
+            "weightedAverageShsOutDil": 4192000000
+          }
+        },
+        {
+          "fiscalYear": "2021",
+          "period": "FY",
+          "date": "2021-07-31",
+          "reportedCurrency": null,
+          "values": {
+            "fiscalYear": "2021",
+            "date": "2021-07-31",
+            "period": "FY",
+            "revenue": 49818000000,
+            "grossProfit": 31894000000,
+            "operatingIncome": 12833000000,
+            "netIncome": 10591000000,
+            "weightedAverageShsOutDil": 4236000000
+          }
+        }
+      ],
+      "balanceSheet": [
+        {
+          "fiscalYear": "2025",
+          "period": "FY",
+          "date": "2025-07-26",
+          "reportedCurrency": null,
+          "values": {
+            "fiscalYear": "2025",
+            "date": "2025-07-26",
+            "period": "FY",
+            "totalAssets": 122291000000,
+            "totalStockholdersEquity": 46843000000,
+            "cashAndCashEquivalents": 8346000000,
+            "totalDebt": 29843000000
+          }
+        },
+        {
+          "fiscalYear": "2024",
+          "period": "FY",
+          "date": "2024-07-27",
+          "reportedCurrency": null,
+          "values": {
+            "fiscalYear": "2024",
+            "date": "2024-07-27",
+            "period": "FY",
+            "totalAssets": 124413000000,
+            "totalStockholdersEquity": 45457000000,
+            "cashAndCashEquivalents": 7508000000,
+            "totalDebt": 31450000000
+          }
+        },
+        {
+          "fiscalYear": "2023",
+          "period": "FY",
+          "date": "2023-07-29",
+          "reportedCurrency": null,
+          "values": {
+            "fiscalYear": "2023",
+            "date": "2023-07-29",
+            "period": "FY",
+            "totalAssets": 101852000000,
+            "totalStockholdersEquity": 44353000000,
+            "cashAndCashEquivalents": 10123000000,
+            "totalDebt": 10124000000
+          }
+        },
+        {
+          "fiscalYear": "2022",
+          "period": "FY",
+          "date": "2022-07-30",
+          "reportedCurrency": null,
+          "values": {
+            "fiscalYear": "2022",
+            "date": "2022-07-30",
+            "period": "FY",
+            "totalAssets": 94002000000,
+            "totalStockholdersEquity": 39773000000,
+            "cashAndCashEquivalents": 7079000000,
+            "totalDebt": 10014000000
+          }
+        },
+        {
+          "fiscalYear": "2021",
+          "period": "FY",
+          "date": "2021-07-31",
+          "reportedCurrency": null,
+          "values": {
+            "fiscalYear": "2021",
+            "date": "2021-07-31",
+            "period": "FY",
+            "totalAssets": 97497000000,
+            "totalStockholdersEquity": 41275000000,
+            "cashAndCashEquivalents": 9175000000,
+            "totalDebt": 11526000000
+          }
+        }
+      ],
+      "cashFlow": [
+        {
+          "fiscalYear": "2025",
+          "period": "FY",
+          "date": "2025-07-26",
+          "reportedCurrency": null,
+          "values": {
+            "fiscalYear": "2025",
+            "date": "2025-07-26",
+            "period": "FY",
+            "operatingCashFlow": 14193000000,
+            "capitalExpenditure": 905000000,
+            "freeCashFlow": 13288000000
+          }
+        },
+        {
+          "fiscalYear": "2024",
+          "period": "FY",
+          "date": "2024-07-27",
+          "reportedCurrency": null,
+          "values": {
+            "fiscalYear": "2024",
+            "date": "2024-07-27",
+            "period": "FY",
+            "operatingCashFlow": 10880000000,
+            "capitalExpenditure": 670000000,
+            "freeCashFlow": 10210000000
+          }
+        },
+        {
+          "fiscalYear": "2023",
+          "period": "FY",
+          "date": "2023-07-29",
+          "reportedCurrency": null,
+          "values": {
+            "fiscalYear": "2023",
+            "date": "2023-07-29",
+            "period": "FY",
+            "operatingCashFlow": 19886000000,
+            "capitalExpenditure": 849000000,
+            "freeCashFlow": 19037000000
+          }
+        },
+        {
+          "fiscalYear": "2022",
+          "period": "FY",
+          "date": "2022-07-30",
+          "reportedCurrency": null,
+          "values": {
+            "fiscalYear": "2022",
+            "date": "2022-07-30",
+            "period": "FY",
+            "operatingCashFlow": 13226000000,
+            "capitalExpenditure": 477000000,
+            "freeCashFlow": 12749000000
+          }
+        },
+        {
+          "fiscalYear": "2021",
+          "period": "FY",
+          "date": "2021-07-31",
+          "reportedCurrency": null,
+          "values": {
+            "fiscalYear": "2021",
+            "date": "2021-07-31",
+            "period": "FY",
+            "operatingCashFlow": 15454000000,
+            "capitalExpenditure": 692000000,
+            "freeCashFlow": 14762000000
+          }
+        }
+      ]
+    },
+    "quarterly": {
+      "incomeStatement": [
+        {
+          "fiscalYear": "2026",
+          "period": "Q3",
+          "date": "2025-04-26",
+          "reportedCurrency": null,
+          "values": {
+            "fiscalYear": "2026",
+            "date": "2025-04-26",
+            "period": "Q3",
+            "revenue": 14149000000,
+            "grossProfit": 9278000000,
+            "operatingIncome": 3202000000,
+            "netIncome": 2491000000,
+            "weightedAverageShsOutDil": 4002000000
+          }
+        },
+        {
+          "fiscalYear": "2026",
+          "period": "Q2",
+          "date": "2025-01-25",
+          "reportedCurrency": null,
+          "values": {
+            "fiscalYear": "2026",
+            "date": "2025-01-25",
+            "period": "Q2",
+            "revenue": 13991000000,
+            "grossProfit": 9111000000,
+            "operatingIncome": 3113000000,
+            "netIncome": 2428000000,
+            "weightedAverageShsOutDil": 4005000000
+          }
+        },
+        {
+          "fiscalYear": "2026",
+          "period": "Q1",
+          "date": "2024-10-26",
+          "reportedCurrency": null,
+          "values": {
+            "fiscalYear": "2026",
+            "date": "2024-10-26",
+            "period": "Q1",
+            "revenue": 13841000000,
+            "grossProfit": 9121000000,
+            "operatingIncome": 2358000000,
+            "netIncome": 2711000000,
+            "weightedAverageShsOutDil": 4013000000
+          }
+        },
+        {
+          "fiscalYear": "2025",
+          "period": "Q3",
+          "date": "2024-04-27",
+          "reportedCurrency": null,
+          "values": {
+            "fiscalYear": "2025",
+            "date": "2024-04-27",
+            "period": "Q3",
+            "revenue": 12702000000,
+            "grossProfit": 8273000000,
+            "operatingIncome": 2191000000,
+            "netIncome": 1886000000,
+            "weightedAverageShsOutDil": 4060000000
+          }
+        },
+        {
+          "fiscalYear": "2025",
+          "period": "Q2",
+          "date": "2024-01-27",
+          "reportedCurrency": null,
+          "values": {
+            "fiscalYear": "2025",
+            "date": "2024-01-27",
+            "period": "Q2",
+            "revenue": 12791000000,
+            "grossProfit": 8217000000,
+            "operatingIncome": 3096000000,
+            "netIncome": 2634000000,
+            "weightedAverageShsOutDil": 4073000000
+          }
+        },
+        {
+          "fiscalYear": "2025",
+          "period": "Q1",
+          "date": "2023-10-28",
+          "reportedCurrency": null,
+          "values": {
+            "fiscalYear": "2025",
+            "date": "2023-10-28",
+            "period": "Q1",
+            "revenue": 14668000000,
+            "grossProfit": 9557000000,
+            "operatingIncome": 4276000000,
+            "netIncome": 3638000000,
+            "weightedAverageShsOutDil": 4087000000
+          }
+        },
+        {
+          "fiscalYear": "2024",
+          "period": "Q3",
+          "date": "2023-04-29",
+          "reportedCurrency": null,
+          "values": {
+            "fiscalYear": "2024",
+            "date": "2023-04-29",
+            "period": "Q3",
+            "revenue": 14571000000,
+            "grossProfit": 9232000000,
+            "operatingIncome": 3946000000,
+            "netIncome": 3212000000,
+            "weightedAverageShsOutDil": 4110000000
+          }
+        },
+        {
+          "fiscalYear": "2024",
+          "period": "Q2",
+          "date": "2023-01-28",
+          "reportedCurrency": null,
+          "values": {
+            "fiscalYear": "2024",
+            "date": "2023-01-28",
+            "period": "Q2",
+            "revenue": 13592000000,
+            "grossProfit": 8427000000,
+            "operatingIncome": 3292000000,
+            "netIncome": 2773000000,
+            "weightedAverageShsOutDil": 4116000000
+          }
+        },
+        {
+          "fiscalYear": "2024",
+          "period": "Q1",
+          "date": "2022-10-29",
+          "reportedCurrency": null,
+          "values": {
+            "fiscalYear": "2024",
+            "date": "2022-10-29",
+            "period": "Q1",
+            "revenue": 13632000000,
+            "grossProfit": 8346000000,
+            "operatingIncome": 3540000000,
+            "netIncome": 2670000000,
+            "weightedAverageShsOutDil": 4116000000
+          }
+        },
+        {
+          "fiscalYear": "2023",
+          "period": "Q3",
+          "date": "2022-04-30",
+          "reportedCurrency": null,
+          "values": {
+            "fiscalYear": "2023",
+            "date": "2022-04-30",
+            "period": "Q3",
+            "revenue": 12835000000,
+            "grossProfit": 8121000000,
+            "operatingIncome": 3610000000,
+            "netIncome": 3044000000,
+            "weightedAverageShsOutDil": 4170000000
+          }
+        },
+        {
+          "fiscalYear": "2023",
+          "period": "Q2",
+          "date": "2022-01-29",
+          "reportedCurrency": null,
+          "values": {
+            "fiscalYear": "2023",
+            "date": "2022-01-29",
+            "period": "Q2",
+            "revenue": 12720000000,
+            "grossProfit": 8049000000,
+            "operatingIncome": 3487000000,
+            "netIncome": 2973000000,
+            "weightedAverageShsOutDil": 4205000000
+          }
+        },
+        {
+          "fiscalYear": "2023",
+          "period": "Q1",
+          "date": "2021-10-30",
+          "reportedCurrency": null,
+          "values": {
+            "fiscalYear": "2023",
+            "date": "2021-10-30",
+            "period": "Q1",
+            "revenue": 12900000000,
+            "grossProfit": 8053000000,
+            "operatingIncome": 3438000000,
+            "netIncome": 2980000000,
+            "weightedAverageShsOutDil": 4243000000
+          }
+        },
+        {
+          "fiscalYear": "2022",
+          "period": "Q3",
+          "date": "2022-04-30",
+          "reportedCurrency": null,
+          "values": {
+            "fiscalYear": "2022",
+            "date": "2022-04-30",
+            "period": "Q3",
+            "revenue": 12835000000,
+            "grossProfit": 8121000000,
+            "operatingIncome": 3610000000,
+            "netIncome": 3044000000,
+            "weightedAverageShsOutDil": 4170000000
+          }
+        },
+        {
+          "fiscalYear": "2022",
+          "period": "Q2",
+          "date": "2021-01-23",
+          "reportedCurrency": null,
+          "values": {
+            "fiscalYear": "2022",
+            "date": "2021-01-23",
+            "period": "Q2",
+            "revenue": 11960000000,
+            "grossProfit": 7784000000,
+            "operatingIncome": 3223000000,
+            "netIncome": 2545000000,
+            "weightedAverageShsOutDil": 4234000000
+          }
+        },
+        {
+          "fiscalYear": "2022",
+          "period": "Q1",
+          "date": "2020-10-24",
+          "reportedCurrency": null,
+          "values": {
+            "fiscalYear": "2022",
+            "date": "2020-10-24",
+            "period": "Q1",
+            "revenue": 11929000000,
+            "grossProfit": 7581000000,
+            "operatingIncome": 2570000000,
+            "netIncome": 2174000000,
+            "weightedAverageShsOutDil": 4244000000
+          }
+        },
+        {
+          "fiscalYear": "2021",
+          "period": "Q3",
+          "date": "2020-04-25",
+          "reportedCurrency": null,
+          "values": {
+            "fiscalYear": "2021",
+            "date": "2020-04-25",
+            "period": "Q3",
+            "revenue": 11983000000,
+            "grossProfit": 7771000000,
+            "operatingIncome": 3414000000,
+            "netIncome": 2774000000,
+            "weightedAverageShsOutDil": 4243000000
+          }
+        },
+        {
+          "fiscalYear": "2021",
+          "period": "Q2",
+          "date": "2020-01-25",
+          "reportedCurrency": null,
+          "values": {
+            "fiscalYear": "2021",
+            "date": "2020-01-25",
+            "period": "Q2",
+            "revenue": 12005000000,
+            "grossProfit": 7764000000,
+            "operatingIncome": 3380000000,
+            "netIncome": 2878000000,
+            "weightedAverageShsOutDil": 4260000000
+          }
+        },
+        {
+          "fiscalYear": "2021",
+          "period": "Q1",
+          "date": "2019-10-26",
+          "reportedCurrency": null,
+          "values": {
+            "fiscalYear": "2021",
+            "date": "2019-10-26",
+            "period": "Q1",
+            "revenue": 13159000000,
+            "grossProfit": 8464000000,
+            "operatingIncome": 3579000000,
+            "netIncome": 2926000000,
+            "weightedAverageShsOutDil": 4273000000
+          }
+        },
+        {
+          "fiscalYear": "2020",
+          "period": "Q3",
+          "date": "2019-04-27",
+          "reportedCurrency": null,
+          "values": {
+            "fiscalYear": "2020",
+            "date": "2019-04-27",
+            "period": "Q3",
+            "revenue": 12958000000,
+            "grossProfit": 8173000000,
+            "operatingIncome": 3513000000,
+            "netIncome": 3044000000,
+            "weightedAverageShsOutDil": 4415000000
+          }
+        },
+        {
+          "fiscalYear": "2020",
+          "period": "Q2",
+          "date": "2019-01-26",
+          "reportedCurrency": null,
+          "values": {
+            "fiscalYear": "2020",
+            "date": "2019-01-26",
+            "period": "Q2",
+            "revenue": 12446000000,
+            "grossProfit": 7773000000,
+            "operatingIncome": 3211000000,
+            "netIncome": 2822000000,
+            "weightedAverageShsOutDil": 4505000000
+          }
+        }
+      ],
+      "balanceSheet": [
+        {
+          "fiscalYear": "2026",
+          "period": "Q3",
+          "date": "2025-07-26",
+          "reportedCurrency": null,
+          "values": {
+            "fiscalYear": "2026",
+            "date": "2025-07-26",
+            "period": "Q3",
+            "totalAssets": 122291000000,
+            "totalStockholdersEquity": 45457000000,
+            "cashAndCashEquivalents": 8346000000,
+            "totalDebt": 29843000000
+          }
+        },
+        {
+          "fiscalYear": "2026",
+          "period": "Q2",
+          "date": "2025-07-26",
+          "reportedCurrency": null,
+          "values": {
+            "fiscalYear": "2026",
+            "date": "2025-07-26",
+            "period": "Q2",
+            "totalAssets": 122291000000,
+            "totalStockholdersEquity": 45457000000,
+            "cashAndCashEquivalents": 8346000000,
+            "totalDebt": 29843000000
+          }
+        },
+        {
+          "fiscalYear": "2026",
+          "period": "Q1",
+          "date": "2025-07-26",
+          "reportedCurrency": null,
+          "values": {
+            "fiscalYear": "2026",
+            "date": "2025-07-26",
+            "period": "Q1",
+            "totalAssets": 122291000000,
+            "totalStockholdersEquity": 45457000000,
+            "cashAndCashEquivalents": 8346000000,
+            "totalDebt": 29843000000
+          }
+        },
+        {
+          "fiscalYear": "2025",
+          "period": "Q3",
+          "date": "2024-07-27",
+          "reportedCurrency": null,
+          "values": {
+            "fiscalYear": "2025",
+            "date": "2024-07-27",
+            "period": "Q3",
+            "totalAssets": 124413000000,
+            "totalStockholdersEquity": 44353000000,
+            "cashAndCashEquivalents": 7508000000,
+            "totalDebt": 31450000000
+          }
+        },
+        {
+          "fiscalYear": "2025",
+          "period": "Q2",
+          "date": "2024-07-27",
+          "reportedCurrency": null,
+          "values": {
+            "fiscalYear": "2025",
+            "date": "2024-07-27",
+            "period": "Q2",
+            "totalAssets": 124413000000,
+            "totalStockholdersEquity": 44353000000,
+            "cashAndCashEquivalents": 7508000000,
+            "totalDebt": 31450000000
+          }
+        },
+        {
+          "fiscalYear": "2025",
+          "period": "Q1",
+          "date": "2024-07-27",
+          "reportedCurrency": null,
+          "values": {
+            "fiscalYear": "2025",
+            "date": "2024-07-27",
+            "period": "Q1",
+            "totalAssets": 124413000000,
+            "totalStockholdersEquity": 44353000000,
+            "cashAndCashEquivalents": 7508000000,
+            "totalDebt": 31450000000
+          }
+        },
+        {
+          "fiscalYear": "2024",
+          "period": "Q3",
+          "date": "2023-07-29",
+          "reportedCurrency": null,
+          "values": {
+            "fiscalYear": "2024",
+            "date": "2023-07-29",
+            "period": "Q3",
+            "totalAssets": 101852000000,
+            "totalStockholdersEquity": 39773000000,
+            "cashAndCashEquivalents": 10123000000,
+            "totalDebt": 10124000000
+          }
+        },
+        {
+          "fiscalYear": "2024",
+          "period": "Q2",
+          "date": "2023-07-29",
+          "reportedCurrency": null,
+          "values": {
+            "fiscalYear": "2024",
+            "date": "2023-07-29",
+            "period": "Q2",
+            "totalAssets": 101852000000,
+            "totalStockholdersEquity": 39773000000,
+            "cashAndCashEquivalents": 10123000000,
+            "totalDebt": 10124000000
+          }
+        },
+        {
+          "fiscalYear": "2024",
+          "period": "Q1",
+          "date": "2023-07-29",
+          "reportedCurrency": null,
+          "values": {
+            "fiscalYear": "2024",
+            "date": "2023-07-29",
+            "period": "Q1",
+            "totalAssets": 101852000000,
+            "totalStockholdersEquity": 39773000000,
+            "cashAndCashEquivalents": 10123000000,
+            "totalDebt": 10124000000
+          }
+        },
+        {
+          "fiscalYear": "2023",
+          "period": "Q3",
+          "date": "2022-07-30",
+          "reportedCurrency": null,
+          "values": {
+            "fiscalYear": "2023",
+            "date": "2022-07-30",
+            "period": "Q3",
+            "totalAssets": 94002000000,
+            "totalStockholdersEquity": 41275000000,
+            "cashAndCashEquivalents": 7079000000,
+            "totalDebt": 10014000000
+          }
+        },
+        {
+          "fiscalYear": "2023",
+          "period": "Q2",
+          "date": "2022-07-30",
+          "reportedCurrency": null,
+          "values": {
+            "fiscalYear": "2023",
+            "date": "2022-07-30",
+            "period": "Q2",
+            "totalAssets": 94002000000,
+            "totalStockholdersEquity": 41275000000,
+            "cashAndCashEquivalents": 7079000000,
+            "totalDebt": 10014000000
+          }
+        },
+        {
+          "fiscalYear": "2023",
+          "period": "Q1",
+          "date": "2022-07-30",
+          "reportedCurrency": null,
+          "values": {
+            "fiscalYear": "2023",
+            "date": "2022-07-30",
+            "period": "Q1",
+            "totalAssets": 94002000000,
+            "totalStockholdersEquity": 41275000000,
+            "cashAndCashEquivalents": 7079000000,
+            "totalDebt": 10014000000
+          }
+        },
+        {
+          "fiscalYear": "2022",
+          "period": "Q3",
+          "date": "2021-07-31",
+          "reportedCurrency": null,
+          "values": {
+            "fiscalYear": "2022",
+            "date": "2021-07-31",
+            "period": "Q3",
+            "totalAssets": 97497000000,
+            "totalStockholdersEquity": 37920000000,
+            "cashAndCashEquivalents": 9175000000,
+            "totalDebt": 14034000000
+          }
+        },
+        {
+          "fiscalYear": "2022",
+          "period": "Q2",
+          "date": "2021-07-31",
+          "reportedCurrency": null,
+          "values": {
+            "fiscalYear": "2022",
+            "date": "2021-07-31",
+            "period": "Q2",
+            "totalAssets": 97497000000,
+            "totalStockholdersEquity": 37920000000,
+            "cashAndCashEquivalents": 9175000000,
+            "totalDebt": 14034000000
+          }
+        },
+        {
+          "fiscalYear": "2022",
+          "period": "Q1",
+          "date": "2021-07-31",
+          "reportedCurrency": null,
+          "values": {
+            "fiscalYear": "2022",
+            "date": "2021-07-31",
+            "period": "Q1",
+            "totalAssets": 97497000000,
+            "totalStockholdersEquity": 37920000000,
+            "cashAndCashEquivalents": 9175000000,
+            "totalDebt": 11526000000
+          }
+        },
+        {
+          "fiscalYear": "2021",
+          "period": "Q3",
+          "date": "2020-07-25",
+          "reportedCurrency": null,
+          "values": {
+            "fiscalYear": "2021",
+            "date": "2020-07-25",
+            "period": "Q3",
+            "totalAssets": 94853000000,
+            "totalStockholdersEquity": 33571000000,
+            "cashAndCashEquivalents": 11809000000,
+            "totalDebt": 14583000000
+          }
+        },
+        {
+          "fiscalYear": "2021",
+          "period": "Q2",
+          "date": "2020-07-25",
+          "reportedCurrency": null,
+          "values": {
+            "fiscalYear": "2021",
+            "date": "2020-07-25",
+            "period": "Q2",
+            "totalAssets": 94853000000,
+            "totalStockholdersEquity": 33571000000,
+            "cashAndCashEquivalents": 11809000000,
+            "totalDebt": 14583000000
+          }
+        },
+        {
+          "fiscalYear": "2021",
+          "period": "Q1",
+          "date": "2020-07-25",
+          "reportedCurrency": null,
+          "values": {
+            "fiscalYear": "2021",
+            "date": "2020-07-25",
+            "period": "Q1",
+            "totalAssets": 94853000000,
+            "totalStockholdersEquity": 33571000000,
+            "cashAndCashEquivalents": 11809000000,
+            "totalDebt": 14583000000
+          }
+        },
+        {
+          "fiscalYear": "2020",
+          "period": "Q3",
+          "date": "2019-07-27",
+          "reportedCurrency": null,
+          "values": {
+            "fiscalYear": "2020",
+            "date": "2019-07-27",
+            "period": "Q3",
+            "totalAssets": 97793000000,
+            "cashAndCashEquivalents": 11750000000,
+            "totalDebt": 30664000000
+          }
+        },
+        {
+          "fiscalYear": "2020",
+          "period": "Q2",
+          "date": "2019-07-27",
+          "reportedCurrency": null,
+          "values": {
+            "fiscalYear": "2020",
+            "date": "2019-07-27",
+            "period": "Q2",
+            "totalAssets": 97793000000,
+            "totalStockholdersEquity": 33571000000,
+            "cashAndCashEquivalents": 11750000000,
+            "totalDebt": 30664000000
+          }
+        }
+      ],
+      "cashFlow": [
+        {
+          "fiscalYear": "2026",
+          "period": "Q3",
+          "date": "2025-04-26",
+          "reportedCurrency": null,
+          "values": {
+            "fiscalYear": "2026",
+            "date": "2025-04-26",
+            "period": "Q3",
+            "operatingCashFlow": 9959000000,
+            "capitalExpenditure": 688000000,
+            "freeCashFlow": 9271000000
+          }
+        },
+        {
+          "fiscalYear": "2026",
+          "period": "Q2",
+          "date": "2025-01-25",
+          "reportedCurrency": null,
+          "values": {
+            "fiscalYear": "2026",
+            "date": "2025-01-25",
+            "period": "Q2",
+            "operatingCashFlow": 5902000000,
+            "capitalExpenditure": 427000000,
+            "freeCashFlow": 5475000000
+          }
+        },
+        {
+          "fiscalYear": "2026",
+          "period": "Q1",
+          "date": "2024-10-26",
+          "reportedCurrency": null,
+          "values": {
+            "fiscalYear": "2026",
+            "date": "2024-10-26",
+            "period": "Q1",
+            "operatingCashFlow": 3661000000,
+            "capitalExpenditure": 217000000,
+            "freeCashFlow": 3444000000
+          }
+        },
+        {
+          "fiscalYear": "2025",
+          "period": "Q3",
+          "date": "2024-04-27",
+          "reportedCurrency": null,
+          "values": {
+            "fiscalYear": "2025",
+            "date": "2024-04-27",
+            "period": "Q3",
+            "operatingCashFlow": 7150000000,
+            "capitalExpenditure": 472000000,
+            "freeCashFlow": 6678000000
+          }
+        },
+        {
+          "fiscalYear": "2025",
+          "period": "Q2",
+          "date": "2024-01-27",
+          "reportedCurrency": null,
+          "values": {
+            "fiscalYear": "2025",
+            "date": "2024-01-27",
+            "period": "Q2",
+            "operatingCashFlow": 3179000000,
+            "capitalExpenditure": 304000000,
+            "freeCashFlow": 2875000000
+          }
+        },
+        {
+          "fiscalYear": "2025",
+          "period": "Q1",
+          "date": "2023-10-28",
+          "reportedCurrency": null,
+          "values": {
+            "fiscalYear": "2025",
+            "date": "2023-10-28",
+            "period": "Q1",
+            "operatingCashFlow": 2371000000,
+            "capitalExpenditure": 134000000,
+            "freeCashFlow": 2237000000
+          }
+        },
+        {
+          "fiscalYear": "2024",
+          "period": "Q3",
+          "date": "2023-04-29",
+          "reportedCurrency": null,
+          "values": {
+            "fiscalYear": "2024",
+            "date": "2023-04-29",
+            "period": "Q3",
+            "operatingCashFlow": 13920000000,
+            "capitalExpenditure": 616000000,
+            "freeCashFlow": 13304000000
+          }
+        },
+        {
+          "fiscalYear": "2024",
+          "period": "Q2",
+          "date": "2023-01-28",
+          "reportedCurrency": null,
+          "values": {
+            "fiscalYear": "2024",
+            "date": "2023-01-28",
+            "period": "Q2",
+            "operatingCashFlow": 8701000000,
+            "capitalExpenditure": 346000000,
+            "freeCashFlow": 8355000000
+          }
+        },
+        {
+          "fiscalYear": "2024",
+          "period": "Q1",
+          "date": "2022-10-29",
+          "reportedCurrency": null,
+          "values": {
+            "fiscalYear": "2024",
+            "date": "2022-10-29",
+            "period": "Q1",
+            "operatingCashFlow": 3962000000,
+            "capitalExpenditure": 176000000,
+            "freeCashFlow": 3786000000
+          }
+        },
+        {
+          "fiscalYear": "2023",
+          "period": "Q3",
+          "date": "2022-04-30",
+          "reportedCurrency": null,
+          "values": {
+            "fiscalYear": "2023",
+            "date": "2022-04-30",
+            "period": "Q3",
+            "operatingCashFlow": 9549000000,
+            "capitalExpenditure": 338000000,
+            "freeCashFlow": 9211000000
+          }
+        },
+        {
+          "fiscalYear": "2023",
+          "period": "Q2",
+          "date": "2022-01-29",
+          "reportedCurrency": null,
+          "values": {
+            "fiscalYear": "2023",
+            "date": "2022-01-29",
+            "period": "Q2",
+            "operatingCashFlow": 5888000000,
+            "capitalExpenditure": 232000000,
+            "freeCashFlow": 5656000000
+          }
+        },
+        {
+          "fiscalYear": "2023",
+          "period": "Q1",
+          "date": "2021-10-30",
+          "reportedCurrency": null,
+          "values": {
+            "fiscalYear": "2023",
+            "date": "2021-10-30",
+            "period": "Q1",
+            "operatingCashFlow": 3427000000,
+            "capitalExpenditure": 122000000,
+            "freeCashFlow": 3305000000
+          }
+        },
+        {
+          "fiscalYear": "2022",
+          "period": "Q3",
+          "date": "2022-04-30",
+          "reportedCurrency": null,
+          "values": {
+            "fiscalYear": "2022",
+            "date": "2022-04-30",
+            "period": "Q3",
+            "operatingCashFlow": 9549000000,
+            "capitalExpenditure": 338000000,
+            "freeCashFlow": 9211000000
+          }
+        },
+        {
+          "fiscalYear": "2022",
+          "period": "Q2",
+          "date": "2021-01-23",
+          "reportedCurrency": null,
+          "values": {
+            "fiscalYear": "2022",
+            "date": "2021-01-23",
+            "period": "Q2",
+            "operatingCashFlow": 7070000000,
+            "capitalExpenditure": 358000000,
+            "freeCashFlow": 6712000000
+          }
+        },
+        {
+          "fiscalYear": "2022",
+          "period": "Q1",
+          "date": "2020-10-24",
+          "reportedCurrency": null,
+          "values": {
+            "fiscalYear": "2022",
+            "date": "2020-10-24",
+            "period": "Q1",
+            "operatingCashFlow": 4096000000,
+            "capitalExpenditure": 171000000,
+            "freeCashFlow": 3925000000
+          }
+        },
+        {
+          "fiscalYear": "2021",
+          "period": "Q3",
+          "date": "2020-04-25",
+          "reportedCurrency": null,
+          "values": {
+            "fiscalYear": "2021",
+            "date": "2020-04-25",
+            "period": "Q3",
+            "operatingCashFlow": 11624000000,
+            "capitalExpenditure": 562000000,
+            "freeCashFlow": 11062000000
+          }
+        },
+        {
+          "fiscalYear": "2021",
+          "period": "Q2",
+          "date": "2020-01-25",
+          "reportedCurrency": null,
+          "values": {
+            "fiscalYear": "2021",
+            "date": "2020-01-25",
+            "period": "Q2",
+            "operatingCashFlow": 7387000000,
+            "capitalExpenditure": 391000000,
+            "freeCashFlow": 6996000000
+          }
+        },
+        {
+          "fiscalYear": "2021",
+          "period": "Q1",
+          "date": "2019-10-26",
+          "reportedCurrency": null,
+          "values": {
+            "fiscalYear": "2021",
+            "date": "2019-10-26",
+            "period": "Q1",
+            "operatingCashFlow": 3587000000,
+            "capitalExpenditure": 202000000,
+            "freeCashFlow": 3385000000
+          }
+        },
+        {
+          "fiscalYear": "2020",
+          "period": "Q3",
+          "date": "2019-04-27",
+          "reportedCurrency": null,
+          "values": {
+            "fiscalYear": "2020",
+            "date": "2019-04-27",
+            "period": "Q3",
+            "operatingCashFlow": 11889000000,
+            "capitalExpenditure": 701000000,
+            "freeCashFlow": 11188000000
+          }
+        },
+        {
+          "fiscalYear": "2020",
+          "period": "Q2",
+          "date": "2019-01-26",
+          "reportedCurrency": null,
+          "values": {
+            "fiscalYear": "2020",
+            "date": "2019-01-26",
+            "period": "Q2",
+            "operatingCashFlow": 7560000000,
+            "capitalExpenditure": 473000000,
+            "freeCashFlow": 7087000000
+          }
+        }
+      ]
+    }
+  },
+  "statementQuality": {
+    "annualPeriods": 5,
+    "quarterlyPeriods": 20,
+    "source": "sec",
+    "status": "ok",
+    "message": "Financials normalized from SEC Company Facts."
+  },
+  "sources": {
+    "profile": {
+      "provider": "finnhub",
+      "endpoint": "stock/profile2",
+      "fetchedAt": "2026-05-27T17:09:23.966Z",
+      "status": "ok"
+    },
+    "metrics": {
+      "provider": "finnhub",
+      "endpoint": "stock/metric",
+      "fetchedAt": "2026-05-27T17:09:23.966Z",
+      "status": "ok"
+    },
+    "financialsReported": {
+      "provider": "sec",
+      "endpoint": "SEC Company Facts",
+      "fetchedAt": "2026-05-27T17:09:23.966Z",
+      "status": "ok"
+    },
+    "summary": {
+      "provider": "derived",
+      "fetchedAt": "2026-05-27T17:09:23.966Z",
+      "status": "ok",
+      "message": "Summary metrics derived from normalized statements."
+    }
+  }
 }

@@ -300,31 +300,6 @@ thead .eq-sticky-col {
   scrollbar-gutter: stable;
 }
 
-.eq-detail-tabs {
-  display: inline-flex;
-  gap: 4px;
-  border: 1px solid var(--vw-border-dim);
-  border-radius: 8px;
-  background: #ffffff;
-  padding: 4px;
-}
-
-.eq-detail-tabs button {
-  border-radius: 6px;
-  color: var(--vw-text-tertiary);
-  font-size: 12px;
-  font-weight: 700;
-  padding: 7px 11px;
-  text-transform: uppercase;
-  transition: background 140ms ease, color 140ms ease;
-}
-
-.eq-detail-tabs button:hover,
-.eq-detail-tabs button.is-active {
-  background: #eef2f7;
-  color: var(--vw-text-primary);
-}
-
 .eq-reported-panel {
   margin-top: 0;
 }
@@ -565,8 +540,62 @@ thead .eq-sticky-col {
   stroke-width: 3;
 }
 
+.eq-fundamentals-chart-bar {
+  fill: rgba(14, 116, 144, 0.72);
+}
+
+.eq-fundamentals-chart-bar.is-in-progress {
+  fill: rgba(14, 116, 144, 0.32);
+  stroke: rgba(14, 116, 144, 0.88);
+  stroke-dasharray: 5 4;
+  stroke-width: 2;
+}
+
 .eq-fundamentals-chart-point {
   fill: var(--vw-accent);
+  pointer-events: none;
+}
+
+.eq-fundamentals-chart-hit {
+  cursor: crosshair;
+  fill: transparent;
+  outline: none;
+  pointer-events: all;
+}
+
+.eq-fundamentals-chart-tooltip-bg {
+  fill: rgba(255, 255, 255, 0.96);
+  opacity: 0;
+  pointer-events: none;
+  stroke: rgba(30, 58, 95, 0.2);
+  stroke-width: 1;
+  transition: opacity 0.14s ease;
+}
+
+.eq-fundamentals-chart-hover-label {
+  fill: var(--vw-text-primary);
+  font-size: 11px;
+  font-weight: 800;
+  opacity: 0;
+  paint-order: stroke;
+  pointer-events: none;
+  stroke: #ffffff;
+  stroke-linejoin: round;
+  stroke-width: 4px;
+  transition: opacity 0.14s ease;
+}
+
+.eq-fundamentals-chart-hover:hover .eq-fundamentals-chart-point,
+.eq-fundamentals-chart-hover:focus-within .eq-fundamentals-chart-point {
+  fill: var(--vw-green);
+  r: 4.5;
+}
+
+.eq-fundamentals-chart-hover:hover .eq-fundamentals-chart-hover-label,
+.eq-fundamentals-chart-hover:hover .eq-fundamentals-chart-tooltip-bg,
+.eq-fundamentals-chart-hover:focus-within .eq-fundamentals-chart-tooltip-bg,
+.eq-fundamentals-chart-hover:focus-within .eq-fundamentals-chart-hover-label {
+  opacity: 1;
 }
 
 .eq-fundamentals-chart-empty {
@@ -581,6 +610,261 @@ thead .eq-sticky-col {
   border-radius: 8px;
   background: #ffffff;
   padding: 16px;
+}
+
+.eq-analysis-stack {
+  display: grid;
+  gap: 0.85rem;
+}
+
+.eq-analysis-company-header {
+  border: 1px solid var(--vw-border);
+  border-radius: 8px;
+  background:
+    linear-gradient(135deg, rgba(30, 58, 95, 0.055), rgba(255, 255, 255, 0) 50%),
+    #ffffff;
+  box-shadow: 0 12px 34px rgba(31, 41, 51, 0.07);
+  padding: 1.1rem;
+}
+
+.eq-analysis-company-kicker {
+  color: var(--vw-accent);
+  font-size: 0.72rem;
+  font-weight: 750;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.eq-analysis-symbol-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.75rem;
+  margin-top: 0.35rem;
+}
+
+.eq-analysis-symbol-row strong {
+  color: var(--vw-text-primary);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-size: clamp(2rem, 5vw, 3.6rem);
+  font-weight: 900;
+  line-height: 0.95;
+}
+
+.eq-analysis-symbol-row span {
+  color: var(--vw-text-primary);
+  font-size: clamp(1rem, 2vw, 1.35rem);
+  font-weight: 760;
+  line-height: 1.2;
+}
+
+.eq-analysis-listing-line {
+  margin-top: 0.35rem;
+  color: var(--vw-text-secondary);
+  font-size: 0.92rem;
+  font-weight: 650;
+}
+
+.eq-analysis-listing-line a {
+  color: var(--vw-accent);
+  text-decoration: none;
+}
+
+.eq-analysis-company-description {
+  max-width: 100ch;
+  margin-top: 0.95rem;
+  border-top: 1px solid rgba(30, 58, 95, 0.1);
+  padding-top: 0.9rem;
+  color: var(--vw-text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.65;
+}
+
+.eq-analysis-price-hero dt {
+  color: var(--vw-text-tertiary);
+  font-size: 0.72rem;
+  font-weight: 750;
+  text-transform: uppercase;
+}
+
+.eq-analysis-price-hero {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.55rem;
+  margin: 0;
+}
+
+.eq-analysis-price-hero>div {
+  min-height: 94px;
+  border: 1px solid rgba(30, 58, 95, 0.12);
+  border-radius: 8px;
+  background: #ffffff;
+  box-shadow: 0 8px 24px rgba(31, 41, 51, 0.055);
+  padding: 0.78rem;
+}
+
+.eq-analysis-price-hero>div.is-prominent {
+  background:
+    linear-gradient(135deg, rgba(14, 116, 144, 0.08), rgba(255, 255, 255, 0) 58%),
+    #ffffff;
+}
+
+.eq-analysis-price-hero dd {
+  margin-top: 0.35rem;
+  color: var(--vw-text-primary);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-size: 1.22rem;
+  font-weight: 780;
+  line-height: 1.05;
+}
+
+.eq-analysis-price-hero dd.is-text {
+  font-family: inherit;
+  font-size: 1rem;
+}
+
+.eq-analysis-price-hero span {
+  display: block;
+  margin-top: 0.42rem;
+  color: var(--vw-text-secondary);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-size: 0.82rem;
+  font-weight: 720;
+}
+
+.eq-analysis-price-hero span.is-up {
+  color: var(--vw-green);
+}
+
+.eq-analysis-price-hero span.is-down {
+  color: var(--vw-red);
+}
+
+.eq-analysis-fundamentals {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.eq-analysis-fundamentals-title {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  border-bottom: 1px solid rgba(30, 58, 95, 0.1);
+  padding: 0.2rem 0 0.7rem;
+}
+
+.eq-analysis-fundamentals-title>span {
+  display: grid;
+  width: 1.75rem;
+  height: 1.75rem;
+  place-items: center;
+  border-left: 3px solid var(--vw-accent);
+  color: var(--vw-accent);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-size: 1rem;
+  font-weight: 900;
+}
+
+.eq-analysis-fundamentals-title h4 {
+  color: var(--vw-text-primary);
+  font-size: 1.15rem;
+  font-weight: 820;
+}
+
+.eq-analysis-fundamentals-title p {
+  margin-top: 0.22rem;
+  color: var(--vw-text-secondary);
+  font-size: 0.84rem;
+  line-height: 1.45;
+}
+
+.eq-analysis-metric-pair-stack {
+  display: grid;
+  gap: 0.85rem;
+}
+
+.eq-analysis-metric-pair-card {
+  display: grid;
+  gap: 0.8rem;
+  border: 1px solid rgba(30, 58, 95, 0.12);
+  border-radius: 8px;
+  background: #ffffff;
+  box-shadow: 0 8px 24px rgba(31, 41, 51, 0.05);
+  padding: 0.9rem;
+}
+
+.eq-analysis-metric-pair-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  border-bottom: 1px solid rgba(30, 58, 95, 0.08);
+  padding-bottom: 0.65rem;
+}
+
+.eq-analysis-metric-pair-head h5 {
+  color: var(--vw-text-primary);
+  font-size: 0.95rem;
+  font-weight: 800;
+}
+
+.eq-analysis-metric-pair-head p {
+  margin-top: 0.22rem;
+  color: var(--vw-text-tertiary);
+  font-size: 0.78rem;
+  line-height: 1.4;
+}
+
+.eq-analysis-latest-pill {
+  min-width: 116px;
+  border: 1px solid rgba(30, 58, 95, 0.1);
+  border-radius: 8px;
+  background: rgba(30, 58, 95, 0.035);
+  padding: 0.5rem 0.6rem;
+  text-align: right;
+}
+
+.eq-analysis-latest-pill span,
+.eq-analysis-latest-pill em {
+  display: block;
+  color: var(--vw-text-tertiary);
+  font-size: 0.68rem;
+  font-style: normal;
+  font-weight: 750;
+  text-transform: uppercase;
+}
+
+.eq-analysis-latest-pill strong {
+  display: block;
+  margin: 0.18rem 0;
+  color: var(--vw-text-primary);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-size: 0.92rem;
+}
+
+.eq-analysis-chart-pair {
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.eq-analysis-chart-pair .eq-fundamentals-chart {
+  min-width: 0;
+  padding: 12px;
+}
+
+@media (max-width: 980px) {
+  .eq-analysis-chart-pair {
+    grid-template-columns: 1fr;
+  }
+
+  .eq-analysis-metric-pair-head {
+    display: grid;
+  }
+
+  .eq-analysis-latest-pill {
+    text-align: left;
+  }
 }
 
 .eq-analysis-section {
@@ -1051,172 +1335,6 @@ thead .eq-sticky-col {
   font-size: 0.875rem;
 }
 
-.eq-metric-panel {
-  border: 1px solid var(--vw-border);
-  border-radius: 8px;
-  background: #ffffff;
-  padding: 0.8rem;
-}
-
-.eq-financials-overview {
-  display: grid;
-  gap: 1rem;
-}
-
-.eq-financials-summary {
-  border: 1px solid var(--vw-border);
-  border-radius: 8px;
-  background:
-    linear-gradient(135deg, rgba(30, 58, 95, 0.055), rgba(255, 255, 255, 0) 46%),
-    #ffffff;
-  box-shadow: 0 12px 34px rgba(31, 41, 51, 0.07);
-  padding: 1rem;
-}
-
-.eq-financials-summary-head {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 0.75rem;
-  margin-bottom: 0.9rem;
-}
-
-.eq-financials-summary-head p,
-.eq-financials-subhead p {
-  color: var(--vw-accent);
-  font-size: 0.72rem;
-  font-weight: 750;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-}
-
-.eq-financials-summary-head h3 {
-  margin-top: 0.2rem;
-  color: var(--vw-text-primary);
-  font-size: 1.15rem;
-  font-weight: 720;
-}
-
-.eq-financials-summary-head>span {
-  border: 1px solid rgba(30, 58, 95, 0.13);
-  border-radius: 999px;
-  background: #ffffff;
-  color: var(--vw-text-secondary);
-  font-size: 0.75rem;
-  font-weight: 700;
-  padding: 0.28rem 0.6rem;
-}
-
-.eq-financials-kpi-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0.55rem;
-}
-
-.eq-financials-kpi {
-  min-height: 96px;
-  border: 1px solid rgba(30, 58, 95, 0.11);
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.82);
-  padding: 0.75rem;
-}
-
-.eq-financials-kpi p,
-.eq-financials-section dt {
-  color: var(--vw-text-tertiary);
-  font-size: 0.72rem;
-  font-weight: 700;
-  text-transform: uppercase;
-}
-
-.eq-financials-kpi strong {
-  display: block;
-  margin-top: 0.35rem;
-  color: var(--vw-text-primary);
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
-  font-size: 1.18rem;
-  font-weight: 760;
-  line-height: 1.05;
-}
-
-.eq-financials-kpi strong.is-missing {
-  color: var(--vw-text-tertiary);
-}
-
-.eq-financials-kpi span {
-  display: block;
-  margin-top: 0.4rem;
-  color: var(--vw-text-secondary);
-  font-size: 0.78rem;
-}
-
-.eq-financials-section-grid {
-  display: grid;
-  gap: 0.75rem;
-}
-
-.eq-financials-section {
-  border: 1px solid var(--vw-border);
-  border-radius: 8px;
-  background: #ffffff;
-  padding: 0.9rem;
-}
-
-.eq-financials-section h3 {
-  color: var(--vw-text-primary);
-  font-size: 0.92rem;
-  font-weight: 720;
-}
-
-.eq-financials-section dl {
-  display: grid;
-  gap: 0.15rem;
-  margin-top: 0.65rem;
-}
-
-.eq-financials-section dl>div {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  min-height: 34px;
-  border-top: 1px solid rgba(30, 58, 95, 0.075);
-}
-
-.eq-financials-section dl>div:first-child {
-  border-top: 0;
-}
-
-.eq-financials-section dd {
-  color: var(--vw-text-primary);
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
-  font-size: 0.88rem;
-  font-weight: 720;
-  text-align: right;
-  white-space: nowrap;
-}
-
-.eq-financials-metric-groups {
-  display: grid;
-  gap: 0.75rem;
-}
-
-.eq-financials-subhead {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: end;
-  justify-content: space-between;
-  gap: 0.5rem;
-  border-bottom: 1px solid rgba(30, 58, 95, 0.1);
-  padding-bottom: 0.55rem;
-}
-
-.eq-financials-subhead span {
-  color: var(--vw-text-secondary);
-  font-size: 0.82rem;
-}
-
 @media (min-width: 900px) {
   .eq-detail-hero {
     grid-template-columns: minmax(0, 1fr) minmax(420px, 0.85fr);
@@ -1227,12 +1345,27 @@ thead .eq-sticky-col {
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 
-  .eq-financials-kpi-grid {
+  .eq-analysis-company-body {
+    grid-template-columns: minmax(0, 1fr) minmax(300px, 0.58fr);
+    align-items: start;
+  }
+
+  .eq-analysis-company-meta {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
-  .eq-financials-section-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+  .eq-analysis-price-hero {
+    grid-template-columns: 1.3fr repeat(3, minmax(0, 1fr));
+  }
+
+  .eq-analysis-ratio-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 899px) {
+  .eq-analysis-ratio-grid {
+    grid-template-columns: 1fr;
   }
 }
 

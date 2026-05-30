@@ -1,13 +1,8 @@
-import { useEffect, useState } from 'react';
-
 import {
   buildFundamentalsChartsFromStock,
-  fetchFundamentalsCharts,
   formatFundamentalsValue,
   latestPoint,
-  type FundamentalsChartsDocument,
 } from '../fundamentals-charts';
-import { coalesceFundamentalsChartsDocument } from '../standardize-financials';
 import type { EdgequityStockRecord } from '../types';
 
 import MetricTrendChart from './MetricTrendChart';
@@ -17,48 +12,9 @@ interface FundamentalsPanelProps {
 }
 
 export default function FundamentalsPanel({ stock }: FundamentalsPanelProps) {
-  const useEmbeddedFmpCharts = stock.financialStatements?.source.provider === 'fmp';
-  const [document, setDocument] = useState<FundamentalsChartsDocument | null>(() =>
-    useEmbeddedFmpCharts ? buildFundamentalsChartsFromStock(stock) : null,
-  );
-  const [loading, setLoading] = useState(!useEmbeddedFmpCharts);
+  const document = buildFundamentalsChartsFromStock(stock);
 
-  useEffect(() => {
-    if (useEmbeddedFmpCharts) return;
-
-    let cancelled = false;
-
-    async function load() {
-      setLoading(true);
-      try {
-        const cached = await fetchFundamentalsCharts(stock.ticker);
-        if (!cancelled) {
-          setDocument(coalesceFundamentalsChartsDocument(stock, cached));
-        }
-      } catch {
-        if (!cancelled) {
-          setDocument(buildFundamentalsChartsFromStock(stock));
-        }
-      } finally {
-        if (!cancelled) setLoading(false);
-      }
-    }
-
-    void load();
-    return () => {
-      cancelled = true;
-    };
-  }, [stock, useEmbeddedFmpCharts]);
-
-  if (loading) {
-    return (
-      <section className="vw-card eq-fundamentals-panel px-4 py-8 text-center text-sm text-[var(--vw-text-secondary)]">
-        Loading fundamentals for {stock.ticker}…
-      </section>
-    );
-  }
-
-  if (!document || document.sections.length === 0) {
+  if (document.sections.length === 0) {
     return (
       <section className="vw-card eq-fundamentals-panel px-4 py-8 text-center text-sm text-[var(--vw-text-secondary)]">
         No fundamentals data is available for {stock.ticker}.

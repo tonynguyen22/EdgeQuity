@@ -209,14 +209,14 @@ export function formatSecSourceLine(document: SecStatementsDocument): string {
 }
 
 export function buildReportedFinancialsFromStock(stock: EdgequityStockRecord): SecStatementsDocument {
-  const hasFmpStatements = Boolean(stock.financialStatements?.annual);
+  const hasNormalizedStatements = Boolean(stock.financialStatements?.annual);
   const statements = {} as SecStatementsDocument['statements'];
 
   for (const statementId of ['ic', 'bs', 'cf'] as const) {
     const statementKey = FMP_STATEMENT_KEYS[statementId];
-    const fmpPeriods = stock.financialStatements?.annual[statementKey] ?? [];
-    statements[statementId] = fmpPeriods.length > 0
-      ? buildRowsFromFmpPeriods(statementId, fmpPeriods)
+    const statementPeriods = stock.financialStatements?.annual[statementKey] ?? [];
+    statements[statementId] = statementPeriods.length > 0
+      ? buildRowsFromFmpPeriods(statementId, statementPeriods)
       : buildRowsFromHistory(statementId, stock.history);
   }
 
@@ -225,7 +225,9 @@ export function buildReportedFinancialsFromStock(stock: EdgequityStockRecord): S
     ticker: stock.ticker,
     cik: null,
     entityName: stock.name,
-    source: hasFmpStatements ? 'fmp' : 'static-summary',
+    source: hasNormalizedStatements
+      ? stock.financialStatements?.source.provider === 'sec' ? 'sec-edgar' : 'fmp'
+      : 'static-summary',
     fetchedAt: stock.financialStatements?.source.fetchedAt ?? stock.sources?.summary?.fetchedAt ?? '',
     status: 'missing',
     recentFilings: [],

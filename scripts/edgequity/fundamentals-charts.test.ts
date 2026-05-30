@@ -1,5 +1,4 @@
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
 import test from 'node:test';
 
 import { buildFundamentalsChartsDocument, type FundamentalsChartPoint } from './fundamentals-charts.ts';
@@ -18,11 +17,38 @@ function isAscending(points: FundamentalsChartPoint[]): boolean {
 }
 
 test('buildFundamentalsChartsDocument merges SEC and Finnhub series', () => {
-  const metrics = JSON.parse(
-    readFileSync(new URL('../../public/data/edgequity/raw/AAPL/metrics.json', import.meta.url), 'utf8'),
-  ) as Record<string, unknown>;
+  const facts = {
+    'us-gaap': {
+      Revenues: {
+        units: {
+          USD: [
+            { fy: 2024, fp: 'FY', form: '10-K', start: '2024-01-01', end: '2024-12-31', val: 100 },
+            { fy: 2025, fp: 'FY', form: '10-K', start: '2025-01-01', end: '2025-12-31', val: 120 },
+            { fy: 2025, fp: 'Q1', form: '10-Q', start: '2025-01-01', end: '2025-03-31', val: 25 },
+          ],
+        },
+      },
+      Assets: {
+        units: {
+          USD: [{ fy: 2025, fp: 'FY', form: '10-K', end: '2025-12-31', val: 500 }],
+        },
+      },
+    },
+  };
+  const metrics = {
+    series: {
+      annual: {
+        pe: [{ period: '2025-12-31', v: 28 }],
+        grossMargin: [{ period: '2025-12-31', v: 0.45 }],
+      },
+      quarterly: {
+        peTTM: [{ period: '2025-03-31', v: 30 }],
+        grossMargin: [{ period: '2025-03-31', v: 0.46 }],
+      },
+    },
+  };
 
-  const document = buildFundamentalsChartsDocument('AAPL', null, null, metrics);
+  const document = buildFundamentalsChartsDocument('NVDA', { cik: 1, entityName: 'Demo Corp', facts }, null, metrics);
 
   assert.ok(document.sections.length >= 4);
   const growth = document.sections.find((section) => section.id === 'growth');

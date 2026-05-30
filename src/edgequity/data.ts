@@ -1,4 +1,13 @@
-import type { EdgequityHistoryYear, EdgequityManifest, EdgequityManifestStock, EdgequityStockRecord } from './types.ts';
+import type {
+  EdgequityEarningsEvent,
+  EdgequityEarningsMetadata,
+  EdgequityHistoryYear,
+  EdgequityManifest,
+  EdgequityManifestStock,
+  EdgequityStatementQuality,
+  EdgequityStockRecord,
+  EdgequityTranscriptMetadata,
+} from './types.ts';
 import { proxyFetch } from '../utils/proxyFetch.ts';
 
 const EDGEQUITY_MANIFEST_PATH = '/data/edgequity/manifest.json';
@@ -66,6 +75,10 @@ const historyNumberKeys = [
   'sharesDiluted',
 ] as const satisfies ReadonlyArray<Exclude<keyof EdgequityHistoryYear, 'year'>>;
 
+const transcriptStatuses = ['found', 'missing', 'error'] as const;
+const statementQualitySources = ['sec', 'dolthub', 'mixed', 'missing'] as const;
+const statementQualityStatuses = ['ok', 'partial', 'missing', 'error'] as const;
+
 function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === 'object' && value !== null;
 }
@@ -80,6 +93,10 @@ function isNullableNumber(value: unknown): value is number | null {
 
 function isFiniteNumber(value: unknown): value is number {
   return typeof value === 'number' && Number.isFinite(value);
+}
+
+function isOptionalString(value: unknown): value is string | undefined {
+  return value === undefined || typeof value === 'string';
 }
 
 function isManifestStock(value: unknown): value is EdgequityManifestStock {
@@ -103,6 +120,49 @@ function isEdgequityHistoryYear(value: unknown): value is EdgequityHistoryYear {
   return isRecord(value)
     && typeof value.year === 'string'
     && historyNumberKeys.every((key) => isNullableNumber(value[key]));
+}
+
+function isEdgequityEarningsEvent(value: unknown): value is EdgequityEarningsEvent {
+  return isRecord(value)
+    && typeof value.period === 'string'
+    && typeof value.date === 'string'
+    && (value.isEstimated === undefined || typeof value.isEstimated === 'boolean')
+    && typeof value.source === 'string'
+    && typeof value.sourceUrl === 'string';
+}
+
+function isNullableEarningsEvent(value: unknown): value is EdgequityEarningsEvent | null {
+  return value === null || isEdgequityEarningsEvent(value);
+}
+
+function isEdgequityEarningsMetadata(value: unknown): value is EdgequityEarningsMetadata {
+  return isRecord(value)
+    && isNullableEarningsEvent(value.recent)
+    && isNullableEarningsEvent(value.next)
+    && typeof value.updatedAt === 'string';
+}
+
+function isEdgequityTranscriptMetadata(value: unknown): value is EdgequityTranscriptMetadata {
+  return isRecord(value)
+    && typeof value.status === 'string'
+    && transcriptStatuses.includes(value.status as EdgequityTranscriptMetadata['status'])
+    && isNullableString(value.title)
+    && isNullableString(value.date)
+    && isNullableString(value.source)
+    && isNullableString(value.sourceUrl)
+    && typeof value.fetchedAt === 'string'
+    && isOptionalString(value.message);
+}
+
+function isEdgequityStatementQuality(value: unknown): value is EdgequityStatementQuality {
+  return isRecord(value)
+    && isFiniteNumber(value.annualPeriods)
+    && isFiniteNumber(value.quarterlyPeriods)
+    && typeof value.source === 'string'
+    && statementQualitySources.includes(value.source as EdgequityStatementQuality['source'])
+    && typeof value.status === 'string'
+    && statementQualityStatuses.includes(value.status as EdgequityStatementQuality['status'])
+    && typeof value.message === 'string';
 }
 
 export function assertEdgequityManifest(value: unknown): asserts value is EdgequityManifest {
@@ -136,6 +196,10 @@ export function assertEdgequityStockRecord(value: unknown): asserts value is Edg
     || !hasNullableNumberFields(value.dividends, dividendKeys)
     || !Array.isArray(value.history)
     || !value.history.every(isEdgequityHistoryYear)
+    || (value.aiTheme !== undefined && typeof value.aiTheme !== 'string')
+    || (value.earnings !== undefined && !isEdgequityEarningsMetadata(value.earnings))
+    || (value.transcript !== undefined && !isEdgequityTranscriptMetadata(value.transcript))
+    || (value.statementQuality !== undefined && !isEdgequityStatementQuality(value.statementQuality))
     || !Array.isArray(value.warnings)
     || !value.warnings.every((warning) => typeof warning === 'string')) {
     throw new Error(INVALID_STOCK_ERROR);

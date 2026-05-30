@@ -6,6 +6,8 @@ import {
   buildUniverseFromFinnhubSymbols,
   lineItemsToObject,
 } from "./finnhub-raw.ts";
+import { buildDolthubSqlUrl, normalizeDolthubStatementValue } from "./dolthub.ts";
+import { buildFinnhubUrl, normalizeFinnhubMarketCap, normalizeFinnhubMarketCapUsd } from "./finnhub.ts";
 
 const symbolFixture = [
   { symbol: "AAPL", displaySymbol: "AAPL", description: "Apple Inc", type: "Common Stock", currency: "USD", mic: "XNAS" },
@@ -65,6 +67,48 @@ test("buildUniverseFromFinnhubSymbols keeps clean unique common stocks", () => {
   assert.equal(universe[0]?.source, "finnhub:stock/symbol");
 });
 
+test("buildFinnhubUrl appends token and query params", () => {
+  const url = buildFinnhubUrl("/stock/profile2", { symbol: "NVDA" }, "token123");
+
+  assert.equal(url.toString(), "https://finnhub.io/api/v1/stock/profile2?symbol=NVDA&token=token123");
+});
+
+test("normalizeFinnhubMarketCap converts Finnhub million-dollar value to dollars", () => {
+  assert.equal(normalizeFinnhubMarketCap(5210986.044312), 5_210_986_044_312);
+  assert.equal(normalizeFinnhubMarketCap(null), null);
+});
+
+test("normalizeFinnhubMarketCapUsd uses US quote and ADR ratio for foreign profiles", () => {
+  assert.equal(
+    normalizeFinnhubMarketCapUsd({
+      ticker: "TSM",
+      profile: { currency: "TWD", marketCapitalization: 59_904_129.140625, shareOutstanding: 25_932.52 },
+      quotePrice: 414.06,
+    }),
+    2_147_523_846_240,
+  );
+  assert.equal(
+    normalizeFinnhubMarketCapUsd({
+      ticker: "ASML",
+      profile: { currency: "EUR", marketCapitalization: 546_467.448767, shareOutstanding: 388.15 },
+      quotePrice: 1635.74,
+    }),
+    634_912_481_000,
+  );
+});
+
+test("buildDolthubSqlUrl encodes the SQL query", () => {
+  const url = buildDolthubSqlUrl("SELECT * FROM earnings_calendar WHERE act_symbol='NVDA'");
+
+  assert.equal(url.origin, "https://www.dolthub.com");
+  assert.equal(url.searchParams.get("q"), "SELECT * FROM earnings_calendar WHERE act_symbol='NVDA'");
+});
+
+test("normalizeDolthubStatementValue parses decimal strings", () => {
+  assert.equal(normalizeDolthubStatementValue("416161000000"), 416_161_000_000);
+  assert.equal(normalizeDolthubStatementValue(null), null);
+});
+
 test("lineItemsToObject maps common financial concepts from Finnhub as-reported filings", () => {
   const filing = reportedFixture.data[0]!;
   const mapped = lineItemsToObject(filing.report.ic, filing.report.bs, filing.report.cf);
@@ -96,6 +140,9 @@ test("buildThinStockRecordFromFinnhub preserves raw source metadata and thin sum
         peTTM: 28,
         forwardPE: 24,
         psTTM: 7,
+        returnOnInvestedCapitalAnnual: 35,
+        dividendYieldIndicatedAnnual: 0.5,
+        payoutRatioAnnual: 15,
       },
     },
     reported: reportedFixture,
@@ -107,6 +154,9 @@ test("buildThinStockRecordFromFinnhub preserves raw source metadata and thin sum
   assert.equal(record.history.length, 1);
   assert.equal(record.history[0]?.revenue, 416_161_000_000);
   assert.equal(record.cashFlow.freeCashFlow, 98_767_000_000);
+  assert.equal(record.profitability.roic, 0.35);
+  assert.equal(record.dividends.dividendYield, 0.005);
+  assert.equal(record.dividends.payoutRatio, 0.15);
   assert.equal(record.sources?.financialsReported.provider, "finnhub");
   assert.equal(record.sources?.financialsReported.status, "ok");
   assert.equal(record.warnings.includes("Thin summary mapped from Finnhub as-reported line items"), true);

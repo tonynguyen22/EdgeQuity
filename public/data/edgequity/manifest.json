@@ -1,747 +1,459 @@
 {
   "app": "Edgequity",
-  "version": 1,
-  "generatedAt": "2026-05-16T22:32:24.224Z",
+  "version": 2,
+  "generatedAt": "2026-05-27T17:10:48.417Z",
   "universe": [
-    "AAL",
-    "AAPL",
-    "ABBV",
-    "ADBE",
-    "AMD",
-    "AMZN",
-    "ATVI",
-    "BA",
-    "BABA",
-    "BAC",
-    "BIDU",
-    "BILI",
-    "C",
-    "CARR",
-    "CCL",
-    "COIN",
-    "COST",
-    "CPRX",
-    "CSCO",
-    "CVX",
-    "DAL",
-    "DIS",
-    "DOCU",
-    "ET",
-    "ETSY",
-    "F",
-    "FDX",
-    "GE",
-    "GM",
-    "GOOGL",
-    "GS",
-    "HCA",
-    "HOOD",
-    "INTC",
-    "JNJ",
-    "JPM",
-    "KO",
-    "LCID",
-    "LMT",
-    "META",
-    "MGM",
-    "MRNA",
-    "MRO",
-    "MSFT",
-    "NFLX",
-    "NIO",
-    "NKE",
-    "NOK",
     "NVDA",
-    "PEP",
-    "PFE",
-    "PINS",
-    "PLTR",
-    "PYPL",
-    "RBLX",
-    "RIOT",
-    "RIVN",
-    "ROKU",
-    "SBUX",
-    "SHOP",
-    "SIRI",
-    "SNAP",
-    "SOFI",
-    "SONY",
-    "SQ",
-    "T",
-    "TGT",
-    "TLRY",
-    "TSLA",
+    "AMD",
+    "AVGO",
     "TSM",
-    "TWTR",
-    "UAL",
+    "ASML",
+    "ARM",
+    "QCOM",
+    "MRVL",
+    "MU",
+    "AMAT",
+    "LRCX",
+    "KLAC",
+    "MSFT",
+    "GOOG",
+    "AMZN",
+    "META",
+    "ORCL",
+    "PLTR",
+    "CRM",
+    "NOW",
+    "ADBE",
+    "SNOW",
+    "MDB",
+    "DDOG",
+    "INTU",
+    "CRWD",
+    "PANW",
+    "ZS",
+    "FTNT",
+    "OKTA",
+    "NET",
+    "ANET",
+    "CSCO",
+    "DELL",
+    "HPE",
+    "SMCI",
+    "NTAP",
+    "WDC",
+    "VRT",
+    "ETN",
+    "GEV",
+    "CEG",
+    "VST",
+    "NRG",
+    "EQIX",
+    "DLR",
+    "APP",
+    "PATH",
     "UBER",
-    "UNH",
-    "V",
-    "VIAC",
-    "VZ",
-    "WBA",
-    "WFC",
-    "WMT",
-    "XOM",
-    "ZM"
+    "TSLA"
   ],
   "stocks": [
     {
-      "ticker": "AAL",
-      "name": "American Airlines Group Inc.",
-      "sector": "Industrials",
-      "industry": "Airlines",
-      "marketCap": null,
-      "dataPath": "/data/edgequity/stocks/AAL.json"
-    },
-    {
-      "ticker": "AAPL",
-      "name": "Apple Inc",
-      "sector": "Technology",
-      "industry": "Consumer Electronics",
-      "marketCap": 3000000000000,
-      "dataPath": "/data/edgequity/stocks/AAPL.json"
-    },
-    {
-      "ticker": "ABBV",
-      "name": "AbbVie Inc.",
-      "sector": "Healthcare",
-      "industry": "Drug Manufacturers - General",
-      "marketCap": null,
-      "dataPath": "/data/edgequity/stocks/ABBV.json"
-    },
-    {
-      "ticker": "ADBE",
-      "name": "Adobe Inc.",
-      "sector": "Technology",
-      "industry": "Software - Infrastructure",
-      "marketCap": null,
-      "dataPath": "/data/edgequity/stocks/ADBE.json"
+      "ticker": "NVDA",
+      "name": "NVIDIA Corp",
+      "sector": "AI Infrastructure",
+      "industry": "AI Semiconductors",
+      "marketCap": 5199612014771,
+      "dataPath": "/data/edgequity/stocks/NVDA.json"
     },
     {
       "ticker": "AMD",
       "name": "Advanced Micro Devices Inc",
-      "sector": "Technology",
-      "industry": "Semiconductors",
-      "marketCap": 245000000000,
+      "sector": "AI Infrastructure",
+      "industry": "AI Semiconductors",
+      "marketCap": 821643353134,
       "dataPath": "/data/edgequity/stocks/AMD.json"
     },
     {
-      "ticker": "AMZN",
-      "name": "Amazon.com Inc",
-      "sector": "Consumer Cyclical",
-      "industry": "Internet Retail",
-      "marketCap": 1950000000000,
-      "dataPath": "/data/edgequity/stocks/AMZN.json"
+      "ticker": "AVGO",
+      "name": "Broadcom Inc",
+      "sector": "AI Infrastructure",
+      "industry": "AI Semiconductors",
+      "marketCap": 1998077275729.0002,
+      "dataPath": "/data/edgequity/stocks/AVGO.json"
     },
     {
-      "ticker": "ATVI",
-      "name": "Activision Blizzard Inc.",
-      "sector": "Communication Services",
-      "industry": "Electronic Gaming & Multimedia",
-      "marketCap": null,
-      "dataPath": "/data/edgequity/stocks/ATVI.json"
+      "ticker": "TSM",
+      "name": "Taiwan Semiconductor Manufacturing Co Ltd",
+      "sector": "AI Infrastructure",
+      "industry": "AI Semiconductors",
+      "marketCap": 2177657434480,
+      "dataPath": "/data/edgequity/stocks/TSM.json"
     },
     {
-      "ticker": "BA",
-      "name": "The Boeing Company",
-      "sector": "Industrials",
-      "industry": "Aerospace & Defense",
-      "marketCap": null,
-      "dataPath": "/data/edgequity/stocks/BA.json"
+      "ticker": "ASML",
+      "name": "ASML Holding NV",
+      "sector": "AI Infrastructure",
+      "industry": "AI Semiconductors",
+      "marketCap": 619246747000,
+      "dataPath": "/data/edgequity/stocks/ASML.json"
     },
     {
-      "ticker": "BABA",
-      "name": "Alibaba Group Holding Limited",
-      "sector": "Consumer Cyclical",
-      "industry": "Internet Retail",
-      "marketCap": null,
-      "dataPath": "/data/edgequity/stocks/BABA.json"
+      "ticker": "ARM",
+      "name": "Arm Holdings PLC",
+      "sector": "AI Infrastructure",
+      "industry": "AI Semiconductors",
+      "marketCap": 341778081299,
+      "dataPath": "/data/edgequity/stocks/ARM.json"
     },
     {
-      "ticker": "BAC",
-      "name": "Bank of America Corporation",
-      "sector": "Financial Services",
-      "industry": "Banks - Diversified",
-      "marketCap": null,
-      "dataPath": "/data/edgequity/stocks/BAC.json"
+      "ticker": "QCOM",
+      "name": "Qualcomm Inc",
+      "sector": "AI Infrastructure",
+      "industry": "AI Semiconductors",
+      "marketCap": 262256287720.00003,
+      "dataPath": "/data/edgequity/stocks/QCOM.json"
     },
     {
-      "ticker": "BIDU",
-      "name": "Baidu, Inc.",
-      "sector": "Communication Services",
-      "industry": "Internet Content & Information",
-      "marketCap": null,
-      "dataPath": "/data/edgequity/stocks/BIDU.json"
+      "ticker": "MRVL",
+      "name": "Marvell Technology Inc",
+      "sector": "AI Infrastructure",
+      "industry": "AI Semiconductors",
+      "marketCap": 182342696630,
+      "dataPath": "/data/edgequity/stocks/MRVL.json"
     },
     {
-      "ticker": "BILI",
-      "name": "Bilibili Inc.",
-      "sector": "Communication Services",
-      "industry": "Electronic Gaming & Multimedia",
-      "marketCap": null,
-      "dataPath": "/data/edgequity/stocks/BILI.json"
+      "ticker": "MU",
+      "name": "Micron Technology Inc",
+      "sector": "AI Infrastructure",
+      "industry": "AI Semiconductors",
+      "marketCap": 1010314349300,
+      "dataPath": "/data/edgequity/stocks/MU.json"
     },
     {
-      "ticker": "C",
-      "name": "Citigroup Inc.",
-      "sector": "Financial Services",
-      "industry": "Banks - Diversified",
-      "marketCap": null,
-      "dataPath": "/data/edgequity/stocks/C.json"
+      "ticker": "AMAT",
+      "name": "Applied Materials Inc",
+      "sector": "AI Infrastructure",
+      "industry": "Semiconductor Equipment",
+      "marketCap": 361164208382.99994,
+      "dataPath": "/data/edgequity/stocks/AMAT.json"
     },
     {
-      "ticker": "CARR",
-      "name": "Carrier Global Corporation",
-      "sector": "Industrials",
-      "industry": "Building Products & Equipment",
-      "marketCap": null,
-      "dataPath": "/data/edgequity/stocks/CARR.json"
+      "ticker": "LRCX",
+      "name": "Lam Research Corp",
+      "sector": "AI Infrastructure",
+      "industry": "Semiconductor Equipment",
+      "marketCap": 403534255616,
+      "dataPath": "/data/edgequity/stocks/LRCX.json"
     },
     {
-      "ticker": "CCL",
-      "name": "Carnival Corporation & plc",
-      "sector": "Consumer Cyclical",
-      "industry": "Travel Services",
-      "marketCap": null,
-      "dataPath": "/data/edgequity/stocks/CCL.json"
-    },
-    {
-      "ticker": "COIN",
-      "name": "Coinbase Global, Inc.",
-      "sector": "Financial Services",
-      "industry": "Financial Data & Stock Exchanges",
-      "marketCap": null,
-      "dataPath": "/data/edgequity/stocks/COIN.json"
-    },
-    {
-      "ticker": "COST",
-      "name": "Costco Wholesale Corp",
-      "sector": "Consumer Defensive",
-      "industry": "Discount Stores",
-      "marketCap": 365000000000,
-      "dataPath": "/data/edgequity/stocks/COST.json"
-    },
-    {
-      "ticker": "CPRX",
-      "name": "Catalyst Pharmaceuticals, Inc.",
-      "sector": "Healthcare",
-      "industry": "Biotechnology",
-      "marketCap": null,
-      "dataPath": "/data/edgequity/stocks/CPRX.json"
-    },
-    {
-      "ticker": "CSCO",
-      "name": "Cisco Systems, Inc.",
-      "sector": "Technology",
-      "industry": "Communication Equipment",
-      "marketCap": null,
-      "dataPath": "/data/edgequity/stocks/CSCO.json"
-    },
-    {
-      "ticker": "CVX",
-      "name": "Chevron Corp",
-      "sector": "Energy",
-      "industry": "Oil & Gas Integrated",
-      "marketCap": 285000000000,
-      "dataPath": "/data/edgequity/stocks/CVX.json"
-    },
-    {
-      "ticker": "DAL",
-      "name": "Delta Air Lines, Inc.",
-      "sector": "Industrials",
-      "industry": "Airlines",
-      "marketCap": null,
-      "dataPath": "/data/edgequity/stocks/DAL.json"
-    },
-    {
-      "ticker": "DIS",
-      "name": "The Walt Disney Company",
-      "sector": "Communication Services",
-      "industry": "Entertainment",
-      "marketCap": null,
-      "dataPath": "/data/edgequity/stocks/DIS.json"
-    },
-    {
-      "ticker": "DOCU",
-      "name": "DocuSign, Inc.",
-      "sector": "Technology",
-      "industry": "Software - Application",
-      "marketCap": null,
-      "dataPath": "/data/edgequity/stocks/DOCU.json"
-    },
-    {
-      "ticker": "ET",
-      "name": "Energy Transfer LP",
-      "sector": "Energy",
-      "industry": "Oil & Gas Midstream",
-      "marketCap": null,
-      "dataPath": "/data/edgequity/stocks/ET.json"
-    },
-    {
-      "ticker": "ETSY",
-      "name": "Etsy, Inc.",
-      "sector": "Consumer Cyclical",
-      "industry": "Internet Retail",
-      "marketCap": null,
-      "dataPath": "/data/edgequity/stocks/ETSY.json"
-    },
-    {
-      "ticker": "F",
-      "name": "Ford Motor Company",
-      "sector": "Consumer Cyclical",
-      "industry": "Auto Manufacturers",
-      "marketCap": null,
-      "dataPath": "/data/edgequity/stocks/F.json"
-    },
-    {
-      "ticker": "FDX",
-      "name": "FedEx Corporation",
-      "sector": "Industrials",
-      "industry": "Integrated Freight & Logistics",
-      "marketCap": null,
-      "dataPath": "/data/edgequity/stocks/FDX.json"
-    },
-    {
-      "ticker": "GE",
-      "name": "GE Aerospace",
-      "sector": "Industrials",
-      "industry": "Aerospace & Defense",
-      "marketCap": null,
-      "dataPath": "/data/edgequity/stocks/GE.json"
-    },
-    {
-      "ticker": "GM",
-      "name": "General Motors Company",
-      "sector": "Consumer Cyclical",
-      "industry": "Auto Manufacturers",
-      "marketCap": null,
-      "dataPath": "/data/edgequity/stocks/GM.json"
-    },
-    {
-      "ticker": "GOOGL",
-      "name": "Alphabet Inc",
-      "sector": "Communication Services",
-      "industry": "Internet Content & Information",
-      "marketCap": 2150000000000,
-      "dataPath": "/data/edgequity/stocks/GOOGL.json"
-    },
-    {
-      "ticker": "GS",
-      "name": "The Goldman Sachs Group, Inc.",
-      "sector": "Financial Services",
-      "industry": "Capital Markets",
-      "marketCap": null,
-      "dataPath": "/data/edgequity/stocks/GS.json"
-    },
-    {
-      "ticker": "HCA",
-      "name": "HCA Healthcare, Inc.",
-      "sector": "Healthcare",
-      "industry": "Medical Care Facilities",
-      "marketCap": null,
-      "dataPath": "/data/edgequity/stocks/HCA.json"
-    },
-    {
-      "ticker": "HOOD",
-      "name": "Robinhood Markets, Inc.",
-      "sector": "Financial Services",
-      "industry": "Capital Markets",
-      "marketCap": null,
-      "dataPath": "/data/edgequity/stocks/HOOD.json"
-    },
-    {
-      "ticker": "INTC",
-      "name": "Intel Corporation",
-      "sector": "Technology",
-      "industry": "Semiconductors",
-      "marketCap": null,
-      "dataPath": "/data/edgequity/stocks/INTC.json"
-    },
-    {
-      "ticker": "JNJ",
-      "name": "Johnson & Johnson",
-      "sector": "Healthcare",
-      "industry": "Drug Manufacturers - General",
-      "marketCap": 370000000000,
-      "dataPath": "/data/edgequity/stocks/JNJ.json"
-    },
-    {
-      "ticker": "JPM",
-      "name": "JPMorgan Chase & Co",
-      "sector": "Financial Services",
-      "industry": "Banks - Diversified",
-      "marketCap": 590000000000,
-      "dataPath": "/data/edgequity/stocks/JPM.json"
-    },
-    {
-      "ticker": "KO",
-      "name": "Coca-Cola Co",
-      "sector": "Consumer Defensive",
-      "industry": "Beverages - Non-Alcoholic",
-      "marketCap": 268000000000,
-      "dataPath": "/data/edgequity/stocks/KO.json"
-    },
-    {
-      "ticker": "LCID",
-      "name": "Lucid Group, Inc.",
-      "sector": "Consumer Cyclical",
-      "industry": "Auto Manufacturers",
-      "marketCap": null,
-      "dataPath": "/data/edgequity/stocks/LCID.json"
-    },
-    {
-      "ticker": "LMT",
-      "name": "Lockheed Martin Corporation",
-      "sector": "Industrials",
-      "industry": "Aerospace & Defense",
-      "marketCap": null,
-      "dataPath": "/data/edgequity/stocks/LMT.json"
-    },
-    {
-      "ticker": "META",
-      "name": "Meta Platforms Inc",
-      "sector": "Communication Services",
-      "industry": "Internet Content & Information",
-      "marketCap": 1320000000000,
-      "dataPath": "/data/edgequity/stocks/META.json"
-    },
-    {
-      "ticker": "MGM",
-      "name": "MGM Resorts International",
-      "sector": "Consumer Cyclical",
-      "industry": "Resorts & Casinos",
-      "marketCap": null,
-      "dataPath": "/data/edgequity/stocks/MGM.json"
-    },
-    {
-      "ticker": "MRNA",
-      "name": "Moderna, Inc.",
-      "sector": "Healthcare",
-      "industry": "Biotechnology",
-      "marketCap": null,
-      "dataPath": "/data/edgequity/stocks/MRNA.json"
-    },
-    {
-      "ticker": "MRO",
-      "name": "Marathon Oil Corporation",
-      "sector": "Energy",
-      "industry": "Oil & Gas E&P",
-      "marketCap": null,
-      "dataPath": "/data/edgequity/stocks/MRO.json"
+      "ticker": "KLAC",
+      "name": "KLA Corp",
+      "sector": "AI Infrastructure",
+      "industry": "Semiconductor Equipment",
+      "marketCap": 262742884740,
+      "dataPath": "/data/edgequity/stocks/KLAC.json"
     },
     {
       "ticker": "MSFT",
       "name": "Microsoft Corp",
-      "sector": "Technology",
-      "industry": "Software - Infrastructure",
-      "marketCap": 3200000000000,
+      "sector": "AI Infrastructure",
+      "industry": "Cloud & AI Platforms",
+      "marketCap": 3090451625219,
       "dataPath": "/data/edgequity/stocks/MSFT.json"
     },
     {
-      "ticker": "NFLX",
-      "name": "NFLX",
-      "sector": null,
-      "industry": null,
-      "marketCap": null,
-      "dataPath": "/data/edgequity/stocks/NFLX.json"
+      "ticker": "GOOG",
+      "name": "Alphabet Inc",
+      "sector": "AI Infrastructure",
+      "industry": "Cloud & AI Platforms",
+      "marketCap": 4711670080000,
+      "dataPath": "/data/edgequity/stocks/GOOG.json"
     },
     {
-      "ticker": "NIO",
-      "name": "NIO Inc.",
-      "sector": "Consumer Cyclical",
-      "industry": "Auto Manufacturers",
-      "marketCap": null,
-      "dataPath": "/data/edgequity/stocks/NIO.json"
+      "ticker": "AMZN",
+      "name": "Amazon.com Inc",
+      "sector": "AI Infrastructure",
+      "industry": "Cloud & AI Platforms",
+      "marketCap": 2853753638012,
+      "dataPath": "/data/edgequity/stocks/AMZN.json"
     },
     {
-      "ticker": "NKE",
-      "name": "NIKE, Inc.",
-      "sector": "Consumer Cyclical",
-      "industry": "Footwear & Accessories",
-      "marketCap": null,
-      "dataPath": "/data/edgequity/stocks/NKE.json"
+      "ticker": "META",
+      "name": "Meta Platforms Inc",
+      "sector": "AI Infrastructure",
+      "industry": "Cloud & AI Platforms",
+      "marketCap": 1554378085240.9998,
+      "dataPath": "/data/edgequity/stocks/META.json"
     },
     {
-      "ticker": "NOK",
-      "name": "Nokia Oyj",
-      "sector": "Technology",
-      "industry": "Communication Equipment",
-      "marketCap": null,
-      "dataPath": "/data/edgequity/stocks/NOK.json"
-    },
-    {
-      "ticker": "NVDA",
-      "name": "NVIDIA Corp",
-      "sector": "Technology",
-      "industry": "Semiconductors",
-      "marketCap": 5420000000000,
-      "dataPath": "/data/edgequity/stocks/NVDA.json"
-    },
-    {
-      "ticker": "PEP",
-      "name": "PepsiCo, Inc.",
-      "sector": "Consumer Defensive",
-      "industry": "Beverages - Non-Alcoholic",
-      "marketCap": null,
-      "dataPath": "/data/edgequity/stocks/PEP.json"
-    },
-    {
-      "ticker": "PFE",
-      "name": "Pfizer Inc.",
-      "sector": "Healthcare",
-      "industry": "Drug Manufacturers - General",
-      "marketCap": null,
-      "dataPath": "/data/edgequity/stocks/PFE.json"
-    },
-    {
-      "ticker": "PINS",
-      "name": "Pinterest, Inc.",
-      "sector": "Communication Services",
-      "industry": "Internet Content & Information",
-      "marketCap": null,
-      "dataPath": "/data/edgequity/stocks/PINS.json"
+      "ticker": "ORCL",
+      "name": "Oracle Corp",
+      "sector": "AI Infrastructure",
+      "industry": "Cloud & AI Platforms",
+      "marketCap": 555249414131,
+      "dataPath": "/data/edgequity/stocks/ORCL.json"
     },
     {
       "ticker": "PLTR",
-      "name": "Palantir Technologies Inc.",
-      "sector": "Technology",
-      "industry": "Software - Infrastructure",
-      "marketCap": null,
+      "name": "Palantir Technologies Inc",
+      "sector": "AI Infrastructure",
+      "industry": "Enterprise AI Software",
+      "marketCap": 327472873318,
       "dataPath": "/data/edgequity/stocks/PLTR.json"
     },
     {
-      "ticker": "PYPL",
-      "name": "PayPal Holdings, Inc.",
-      "sector": "Financial Services",
-      "industry": "Credit Services",
-      "marketCap": null,
-      "dataPath": "/data/edgequity/stocks/PYPL.json"
+      "ticker": "CRM",
+      "name": "Salesforce Inc",
+      "sector": "AI Infrastructure",
+      "industry": "Enterprise AI Software",
+      "marketCap": 146497070983,
+      "dataPath": "/data/edgequity/stocks/CRM.json"
     },
     {
-      "ticker": "RBLX",
-      "name": "Roblox Corporation",
-      "sector": "Communication Services",
-      "industry": "Electronic Gaming & Multimedia",
-      "marketCap": null,
-      "dataPath": "/data/edgequity/stocks/RBLX.json"
+      "ticker": "NOW",
+      "name": "ServiceNow Inc",
+      "sector": "AI Infrastructure",
+      "industry": "Enterprise AI Software",
+      "marketCap": 103048291813,
+      "dataPath": "/data/edgequity/stocks/NOW.json"
     },
     {
-      "ticker": "RIOT",
-      "name": "Riot Platforms, Inc.",
-      "sector": "Financial Services",
-      "industry": "Capital Markets",
-      "marketCap": null,
-      "dataPath": "/data/edgequity/stocks/RIOT.json"
+      "ticker": "ADBE",
+      "name": "Adobe Inc",
+      "sector": "AI Infrastructure",
+      "industry": "Enterprise AI Software",
+      "marketCap": 97206063156,
+      "dataPath": "/data/edgequity/stocks/ADBE.json"
     },
     {
-      "ticker": "RIVN",
-      "name": "Rivian Automotive, Inc.",
-      "sector": "Consumer Cyclical",
-      "industry": "Auto Manufacturers",
-      "marketCap": null,
-      "dataPath": "/data/edgequity/stocks/RIVN.json"
+      "ticker": "SNOW",
+      "name": "Snowflake Inc",
+      "sector": "AI Infrastructure",
+      "industry": "Enterprise AI Software",
+      "marketCap": 61556678092,
+      "dataPath": "/data/edgequity/stocks/SNOW.json"
     },
     {
-      "ticker": "ROKU",
-      "name": "Roku, Inc.",
-      "sector": "Communication Services",
-      "industry": "Entertainment",
-      "marketCap": null,
-      "dataPath": "/data/edgequity/stocks/ROKU.json"
+      "ticker": "MDB",
+      "name": "MongoDB Inc",
+      "sector": "AI Infrastructure",
+      "industry": "Enterprise AI Software",
+      "marketCap": 24741656732,
+      "dataPath": "/data/edgequity/stocks/MDB.json"
     },
     {
-      "ticker": "SBUX",
-      "name": "Starbucks Corporation",
-      "sector": "Consumer Cyclical",
-      "industry": "Restaurants",
-      "marketCap": null,
-      "dataPath": "/data/edgequity/stocks/SBUX.json"
+      "ticker": "DDOG",
+      "name": "Datadog Inc (Pre-Reincorporation)",
+      "sector": "AI Infrastructure",
+      "industry": "Enterprise AI Software",
+      "marketCap": 79610495811,
+      "dataPath": "/data/edgequity/stocks/DDOG.json"
     },
     {
-      "ticker": "SHOP",
-      "name": "Shopify Inc.",
-      "sector": "Technology",
-      "industry": "Software - Application",
-      "marketCap": null,
-      "dataPath": "/data/edgequity/stocks/SHOP.json"
+      "ticker": "INTU",
+      "name": "Intuit Inc",
+      "sector": "AI Infrastructure",
+      "industry": "Enterprise AI Software",
+      "marketCap": 83250983756,
+      "dataPath": "/data/edgequity/stocks/INTU.json"
     },
     {
-      "ticker": "SIRI",
-      "name": "Sirius XM Holdings Inc.",
-      "sector": "Communication Services",
-      "industry": "Entertainment",
-      "marketCap": null,
-      "dataPath": "/data/edgequity/stocks/SIRI.json"
+      "ticker": "CRWD",
+      "name": "CrowdStrike Holdings Inc",
+      "sector": "AI Infrastructure",
+      "industry": "Cybersecurity",
+      "marketCap": 170933993059,
+      "dataPath": "/data/edgequity/stocks/CRWD.json"
     },
     {
-      "ticker": "SNAP",
-      "name": "Snap Inc.",
-      "sector": "Communication Services",
-      "industry": "Internet Content & Information",
-      "marketCap": null,
-      "dataPath": "/data/edgequity/stocks/SNAP.json"
+      "ticker": "PANW",
+      "name": "Palo Alto Networks Inc",
+      "sector": "AI Infrastructure",
+      "industry": "Cybersecurity",
+      "marketCap": 209508000000,
+      "dataPath": "/data/edgequity/stocks/PANW.json"
     },
     {
-      "ticker": "SOFI",
-      "name": "SoFi Technologies, Inc.",
-      "sector": "Financial Services",
-      "industry": "Credit Services",
-      "marketCap": null,
-      "dataPath": "/data/edgequity/stocks/SOFI.json"
+      "ticker": "ZS",
+      "name": "Zscaler Inc",
+      "sector": "AI Infrastructure",
+      "industry": "Cybersecurity",
+      "marketCap": 28178570000,
+      "dataPath": "/data/edgequity/stocks/ZS.json"
     },
     {
-      "ticker": "SONY",
-      "name": "Sony Group Corporation",
-      "sector": "Technology",
-      "industry": "Consumer Electronics",
-      "marketCap": null,
-      "dataPath": "/data/edgequity/stocks/SONY.json"
+      "ticker": "FTNT",
+      "name": "Fortinet Inc",
+      "sector": "AI Infrastructure",
+      "industry": "Cybersecurity",
+      "marketCap": 98145581430,
+      "dataPath": "/data/edgequity/stocks/FTNT.json"
     },
     {
-      "ticker": "SQ",
-      "name": "Block, Inc.",
-      "sector": "Technology",
-      "industry": "Software - Infrastructure",
-      "marketCap": null,
-      "dataPath": "/data/edgequity/stocks/SQ.json"
+      "ticker": "OKTA",
+      "name": "Okta Inc",
+      "sector": "AI Infrastructure",
+      "industry": "Cybersecurity",
+      "marketCap": 16449248833.000002,
+      "dataPath": "/data/edgequity/stocks/OKTA.json"
     },
     {
-      "ticker": "T",
-      "name": "AT&T Inc.",
-      "sector": "Communication Services",
-      "industry": "Telecom Services",
-      "marketCap": null,
-      "dataPath": "/data/edgequity/stocks/T.json"
+      "ticker": "NET",
+      "name": "Cloudflare Inc",
+      "sector": "AI Infrastructure",
+      "industry": "Cybersecurity",
+      "marketCap": 76893045180,
+      "dataPath": "/data/edgequity/stocks/NET.json"
     },
     {
-      "ticker": "TGT",
-      "name": "Target Corporation",
-      "sector": "Consumer Defensive",
-      "industry": "Discount Stores",
-      "marketCap": null,
-      "dataPath": "/data/edgequity/stocks/TGT.json"
+      "ticker": "ANET",
+      "name": "Arista Networks Inc",
+      "sector": "AI Infrastructure",
+      "industry": "Data Center Networking",
+      "marketCap": 198966601710.99997,
+      "dataPath": "/data/edgequity/stocks/ANET.json"
     },
     {
-      "ticker": "TLRY",
-      "name": "Tilray Brands, Inc.",
-      "sector": "Healthcare",
-      "industry": "Drug Manufacturers - Specialty & Generic",
-      "marketCap": null,
-      "dataPath": "/data/edgequity/stocks/TLRY.json"
+      "ticker": "CSCO",
+      "name": "Cisco Systems Inc",
+      "sector": "AI Infrastructure",
+      "industry": "Data Center Networking",
+      "marketCap": 466389988811,
+      "dataPath": "/data/edgequity/stocks/CSCO.json"
+    },
+    {
+      "ticker": "DELL",
+      "name": "Dell Technologies Inc",
+      "sector": "AI Infrastructure",
+      "industry": "AI Servers & Hardware",
+      "marketCap": 199041656384.00003,
+      "dataPath": "/data/edgequity/stocks/DELL.json"
+    },
+    {
+      "ticker": "HPE",
+      "name": "Hewlett Packard Enterprise Co",
+      "sector": "AI Infrastructure",
+      "industry": "AI Servers & Hardware",
+      "marketCap": 50500069857.00001,
+      "dataPath": "/data/edgequity/stocks/HPE.json"
+    },
+    {
+      "ticker": "SMCI",
+      "name": "Super Micro Computer Inc",
+      "sector": "AI Infrastructure",
+      "industry": "AI Servers & Hardware",
+      "marketCap": 22312626103,
+      "dataPath": "/data/edgequity/stocks/SMCI.json"
+    },
+    {
+      "ticker": "NTAP",
+      "name": "NetApp Inc",
+      "sector": "AI Infrastructure",
+      "industry": "AI Servers & Hardware",
+      "marketCap": 27419060398,
+      "dataPath": "/data/edgequity/stocks/NTAP.json"
+    },
+    {
+      "ticker": "WDC",
+      "name": "Western Digital Corp",
+      "sector": "AI Infrastructure",
+      "industry": "AI Servers & Hardware",
+      "marketCap": 157106120000,
+      "dataPath": "/data/edgequity/stocks/WDC.json"
+    },
+    {
+      "ticker": "VRT",
+      "name": "Vertiv Holdings Co",
+      "sector": "AI Infrastructure",
+      "industry": "Power & Cooling Infrastructure",
+      "marketCap": 123925030000,
+      "dataPath": "/data/edgequity/stocks/VRT.json"
+    },
+    {
+      "ticker": "ETN",
+      "name": "Eaton Corporation PLC",
+      "sector": "AI Infrastructure",
+      "industry": "Power & Cooling Infrastructure",
+      "marketCap": 156535375975,
+      "dataPath": "/data/edgequity/stocks/ETN.json"
+    },
+    {
+      "ticker": "GEV",
+      "name": "GE Vernova Inc",
+      "sector": "AI Infrastructure",
+      "industry": "Power & Cooling Infrastructure",
+      "marketCap": 287656691834,
+      "dataPath": "/data/edgequity/stocks/GEV.json"
+    },
+    {
+      "ticker": "CEG",
+      "name": "Constellation Energy Corp",
+      "sector": "AI Infrastructure",
+      "industry": "Power & Cooling Infrastructure",
+      "marketCap": 108924090088,
+      "dataPath": "/data/edgequity/stocks/CEG.json"
+    },
+    {
+      "ticker": "VST",
+      "name": "Vistra Corp",
+      "sector": "AI Infrastructure",
+      "industry": "Power & Cooling Infrastructure",
+      "marketCap": 45421850000,
+      "dataPath": "/data/edgequity/stocks/VST.json"
+    },
+    {
+      "ticker": "NRG",
+      "name": "NRG Energy Inc",
+      "sector": "AI Infrastructure",
+      "industry": "Power & Cooling Infrastructure",
+      "marketCap": 29628827798,
+      "dataPath": "/data/edgequity/stocks/NRG.json"
+    },
+    {
+      "ticker": "EQIX",
+      "name": "Equinix Inc",
+      "sector": "AI Infrastructure",
+      "industry": "Data Center REITs",
+      "marketCap": 106280453508,
+      "dataPath": "/data/edgequity/stocks/EQIX.json"
+    },
+    {
+      "ticker": "DLR",
+      "name": "Digital Realty Trust Inc",
+      "sector": "AI Infrastructure",
+      "industry": "Data Center REITs",
+      "marketCap": 68056812332,
+      "dataPath": "/data/edgequity/stocks/DLR.json"
+    },
+    {
+      "ticker": "APP",
+      "name": "Applovin Corp",
+      "sector": "AI Infrastructure",
+      "industry": "AI Apps & Automation",
+      "marketCap": 172753779557,
+      "dataPath": "/data/edgequity/stocks/APP.json"
+    },
+    {
+      "ticker": "PATH",
+      "name": "UiPath Inc",
+      "sector": "AI Infrastructure",
+      "industry": "AI Apps & Automation",
+      "marketCap": 5771720552,
+      "dataPath": "/data/edgequity/stocks/PATH.json"
+    },
+    {
+      "ticker": "UBER",
+      "name": "Uber Technologies Inc",
+      "sector": "AI Infrastructure",
+      "industry": "AI Apps & Automation",
+      "marketCap": 143377414887.3255,
+      "dataPath": "/data/edgequity/stocks/UBER.json"
     },
     {
       "ticker": "TSLA",
       "name": "Tesla Inc",
-      "sector": "Consumer Cyclical",
-      "industry": "Auto Manufacturers",
-      "marketCap": 560000000000,
+      "sector": "AI Infrastructure",
+      "industry": "AI Apps & Automation",
+      "marketCap": 1628444196197,
       "dataPath": "/data/edgequity/stocks/TSLA.json"
-    },
-    {
-      "ticker": "TSM",
-      "name": "Taiwan Semiconductor Manufacturing Company Limited",
-      "sector": "Technology",
-      "industry": "Semiconductors",
-      "marketCap": null,
-      "dataPath": "/data/edgequity/stocks/TSM.json"
-    },
-    {
-      "ticker": "TWTR",
-      "name": "Twitter, Inc.",
-      "sector": "Communication Services",
-      "industry": "Internet Content & Information",
-      "marketCap": null,
-      "dataPath": "/data/edgequity/stocks/TWTR.json"
-    },
-    {
-      "ticker": "UAL",
-      "name": "United Airlines Holdings, Inc.",
-      "sector": "Industrials",
-      "industry": "Airlines",
-      "marketCap": null,
-      "dataPath": "/data/edgequity/stocks/UAL.json"
-    },
-    {
-      "ticker": "UBER",
-      "name": "Uber Technologies, Inc.",
-      "sector": "Technology",
-      "industry": "Software - Application",
-      "marketCap": null,
-      "dataPath": "/data/edgequity/stocks/UBER.json"
-    },
-    {
-      "ticker": "UNH",
-      "name": "UnitedHealth Group Incorporated",
-      "sector": "Healthcare",
-      "industry": "Healthcare Plans",
-      "marketCap": null,
-      "dataPath": "/data/edgequity/stocks/UNH.json"
-    },
-    {
-      "ticker": "V",
-      "name": "Visa Inc",
-      "sector": "Financial Services",
-      "industry": "Credit Services",
-      "marketCap": 560000000000,
-      "dataPath": "/data/edgequity/stocks/V.json"
-    },
-    {
-      "ticker": "VIAC",
-      "name": "ViacomCBS Inc.",
-      "sector": "Communication Services",
-      "industry": "Entertainment",
-      "marketCap": null,
-      "dataPath": "/data/edgequity/stocks/VIAC.json"
-    },
-    {
-      "ticker": "VZ",
-      "name": "Verizon Communications Inc.",
-      "sector": "Communication Services",
-      "industry": "Telecom Services",
-      "marketCap": null,
-      "dataPath": "/data/edgequity/stocks/VZ.json"
-    },
-    {
-      "ticker": "WBA",
-      "name": "Walgreens Boots Alliance, Inc.",
-      "sector": "Healthcare",
-      "industry": "Pharmaceutical Retailers",
-      "marketCap": null,
-      "dataPath": "/data/edgequity/stocks/WBA.json"
-    },
-    {
-      "ticker": "WFC",
-      "name": "Wells Fargo & Company",
-      "sector": "Financial Services",
-      "industry": "Banks - Diversified",
-      "marketCap": null,
-      "dataPath": "/data/edgequity/stocks/WFC.json"
-    },
-    {
-      "ticker": "WMT",
-      "name": "Walmart Inc",
-      "sector": "Consumer Defensive",
-      "industry": "Discount Stores",
-      "marketCap": 545000000000,
-      "dataPath": "/data/edgequity/stocks/WMT.json"
-    },
-    {
-      "ticker": "XOM",
-      "name": "Exxon Mobil Corp",
-      "sector": "Energy",
-      "industry": "Oil & Gas Integrated",
-      "marketCap": 500000000000,
-      "dataPath": "/data/edgequity/stocks/XOM.json"
-    },
-    {
-      "ticker": "ZM",
-      "name": "Zoom Video Communications, Inc.",
-      "sector": "Technology",
-      "industry": "Software - Application",
-      "marketCap": null,
-      "dataPath": "/data/edgequity/stocks/ZM.json"
     }
   ]
 }

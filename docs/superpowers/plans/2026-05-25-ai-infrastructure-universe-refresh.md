@@ -1251,7 +1251,7 @@ Confirm `package.json` keeps:
 Run:
 
 ```bash
-$env:FINNHUB_API_KEY="ctj1dchr01qgfbsvp4mgctj1dchr01qgfbsvp4n0"; $env:EDGEQUITY_TICKERS="NVDA,MSFT,GOOG"; npm run edgequity:data
+$env:FINNHUB_API_KEY="<set locally>"; $env:EDGEQUITY_TICKERS="NVDA,MSFT,GOOG"; npm run edgequity:data
 ```
 
 Expected: generated manifest with 3 stocks and no TypeScript runtime errors.
@@ -1261,7 +1261,7 @@ Expected: generated manifest with 3 stocks and no TypeScript runtime errors.
 Run:
 
 ```bash
-$env:FINNHUB_API_KEY="ctj1dchr01qgfbsvp4mgctj1dchr01qgfbsvp4n0"; Remove-Item Env:\EDGEQUITY_TICKERS -ErrorAction SilentlyContinue; npm run edgequity:data
+$env:FINNHUB_API_KEY="<set locally>"; Remove-Item Env:\EDGEQUITY_TICKERS -ErrorAction SilentlyContinue; npm run edgequity:data
 ```
 
 Expected: generated manifest with 50 stocks.
