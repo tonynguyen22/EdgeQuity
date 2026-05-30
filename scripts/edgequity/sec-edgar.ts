@@ -239,16 +239,27 @@ function quarterDurationDays(row: { start?: string; end: string }): number | nul
   return (endMs - startMs) / 86_400_000;
 }
 
+function quarterFactScore<T extends SecQuarterlyUsdRow>(row: T): number {
+  const days = quarterDurationDays(row);
+  if (days === null) return 900;
+  if (days >= 70 && days <= 120) return Math.abs(days - 91);
+  if (days < 70) return 400 + (70 - days);
+  return 400 + (days - 120);
+}
+
 /** Prefer ~3-month fiscal quarter facts over YTD cumulative duplicates at the same period end. */
 export function pickBetterQuarterFact<T extends SecQuarterlyUsdRow>(left: T, right: T): T {
-  const score = (row: T): number => {
-    const days = quarterDurationDays(row);
-    if (days === null) return 900;
-    if (days >= 70 && days <= 120) return Math.abs(days - 91);
-    if (days < 70) return 400 + (70 - days);
-    return 400 + (days - 120);
-  };
-  return score(left) <= score(right) ? left : right;
+  const leftScore = quarterFactScore(left);
+  const rightScore = quarterFactScore(right);
+  if (Math.abs(leftScore - rightScore) > 50) {
+    return leftScore <= rightScore ? left : right;
+  }
+
+  if (left.end !== right.end) {
+    return left.end > right.end ? left : right;
+  }
+
+  return leftScore <= rightScore ? left : right;
 }
 
 export function pickQuarterlyUsdRows(

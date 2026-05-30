@@ -26,7 +26,7 @@ export interface FundamentalsChartsSection {
 export interface FundamentalsChartsDocument {
   schemaVersion: number;
   ticker: string;
-  source: 'sec-edgar+finnhub' | 'fmp' | 'static-summary';
+  source: 'sec-edgar+finnhub' | 'fmp' | 'static-summary' | 'sec';
   fetchedAt: string;
   status: 'ok' | 'partial' | 'missing';
   sections: FundamentalsChartsSection[];
