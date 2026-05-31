@@ -54,7 +54,12 @@ export default function MetricTrendChart({
         <span>Y: {yAxisLabel}</span>
         <span>X: {xAxisLabel}</span>
       </div>
-      <svg viewBox={`0 0 ${layout.width} ${layout.height}`} role="img" aria-label={`${title} ${cadence} chart`}>
+      <svg
+        className="eq-fundamentals-chart-svg"
+        viewBox={`0 0 ${layout.width} ${layout.height}`}
+        role="img"
+        aria-label={`${title} ${cadence} chart`}
+      >
         <text className="eq-fundamentals-chart-y" x={layout.yAxisX} y={layout.top + 4} textAnchor="end">
           {formatAxisValue(layout.max, format)}
         </text>
@@ -84,17 +89,12 @@ export default function MetricTrendChart({
           ))
           : layout.polyline && <polyline className="eq-fundamentals-chart-line" points={layout.polyline} />}
         {layout.plotPoints.map((point) => {
-          const pointPeriodLabel = point.inProgress ? `${point.period} in progress` : point.period;
-          const label = `${title} ${pointPeriodLabel}: ${formatFundamentalsValue(point.value, format)}`;
-          const visibleLabel = `${point.inProgress ? `${point.period} (in progress)` : point.period} - ${formatFundamentalsValue(point.value, format)}`;
-          const tooltipWidth = Math.max(92, visibleLabel.length * 6.2 + 18);
-          const tooltipHeight = 22;
-          const tooltipRectX = point.tooltipAnchor === 'end'
-            ? point.tooltipX - tooltipWidth - 6
-            : point.tooltipAnchor === 'middle'
-              ? point.tooltipX - tooltipWidth / 2
-              : point.tooltipX - 6;
-          const tooltipRectY = point.tooltipY - 16;
+          const periodText = formatHoverPeriod(point.period);
+          const pointPeriodLabel = point.inProgress ? `${periodText} in progress` : periodText;
+          const valueText = formatFundamentalsValue(point.value, format);
+          const label = `${title} ${pointPeriodLabel}: ${valueText}`;
+          const visibleLabel = `${point.inProgress ? `${periodText} (in progress)` : periodText} - ${valueText}`;
+          const tooltip = layoutTooltip(visibleLabel, point.x, point.y, layout);
           return (
             <g className="eq-fundamentals-chart-hover" key={point.period}>
               <circle
@@ -116,18 +116,19 @@ export default function MetricTrendChart({
               />
               <rect
                 className="eq-fundamentals-chart-tooltip-bg"
-                x={tooltipRectX}
-                y={tooltipRectY}
-                width={tooltipWidth}
-                height={tooltipHeight}
+                x={tooltip.x}
+                y={tooltip.y}
+                width={tooltip.width}
+                height={tooltip.height}
                 rx="5"
                 aria-hidden="true"
               />
               <text
                 className="eq-fundamentals-chart-hover-label"
-                x={point.tooltipX}
-                y={point.tooltipY}
-                textAnchor={point.tooltipAnchor}
+                x={tooltip.textX}
+                y={tooltip.textY}
+                textAnchor="middle"
+                dominantBaseline="middle"
               >
                 {visibleLabel}
               </text>
@@ -172,6 +173,11 @@ function formatPeriodLabel(period: string): string {
   const annualDate = period.match(/^(\d{4})-\d{2}-\d{2}$/);
   if (annualDate) return annualDate[1]!;
   return period.length > 6 ? period.slice(0, 6) : period;
+}
+
+function formatHoverPeriod(period: string): string {
+  if (/^\d{4}-\d{2}-\d{2}$/.test(period)) return period;
+  return formatPeriodLabel(period);
 }
 
 function normalizeChartPoints(
@@ -252,10 +258,7 @@ function buildChartLayout(points: FundamentalsChartPoint[]) {
   const plotPoints = points.map((point, index) => {
     const x = points.length <= 1 ? plotLeft : plotLeft + (index / (points.length - 1)) * (plotRight - plotLeft);
     const y = bottom - ((point.value - min) / range) * (bottom - top);
-    const tooltipAnchor: 'start' | 'middle' | 'end' = x > right - 70 ? 'end' : x < left + 70 ? 'start' : 'middle';
-    const tooltipY = Math.max(top + 12, y - 12);
-    const tooltipX = tooltipAnchor === 'end' ? x - 8 : tooltipAnchor === 'start' ? x + 8 : x;
-    return { ...point, x, y, tooltipX, tooltipY, tooltipAnchor };
+    return { ...point, x, y };
   });
   const barWidth = Math.max(8, Math.min(34, (right - left) / Math.max(points.length, 1) * 0.58));
 
@@ -276,6 +279,8 @@ function buildChartLayout(points: FundamentalsChartPoint[]) {
     bottom,
     xLabelY,
     yAxisX,
+    plotLeft,
+    plotRight,
     min,
     max,
     midValue,
@@ -283,5 +288,51 @@ function buildChartLayout(points: FundamentalsChartPoint[]) {
     polyline: plotPoints.map((point) => `${point.x},${point.y}`).join(' '),
     plotPoints,
     xLabels,
+  };
+}
+
+interface TooltipLayout {
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+  textX: number;
+  textY: number;
+}
+
+function layoutTooltip(
+  label: string,
+  pointX: number,
+  pointY: number,
+  layout: {
+    left: number;
+    right: number;
+    top: number;
+    bottom: number;
+    plotLeft: number;
+    plotRight: number;
+  },
+): TooltipLayout {
+  const paddingX = 10;
+  const height = 22;
+  const charWidth = 5.8;
+  const maxWidth = layout.plotRight - layout.plotLeft - 8;
+  const width = Math.min(maxWidth, Math.max(88, label.length * charWidth + paddingX * 2));
+
+  let x = pointX - width / 2;
+  x = Math.max(layout.plotLeft + 2, Math.min(x, layout.plotRight - width - 2));
+
+  const aboveY = pointY - height - 12;
+  const belowY = pointY + 12;
+  let y = aboveY >= layout.top + 2 ? aboveY : belowY;
+  y = Math.max(layout.top + 2, Math.min(y, layout.bottom - height - 2));
+
+  return {
+    x,
+    y,
+    width,
+    height,
+    textX: x + width / 2,
+    textY: y + height / 2,
   };
 }

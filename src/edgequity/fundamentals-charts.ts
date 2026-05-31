@@ -205,7 +205,7 @@ function partialAnnualPointFromQuarters(
   latestAnnualPeriod: string | null,
 ): FundamentalsChartPoint | null {
   const quarters = getStatementPeriods(stock, 'quarterly', key)
-    .map((period) => ({ statement: period, label: periodLabel(period), value: metricValueFromPeriod(period, key) }))
+    .map((period) => ({ statement: period, label: periodLabelForStock(stock, period), value: metricValueFromPeriod(period, key) }))
     .filter((period): period is { statement: EdgequityFinancialStatementPeriod; label: string; value: number } => period.value !== null)
     .sort((left, right) => comparePeriods({ period: left.label, value: left.value }, { period: right.label, value: right.value }));
   const latestQuarter = quarters.at(-1);
@@ -294,12 +294,36 @@ function periodLabel(period: EdgequityFinancialStatementPeriod): string {
 }
 
 function periodLabelForStock(stock: EdgequityStockRecord, period: EdgequityFinancialStatementPeriod): string {
-  const latestEnd = latestQuarterEndDate(stock);
-  if (period.date && period.date === latestEnd) {
-    const earningsLabel = earningsQuarterChartLabel(stock);
-    if (earningsLabel) return earningsLabel;
+  const offset = resolveFiscalYearDisplayOffset(stock);
+  if (period.period && period.period !== 'FY') {
+    const fiscalYear = Number(period.fiscalYear);
+    if (Number.isFinite(fiscalYear)) {
+      return `${fiscalYear + offset}-Q${period.period.replace(/^Q/i, '')}`;
+    }
   }
-  return periodLabel(period);
+  const fiscalYear = Number(period.fiscalYear);
+  return Number.isFinite(fiscalYear) ? String(fiscalYear + offset) : period.fiscalYear;
+}
+
+function resolveFiscalYearDisplayOffset(stock: EdgequityStockRecord): number {
+  const earningsLabel = earningsQuarterChartLabel(stock);
+  const latestEnd = latestQuarterEndDate(stock);
+  if (!earningsLabel || !latestEnd) return 0;
+
+  const earningsMatch = earningsLabel.match(/^(\d{4})-Q([1-4])$/);
+  if (!earningsMatch) return 0;
+
+  const latestPeriod = stock.financialStatements?.quarterly?.incomeStatement?.find((row) => row.date === latestEnd);
+  if (!latestPeriod?.period || latestPeriod.period === 'FY') return 0;
+
+  const secQuarter = latestPeriod.period.replace(/^Q/i, '');
+  if (secQuarter !== earningsMatch[2]) return 0;
+
+  const secYear = Number(latestPeriod.fiscalYear);
+  const earningsYear = Number(earningsMatch[1]);
+  if (!Number.isFinite(secYear) || !Number.isFinite(earningsYear)) return 0;
+
+  return earningsYear - secYear;
 }
 
 function latestQuarterEndDate(stock: EdgequityStockRecord): string | null {
@@ -315,7 +339,7 @@ function latestQuarterEndDate(stock: EdgequityStockRecord): string | null {
 function earningsQuarterChartLabel(stock: EdgequityStockRecord): string | null {
   const period = stock.earnings?.recent?.period;
   if (!period) return null;
-  const match = period.match(/^Q([1-4])\s+(\d{4})$/i);
+  const match = period.match(/^Q([1-4])\s+(\d{4})$/i) ?? period.match(/^Q([1-4])\s+FY?(\d{4})$/i);
   if (!match) return null;
   return `${match[2]}-Q${match[1]}`;
 }

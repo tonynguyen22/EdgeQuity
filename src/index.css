@@ -517,11 +517,13 @@ thead .eq-sticky-col {
   margin-bottom: 8px;
 }
 
-.eq-fundamentals-chart svg {
+.eq-fundamentals-chart svg,
+.eq-fundamentals-chart-svg {
   display: block;
   width: 100%;
   height: auto;
   min-height: 220px;
+  overflow: hidden;
 }
 
 .eq-fundamentals-chart-y,

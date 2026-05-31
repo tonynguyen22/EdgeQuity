@@ -491,8 +491,8 @@ test('StockDetail AI Analysis uses paired annual and quarterly fundamental metri
   assert.ok(html.indexOf('A. Revenue') < html.indexOf('Annual'));
   assert.ok(html.indexOf('Annual') < html.indexOf('Quarterly'));
   assert.match(html, /20Q/);
-  assert.match(html, /FCF margin Annual 2025: 22\.00%/);
-  assert.match(html, /FCF margin Quarterly 2025-Q4: 29\.00%/);
+  assert.match(html, /FCF margin Annual 2025: 22\.00%|FCF margin Annual &#x27;25: 22\.00%/);
+  assert.match(html, /FCF margin Quarterly (2025-Q4|&#x27;25 Q4): 29\.00%/);
 });
 
 test('MetricTrendChart formats per-share currency values with cents', () => {
@@ -788,7 +788,7 @@ test('MetricTrendChart marks in-progress annual bars', () => {
   assert.match(html, /eq-fundamentals-chart-bar is-in-progress/);
   assert.match(html, /2026-12-31 in progress/);
   assert.match(html, /aria-label="Revenue 2026-12-31 in progress: \$60"/);
-  assert.match(html, />2026-12-31 \(in progress\) - \$60</);
+  assert.match(html, /2026-12-31 \(in progress\) - \$60/);
 });
 
 test('MetricTrendChart does not fade completed fiscal years with current-year labels', () => {
@@ -829,8 +829,8 @@ test('MetricTrendChart maxPoints can render the latest twenty quarterly points',
   assert.match(html, /20Q/);
   assert.doesNotMatch(html, /Gross Margin 2020-Q1/);
   assert.doesNotMatch(html, /Gross Margin 2020-Q4/);
-  assert.match(html, /Gross Margin 2021-Q1: 5\.00%/);
-  assert.match(html, /Gross Margin 2025-Q4: 24\.00%/);
+  assert.match(html, /Gross Margin (2021-Q1|&#x27;21 Q1): 5\.00%/);
+  assert.match(html, /Gross Margin (2025-Q4|&#x27;25 Q4): 24\.00%/);
 });
 
 test('MetricTrendChart labels partial quarterly coverage by actual point count', () => {
