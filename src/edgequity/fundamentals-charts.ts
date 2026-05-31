@@ -70,7 +70,11 @@ export function formatFundamentalsValue(value: number | null, format: Fundamenta
 }
 
 export function latestPoint(metric: FundamentalsChartMetric): FundamentalsChartPoint | null {
-  return metric.quarterly.at(-1) ?? metric.annual.at(-1) ?? null;
+  const quarterly = [...metric.quarterly].sort(comparePeriods);
+  if (quarterly.length > 0) return quarterly.at(-1) ?? null;
+
+  const annual = [...metric.annual].sort(comparePeriods);
+  return annual.at(-1) ?? null;
 }
 
 export function buildFundamentalsChartsFromStock(stock: EdgequityStockRecord): FundamentalsChartsDocument {
@@ -174,7 +178,7 @@ function pointsForMetric(
         const value = metricValueFromPeriod(period, key);
         return value === null
           ? null
-          : { period: periodLabel(period), periodEnd: period.date ?? undefined, value };
+          : { period: periodLabelForStock(stock, period), periodEnd: period.date ?? undefined, value };
       })
       .filter((point): point is FundamentalsChartPoint => point !== null)
       .sort(comparePeriods);
@@ -289,8 +293,43 @@ function periodLabel(period: EdgequityFinancialStatementPeriod): string {
   return period.fiscalYear;
 }
 
+function periodLabelForStock(stock: EdgequityStockRecord, period: EdgequityFinancialStatementPeriod): string {
+  const latestEnd = latestQuarterEndDate(stock);
+  if (period.date && period.date === latestEnd) {
+    const earningsLabel = earningsQuarterChartLabel(stock);
+    if (earningsLabel) return earningsLabel;
+  }
+  return periodLabel(period);
+}
+
+function latestQuarterEndDate(stock: EdgequityStockRecord): string | null {
+  const rows = stock.financialStatements?.quarterly?.incomeStatement ?? [];
+  let latest: string | null = null;
+  for (const row of rows) {
+    if (!row.date) continue;
+    if (!latest || row.date > latest) latest = row.date;
+  }
+  return latest;
+}
+
+function earningsQuarterChartLabel(stock: EdgequityStockRecord): string | null {
+  const period = stock.earnings?.recent?.period;
+  if (!period) return null;
+  const match = period.match(/^Q([1-4])\s+(\d{4})$/i);
+  if (!match) return null;
+  return `${match[2]}-Q${match[1]}`;
+}
+
 function comparePeriods(a: FundamentalsChartPoint, b: FundamentalsChartPoint): number {
+  const leftEnd = periodSortKey(a.periodEnd ?? a.period);
+  const rightEnd = periodSortKey(b.periodEnd ?? b.period);
+  if (leftEnd !== rightEnd) return leftEnd.localeCompare(rightEnd);
   return sortablePeriod(a.period).localeCompare(sortablePeriod(b.period));
+}
+
+function periodSortKey(periodEndOrLabel: string): string {
+  if (/^\d{4}-\d{2}-\d{2}$/.test(periodEndOrLabel)) return periodEndOrLabel;
+  return '';
 }
 
 function sortablePeriod(period: string): string {

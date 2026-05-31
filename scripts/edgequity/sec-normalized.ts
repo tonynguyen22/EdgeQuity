@@ -207,7 +207,7 @@ function sortAnnualDesc(rows: RawObject[]): RawObject[] {
 
 function sortQuarterDesc(rows: RawObject[]): RawObject[] {
   return rows
-    .sort((left, right) => `${right.fiscalYear}-${right.period}`.localeCompare(`${left.fiscalYear}-${left.period}`))
+    .sort((left, right) => String(right.date ?? "").localeCompare(String(left.date ?? "")))
     .slice(0, QUARTERLY_PERIOD_LIMIT);
 }
 

@@ -187,8 +187,15 @@ function normalizeChartPoints(
       inProgress: point.inProgress ?? (cadence === 'Annual' && isAnnualPeriodInProgress(point.periodEnd ?? point.period, currentDate)),
     }))
     .slice()
-    .sort((left, right) => comparePeriods(left.period, right.period))
+    .sort(compareChartPoints)
     .slice(-Math.max(0, maxPoints));
+}
+
+function compareChartPoints(left: FundamentalsChartPoint, right: FundamentalsChartPoint): number {
+  const leftEnd = left.periodEnd ?? left.period;
+  const rightEnd = right.periodEnd ?? right.period;
+  if (leftEnd !== rightEnd) return leftEnd.localeCompare(rightEnd);
+  return comparePeriods(left.period, right.period);
 }
 
 function isAnnualPeriodInProgress(period: string, currentDate: Date): boolean {
