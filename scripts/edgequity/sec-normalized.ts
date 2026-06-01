@@ -4,6 +4,7 @@ import {
   loadSecTickerMap,
   padCik,
   pickAnnualUsdValues,
+  pickQuarterlyInstantUsdRows,
   pickQuarterlyUsdRows,
   resolveCik,
   secQuarterPeriod,
@@ -127,11 +128,26 @@ function quarterlyValuesByConcept(
   facts: CompanyFactsPayload,
   concepts: readonly string[],
 ): Map<string, { fiscalYear: string; period: string; date: string; value: number }> {
+  return quarterlyValuesByConceptPicker(facts, concepts, pickQuarterlyUsdRows);
+}
+
+function quarterlyInstantValuesByConcept(
+  facts: CompanyFactsPayload,
+  concepts: readonly string[],
+): Map<string, { fiscalYear: string; period: string; date: string; value: number }> {
+  return quarterlyValuesByConceptPicker(facts, concepts, pickQuarterlyInstantUsdRows);
+}
+
+function quarterlyValuesByConceptPicker(
+  facts: CompanyFactsPayload,
+  concepts: readonly string[],
+  pickRows: typeof pickQuarterlyUsdRows,
+): Map<string, { fiscalYear: string; period: string; date: string; value: number }> {
   const candidates: Array<{ values: ReturnType<typeof pickQuarterlyUsdRows>; score: string }> = [];
 
   for (const concept of concepts) {
     const series = findConceptSeries(facts.facts, [concept])?.series;
-    const values = pickQuarterlyUsdRows(series, QUARTERLY_PERIOD_LIMIT);
+    const values = pickRows(series, QUARTERLY_PERIOD_LIMIT);
     if (values.length === 0) continue;
 
     const latest = values.at(-1);
@@ -165,6 +181,12 @@ function addQuarterlyConcept(rows: RawObject[], facts: CompanyFactsPayload, targ
   }
 }
 
+function addQuarterlyInstantConcept(rows: RawObject[], facts: CompanyFactsPayload, targetKey: string, concepts: readonly string[]): void {
+  for (const row of quarterlyInstantValuesByConcept(facts, concepts).values()) {
+    mergeByQuarter(rows, row.fiscalYear, row.period, row.date, targetKey, row.value);
+  }
+}
+
 function addAnnualSummedConcept(rows: RawObject[], facts: CompanyFactsPayload, targetKey: string, concepts: readonly string[]): void {
   const byYear = new Map<string, { value: number; end: string }>();
 
@@ -184,10 +206,24 @@ function addAnnualSummedConcept(rows: RawObject[], facts: CompanyFactsPayload, t
 }
 
 function addQuarterlySummedConcept(rows: RawObject[], facts: CompanyFactsPayload, targetKey: string, concepts: readonly string[]): void {
+  addQuarterlySummedConceptWithPicker(rows, facts, targetKey, concepts, quarterlyValuesByConcept);
+}
+
+function addQuarterlyInstantSummedConcept(rows: RawObject[], facts: CompanyFactsPayload, targetKey: string, concepts: readonly string[]): void {
+  addQuarterlySummedConceptWithPicker(rows, facts, targetKey, concepts, quarterlyInstantValuesByConcept);
+}
+
+function addQuarterlySummedConceptWithPicker(
+  rows: RawObject[],
+  facts: CompanyFactsPayload,
+  targetKey: string,
+  concepts: readonly string[],
+  pickValues: typeof quarterlyValuesByConcept,
+): void {
   const byQuarter = new Map<string, { fiscalYear: string; period: string; date: string; value: number }>();
 
   for (const concept of concepts) {
-    for (const [key, row] of quarterlyValuesByConcept(facts, [concept])) {
+    for (const [key, row] of pickValues(facts, [concept])) {
       const existing = byQuarter.get(key);
       byQuarter.set(key, {
         ...row,
@@ -219,6 +255,82 @@ function finishCashFlows(rows: RawObject[]): void {
   }
 }
 
+/**
+ * Derive Q4 rows for duration-based statements (income statement, cash flow).
+ *
+ * SEC does not file a separate 10-Q for Q4 — the Q4 data is embedded in the
+ * 10-K annual report.  This computes Q4 = Annual − Q1 − Q2 − Q3 for each
+ * additive metric.  Quarters are matched to their annual period by date range,
+ * not fiscal-year label, so non-calendar FY companies (e.g. NVDA, Jan FY end)
+ * are handled correctly.
+ */
+export function deriveQ4Rows(
+  annualRows: RawObject[],
+  quarterlyRows: RawObject[],
+  additiveKeys: readonly string[],
+): RawObject[] {
+  const sortedAnnual = [...annualRows]
+    .filter((r) => typeof r.date === "string" && (r.date as string).length >= 10)
+    .sort((a, b) => (a.date as string).localeCompare(b.date as string));
+
+  if (sortedAnnual.length === 0) return [];
+
+  const derived: RawObject[] = [];
+
+  for (let i = 0; i < sortedAnnual.length; i++) {
+    const annual = sortedAnnual[i];
+    const annualDate = annual.date as string;
+
+    // Lower date bound: previous annual end date, or ~380 days before current
+    const lowerBound =
+      i > 0
+        ? (sortedAnnual[i - 1].date as string)
+        : new Date(new Date(annualDate).getTime() - 380 * 86_400_000).toISOString().slice(0, 10);
+
+    // Find Q1/Q2/Q3 whose dates are in (lowerBound, annualDate) — exclusive on both ends
+    const matchingQuarters = quarterlyRows.filter((q) => {
+      const qDate = String(q.date ?? "");
+      return qDate > lowerBound && qDate < annualDate && q.period !== "Q4";
+    });
+
+    if (matchingQuarters.length !== 3) continue;
+
+    // Skip if Q4 already exists at this annual end date
+    if (quarterlyRows.some((q) => q.period === "Q4" && String(q.date ?? "") === annualDate)) continue;
+
+    const q4Row: RawObject = {
+      fiscalYear: String(annual.fiscalYear),
+      date: annualDate,
+      period: "Q4",
+    };
+
+    let anyValue = false;
+    for (const key of additiveKeys) {
+      const annualVal = typeof annual[key] === "number" ? (annual[key] as number) : null;
+      if (annualVal === null) continue;
+
+      let qSum: number | null = 0;
+      for (const q of matchingQuarters) {
+        const v = typeof q[key] === "number" ? (q[key] as number) : null;
+        if (v === null) {
+          qSum = null;
+          break;
+        }
+        qSum += v;
+      }
+
+      if (qSum !== null) {
+        q4Row[key] = annualVal - qSum;
+        anyValue = true;
+      }
+    }
+
+    if (anyValue) derived.push(q4Row);
+  }
+
+  return derived;
+}
+
 export function buildNormalizedSecStatements(facts: CompanyFactsPayload): NormalizedStatementPayload {
   const annualIncomeStatements: RawObject[] = [];
   const annualBalanceSheets: RawObject[] = [];
@@ -232,17 +344,26 @@ export function buildNormalizedSecStatements(facts: CompanyFactsPayload): Normal
     addQuarterlyConcept(quarterlyIncomeStatements, facts, key, CONCEPTS[key]);
   }
 
+  // Derive Q4 income rows: SEC files 3×10-Q + 1×10-K; Q4 = Annual − Q1 − Q2 − Q3
+  quarterlyIncomeStatements.push(
+    ...deriveQ4Rows(annualIncomeStatements, quarterlyIncomeStatements, ["revenue", "grossProfit", "operatingIncome", "netIncome", "ebitda"]),
+  );
+
   for (const key of ["totalAssets", "totalStockholdersEquity", "cashAndCashEquivalents"] as const) {
     addAnnualConcept(annualBalanceSheets, facts, key, CONCEPTS[key]);
-    addQuarterlyConcept(quarterlyBalanceSheets, facts, key, CONCEPTS[key]);
+    addQuarterlyInstantConcept(quarterlyBalanceSheets, facts, key, CONCEPTS[key]);
   }
   addAnnualSummedConcept(annualBalanceSheets, facts, "totalDebt", CONCEPTS.totalDebt);
-  addQuarterlySummedConcept(quarterlyBalanceSheets, facts, "totalDebt", CONCEPTS.totalDebt);
+  addQuarterlyInstantSummedConcept(quarterlyBalanceSheets, facts, "totalDebt", CONCEPTS.totalDebt);
 
   for (const key of ["operatingCashFlow", "capitalExpenditure"] as const) {
     addAnnualConcept(annualCashFlows, facts, key, CONCEPTS[key]);
     addQuarterlyConcept(quarterlyCashFlows, facts, key, CONCEPTS[key]);
   }
+  // Derive Q4 cash flow rows before computing freeCashFlow
+  quarterlyCashFlows.push(
+    ...deriveQ4Rows(annualCashFlows, quarterlyCashFlows, ["operatingCashFlow", "capitalExpenditure"]),
+  );
   finishCashFlows(annualCashFlows);
   finishCashFlows(quarterlyCashFlows);
 

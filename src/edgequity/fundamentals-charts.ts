@@ -294,15 +294,16 @@ function periodLabel(period: EdgequityFinancialStatementPeriod): string {
 }
 
 function periodLabelForStock(stock: EdgequityStockRecord, period: EdgequityFinancialStatementPeriod): string {
-  const offset = resolveFiscalYearDisplayOffset(stock);
   if (period.period && period.period !== 'FY') {
     const fiscalYear = Number(period.fiscalYear);
+    const offset = resolveFiscalYearDisplayOffset(stock);
     if (Number.isFinite(fiscalYear)) {
       return `${fiscalYear + offset}-Q${period.period.replace(/^Q/i, '')}`;
     }
   }
+
   const fiscalYear = Number(period.fiscalYear);
-  return Number.isFinite(fiscalYear) ? String(fiscalYear + offset) : period.fiscalYear;
+  return Number.isFinite(fiscalYear) ? String(fiscalYear) : period.fiscalYear;
 }
 
 function resolveFiscalYearDisplayOffset(stock: EdgequityStockRecord): number {

@@ -226,12 +226,12 @@ export function pickAnnualUsdValues(
 }
 
 function annualPeriodYear(row: { end: string; frame?: string; fy?: number }): number {
-  if (!row.end.endsWith("-12-31") && typeof row.fy === "number") {
-    return row.fy;
+  const frameYear = /^CY(\d{4})$/.exec(row.frame ?? "")?.[1];
+  if (row.end.endsWith("-12-31") && frameYear) {
+    return Number.parseInt(frameYear, 10);
   }
 
-  const frameYear = /^CY(\d{4})$/.exec(row.frame ?? "")?.[1];
-  return Number.parseInt(frameYear ?? row.end.slice(0, 4), 10);
+  return Number.parseInt(row.end.slice(0, 4), 10);
 }
 
 function annualDurationDays(row: { start?: string; end: string }): number | null {
@@ -242,7 +242,7 @@ function annualDurationDays(row: { start?: string; end: string }): number | null
   return (endMs - startMs) / 86_400_000;
 }
 
-function pickBetterAnnualFact<T extends { start?: string; end: string; form?: string; fp?: string }>(left: T, right: T): T {
+function pickBetterAnnualFact<T extends { start?: string; end: string; form?: string; fp?: string; frame?: string }>(left: T, right: T): T {
   const isFullYear = (row: T): boolean => {
     const days = annualDurationDays(row);
     return days === null || (days >= 300 && days <= 430);
@@ -258,7 +258,8 @@ function pickBetterAnnualFact<T extends { start?: string; end: string; form?: st
     return formScore + periodScore;
   };
   if (score(left) !== score(right)) return score(left) <= score(right) ? left : right;
-  return left.end >= right.end ? left : right;
+  if (Boolean(left.frame) !== Boolean(right.frame)) return right.frame ? right : left;
+  return right;
 }
 
 export type SecQuarterlyUsdRow = {
@@ -281,7 +282,7 @@ function calendarQuarter(end: string): string | null {
 }
 
 export function secQuarterPeriod(row: { end: string; fy?: number; fp?: string; frame?: string }): { fiscalYear: string; period: string } {
-  const frame = /^CY(\d{4})Q([1-4])$/.exec(row.frame ?? "");
+  const frame = /^CY(\d{4})Q([1-4])I?$/.exec(row.frame ?? "");
   if (frame && row.fp === `Q${frame[2]}`) {
     return { fiscalYear: frame[1] ?? row.end.slice(0, 4), period: `Q${frame[2]}` };
   }
@@ -366,6 +367,46 @@ export function pickQuarterlyUsdRows(
 
   return [...byPeriod.values()]
     .filter((row) => isFiscalQuarterDuration(quarterDurationDays(row)))
+    .sort((left, right) => left.end.localeCompare(right.end))
+    .slice(-maxQuarters);
+}
+
+
+function isInstantQuarterFrame(row: SecQuarterlyUsdRow): boolean {
+  return /^CY\d{4}Q[1-4]I$/.test(row.frame ?? "");
+}
+
+function pickBetterInstantQuarterFact<T extends SecQuarterlyUsdRow>(left: T, right: T): T {
+  const leftHasFrame = isInstantQuarterFrame(left);
+  const rightHasFrame = isInstantQuarterFrame(right);
+  if (leftHasFrame !== rightHasFrame) return rightHasFrame ? right : left;
+  if (left.end !== right.end) return left.end > right.end ? left : right;
+  if (left.form !== right.form) return right.form === "10-Q" ? right : left;
+  return right;
+}
+
+export function pickQuarterlyInstantUsdRows(
+  series: GaapFactSeries | undefined,
+  maxQuarters = 20,
+): SecQuarterlyUsdRow[] {
+  if (!series?.units) return [];
+  const usd = series.units.USD ?? series.units.usd ?? Object.values(series.units)[0];
+  if (!usd) return [];
+
+  const instantRows = usd
+    .filter((row) => row.fp === "Q1" || row.fp === "Q2" || row.fp === "Q3" || row.fp === "Q4")
+    .filter((row) => !row.start && typeof row.val === "number" && Number.isFinite(row.val)) as SecQuarterlyUsdRow[];
+  const framedRows = instantRows.filter(isInstantQuarterFrame);
+  const quarterly = framedRows.length > 0 ? framedRows : instantRows;
+
+  const byPeriod = new Map<string, SecQuarterlyUsdRow>();
+  for (const row of quarterly) {
+    const key = secQuarterKey(row);
+    const existing = byPeriod.get(key);
+    byPeriod.set(key, existing ? pickBetterInstantQuarterFact(existing, row) : row);
+  }
+
+  return [...byPeriod.values()]
     .sort((left, right) => left.end.localeCompare(right.end))
     .slice(-maxQuarters);
 }
