@@ -544,6 +544,7 @@ thead .eq-sticky-col {
 
 .eq-fundamentals-chart-bar {
   fill: rgba(14, 116, 144, 0.72);
+  transition: fill 0.15s ease;
 }
 
 .eq-fundamentals-chart-bar.is-in-progress {
@@ -551,6 +552,17 @@ thead .eq-sticky-col {
   stroke: rgba(14, 116, 144, 0.88);
   stroke-dasharray: 5 4;
   stroke-width: 2;
+  transition: fill 0.15s ease;
+}
+
+.eq-fundamentals-chart-hover:hover .eq-fundamentals-chart-bar,
+.eq-fundamentals-chart-hover:focus-within .eq-fundamentals-chart-bar {
+  fill: rgba(14, 116, 144, 0.95);
+}
+
+.eq-fundamentals-chart-hover:hover .eq-fundamentals-chart-bar.is-in-progress,
+.eq-fundamentals-chart-hover:focus-within .eq-fundamentals-chart-bar.is-in-progress {
+  fill: rgba(14, 116, 144, 0.55);
 }
 
 .eq-fundamentals-chart-point {

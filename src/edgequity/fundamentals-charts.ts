@@ -205,16 +205,26 @@ function partialAnnualPointFromQuarters(
   latestAnnualPeriod: string | null,
 ): FundamentalsChartPoint | null {
   const quarters = getStatementPeriods(stock, 'quarterly', key)
-    .map((period) => ({ statement: period, label: periodLabelForStock(stock, period), value: metricValueFromPeriod(period, key) }))
-    .filter((period): period is { statement: EdgequityFinancialStatementPeriod; label: string; value: number } => period.value !== null)
+    .map((period) => {
+      const label = periodLabelForStock(stock, period);
+      const displayYear = label.split('-')[0] ?? period.fiscalYear;
+      return {
+        statement: period,
+        label,
+        displayYear,
+        value: metricValueFromPeriod(period, key),
+      };
+    })
+    .filter((period): period is { statement: EdgequityFinancialStatementPeriod; label: string; displayYear: string; value: number } => period.value !== null)
     .sort((left, right) => comparePeriods({ period: left.label, value: left.value }, { period: right.label, value: right.value }));
+
   const latestQuarter = quarters.at(-1);
   if (!latestQuarter) return null;
 
-  const latestQuarterYear = latestQuarter.statement.fiscalYear;
-  if (latestAnnualPeriod !== null && Number(latestQuarterYear) <= Number(latestAnnualPeriod)) return null;
+  const latestQuarterDisplayYear = latestQuarter.displayYear;
+  if (latestAnnualPeriod !== null && Number(latestQuarterDisplayYear) <= Number(latestAnnualPeriod)) return null;
 
-  const currentYearQuarters = quarters.filter((period) => period.statement.fiscalYear === latestQuarterYear);
+  const currentYearQuarters = quarters.filter((period) => period.displayYear === latestQuarterDisplayYear);
   if (currentYearQuarters.length === 0) return null;
 
   const isPointInTimeMetric = key === 'totalAssets' || key === 'totalDebt' || key === 'totalEquity';
@@ -223,7 +233,7 @@ function partialAnnualPointFromQuarters(
     : currentYearQuarters.reduce((sum, period) => sum + period.value, 0);
 
   return {
-    period: latestQuarterYear,
+    period: latestQuarterDisplayYear,
     periodEnd: latestQuarter.statement.date ?? undefined,
     value,
     inProgress: true,

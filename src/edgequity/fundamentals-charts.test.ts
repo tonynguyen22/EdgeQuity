@@ -36,5 +36,5 @@ test('NVDA annual revenue labels keep reported fiscal years', async () => {
     .sort((left, right) => (left.periodEnd ?? left.period).localeCompare(right.periodEnd ?? right.period))
     .map((point) => point.period);
 
-  assert.deepEqual(labels, ['2022', '2023', '2024', '2025', '2026']);
+  assert.deepEqual(labels, ['2022', '2023', '2024', '2025', '2026', '2027']);
 });

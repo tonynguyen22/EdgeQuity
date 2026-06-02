@@ -73,22 +73,10 @@ export default function MetricTrendChart({
         <line className="eq-fundamentals-chart-grid" x1={layout.left} y1={layout.mid} x2={layout.right} y2={layout.mid} />
         <line x1={layout.left} y1={layout.bottom} x2={layout.right} y2={layout.bottom} stroke="var(--vw-border)" />
         <line x1={layout.left} y1={layout.top} x2={layout.left} y2={layout.bottom} stroke="var(--vw-border)" />
-        {variant === 'bar'
-          ? layout.plotPoints.map((point) => (
-            <rect
-              className={point.inProgress ? 'eq-fundamentals-chart-bar is-in-progress' : 'eq-fundamentals-chart-bar'}
-              key={`bar-${point.period}`}
-              x={point.x - layout.barWidth / 2}
-              y={Math.min(point.y, layout.bottom - 2)}
-              width={layout.barWidth}
-              height={Math.max(2, layout.bottom - point.y)}
-              rx="3"
-            >
-              {point.inProgress ? <title>{`${point.period} in progress`}</title> : null}
-            </rect>
-          ))
-          : layout.polyline && <polyline className="eq-fundamentals-chart-line" points={layout.polyline} />}
-        {variant !== 'bar' && layout.plotPoints.map((point) => (
+        {variant === 'line'
+          ? (layout.polyline && <polyline className="eq-fundamentals-chart-line" points={layout.polyline} />)
+          : null}
+        {variant === 'line' && layout.plotPoints.map((point) => (
           <circle
             className="eq-fundamentals-chart-point"
             key={`point-static-${point.period}`}
@@ -107,23 +95,40 @@ export default function MetricTrendChart({
           const tooltip = layoutTooltip(visibleLabel, point.x, point.y, layout);
           return (
             <g className="eq-fundamentals-chart-hover" key={point.period}>
-              <circle
-                className="eq-fundamentals-chart-hit"
-                cx={point.x}
-                cy={point.y}
-                r="11"
-                tabIndex={0}
-                aria-label={label}
-              >
-                <title>{label}</title>
-              </circle>
-              <circle
-                className="eq-fundamentals-chart-point-active"
-                cx={point.x}
-                cy={point.y}
-                r="4.5"
-                aria-hidden="true"
-              />
+              {variant === 'bar' ? (
+                <rect
+                  className={point.inProgress ? 'eq-fundamentals-chart-bar is-in-progress' : 'eq-fundamentals-chart-bar'}
+                  x={point.x - layout.barWidth / 2}
+                  y={Math.min(point.y, layout.bottom - 2)}
+                  width={layout.barWidth}
+                  height={Math.max(2, layout.bottom - point.y)}
+                  rx="3"
+                  tabIndex={0}
+                  aria-label={label}
+                >
+                  {point.inProgress ? <title>{`${point.period} in progress`}</title> : null}
+                </rect>
+              ) : (
+                <circle
+                  className="eq-fundamentals-chart-hit"
+                  cx={point.x}
+                  cy={point.y}
+                  r="11"
+                  tabIndex={0}
+                  aria-label={label}
+                >
+                  <title>{label}</title>
+                </circle>
+              )}
+              {variant === 'line' && (
+                <circle
+                  className="eq-fundamentals-chart-point-active"
+                  cx={point.x}
+                  cy={point.y}
+                  r="4.5"
+                  aria-hidden="true"
+                />
+              )}
               <rect
                 className="eq-fundamentals-chart-tooltip-bg"
                 x={tooltip.x}
@@ -145,17 +150,21 @@ export default function MetricTrendChart({
             </g>
           );
         })}
-        {layout.xLabels.map((label) => (
-          <text
-            className="eq-fundamentals-chart-x"
-            key={label.period}
-            x={label.x}
-            y={layout.xLabelY}
-            textAnchor="middle"
-          >
-            {formatPeriodLabel(label.period)}
-          </text>
-        ))}
+        {layout.xLabels.map((label) => {
+          const point = layout.plotPoints.find((p) => p.period === label.period);
+          const isPointInProgress = point?.inProgress;
+          return (
+            <text
+              className="eq-fundamentals-chart-x"
+              key={label.period}
+              x={label.x}
+              y={layout.xLabelY}
+              textAnchor="middle"
+            >
+              {formatPeriodLabel(label.period)}{isPointInProgress ? '*' : ''}
+            </text>
+          );
+        })}
       </svg>
     </article>
   );

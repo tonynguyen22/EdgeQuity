@@ -681,8 +681,8 @@ test('MetricTrendChart normalizes annual charts to the latest five years in chro
   assert.match(html, /viewBox="0 0 520 260"/);
   assert.doesNotMatch(html, />2021</);
   assert.match(html, />2022</);
-  assert.match(html, />2026</);
-  assert.ok(html.indexOf('>2022<') < html.indexOf('>2026<'));
+  assert.match(html, />2026\*?</);
+  assert.ok(html.indexOf('>2022<') < (html.indexOf('>2026*<') !== -1 ? html.indexOf('>2026*<') : html.indexOf('>2026<')));
 });
 
 test('MetricTrendChart labels ISO annual date periods by year', () => {
