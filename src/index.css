@@ -587,10 +587,16 @@ thead .eq-sticky-col {
   transition: opacity 0.14s ease;
 }
 
-.eq-fundamentals-chart-hover:hover .eq-fundamentals-chart-point,
-.eq-fundamentals-chart-hover:focus-within .eq-fundamentals-chart-point {
+.eq-fundamentals-chart-point-active {
   fill: var(--vw-green);
-  r: 4.5;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.1s ease;
+}
+
+.eq-fundamentals-chart-hover:hover .eq-fundamentals-chart-point-active,
+.eq-fundamentals-chart-hover:focus-within .eq-fundamentals-chart-point-active {
+  opacity: 1;
 }
 
 .eq-fundamentals-chart-hover:hover .eq-fundamentals-chart-hover-label,

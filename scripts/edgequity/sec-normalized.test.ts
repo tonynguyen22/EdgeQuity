@@ -63,14 +63,14 @@ test('deriveQ4Rows computes Q4 = Annual − Q1 − Q2 − Q3 for non-calendar FY
   assert.equal(derived.length, 2, 'should derive Q4 for both fiscal years');
 
   // FY2025 Q4: 130,497M - (26,044M + 30,040M + 35,082M) = 39,331M
-  const fy2025Q4 = derived.find((r) => r.fiscalYear === '2025')!;
+  const fy2025Q4 = derived.find((r) => r.fiscalYear === '2024')!;
   assert.equal(fy2025Q4.period, 'Q4');
   assert.equal(fy2025Q4.date, '2025-01-26');
   assert.equal(fy2025Q4.revenue, 130_497_000_000 - (26_044_000_000 + 30_040_000_000 + 35_082_000_000));
   assert.equal(fy2025Q4.grossProfit, 97_858_000_000 - (20_406_000_000 + 22_574_000_000 + 26_156_000_000));
 
   // FY2026 Q4: 215,938M - (44,062M + 46,743M + 57,006M) = 68,127M
-  const fy2026Q4 = derived.find((r) => r.fiscalYear === '2026')!;
+  const fy2026Q4 = derived.find((r) => r.fiscalYear === '2025')!;
   assert.equal(fy2026Q4.period, 'Q4');
   assert.equal(fy2026Q4.date, '2026-01-25');
   assert.equal(fy2026Q4.revenue, 215_938_000_000 - (44_062_000_000 + 46_743_000_000 + 57_006_000_000));
@@ -173,7 +173,7 @@ test('buildNormalizedSecStatements derives Q4 income and cash flow for NVDA-like
   // Check Q4 income was derived
   const q4Income = statements.quarterly.incomeStatements.find((r) => r.period === 'Q4');
   assert.ok(q4Income, 'Q4 income statement row should exist');
-  assert.equal(q4Income.fiscalYear, '2026');
+  assert.equal(q4Income.fiscalYear, '2025');
   assert.equal(q4Income.date, '2026-01-25');
   const expectedQ4Revenue = 215_938_000_000 - (44_062_000_000 + 46_743_000_000 + 57_006_000_000);
   assert.equal(q4Income.revenue, expectedQ4Revenue, 'Q4 revenue = Annual − Q1 − Q2 − Q3');

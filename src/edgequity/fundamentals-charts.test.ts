@@ -19,7 +19,7 @@ test('NVDA quarterly revenue labels advance by fiscal year without skipping 2026
     .slice(-5)
     .map((point) => point.period);
 
-  assert.deepEqual(labels, ['2026-Q1', '2026-Q2', '2026-Q3', '2027-Q4', '2027-Q1']);
+  assert.deepEqual(labels, ['2026-Q1', '2026-Q2', '2026-Q3', '2026-Q4', '2027-Q1']);
 });
 
 

@@ -5,18 +5,18 @@
   "industry": "AI Servers & Hardware",
   "currency": "USD",
   "price": null,
-  "marketCap": 148238256380,
-  "enterpriseValue": 168213256380,
+  "marketCap": 304003720655.4352,
+  "enterpriseValue": 323978720655.4352,
   "valuation": {
-    "peTTM": 32.6569,
+    "peTTM": 36.1522,
     "forwardPE": 23.24983,
-    "psTTM": 2.0493,
+    "psTTM": 2.2687,
     "pb": 18.5202,
-    "evRevenue": 1.4815590936955028,
+    "evRevenue": 2.8534827164071515,
     "evEbitda": null,
-    "pfcf": 17.33375308465856,
-    "fcfYield": 0.05769091062483529,
-    "earningsYield": 0.040043644231644325
+    "pfcf": 35.54767547420898,
+    "fcfYield": 0.028131234649239816,
+    "earningsYield": 0.019526076809855887
   },
   "profitability": {
     "grossMargin": 0.2,
@@ -47,7 +47,7 @@
     "fcfConversion": 1.440700808625337
   },
   "dividends": {
-    "dividendYield": 0.00598702810577083,
+    "dividendYield": 0.005408189544166882,
     "payoutRatio": 0.2458
   },
   "history": [
@@ -122,7 +122,7 @@
       "sourceUrl": "https://finnhub.io"
     },
     "next": null,
-    "updatedAt": "2026-06-01T20:01:51.106Z"
+    "updatedAt": "2026-06-02T02:56:06.596Z"
   },
   "transcript": {
     "status": "error",
@@ -130,14 +130,14 @@
     "date": null,
     "source": "Finnhub",
     "sourceUrl": "https://finnhub.io",
-    "fetchedAt": "2026-06-01T20:01:51.107Z",
+    "fetchedAt": "2026-06-02T02:56:06.598Z",
     "message": "Finnhub request failed 403: {\"error\":\"You don't have access to this resource.\"}"
   },
   "financialStatements": {
     "source": {
       "provider": "sec",
       "endpoint": "SEC Company Facts",
-      "fetchedAt": "2026-06-01T20:01:58.754Z",
+      "fetchedAt": "2026-06-02T02:56:07.020Z",
       "status": "ok"
     },
     "annual": {
@@ -381,12 +381,12 @@
     "quarterly": {
       "incomeStatement": [
         {
-          "fiscalYear": "2026",
+          "fiscalYear": "2025",
           "period": "Q4",
           "date": "2026-01-30",
           "reportedCurrency": null,
           "values": {
-            "fiscalYear": "2026",
+            "fiscalYear": "2025",
             "date": "2026-01-30",
             "period": "Q4",
             "revenue": 33379000000,
@@ -447,12 +447,12 @@
           }
         },
         {
-          "fiscalYear": "2025",
+          "fiscalYear": "2024",
           "period": "Q4",
           "date": "2025-01-31",
           "reportedCurrency": null,
           "values": {
-            "fiscalYear": "2025",
+            "fiscalYear": "2024",
             "date": "2025-01-31",
             "period": "Q4",
             "revenue": 23931000000,
@@ -1172,24 +1172,24 @@
     "profile": {
       "provider": "finnhub",
       "endpoint": "stock/profile2",
-      "fetchedAt": "2026-06-01T20:01:58.755Z",
+      "fetchedAt": "2026-06-02T02:56:07.021Z",
       "status": "ok"
     },
     "metrics": {
       "provider": "finnhub",
       "endpoint": "stock/metric",
-      "fetchedAt": "2026-06-01T20:01:58.755Z",
+      "fetchedAt": "2026-06-02T02:56:07.021Z",
       "status": "ok"
     },
     "financialsReported": {
       "provider": "sec",
       "endpoint": "SEC Company Facts",
-      "fetchedAt": "2026-06-01T20:01:58.754Z",
+      "fetchedAt": "2026-06-02T02:56:07.020Z",
       "status": "ok"
     },
     "summary": {
       "provider": "derived",
-      "fetchedAt": "2026-06-01T20:01:58.755Z",
+      "fetchedAt": "2026-06-02T02:56:07.021Z",
       "status": "ok",
       "message": "Summary metrics derived from normalized statements."
     }

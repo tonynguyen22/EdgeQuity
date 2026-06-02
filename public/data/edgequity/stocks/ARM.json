@@ -122,7 +122,7 @@
       "sourceUrl": "https://finnhub.io"
     },
     "next": null,
-    "updatedAt": "2026-06-01T19:59:18.722Z"
+    "updatedAt": "2026-06-02T02:53:54.781Z"
   },
   "transcript": {
     "status": "error",
@@ -130,14 +130,14 @@
     "date": null,
     "source": "Finnhub",
     "sourceUrl": "https://finnhub.io",
-    "fetchedAt": "2026-06-01T19:59:18.724Z",
+    "fetchedAt": "2026-06-02T02:53:54.782Z",
     "message": "Finnhub request failed 403: {\"error\":\"You don't have access to this resource.\"}"
   },
   "financialStatements": {
     "source": {
       "provider": "sec",
       "endpoint": "SEC Company Facts",
-      "fetchedAt": "2026-06-01T19:59:19.051Z",
+      "fetchedAt": "2026-06-02T02:53:55.213Z",
       "status": "ok"
     },
     "annual": {
@@ -441,12 +441,12 @@
           }
         },
         {
-          "fiscalYear": "2025",
+          "fiscalYear": "2024",
           "period": "Q4",
           "date": "2025-03-31",
           "reportedCurrency": null,
           "values": {
-            "fiscalYear": "2025",
+            "fiscalYear": "2024",
             "date": "2025-03-31",
             "period": "Q4",
             "revenue": 1241000000,
@@ -743,24 +743,24 @@
     "profile": {
       "provider": "finnhub",
       "endpoint": "stock/profile2",
-      "fetchedAt": "2026-06-01T19:59:19.052Z",
+      "fetchedAt": "2026-06-02T02:53:55.213Z",
       "status": "ok"
     },
     "metrics": {
       "provider": "finnhub",
       "endpoint": "stock/metric",
-      "fetchedAt": "2026-06-01T19:59:19.052Z",
+      "fetchedAt": "2026-06-02T02:53:55.213Z",
       "status": "ok"
     },
     "financialsReported": {
       "provider": "sec",
       "endpoint": "SEC Company Facts",
-      "fetchedAt": "2026-06-01T19:59:19.051Z",
+      "fetchedAt": "2026-06-02T02:53:55.213Z",
       "status": "ok"
     },
     "summary": {
       "provider": "derived",
-      "fetchedAt": "2026-06-01T19:59:19.052Z",
+      "fetchedAt": "2026-06-02T02:53:55.213Z",
       "status": "ok",
       "message": "Summary metrics derived from normalized statements."
     }

@@ -5,7 +5,7 @@
   "industry": "Cybersecurity",
   "currency": "USD",
   "price": null,
-  "marketCap": 233216880000,
+  "marketCap": 245191682124.87546,
   "enterpriseValue": 225701.05,
   "valuation": {
     "peTTM": 179.3112,
@@ -14,9 +14,9 @@
     "pb": 14.8195,
     "evRevenue": 0.000024475524589275064,
     "evEbitda": null,
-    "pfcf": 67.21334947259209,
-    "fcfYield": 0.014877996824243596,
-    "earningsYield": 0.004861997982307284
+    "pfcf": 70.66450000716914,
+    "fcfYield": 0.014151377281358346,
+    "earningsYield": 0.0046245451320918295
   },
   "profitability": {
     "grossMargin": 0.7341,
@@ -116,19 +116,13 @@
   "aiTheme": "Cybersecurity",
   "earnings": {
     "recent": {
-      "period": "Recent earnings",
-      "date": "2026-02-17",
-      "source": "DoltHub",
-      "sourceUrl": "https://www.dolthub.com/repositories/post-no-preference/earnings"
-    },
-    "next": {
-      "period": "Next earnings",
+      "period": "Q3 2026",
       "date": "2026-06-02",
-      "isEstimated": true,
-      "source": "DoltHub",
-      "sourceUrl": "https://www.dolthub.com/repositories/post-no-preference/earnings"
+      "source": "Finnhub",
+      "sourceUrl": "https://finnhub.io"
     },
-    "updatedAt": "2026-06-01T20:01:08.620Z"
+    "next": null,
+    "updatedAt": "2026-06-02T02:55:33.724Z"
   },
   "transcript": {
     "status": "error",
@@ -136,14 +130,14 @@
     "date": null,
     "source": "Finnhub",
     "sourceUrl": "https://finnhub.io",
-    "fetchedAt": "2026-06-01T20:01:08.621Z",
+    "fetchedAt": "2026-06-02T02:55:33.725Z",
     "message": "Finnhub request failed 403: {\"error\":\"You don't have access to this resource.\"}"
   },
   "financialStatements": {
     "source": {
       "provider": "sec",
       "endpoint": "SEC Company Facts",
-      "fetchedAt": "2026-06-01T20:01:10.100Z",
+      "fetchedAt": "2026-06-02T02:55:34.163Z",
       "status": "ok"
     },
     "annual": {
@@ -1195,24 +1189,24 @@
     "profile": {
       "provider": "finnhub",
       "endpoint": "stock/profile2",
-      "fetchedAt": "2026-06-01T20:01:10.101Z",
+      "fetchedAt": "2026-06-02T02:55:34.163Z",
       "status": "ok"
     },
     "metrics": {
       "provider": "finnhub",
       "endpoint": "stock/metric",
-      "fetchedAt": "2026-06-01T20:01:10.101Z",
+      "fetchedAt": "2026-06-02T02:55:34.163Z",
       "status": "ok"
     },
     "financialsReported": {
       "provider": "sec",
       "endpoint": "SEC Company Facts",
-      "fetchedAt": "2026-06-01T20:01:10.100Z",
+      "fetchedAt": "2026-06-02T02:55:34.163Z",
       "status": "ok"
     },
     "summary": {
       "provider": "derived",
-      "fetchedAt": "2026-06-01T20:01:10.101Z",
+      "fetchedAt": "2026-06-02T02:55:34.164Z",
       "status": "ok",
       "message": "Summary metrics derived from normalized statements."
     }

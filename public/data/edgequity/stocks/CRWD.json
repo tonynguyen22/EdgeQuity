@@ -5,18 +5,18 @@
   "industry": "Cybersecurity",
   "currency": "USD",
   "price": null,
-  "marketCap": 192040530390,
-  "enterpriseValue": 187555876390,
+  "marketCap": 199090825375.8,
+  "enterpriseValue": 194606171375.8,
   "valuation": {
     "peTTM": null,
     "forwardPE": 138.42133,
-    "psTTM": 38.6671,
+    "psTTM": 41.3738,
     "pb": 24.9828,
     "evRevenue": null,
     "evEbitda": null,
-    "pfcf": 146.56886053023834,
-    "fcfYield": 0.006822731625137333,
-    "earningsYield": -0.0008461859570476476
+    "pfcf": 151.9497751755593,
+    "fcfYield": 0.006581121945357424,
+    "earningsYield": -0.0008162204345341598
   },
   "profitability": {
     "grossMargin": 0.7481,
@@ -130,7 +130,7 @@
       "source": "DoltHub",
       "sourceUrl": "https://www.dolthub.com/repositories/post-no-preference/earnings"
     },
-    "updatedAt": "2026-06-01T20:01:03.943Z"
+    "updatedAt": "2026-06-02T02:55:29.057Z"
   },
   "transcript": {
     "status": "error",
@@ -138,14 +138,14 @@
     "date": null,
     "source": "Finnhub",
     "sourceUrl": "https://finnhub.io",
-    "fetchedAt": "2026-06-01T20:01:03.946Z",
+    "fetchedAt": "2026-06-02T02:55:29.058Z",
     "message": "Finnhub request failed 403: {\"error\":\"You don't have access to this resource.\"}"
   },
   "financialStatements": {
     "source": {
       "provider": "sec",
       "endpoint": "SEC Company Facts",
-      "fetchedAt": "2026-06-01T20:01:04.505Z",
+      "fetchedAt": "2026-06-02T02:55:29.611Z",
       "status": "ok"
     },
     "annual": {
@@ -384,12 +384,12 @@
     "quarterly": {
       "incomeStatement": [
         {
-          "fiscalYear": "2026",
+          "fiscalYear": "2025",
           "period": "Q4",
           "date": "2026-01-31",
           "reportedCurrency": null,
           "values": {
-            "fiscalYear": "2026",
+            "fiscalYear": "2025",
             "date": "2026-01-31",
             "period": "Q4",
             "grossProfit": 993677000,
@@ -446,12 +446,12 @@
           }
         },
         {
-          "fiscalYear": "2025",
+          "fiscalYear": "2024",
           "period": "Q4",
           "date": "2025-01-31",
           "reportedCurrency": null,
           "values": {
-            "fiscalYear": "2025",
+            "fiscalYear": "2024",
             "date": "2025-01-31",
             "period": "Q4",
             "grossProfit": 785857000,
@@ -508,12 +508,12 @@
           }
         },
         {
-          "fiscalYear": "2024",
+          "fiscalYear": "2023",
           "period": "Q4",
           "date": "2024-01-31",
           "reportedCurrency": null,
           "values": {
-            "fiscalYear": "2024",
+            "fiscalYear": "2023",
             "date": "2024-01-31",
             "period": "Q4",
             "grossProfit": 633557000,
@@ -570,12 +570,12 @@
           }
         },
         {
-          "fiscalYear": "2023",
+          "fiscalYear": "2022",
           "period": "Q4",
           "date": "2023-01-31",
           "reportedCurrency": null,
           "values": {
-            "fiscalYear": "2023",
+            "fiscalYear": "2022",
             "date": "2023-01-31",
             "period": "Q4",
             "grossProfit": 461763000,
@@ -632,12 +632,12 @@
           }
         },
         {
-          "fiscalYear": "2022",
+          "fiscalYear": "2021",
           "period": "Q4",
           "date": "2022-01-31",
           "reportedCurrency": null,
           "values": {
-            "fiscalYear": "2022",
+            "fiscalYear": "2021",
             "date": "2022-01-31",
             "period": "Q4",
             "grossProfit": 318390000,
@@ -1114,24 +1114,24 @@
     "profile": {
       "provider": "finnhub",
       "endpoint": "stock/profile2",
-      "fetchedAt": "2026-06-01T20:01:04.506Z",
+      "fetchedAt": "2026-06-02T02:55:29.611Z",
       "status": "ok"
     },
     "metrics": {
       "provider": "finnhub",
       "endpoint": "stock/metric",
-      "fetchedAt": "2026-06-01T20:01:04.506Z",
+      "fetchedAt": "2026-06-02T02:55:29.611Z",
       "status": "ok"
     },
     "financialsReported": {
       "provider": "sec",
       "endpoint": "SEC Company Facts",
-      "fetchedAt": "2026-06-01T20:01:04.505Z",
+      "fetchedAt": "2026-06-02T02:55:29.611Z",
       "status": "ok"
     },
     "summary": {
       "provider": "derived",
-      "fetchedAt": "2026-06-01T20:01:04.506Z",
+      "fetchedAt": "2026-06-02T02:55:29.611Z",
       "status": "ok",
       "message": "Summary metrics derived from normalized statements."
     }

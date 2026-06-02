@@ -299,7 +299,7 @@ export function deriveQ4Rows(
     if (quarterlyRows.some((q) => q.period === "Q4" && String(q.date ?? "") === annualDate)) continue;
 
     const q4Row: RawObject = {
-      fiscalYear: String(annual.fiscalYear),
+      fiscalYear: String(matchingQuarters[0].fiscalYear),
       date: annualDate,
       period: "Q4",
     };

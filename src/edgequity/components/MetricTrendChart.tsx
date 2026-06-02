@@ -88,6 +88,16 @@ export default function MetricTrendChart({
             </rect>
           ))
           : layout.polyline && <polyline className="eq-fundamentals-chart-line" points={layout.polyline} />}
+        {variant !== 'bar' && layout.plotPoints.map((point) => (
+          <circle
+            className="eq-fundamentals-chart-point"
+            key={`point-static-${point.period}`}
+            cx={point.x}
+            cy={point.y}
+            r="3"
+            aria-hidden="true"
+          />
+        ))}
         {layout.plotPoints.map((point) => {
           const periodText = formatHoverPeriod(point.period);
           const pointPeriodLabel = point.inProgress ? `${periodText} in progress` : periodText;
@@ -108,10 +118,10 @@ export default function MetricTrendChart({
                 <title>{label}</title>
               </circle>
               <circle
-                className="eq-fundamentals-chart-point"
+                className="eq-fundamentals-chart-point-active"
                 cx={point.x}
                 cy={point.y}
-                r="3"
+                r="4.5"
                 aria-hidden="true"
               />
               <rect
